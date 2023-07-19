@@ -19,8 +19,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.sangeng</groupId>
-            <artifactId>sangeng-framework</artifactId>
+            <groupId>com.liyyro</groupId>
+            <artifactId>liyyro-framework</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
