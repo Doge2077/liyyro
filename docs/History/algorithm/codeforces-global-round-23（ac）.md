@@ -7,7 +7,7 @@ description: ""
 
 ## A. Maxmina
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1746/problem/A&gt;)
 
@@ -23,7 +23,7 @@ description: ""
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -32,7 +32,7 @@ description: ""
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -101,11 +101,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## B. Rebellion
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1746/problem/B&gt;)
 
@@ -122,7 +122,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -133,7 +133,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -205,11 +205,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## C. Permutation Operations
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1746/problem/C&gt;)
 
@@ -223,7 +223,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -235,7 +235,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java

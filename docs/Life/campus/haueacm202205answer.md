@@ -7,7 +7,7 @@ description: ""
 
 ## A. HF 的智能小车车
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1390&gt;)
 
@@ -118,11 +118,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## B. Do you like Van game?
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1391&gt;)
 
@@ -350,11 +350,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## C. 好姐姐的三角形
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1393&gt;)
 
@@ -479,11 +479,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## D. 帮帮小陈
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1394&gt;)
 
@@ -615,11 +615,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## E. 卷点
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1395&gt;)
 
@@ -746,11 +746,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## F. 签个到就下班
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1396&gt;)
 
@@ -770,7 +770,9 @@ int main(){
 
 **数据范围** ：
 
-保证 $S$ 的长度 $$
+保证 $S$ 的长度
+
+$$
 L_{(S)}
 $$ 满足 $$
 1\le L_{(S)} \le 1\times 10^5
@@ -861,11 +863,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## G. 现在是摸鱼时间
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1397&gt;)
 
@@ -997,11 +999,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## H. 现在是摸鱼时间 PLUS
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1398&gt;)
 

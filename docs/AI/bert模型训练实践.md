@@ -5,172 +5,103 @@ categories: [AI, AI]
 description: ""
 ---
 
-平台：Windows 11 + NVIDIA RTX 4060 + CUDA 12.7 + Miniconda + PyTorch + Hugging Face Transformers 
+平台：Windows 11 + NVIDIA RTX 4060 + CUDA 12.6 + Miniconda + PyTorch + Hugging Face Transformers
 
-使用 Hugging Face 的 Transformers 库，基于 `bert-base-uncased` 模型进行微调，完成一个**句子评分/分类任务** 的训练与预测流程，并使用 GPU 加速训练。
+使用 Hugging Face 的 Transformers 库，基于 `bert-base-uncased` 模型进行微调，完成一个**句子评分/分类任务**的训练与预测流程，并使用 GPU 加速训练。
 
-完整代码地址：&lt;https://github.com/Doge2077/learn-bert&gt;
-
-* * *
+完整代码地址：[https://github.com/Doge2077/learn-bert](https://github.com/Doge2077/learn-bert)
 
 ## 技术介绍
-
-* * *
 
 ### BERT 核心思想
 
 BERT（Bidirectional Encoder Representations from Transformers）是由Google在2018年提出的预训练语言模型，基于Transformer架构，通过大规模无监督语料训练，能够捕捉文本的深层语义和上下文信息。以下是BERT的核心原理及其各层功能的详细解析：
 
-* * *
-
 ### **一、BERT的核心原理**
 
-* * *
+1. **双向上下文建模**：
+   BERT通过Transformer的自注意力机制（Self-Attention）同时捕捉文本的**双向上下文关系**，克服了传统模型（如LSTM）单向或简单双向拼接的局限性。
 
-  1. **双向上下文建模** ： 
-```java
- * BERT通过Transformer的自注意力机制（Self-Attention）同时捕捉文本的**双向上下文关系** ，克服了传统模型（如LSTM）单向或简单双向拼接的局限性。
-```
-  2. **预训练任务** ： 
-```java
- * **Masked Language Model (MLM)** ：随机遮盖15%的输入词，模型预测被遮盖的词（学习上下文依赖）。
- * **Next Sentence Prediction (NSP)** ：判断两个句子是否是连续的（学习句子间关系）。
-```
-  3. **Transformer Encoder架构** ： 
-```java
- * BERT仅使用Transformer的**编码器（Encoder）** 部分，由多层堆叠的编码器组成，每层包含自注意力机制和前馈神经网络。
-```
+2. **预训练任务**：
+   - **Masked Language Model (MLM)** ：随机遮盖15%的输入词，模型预测被遮盖的词（学习上下文依赖）。
+   - **Next Sentence Prediction (NSP)** ：判断两个句子是否是连续的（学习句子间关系）。
 
-
-
-* * *
+3. **Transformer Encoder架构**：
+   BERT仅使用Transformer的**编码器（Encoder）**部分，由多层堆叠的编码器组成，每层包含自注意力机制和前馈神经网络。
 
 ### **二、BERT的层级结构**
 
-BERT模型分为**输入层、嵌入层、多层编码器** 。以BERT-Base为例（12层编码器），每一层的作用如下：
+BERT模型分为**输入层、嵌入层、多层编码器**。以BERT-Base为例（12层编码器），每一层的作用如下：
 
-#### **1\. 输入层（Input Layer）**
+#### **1. 输入层（Input Layer）**
 
-  * **功能** ：将原始文本转换为模型可处理的输入形式。
-  * **输入格式** ： 
-```java
-* `[CLS]`：句首标记，用于分类任务的聚合表示。
-* `Token Embeddings`：词向量（如 `WordPiece` 分词后的词）。
-* `Segment Embeddings`：区分句子A和句子B（用于NSP任务）。
-* `Position Embeddings`：位置编码，标记词的位置信息。
-```
+- **功能**：将原始文本转换为模型可处理的输入形式。
+- **输入格式**：
+   - `[CLS]`：句首标记，用于分类任务的聚合表示。
+   - `Token Embeddings`：词向量（如 `WordPiece` 分词后的词）。
+   - `Segment Embeddings`：区分句子A和句子B（用于NSP任务）。
+   - `Position Embeddings`：位置编码，标记词的位置信息。
 
+#### **2. 嵌入层（Embedding Layer）**
 
+- **功能**：将输入转换为稠密向量。
+   - 词嵌入（Token Embeddings）：将词映射到低维向量。
+   - 位置嵌入（Position Embeddings）：编码词的位置信息。
+   - 分段嵌入（Segment Embeddings）：区分不同句子（如问答任务中的问题和答案）。
 
-#### **2\. 嵌入层（Embedding Layer）**
+#### **3. 编码器层（Encoder Layers）**
 
-  * **功能** ：将输入转换为稠密向量。 
-```java
-* 词嵌入（Token Embeddings）：将词映射到低维向量。
-* 位置嵌入（Position Embeddings）：编码词的位置信息。
-* 分段嵌入（Segment Embeddings）：区分不同句子（如问答任务中的问题和答案）。
-```
+每层编码器包含两个核心模块：**多头自注意力（Multi-Head Self-Attention）**和**前馈神经网络（Feed-Forward Network）**，通过残差连接和层归一化（LayerNorm）优化训练。
 
+- **(1) 多头自注意力机制（Multi-Head Self-Attention）**
 
+   - **功能**：捕捉词与词之间的全局依赖关系。
+   - **实现**：将输入拆分为多个子空间（如12个“头”），每个头独立计算注意力权重，最后拼接结果。
 
-#### **3\. 编码器层（Encoder Layers）**
+- **公式**：
+   $$
+   \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+   $$
+   （其中 $Q, K, V$ 是查询、键、值矩阵，$d_k$ 是维度）
 
-每层编码器包含两个核心模块：**多头自注意力（Multi-Head Self-Attention）** 和**前馈神经网络（Feed-Forward Network）** ，通过残差连接和层归一化（LayerNorm）优化训练。
+- **(2) 前馈神经网络（Feed-Forward Network, FFN）**
 
-  * **(1) 多头自注意力机制（Multi-Head Self-Attention）**
+   - **功能**：对自注意力的输出进行非线性变换。
+   - **结构**：两层全连接层（如中间层维度扩大为4倍），激活函数为GELU/ReLU。
 
-```java
-* **功能** ：捕捉词与词之间的全局依赖关系。
-```
+- **(3) 残差连接与层归一化**
 
-```java
-* **实现** ：将输入拆分为多个子空间（如12个“头”），每个头独立计算注意力权重，最后拼接结果。
-```
+   - 每层输出前应用残差连接，缓解梯度消失问题。
 
-```java
-* **公式** ：  
-```
-$$
-\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k&#125;&#125;\right)V
-$$
+#### **4. 各编码器层的特点**
 
-（其中 $Q, K, V$ 是查询、键、值矩阵，( $d_k$ ) 是维度）
-
-  * **(2) 前馈神经网络（Feed-Forward Network, FFN）**
-
-```java
-* **功能** ：对自注意力的输出进行非线性变换。
-* **结构** ：两层全连接层（如中间层维度扩大为4倍），激活函数为GELU/ReLU。
-```
-  * **(3) 残差连接与层归一化**
-
-```java
-* 每层输出前应用残差连接 $( \text{Output} = \text{LayerNorm}(x + \text{Sublayer}(x)) )$，缓解梯度消失问题。
-```
-
-
-
-#### **4\. 各编码器层的特点**
-
-  * **底层（靠近输入层）** ：学习基础语法、局部特征（如词性、短语结构）。
-  * **中层** ：捕捉句内和句间关系（如指代消解、语义角色）。
-  * **高层** ：提取抽象语义（如情感倾向、文本主旨）。
-
-
-
-* * *
+- **底层（靠近输入层）**：学习基础语法、局部特征（如词性、短语结构）。
+- **中层**：捕捉句内和句间关系（如指代消解、语义角色）。
+- **高层**：提取抽象语义（如情感倾向、文本主旨）。
 
 ### **三、BERT的输出**
 
-  * **最后一层编码器的输出** ：每个词对应的上下文向量。
-  * `[CLS]` 向量：用于分类任务（如情感分析），聚合全局信息。
-  * 其他词向量：用于序列标注（如命名实体识别）、问答等任务。
-
-
-
-* * *
+- **最后一层编码器的输出**：每个词对应的上下文向量。
+- `[CLS]` 向量：用于分类任务（如情感分析），聚合全局信息。
+- 其他词向量：用于序列标注（如命名实体识别）、问答等任务。
 
 ## 环境配置
 
-* * *
-
-  * 安装 Miniconda：&lt;https://www.anaconda.com/docs/getting-started/miniconda/install#power-shell&gt;
-
-  * 创建虚拟环境：
-
-  * conda create -n ai python=3.12 -y # 创建一个虚拟环境 ai
-```java
-    conda activate ai                 # 激活虚拟环境
-```
-
-  * 安装 Pytorch：&lt;https://pytorch.org/&gt;
-
-  * # 在官网选择相应Cuda版本，以win11+4060为例
-```java
-    pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
-```
-
-  * 验证安装：
-
-  * python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"
-
-  * 输出：
-
-  * 2.6.0+cu126
-```java
-    True
-    # 安装成功
-```
-
-
-
-
-* * *
+| 项目 | 说明 |
+| :--- | :--- |
+| 平台 | Windows 11 + NVIDIA RTX 4060 + CUDA 12.6 + Miniconda + PyTorch + Hugging Face Transformers |
+| 安装参考 | [Miniconda安装文档](https://www.anaconda.com/docs/getting-started/miniconda/install#power-shell) |
+| 安装命令 | `conda create -n ai python=3.12 -y` |
+|          | `conda activate ai` |
+| Pytorch安装 | 请访问 [PyTorch官网](https://pytorch.org/) 选择对应版本，示例命令如下： |
+|          | `pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126` |
+| 验证命令 | `python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"` |
+| 预期输出 | `2.6.0+cu126` |
+|          | `True` |
 
 ## 项目结构
-```java
 
-
+```
 my_transformer_demo/
 ├── config.json
 ├── data/
@@ -179,12 +110,8 @@ my_transformer_demo/
 ├── utils.py
 ```
 
-* * *
-
 ## 配置文件 `config.json`
-```java
-
-
+```json
 {
   "model_name": "bert-base-uncased",
   "max_length": 128,
@@ -197,14 +124,8 @@ my_transformer_demo/
 }
 ```
 
-* * *
-
 ## 数据集 `data/dataset.csv`
-
-* * *
-```java
-
-
+```text
 sentence,score
 "The weather is perfect today!",5
 "This restaurant serves awful food.",1
@@ -213,14 +134,8 @@ sentence,score
 ...
 ```
 
-* * *
-
 ## 工具函数 `utils.py`
-
-* * *
-```java
-
-
+```python
 import pandas as pd
 from datasets import Dataset
 
@@ -230,12 +145,8 @@ def load_dataset(path):
     return Dataset.from_pandas(df[['sentence', 'label']])
 ```
 
-* * *
-
 ## 训练脚本 `train.py`
-```java
-
-
+```python
 import json
 
 import torch
@@ -330,16 +241,10 @@ tokenizer.save_pretrained(cfg["output_dir"])
 print("✅ 模型和分词器保存成功！")
 ```
 
-* * *
-
 ## 使用模型 `predict.py`
 
-  * 模型会保存到 `./models/`
-
-
-```java
-
-
+- 模型会保存到 `./models/`
+```python
 import sys
 import torch
 from transformers import BertTokenizer, BertForSequenceClassification
@@ -360,5 +265,3 @@ if __name__ == "__main__":
     sentence = " ".join(sys.argv[1:]) or "This is a test."
     print(f"Score: {predict(sentence)}")
 ```
-
-## 

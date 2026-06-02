@@ -7,7 +7,7 @@ description: ""
 
 ## A. Number Replacement
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1744/problem/A&gt;)
 
@@ -19,7 +19,7 @@ description: ""
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -29,7 +29,7 @@ description: ""
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -107,11 +107,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## B. Even-Odd Increments
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1744/problem/B&gt;)
 
@@ -126,7 +126,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -145,7 +145,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -233,11 +233,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## C. Traffic Light
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1744/problem/C&gt;)
 
@@ -249,7 +249,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -260,7 +260,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -337,11 +337,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## D. Divisibility by 2^n
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1744/problem/D&gt;)
 
@@ -357,7 +357,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想**
 
@@ -367,7 +367,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java

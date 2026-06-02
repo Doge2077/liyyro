@@ -7,7 +7,7 @@ description: ""
 
 ## A. Compare T-Shirt Sizes
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1741/problem/A&gt;)
 
@@ -20,7 +20,7 @@ description: ""
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -29,7 +29,7 @@ description: ""
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -110,11 +110,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## B. Funny Permutation
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1741/problem/B&gt;)
 
@@ -130,7 +130,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -140,7 +140,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -214,11 +214,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## C. Minimize the Thickness
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1741/problem/C&gt;)
 
@@ -229,7 +229,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -241,7 +241,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -326,11 +326,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## D. Masha and a Beautiful Tree
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1741/problem/D&gt;)
 
@@ -341,7 +341,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -350,7 +350,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java

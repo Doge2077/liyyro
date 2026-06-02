@@ -7,7 +7,7 @@ description: ""
 
 ## A. Make A Equal to B
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1736/problem/A&gt;)
 
@@ -23,7 +23,7 @@ description: ""
 
 
 
-* * *
+---
 
 **思想** ： 
 
@@ -36,7 +36,7 @@ description: ""
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -115,24 +115,26 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## B. Playing with GCD
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1736/problem/B&gt;)
 
 **题目大意** ：
 
   * 给定一个长度为 $n$ 的序列 $a$。
-  * 问是否存在一个 $n + 1$ 长度的序列 $b$，使得 $$
+* 问是否存在一个 $n + 1$ 长度的序列 $b$，使得
+
+$$
 a_i= gcd(b_i,b_{i+1}),1\le i \le n
 $$。
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -157,7 +159,7 @@ $$ 是一定存在的。
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -241,11 +243,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## C1. Good Subarrays (Easy Version)
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1736/problem/C1&gt;)
 
@@ -257,7 +259,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想**
 
@@ -269,7 +271,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java

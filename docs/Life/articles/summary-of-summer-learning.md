@@ -7,7 +7,7 @@ description: ""
 
 ## What I've learnt ?
 
-* * *
+---
 
 In my perspective, I wasted a summer vacation once again. Not only did I failed to complet the plans what I had decided previously, but also learned nothing. I have no idea about my wasting time, so here, I would list them all bellow to show what I've learnt and done. 
 
@@ -24,11 +24,11 @@ You see, it looks not bad right? But I don't think so, because I still know noth
 
 So, that is the problem, which seems that I have a busy or fullfilling vacation but I benefit a little from what I did. To be honestly, I should do the things in plan but I had deviated from it.
 
-* * *
+---
 
 ## About new term ?
 
-* * *
+---
 
 Anyway, the summer holidays have passed, there is no need to regret the wasted time, just look forward and head on.
 
@@ -43,11 +43,11 @@ So, here is the following plan for the comming term(I'm not sure I would do, jus
 
 
 
-* * *
+---
 
 ## Other wishes !
 
-* * *
+---
 
   * $\color{red}{I'm~dying~to~go~to~shool~!}$
   * $\color{red}{I'm~dying~to~go~to~shool~!}$

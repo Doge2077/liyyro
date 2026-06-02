@@ -7,7 +7,7 @@ description: ""
 
 ## 校验框架
 
-* * *
+---
 
 SpringBoot 的 Validation：
 
@@ -33,15 +33,15 @@ Hibernate Validator：
 
 综上所述，SpringBoot 的 Validation 实际执行的是 Hibernate Validator，通过 Jakarta Validation API 对其进行了一层封装。
 
-* * *
+---
 
 ## 常用注解
 
-* * *
+---
 
 ### @Size
 
-* * *
+---
 
   * **用法** : 用于验证字符串、集合、数组等的长度或大小。
 
@@ -61,11 +61,11 @@ Hibernate Validator：
 
 
 
-* * *
+---
 
 ### @Min
 
-* * *
+---
 
   * **用法** : 用于验证数值型字段的值不小于指定的最小值。
 
@@ -84,11 +84,11 @@ Hibernate Validator：
 
 
 
-* * *
+---
 
 ### @Max
 
-* * *
+---
 
   * **用法** : 用于验证数值型字段的值不大于指定的最大值。
 
@@ -107,11 +107,11 @@ Hibernate Validator：
 
 
 
-* * *
+---
 
 ### @Null
 
-* * *
+---
 
   * **用法** : 用于验证字段必须为`null`。
 
@@ -125,11 +125,11 @@ Hibernate Validator：
 
 
 
-* * *
+---
 
 ### @NotNull
 
-* * *
+---
 
   * **用法** : 用于验证字段不能为`null`。
 
@@ -143,11 +143,11 @@ Hibernate Validator：
 
 
 
-* * *
+---
 
 ### @NotEmpty
 
-* * *
+---
 
   * **用法** : 用于验证字符串、集合、数组等不能为`null`且必须有元素（即非空）。
 
@@ -161,7 +161,7 @@ Hibernate Validator：
 
 
 
-* * *
+---
 
 ### @NotBlank
 
@@ -177,11 +177,11 @@ Hibernate Validator：
 
 
 
-* * *
+---
 
 ### @Pattern
 
-* * *
+---
 
   * **用法** : 用于验证字符串字段必须符合指定的正则表达式。
 
@@ -201,7 +201,7 @@ Hibernate Validator：
 
 
 
-* * *
+---
 
 ### @DecimalMin
 
@@ -227,7 +227,7 @@ Hibernate Validator：
 
 
 
-* * *
+---
 
 ### @DecimalMax
 
@@ -249,7 +249,7 @@ Hibernate Validator：
 
 
 
-* * *
+---
 
 ### @Digits
 
@@ -271,7 +271,7 @@ Hibernate Validator：
 
 
 
-* * *
+---
 
 ### @Email
 
@@ -293,7 +293,7 @@ Hibernate Validator：
 
 
 
-* * *
+---
 
 ### @Future
 
@@ -309,11 +309,11 @@ Hibernate Validator：
 
 
 
-* * *
+---
 
 ## 全局异常解析
 
-* * *
+---
 
 当校验异常时，会抛出 `MethodArgumentNotValidException` 异常，可以对其添加全局的异常解析：
 ```java

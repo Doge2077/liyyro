@@ -7,7 +7,7 @@ description: ""
 
 ## A. Password
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1743/problem/A&gt;)
 
@@ -19,7 +19,7 @@ description: ""
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -30,7 +30,7 @@ description: ""
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -94,11 +94,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## B. Permutation Value
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1743/problem/B&gt;)
 
@@ -111,7 +111,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -120,7 +120,7 @@ int main(){
 
 
 
-* * *
+---
 ```java
 
 
@@ -180,11 +180,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## C. Save the Magazines
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1743/problem/C&gt;)
 
@@ -197,7 +197,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -207,7 +207,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -301,11 +301,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## D. Problem with Random Tests
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/contest/1743/problem/D&gt;)
 
@@ -317,7 +317,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -328,7 +328,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java

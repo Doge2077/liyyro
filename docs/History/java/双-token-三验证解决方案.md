@@ -7,7 +7,7 @@ description: ""
 
 ## 问题分析
 
-* * *
+---
 
 以往的项目大部分解决方案为单 token：
 
@@ -24,11 +24,11 @@ description: ""
 
 
 
-* * *
+---
 
 ## 原理解析
 
-* * *
+---
 
 这里引入双 token 机制：
 
@@ -56,15 +56,15 @@ description: ""
 
 ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/08/双token三验证.png)
 
-* * *
+---
 
 ## 最佳实践
 
-* * *
+---
 
 ### 生成 Token
 
-* * *
+---
 
 基于 SpringCache 来操作 redis，利用 MD5 算法对 token 进行加密，防止其作为键的后缀存入时过长，导致”大KEY“的问题出现
 ```java
@@ -100,11 +100,11 @@ private String createRefreshToken(Map&lt;String, Object&gt; claims) {
 }
 ```
 
-* * *
+---
 
 ### 校验 Token
 
-* * *
+---
 
 基于自定义注解和 Spring AOP 实现校验 token，并将解析后的信息存储到上下文
 
@@ -160,11 +160,11 @@ public class CurrentUserAspect {
 }
 ```
 
-* * *
+---
 
 ### 刷新 Token
 
-* * *
+---
 
 前端调用刷新 token 后，服务端返回新的 accessToken 和 refreshToken：
 ```java

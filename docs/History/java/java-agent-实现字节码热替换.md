@@ -7,7 +7,7 @@ description: ""
 
 ## 问题背景
 
-* * *
+---
 
 正在运行中的 SpringBoot 项目需要在不停机的情况下，针对某个 Aop 切面的方法体内容进行修改，需要执行字节码替换的类为：
 ```java
@@ -50,11 +50,11 @@ public class TestAgentAop {
 }
 ```
 
-* * *
+---
 
 ## 问题分析
 
-* * *
+---
 
   * 该 SpringBoot 项目处于运行中，需要针对运行中的类代码进行修改
   * 即对这个方法的字节码进行热替换
@@ -62,15 +62,15 @@ public class TestAgentAop {
 
 
 
-* * *
+---
 
 ## 解决方案
 
-* * *
+---
 
 ### 编写字节码修改探针类
 
-* * *
+---
 
 创建 Maven 工程，引入 Javassist 依赖：
 ```java
@@ -159,11 +159,11 @@ public class MyAgent {
 }
 ```
 
-* * *
+---
 
 ### 编写字节码热替换类
 
-* * *
+---
 
 这里通过 Attach API的 `loadAgent()` 方法，将以后打包好的探针动态 Attach 到目标 JVM 上，编写该工具类：
 ```java
@@ -195,11 +195,11 @@ public class AttachAgent {
 }
 ```
 
-* * *
+---
 
 ### 执行替换操作
 
-* * *
+---
 
 首先将编写好的探针类包含其 MANIFEST.MF 配置一起打包，因此需要在 Maven 中引入：
 ```java
@@ -238,11 +238,11 @@ public class AttachAgent {
 
 然后运行 AttachAgent 即可完成替换
 
-* * *
+---
 
 ## 注意事项
 
-* * *
+---
 
   * 替换的 JavaAgent 需要和目标项目使用的 JDK 保持一致
   * Javassist 需要引用的类型需要附加其所在的包，例如，使用 `Object` 应指定 `java.lang.Object`

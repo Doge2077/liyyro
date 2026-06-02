@@ -7,11 +7,11 @@ description: ""
 
 # ArrayList 类
 
-* * *
+---
 
 ## ArrayList 类结构
 
-* * *
+---
 
 ArrayList 是一个用数组实现的集合，支持随机访问，元素有序且可以重复：
 
@@ -56,11 +56,11 @@ public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
 
 ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220214152521279.png)
 
-* * *
+---
 
 ## 字段属性
 
-* * *
+---
 ```java
 
 
@@ -82,11 +82,11 @@ transient Object[] elementData;
 private int size;
 ```
 
-* * *
+---
 
 ## 类构造器
 
-* * *
+---
 
 ### 无参构造
 ```java
@@ -101,7 +101,7 @@ public ArrayList() {
 
 **注意** ：根据默认构造函数创建的集合，`ArrayList list = new ArrayList();` 此时集合长度是 0
 
-* * *
+---
 
 ### 重载：有参构造 ArrayList(int initialCapacity)
 ```java
@@ -123,7 +123,7 @@ public ArrayList(int initialCapacity) {
 
 当等于0时，创建一个空数组；当小于0时，抛出异常
 
-* * *
+---
 
 ### 重载：ArrayList(Collection<? extends E> c)
 ```java
@@ -144,11 +144,11 @@ public ArrayList(Collection<? extends E> c) {
 
 将已有的集合复制到 ArrayList 集合中
 
-* * *
+---
 
 ## 添加元素
 
-* * *
+---
 
 源码：
 ```java
@@ -238,11 +238,11 @@ list.add(1);
 System.out.println(list.size());//2
 ```
 
-* * *
+---
 
 ## 删除元素
 
-* * *
+---
 ```java
 
 
@@ -284,11 +284,11 @@ public static native void arraycopy(Object src,  int  srcPos,
                                         int length);
 ```
 
-* * *
+---
 
 ## 修改元素
 
-* * *
+---
 
 通过调用 set(int index, E element) 方法在指定索引 index 处的元素替换为 element。并返回原数组的元素。
 ```java
@@ -317,11 +317,11 @@ private void rangeCheck(int index) {
 
 当索引大于集合长度时，会抛出 IndexOutOfBoundsException 异常。
 
-* * *
+---
 
 ## 查找元素
 
-* * *
+---
 ```java
 
 
@@ -334,15 +334,15 @@ public E get(int index) {
 
 同理，首先还是判断给定索引的合理性，然后直接返回处于该下标位置的数组元素。
 
-* * *
+---
 
 ## 遍历集合
 
-* * *
+---
 
 ### 普通 for 循环遍历
 
-* * *
+---
 
 前面我们介绍查找元素时，知道可以通过get(int index)方法，根据索引查找元素，那么遍历同理：
 ```java
@@ -357,11 +357,11 @@ for(int i = 0 ; i < list.size() ; i ++){
 }
 ```
 
-* * *
+---
 
 ### 迭代器 iterator
 
-* * *
+---
 ```java
 
 
@@ -494,11 +494,11 @@ while(it.hasNext()){
 
 **注意：迭代器只能向后遍历，不能向前遍历，能够删除元素，但是不能新增元素。**
 
-* * *
+---
 
 ### 迭代器的变种 forEach
 
-* * *
+---
 ```java
 
 
@@ -533,15 +533,15 @@ ArrayList list = new ArrayList();
 
 
 
-* * *
+---
 
 # LinkedList 类
 
-* * *
+---
 
 ## LinkedList 类结构图
 
-* * *
+---
 ```java
 
 
@@ -559,11 +559,11 @@ ArrayList list = new ArrayList();
 
 **注意** ：相对于 ArrayList 集合，LinkedList 集合多实现了一个 `Deque` 接口，这是一个双向队列接口，双向队列就是两端都可以进行增加和删除操作。
 
-* * *
+---
 
 ## 字段属性
 
-* * *
+---
 ```java
 
 
@@ -602,11 +602,11 @@ private static class Node&lt;E&gt; {
 }
 ```
 
-* * *
+---
 
 ## 类构造器
 
-* * *
+---
 
 无参构造：
 ```java
@@ -630,15 +630,15 @@ LinkedList 有两个构造函数，第一个是默认的空的构造函数，第
 
 **注意** ：LinkedList 是没有初始化链表大小的构造函数，因为链表不像数组，一个定义好的数组是必须要有确定的大小，然后去分配内存空间，而链表不一样，它没有确定的大小，通过指针的移动来指向下一个内存地址的分配。
 
-* * *
+---
 
 ## 添加元素
 
-* * *
+---
 
 ### addFirst(E e)
 
-* * *
+---
 
 将指定元素添加到链表头：
 ```java
@@ -662,11 +662,11 @@ private void linkFirst(E e) {
 }
 ```
 
-* * *
+---
 
 ### addLast(E e)和add(E e)
 
-* * *
+---
 
 将指定元素添加到链表尾：
 ```java
@@ -694,11 +694,11 @@ void linkLast(E e) {
 }
 ```
 
-* * *
+---
 
 ### add(int index, E element)
 
-* * *
+---
 
 将指定的元素插入此列表中的指定位置：
 ```java
@@ -754,11 +754,11 @@ void linkBefore(E e, Node&lt;E&gt; succ) {
 }
 ```
 
-* * *
+---
 
 ### addAll(Collection<? extends E> c)
 
-* * *
+---
 
 按照指定集合的迭代器返回的顺序，将指定集合中的所有元素追加到此列表的末尾
 
@@ -863,11 +863,11 @@ Node&lt;E&gt; node(int index) {
 
 说明：在根据索引查找结点时，会有一个小优化，结点在前半段则从头开始遍历，在后半段则从尾开始遍历，这样就保证了只需要遍历最多一半结点就可以找到指定索引的结点。
 
-* * *
+---
 
 ## 修改元素
 
-* * *
+---
 
 通过调用 set(int index, E element) 方法，用指定的元素替换此列表中指定位置的元素
 ```java
@@ -885,15 +885,15 @@ public E set(int index, E element) {
 
 这里主要是通过 node(index) 方法获取指定索引位置的节点，然后修改此节点位置的元素即可。
 
-* * *
+---
 
 ## 查找元素
 
-* * *
+---
 
 ### getFirst()
 
-* * *
+---
 
 返回此列表中的第一个元素：
 ```java
@@ -907,11 +907,11 @@ public E getFirst() {
 }
 ```
 
-* * *
+---
 
 ### getLast()
 
-* * *
+---
 
 返回此列表中的最后一个元素：
 ```java
@@ -925,11 +925,11 @@ public E getLast() {
 }
 ```
 
-* * *
+---
 
 ### get(int index)
 
-* * *
+---
 
 返回指定索引处的元素：
 ```java
@@ -973,11 +973,11 @@ Node&lt;E&gt; node(int index) {
 
 
 
-* * *
+---
 
 ### indexOf(Object o)
 
-* * *
+---
 
 返回此列表中指定元素第一次出现的索引，如果此列表不包含元素，则返回-1
 ```java
@@ -1003,15 +1003,15 @@ public int indexOf(Object o) {
 }
 ```
 
-* * *
+---
 
 ## 删除元素
 
-* * *
+---
 
 ### remove()和removeFirst()
 
-* * *
+---
 
 从此列表中移除并返回第一个元素：
 ```java
@@ -1047,11 +1047,11 @@ private E unlinkFirst(Node&lt;E&gt; f) {
 }
 ```
 
-* * *
+---
 
 ### removeLast()
 
-* * *
+---
 
 从该列表中删除并返回最后一个元素：
 ```java
@@ -1082,11 +1082,11 @@ private E unlinkLast(Node&lt;E&gt; l) {
 }
 ```
 
-* * *
+---
 
 ### remove(int index)
 
-* * *
+---
 
 删除此列表中指定位置的元素：
 ```java
@@ -1125,15 +1125,15 @@ E unlink(Node&lt;E&gt; x) {
 }
 ```
 
-* * *
+---
 
 ## 遍历集合
 
-* * *
+---
 
 ### 普通 for 循环
 
-* * *
+---
 ```java
 
 
@@ -1154,11 +1154,11 @@ for(int i = 0 ; i < linkedList.size(); i ++){
 
 
 
-* * *
+---
 
 ### 迭代器
 
-* * *
+---
 
 在LinkedList中除了有一个Node的内部类外，应该还能看到另外两个内部类，那就是ListItr，还有一个是DescendingIterator。
 
@@ -1224,11 +1224,11 @@ while(it.hasNext()){
 }
 ```
 
-* * *
+---
 
 ### 迭代器和for循环效率差异
 
-* * *
+---
 ```java
 
 
@@ -1255,4 +1255,4 @@ System.out.println("使用迭代器遍历10000个元素需要的时间：" + (en
 
 一万个元素两者之间都相差一倍多的时间，如果是十万，百万个元素，那么两者之间相差的速度会越来越大，因此推荐使用迭代器遍历 LinkedList。
 
-* * *
+---

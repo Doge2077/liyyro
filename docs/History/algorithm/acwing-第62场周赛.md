@@ -5,17 +5,17 @@ categories: [ALGORITHM, Q&amp;A, 数学]
 description: ""
 ---
 
-* * *
+---
 
 ## 4500\. 三个元素
 
-* * *
+---
 
 ### 原题链接
 
 [Origional Linl](&lt;https://www.acwing.com/problem/content/4503/&gt;)
 
-* * *
+---
 
 ### 思想
 
@@ -25,7 +25,7 @@ description: ""
 
 
 
-* * *
+---
 
 ### 代码
 ```java
@@ -83,17 +83,17 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## 4501\. 收集卡牌
 
-* * *
+---
 
 ### 原题链接
 
 [Origional Link](&lt;https://www.acwing.com/problem/content/4504/&gt;)
 
-* * *
+---
 
 ### 思想
 
@@ -110,7 +110,7 @@ int main(){
 
 
 
-* * *
+---
 
 ### 代码
 ```java
@@ -174,17 +174,17 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## AcWing 4502. 集合操作
 
-* * *
+---
 
 ### 原题链接
 
 [Origional Link](&lt;https://www.acwing.com/solution/content/128431/&gt;)
 
-* * *
+---
 
 ### 思想
 
@@ -200,7 +200,7 @@ int main(){
 
 
 
-* * *
+---
 
 ### 代码
 ```java

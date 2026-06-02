@@ -7,7 +7,7 @@ description: ""
 
 ## A - Sequence of Strings
 
-* * *
+---
 
 [Original Link](&lt;https://atcoder.jp/contests/abc284/tasks/abc284_a&gt;)
 
@@ -17,7 +17,7 @@ description: ""
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -25,7 +25,7 @@ description: ""
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -88,11 +88,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## B - Multi Test Cases
 
-* * *
+---
 
 [Original Link](&lt;https://atcoder.jp/contests/abc284/tasks/abc284_b&gt;)
 
@@ -102,7 +102,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -110,7 +110,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -174,11 +174,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## C - Count Connected Components
 
-* * *
+---
 
 [Original Link](&lt;https://atcoder.jp/contests/abc284/tasks/abc284_c&gt;)
 
@@ -189,7 +189,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -197,7 +197,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -278,11 +278,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## D - Happy New Year 2023
 
-* * *
+---
 
 [Original Link](&lt;https://atcoder.jp/contests/abc284/tasks/abc284_d&gt;)
 
@@ -294,7 +294,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -316,7 +316,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -380,11 +380,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## E - Count Simple Paths
 
-* * *
+---
 
 [Original Link](&lt;https://atcoder.jp/contests/abc284/tasks/abc284_e&gt;)
 
@@ -396,7 +396,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -406,7 +406,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -487,11 +487,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## F - ABCBAC
 
-* * *
+---
 
 [Original Link](&lt;https://atcoder.jp/contests/abc284/tasks/abc284_f&gt;)
 
@@ -510,7 +510,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -519,7 +519,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java

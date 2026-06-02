@@ -7,7 +7,7 @@ description: ""
 
 ## A. Integer Sum
 
-* * *
+---
 
 [Origional Link](&lt;https://atcoder.jp/contests/abc272/tasks/abc272_a&gt;)
 
@@ -17,7 +17,7 @@ description: ""
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -25,7 +25,7 @@ description: ""
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -95,11 +95,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## B. Everyone is Friends
 
-* * *
+---
 
 [Origional Link](&lt;https://atcoder.jp/contests/abc272/tasks/abc272_b&gt;)
 
@@ -111,7 +111,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -122,7 +122,7 @@ int main(){
 
 
 
-* * *
+---
 ```java
 
 
@@ -212,11 +212,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## C. Max Even
 
-* * *
+---
 
 [Origional Link](&lt;https://atcoder.jp/contests/abc272/tasks/abc272_c&gt;)
 
@@ -227,7 +227,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -237,7 +237,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -333,11 +333,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## D. Root M Leaper
 
-* * *
+---
 
 [Origional Link](&lt;https://atcoder.jp/contests/abc272/tasks/abc272_d&gt;)
 
@@ -362,7 +362,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java

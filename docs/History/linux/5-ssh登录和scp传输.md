@@ -39,7 +39,7 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?
 ssh user@hostname -p 22
 ```
 
-* * *
+---
 
 ### 5.2 配置文件
 
@@ -60,7 +60,7 @@ Host myserver2
 
 之后再使用服务器时，可以直接使用别名`myserver1`、`myserver2`
 
-* * *
+---
 
 ### 5.3 密钥登录
 
@@ -101,7 +101,7 @@ ssh-copy-id myserver  #mysever是配置免密登录的服务器名称
 
 
 
-* * *
+---
 
 ### 5.4 scp传输
 

@@ -7,7 +7,7 @@ description: ""
 
 ## A - A Recursive Function
 
-* * *
+---
 
 [Origional Link](&lt;https://atcoder.jp/contests/abc273/tasks/abc273_a&gt;)
 
@@ -21,7 +21,7 @@ description: ""
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -29,7 +29,7 @@ description: ""
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -94,11 +94,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## B - Broken Rounding
 
-* * *
+---
 
 [Origional Link](&lt;https://atcoder.jp/contests/abc273/tasks/abc273_b&gt;)
 
@@ -109,7 +109,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -118,7 +118,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -188,11 +188,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## C - (K+1)-th Largest Number
 
-* * *
+---
 
 [Origional Link](&lt;https://atcoder.jp/contests/abc273/tasks/abc273_c&gt;)
 
@@ -206,7 +206,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -215,7 +215,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -298,11 +298,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## D - LRUD Instructions
 
-* * *
+---
 
 [Origional Link](&lt;https://atcoder.jp/contests/abc273/tasks/abc273_d&gt;)
 
@@ -316,7 +316,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -327,7 +327,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
