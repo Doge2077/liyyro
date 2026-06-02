@@ -5,6 +5,7 @@ categories: [AI, AI]
 description: ""
 ---
 
+
 平台：Windows 11 + NVIDIA RTX 4060 + CUDA 12.6 + Miniconda + PyTorch + Hugging Face Transformers
 
 使用 Hugging Face 的 Transformers 库，基于 `bert-base-uncased` 模型进行微调，完成一个**句子评分/分类任务**的训练与预测流程，并使用 GPU 加速训练。
@@ -75,7 +76,8 @@ BERT模型分为**输入层、嵌入层、多层编码器**。以BERT-Base为例
 
 #### **4. 各编码器层的特点**
 
-- **底层（靠近输入层）**：学习基础语法、局部特征（如词性、短语结构）。
+- **底层（靠近输入层）**：学习基础语法、
+局部特征（如词性、短语结构）。
 - **中层**：捕捉句内和句间关系（如指代消解、语义角色）。
 - **高层**：提取抽象语义（如情感倾向、文本主旨）。
 
@@ -164,7 +166,8 @@ from utils import load_dataset
 print(torch.cuda.is_available())
 
 # ========== 设备检测 ==========
-device = "cuda" if torch.cuda.is_available() else "cpu"
+device = "
+cuda" if torch.cuda.is_available() else "cpu"
 if device == "cuda":
     print(f"🚀 使用 GPU：{torch.cuda.get_device_name(0)}")
     print(f"显存占用：{torch.cuda.memory_allocated() / 1024 ** 2:.2f} MB")
@@ -227,7 +230,8 @@ trainer = Trainer(
     args=args,
     train_dataset=tokenized_dataset["train"],
     eval_dataset=tokenized_dataset["test"],
-    tokenizer=tokenizer,
+    tokenizer=
+tokenizer,
     data_collator=DataCollatorWithPadding(tokenizer),
     compute_metrics=compute_metrics,
     callbacks=[PrintMemoryCallback()]
