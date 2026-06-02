@@ -1,0 +1,736 @@
+---
+title: "数据结构课程设计"
+date: 2022-12-21
+categories: [BFS, DFS, Data Structure, University Homeworks]
+description: ""
+---
+
+# 迷宫求解
+
+* * *
+
+## 1\. 问题描述
+
+* * *
+
+（1）根据用户选择的游戏难度程度来动态生成迷宫地图，迷宫规模为三种，分别是10 _10、50_ 50、100 * 100。
+
+（2）每次游戏开始需要玩家选择一个难度，然后随机生成一个迷宫地图，需要保证改迷宫地图至少存在一个解。
+
+（3）迷宫地图由0和1构成的n维方阵表示，0表示可走，1表示障碍物（输出迷宫地图时，障碍物用黑色方块表示，通道块用白色方块表示）。
+
+（4）程序运行时，用户在终端输入每步要走的位置（坐标），程序应在迷宫地图上用箭头显示出用户所走的这一步（即：用户每走一步，需要更新一下地图）。
+
+（5）当用户选择帮助功能时，应给出迷宫的一种解法（分别使用栈和队列的方法求出迷宫的一个解，注意：用户选择的帮助位置，指的是用户当前所处的位置，程序应给出从当前位置处的迷宫解）
+
+（6）迷宫入口固定在左上角，出口固定在右下角。
+
+* * *
+
+## 2\. 设计模式
+
+* * *
+
+### 2.1 设计菜单选项
+
+* * *
+
+首先设计菜单，包含**主菜单** 和**游戏菜单** 。其中主菜单界面用于选择游戏难度，只需在游戏开始选择难度时调用一次，游戏菜单有两个选项，输入合法坐标进行移动或触发帮助选项进行移动。 这两个菜单选项对应相应的函数模块，根据用户输入进行调用。
+
+* * *
+
+### 2.2 根据用户选择的难度动态创建迷宫地图
+
+* * *
+
+在创建迷宫前需要定好相应的变量，用二维数组`GameMap`存储迷宫，二维数组`MapVis`存储迷宫格子的状态，整形变量`MAP_SIZE`表示迷宫的大小边界。
+
+根据用户选择事先所提供的的选项选择去创建地图大小，若用户输入错误的选择，则说明输入的数据非法，此时需要提示用户并重新输入。由用户选择的选项确定迷宫的边界，即确定`MAP_SIZE`的值。同时，我们用0和1简单的表示迷宫格子的状态，其中0代表可走路径，1代表墙壁。在创建地图的过程中，我们需要随机地生成迷宫的墙壁和路径，为了实现这一功能，我们借助以time为随机数种子，尽量做到随机，然后利用循环遍历，用0或1对迷宫的每一个格子进行随机赋值，为使得迷宫在大部分情况下能够生成可解的状态，我们有目的的利用生成的随机数来进行判断某一处格子的状态，最后将所有迷宫的状态记录下来。此外，我们还需要一个二维数组`MapVis`在迷宫格子状态为1时对其下标进行标记，用于可走路径的判断。
+
+* * *
+
+### 2.3 迷宫可解性的判断和帮助求解的算法
+
+* * *
+
+在生成地图和用户需要帮助时，我们都需要使用某种方法来得到一个路径，使得该路径能够连接迷宫入口和出口。我们可以选择深度优先搜索（DFS）和宽度优先搜索（BFS）的方式来求解。其中深度优先搜索可以借助函数递归来实现，在实现宽度优先搜索时，我们可以通过数组模拟的方式实现简单的队列操作。在用户需要帮助时，利用time作为随机数种子生成随机数，以随机地调用这两种方法得到解，对于有解和无解的结果返回对应的模块函数。
+
+* * *
+
+### 2.4 接收用户输入的行动指令和帮助指令
+
+* * *
+
+游戏开始后，我们需要根据用户在终端键入的下标，来执行用户行动的指令。在用户输入指令后，我们需要判断该指令是否是合法的。
+
+对于一组数据，当其移动的坐标在迷宫地图的边界范围内时，且其目标位置不是墙时可以进行移动。特别地，当移动的位置在`MapVis`中被标记为`true`时，说明用户进行了回退，那么当且位置的`MapVis`状态应当被重置为`false`。 
+
+当可以进行移动时，调用相应的模块函数，在移动后更新`MapVis`的状态和当前位置的信息。
+
+特别地，对于输入的指令为“0 0”时，视为帮助指令。此时以用户当前所在的坐标为起始点，调用搜索函数找到对应的解。若有解，则帮助用户移动下一步，若无解，说明从当前位置出发，不进行回退无法到达出口，需要提示用户返回。
+
+* * *
+
+### 2.5 接收指令的信息处理
+
+* * *
+
+由于用户的不确定性原因，有可能输入非法的数据或非法字符，为了避免这些非法数据对程序造成的不必要的影响，我们在读入用户数据时利用string类型来存储用户的所有指令，然后对这些指令进行预处理，最后把处理好的指令再传入对应的模块函数进行执行。
+
+* * *
+
+## 3\. 算法设计
+
+* * *
+
+### 3.1 判断用户输入数据是否合法
+
+* * *
+
+**思想** ：
+
+  * 判断难度选择输入数据是否合法，只需要利用`getline()`函数读入`string`类型，与对应难度选择比较即可。
+  * 判断操作输入的数据是否合法: 
+    * 首先利用`getline()`函数读入`string`类型，然后利用`stringstream()`将其转化为输入流，通过输入流将所有的操保存到`string`数组中。
+    * 接着从字符串数组中取出前两个操作，将其转化为整数。转化为整数按照`ASCII`码的规则转换，若遇到非整数字符，说明输入的数据非法。
+    * 将转换后得到的两个坐标进行判断，该坐标需要在迷宫地图的界内不能是墙壁，且满足和上一个位置的坐标距离为1，
+
+
+
+**代码** ：
+    
+    
+    string op_s; getline(cin, op_s);  //读入操作为string，防止非法数据对程序造成不可知的错误
+    //读入操作
+        stringstream op_ss(op_s);
+        string op[N];  //存储用户的操作
+        int idx = 0;
+        string op_o;
+        while(op_ss >> op_o) op[idx ++] = op_o;
+    //将操作转化为整数
+    int Game_Play_Menu_Choose_Atoi(string s){  
+        int sum = 0;
+        for(int i = 0; i < s.size(); i ++){
+            if(s[i] >= '0' && s[i] <= '9') sum = sum * 10 + (int)(s[i] - '0');
+            else return -1;  //若非数字说明数据非法
+        }
+        return sum;
+    }
+    
+    bool check_in(int l, int r){  //检查坐标是否出界
+        if(l >= 1 && l <= MAP_SIZE && r >= 1 && r <= MAP_SIZE) return 1;
+        else return 0;
+    }
+    
+    bool check_move(int x, int y){  //检查移动是否是相邻的一格
+        if((Pos_x - x) * (Pos_x - x) + (Pos_y - y) * (Pos_y - y) == 1) return 1;
+        else return 0;
+    }
+    
+    bool Game_Play_Menu_Choose_Check(int x, int y){  //检查移动操作是否合法
+        if(check_in(x, y) && GameMap[x][y] == '0' && check_move(x, y)) return 1;  //下一个位置在界内，不是墙，相对移动一格的情况下合法
+        else return 0;
+    }
+
+* * *
+
+### 3.2 深度优先搜索求迷宫的解
+
+* * *
+
+**思想** ：
+
+  * 先判断当前位置是否为迷宫出口，若为出口则进行标记`GameMapFlag`的值为`true`。
+  * 否则我们利用循环遍历偏移量数组，以该点为基础扩展搜索四个方向。
+  * 对于每个搜到的点，在迷宫地图界内不能是墙壁，且之前未走过，满足条件则继续判断是否为迷宫出口，若为出口则进行标记`GameMapFlag`的值为`true`。否则标记该点已经走过，后续不再重复搜索该点。
+  * 递归到下一层继续搜索。最终返回时，我们判断`GmaeMapFlag`的值即可得知是否可以得到迷宫的解。
+
+
+
+**代码** ：
+    
+    
+    void Game_Map_DFS(char mp[N][N], bool st[N][N], int x, int y){  //DFS搜索的过程
+        if(x == MAP_SIZE && y == MAP_SIZE) GameMapFlag = 1;  //到达出口进行标记
+        for(int i = 0; i < 4; i ++){  //循环遍历偏移量数组，搜索四个方向
+            int l = x + dx[i], r = y + dy[i];
+            if(check_in(l, r) && !st[l][r] && mp[l][r] == '0'){  //判断该点是否满足搜索条件
+                st[l][r] = 1;  //标记该点已经走过
+                if(l == MAP_SIZE && r == MAP_SIZE) GameMapFlag = 1;  //到达出口进行标记
+                Game_Map_DFS(mp, st, l, r);  //继续以该点搜索
+            }
+        }
+    }
+
+* * *
+
+### 3.3 宽度优先搜索求迷宫的解
+
+* * *
+
+**思想** ：
+
+  * 调用搜索函数，在函数内部利用`pair`数组简单模拟一个队列，其大小按照最坏的情况，需要`N*N*4`的空间，并将起始点加入队头。
+  * 每次搜索时取出队头，然后利用循环遍历偏移量数组，以该点为基础扩展搜索四个方向。
+  * 对于每个搜到的点，在迷宫地图界内不能是墙壁，且之前未走过，满足条件则继续判断是否为迷宫出口，若为出口则提前返回。否则标记该点已经走过，后续不再重复搜索该点。
+  * 接着将满足条件的点加入队尾，继续搜索。当队列为空且仍未搜索到出口时，说明不存在解。
+
+
+
+**代码** ：
+    
+    
+    bool Game_Map_BFS(char mp[N][N], bool st[N][N], int x, int y){  //BFS搜索的过程
+        if(x == MAP_SIZE && y == MAP_SIZE) return 1;  //本身处于出口，直接返回
+        PII q[N * N * 4];  //数组模拟实现队列
+        int hh, tt; hh = tt = 0;  //hh为队头指针，tt为队尾指针
+        q[tt ++] = {x, y};  //将起始点入队
+        while(hh < tt){  
+            PII head = q[hh ++];  //取出队头扩展搜索
+            for(int i = 0; i < 4; i ++){  //循环遍历偏移量数组，搜索四个方向
+                int l = head.fi + dx[i], r = head.se + dy[i];
+                if(check_in(l, r) && mp[l][r] == '0' && !st[l][r]){  //判断该点是否满足搜索条件
+                    q[tt ++] = {l, r};  //将该点入队
+                    if(l == MAP_SIZE && r == MAP_SIZE) return 1;  //若已经为出口，则提前返回
+                    st[l][r] = 1;  //标记该点已经走过
+                }
+            }
+        }
+        return 0;  //搜不到，说明当前位置无解
+    }
+
+* * *
+
+### 3.4 生成合法的迷宫地图
+
+* * *
+
+**思想** ：
+
+  * 首先随机生成一次迷宫并利用深度优先搜索或宽度优先搜索来求解一遍。若迷宫可解，说明本次生成的迷宫是合法的，否则重新生成迷宫，直到生成一个合法迷宫位置。
+  * 生成迷宫时，利用循环遍历迷宫地图`GameMap`，为了保证大部分条件下生成的迷宫有解，对于每一个格子，用time作为随机数种子生成范围为0~1000的随机数，当生成的随机数可以被3整除时，该格子生成为墙壁，同时将对应的`MapVis`的值置为1，否则生成为可走的路径。
+  * 迷宫生成完毕后，再次重新将入口和出口调整为可行走的路径，入口的`MapVis`的值置为1，出口的`MapVis`的值置为0，之后再判断是否合法。
+  * 当生成的迷宫非法时，利用循环不断的重新调用生成迷宫的模块函数，重新生成迷宫需要重置之前的`MapVis`，直到生成一个合法的迷宫为止。
+
+
+
+**代码** ：
+    
+    
+    bool Game_Map_Check(){  //检查生成的迷宫是否合法
+        GameMapFlag = 0;
+        char mp[N][N];
+        bool st[N][N];
+        Game_GameMap_Copy(mp);
+        Game_MapVis_Copy(st);
+        st[1][1] = 1;
+        Game_Map_DFS(mp, st, 1, 1);  //利用DFS检查
+        return GameMapFlag;
+    }
+    
+    void Game_Map_reset(){  //重置迷宫
+        for(int i = 1; i <= MAP_SIZE; i ++){
+            for(int j = 1; j <= MAP_SIZE; j ++) MapVis[i][j] = 0;  //GameMap会被覆盖，只需将MapVis置0即可
+        }
+    }
+    
+    void Game_Map_Create(){  //生成迷宫
+    
+        Game_Map_reset();  //重置
+    
+        srand((unsigned)time(0));  //随机种子
+        for(int i = 1; i <= MAP_SIZE; i ++){
+           for(int j = 1; j <= MAP_SIZE; j ++){
+                int u = rand() % 1000;
+                GameMap[i][j] = u % 3 == 0 ? '1' : '0';  //当随机数u可以被3整除时设为墙壁
+                if(GameMap[i][j] == '1') MapVis[i][j] = 1;  //同时标记墙壁不可走
+            }
+        }
+        GameMap[1][1] = GameMap[MAP_SIZE][MAP_SIZE] = '0';  //迷宫起始点和终点必须是可走的
+        MapVis[MAP_SIZE][MAP_SIZE] = 0;  //迷宫终点必须是未走过的
+        MapVis[1][1] = 1;  //迷宫起始点必须是走过的
+    }
+    
+    Game_Map_Create();  //创建并生成首个迷宫
+    while(!Game_Map_Check()) Game_Map_Create();  //生成一个有解的迷宫
+
+* * *
+
+### 3.5 迷宫地图的刷新和输出
+
+* * *
+
+**思想** ：
+
+  * 刷新迷宫只需要在每一步操作执行完毕后，自动地调用相应的输出迷宫地图的模块函数即可。
+  * 我们利用循环遍历的方式进行输出，在循环遍历时检查迷宫每一个格子的状态，检查`GameMap`的值若为1，说明该处是墙壁，故直接输出■。
+  * 否则说明是可走的路径，那么我们需要判断这个格子是否已经走过，检查`MapVis`的值若为false，则说明该处之前未走过，然后判断与上一个格子的相对位置并输出对应的箭头表示当前所在的位置，否则说明已经走过该格子，输出·以进行区分和标记。
+  * 判断箭头的方向，我们需要比较移动前和移动后的坐标，判断出移动的方向，在遍历到当前用户所在的位置时，输出对应方向的箭头符号即可。
+
+
+
+**代码** ：
+    
+    
+    void Game_Map_Show_Arrow(){  //打印箭头
+        if(Pos_x == 1 && Pos_y == 1) cout << "▷";
+        else if(Pos_x == Pos_xx){
+            if(Pos_y >= Pos_yy) cout << "▷";
+            else cout << "◁";
+        }
+        else if(Pos_y == Pos_yy){
+            if(Pos_x >= Pos_xx) cout << "▽";
+            else cout << "△";
+        }
+    }
+    
+    void Game_Map_Show(){  //打印出迷宫
+        Game_Line();
+        for(int i = 1; i <= MAP_SIZE; i ++){
+            cout << '|';
+            for(int j = 1; j <= MAP_SIZE; j ++){
+                if(GameMap[i][j] == '1') cout << "■";  //墙壁
+                else{
+                    if(i == Pos_x && j == Pos_y) Game_Map_Show_Arrow();
+                    else if(MapVis[i][j]) cout << "·";  //已经走过的位置用“·”标记
+                    else cout << "□";  //可走路径
+                }
+            }
+            cout << '|' << endl;
+        }
+        Game_Line();
+    }
+
+* * *
+
+### 3.6 游戏帮助功能的实现
+
+* * *
+
+**思想** ：
+
+  * 以用户当前所在的坐标为起始点，随机的调用两种搜索模块函数找到对应的解。
+  * 调用搜索模块函数前需要复制当前迷宫的地图信息和迷宫的地图状态信息，作为参数传入。
+  * 然后以当前坐标利用循环遍历偏移量数组，枚举四个方向即枚举下一步要走的格子。
+  * 当搜索结果表明下一步所走的格子可以到达出口，则执行移动的模块函数，并告知用户已经进行了移动。反之说明从当前位置出发，不进行回退无法到达出口，需要提示用户返回。
+
+
+
+**代码** ：
+    
+    
+    bool Game_Play_Help_DFS(char mp[N][N], bool st[N][N]){  //DFS搜索解
+        for(int i = 0; i < 4; i ++){  //循环遍历偏移量数组，枚举四个方向
+            int l = Pos_x + dx[i], r = Pos_y + dy[i];
+            if(check_in(l, r) && !st[l][r] && mp[l][r] == '0'){  //判断该点是否满足搜索条件
+                GameMapFlag = 0;  //重置DFS判断条件
+                Game_Map_DFS(mp, st, l, r);
+                if(GameMapFlag){  //满足条件
+                    Game_Play_Move(l, r);  //进行移动
+                    return 1;  //直接返回成功
+                }
+            }
+        }
+        return 0;  //当前位置无解
+    }
+    
+    bool Game_Play_Help_BFS(char mp[N][N], bool st[N][N]){  //BFS搜索解
+        for(int i = 0; i < 4; i ++){  //循环遍历偏移量数组，枚举四个方向
+            int l = Pos_x + dx[i], r = Pos_y + dy[i];
+            if(check_in(l, r) && !st[l][r] && mp[l][r] == '0'){  //判断该点是否满足搜索条件
+                if(Game_Map_BFS(mp, st, l, r)){  //满足条件
+                    Game_Play_Move(l, r);  //进行移动
+                    return 1;  //直接返回成功
+                }
+            }
+        }
+        return 0;  //当前位置无解
+    }
+    
+    bool Game_Play_Help(){  //游戏帮助
+        srand((unsigned)time(0));  //随机种子
+        int u = rand() % 100;
+    
+        char mp[N][N];
+        bool st[N][N];
+        Game_GameMap_Copy(mp);  //复制迷宫信息
+        Game_MapVis_Copy(st);  //复制走过的位置状态
+    
+        if(u % 2 == 0){
+            cout << "-----GAME-PLAY-DFS-HELP-----" <<  endl;
+            return Game_Play_Help_DFS(mp, st);  //50%的概率调用DFS搜索解
+        }
+        else{
+            cout << "-----GAME-PLAY-BFS-HELP-----" <<  endl;
+            return Game_Play_Help_BFS(mp, st);  //50%的概率调用BFS搜索解
+        }
+    }
+
+* * *
+
+## 4\. 完整代码
+
+* * *
+    
+    
+    #include &lt;iostream&gt;
+    #include &lt;cstring&gt;
+    #include &lt;sstream&gt;
+    #include &lt;stdlib.h&gt;
+    #include &lt;time.h&gt;
+    
+    using namespace std;
+    
+    #define fi first
+    #define se second
+    #define endl '\n'
+    
+    typedef pair&lt;int, int&gt; PII;
+    
+    const int N = 110;
+    
+    int MAP_SIZE;  //迷宫的规模
+    
+    char GameMap[N][N];  //存储迷宫信息
+    bool MapVis[N][N];  //记录走过的位置
+    
+    int Pos_x = 1, Pos_y = 1;  //记录当前所在的位置坐标
+    int Pos_xx = 1, Pos_yy = 1;  //记录上一次所在位置的坐标
+    
+    bool GameMapFlag;  //用于DFS搜索的条件判断
+    
+    int dx[] = {1, 0, -1, 0}, dy[] = {0, 1, 0, -1};  //偏移量数组
+    
+    bool check_in(int l, int r){  //检查坐标是否出界
+        if(l >= 1 && l <= MAP_SIZE && r >= 1 && r <= MAP_SIZE) return 1;
+        else return 0;
+    }
+    
+    bool check_move(int x, int y){  //检查移动是否是相邻的一格
+        if((Pos_x - x) * (Pos_x - x) + (Pos_y - y) * (Pos_y - y) == 1) return 1;
+        else return 0;
+    }
+    
+    bool Game_Play_Menu_Choose_Check(int x, int y){  //检查移动操作是否合法
+        if(check_in(x, y) && GameMap[x][y] == '0' && check_move(x, y)) return 1;  //下一个位置在界内，不是墙，相对移动一格的情况下合法
+        else return 0;
+    }
+    
+    void Game_Map_reset(){  //重置迷宫
+        for(int i = 1; i <= MAP_SIZE; i ++){
+            for(int j = 1; j <= MAP_SIZE; j ++) MapVis[i][j] = 0;  //GameMap会被覆盖，只需将MapVis置0即可
+        }
+    }
+    
+    void Game_GameMap_Copy(char mp[N][N]){  //复制迷宫
+        for(int i = 1; i <= MAP_SIZE; i ++){
+            for(int j = 1; j <= MAP_SIZE; j ++) mp[i][j] = GameMap[i][j];
+        }
+    }
+    
+    void Game_MapVis_Copy(bool st[N][N]){  //复制迷宫状态
+        for(int i = 1; i <= MAP_SIZE; i ++){
+            for(int j = 1; j <= MAP_SIZE; j ++) st[i][j] = MapVis[i][j];
+        }
+    }
+    
+    void Game_Line(){  //输出分割线
+        for(int i = 1; i <= MAP_SIZE * 2 + 2; i ++) cout << '-';
+            cout << endl;
+    }
+    
+    void Game_Statement(){  //游戏说明
+        cout << "----------------------------" << endl;
+        cout << "|=========迷宫游戏=========|" << endl;
+        cout << "|                          |" << endl;
+        cout << "|说明：                    |" << endl;
+        cout << "|    选择难度不同的迷宫，键|" << endl;
+        cout << "|入相邻当前位置的一格的坐标|" << endl;
+        cout << "|进行移动。                |" << endl;
+        cout << "|    从左上角出发到达右下角|" << endl;
+        cout << "|即可获得胜利。            |" << endl;
+        cout << "|                          |" << endl;
+        cout << "----------------------------" << endl;
+        cout << endl;
+    }
+    
+    void Game_Main_Menu(){  //游戏主菜单
+        //选择游戏难度
+        cout << "-----------主菜单-----------" << endl;
+        cout << "|     请选择迷宫大小：     |" << endl;
+        cout << "|     简单难度：键入 1     |" << endl;
+        cout << "|     中等难度：键入 2     |" << endl;
+        cout << "|     困难难度：键入 3     |" << endl;
+        cout << "----------------------------" << endl;
+    }
+    
+    void Game_Play_Menu(){  //游戏操作菜单
+        cout << "----------操作菜单----------" << endl;
+        cout << "|  移动： 键入两个整数     |" << endl;
+        cout << "|  帮助并移动： 键入 0 0   |" << endl;
+        cout << "----------------------------" << endl;
+    }
+    
+    void Game_Play_status(){  //显示当前位置
+        cout << "----------当前位置----------" << endl;
+        cout << '|' << "          " << Pos_x << ' ' << Pos_y << endl;
+        cout << "----------------------------" << endl;
+    }
+    
+    void Game_Play_End(){  //游戏结束
+        cout << "----------------------------" << endl;
+        cout << "|     恭喜！您已通关！     |" << endl;
+        cout << "----------------------------" << endl;
+    }
+    
+    void Game_Map_Show_Arrow(){  //打印箭头
+        if(Pos_x == 1 && Pos_y == 1) cout << "▷";
+        else if(Pos_x == Pos_xx){
+            if(Pos_y >= Pos_yy) cout << "▷";
+            else cout << "◁";
+        }
+        else if(Pos_y == Pos_yy){
+            if(Pos_x >= Pos_xx) cout << "▽";
+            else cout << "△";
+        }
+    }
+    
+    void Game_Map_Show(){  //打印出迷宫
+        Game_Line();
+        for(int i = 1; i <= MAP_SIZE; i ++){
+            cout << '|';
+            for(int j = 1; j <= MAP_SIZE; j ++){
+                if(GameMap[i][j] == '1') cout << "■";  //墙壁
+                else{
+                    if(i == Pos_x && j == Pos_y) Game_Map_Show_Arrow();
+                    else if(MapVis[i][j]) cout << "·";  //已经走过的位置用“·”标记
+                    else cout << "□";  //可走路径
+                }
+            }
+            cout << '|' << endl;
+        }
+        Game_Line();
+    }
+    
+    void Game_Play_Move(int x, int y){  //移动操作
+        if(MapVis[x][y] == 1) MapVis[Pos_x][Pos_y] = 0;  //若下一个点被标记为走过，说明原路返回，清空上一次的标记
+        else MapVis[x][y] = 1;
+        Pos_xx = Pos_x, Pos_yy = Pos_y;
+        Pos_x = x, Pos_y = y;  //更新位置
+    }
+    
+    int Game_Play_Menu_Choose_Atoi(string s){  //将操作转化为整数
+        int sum = 0;
+        for(int i = 0; i < s.size(); i ++){
+            if(s[i] >= '0' && s[i] <= '9') sum = sum * 10 + (int)(s[i] - '0');
+            else return -1;  //若非数字说明数据非法
+        }
+        return sum;
+    }
+    
+    bool Game_Map_BFS(char mp[N][N], bool st[N][N], int x, int y){  //BFS搜索的过程
+        if(x == MAP_SIZE && y == MAP_SIZE) return 1;  //本身处于出口，直接返回
+        PII q[N * N * 4];  //数组模拟实现队列
+        int hh, tt; hh = tt = 0;  //hh为队头指针，tt为队尾指针
+        q[tt ++] = {x, y};  //将起始点入队
+        while(hh < tt){  
+            PII head = q[hh ++];  //取出队头扩展搜索
+            for(int i = 0; i < 4; i ++){  //循环遍历偏移量数组，搜索四个方向
+                int l = head.fi + dx[i], r = head.se + dy[i];
+                if(check_in(l, r) && mp[l][r] == '0' && !st[l][r]){  //判断该点是否满足搜索条件
+                    q[tt ++] = {l, r};  //将该点入队
+                    if(l == MAP_SIZE && r == MAP_SIZE) return 1;  //若已经为出口，则提前返回
+                    st[l][r] = 1;  //标记该点已经走过
+                }
+            }
+        }
+        return 0;  //搜不到，说明当前位置无解
+    }
+    
+    void Game_Map_DFS(char mp[N][N], bool st[N][N], int x, int y){  //DFS搜索的过程
+        if(x == MAP_SIZE && y == MAP_SIZE) GameMapFlag = 1;  //到达出口进行标记
+        for(int i = 0; i < 4; i ++){  //循环遍历偏移量数组，搜索四个方向
+            int l = x + dx[i], r = y + dy[i];
+            if(check_in(l, r) && !st[l][r] && mp[l][r] == '0'){  //判断该点是否满足搜索条件
+                st[l][r] = 1;  //标记该点已经走过
+                if(l == MAP_SIZE && r == MAP_SIZE) GameMapFlag = 1;  //到达出口进行标记
+                Game_Map_DFS(mp, st, l, r);  //继续以该点搜索
+            }
+        }
+    }
+    
+    bool Game_Map_Check(){  //检查生成的迷宫是否合法
+        GameMapFlag = 0;
+        char mp[N][N];
+        bool st[N][N];
+        Game_GameMap_Copy(mp);
+        Game_MapVis_Copy(st);
+        st[1][1] = 1;
+        Game_Map_DFS(mp, st, 1, 1);  //利用DFS检查
+        return GameMapFlag;
+    }
+    
+    void Game_Map_Create(){  //生成迷宫
+    
+        Game_Map_reset();  //重置
+    
+        srand((unsigned)time(0));  //随机种子
+        for(int i = 1; i <= MAP_SIZE; i ++){
+           for(int j = 1; j <= MAP_SIZE; j ++){
+                int u = rand() % 1000;
+                GameMap[i][j] = u % 3 == 0 ? '1' : '0';  //当随机数u可以被3整除时设为墙壁
+                if(GameMap[i][j] == '1') MapVis[i][j] = 1;  //同时标记墙壁不可走
+            }
+        }
+        GameMap[1][1] = GameMap[MAP_SIZE][MAP_SIZE] = '0';  //迷宫起始点和终点必须是可走的
+        MapVis[MAP_SIZE][MAP_SIZE] = 0;  //迷宫终点必须是未走过的
+        MapVis[1][1] = 1;  //迷宫起始点必须是走过的
+    }
+    
+    bool Game_Create(){  //创建游戏
+        string map_size; getline(cin, map_size);  //读入迷宫规模
+        if(map_size == "1") MAP_SIZE = 10;
+        else if(map_size == "2") MAP_SIZE = 50;
+        else if(map_size == "3") MAP_SIZE = 100;
+        else{
+            cout << "----------------------------" << endl;
+            cout << "|  输入数据非法，请重新输入  |" << endl;
+            cout << "----------------------------" << endl;
+            Game_Main_Menu();
+            return 0;
+        }
+    
+        cout << "----------------------------" << endl;
+        cout << "|    正在创建地图.....     |" << endl;
+        cout << "----------------------------" << endl;
+    
+        Game_Map_Create();  //创建并生成首个迷宫
+        while(!Game_Map_Check()) Game_Map_Create();  //生成一个有解的迷宫
+    
+        cout << "----------------------------" << endl;
+        cout << "|        创建成功！        |" << endl;
+        cout << "----------------------------" << endl;
+    
+        Game_Map_Show();  //显示迷宫
+        Game_Play_status();  //显示当前位置
+    
+        return 1;  //创建成功
+    }
+    
+    bool Game_Play_Help_DFS(char mp[N][N], bool st[N][N]){  //DFS搜索解
+        for(int i = 0; i < 4; i ++){  //循环遍历偏移量数组，枚举四个方向
+            int l = Pos_x + dx[i], r = Pos_y + dy[i];
+            if(check_in(l, r) && !st[l][r] && mp[l][r] == '0'){  //判断该点是否满足搜索条件
+                GameMapFlag = 0;  //重置DFS判断条件
+                Game_Map_DFS(mp, st, l, r);
+                if(GameMapFlag){  //满足条件
+                    Game_Play_Move(l, r);  //进行移动
+                    return 1;  //直接返回成功
+                }
+            }
+        }
+        return 0;  //当前位置无解
+    }
+    
+    bool Game_Play_Help_BFS(char mp[N][N], bool st[N][N]){  //BFS搜索解
+        for(int i = 0; i < 4; i ++){  //循环遍历偏移量数组，枚举四个方向
+            int l = Pos_x + dx[i], r = Pos_y + dy[i];
+            if(check_in(l, r) && !st[l][r] && mp[l][r] == '0'){  //判断该点是否满足搜索条件
+                if(Game_Map_BFS(mp, st, l, r)){  //满足条件
+                    Game_Play_Move(l, r);  //进行移动
+                    return 1;  //直接返回成功
+                }
+            }
+        }
+        return 0;  //当前位置无解
+    }
+    
+    bool Game_Play_Help(){  //游戏帮助
+        srand((unsigned)time(0));  //随机种子
+        int u = rand() % 100;
+    
+        char mp[N][N];
+        bool st[N][N];
+        Game_GameMap_Copy(mp);  //复制迷宫信息
+        Game_MapVis_Copy(st);  //复制走过的位置状态
+    
+        if(u % 2 == 0){
+            cout << "-----GAME-PLAY-DFS-HELP-----" <<  endl;
+            return Game_Play_Help_DFS(mp, st);  //50%的概率调用DFS搜索解
+        }
+        else{
+            cout << "-----GAME-PLAY-BFS-HELP-----" <<  endl;
+            return Game_Play_Help_BFS(mp, st);  //50%的概率调用BFS搜索解
+        }
+    }
+    
+    void Game_Play_Menu_Choose(){  //游戏操作菜单选项
+        string op_s; getline(cin, op_s);  //读入操作为string，防止非法数据对程序造成不可知的错误
+        stringstream op_ss(op_s);
+        string op[N];  //存储用户的操作
+        int idx = 0;
+        string op_o;
+        while(op_ss >> op_o) op[idx ++] = op_o;
+        if(op[0] == "0" && op[1] == "0" && idx == 2){  //使用帮助
+            if(Game_Play_Help()){  //有解的情况辅助进行下一步操作
+                cout << "|      已帮您走好下一步    |" << endl;
+                cout << "----------------------------" << endl;
+            }
+            else {  //无解的情况
+                cout << "----------------------------" << endl;
+                cout << "|   当前状态无解，请后退    |" << endl;
+                cout << "----------------------------" << endl;
+                for(int i = 1; i <= MAP_SIZE; i ++){
+                    for(int j = 1; j <= MAP_SIZE; j ++){
+                        cout << MapVis[i][j];
+                    }
+                    cout << endl;
+                }
+            }
+        }
+        else{  //判断移动
+            int x = Game_Play_Menu_Choose_Atoi(op[0]), y = Game_Play_Menu_Choose_Atoi(op[1]);  //取读入的前两个数，并转化为整形
+            if(Game_Play_Menu_Choose_Check(x, y) && idx == 2) Game_Play_Move(x, y);  //移动位置合法进行移动
+            else{  //移动位置非法提示错误
+                cout << "----------操作非法----------" << endl;
+                cout << "|      请输入合法坐标      |" << endl;
+                cout << "----------------------------" << endl;
+            }
+        }
+    }
+    
+    void Game_Play(){  //游戏游玩过程
+    
+        Game_Play_Menu();  //每次操作后调用游戏操作菜单
+        Game_Play_Menu_Choose();  //每次操作后调用游戏操作菜单选项
+        Game_Map_Show();  //每次操作后更新并显示迷宫信息
+        Game_Play_status();  //每次操作后更新并显示当前位置
+    
+        if(Pos_x == MAP_SIZE && Pos_y == MAP_SIZE){
+            Game_Play_End();  //若当前位于终点，则游戏结束
+            return ;
+        }
+        else Game_Play();  //否则再次调用
+    }
+    
+    void Game_Start(){  //游戏初始化
+    
+        Game_Statement();  //调用游戏声明，仅在初始化时调用一次
+    
+        Game_Main_Menu();  //调用游戏主菜单，仅在初始化时调用一次
+    
+        while(!Game_Create());  //创建游戏，仅在初始化时调用一次
+    
+        Game_Play();  //运行游戏，仅在初始化时调用一次
+    
+    }
+    
+    int main(){
+    
+        Game_Start();  //初始化游戏
+    
+        system("pause");
+    
+        return 0;
+    
+    }
