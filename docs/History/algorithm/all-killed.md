@@ -39,15 +39,19 @@ description: ""
 $1\le N\le 1\times10^8$
 
 **样例输入** ：
-    
-    
-    3
-    KAA
+```java
+
+
+3
+KAA
+```
 
 **样例输出** ：
-    
-    
-    YES
+```java
+
+
+YES
+```
 
 * * *
 
@@ -55,66 +59,76 @@ $1\le N\le 1\times10^8$
 
   * 当 $N$ 为 $1$ 时，不需要操作就是回文串。 
   * 接下来明确以下两个性质： 
-    * 当第一个字符为 `A` 时，无论如何操作都无法将其变为 `K`；
-    * 当最后一个字符为 `K` 时，无论如何操作都无法将其变为 `A`。
+```java
+* 当第一个字符为 `A` 时，无论如何操作都无法将其变为 `K`；
+* 当最后一个字符为 `K` 时，无论如何操作都无法将其变为 `A`。
+```
   * 因此当第一个字符为 `A` 且最后一个字符为 `K` 时，无论如何操作都无法变成回文串。
   * 我们先考虑第一个字符为 `K` 的情况： 
-    * 当第一个字符为 `K` 且 $N$ 的长度至少为 $3$ 时，由于不限制操作次数，那么我们最终一定可以通过操作得到类似 `KAAA...AAAK` 的字符串，故是回文串。
+```java
+* 当第一个字符为 `K` 且 $N$ 的长度至少为 $3$ 时，由于不限制操作次数，那么我们最终一定可以通过操作得到类似 `KAAA...AAAK` 的字符串，故是回文串。
+```
   * 类似的考虑最后一个字符为 `A` 的情况： 
-    * 当最后一个字符为 `A` 且 $N$ 的长度至少为 $3$ 时，由于不限制操作次数，那么我们最终一定可以通过操作得到类似 `AKKK...KKKA` 的字符串，故是回文串。 
+```java
+* 当最后一个字符为 `A` 且 $N$ 的长度至少为 $3$ 时，由于不限制操作次数，那么我们最终一定可以通过操作得到类似 `AKKK...KKKA` 的字符串，故是回文串。 
+```
   * 其他情况，当 $S$ 长度为 $2$ 时，只有 `AA` 和 `KK` 是回文串。
 
 
 
 **代码1** ：
-    
-    
-    #include &lt;stdio.h&gt;
-    
-    void solve(){
-    
-        int n; scanf("%d", &n);
-    
-        char s[n + 10]; scanf("%s", s);
-    
-        if((s[0] == 'K' || s[n - 1] == 'A') && !(s[0] == 'K' && s[n - 1] == 'A' && n == 2)) printf("YES\n");
-        else printf("NO\n");
-    }
-    
-    int main(){
-    
-        solve();
-    
-        return 0;
-    
-    }
+```java
+
+
+#include &lt;stdio.h&gt;
+
+void solve(){
+
+    int n; scanf("%d", &n);
+
+    char s[n + 10]; scanf("%s", s);
+
+    if((s[0] == 'K' || s[n - 1] == 'A') && !(s[0] == 'K' && s[n - 1] == 'A' && n == 2)) printf("YES\n");
+    else printf("NO\n");
+}
+
+int main(){
+
+    solve();
+
+    return 0;
+
+}
+```
 
 **代码2** ：
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    void solve(){
-    
-        int n; cin >> n;
-    
-        char t, p;
-    
-        for(int i = 0; i < n; i ++){
-            char op; cin >> op;
-            if(i == 0) t = op;
-            if(i == n - 1) p = op;
-        }
-        if((t == 'K' || p == 'A') && !(t == 'K' && p == 'A' && n == 2)) cout << "YES" << endl;
-        else cout << "NO" << endl;
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+void solve(){
+
+    int n; cin >> n;
+
+    char t, p;
+
+    for(int i = 0; i < n; i ++){
+        char op; cin >> op;
+        if(i == 0) t = op;
+        if(i == n - 1) p = op;
     }
-    
-    int main(){
-    
-        solve();
-    
-        return 0;
-    
-    }
+    if((t == 'K' || p == 'A') && !(t == 'K' && p == 'A' && n == 2)) cout << "YES" << endl;
+    else cout << "NO" << endl;
+
+}
+
+int main(){
+
+    solve();
+
+    return 0;
+
+}
+```

@@ -31,40 +31,42 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    void solve(){
-    
-        string s;
-    
-        cin >> s;
-    
-        bool flag = 1;
-    
-        if(s[0] != 'y' && s[0] != 'Y') flag = 0;
-        if(s[1] != 'e' && s[1] != 'E') flag = 0;
-        if(s[2] != 's' && s[2] != 'S') flag = 0;
-    
-        if(s.size() == 3 && flag) cout << "YES" << endl;
-        else cout << "NO" << endl;
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+void solve(){
+
+    string s;
+
+    cin >> s;
+
+    bool flag = 1;
+
+    if(s[0] != 'y' && s[0] != 'Y') flag = 0;
+    if(s[1] != 'e' && s[1] != 'E') flag = 0;
+    if(s[2] != 's' && s[2] != 'S') flag = 0;
+
+    if(s.size() == 3 && flag) cout << "YES" << endl;
+    else cout << "NO" << endl;
+
+}
+
+int main(){
+
+    int _;
+    cin >> _;
+
+    while(_--){
+        solve();
     }
-    
-    int main(){
-    
-        int _;
-        cin >> _;
-    
-        while(_--){
-            solve();
-        }
-    
-        return 0;
-    
-    }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -94,56 +96,58 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N = 1010;
-    
-    typedef long long LL;
-    
-    bool vis[N];
-    
-    void solve(){
-    
-        memset(vis,0,sizeof vis);
-    
-        int n;
-    
-        cin >> n;
-    
-        LL cnt = 0;
-    
-        while(n--){
-    
-            char a;
-            cin >> a;
-    
-            if(!vis[a]){
-                cnt += 2;
-                vis[a] = 1;
-            }
-            else cnt ++;
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 1010;
+
+typedef long long LL;
+
+bool vis[N];
+
+void solve(){
+
+    memset(vis,0,sizeof vis);
+
+    int n;
+
+    cin >> n;
+
+    LL cnt = 0;
+
+    while(n--){
+
+        char a;
+        cin >> a;
+
+        if(!vis[a]){
+            cnt += 2;
+            vis[a] = 1;
         }
-    
-        cout << cnt << endl;
-    
+        else cnt ++;
+
     }
-    
-    int main(){
-    
-        int _;
-        cin >> _;
-    
-        while(_--){
-            solve();
-        }
-    
-        return 0;
-    
+
+    cout << cnt << endl;
+
+}
+
+int main(){
+
+    int _;
+    cin >> _;
+
+    while(_--){
+        solve();
     }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -175,59 +179,61 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N = 1010;
-    
-    int n;
-    
-    int ans[N];
-    
-    void solve(){
-    
-        cin >> n;
-    
-        for(int i = 1; i <= n; i ++) cin >> ans[i];
-    
-        for(int i = 1; i <= n; i ++){
-    
-            int m;
-            cin >> m;
-    
-            int flag = 0;
-    
-            while(m--){
-                char op;
-                cin >> op;
-                if(op == 'D') flag ++;
-                else flag --;
-            }
-    
-            ans[i] = (ans[i] + flag % 10 + 10) % 10;
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 1010;
+
+int n;
+
+int ans[N];
+
+void solve(){
+
+    cin >> n;
+
+    for(int i = 1; i <= n; i ++) cin >> ans[i];
+
+    for(int i = 1; i <= n; i ++){
+
+        int m;
+        cin >> m;
+
+        int flag = 0;
+
+        while(m--){
+            char op;
+            cin >> op;
+            if(op == 'D') flag ++;
+            else flag --;
         }
-    
-        for(int i = 1; i <= n; i ++) cout << ans[i] << " ";
-    
-        cout << endl;
-    
+
+        ans[i] = (ans[i] + flag % 10 + 10) % 10;
+
     }
-    
-    int main(){
-    
-        int _;
-        cin >> _;
-    
-        while(_--){
-            solve();
-        }
-    
-        return 0;
-    
+
+    for(int i = 1; i <= n; i ++) cout << ans[i] << " ";
+
+    cout << endl;
+
+}
+
+int main(){
+
+    int _;
+    cin >> _;
+
+    while(_--){
+        solve();
     }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -260,63 +266,65 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    void solve(){
-    
-        int n;
-    
-        cin >> n;
-    
-        bool vis[n + 10];
-    
-        memset(vis,0,sizeof vis);
-    
-        set&lt;string&gt; st;
-    
-        string s[n + 1];
-    
-        for(int i = 0; i < n; i ++){
-            cin >> s[i];
-            st.insert(s[i]);
-        }
-    
-        for(int i = 0; i < n; i ++){
-            if(s[i].size() == 1) continue;
-            for(int j = 1; j <= s[i].size() - 1; j ++){
-                string s1 = s[i].substr(0,j), s2 = s[i].substr(j,s[i].size() - j);
-                if(st.count(s1) == 1 && st.count(s2) == 1){
-                    vis[i] = 1;
-                    break;  
-                }
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+void solve(){
+
+    int n;
+
+    cin >> n;
+
+    bool vis[n + 10];
+
+    memset(vis,0,sizeof vis);
+
+    set&lt;string&gt; st;
+
+    string s[n + 1];
+
+    for(int i = 0; i < n; i ++){
+        cin >> s[i];
+        st.insert(s[i]);
+    }
+
+    for(int i = 0; i < n; i ++){
+        if(s[i].size() == 1) continue;
+        for(int j = 1; j <= s[i].size() - 1; j ++){
+            string s1 = s[i].substr(0,j), s2 = s[i].substr(j,s[i].size() - j);
+            if(st.count(s1) == 1 && st.count(s2) == 1){
+                vis[i] = 1;
+                break;  
             }
         }
-    
-        for(int i = 0; i < n; i ++){
-            if(vis[i]) cout << 1;
-            else cout << 0;
-        }
-    
-        cout << endl;
-    
     }
-    
-    int main(){
-    
-        int _;
-        cin >> _;
-    
-        while(_--){
-            solve();
-        }
-    
-        return 0;
-    
+
+    for(int i = 0; i < n; i ++){
+        if(vis[i]) cout << 1;
+        else cout << 0;
     }
-    
+
+    cout << endl;
+
+}
+
+int main(){
+
+    int _;
+    cin >> _;
+
+    while(_--){
+        solve();
+    }
+
+    return 0;
+
+}
+
+```
 
 * * *
 
@@ -347,68 +355,70 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N = 110;
-    
-    char mp[N][N];
-    
-    bool st[N][N];
-    
-    void solve()
-    {
-        int n;
-        cin >> n;
-    
-        memset(st, 0, sizeof st);
-    
-        for (int i = 1; i <= n; i++) cin >> mp[i] + 1;
-    
-        int ans = 0;
-    
-        for (int i = 1; i <= n; i++){
-            for (int j = 1; j <= n; j++){
-                if(i == j && n % 2 == 1) continue;
-    
-                if(!st[i][j]){
-                    int cnt = 0;
-                    if(mp[i][j] == '1') cnt++;
-    
-                    st[i][j] = 1;
-                    if(mp[j][n - i + 1] == '1') cnt++;
-    
-                    st[j][n - i + 1] = 1;
-                    if(mp[n - i + 1][n - j + 1] == '1') cnt++;
-    
-                    st[n - i + 1][n - j + 1] = 1;
-                    if(mp[n - j + 1][i] == '1') cnt++;
-    
-                    st[n - j + 1][i] = 1;
-    
-                    ans += min(cnt, 4 - cnt);
-                }
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 110;
+
+char mp[N][N];
+
+bool st[N][N];
+
+void solve()
+{
+    int n;
+    cin >> n;
+
+    memset(st, 0, sizeof st);
+
+    for (int i = 1; i <= n; i++) cin >> mp[i] + 1;
+
+    int ans = 0;
+
+    for (int i = 1; i <= n; i++){
+        for (int j = 1; j <= n; j++){
+            if(i == j && n % 2 == 1) continue;
+
+            if(!st[i][j]){
+                int cnt = 0;
+                if(mp[i][j] == '1') cnt++;
+
+                st[i][j] = 1;
+                if(mp[j][n - i + 1] == '1') cnt++;
+
+                st[j][n - i + 1] = 1;
+                if(mp[n - i + 1][n - j + 1] == '1') cnt++;
+
+                st[n - i + 1][n - j + 1] = 1;
+                if(mp[n - j + 1][i] == '1') cnt++;
+
+                st[n - j + 1][i] = 1;
+
+                ans += min(cnt, 4 - cnt);
             }
         }
-    
-        cout << ans << endl;
-    
     }
-    
-    int main(){
-    
-        int _;
-        cin >> _;
-    
-        while(_--){
-            solve();
-        }
-    
-        return 0;
-    
+
+    cout << ans << endl;
+
+}
+
+int main(){
+
+    int _;
+    cin >> _;
+
+    while(_--){
+        solve();
     }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -429,8 +439,10 @@ description: ""
 ### 思想
 
   * 对于$a_i \lt i\lt a_j<j,1\le i,j\le n$ 
-    * 一定满足`a[i] < i`，将`a[i] >= i`的删去，不参与后续匹配
-    * 一定满足`i < a[j]`，`{i,j}`的对数为`i`之前的满足`a[i] < i`的数量
+```java
+* 一定满足`a[i] < i`，将`a[i] >= i`的删去，不参与后续匹配
+* 一定满足`i < a[j]`，`{i,j}`的对数为`i`之前的满足`a[i] < i`的数量
+```
   * 枚举`j`，二分查找最小满足`i < a[j]`的位置，总数量加上`i`之前的所有满足`a[i] < i`的数量
 
 
@@ -438,49 +450,51 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N = 1e6 + 3;
-    
-    int a[N];
-    
-    typedef long long LL;
-    
-    LL cnt;
-    
-    vector&lt;int&gt; st;
-    
-    void solve(){
-        int n;
-        cin >> n;
-    
-        st.clear();
-        cnt = 0;
-    
-        for(int i = 1; i <= n; i ++) cin >> a[i];
-    
-        for(int i = 1; i <= n; i ++){
-            if (a[i] >= i) continue;
-            cnt += (lower_bound(st.begin(), st.end(), a[i]) - st.begin());
-            st.push_back(i);
-        }
-    
-        cout << cnt << endl;
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 1e6 + 3;
+
+int a[N];
+
+typedef long long LL;
+
+LL cnt;
+
+vector&lt;int&gt; st;
+
+void solve(){
+    int n;
+    cin >> n;
+
+    st.clear();
+    cnt = 0;
+
+    for(int i = 1; i <= n; i ++) cin >> a[i];
+
+    for(int i = 1; i <= n; i ++){
+        if (a[i] >= i) continue;
+        cnt += (lower_bound(st.begin(), st.end(), a[i]) - st.begin());
+        st.push_back(i);
     }
-    
-    int main(){
-    
-        int _;
-    
-        cin >> _;
-    
-        while(_--){
-            solve();
-        }
-    
-        return 0;
-    
+
+    cout << cnt << endl;
+}
+
+int main(){
+
+    int _;
+
+    cin >> _;
+
+    while(_--){
+        solve();
     }
+
+    return 0;
+
+}
+```

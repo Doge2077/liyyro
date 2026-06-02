@@ -19,10 +19,20 @@ description: ""
 
 ### 思想
 
-  * 若$a_i(i>=2)$可以通过[latex]a_i=a_i-a_{i-1}[/latex]变为$0$
-  * 说明：[latex]a_{i-1}|a_i[/latex]
-  * 若[latex]a_{i-1}(i>=2)[/latex]可以通过[latex]a_{i-1}=a_{i-1}-a_{i-2}[/latex]变为$0$
-  * 说明：[latex]a_{i_2}|a_{i-1}[/latex]
+  * 若$a_i(i>=2)$可以通过$$
+a_i=a_i-a_{i-1}
+$$变为$0$
+  * 说明：$$
+a_{i-1}|a_i
+$$
+  * 若$$
+a_{i-1}(i>=2)
+$$可以通过$$
+a_{i-1}=a_{i-1}-a_{i-2}
+$$变为$0$
+  * 说明：$$
+a_{i_2}|a_{i-1}
+$$
   * 由此可得，当$a_i(i>=2)$可以变为$0$时
   * 说明：$a_1|a_i$
 
@@ -31,52 +41,54 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N = 1e6 + 3;
-    
-    int a[N];
-    
-    void solve(){
-    
-        int n;
-    
-        cin >> n;
-    
-        for(int i = 1 ; i <= n ; i++){
-            cin >> a[i];
-        }
-    
-        bool flag = 1;
-    
-        int t = a[1];
-    
-        for(int i = 2 ; i <= n ; i++){
-            if(a[i] % t != 0){
-                flag = 0;
-                break;
-            }
-        }
-    
-        if(flag) cout << "YES" << "\n";
-        else cout << "NO" << "\n";
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 1e6 + 3;
+
+int a[N];
+
+void solve(){
+
+    int n;
+
+    cin >> n;
+
+    for(int i = 1 ; i <= n ; i++){
+        cin >> a[i];
     }
-    
-    int main(){
-    
-        int tt;
-        cin >> tt;
-        while(tt -- ){
-            solve();
-        } 
-    
-        return 0;
-    
+
+    bool flag = 1;
+
+    int t = a[1];
+
+    for(int i = 2 ; i <= n ; i++){
+        if(a[i] % t != 0){
+            flag = 0;
+            break;
+        }
     }
+
+    if(flag) cout << "YES" << "\n";
+    else cout << "NO" << "\n";
+
+}
+
+int main(){
+
+    int tt;
+    cin >> tt;
+    while(tt -- ){
+        solve();
+    } 
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -104,54 +116,56 @@ description: ""
 ### 代码
 
 * * *
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N = 1e6 + 3;
-    
-    int a[N];
-    
-    void solve(){
-    
-        int n, l, r;
-        cin >> n >> l >> r;
-    
-        bool flag = 1;
-    
-        for(int i = 1; i <= n; i++){
-    
-            a[i] = r / i * i;
-            if(a[i] < l ){
-                flag = 0;
-                break;
-            }
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 1e6 + 3;
+
+int a[N];
+
+void solve(){
+
+    int n, l, r;
+    cin >> n >> l >> r;
+
+    bool flag = 1;
+
+    for(int i = 1; i <= n; i++){
+
+        a[i] = r / i * i;
+        if(a[i] < l ){
+            flag = 0;
+            break;
         }
-    
-        if(flag){
-            cout << "YES" << "\n";
-            for(int i = 1; i <= n; i++) cout << a[i] << " ";
-            cout << "\n";
-        }
-        else cout << "NO" << "\n";
-    
+
     }
-    
-    int main(){
-    
-        int tt;
-    
-        cin >> tt;
-    
-        while(tt--){
-            solve();
-        }
-    
-        return 0;
-    
+
+    if(flag){
+        cout << "YES" << "\n";
+        for(int i = 1; i <= n; i++) cout << a[i] << " ";
+        cout << "\n";
     }
+    else cout << "NO" << "\n";
+
+}
+
+int main(){
+
+    int tt;
+
+    cin >> tt;
+
+    while(tt--){
+        solve();
+    }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -180,54 +194,56 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N = 1e6 + 3;
-    
-    int a[N];
-    
-    void solve(){
-    
-        int n,m;
-    
-        cin >> n >> m;
-    
-        string s(n,'0');
-    
-        for(int i = 0; i < n; i++) cin >> a[i];
-    
-        int q=0;
-    
-        for(int i = n-1; i >= 0; i--){
-    
-            if(a[i] <= q) s[i] = '1';
-            else if(a[i] > q && q < m){
-                q++;
-                s[i] = '1';
-            }
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 1e6 + 3;
+
+int a[N];
+
+void solve(){
+
+    int n,m;
+
+    cin >> n >> m;
+
+    string s(n,'0');
+
+    for(int i = 0; i < n; i++) cin >> a[i];
+
+    int q=0;
+
+    for(int i = n-1; i >= 0; i--){
+
+        if(a[i] <= q) s[i] = '1';
+        else if(a[i] > q && q < m){
+            q++;
+            s[i] = '1';
         }
-    
-        cout << s << "\n";
-    
+
     }
-    
-    int main(){
-    
-        int tt;
-    
-        cin >> tt;
-    
-        while(tt--){
-            solve();
-        }
-    
-        return 0;
-    
+
+    cout << s << "\n";
+
+}
+
+int main(){
+
+    int tt;
+
+    cin >> tt;
+
+    while(tt--){
+        solve();
     }
+
+    return 0;
+
+}
+```
 
 * * *
 

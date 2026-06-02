@@ -24,19 +24,25 @@ description: ""
 * * *
 
 配置好服务器后，在终端将课程提供的镜像 `django_lesson_1_0.tar` 上传至服务器：
-    
-    
-    scp /var/lib/acwing/docker/images/django_lesson_1_0.tar server_name:  #server_name 为配置好免密登录的服务器名称
+```java
+
+
+scp /var/lib/acwing/docker/images/django_lesson_1_0.tar server_name:  #server_name 为配置好免密登录的服务器名称
+```
 
 接下来将镜像加载到本地：
-    
-    
-    docker load -i django_lesson_1_0.tar
+```java
+
+
+docker load -i django_lesson_1_0.tar
+```
 
 创建并运行容器，并初始化端口映射：
-    
-    
-    docker run -p 20000:22 -p 8000:8000 --name django_server -itd django_lesson:1.0
+```java
+
+
+docker run -p 20000:22 -p 8000:8000 --name django_server -itd django_lesson:1.0
+```
 
   * 若某主机端口被其他容器占用，可以修改端口，如 `20022:22`。
   * 若忘记初始化端口，需要停止并删除该容器，重新创建。
@@ -53,14 +59,18 @@ description: ""
 * * *
 
 打开 `tmux` 初始化新的 `Django` 项目：
-    
-    
-    django-admin startproject acapp  #acapp 为项目所在文件夹
+```java
+
+
+django-admin startproject acapp  #acapp 为项目所在文件夹
+```
 
 然后将 `acapp` 项目文件夹初始化 `git` 仓库，便于版本控制管理和维护，且上传云端后可以防止项目丢失。
-    
-    
-    git init  #进入 acapp 中初始化git仓库
+```java
+
+
+git init  #进入 acapp 中初始化git仓库
+```
 
 将该容器的公钥上传 `git`，在偏好设置中添加 `ssh` 密钥，之后 在 `git` 云端创建新的项目，按照提示在终端里连接仓库。
 
@@ -71,9 +81,11 @@ description: ""
 * * *
 
 在 `acapp` 文件夹下执行下方指令运行项目：
-    
-    
-    python3 manage.py runserver 0.0.0.0:8000
+```java
+
+
+python3 manage.py runserver 0.0.0.0:8000
+```
 
 然后浏览器打开 `xx.xx.xx.xx:8000` 进入项目界面。
 
@@ -99,26 +111,34 @@ description: ""
 * * *
 
 创建一个 `Django` 子应用：
-    
-    
-    python3 manage.py startapp game  #game 为该子应用的名字
+```java
+
+
+python3 manage.py startapp game  #game 为该子应用的名字
+```
 
 之后的项目开发在这个子应用 `game` 文件夹下进行。
 
 关闭运行中的控制台，同步数据库：
-    
-    
-    python3 manage.py migrate
+```java
+
+
+python3 manage.py migrate
+```
 
 创建管理员账号：
-    
-    
-    python3 manage.py createsuperuser
+```java
+
+
+python3 manage.py createsuperuser
+```
 
 接下来重启控制台：
-    
-    
-    pyhton3 manage.py runserver 0.0.0.0:8000
+```java
+
+
+pyhton3 manage.py runserver 0.0.0.0:8000
+```
 
 浏览器打开 `xx.xx.xx.xx:8000/admin` 进入管理员登录界面，输入创建好的账号即可登录。
 
@@ -150,26 +170,30 @@ description: ""
 **game/views.py**
 
 `views` 存储函数及其执行的逻辑：
-    
-    
-    from django.http import HttpResponse
-    
-    def index(resquest):
-        return HttpResponse("lys is a dog")
+```java
+
+
+from django.http import HttpResponse
+
+def index(resquest):
+    return HttpResponse("lys is a dog")
+```
 
 在如上例子中，当 `index()` 函数接收到用户的请求的时，就会被调用，执行 `HttpResponse("lys is a dog")`。
 
 **game/urls.py**
 
 `urls` 存储了相应的路由，即调用函数链接的指向，此处的路由为 `game` 子应用的路由：
-    
-    
-    from django.urls import path
-    from game.views import index # 从game/views.py 里面调用index函数
-    
-    urlpatterns = [
-        path('', index, name="index")
-    ]
+```java
+
+
+from django.urls import path
+from game.views import index # 从game/views.py 里面调用index函数
+
+urlpatterns = [
+    path('', index, name="index")
+]
+```
 
 执行语句 `path('', index, name = 'game_index')` 意思为，在用户访问网站的 `/game` 目录时（`path`的路径为 `''`，即为空路径，默认指向当前目录的根目录）会调用 `index` 函数。
 
@@ -178,15 +202,17 @@ description: ""
 **acapp/urls.py**
 
 设置子应用的路由仍需要将其加入到整个项目的路由当中：
-    
-    
-    from django.contrib import admin
-    from django.urls import path, include
-    
-    urlpatterns = [
-        path('', include('game.urls')),
-        path('admin/', admin.site.urls)
-    ]
+```java
+
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('', include('game.urls')),
+    path('admin/', admin.site.urls)
+]
+```
 
 此处的 `path` 为空路径，默认访问整个网站的根目录。由于此时调用的函数是 `include('game.urls')`，所以相当于访问 `/game/urls`。
 

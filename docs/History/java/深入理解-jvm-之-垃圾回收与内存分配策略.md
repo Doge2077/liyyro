@@ -121,42 +121,44 @@ description: ""
 
 
 我们提供如下示例代码进行验证：
-    
-    
-    public class TestReference {
-        public static void main(String[] args) {
-            // 创建一个强引用对象
-            Object hardReference = new Object();
-    
-            // 创建一个软引用对象
-            SoftReference&lt;Object&gt; softReference = new SoftReference&lt;&gt;(new Object());
-    
-            // 创建一个弱引用对象
-            WeakReference&lt;Object&gt; weakReference = new WeakReference&lt;&gt;(new Object());
-    
-            // 创建一个弱引用对象，并将其引用赋给一个强引用变量
-            WeakReference&lt;Object&gt; weakUseReference = new WeakReference&lt;&gt;(new Object());
-            Object hardUseReference = weakUseReference.get();
-    
-    //        WeakReference&lt;Object&gt; weakUseReference = new WeakReference&lt;&gt;(hardReference);
-    //        Object hardUseReference = weakUseReference;
-    
-            // 创建一个虚引用对象，并指定引用队列
-            ReferenceQueue&lt;Object&gt; referenceQueue = new ReferenceQueue&lt;&gt;();
-            PhantomReference&lt;Object&gt; phantomReference = new PhantomReference&lt;&gt;(new Object(), referenceQueue);
-    
-            // 执行垃圾回收
-            System.gc();
-    
-            // 输出各个引用对象的状态
-            System.out.println("HardReference Obj = " + hardReference);
-            System.out.println("SoftReference Obj = " + softReference.get());
-            System.out.println("WeakReference Obj = " + weakReference.get());
-            System.out.println("HardUseReference Obj = " + hardUseReference);
-            System.out.println("WeakUseReference Obj = " + weakUseReference.get());
-            System.out.println("PhantomReference Obj = " + phantomReference.get());
-        }
+```java
+
+
+public class TestReference {
+    public static void main(String[] args) {
+        // 创建一个强引用对象
+        Object hardReference = new Object();
+
+        // 创建一个软引用对象
+        SoftReference&lt;Object&gt; softReference = new SoftReference&lt;&gt;(new Object());
+
+        // 创建一个弱引用对象
+        WeakReference&lt;Object&gt; weakReference = new WeakReference&lt;&gt;(new Object());
+
+        // 创建一个弱引用对象，并将其引用赋给一个强引用变量
+        WeakReference&lt;Object&gt; weakUseReference = new WeakReference&lt;&gt;(new Object());
+        Object hardUseReference = weakUseReference.get();
+
+//        WeakReference&lt;Object&gt; weakUseReference = new WeakReference&lt;&gt;(hardReference);
+//        Object hardUseReference = weakUseReference;
+
+        // 创建一个虚引用对象，并指定引用队列
+        ReferenceQueue&lt;Object&gt; referenceQueue = new ReferenceQueue&lt;&gt;();
+        PhantomReference&lt;Object&gt; phantomReference = new PhantomReference&lt;&gt;(new Object(), referenceQueue);
+
+        // 执行垃圾回收
+        System.gc();
+
+        // 输出各个引用对象的状态
+        System.out.println("HardReference Obj = " + hardReference);
+        System.out.println("SoftReference Obj = " + softReference.get());
+        System.out.println("WeakReference Obj = " + weakReference.get());
+        System.out.println("HardUseReference Obj = " + hardUseReference);
+        System.out.println("WeakUseReference Obj = " + weakUseReference.get());
+        System.out.println("PhantomReference Obj = " + phantomReference.get());
     }
+}
+```
 
 在上述代码中，我们进行了如下过程试验：
 
@@ -170,18 +172,22 @@ description: ""
 
 
 我在弱引用下添加了被注释的代码片段：
-    
-    
-    WeakReference&lt;Object&gt; weakUseReference = new WeakReference&lt;&gt;(hardReference);
-    Object hardUseReference = weakUseReference;
+```java
+
+
+WeakReference&lt;Object&gt; weakUseReference = new WeakReference&lt;&gt;(hardReference);
+Object hardUseReference = weakUseReference;
+```
 
 在这段代码中，`weakUseReference` 弱引用对象是通过将 `hardReference` 强引用对象作为参数传递给构造函数创建的。然后，将 `weakUseReference` 赋值给 `hardUseReference` 强引用变量。
 
 不同于原来的：
-    
-    
-    WeakReference&lt;Object&gt; weakUseReference = new WeakReference&lt;&gt;(new Object());
-    Object hardUseReference = weakUseReference.get();
+```java
+
+
+WeakReference&lt;Object&gt; weakUseReference = new WeakReference&lt;&gt;(new Object());
+Object hardUseReference = weakUseReference.get();
+```
 
 `weakUseReference` 弱引用对象通过直接创建一个新的匿名对象传递给构造函数创建的。然后，通过调用 `weakUseReference.get()` 来获取弱引用对象所引用的对象，并将其赋值给 `hardUseReference` 强引用变量。
 
@@ -203,42 +209,44 @@ description: ""
 
 
 我们来看如下代码示例：
-    
-    
-    public class FinalizeEscapeGC {
-        public static FinalizeEscapeGC SAVE_HOOK = null;
-    
-        public void isAlive() {
-            System.out.println("I feel gooooooooooood :)");
-        }
-    
-        @Override
-        protected void finalize() throws Throwable {
-            super.finalize();                   // 调用父类的 finalize() 方法
-            FinalizeEscapeGC.SAVE_HOOK = this;  // 重新连接
-            System.out.println("finalize() method executed!");
-        }
-    
-        public static void main(String[] args) throws Throwable {
-    
-            // 创建对象 link start!
-            SAVE_HOOK = new FinalizeEscapeGC();
-    
-            for (int i = 0; i < 5; i++) {
-                // 断开连接
-                SAVE_HOOK = null;
-                System.out.println("God ! Please! no ! Please do something! Save me!");
-                System.gc();
-                // 因为Finalizer方法优先级很低，暂停0.5秒，以等待它
-                Thread.sleep(500);
-                if (SAVE_HOOK != null) {
-                    SAVE_HOOK.isAlive();
-                } else {
-                    System.out.println("Wasted :(");
-                }
+```java
+
+
+public class FinalizeEscapeGC {
+    public static FinalizeEscapeGC SAVE_HOOK = null;
+
+    public void isAlive() {
+        System.out.println("I feel gooooooooooood :)");
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();                   // 调用父类的 finalize() 方法
+        FinalizeEscapeGC.SAVE_HOOK = this;  // 重新连接
+        System.out.println("finalize() method executed!");
+    }
+
+    public static void main(String[] args) throws Throwable {
+
+        // 创建对象 link start!
+        SAVE_HOOK = new FinalizeEscapeGC();
+
+        for (int i = 0; i < 5; i++) {
+            // 断开连接
+            SAVE_HOOK = null;
+            System.out.println("God ! Please! no ! Please do something! Save me!");
+            System.gc();
+            // 因为Finalizer方法优先级很低，暂停0.5秒，以等待它
+            Thread.sleep(500);
+            if (SAVE_HOOK != null) {
+                SAVE_HOOK.isAlive();
+            } else {
+                System.out.println("Wasted :(");
             }
         }
     }
+}
+```
 
 在上述代码中：
 
@@ -253,19 +261,21 @@ description: ""
 
 
 运行后，可以看到与i那些结果如下：
-    
-    
-    God ! Please! no ! Please do something! Save me!
-    finalize() method executed!
-    I feel gooooooooooood :)
-    God ! Please! no ! Please do something! Save me!
-    Wasted :(
-    God ! Please! no ! Please do something! Save me!
-    Wasted :(
-    God ! Please! no ! Please do something! Save me!
-    Wasted :(
-    God ! Please! no ! Please do something! Save me!
-    Wasted :(
+```java
+
+
+God ! Please! no ! Please do something! Save me!
+finalize() method executed!
+I feel gooooooooooood :)
+God ! Please! no ! Please do something! Save me!
+Wasted :(
+God ! Please! no ! Please do something! Save me!
+Wasted :(
+God ! Please! no ! Please do something! Save me!
+Wasted :(
+God ! Please! no ! Please do something! Save me!
+Wasted :(
+```
 
 可以看到被强制断开连接的对象只成功逃出了第一次回收，这是因为任何一个对象的 `finalize()` 方法都只会被系统自动调用一次，如果对象面临下一次回收，它的 `finalize()` 方法不会被再次执行，因此后续所有的自救都失败了。
 
@@ -283,21 +293,27 @@ description: ""
 
   1. 弱分代假说（Weak Generational Hypothesis）：
 
-     * 弱分代假说认为绝大多数对象都是朝生夕灭的，即它们在创建后很快就变成垃圾对象。
-     * 这意味着大部分对象的生命周期相对较短，它们很可能在不久后就不再被程序使用，成为垃圾对象。
-     * 基于这个假设，分代收集理论将内存中的对象划分为不同的代，将对象按照生命周期的长短分为新生代和老年代，以便更有效地进行垃圾回收。
+```java
+ * 弱分代假说认为绝大多数对象都是朝生夕灭的，即它们在创建后很快就变成垃圾对象。
+ * 这意味着大部分对象的生命周期相对较短，它们很可能在不久后就不再被程序使用，成为垃圾对象。
+ * 基于这个假设，分代收集理论将内存中的对象划分为不同的代，将对象按照生命周期的长短分为新生代和老年代，以便更有效地进行垃圾回收。
+```
   2. 强分代假说（Strong Generational Hypothesis）：
 
-     * 强分代假说认为经过多次垃圾收集过程后仍然存活的对象越来越难以消亡。
-     * 即对象在经历了多次垃圾收集后，它们的存活概率会逐渐增加。这是因为在多次垃圾收集过程中，存活下来的对象往往是具有较长生命周期的对象，它们可能是程序中的核心数据结构或全局变量等，对程序的执行起着重要作用。
-     * 基于这个假设，分代收集理论将老年代作为存放较长生命周期对象的区域，采用更耗时但更全面的垃圾收集算法来处理老年代中的对象。
+```java
+ * 强分代假说认为经过多次垃圾收集过程后仍然存活的对象越来越难以消亡。
+ * 即对象在经历了多次垃圾收集后，它们的存活概率会逐渐增加。这是因为在多次垃圾收集过程中，存活下来的对象往往是具有较长生命周期的对象，它们可能是程序中的核心数据结构或全局变量等，对程序的执行起着重要作用。
+ * 基于这个假设，分代收集理论将老年代作为存放较长生命周期对象的区域，采用更耗时但更全面的垃圾收集算法来处理老年代中的对象。
+```
 
 
 
 即使这两个假说已经很完善了，但在进行新生代的垃圾收集（Minor GC）时，若新生代中的对象有被老年代所引用，为了准确地确定新生代中的存活对象，必须额外遍历整个老年代中的所有对象，以确保可达性分析结果的正确性。然而，遍历整个老年代的所有对象会给内存回收带来很大的性能负担。因此便追加提出了第三条假说：
 
   3. 跨代引用假说（Intergenerational Reference Hypothesis）： 
-     * 跨代引用相对于同代引用来说仅占极少数。
+```java
+ * 跨代引用相对于同代引用来说仅占极少数。
+```
 
 
 
@@ -316,20 +332,26 @@ description: ""
 基于先前的可达性分析和分代收集理论，有如下三种经典的垃圾回收算法：
 
   1. 标记-清除算法（Mark and Sweep）： 
-     * 基本的垃圾收集算法之一，共分为标记阶段和清除阶段。
-     * 标记阶段：从根对象开始，递归地遍历所有可达对象，并将其标记为活动对象。
-     * 清除阶段：遍历整个堆内存，将未被标记的对象认定为垃圾对象，并将其回收。
-     * 缺点：执行效率不稳定，且多次执行后会产生大量不连续的内存碎片，进而导致当以后在程序运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作。
+```java
+ * 基本的垃圾收集算法之一，共分为标记阶段和清除阶段。
+ * 标记阶段：从根对象开始，递归地遍历所有可达对象，并将其标记为活动对象。
+ * 清除阶段：遍历整个堆内存，将未被标记的对象认定为垃圾对象，并将其回收。
+ * 缺点：执行效率不稳定，且多次执行后会产生大量不连续的内存碎片，进而导致当以后在程序运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作。
+```
   2. 标记-复制算法（Copying）： 
-     * 该算法是一种针**对新生代的标记算法** 。
-     * 它将新生代的内存空间划分为两个相等的部分，每次只使用其中一部分。
-     * 在垃圾收集过程中，将存活的对象从一个部分复制到另一个部分，同时清除非存活对象。这样，每次垃圾收集后，都会有一部分内存是空闲的，**不会产生内存碎片** 。
-     * 缺点：该算法仅适用于新生代中垃圾产生率较高的情况，如果新生代内存中多数对象都是存活的，这种算法将会产生大量的内存间复制的开销。
+```java
+ * 该算法是一种针**对新生代的标记算法** 。
+ * 它将新生代的内存空间划分为两个相等的部分，每次只使用其中一部分。
+ * 在垃圾收集过程中，将存活的对象从一个部分复制到另一个部分，同时清除非存活对象。这样，每次垃圾收集后，都会有一部分内存是空闲的，**不会产生内存碎片** 。
+ * 缺点：该算法仅适用于新生代中垃圾产生率较高的情况，如果新生代内存中多数对象都是存活的，这种算法将会产生大量的内存间复制的开销。
+```
   3. 标记-整理算法（Mark and Compact）： 
-     * 该算法是一种**针对老年代的标记算法** 。
-     * 它和“标记-清除法”一样首先使用标记阶段来标记活动对象。但在清除阶阶段做法不同，而是将存活的对象向一端移动，最后清理掉边界之外的内存。
-     * 这样可以保持存活对象的连续性，减少内存碎片的产生。
-     * 缺点：该算法仅适用于老年代中垃圾产生率较低的情况，如果老年代大部分的对象都是死亡的，那么移动存活对象并更新所有引用这些对象的地方将会是一种极为负重的操作。
+```java
+ * 该算法是一种**针对老年代的标记算法** 。
+ * 它和“标记-清除法”一样首先使用标记阶段来标记活动对象。但在清除阶阶段做法不同，而是将存活的对象向一端移动，最后清理掉边界之外的内存。
+ * 这样可以保持存活对象的连续性，减少内存碎片的产生。
+ * 缺点：该算法仅适用于老年代中垃圾产生率较低的情况，如果老年代大部分的对象都是死亡的，那么移动存活对象并更新所有引用这些对象的地方将会是一种极为负重的操作。
+```
 
 
 
@@ -458,11 +480,15 @@ description: ""
 `JVM` 的内存分配策略决定了如何为新对象分配内存空间。常见的内存分配策略有两种：
 
   1. 对象优先在 `Eden` 区分配： 
-     * `JVM` 将堆内存划分为不同的区域，其中 `Eden` 区是新对象分配的主要区域。
-     * 当程序创建新对象时，`JVM` 将其分配到 `Eden` 区。当 `Eden` 区满时，触发 `Minor GC`（新生代垃圾回收），将仍然存活的对象移动到 `Survivor` 区或老年代。
+```java
+ * `JVM` 将堆内存划分为不同的区域，其中 `Eden` 区是新对象分配的主要区域。
+ * 当程序创建新对象时，`JVM` 将其分配到 `Eden` 区。当 `Eden` 区满时，触发 `Minor GC`（新生代垃圾回收），将仍然存活的对象移动到 `Survivor` 区或老年代。
+```
   2. 大对象直接进入老年代： 
-     * 如果对象的大小超过了一定的阈值，`JVM` 会将其直接分配到老年代。
-     * 这是因为大对象往往具有较长的生命周期，直接分配到老年代可以减少在新生代的复制操作。
+```java
+ * 如果对象的大小超过了一定的阈值，`JVM` 会将其直接分配到老年代。
+ * 这是因为大对象往往具有较长的生命周期，直接分配到老年代可以减少在新生代的复制操作。
+```
 
 
 
@@ -473,13 +499,17 @@ description: ""
 * * *
 
   1. 长期存活的对象将进入老年代： 
-     * `JVM` 给每个对象定义了一个对象年龄（Age）计数器，存储在对象头中。
-     * 在 `Eden` 区诞生的对象经历一次 `Minor GC` 后存活会被移动到 `Survivor` 区且年龄计数器加一；
-     * 后续在 `Survivor` 区每经历一次 `Minor GC` 且存活继续计数，当年龄计数器达到阈值（默认为15）则会将其移动到老年代。
-     * 在虚拟机中可以通过参数 `-XX:MaxTenuringThreshold` 来设置对象晋升到老年代的年龄阈值。
+```java
+ * `JVM` 给每个对象定义了一个对象年龄（Age）计数器，存储在对象头中。
+ * 在 `Eden` 区诞生的对象经历一次 `Minor GC` 后存活会被移动到 `Survivor` 区且年龄计数器加一；
+ * 后续在 `Survivor` 区每经历一次 `Minor GC` 且存活继续计数，当年龄计数器达到阈值（默认为15）则会将其移动到老年代。
+ * 在虚拟机中可以通过参数 `-XX:MaxTenuringThreshold` 来设置对象晋升到老年代的年龄阈值。
+```
   2. 动态对象年龄判定： 
-     * 为了能更好地适应不同程序的内存状况，`HotSpot` 虚拟机并不是永远要求对象的年龄必须达到 `-XX：MaxTenuringThreshold`才能晋升老年代。
-     * 如果在 `Survivor` 空间中相同年龄所有对象大小的总和大于 `Survivor` 空间的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，无须等到 `-XX：MaxTenuringThreshold` 中要求的年龄。
+```java
+ * 为了能更好地适应不同程序的内存状况，`HotSpot` 虚拟机并不是永远要求对象的年龄必须达到 `-XX：MaxTenuringThreshold`才能晋升老年代。
+ * 如果在 `Survivor` 空间中相同年龄所有对象大小的总和大于 `Survivor` 空间的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，无须等到 `-XX：MaxTenuringThreshold` 中要求的年龄。
+```
 
 
 

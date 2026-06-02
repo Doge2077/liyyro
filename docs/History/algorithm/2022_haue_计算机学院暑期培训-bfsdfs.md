@@ -43,12 +43,14 @@ description: ""
 ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/149096_b6baba9e88-19_4b6be8d85f-zig.png)
 
 对于下面的 4×4 的矩阵，
-    
-    
-    1 5 3 9
-    3 7 5 6
-    9 4 6 4
-    7 3 1 3
+```java
+
+
+1 5 3 9
+3 7 5 6
+9 4 6 4
+7 3 1 3
+```
 
 对其进行 Z 字形扫描后得到长度为 16 的序列：`1 5 3 9 7 3 9 5 4 7 3 6 6 4 1 3`。
 
@@ -69,18 +71,22 @@ description: ""
 1≤n≤500, 矩阵元素为不超过 1000 的正整数。
 
 **输入样例** ：
-    
-    
-    4
-    1 5 3 9
-    3 7 5 6
-    9 4 6 4
-    7 3 1 3
+```java
+
+
+4
+1 5 3 9
+3 7 5 6
+9 4 6 4
+7 3 1 3
+```
 
 **输出样例** ：
-    
-    
-    1 5 3 9 7 3 9 5 4 7 3 6 6 4 1 3
+```java
+
+
+1 5 3 9 7 3 9 5 4 7 3 6 6 4 1 3
+```
 
 **分析**
 
@@ -94,38 +100,40 @@ description: ""
 
 
 **代码**
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    const int N=505;
-    
-    int a[2*N][2*N];  //定义时直接扩大
-    
-    int main(){
-        int n;
-        scanf("%d",&n);
-        for(int i=0;i<n;i++){  //初始化二维数组
-            for(int j=0;j<n;j++){
-                scanf("%d",&a[i][j]);
-            }
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=505;
+
+int a[2*N][2*N];  //定义时直接扩大
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){  //初始化二维数组
+        for(int j=0;j<n;j++){
+            scanf("%d",&a[i][j]);
         }
-        int dr=0,dx[]={0,1,1,-1},dy[]={1,-1,0,1};  //定义(0,1)的方向dr=0  定义偏移量数组
-        printf("%d ",a[0][0]);  //先将(0,0)位置的数输出
-        int x=0,y=1;  //初始化位置为(0,1)
-        for(int i=0;i<(2*n+1)*n;i++){  //循环遍历扩大后的数组
-            if(x<n&&y<n){
-                printf("%d ",a[x][y]);  //满足在原始数组范围内输出
-            }
-            int l=x+dx[dr],r=y+dy[dr];  //临时变量判断下一个要遍历的格子坐标(l,r)
-            if(dr==0||dr==2||r<0||l<0||r>=n||l>=n){  //如果dr=0或dr=2或(l,r)出界时改变方向
-                dr=(dr+1)%4;
-                l=x+dx[dr],r=y+dy[dr];
-            }
-            x=l,y=r;  //更新(x,y)
-        }
-        return 0;
     }
+    int dr=0,dx[]={0,1,1,-1},dy[]={1,-1,0,1};  //定义(0,1)的方向dr=0  定义偏移量数组
+    printf("%d ",a[0][0]);  //先将(0,0)位置的数输出
+    int x=0,y=1;  //初始化位置为(0,1)
+    for(int i=0;i<(2*n+1)*n;i++){  //循环遍历扩大后的数组
+        if(x<n&&y<n){
+            printf("%d ",a[x][y]);  //满足在原始数组范围内输出
+        }
+        int l=x+dx[dr],r=y+dy[dr];  //临时变量判断下一个要遍历的格子坐标(l,r)
+        if(dr==0||dr==2||r<0||l<0||r>=n||l>=n){  //如果dr=0或dr=2或(l,r)出界时改变方向
+            dr=(dr+1)%4;
+            l=x+dx[dr],r=y+dy[dr];
+        }
+        x=l,y=r;  //更新(x,y)
+    }
+    return 0;
+}
+```
 
 * * *
 
@@ -142,14 +150,18 @@ description: ""
 **输出格式** 一个整数，表示方案总数。
 
 **数据范围** 1≤N≤20 **输入样例：**
-    
-    
-    4
+```java
+
+
+4
+```
 
 **输出样例：**
-    
-    
-    7
+```java
+
+
+7
+```
 
 **分析**
 
@@ -158,34 +170,36 @@ description: ""
 
 
 **代码**
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    int n,ans;
-    
-    void dfs(int u){
-    
-        if(u==n) ans++;
-    
-        //当不会超出n时进行下一步
-        if(u+1<=n) dfs(u+1);  
-        if(u+2<=n) dfs(u+2);
-        if(u+3<=n) dfs(u+3);
-    
-    }
-    
-    int main(){
-    
-        cin>>n;
-    
-        dfs(0);
-    
-        cout<<ans<<endl;
-    
-        return 0;
-    }
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int n,ans;
+
+void dfs(int u){
+
+    if(u==n) ans++;
+
+    //当不会超出n时进行下一步
+    if(u+1<=n) dfs(u+1);  
+    if(u+2<=n) dfs(u+2);
+    if(u+3<=n) dfs(u+3);
+
+}
+
+int main(){
+
+    cin>>n;
+
+    dfs(0);
+
+    cout<<ans<<endl;
+
+    return 0;
+}
+```
 
 * * *
 
@@ -263,26 +277,28 @@ description: ""
 
 
 **eg：**
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;string&gt;
-    #include &lt;queue&gt;
-    using namespace std;
-    
-    struct point{  //声明point为struct类型
-        int x,y;
-    };
-    
-    int main() {
-    
-        queue&lt;int&gt; a;  //定义一个名为a，存储int类型数据的队列
-        queue&lt;string&gt; b;  //定义一个名为b，存储string类型数据的队列
-        queue&lt;point&gt; c;  //定义一个名为c，存储point类型数据的队列
-    
-        return 0;
-    
-    }
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+struct point{  //声明point为struct类型
+    int x,y;
+};
+
+int main() {
+
+    queue&lt;int&gt; a;  //定义一个名为a，存储int类型数据的队列
+    queue&lt;string&gt; b;  //定义一个名为b，存储string类型数据的队列
+    queue&lt;point&gt; c;  //定义一个名为c，存储point类型数据的队列
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -291,37 +307,39 @@ description: ""
 **语法：**`.push()`
 
 **eg：**
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;string&gt;
-    #include &lt;queue&gt;
-    using namespace std;
-    
-    struct point{  //声明point为struct类型
-        int x,y;
-    };
-    
-    int main() {
-    
-        queue&lt;int&gt; a;  //定义一个名为a，存储int类型数据的队列
-        queue&lt;string&gt; b;  //定义一个名为b，存储string类型数据的队列
-        queue&lt;point&gt; c;  //定义一个名为c，存储point类型数据的队列
-    
-        a.push(1);  //在队列a的末尾添加int类型的元素1
-    
-        b.push("abc");  //在队列b的末尾添加string类型的元素abc
-    
-        point p;
-        p.x=10;
-        p.y=20;
-        c.push(p);  //在队列c的末尾添加point类型的元素p,p.x=10,p.y=20
-    
-        c.push({10,20});  //与c.push(p)等价
-    
-        return 0;
-    
-    }
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+struct point{  //声明point为struct类型
+    int x,y;
+};
+
+int main() {
+
+    queue&lt;int&gt; a;  //定义一个名为a，存储int类型数据的队列
+    queue&lt;string&gt; b;  //定义一个名为b，存储string类型数据的队列
+    queue&lt;point&gt; c;  //定义一个名为c，存储point类型数据的队列
+
+    a.push(1);  //在队列a的末尾添加int类型的元素1
+
+    b.push("abc");  //在队列b的末尾添加string类型的元素abc
+
+    point p;
+    p.x=10;
+    p.y=20;
+    c.push(p);  //在队列c的末尾添加point类型的元素p,p.x=10,p.y=20
+
+    c.push({10,20});  //与c.push(p)等价
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -330,47 +348,49 @@ description: ""
 **语法：**`.pop()`
 
 **eg：**
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;string&gt;
-    #include &lt;queue&gt;
-    using namespace std;
-    
-    struct point{  //声明point为struct类型
-        int x,y;
-    };
-    
-    int main() {
-    
-        queue&lt;int&gt; a;  //定义一个名为a，存储int类型数据的队列
-        queue&lt;string&gt; b;  //定义一个名为b，存储string类型数据的队列
-        queue&lt;point&gt; c;  //定义一个名为c，存储point类型数据的队列
-    
-        a.push(1);  //在队列a的末尾添加int类型的元素1
-    
-        b.push("abc");  //在队列b的末尾添加string类型的元素abc
-    
-        point p;
-        p.x=10;
-        p.y=20;
-        c.push(p);  //在队列c的末尾添加point类型的元素p,p.x=10,p.y=20
-    
-        c.push({10,20});  //与c.push(p)等价
-    
-        /*目前队列中的元素：
-        a: 1
-        b: "abc"
-        c: {10,20},{10,20};
-        */
-    
-        a.pop();  //将队列a的队头元素弹出，此时队列a为空
-        b.pop();  //将队列b的队头元素弹出，此时队列b为空
-        c.pop();  //将队列c的队头元素弹出，此时队列c还有一个元素{10，20}
-    
-        return 0;
-    
-    }
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+struct point{  //声明point为struct类型
+    int x,y;
+};
+
+int main() {
+
+    queue&lt;int&gt; a;  //定义一个名为a，存储int类型数据的队列
+    queue&lt;string&gt; b;  //定义一个名为b，存储string类型数据的队列
+    queue&lt;point&gt; c;  //定义一个名为c，存储point类型数据的队列
+
+    a.push(1);  //在队列a的末尾添加int类型的元素1
+
+    b.push("abc");  //在队列b的末尾添加string类型的元素abc
+
+    point p;
+    p.x=10;
+    p.y=20;
+    c.push(p);  //在队列c的末尾添加point类型的元素p,p.x=10,p.y=20
+
+    c.push({10,20});  //与c.push(p)等价
+
+    /*目前队列中的元素：
+    a: 1
+    b: "abc"
+    c: {10,20},{10,20};
+    */
+
+    a.pop();  //将队列a的队头元素弹出，此时队列a为空
+    b.pop();  //将队列b的队头元素弹出，此时队列b为空
+    c.pop();  //将队列c的队头元素弹出，此时队列c还有一个元素{10，20}
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -379,104 +399,108 @@ description: ""
 **语法：**`.size()`
 
 **eg：**
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;string&gt;
-    #include &lt;queue&gt;
-    using namespace std;
-    
-    struct point{  //声明point为struct类型
-        int x,y;
-    };
-    
-    int main() {
-    
-        queue&lt;int&gt; a;  //定义一个名为a，存储int类型数据的队列
-        queue&lt;string&gt; b;  //定义一个名为b，存储string类型数据的队列
-        queue&lt;point&gt; c;  //定义一个名为c，存储point类型数据的队列
-    
-        a.push(1);  //在队列a的末尾添加int类型的元素1
-    
-        b.push("abc");  //在队列b的末尾添加string类型的元素abc
-        b.push("cdef");
-    
-        point p;
-        p.x=10;
-        p.y=20;
-        c.push(p);  //在队列c的末尾添加point类型的元素p,p.x=10,p.y=20
-    
-        c.push({10,20});  //与c.push(p)等价
-    
-        while(c.size()){  //当队列c中存在元素时弹出队头
-            c.pop();
-        }
-    
-        /*目前队列中的元素：
-        a: 1
-        b: "abc","cdef"
-        c: 
-        */
-    
-        cout<<a.size()<<endl;  //输出队列a的元素个数为1
-        cout<<b.size()<<endl;  //输出队列b的元素个数为2
-        cout<<c.size()<<endl;  //输出队列c的元素个数为0
-    
-        return 0;
-    
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+struct point{  //声明point为struct类型
+    int x,y;
+};
+
+int main() {
+
+    queue&lt;int&gt; a;  //定义一个名为a，存储int类型数据的队列
+    queue&lt;string&gt; b;  //定义一个名为b，存储string类型数据的队列
+    queue&lt;point&gt; c;  //定义一个名为c，存储point类型数据的队列
+
+    a.push(1);  //在队列a的末尾添加int类型的元素1
+
+    b.push("abc");  //在队列b的末尾添加string类型的元素abc
+    b.push("cdef");
+
+    point p;
+    p.x=10;
+    p.y=20;
+    c.push(p);  //在队列c的末尾添加point类型的元素p,p.x=10,p.y=20
+
+    c.push({10,20});  //与c.push(p)等价
+
+    while(c.size()){  //当队列c中存在元素时弹出队头
+        c.pop();
     }
+
+    /*目前队列中的元素：
+    a: 1
+    b: "abc","cdef"
+    c: 
+    */
+
+    cout<<a.size()<<endl;  //输出队列a的元素个数为1
+    cout<<b.size()<<endl;  //输出队列b的元素个数为2
+    cout<<c.size()<<endl;  //输出队列c的元素个数为0
+
+    return 0;
+
+}
+```
 
 ##### 6\. 查看队列是否为空
 
 **语法：**`.empty()`
 
 **eg：**
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;string&gt;
-    #include &lt;queue&gt;
-    using namespace std;
-    
-    struct point{  //声明point为struct类型
-        int x,y;
-    };
-    
-    int main() {
-    
-        queue&lt;int&gt; a;  //定义一个名为a，存储int类型数据的队列
-        queue&lt;string&gt; b;  //定义一个名为b，存储string类型数据的队列
-        queue&lt;point&gt; c;  //定义一个名为c，存储point类型数据的队列
-    
-        a.push(1);  //在队列a的末尾添加int类型的元素1
-    
-        b.push("abc");  //在队列b的末尾添加string类型的元素abc
-        b.push("cdef");
-    
-        point p;
-        p.x=10;
-        p.y=20;
-        c.push(p);  //在队列c的末尾添加point类型的元素p,p.x=10,p.y=20
-    
-        c.push({10,20});  //与c.push(p)等价
-    
-        while(!c.empty()){  //当队列c中存在元素时弹出队头
-            c.pop();
-        }
-    
-        /*目前队列中的元素：
-        a: 1
-        b: "abc","cdef"
-        c: 
-        */
-    
-        cout<<a.empty()<<endl;  //队列a不空，输出0
-        cout<<b.empty()<<endl;  //队列b不空，输出0
-        cout<<c.empty()<<endl;  //队列c为空，输出1
-    
-        return 0;
-    
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+struct point{  //声明point为struct类型
+    int x,y;
+};
+
+int main() {
+
+    queue&lt;int&gt; a;  //定义一个名为a，存储int类型数据的队列
+    queue&lt;string&gt; b;  //定义一个名为b，存储string类型数据的队列
+    queue&lt;point&gt; c;  //定义一个名为c，存储point类型数据的队列
+
+    a.push(1);  //在队列a的末尾添加int类型的元素1
+
+    b.push("abc");  //在队列b的末尾添加string类型的元素abc
+    b.push("cdef");
+
+    point p;
+    p.x=10;
+    p.y=20;
+    c.push(p);  //在队列c的末尾添加point类型的元素p,p.x=10,p.y=20
+
+    c.push({10,20});  //与c.push(p)等价
+
+    while(!c.empty()){  //当队列c中存在元素时弹出队头
+        c.pop();
     }
+
+    /*目前队列中的元素：
+    a: 1
+    b: "abc","cdef"
+    c: 
+    */
+
+    cout<<a.empty()<<endl;  //队列a不空，输出0
+    cout<<b.empty()<<endl;  //队列b不空，输出0
+    cout<<c.empty()<<endl;  //队列c为空，输出1
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -517,22 +541,26 @@ description: ""
 **输出格式:** 每组数据输出一行，如果小明能够从起点走到终点，那么输出Yes，否则输出No
 
 **输入样例：**
-    
-    
-    3 3
-    S..
-    ..E
-    ...
-    3 3
-    S##
-    ###
-    ##E
+```java
+
+
+3 3
+S..
+..E
+...
+3 3
+S##
+###
+##E
+```
 
 **输出样例**
-    
-    
-    Yes
-    No
+```java
+
+
+Yes
+No
+```
 
 **分析**
 
@@ -544,82 +572,84 @@ description: ""
 
 
 **BFS代码**
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N=510;
-    
-    int n,m;
-    
-    char mp[N][N];  //存储地图
-    
-    bool vis[N][N];  //标记是否走过该点
-    
-    int s1,s2;  //标记S的坐标
-    
-    int dx[]={0,0,1,-1},dy[]={1,-1,0,0};  //初始化偏移量数组
-    
-    struct point{  //用于记录点的信息
-        int x,y;
-    };
-    
-    bool bfs(){
-    
-        queue&lt;point&gt; st;  //定义队列
-    
-        st.push({s1,s2});  //将S点的信息入队
-        vis[s1][s2]=1;  //标记S点为走过
-    
-        while(!st.empty()){  //当队列不空时
-    
-            auto p=st.front();  //使p获得队头的信息
-            st.pop();  //将队头出队
-    
-            for(int i=0;i<4;i++){  //循环遍历偏移量数组，搜索四个方向
-    
-                int l=p.x+dx[i],r=p.y+dy[i];
-                if(l>=1&&l<=n&&r>=1&&r<=m&&!vis[l][r]&&mp[l][r]!='#'){  //判断该点是否满足搜索条件
-                    if(mp[l][r]=='E') return 1;  //搜到答案直接返回
-                    vis[l][r]=1;  //标记该点已经走过
-                    st.push({l,r});  //将该点入队，后续继续扩展该点搜索
-                }
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N=510;
+
+int n,m;
+
+char mp[N][N];  //存储地图
+
+bool vis[N][N];  //标记是否走过该点
+
+int s1,s2;  //标记S的坐标
+
+int dx[]={0,0,1,-1},dy[]={1,-1,0,0};  //初始化偏移量数组
+
+struct point{  //用于记录点的信息
+    int x,y;
+};
+
+bool bfs(){
+
+    queue&lt;point&gt; st;  //定义队列
+
+    st.push({s1,s2});  //将S点的信息入队
+    vis[s1][s2]=1;  //标记S点为走过
+
+    while(!st.empty()){  //当队列不空时
+
+        auto p=st.front();  //使p获得队头的信息
+        st.pop();  //将队头出队
+
+        for(int i=0;i<4;i++){  //循环遍历偏移量数组，搜索四个方向
+
+            int l=p.x+dx[i],r=p.y+dy[i];
+            if(l>=1&&l<=n&&r>=1&&r<=m&&!vis[l][r]&&mp[l][r]!='#'){  //判断该点是否满足搜索条件
+                if(mp[l][r]=='E') return 1;  //搜到答案直接返回
+                vis[l][r]=1;  //标记该点已经走过
+                st.push({l,r});  //将该点入队，后续继续扩展该点搜索
             }
-    
+
         }
-    
-        return 0;
-    
+
     }
-    
-    int main(){
-    
-        while(cin>>n>>m){
-    
-            //初始化清空数据
-            memset(vis,0,sizeof vis);
-            memset(mp,0,sizeof mp);
-    
-            for(int i=1;i<=n;i++){
-                for(int j=1;j<=m;j++){
-                    cin>>mp[i][j];
-                    if(mp[i][j]=='S'){  //标记S的坐标
-                        s1=i;
-                        s2=j;
-                    }
+
+    return 0;
+
+}
+
+int main(){
+
+    while(cin>>n>>m){
+
+        //初始化清空数据
+        memset(vis,0,sizeof vis);
+        memset(mp,0,sizeof mp);
+
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                cin>>mp[i][j];
+                if(mp[i][j]=='S'){  //标记S的坐标
+                    s1=i;
+                    s2=j;
                 }
             }
-    
-            if(bfs()) cout<<"Yes"<<endl;
-            else cout<<"No"<<endl;
-    
         }
-    
-        return 0;
-    
+
+        if(bfs()) cout<<"Yes"<<endl;
+        else cout<<"No"<<endl;
+
     }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -644,86 +674,92 @@ description: ""
 **输出格式** 输出一个整数，表示从左上角移动至右下角的最少移动次数。
 
 **数据范围** 1≤n,m≤100 **输入样例：**
-    
-    
-    5 5
-    0 1 0 0 0
-    0 1 0 1 0
-    0 0 0 0 0
-    0 1 1 1 0
-    0 0 0 1 0
+```java
+
+
+5 5
+0 1 0 0 0
+0 1 0 1 0
+0 0 0 0 0
+0 1 1 1 0
+0 0 0 1 0
+```
 
 输出样例：
-    
-    
-    8
+```java
+
+
+8
+```
 
 **代码**
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N=110;
-    
-    int mp[N][N];  //记录地图
-    
-    bool vis[N][N];  //标记该点是否走过
-    
-    int ans[N][N];  //存储答案
-    
-    int n,m;
-    
-    struct point{  //初始化point为struct类型
-        int x,y;
-    };
-    
-    int dx[]={0,0,1,-1},dy[]={1,-1,0,0};
-    
-    int bfs(){
-    
-        queue&lt;point&gt; st;  //定义队列
-        st.push({1,1});  //将起始点的信息入队
-        vis[1][1]=1;  //标记起始点已经走过
-    
-        while(!st.empty()){
-    
-            auto p=st.front();  //使p获得队头的信息
-            st.pop();  //将队头出队
-    
-            for(int i=0;i<4;i++){  //循环遍历偏移量数组，搜索四个方向
-    
-                int l=p.x+dx[i],r=p.y+dy[i];
-                if(l>=1&&l<=n&&r>=1&&r<=m&&mp[l][r]==0&&!vis[l][r]){   //判断该点是否满足搜索条件
-                    ans[l][r]=ans[p.x][p.y]+1;  //更新答案
-                    if(l==n&&r==m) return ans[n][m];  //搜到答案直接返回
-                    vis[l][r]=1;  //标记该点已经走过
-                    st.push({l,r});  //将该点入队，后续继续扩展该点搜索
-                }
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N=110;
+
+int mp[N][N];  //记录地图
+
+bool vis[N][N];  //标记该点是否走过
+
+int ans[N][N];  //存储答案
+
+int n,m;
+
+struct point{  //初始化point为struct类型
+    int x,y;
+};
+
+int dx[]={0,0,1,-1},dy[]={1,-1,0,0};
+
+int bfs(){
+
+    queue&lt;point&gt; st;  //定义队列
+    st.push({1,1});  //将起始点的信息入队
+    vis[1][1]=1;  //标记起始点已经走过
+
+    while(!st.empty()){
+
+        auto p=st.front();  //使p获得队头的信息
+        st.pop();  //将队头出队
+
+        for(int i=0;i<4;i++){  //循环遍历偏移量数组，搜索四个方向
+
+            int l=p.x+dx[i],r=p.y+dy[i];
+            if(l>=1&&l<=n&&r>=1&&r<=m&&mp[l][r]==0&&!vis[l][r]){   //判断该点是否满足搜索条件
+                ans[l][r]=ans[p.x][p.y]+1;  //更新答案
+                if(l==n&&r==m) return ans[n][m];  //搜到答案直接返回
+                vis[l][r]=1;  //标记该点已经走过
+                st.push({l,r});  //将该点入队，后续继续扩展该点搜索
             }
-    
+
         }
-    
-        return ans[n][m];  //没有提前搜到答案，最后返回答案
-    
+
     }
-    
-    int main(){
-    
-        cin>>n>>m;
-    
-        for(int i=1;i<=n;i++){
-            for(int j=1;j<=m;j++){
-                cin>>mp[i][j];
-            }
+
+    return ans[n][m];  //没有提前搜到答案，最后返回答案
+
+}
+
+int main(){
+
+    cin>>n>>m;
+
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=m;j++){
+            cin>>mp[i][j];
         }
-    
-        cout<<bfs()<<endl;
-    
-        return 0;
-    
     }
+
+    cout<<bfs()<<endl;
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -762,34 +798,36 @@ description: ""
 **例题1 计算n的阶乘**
 
 **eg：**
-    
-    
-     #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    int n;
-    
-    int fx(int u){
-    
-        //cout<<"u = "<<u<<endl;  //输出每一次递归调用后u的值
-    
-        if(u==1){
-            return 1;
-        }
-    
-        return fx(u-1)*u;
-    
+```java
+
+
+ #include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int n;
+
+int fx(int u){
+
+    //cout<<"u = "<<u<<endl;  //输出每一次递归调用后u的值
+
+    if(u==1){
+        return 1;
     }
-    
-    int main(){
-    
-        cin>>n;
-    
-        cout<<fx(n)<<endl;
-    
-        return 0;
-    
-    }
+
+    return fx(u-1)*u;
+
+}
+
+int main(){
+
+    cin>>n;
+
+    cout<<fx(n)<<endl;
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -810,14 +848,18 @@ description: ""
 **输出** 共一行，包含一个整数，表示走法数量。
 
 **样例输入**
-    
-    
-    2 3
+```java
+
+
+2 3
+```
 
 **样例输出**
-    
-    
-    10
+```java
+
+
+10
+```
 
 **分析**
 
@@ -828,37 +870,39 @@ description: ""
 
 
 **代码**
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    int n,m;
-    
-    int ans;
-    
-    void step(int x,int y){
-    
-        if(x==n&&y==m) ans++;
-    
-        //当走下一步，没有超出终点时，利用递归进行选择的实现
-        if(x+1<=n) step(x+1,y);
-        if(y+1<=m) step(x,y+1);
-    
-    }
-    
-    int main(){
-    
-        cin>>n>>m;
-    
-        if(n!=0&&m!=0) step(0,0);  //注意如果起始点和终点重合，则不需要走
-    
-        cout<<ans<<endl;
-    
-        return 0;
-    
-    }
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int n,m;
+
+int ans;
+
+void step(int x,int y){
+
+    if(x==n&&y==m) ans++;
+
+    //当走下一步，没有超出终点时，利用递归进行选择的实现
+    if(x+1<=n) step(x+1,y);
+    if(y+1<=m) step(x,y+1);
+
+}
+
+int main(){
+
+    cin>>n>>m;
+
+    if(n!=0&&m!=0) step(0,0);  //注意如果起始点和终点重合，则不需要走
+
+    cout<<ans<<endl;
+
+    return 0;
+
+}
+
+```
 
 * * *
 
@@ -906,22 +950,26 @@ description: ""
 **输出格式:** 每组数据输出一行，如果小明能够从起点走到终点，那么输出Yes，否则输出No
 
 **输入样例：**
-    
-    
-    3 3
-    S..
-    ..E
-    ...
-    3 3
-    S##
-    ###
-    ##E
+```java
+
+
+3 3
+S..
+..E
+...
+3 3
+S##
+###
+##E
+```
 
 **输出样例**
-    
-    
-    Yes
-    No
+```java
+
+
+Yes
+No
+```
 
 **分析**
 
@@ -933,72 +981,74 @@ description: ""
 
 
 **DFS代码**
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N=510;
-    
-    int n,m;
-    
-    char mp[N][N];  //存储地图
-    
-    bool vis[N][N];  //标记是否走过该点
-    
-    int s1,s2;  //标记S的坐标
-    
-    int dx[]={0,0,1,-1},dy[]={1,-1,0,0};  //初始化偏移量数组
-    
-    bool flag;  //标记是否可以走到E
-    
-    void dfs(int x,int y){
-    
-        if(mp[x][y]=='E'){
-            flag=1;  //标记答案
-        }
-    
-        for(int i=0;i<4;i++){  //循环遍历偏移量数组，搜索四个方向
-    
-            int l=x+dx[i],r=y+dy[i];
-            if(l>=1&&l<=n&&r>=1&&r<=m&&!vis[l][r]&&mp[l][r]!='#'){  //判断该点是否满足搜索条件
-                vis[l][r]=1;  //标记该点已经走过
-                dfs(l,r);  //继续以该点搜索
-            }
-    
-        }
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N=510;
+
+int n,m;
+
+char mp[N][N];  //存储地图
+
+bool vis[N][N];  //标记是否走过该点
+
+int s1,s2;  //标记S的坐标
+
+int dx[]={0,0,1,-1},dy[]={1,-1,0,0};  //初始化偏移量数组
+
+bool flag;  //标记是否可以走到E
+
+void dfs(int x,int y){
+
+    if(mp[x][y]=='E'){
+        flag=1;  //标记答案
     }
-    
-    int main(){
-    
-        while(cin>>n>>m){  //多实例输入
-    
-            //初始化清空数据
-            flag=0;
-            memset(vis,0,sizeof vis);
-            memset(mp,0,sizeof mp);
-    
-            for(int i=1;i<=n;i++){
-                for(int j=1;j<=m;j++){
-                    cin>>mp[i][j];
-                    if(mp[i][j]=='S'){  //标记S的坐标
-                        s1=i;
-                        s2=j;
-                    }
+
+    for(int i=0;i<4;i++){  //循环遍历偏移量数组，搜索四个方向
+
+        int l=x+dx[i],r=y+dy[i];
+        if(l>=1&&l<=n&&r>=1&&r<=m&&!vis[l][r]&&mp[l][r]!='#'){  //判断该点是否满足搜索条件
+            vis[l][r]=1;  //标记该点已经走过
+            dfs(l,r);  //继续以该点搜索
+        }
+
+    }
+
+}
+
+int main(){
+
+    while(cin>>n>>m){  //多实例输入
+
+        //初始化清空数据
+        flag=0;
+        memset(vis,0,sizeof vis);
+        memset(mp,0,sizeof mp);
+
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                cin>>mp[i][j];
+                if(mp[i][j]=='S'){  //标记S的坐标
+                    s1=i;
+                    s2=j;
                 }
             }
-    
-            dfs(s1,s2);
-    
-            if(flag) cout<<"Yes"<<endl;
-            else cout<<"No"<<endl;
-    
         }
-    
-        return 0;
-    
+
+        dfs(s1,s2);
+
+        if(flag) cout<<"Yes"<<endl;
+        else cout<<"No"<<endl;
+
     }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -1015,25 +1065,31 @@ description: ""
 **输出格式** 按字典序输出所有排列方案，每个方案占一行。
 
 **数据范围**
-    
-    
-    1≤n≤9
+```java
+
+
+1≤n≤9
+```
 
 **输入样例：**
-    
-    
-    3
+```java
+
+
+3
+```
 
 **输出样例：**
-    
-    
-    1 2 3
-    1 3 2
-    2 1 3
-    2 3 1
-    3 1 2
-    3 2 1
-    
+```java
+
+
+1 2 3
+1 3 2
+2 1 3
+2 3 1
+3 1 2
+3 2 1
+
+```
 
 **分析** ：
 
@@ -1051,57 +1107,59 @@ description: ""
 
 
 **代码**
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N=1e6+3;
-    
-    int ans[N];
-    
-    int a[N];
-    
-    bool vis[N];  //标记是否使用过该数
-    
-    int n;
-    
-    void dfs(int u){
-    
-        if(u==n){
-    
-            for(int i=0;i<n;i++){
-                cout<<ans[i]<<" ";
-            }
-            cout<<endl;
-            return ;
-    
-        }
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N=1e6+3;
+
+int ans[N];
+
+int a[N];
+
+bool vis[N];  //标记是否使用过该数
+
+int n;
+
+void dfs(int u){
+
+    if(u==n){
+
         for(int i=0;i<n;i++){
-            if(!vis[a[i]]){
-                vis[a[i]]=1;  //标记为使用过
-                ans[u]=a[i];  //选择该数
-                dfs(u+1);  //递归到下一层
-                vis[a[i]]=0;  //恢复状态
-            }
+            cout<<ans[i]<<" ";
         }
-    
+        cout<<endl;
+        return ;
+
     }
-    
-    int main(){
-    
-        cin>>n;
-    
-        for(int i=0;i<n;i++){  //初始化
-            a[i]=i+1;
+
+    for(int i=0;i<n;i++){
+        if(!vis[a[i]]){
+            vis[a[i]]=1;  //标记为使用过
+            ans[u]=a[i];  //选择该数
+            dfs(u+1);  //递归到下一层
+            vis[a[i]]=0;  //恢复状态
         }
-    
-        dfs(0);
-    
-        return 0;
-    
     }
+
+}
+
+int main(){
+
+    cin>>n;
+
+    for(int i=0;i<n;i++){  //初始化
+        a[i]=i+1;
+    }
+
+    dfs(0);
+
+    return 0;
+
+}
+```
 
 **扩展** ：
 
@@ -1112,24 +1170,26 @@ description: ""
 > `next_permutation`按照字典序生成下一个排列组合 复杂度`O(n)` 排列范围`[first,last)`
 
 **代码** ：
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    int main(){
-        int n,a[1000];  //a[]用于存放排列
-        cin>>n;
-        for(int i=1;i<=n;i++){
-            a[i]=i;  //初始化排列
-        }
-        do{
-            for(int i=1;i<=n;i++){  //循环输出排列
-                cout<<a[i]<<" "; 
-            }
-            cout<<endl;
-        }while(next_permutation(a+1,a+n+1));  //如果下一个排列存在，则生成排列并执行
-        return 0;
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+int main(){
+    int n,a[1000];  //a[]用于存放排列
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        a[i]=i;  //初始化排列
     }
+    do{
+        for(int i=1;i<=n;i++){  //循环输出排列
+            cout<<a[i]<<" "; 
+        }
+        cout<<endl;
+    }while(next_permutation(a+1,a+n+1));  //如果下一个排列存在，则生成排列并执行
+    return 0;
+}
+```
 
 * * *
 
@@ -1144,14 +1204,18 @@ description: ""
 **输出描述:** 输出一行一个整数，表示总共有多少种摆放皇后的方案，使得它们两两不能互相攻击。
 
 **样例输入**
-    
-    
-    4
+```java
+
+
+4
+```
 
 **样例输出**
-    
-    
-    2
+```java
+
+
+2
+```
 
 **分析**
 
@@ -1165,47 +1229,49 @@ description: ""
 
 
 **代码**
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N=510;
-    
-    bool y[N],l[N],r[N];  //标记是否存在皇后
-    
-    int n;
-    
-    int ans;
-    
-    void dfs(int u){
-    
-        if(u==n){
-            ans++;
-            return ;
-        }
-    
-        for(int i=0;i<n;i++){
-    
-            if(!y[i]&&!l[u+i+n]&&!r[u-i+n]){  //若该格子的列和对角线的平行线上没有存在过皇后
-                y[i]=l[u+i+n]=r[u-i+n]=1;  //标记
-                dfs(u+1);  //递归到下一层
-                y[i]=l[u+i+n]=r[u-i+n]=0;  //恢复现场
-            }
-    
-        }
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N=510;
+
+bool y[N],l[N],r[N];  //标记是否存在皇后
+
+int n;
+
+int ans;
+
+void dfs(int u){
+
+    if(u==n){
+        ans++;
+        return ;
     }
-    
-    int main(){
-    
-        cin>>n;
-    
-        dfs(0);
-    
-        cout<<ans<<endl;
-    
+
+    for(int i=0;i<n;i++){
+
+        if(!y[i]&&!l[u+i+n]&&!r[u-i+n]){  //若该格子的列和对角线的平行线上没有存在过皇后
+            y[i]=l[u+i+n]=r[u-i+n]=1;  //标记
+            dfs(u+1);  //递归到下一层
+            y[i]=l[u+i+n]=r[u-i+n]=0;  //恢复现场
+        }
+
     }
+
+}
+
+int main(){
+
+    cin>>n;
+
+    dfs(0);
+
+    cout<<ans<<endl;
+
+}
+```
 
 * * *
 

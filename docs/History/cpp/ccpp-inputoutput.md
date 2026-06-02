@@ -52,11 +52,15 @@ description: ""
 
   * 标准输入输出流是指程序与外部设备（例如键盘和显示器）之间的输入输出
   * 在 `C` 语言中： 
-    * 在 `C` 标准库中，标准输入流输出流分别是 `stdin` 和 `stdout`，另外还有标准错误流 `stderr`。
-    * 使用 `&lt;stdio.h&gt;` 头文件里的 `scanf()` 函数和 `printf()` 函数。
+```java
+* 在 `C` 标准库中，标准输入流输出流分别是 `stdin` 和 `stdout`，另外还有标准错误流 `stderr`。
+* 使用 `&lt;stdio.h&gt;` 头文件里的 `scanf()` 函数和 `printf()` 函数。
+```
   * 在 `C++` 语言中： 
-    * 在 `C++` 标准库中，没有 `stdin` 这样的标准输入流，而是使用 `std::cin` 和 `std::out` 来进行标准输入和标准输出。
-    * 使用 `&lt;iostream.h&gt;` 头文件里的 `getline()` 函数或是 `&gt;&gt;` 和 `&lt;&lt;` 操作符。
+```java
+* 在 `C++` 标准库中，没有 `stdin` 这样的标准输入流，而是使用 `std::cin` 和 `std::out` 来进行标准输入和标准输出。
+* 使用 `&lt;iostream.h&gt;` 头文件里的 `getline()` 函数或是 `&gt;&gt;` 和 `&lt;&lt;` 操作符。
+```
   * 综上，在 `C++` 中，输入输出流的使用通常是通过 `iostream` 库实现的，而在 `C` 中则是通过 `stdio` 库实现的。
 
 
@@ -69,11 +73,15 @@ description: ""
 
   * 文件输入输出流则是将数据保存在磁盘上的文件中，通过打开和关闭文件，程序可以使用文件输入输出流进行数据的读取和写入。
   * 在 `C` 语言中： 
-    * 文件输入输出流使用 `C` 标准库中的文件指针 `FILE*` 来实现。
-    * 操作函数有 `fopen()`, `fclose()`, `fread()`, `fwrite()` 等。
+```java
+* 文件输入输出流使用 `C` 标准库中的文件指针 `FILE*` 来实现。
+* 操作函数有 `fopen()`, `fclose()`, `fread()`, `fwrite()` 等。
+```
   * 在 `C++` 语言中： 
-    * 文件输入输出流是基于 `C` 标准库中的文件操作函数封装而成，即 `fstream` 类。
-    * 具体地，通过 `std::ifstream` 和 `std::ofstream` 类实现，它们是 `std::istream` 和 `std::ostream` 类的派生类。
+```java
+* 文件输入输出流是基于 `C` 标准库中的文件操作函数封装而成，即 `fstream` 类。
+* 具体地，通过 `std::ifstream` 和 `std::ofstream` 类实现，它们是 `std::istream` 和 `std::ostream` 类的派生类。
+```
 
 
 
@@ -139,18 +147,28 @@ description: ""
 
   * 分配缓冲区的时机：
 
-    * 对于标准输入输出流：缓冲区的空间通常是在程序启动时预先分配好的。
-    * 对于文件输入输出流：缓冲区的空间是在文件流和流缓冲区对象创建时动态分配的，这些对象通常是在程序开始时被初始化的。
-    * 缓冲区的大小通常是由实现细节所决定的，但是一般来说，缓冲区的大小应该足够容纳输入或输出数据的常规大小，同时又不能过大以致于浪费内存。
+```java
+* 对于标准输入输出流：缓冲区的空间通常是在程序启动时预先分配好的。
+* 对于文件输入输出流：缓冲区的空间是在文件流和流缓冲区对象创建时动态分配的，这些对象通常是在程序开始时被初始化的。
+* 缓冲区的大小通常是由实现细节所决定的，但是一般来说，缓冲区的大小应该足够容纳输入或输出数据的常规大小，同时又不能过大以致于浪费内存。
+```
   * 分配缓冲区的大小：
 
-    * 缓冲区的大小应该**足够容纳输入或输出数据的常规大小，同时又不能过大以致于浪费内存** 。
+```java
+* 缓冲区的大小应该**足够容纳输入或输出数据的常规大小，同时又不能过大以致于浪费内存** 。
+```
 
-    * 由实现库来完成对缓冲区大小的分配，具体实现细节可能会因编译器或操作系统的不同而有所差异。
+```java
+* 由实现库来完成对缓冲区大小的分配，具体实现细节可能会因编译器或操作系统的不同而有所差异。
+```
 
-    * 一般来说，实现库会**通过调用操作系统提供的系统调用或动态内存分配函数** 来分配缓冲区的空间。
+```java
+* 一般来说，实现库会**通过调用操作系统提供的系统调用或动态内存分配函数** 来分配缓冲区的空间。
+```
 
-    * 在内存空间紧张的情况下，缓冲区的大小可能会被限制，从而可能影响到程序的性能和可靠性。
+```java
+* 在内存空间紧张的情况下，缓冲区的大小可能会被限制，从而可能影响到程序的性能和可靠性。
+```
 
 
 
@@ -164,19 +182,23 @@ description: ""
 ~~我知道你急了，但是你先别急~~ ，这部分其实不用太纠结。的。对吧：
 
   * 在 `C` 语言中，标准输入输出库 `&lt;stdio.h&gt;` 提供了输入输出缓冲区的实现。 
-    * 主要使用了三个函数：`setbuf()`，`setvbuf()`，`fflush()`。
-    * 其中，`setbuf()` 和 `setvbuf()` 可以用来设置缓冲区，而 `fflush()` 用来清空缓冲区并把缓冲区中的数据输出到文件。
-    * 因此，`C` 中的输入输出函数，如 `scanf()` 和 `printf()` 等，是**非类型安全的** ：
-    * 它们依赖于格式化字符串来指示输入/输出数据的类型。
-    * 如果格式化字符串不正确，就会导致不可预测的结果，如缓冲区溢出和未定义的行为。
+```java
+* 主要使用了三个函数：`setbuf()`，`setvbuf()`，`fflush()`。
+* 其中，`setbuf()` 和 `setvbuf()` 可以用来设置缓冲区，而 `fflush()` 用来清空缓冲区并把缓冲区中的数据输出到文件。
+* 因此，`C` 中的输入输出函数，如 `scanf()` 和 `printf()` 等，是**非类型安全的** ：
+* 它们依赖于格式化字符串来指示输入/输出数据的类型。
+* 如果格式化字符串不正确，就会导致不可预测的结果，如缓冲区溢出和未定义的行为。
+```
   * 在 `C++` 中，`&lt;iostream&gt;` 库提供了输入输出缓冲区的实现。 
-    * 提供了两种不同的缓冲区：`streambuf` 和 `filebuf`。
-    * `streambuf` 是 `&lt;iostream&gt;` 库的基类，提供了对输入输出缓冲区的访问；而 `filebuf` 是 `&lt;fstream&gt;` 库的基类，提供了对文件输入输出缓冲区的访问。
-    * 但是，`&lt;iostream&gt;` 库还提供了一些类似 `setbuf()`，`setvbuf()`，`flush()` 等函数，用来管理输入输出缓冲区。在关闭同步流之后，`&lt;iostream&gt;` 库使用了一种不同于标准输入输出库的机制来提高效率，例如使用字符串流 `stringstream` 和缓冲流 `buffer stream` 等。
-    * 因此，`C++` 中的输入输出函数，如 `std::cin` 和 `std::cout` 等，是**类型安全的** ：
-    * 它们使用类型安全的 `C++` 流语义，其中数据类型是静态确定的，而不是动态确定的。
-    * 这意味着数据类型在编译时就已经确定，而不是在运行时根据格式化字符串动态确定。
-    * 这种静态类型检查可以在编译时检测到类型不匹配的错误，从而使 `C++` 的输入输出更加类型安全。
+```java
+* 提供了两种不同的缓冲区：`streambuf` 和 `filebuf`。
+* `streambuf` 是 `&lt;iostream&gt;` 库的基类，提供了对输入输出缓冲区的访问；而 `filebuf` 是 `&lt;fstream&gt;` 库的基类，提供了对文件输入输出缓冲区的访问。
+* 但是，`&lt;iostream&gt;` 库还提供了一些类似 `setbuf()`，`setvbuf()`，`flush()` 等函数，用来管理输入输出缓冲区。在关闭同步流之后，`&lt;iostream&gt;` 库使用了一种不同于标准输入输出库的机制来提高效率，例如使用字符串流 `stringstream` 和缓冲流 `buffer stream` 等。
+* 因此，`C++` 中的输入输出函数，如 `std::cin` 和 `std::cout` 等，是**类型安全的** ：
+* 它们使用类型安全的 `C++` 流语义，其中数据类型是静态确定的，而不是动态确定的。
+* 这意味着数据类型在编译时就已经确定，而不是在运行时根据格式化字符串动态确定。
+* 这种静态类型检查可以在编译时检测到类型不匹配的错误，从而使 `C++` 的输入输出更加类型安全。
+```
 
 
 
@@ -237,70 +259,84 @@ description: ""
 **举个栗子** ：
 
 观察下列代码：
-    
-    
-    #include &lt;stdio.h&gt;
-    
-    int main(){
-        int n;                  //声明 int 类型变量 n
-        scanf("%d", &n);        //读入 int 类型变量 n
-        printf("%d\n", n);      //输出 int 类型变量 n 并且换行
-        char c = getchar();     //读入一个字符，并存储在 char 类型变量 c 中
-        printf("%c", c);        //输出 char 类型变量 c
-        printf("14\n");         //输出 14 并且换行
-        return 0;
-    }
+```java
+
+
+#include &lt;stdio.h&gt;
+
+int main(){
+    int n;                  //声明 int 类型变量 n
+    scanf("%d", &n);        //读入 int 类型变量 n
+    printf("%d\n", n);      //输出 int 类型变量 n 并且换行
+    char c = getchar();     //读入一个字符，并存储在 char 类型变量 c 中
+    printf("%c", c);        //输出 char 类型变量 c
+    printf("14\n");         //输出 14 并且换行
+    return 0;
+}
+```
 
 假设运行并且在控制台输入如下内容：
-    
-    
-    114
-    5
+```java
+
+
+114
+5
+```
 
 理论上，我期望得到输出：
-    
-    
-    114
-    514
+```java
+
+
+114
+514
+```
 
 但实际上，控制台~~哼哼哼啊啊啊~~ 输出了如下内容：
-    
-    
-    114
-    
-    14
+```java
+
+
+114
+
+14
+```
 
 甚至控制台根本就没有接收你后续输入的 `5` 这个字符。
 
 在该例子中，`scanf("%d", &n)`会读取输入流中的数字 `114`，并将其存储在变量 `n` 中。但是，由于输入缓冲区中还有一个换行符 `\n`，`getchar()`函数会读取这个换行符，并存储在变量 `c` 中，导致产生了这样的结果。在**缓冲区中的数据没有被自动清空** ，这就是为什么控制台根本没有鸟你后续输入的东西，并输出了不符合预期的内容。
 
 那么继续观察如下代码：
-    
-    
-    #include &lt;stdio.h&gt;
-    
-    int main(){
-        int n;                  //声明 int 类型变量 n
-        scanf("%d", &n);        //读入 int 类型变量 n
-        printf("%d\n", n);      //输出 int 类型变量 n 并且换行
-        getchar();              //用 getchar() 吃掉缓冲区中的 '\n'
-        char c = getchar();     //读入一个字符，并存储在 char 类型变量 c 中
-        printf("%c", c);        //输出 char 类型变量 c
-        printf("14\n");         //输出 14 并且换行
-        return 0;
-    }
+```java
+
+
+#include &lt;stdio.h&gt;
+
+int main(){
+    int n;                  //声明 int 类型变量 n
+    scanf("%d", &n);        //读入 int 类型变量 n
+    printf("%d\n", n);      //输出 int 类型变量 n 并且换行
+    getchar();              //用 getchar() 吃掉缓冲区中的 '\n'
+    char c = getchar();     //读入一个字符，并存储在 char 类型变量 c 中
+    printf("%c", c);        //输出 char 类型变量 c
+    printf("14\n");         //输出 14 并且换行
+    return 0;
+}
+```
 
 重新编译运行并在控制台输入如下内容：
-    
-    
-    114
-    5
+```java
+
+
+114
+5
+```
 
 可以发现控制台~~哼哼哼啊啊啊~~ 输出了：
-    
-    
-    114
-    514
+```java
+
+
+114
+514
+```
 
 在该例子中，为了避免上述缓冲区没有清空的情况，我们在读取完数据后手动清空输入缓冲区，利用 `getchar()` 读取了缓冲区里的换行符 `\n`，使得后续的字符 `5` 被成功读入，最终输出了符合预期的内容。
 
@@ -354,45 +390,53 @@ description: ""
 关于 `getchar()` 缓冲区的问题已经讲过，下面举个 `getline()` 的栗子：
 
 观察下列代码：
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;string&gt;
-    
-    using namespace std;
-    
-    int main() {
-    
-        string s; 
-    
-        getline(cin, s);  //读入 string 类型 s
-    
-        cout << "First: " << s << endl;  //输出 s
-    
-        getline(cin, s);  //在此读入
-    
-        cout << "Second: " << s << endl;  //再次输出 s
-    
-        return 0;
-    }
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+int main() {
+
+    string s; 
+
+    getline(cin, s);  //读入 string 类型 s
+
+    cout << "First: " << s << endl;  //输出 s
+
+    getline(cin, s);  //在此读入
+
+    cout << "Second: " << s << endl;  //再次输出 s
+
+    return 0;
+}
+```
 
 假设运行并且在控制台输入如下内容：
-    
-    
-    114
-    514
+```java
+
+
+114
+514
+```
 
 理论上，我期望得到输出：
-    
-    
-    First: 114
-    Second: 514
+```java
+
+
+First: 114
+Second: 514
+```
 
 但实际上，控制台~~哼哼哼啊啊啊~~ 输出了如下内容：
-    
-    
-    First: 114
-    Second: 514
+```java
+
+
+First: 114
+Second: 514
+```
 
 你会惊讶地发现符合期望，然后你想：“诶这不是没毛病垃圾 $Lys$ 玩我呢？”
 
@@ -403,46 +447,54 @@ description: ""
 那么在该例子中，输入 `114` 后按下回车键，该回车键被视为一个分隔符并从输入流中删除，此时 `\n` 仍然留在缓冲区中 。然后第二个 `getline()` 调用会读取缓冲区中剩余的字符，即 `"\n514"`，将其中的 `\n` 删除并存储 `514`。因此输出符合预期。
 
 我们重新指定一下 `getline()` 的分隔符，修改得到如下代码：
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;string&gt;
-    
-    using namespace std;
-    
-    int main() {
-    
-        string s; 
-    
-        getline(cin, s, ',');  //读入 string 类型 s，并以 ',' 为分隔符
-    
-        cout << "First: " << s << endl;  //输出 s
-    
-        getline(cin, s, ',');  //在此读入
-    
-        cout << "Second: " << s << endl;  //再次输出 s，并以 ',' 为分隔符
-    
-        return 0;
-    }
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+int main() {
+
+    string s; 
+
+    getline(cin, s, ',');  //读入 string 类型 s，并以 ',' 为分隔符
+
+    cout << "First: " << s << endl;  //输出 s
+
+    getline(cin, s, ',');  //在此读入
+
+    cout << "Second: " << s << endl;  //再次输出 s，并以 ',' 为分隔符
+
+    return 0;
+}
+```
 
 假设运行并且在控制台输入如下内容：
-    
-    
-    114,
-    514,
+```java
+
+
+114,
+514,
+```
 
 理论上，我期望得到输出：
-    
-    
-    First: 114
-    Second: 514
+```java
+
+
+First: 114
+Second: 514
+```
 
 但实际上，控制台~~哼哼哼啊啊啊~~ 输出了如下内容：
-    
-    
-    First: 114
-    Second: 
-    514
+```java
+
+
+First: 114
+Second: 
+514
+```
 
 你会惊讶地发现这次不符合期望了，然后你想：“诶这不废话吗垃圾 $Lys$ 玩我呢？”
 
@@ -451,38 +503,42 @@ description: ""
 在该例子中，输入 `114,` 后按下回车键，`','` 则被视为了一个分隔符并从输入流中删除，但后续输入的 `\n` 保留在了缓冲区中 。然后第二个 `getline()` 调用会读取缓冲区中剩余的字符，即 `"\n514,"`，将其中的 `','` 删除并存储 `\n514`。因此输出了不符合预期的内容。
 
 为了避免这种结果，我们同样需要手动清空缓存区，可以使用 `getchar()` “吃掉”缓冲区中的 `\n`，但更建议使用如下方法：
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;string&gt;
-    
-    using namespace std;
-    
-    int main() {
-    
-        string s; 
-    
-        getline(cin, s, ',');  //读入 string 类型 s
-    
-        cout << "First: " << s << endl;  //输出 s
-    
-        // 使用 cin.ignore() 忽略掉输入缓冲区中的换行符
-        // 也可以使用 cin.get() 读取缓冲区中的换行符
-        cin.ignore();
-        // cin.get();
-    
-        getline(cin, s, ',');  //在此读入
-    
-        cout << "Second: " << s << endl;  //再次输出 s
-    
-        return 0;
-    }
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+int main() {
+
+    string s; 
+
+    getline(cin, s, ',');  //读入 string 类型 s
+
+    cout << "First: " << s << endl;  //输出 s
+
+    // 使用 cin.ignore() 忽略掉输入缓冲区中的换行符
+    // 也可以使用 cin.get() 读取缓冲区中的换行符
+    cin.ignore();
+    // cin.get();
+
+    getline(cin, s, ',');  //在此读入
+
+    cout << "Second: " << s << endl;  //再次输出 s
+
+    return 0;
+}
+```
 
 最终得到了符合预期的结果。
-    
-    
-    First: 114
-    Second: 514
+```java
+
+
+First: 114
+Second: 514
+```
 
 总体而言，`getchar()`适用于读取单个字符或者字符数组，而`getline()`适用于读取一整行文本，两者使用时需要**注意不同的输入方式和缓冲区处理** 。
 
@@ -512,67 +568,75 @@ description: ""
 **举个栗子** ：
 
 观察如下代码：
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;string&gt;
-    #include &lt;sstream&gt;
-    
-    using namespace std;
-    
-    int main() {
-        stringstream s;
-        string name = "Lys";
-        int age = 13;
-        double height = 1.86;
-        string status = "is a dog";
-    
-        s << "Name: " << name << ", Age: " << age << ", Height: " << height << ", Status: " << status;
-        string str = s.str();
-    
-        cout << str << endl;
-    
-        return 0;
-    }
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;sstream&gt;
+
+using namespace std;
+
+int main() {
+    stringstream s;
+    string name = "Lys";
+    int age = 13;
+    double height = 1.86;
+    string status = "is a dog";
+
+    s << "Name: " << name << ", Age: " << age << ", Height: " << height << ", Status: " << status;
+    string str = s.str();
+
+    cout << str << endl;
+
+    return 0;
+}
+```
 
 在这个示例中，我们首先创建了一个 `stringstream` 对象 `s`，然后使用`<<`运算符将字符串、整数和浮点数和一个字符串插入到 `s` 中，最后使用 `str()` 方法将所有插入的数据转换为一个字符串，并将其打印到标准输出中。
 
 再比如，观察如下代码：
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;string&gt;
-    #include &lt;sstream&gt;
-    
-    using namespace std;
-    
-    int main() {
-    
-        string s;
-        getline(cin, s);
-    
-        stringstream ss(s);
-        string str;
-    
-        while(ss >> str){
-            cout << str << endl;
-        }
-    
-        return 0;
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;sstream&gt;
+
+using namespace std;
+
+int main() {
+
+    string s;
+    getline(cin, s);
+
+    stringstream ss(s);
+    string str;
+
+    while(ss >> str){
+        cout << str << endl;
     }
 
+    return 0;
+}
+```
+
 编译运行并且在控制台输入如下内容：
-    
-    
-    Lys is a dog.
+```java
+
+
+Lys is a dog.
+```
 
 然后得到如下输出：
-    
-    
-    Lys
-    is
-    a
-    dog.
+```java
+
+
+Lys
+is
+a
+dog.
+```
 
 在这个示例中，我们首先创建了一个 `string` 类型的 `s`，并用 `getline(cin, s)` 读入字符串，然后将字符串 `s` 转换为了`stringstream` 对象 `ss`，再通过该对象过滤空格后不断赋值给 `str`，最终将其打印到标准输出中。
 
@@ -585,11 +649,13 @@ description: ""
 前面提到了，由于 `cin` 和 `cout` 存在同步流机制和类型检查机制等影响其性能的功能。因此，在面对需要大量输入输出的场景时， `scanf()` 和 `printf()` 输入输出的效率显著优于 `cin` 和 `cout`，但我们仍然可以通过设置 `cin` 和 `cout` 的同步流标志位来关闭同步流，从而提高程序的效率，甚至优于 `scanf()` 和 `printf()`。
 
 在 `C++` 程序中，添加如下语句以优化输入输出流速度和交互性：
-    
-    
-     ios::sync_with_stdio(false);
-     cin.tie(nullptr);
-     cout.tie(nullptr);
+```java
+
+
+ ios::sync_with_stdio(false);
+ cin.tie(nullptr);
+ cout.tie(nullptr);
+```
 
   * `ios::sync_with_stdio(false)`：关闭 `C++` 的标准输入输出流与 `C` 语言输入输出流的同步，从而加快输入输出的速度。
   * `cin.tie(nullptr)`：解除 `cin` 和 `cout` 的绑定，从而避免在读取输入时，每次输出缓存区都被刷新的问题。
@@ -600,11 +666,13 @@ description: ""
 需要注意的是，关闭输入输出流同步后，不能再在 `C++` 代码中使用 `C` 语言的输入输出函数了，否则可能会导致输出不完整或者输出顺序错误等问题。此外，**解除绑定后，需要手动刷新输出缓存区** ，否则输出的内容可能不完整或者不及时。因此，在使用这些语句时，需要谨慎地考虑使用场景和执行顺序，避免出现不可预料的错误。
 
 下列语句：
-    
-    
-     ios::sync_with_stdio(false);
-     cin.tie(0);
-     cout.tie(0);
+```java
+
+
+ ios::sync_with_stdio(false);
+ cin.tie(0);
+ cout.tie(0);
+```
 
 同样可以达到提高输入输出速度的目的。这种写法比使用 `nullptr` 更加通用，因为在某些旧的 `C++` 编译器中可能不支持 `nullptr`。
 
@@ -641,15 +709,19 @@ description: ""
 $0 \le k \le 100$。
 
 **样例输入** ：
-    
-    
-    2
-    *eee/peee++?
+```java
+
+
+2
+*eee/peee++?
+```
 
 **样例输出** ：
-    
-    
-    *ccc/nccc++
+```java
+
+
+*ccc/nccc++
+```
 
 * * *
 
@@ -658,31 +730,33 @@ $0 \le k \le 100$。
 * * *
 
 你已经是一个成熟的 $\text{ ACMer }$ 了，要学会自己分析并解决问题。~~实在解决不了就解决自己吧~~ 。
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;cstring&gt;
-    
-    using namespace std;
-    
-    void solve(){
-        int k; cin >> k;
-        string s;
-        k %= 26;
-        getchar();  //清空缓冲区中的 '\n'
-        while(getline(cin, s)){
-            for(int i = 0; i < s.size(); i ++){
-                char st = s[i];
-                if(st >= 'a' && st <= 'z') cout << char(st - k < 'a' ? st - k + 26 : st - k);
-                else if(st >= 'A' && st <= 'Z') cout << char(st - k < 'A' ? st - k + 26 : st - k);
-                else if(st == '?') break;
-                else cout << st;
-            }
-            cout << endl;
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+
+using namespace std;
+
+void solve(){
+    int k; cin >> k;
+    string s;
+    k %= 26;
+    getchar();  //清空缓冲区中的 '\n'
+    while(getline(cin, s)){
+        for(int i = 0; i < s.size(); i ++){
+            char st = s[i];
+            if(st >= 'a' && st <= 'z') cout << char(st - k < 'a' ? st - k + 26 : st - k);
+            else if(st >= 'A' && st <= 'Z') cout << char(st - k < 'A' ? st - k + 26 : st - k);
+            else if(st == '?') break;
+            else cout << st;
         }
+        cout << endl;
     }
-    
-    int main(){
-        solve();
-        return 0;
-    }
+}
+
+int main(){
+    solve();
+    return 0;
+}
+```

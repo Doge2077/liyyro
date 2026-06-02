@@ -39,21 +39,25 @@ RPAREN | `)`
 空格符，制表符，换行符 | ` `，`\lt`，`\n`  
   
 例如，对于下列程序：
-    
-    
-    float match0(char *s) /* find a zero */
-    {
-        if(!strncmp(s, "0,0", 3))
-            return 0;
-    }
+```java
+
+
+float match0(char *s) /* find a zero */
+{
+    if(!strncmp(s, "0,0", 3))
+        return 0;
+}
+```
 
 此法分析器将返回下列单词流：
-    
-    
-    FLOAT ID(match0) LPAREN CHAR STAR ID(s) RPAREN
-    LBRACE IF LPAREN BANG ID(strncmp) LPAREN ID(s) 
-    COMMA STRING(0.0) COMMA NUM(3) RPAREN RPAREN 
-    RETURN REAL(0.0) SEMI RBRACE EOF
+```java
+
+
+FLOAT ID(match0) LPAREN CHAR STAR ID(s) RPAREN
+LBRACE IF LPAREN BANG ID(strncmp) LPAREN ID(s) 
+COMMA STRING(0.0) COMMA NUM(3) RPAREN RPAREN 
+RETURN REAL(0.0) SEMI RBRACE EOF
+```
 
 其中报告了每个单词的单词类型。这些单词中有一些（如标识符和文字常数）有语义值与之相连，因此，词法分析器还给出了除单词类型之外的附加信息。
 
@@ -85,7 +89,13 @@ RPAREN | `)`
   * 可选（alternation）：对于给定的两个正则表达式 $M$ 和 $N$，可选操作符（`|`）形成一个新的正则表达 $M~|~N$。如果一个字符串属于语言 $M$ 或者语言 $N$，则它属于语言 $M~|~N$。因 此，$a~|~b$ 组成的语言包含 $a$ 和 $b$ 这两个字符串。 
   * 联结（concatenation）：对于给定的两个正则表达式 $M$ 和 $N$，联结操作符（`·`）形成一个 新的正则表达式 $M·N$。如果一个字符串是任意两个字符串 $\alpha $ 和 $\beta$ 的联结，且 $\alpha$ 属于语言 $M$，$\beta$ 属于语言 $N$，则该字符串属于 $M·N$ 组成的语言。因此，正则表达式 $(a~|~b)·a$ 定义了一个包含两个字符串 $aa$ 和 $ba$ 的语言。 
   * $\epsilon$ （epsilon）:正则表达式 $\epsilon$ 表示仅含一个空字符串的语言。因此，$(a·b)~|~\epsilon$ 示语言 `{" ", "ab"}`。 
-  * 重复（repetition）：对于给定的正则表达式 $M$，它的克林（Kleene）闭包是 [latex]M^*[/latex]。如果一个字符串是由 $M$ 中的字符串经零至多次联结运算的结果，则该字符串属于 [latex]M^*[/latex]。因此， [latex]((a~|~b)·a)^*[/latex]表示无穷集合`{" "，"aa", "ba", "aaaa", "baaa", "aaba", "baba", "aaaaaa", ...)`。
+  * 重复（repetition）：对于给定的正则表达式 $M$，它的克林（Kleene）闭包是 $$
+M^*
+$$。如果一个字符串是由 $M$ 中的字符串经零至多次联结运算的结果，则该字符串属于 $$
+M^*
+$$。因此， $$
+((a~|~b)·a)^*
+$$表示无穷集合`{" "，"aa", "ba", "aaaa", "baaa", "aaba", "baba", "aaaaaa", ...)`。
 
 通过使用符号、可选、联结、闭包和克林闭包，我们可以规定与程序设计语言词法单词相 对应的 `ASCII` 字符集。在书写正则表达式时，我们有时会省略联结操作符或 $\epsilon$ 符号，并假定克林闭包的优先级高于联结运算，联结运算的优先级高于可选运算，所以 $ab~|~c$ 表示 $(a·b)~|~c$，$(a~|~)$ 表 示 $(a~|~\epsilon)$。
 
@@ -200,7 +210,17 @@ RPAREN | `)`
 
 现在已到达字符串 `"in"` 的末尾，在得到的可能状态集合中，状态 `8` 是终态，因此 $n$ 是一个 `ID` 单词。 
 
-我们形式化地定义 $\epsilon$ 闭包如下。 令 $edge(s,c)$ 是从状态 $s$ 沿着标有 $c$ 的一条边可到达的所有 `NFA` 状态的集合。对于状态集合$S$，$closure(S)$ 是从 $S$ 中的状态出发，无需接收任何字符，即只通过 $\epsilon$ 边便可到达的状态组成的集合。这种经过 $\epsilon$ 边的概念可用数学方式表述，即 $closure(S)$ 是满足如下条件的最小集合 $T$： [latex] T = S \cup \big(\bigcup_{x\in T}edge(s, \epsilon ) \big) [/latex] 上述表达式可以通过迭代算法求解： [latex] \begin{aligned} &T; \leftarrow S\\\ &\text {repeat} &T;'\leftarrow T\\\ &&T;\leftarrow T' \big( \bigcup_{s\in T'} \text {edge} (s,\epsilon) \big)\\\ &\text {until} &T;=T' \end{aligned} [/latex] 上述算法可以模拟 `NFA`的状态，接下来，设由 `NFA` 状态 $s_i,s_k,s_l$ 组成的集合 $d=\set{s_i,s_k,s_l}$ 中，从 $d$ 中的状态出发，并吃进输入符号 $c$，将到达 `NFA` 的一个新的状态集合，称这个集合为 $DFAedge(d,c)$： [latex] \text {DFAedge}(d,c) = \text {closure}\big( \bigcup_{s\in d} \text {edge}(s,c) \big) [/latex] 利用 $DFAedge(d,c)$ 可以更形式化地表示 `NFA` 算法，设初态为 $s_1$，输入字符串的字符为 $c_1,\dots c_k$，则算法表示为： [latex] \begin{aligned} d\leftarrow & \text {closure}(\\{s_1\\})\\\ \text for~i&\leftarrow 1~\text to~k\\\ d&\leftarrow \text {DFAedge}(d,c_i) \end{aligned} [/latex] 状态集合运算是代价很高的运算——对进行词法分析的源程序中的每一个字符都做这种运算几乎是不现实的。但是，预先计算出所有的状态集合却是有可能的。由 `NFA` 构造一个 `DFA`，使得 `NFA` 的每一个状态集合都对应于 `DFA` 的一个状态。因为 `NFA` 的状态个数有限 （$n$ 个），所以 `DFA` 的状态个数也是有限的（至多为 $2^n$个）。 一旦有了 $\text{closure}$ 和 $\text {DFAedge}$ 的算法，就很容易构造出 `DFA`。`DFA` 的状态 $d$ ，就是 $\text{closure}(s_1)$，这同 `NFA` 模拟算法一样。抽象而言，如果 $d_j =\text{DFAedge}(d_i,c)$，则存在着一条从 $d_i$ 到 $d_j$ 的标记为 $c$ 的边，令 $\sum$ 是字母表。 [latex] \begin{array}{l} \text { states[0] } \leftarrow\\{\\} ; \quad \text { states[1] } \leftarrow \text { closure }\left(\left\\{s_{1}\right\\}\right) \\\ p \leftarrow 1 ; \quad j \leftarrow 0 \\\ \text { while } j \leq p \\\ \quad \text { foreach } c \in \Sigma \\\ \qquad e \leftarrow \text { DFAedge(states }[j], c) \\\ \qquad \text { if } e=\operatorname{states}[i] \text { for some } i \leq p \\\ \qquad \quad\text { then trans }[j, c\\} \leftarrow i \\\ \qquad \quad\text { else } p \leftarrow p+1 \\\ \qquad \qquad \text { states }[p] \leftarrow e \\\ \qquad \qquad \text { trans }[j, c] \leftarrow p \\\ j \leftarrow j+1 \end{array} [/latex] 该算法不访问 `DFA` 的不可到达状态。因为原则上 `DFA`有 $2^n$ 个状态， 但实际上我们一般找到的只有约 $n$ 个状态是从初态可到达的。这一点对避免 `DFA` 解释器的转换表出现指数级的膨胀很重要，因为这个转换表是编译器的一部分。
+我们形式化地定义 $\epsilon$ 闭包如下。 令 $edge(s,c)$ 是从状态 $s$ 沿着标有 $c$ 的一条边可到达的所有 `NFA` 状态的集合。对于状态集合$S$，$closure(S)$ 是从 $S$ 中的状态出发，无需接收任何字符，即只通过 $\epsilon$ 边便可到达的状态组成的集合。这种经过 $\epsilon$ 边的概念可用数学方式表述，即 $closure(S)$ 是满足如下条件的最小集合 $T$： $$
+T = S \cup \big(\bigcup_{x\in T}edge(s, \epsilon ) \big)
+$$ 上述表达式可以通过迭代算法求解： $$
+\begin{aligned} &T; \leftarrow S\\\ &\text {repeat} &T;'\leftarrow T\\\ &&T;\leftarrow T' \big( \bigcup_{s\in T'} \text {edge} (s,\epsilon) \big)\\\ &\text {until} &T;=T' \end{aligned}
+$$ 上述算法可以模拟 `NFA`的状态，接下来，设由 `NFA` 状态 $s_i,s_k,s_l$ 组成的集合 $d=\set{s_i,s_k,s_l}$ 中，从 $d$ 中的状态出发，并吃进输入符号 $c$，将到达 `NFA` 的一个新的状态集合，称这个集合为 $DFAedge(d,c)$： $$
+\text {DFAedge}(d,c) = \text {closure}\big( \bigcup_{s\in d} \text {edge}(s,c) \big)
+$$ 利用 $DFAedge(d,c)$ 可以更形式化地表示 `NFA` 算法，设初态为 $s_1$，输入字符串的字符为 $c_1,\dots c_k$，则算法表示为： $$
+\begin{aligned} d\leftarrow & \text {closure}(\\{s_1\\})\\\ \text for~i&\leftarrow 1~\text to~k\\\ d&\leftarrow \text {DFAedge}(d,c_i) \end{aligned}
+$$ 状态集合运算是代价很高的运算——对进行词法分析的源程序中的每一个字符都做这种运算几乎是不现实的。但是，预先计算出所有的状态集合却是有可能的。由 `NFA` 构造一个 `DFA`，使得 `NFA` 的每一个状态集合都对应于 `DFA` 的一个状态。因为 `NFA` 的状态个数有限 （$n$ 个），所以 `DFA` 的状态个数也是有限的（至多为 $2^n$个）。 一旦有了 $\text{closure}$ 和 $\text {DFAedge}$ 的算法，就很容易构造出 `DFA`。`DFA` 的状态 $d$ ，就是 $\text{closure}(s_1)$，这同 `NFA` 模拟算法一样。抽象而言，如果 $d_j =\text{DFAedge}(d_i,c)$，则存在着一条从 $d_i$ 到 $d_j$ 的标记为 $c$ 的边，令 $\sum$ 是字母表。 $$
+\begin{array}{l} \text { states[0] } \leftarrow\\{\\} ; \quad \text { states[1] } \leftarrow \text { closure }\left(\left\\{s_{1}\right\\}\right) \\\ p \leftarrow 1 ; \quad j \leftarrow 0 \\\ \text { while } j \leq p \\\ \quad \text { foreach } c \in \Sigma \\\ \qquad e \leftarrow \text { DFAedge(states }[j], c) \\\ \qquad \text { if } e=\operatorname{states}[i] \text { for some } i \leq p \\\ \qquad \quad\text { then trans }[j, c\\} \leftarrow i \\\ \qquad \quad\text { else } p \leftarrow p+1 \\\ \qquad \qquad \text { states }[p] \leftarrow e \\\ \qquad \qquad \text { trans }[j, c] \leftarrow p \\\ j \leftarrow j+1 \end{array}
+$$ 该算法不访问 `DFA` 的不可到达状态。因为原则上 `DFA`有 $2^n$ 个状态， 但实际上我们一般找到的只有约 $n$ 个状态是从初态可到达的。这一点对避免 `DFA` 解释器的转换表出现指数级的膨胀很重要，因为这个转换表是编译器的一部分。
 
 由此我们对上述所给出的 `NFA` 应用该 `DFA` 算法得到如下图所示自动机：
 

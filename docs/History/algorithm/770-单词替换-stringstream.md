@@ -24,16 +24,20 @@ description: ""
 **输出格式** 共一行，输出将 s 中所有单词 a 替换成 b 之后的字符串。
 
 **输入样例：**
-    
-    
-    You want someone to help you
-    You
-    I
+```java
+
+
+You want someone to help you
+You
+I
+```
 
 **输出样例：**
-    
-    
-    I want someone to help you
+```java
+
+
+I want someone to help you
+```
 
 **分析** ：
 
@@ -42,24 +46,26 @@ description: ""
 
 
 **代码** ：
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    int main()
-    {
-        string s,s1,a,b;
-        getline(cin,s);  //读入
-        cin>>a>>b;
-        stringstream ssin(s);  //初始化
-        while(ssin>>s1){  //依次读入
-            if(s1==a){  //判断
-                cout<<b<<" ";
-            }
-            else cout<<s1<<" ";
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+int main()
+{
+    string s,s1,a,b;
+    getline(cin,s);  //读入
+    cin>>a>>b;
+    stringstream ssin(s);  //初始化
+    while(ssin>>s1){  //依次读入
+        if(s1==a){  //判断
+            cout<<b<<" ";
         }
-        return 0;
+        else cout<<s1<<" ";
     }
+    return 0;
+}
+```
 
 * * *
 

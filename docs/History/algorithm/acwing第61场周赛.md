@@ -30,21 +30,25 @@ description: ""
 **数据范围** 前三个测试点满足$ 1≤T≤10$。 所有测试点满足$ 1≤T≤1000，1≤a,b,c≤10^{16}$。
 
 **输入样例：**
-    
-    
-    4
-    1 3 4
-    1 10 100
-    10000000000000000 10000000000000000 10000000000000000
-    23 34 45
+```java
+
+
+4
+1 3 4
+1 10 100
+10000000000000000 10000000000000000 10000000000000000
+23 34 45
+```
 
 **输出样例：**
-    
-    
-    4
-    55
-    15000000000000000
-    51
+```java
+
+
+4
+55
+15000000000000000
+51
+```
 
 * * *
 
@@ -61,121 +65,125 @@ description: ""
   * 倒序`vector&lt;int&gt;`存储`A`，进行高精度除低精度`b`运算
 
 
-    
-    
-    //高精度加法
-    vector&lt;int&gt; add(vector&lt;int&gt; &A,vector&lt;int&gt; &B){
-        if(A.size()<B.size()) return add(B,A);  //判断A和B的长度
-    
-        int k=0;  //定义进位，初始化为0
-        vector&lt;int&gt; C;  //存储答案
-    
-        for(int i=0;i<A.size();i++){  //遍历模拟
-            k+=A[i];  //进位加A本位
-            if(i<B.size()) k+=B[i];  //如果B未遍历完，则加上B本位
-            C.push_back(k%10);  //存入答案
-            k/=10;  //更新进位
-        }
-    
-        if(k) C.push_back(k);  //如果最后进位非零，则补上进位
-    
-        return C;
+```java
+
+
+//高精度加法
+vector&lt;int&gt; add(vector&lt;int&gt; &A,vector&lt;int&gt; &B){
+    if(A.size()<B.size()) return add(B,A);  //判断A和B的长度
+
+    int k=0;  //定义进位，初始化为0
+    vector&lt;int&gt; C;  //存储答案
+
+    for(int i=0;i<A.size();i++){  //遍历模拟
+        k+=A[i];  //进位加A本位
+        if(i<B.size()) k+=B[i];  //如果B未遍历完，则加上B本位
+        C.push_back(k%10);  //存入答案
+        k/=10;  //更新进位
     }
-    
-    //高精度除法
-    vector&lt;int&gt; div(vector&lt;int&gt; &A,int b,int &r){
-        vector&lt;int&gt; C;  //存储答案
-        r=0;  //初始化余数为0
-        for(int i=A.size()-1;i>=0;i--){  //从最高位开始遍历
-            int k=r*10+A[i];  //定义除数k为余数r*10加A本位
-            C.push_back(k/b);  //存入答案
-            r=k%b;  //更新余数
-        }
-        reverse(C.begin(),C.end());  //由于答案从最高位开始存入，故需翻转
-        while(C.size()>1&&C.back()==0) C.pop_back();  //去除前导0
-        return C;
+
+    if(k) C.push_back(k);  //如果最后进位非零，则补上进位
+
+    return C;
+}
+
+//高精度除法
+vector&lt;int&gt; div(vector&lt;int&gt; &A,int b,int &r){
+    vector&lt;int&gt; C;  //存储答案
+    r=0;  //初始化余数为0
+    for(int i=A.size()-1;i>=0;i--){  //从最高位开始遍历
+        int k=r*10+A[i];  //定义除数k为余数r*10加A本位
+        C.push_back(k/b);  //存入答案
+        r=k%b;  //更新余数
     }
+    reverse(C.begin(),C.end());  //由于答案从最高位开始存入，故需翻转
+    while(C.size()>1&&C.back()==0) C.pop_back();  //去除前导0
+    return C;
+}
+```
 
 * * *
 
 ### 代码
-    
-    
-    #include&lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    vector&lt;int&gt; add(vector&lt;int&gt; &A, vector&lt;int&gt; &B)
+```java
+
+
+#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+vector&lt;int&gt; add(vector&lt;int&gt; &A, vector&lt;int&gt; &B)
+{
+    if (A.size() < B.size()) return add(B, A);
+
+    vector&lt;int&gt; C;
+    int t = 0;
+    for (int i = 0; i < A.size(); i ++ )
     {
-        if (A.size() < B.size()) return add(B, A);
-    
-        vector&lt;int&gt; C;
-        int t = 0;
-        for (int i = 0; i < A.size(); i ++ )
-        {
-            t += A[i];
-            if (i < B.size()) t += B[i];
-            C.push_back(t % 10);
-            t /= 10;
-        }
-    
-        if (t) C.push_back(t);
-        return C;
+        t += A[i];
+        if (i < B.size()) t += B[i];
+        C.push_back(t % 10);
+        t /= 10;
     }
-    
-    vector&lt;int&gt; div(vector&lt;int&gt; &A, int b, int &r)
+
+    if (t) C.push_back(t);
+    return C;
+}
+
+vector&lt;int&gt; div(vector&lt;int&gt; &A, int b, int &r)
+{
+    vector&lt;int&gt; C;
+    r = 0;
+    for (int i = A.size() - 1; i >= 0; i -- )
     {
-        vector&lt;int&gt; C;
-        r = 0;
-        for (int i = A.size() - 1; i >= 0; i -- )
-        {
-            r = r * 10 + A[i];
-            C.push_back(r / b);
-            r %= b;
-        }
-        reverse(C.begin(), C.end());
-        while (C.size() > 1 && C.back() == 0) C.pop_back();
-        return C;
+        r = r * 10 + A[i];
+        C.push_back(r / b);
+        r %= b;
     }
-    
-    void solve(){
-    
-        vector&lt;int&gt; A,B,C;
-    
-        string a, b, c;
-    
-        int r;
-    
-        cin >> a >> b >> c;
-    
-        for(int i = a.size() - 1; i >= 0; i--) A.push_back(a[i] - '0');  //倒序存储
-        for(int i = b.size() - 1; i >= 0; i--) B.push_back(b[i] - '0');
-        for(int i = c.size() - 1; i >= 0; i--) C.push_back(c[i] - '0');
-    
-        vector&lt;int&gt; D = add(A,B);
-        vector&lt;int&gt; E = add(C,D);  //E = A + B + C
-    
-        vector&lt;int&gt; F = div(E,2,r);
-    
-        for(int i = F.size() - 1; i >= 0; i--) cout << F[i];
-    
-        cout << endl;
-    
+    reverse(C.begin(), C.end());
+    while (C.size() > 1 && C.back() == 0) C.pop_back();
+    return C;
+}
+
+void solve(){
+
+    vector&lt;int&gt; A,B,C;
+
+    string a, b, c;
+
+    int r;
+
+    cin >> a >> b >> c;
+
+    for(int i = a.size() - 1; i >= 0; i--) A.push_back(a[i] - '0');  //倒序存储
+    for(int i = b.size() - 1; i >= 0; i--) B.push_back(b[i] - '0');
+    for(int i = c.size() - 1; i >= 0; i--) C.push_back(c[i] - '0');
+
+    vector&lt;int&gt; D = add(A,B);
+    vector&lt;int&gt; E = add(C,D);  //E = A + B + C
+
+    vector&lt;int&gt; F = div(E,2,r);
+
+    for(int i = F.size() - 1; i >= 0; i--) cout << F[i];
+
+    cout << endl;
+
+}
+
+int main(){
+
+    int _;
+
+    cin >> _;
+
+    while(_--){
+        solve();
     }
-    
-    int main(){
-    
-        int _;
-    
-        cin >> _;
-    
-        while(_--){
-            solve();
-        }
-    
-        return 0;
-    
-    }
-    
+
+    return 0;
+
+}
+
+```
 
 * * *
 
@@ -208,43 +216,55 @@ description: ""
 **数据范围** 前 4 个测试点满足 1≤n≤3。 所有测试点满足 1≤n≤15，1≤ai≤180。
 
 **输入样例1：**
-    
-    
-    3
-    10
-    20
-    30
+```java
+
+
+3
+10
+20
+30
+```
 
 **输出样例1：**
-    
-    
-    YES
+```java
+
+
+YES
+```
 
 **输入样例2：**
-    
-    
-    3
-    10
-    10
-    10
+```java
+
+
+3
+10
+10
+10
+```
 
 **输出样例2：**
-    
-    
-    NO
+```java
+
+
+NO
+```
 
 **输入样例3：**
-    
-    
-    3
-    120
-    120
-    120
+```java
+
+
+3
+120
+120
+120
+```
 
 **输出样例3：**
-    
-    
-    YES
+```java
+
+
+YES
+```
 
 * * *
 
@@ -259,47 +279,49 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N = 1e6 + 3;
-    
-    int a[N];
-    
-    int n;
-    
-    bool flag;
-    
-    void dfs(int u,int p)
-    {
-        if(u > n){
-            if(p % 360 == 0){
-                flag = 1;
-            }
-            return ;
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 1e6 + 3;
+
+int a[N];
+
+int n;
+
+bool flag;
+
+void dfs(int u,int p)
+{
+    if(u > n){
+        if(p % 360 == 0){
+            flag = 1;
         }
-    
-        dfs(u + 1,p + a[u]);  //顺时针旋转
-        dfs(u + 1,p - a[u]);  //逆时针旋转
-    
+        return ;
     }
-    
-    int main(){
-    
-        cin >> n;
-    
-        for(int i = 0; i < n; i++) cin >> a[i];
-    
-        dfs(0,0);
-    
-        if(flag) cout << "YES" << endl;
-        else cout << "NO" << endl;
-    
-        return 0;
-    
-    }
+
+    dfs(u + 1,p + a[u]);  //顺时针旋转
+    dfs(u + 1,p - a[u]);  //逆时针旋转
+
+}
+
+int main(){
+
+    cin >> n;
+
+    for(int i = 0; i < n; i++) cin >> a[i];
+
+    dfs(0,0);
+
+    if(flag) cout << "YES" << endl;
+    else cout << "NO" << endl;
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -328,24 +350,32 @@ description: ""
 **数据范围** 所有测试点满足 1≤R≤105，|x1|,|y1|,|x2|,|y2|≤105。
 
 **输入样例1：**
-    
-    
-    5 3 3 1 1
+```java
+
+
+5 3 3 1 1
+```
 
 **输出样例1：**
-    
-    
-    3.767767 3.767767 3.914214
+```java
+
+
+3.767767 3.767767 3.914214
+```
 
 **输入样例2：**
-    
-    
-    10 5 5 5 15
+```java
+
+
+10 5 5 5 15
+```
 
 **输出样例2：**
-    
-    
-    5.000000 5.000000 10.000000
+```java
+
+
+5.000000 5.000000 10.000000
+```
 
 * * *
 
@@ -354,53 +384,57 @@ description: ""
 * * *
 
   * 分析题目可知： 
-    * 圆要画在给定圆内
-    * 当给定点在给定圆外或圆上时，答案就是给定的圆
-    * 当给定点在圆内时，要使要求3中面积最小，则画的圆尽量大，所以半径尽量大
+```java
+* 圆要画在给定圆内
+* 当给定点在给定圆外或圆上时，答案就是给定的圆
+* 当给定点在圆内时，要使要求3中面积最小，则画的圆尽量大，所以半径尽量大
+```
 
 
 
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    void solve(){
-    
-        double r, x_1, y_1, x_2, y_2;
-        scanf("%lf%lf%lf%lf%lf", &r, &x_1, &y_1, &x_2, &y_2);
-    
-        double l = (x_1 - x_2) * (x_1 - x_2) + (y_1 - y_2) * (y_1 - y_2);
-    
-        if (l == 0){  //重合
-            printf("%.6lf %.6lf %.6lf", x_1 + (r / 2), y_1, r / 2);
-        }
-        else if (l < r * r && l){
-            l = sqrt(l);
-    
-            double d = l + r;    //给定点与圆心的距离加上给定圆的半径即为该情况下半径的最大值
-            double r_1 = d / 2.0; //半径
-    
-            double l_1 = y_1 - y_2;
-            double l_2 = x_1 - x_2;
-            double x_3 = (x_1 + x_2 + (r * l_2 / l)) / 2;
-            double y_3 = (y_1 + y_2 + (r * l_1 / l)) / 2;
-    
-            printf("%.6lf %.6lf %.6lf", x_3, y_3, r_1);
-        }
-        else{
-            printf("%.6lf %.6lf %.6lf", x_1, y_1, r);
-        }
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+void solve(){
+
+    double r, x_1, y_1, x_2, y_2;
+    scanf("%lf%lf%lf%lf%lf", &r, &x_1, &y_1, &x_2, &y_2);
+
+    double l = (x_1 - x_2) * (x_1 - x_2) + (y_1 - y_2) * (y_1 - y_2);
+
+    if (l == 0){  //重合
+        printf("%.6lf %.6lf %.6lf", x_1 + (r / 2), y_1, r / 2);
     }
-    
-    int main(){
-    
-        solve();
-    
-        return 0;
-    
+    else if (l < r * r && l){
+        l = sqrt(l);
+
+        double d = l + r;    //给定点与圆心的距离加上给定圆的半径即为该情况下半径的最大值
+        double r_1 = d / 2.0; //半径
+
+        double l_1 = y_1 - y_2;
+        double l_2 = x_1 - x_2;
+        double x_3 = (x_1 + x_2 + (r * l_2 / l)) / 2;
+        double y_3 = (y_1 + y_2 + (r * l_1 / l)) / 2;
+
+        printf("%.6lf %.6lf %.6lf", x_3, y_3, r_1);
     }
+    else{
+        printf("%.6lf %.6lf %.6lf", x_1, y_1, r);
+    }
+
+}
+
+int main(){
+
+    solve();
+
+    return 0;
+
+}
+```

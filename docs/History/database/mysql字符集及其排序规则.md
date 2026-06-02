@@ -57,18 +57,26 @@ description: ""
 * * *
 
   * utf8mb4_general_ci： 
-    * 默认的排序规则，**不区分大小写** ，同时考虑了多语言的排序规则。
-    * 在该规则下，'a'和'A'被认为是相等的。
+```java
+* 默认的排序规则，**不区分大小写** ，同时考虑了多语言的排序规则。
+* 在该规则下，'a'和'A'被认为是相等的。
+```
   * utf8mb4_unicode_ci： 
-    * 基于Unicode Collation Algorithm (UCA) 默认的排序规则，**不区分大小写** 。
-    * 与utf8mb4_general_ci相比，utf8mb4_unicode_ci更加精确，能够正确地排序各种语言的字符。
+```java
+* 基于Unicode Collation Algorithm (UCA) 默认的排序规则，**不区分大小写** 。
+* 与utf8mb4_general_ci相比，utf8mb4_unicode_ci更加精确，能够正确地排序各种语言的字符。
+```
   * utf8mb4_bin： 
-    * 这个排序规则是基于二进制的排序规则，**区分大小写** 的，且按照字符的二进制值进行排序。
-    * 在这个规则下，'A'会排在'a'之前。
+```java
+* 这个排序规则是基于二进制的排序规则，**区分大小写** 的，且按照字符的二进制值进行排序。
+* 在这个规则下，'A'会排在'a'之前。
+```
   * utf8mb4_0900_ai_ci： 
-    * 在MySQL 8.0.0版本中引入的，用于支持utf8mb4字符集的全新排序规则。
-    * 在MySQL 8.0.0之前的版本中，utf8mb4字符集使用的是utf8mb4_general_ci排序规则。然而，这个排序规则对于一些特定的字符比较不够准确，可能会导致一些排序和比较结果不符合预期。
-    * 基于Unicode Collation Algorithm (UCA) 9.0.0的排序规则，**不区分大小写** ，更准确地处理了各种字符的排序和比较。
+```java
+* 在MySQL 8.0.0版本中引入的，用于支持utf8mb4字符集的全新排序规则。
+* 在MySQL 8.0.0之前的版本中，utf8mb4字符集使用的是utf8mb4_general_ci排序规则。然而，这个排序规则对于一些特定的字符比较不够准确，可能会导致一些排序和比较结果不符合预期。
+* 基于Unicode Collation Algorithm (UCA) 9.0.0的排序规则，**不区分大小写** ，更准确地处理了各种字符的排序和比较。
+```
 
 
 
@@ -109,12 +117,16 @@ description: ""
 ### utf8mb4_unicode_ci和utf8mb4_general_ci对比
 
   * 准确性： 
-    * utf8mb4_unicode_ci排序规则基于标准unicode进行排序和比较，能处理特殊的字符，能在各种语音中精确排序。
-    * utf8mb4_general_ci排序规则没有基于标准unicode，无法处理部分特殊字符。
+```java
+* utf8mb4_unicode_ci排序规则基于标准unicode进行排序和比较，能处理特殊的字符，能在各种语音中精确排序。
+* utf8mb4_general_ci排序规则没有基于标准unicode，无法处理部分特殊字符。
+```
   * 性能上： 
-    * utf8mb4_general_ci排序规则在排序性能上相对较好；
-    * utf8mb4_unicode_ci排序规则为处理特殊字符实现复杂的排序算法，性能略差。
-    * 在大部分场景下，两者没有明显的性能差异
+```java
+* utf8mb4_general_ci排序规则在排序性能上相对较好；
+* utf8mb4_unicode_ci排序规则为处理特殊字符实现复杂的排序算法，性能略差。
+* 在大部分场景下，两者没有明显的性能差异
+```
 
 
 
@@ -134,9 +146,11 @@ description: ""
 
 
 查看当前MySQL服务器的`collation_server`的值：
-    
-    
-    SHOW VARIABLES LIKE 'collation_server';
+```java
+
+
+SHOW VARIABLES LIKE 'collation_server';
+```
 
 该命令将返回一个结果集，其中包含名为`collation_server`的变量及其对应的值。
 
@@ -163,10 +177,12 @@ description: ""
   * 参数character_set_database和collation_database在MySQL 5.7版本中被遗弃并将在后续版本中移除。
   * MySQL新增参数default_collation_for_utf8mb4用于控制使用utf8mb4字符集时的默认排序规则，取值为utf8mb4_0900_ai_ci或utf8mb4_general_ci
   * 参数default_collation_for_utf8mb4在下列条件中生效： 
-    * 使用SHOW COLLATION and SHOW CHARACTER SET 命令时。
-    * 在创建库或修改库指定utf8mb4但未指定编码规则时。
-    * 在创建表或修改表指定utf8mb4但未指定编码规则时。
-    * 在增加列或修改列指定utf8mb4但未指定编码规则时。
-    * 其他使用utf8mb4但未指定编码规则时。
+```java
+* 使用SHOW COLLATION and SHOW CHARACTER SET 命令时。
+* 在创建库或修改库指定utf8mb4但未指定编码规则时。
+* 在创建表或修改表指定utf8mb4但未指定编码规则时。
+* 在增加列或修改列指定utf8mb4但未指定编码规则时。
+* 其他使用utf8mb4但未指定编码规则时。
+```
 
 

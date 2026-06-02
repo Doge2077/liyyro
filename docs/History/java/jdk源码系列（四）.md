@@ -46,25 +46,27 @@ synchronized 的作用是保证在同一时刻， 被修饰的代码块或方法
   * 直接定义代码块
 
 
-    
-    
-    // （1）修饰静态方法
-    public synchronized static void helloStatic(){
-        System.out.println("hello world static");
-    }
-    
-    // （2）修饰成员函数
-    public synchronized void hello(){
+```java
+
+
+// （1）修饰静态方法
+public synchronized static void helloStatic(){
+    System.out.println("hello world static");
+}
+
+// （2）修饰成员函数
+public synchronized void hello(){
+    System.out.println("hello world");
+}
+
+// （3）直接定义代码块
+public void test(){
+    SynchronizedTest test = new SynchronizedTest();        
+    synchronized (test){
         System.out.println("hello world");
     }
-    
-    // （3）直接定义代码块
-    public void test(){
-        SynchronizedTest test = new SynchronizedTest();        
-        synchronized (test){
-            System.out.println("hello world");
-        }
-    }
+}
+```
 
 * * *
 
@@ -96,57 +98,61 @@ synchronized 有两种形式上锁
 * * *
 
 定义一个同步代码块：
-    
-    
-    package test;
-    
-    public class Main {
-        public static void main(String[] args) {
-            Object o = new Object();
-            synchronized (o) {
-                System.out.println("Hello World");
-            }
+```java
+
+
+package test;
+
+public class Main {
+    public static void main(String[] args) {
+        Object o = new Object();
+        synchronized (o) {
+            System.out.println("Hello World");
         }
     }
+}
+```
 
 javac 编译出class字节码，然后反编译 javap -c 找到该 method 方法所在的指令块：
-    
-    
-    Compiled from "Main.java"
-    public class test.Main {
-      public test.Main();
-        Code:
-           0: aload_0
-           1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
-           4: return
-    
-      public static void main(java.lang.String[]);
-        Code:
-           0: new           #2                  // class java/lang/Object
-           3: dup
-           4: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
-           7: astore_1
-           8: aload_1
-           9: dup
-          10: astore_2
-          11: monitorenter
-          12: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
-          15: ldc           #4                  // String Hello World
-          17: invokevirtual #5                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-          20: aload_2
-          21: monitorexit
-          22: goto          30
-          25: astore_3
-          26: aload_2
-          27: monitorexit
-          28: aload_3
-          29: athrow
-          30: return
-        :
-           from    to  target type
-              12    22    25   any
-              25    28    25   any
-    }
+```java
+
+
+Compiled from "Main.java"
+public class test.Main {
+  public test.Main();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+       4: return
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: new           #2                  // class java/lang/Object
+       3: dup
+       4: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+       7: astore_1
+       8: aload_1
+       9: dup
+      10: astore_2
+      11: monitorenter
+      12: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
+      15: ldc           #4                  // String Hello World
+      17: invokevirtual #5                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      20: aload_2
+      21: monitorexit
+      22: goto          30
+      25: astore_3
+      26: aload_2
+      27: monitorexit
+      28: aload_3
+      29: athrow
+      30: return
+    :
+       from    to  target type
+          12    22    25   any
+          25    28    25   any
+}
+```
 
 由此可见第 11 行出现了 monitorenter 指令，第 21 和 27 行出现了 monitorexit 指令
 
@@ -183,36 +189,40 @@ javac 编译出class字节码，然后反编译 javap -c 找到该 method 方法
 * * *
 
 将 synchorized 定义到方法上：
-    
-    
-    package test;
-    
-    public class Main {
-    
-        public synchronized void hello() {
-            System.out.println("Hello World");
-        }
-    
-        public static void main(String[] args) {
-        }
-    
+```java
+
+
+package test;
+
+public class Main {
+
+    public synchronized void hello() {
+        System.out.println("Hello World");
     }
 
+    public static void main(String[] args) {
+    }
+
+}
+```
+
 javac 编译出class字节码，然后反编译 javap -c 找到该 method 方法所在的指令块：
-    
-    
-      public synchronized void hello();
-        descriptor: ()V
-        flags: (0x0021) ACC_PUBLIC, ACC_SYNCHRONIZED
-        Code:
-          stack=2, locals=1, args_size=1
-             0: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
-             3: ldc           #3                  // String Hello World
-             5: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-             8: return
-          LineNumberTable:
-            line 9: 0
-            line 10: 8
+```java
+
+
+  public synchronized void hello();
+    descriptor: ()V
+    flags: (0x0021) ACC_PUBLIC, ACC_SYNCHRONIZED
+    Code:
+      stack=2, locals=1, args_size=1
+         0: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         3: ldc           #3                  // String Hello World
+         5: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+         8: return
+      LineNumberTable:
+        line 9: 0
+        line 10: 8
+```
 
 从编译的结果来看，方法的同步并没有通过指令 `monitorenter` 和 `monitorexit` 来完成（理论上其实也可以通过这两条指令来实现），不过相对于普通方法，其常量池中多了 `ACC_SYNCHRONIZED` 标示符。
 
@@ -251,26 +261,28 @@ Synchronized在JVM里的实现都是 基于进入和退出Monitor对象来实现
 
 
 在 HotSpot 虚拟机中，Monitor 底层是由 C++实现的，它的实现对象是 ObjectMonitor，ObjectMonitor 结构体的实现如下：
-    
-    
-    ObjectMonitor::ObjectMonitor() {  
-      _header       = NULL;  
-      _count       = 0;  
-      _waiters      = 0,  
-      _recursions   = 0;       //线程的重入次数
-      _object       = NULL;  
-      _owner        = NULL;    //标识拥有该monitor的线程
-      _WaitSet      = NULL;    //等待线程组成的双向循环链表，_WaitSet是第一个节点
-      _WaitSetLock  = 0 ;  
-      _Responsible  = NULL ;  
-      _succ         = NULL ;  
-      _cxq          = NULL ;    //多线程竞争锁进入时的单向链表
-      FreeNext      = NULL ;  
-      _EntryList    = NULL ;    //_owner从该双向循环链表中唤醒线程结点，_EntryList是第一个节点
-      _SpinFreq     = 0 ;  
-      _SpinClock    = 0 ;  
-      OwnerIsThread = 0 ;  
-    } 
+```java
+
+
+ObjectMonitor::ObjectMonitor() {  
+  _header       = NULL;  
+  _count       = 0;  
+  _waiters      = 0,  
+  _recursions   = 0;       //线程的重入次数
+  _object       = NULL;  
+  _owner        = NULL;    //标识拥有该monitor的线程
+  _WaitSet      = NULL;    //等待线程组成的双向循环链表，_WaitSet是第一个节点
+  _WaitSetLock  = 0 ;  
+  _Responsible  = NULL ;  
+  _succ         = NULL ;  
+  _cxq          = NULL ;    //多线程竞争锁进入时的单向链表
+  FreeNext      = NULL ;  
+  _EntryList    = NULL ;    //_owner从该双向循环链表中唤醒线程结点，_EntryList是第一个节点
+  _SpinFreq     = 0 ;  
+  _SpinClock    = 0 ;  
+  OwnerIsThread = 0 ;  
+} 
+```
 
 在以上代码中有几个关键的属性：
 

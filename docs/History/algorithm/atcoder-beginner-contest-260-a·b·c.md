@@ -28,37 +28,39 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N = 1000;
-    
-    int a[N];
-    
-    int main(){
-    
-        string s;
-    
-        cin >> s;
-    
-        for(int i = 0; i < s.size(); i ++){
-            a[s[i]]++;
-        }
-    
-        for(int i = 'a'; i <= 'z'; i ++){
-            if(a[i] == 1){
-                cout << (char)i << endl;
-                return 0;
-            }
-        }
-    
-        cout << -1 << endl;
-    
-        return 0;
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 1000;
+
+int a[N];
+
+int main(){
+
+    string s;
+
+    cin >> s;
+
+    for(int i = 0; i < s.size(); i ++){
+        a[s[i]]++;
     }
+
+    for(int i = 'a'; i <= 'z'; i ++){
+        if(a[i] == 1){
+            cout << (char)i << endl;
+            return 0;
+        }
+    }
+
+    cout << -1 << endl;
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -85,94 +87,96 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N = 1e6 + 3;
-    
-    struct students{
-        int m,e,p;
-    }stu[N];
-    
-    int n,x,y,z; 
-    
-    bool vis[N];
-    
-    //对数学成绩排序
-    bool cmp1(students &s1,students &s2){
-        if(s1.m == s2.m){
-            return s1.p < s2.p;
-        }
-        else return s1.m > s2.m;
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 1e6 + 3;
+
+struct students{
+    int m,e,p;
+}stu[N];
+
+int n,x,y,z; 
+
+bool vis[N];
+
+//对数学成绩排序
+bool cmp1(students &s1,students &s2){
+    if(s1.m == s2.m){
+        return s1.p < s2.p;
     }
-    
-    //对英语成绩排序
-    bool cmp2(students &s1,students &s2){
-        if(s1.e == s2.e){
-            return s1.p < s2.p;
-        }
-        else return s1.e > s2.e;
+    else return s1.m > s2.m;
+}
+
+//对英语成绩排序
+bool cmp2(students &s1,students &s2){
+    if(s1.e == s2.e){
+        return s1.p < s2.p;
     }
-    
-    //对总成绩排序
-    bool cmp3(students &s1,students &s2){
-        if(s1.m + s1.e == s2.m + s2.e){
-            return s1.p < s2.p;
-        }
-        else return s1.m + s1.e > s2.m + s2.e;
+    else return s1.e > s2.e;
+}
+
+//对总成绩排序
+bool cmp3(students &s1,students &s2){
+    if(s1.m + s1.e == s2.m + s2.e){
+        return s1.p < s2.p;
     }
-    
-    int main(){
-    
-        cin >> n >> x >> y >> z;
-    
-        for(int i = 0; i < n; i ++){
-            cin >> stu[i].m;
-            stu[i].p = i + 1;
-        }
-    
-        for(int i = 0; i < n; i ++) cin >> stu[i].e;
-    
-        if(x){
-            int flag = 0;
-            sort(stu,stu + n,cmp1);
-            for(int i = 0; flag < x; i ++){
-                if(!vis[stu[i].p]){
-                    vis[stu[i].p] = 1;
-                    flag++;
-                }
+    else return s1.m + s1.e > s2.m + s2.e;
+}
+
+int main(){
+
+    cin >> n >> x >> y >> z;
+
+    for(int i = 0; i < n; i ++){
+        cin >> stu[i].m;
+        stu[i].p = i + 1;
+    }
+
+    for(int i = 0; i < n; i ++) cin >> stu[i].e;
+
+    if(x){
+        int flag = 0;
+        sort(stu,stu + n,cmp1);
+        for(int i = 0; flag < x; i ++){
+            if(!vis[stu[i].p]){
+                vis[stu[i].p] = 1;
+                flag++;
             }
         }
-    
-        if(y){
-            int flag = 0;
-            sort(stu,stu + n,cmp2);
-            for(int i = 0; flag < y; i ++){
-                if(!vis[stu[i].p]){
-                    vis[stu[i].p] = 1;
-                    flag++;
-                }
-            }
-        }
-    
-        if(z){
-            int flag = 0;
-            sort(stu,stu + n,cmp3);
-            for(int i = 0; flag < z; i ++){
-                if(!vis[stu[i].p]){
-                    vis[stu[i].p] = 1;
-                    flag++;
-                }
-            }
-        }
-    
-        for(int i = 1; i <= n; i ++) if(vis[i]) cout << i << endl;
-    
-        return 0;
-    
     }
+
+    if(y){
+        int flag = 0;
+        sort(stu,stu + n,cmp2);
+        for(int i = 0; flag < y; i ++){
+            if(!vis[stu[i].p]){
+                vis[stu[i].p] = 1;
+                flag++;
+            }
+        }
+    }
+
+    if(z){
+        int flag = 0;
+        sort(stu,stu + n,cmp3);
+        for(int i = 0; flag < z; i ++){
+            if(!vis[stu[i].p]){
+                vis[stu[i].p] = 1;
+                flag++;
+            }
+        }
+    }
+
+    for(int i = 1; i <= n; i ++) if(vis[i]) cout << i << endl;
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -197,51 +201,57 @@ description: ""
 
   * 动态规划
   * 状态表示： 
-    * `red[i]`表示从一颗等级为$i$的红宝石转化到等级为$1$的蓝宝石的最大数量
-    * `blue[i]`表示一颗等级为$i$的蓝宝石转化到等级为$1$的蓝宝石的最大数量
+```java
+* `red[i]`表示从一颗等级为$i$的红宝石转化到等级为$1$的蓝宝石的最大数量
+* `blue[i]`表示一颗等级为$i$的蓝宝石转化到等级为$1$的蓝宝石的最大数量
+```
   * 状态计算： 
-    * 先计算`blue[i] = red[i - 1] + blue[i - 1] * Y`的状态
-    * 再计算`red[i] = red[i - 1] + blue[i] * X`的状态
-    * 最后`red[n]`即为转化的最大值
+```java
+* 先计算`blue[i] = red[i - 1] + blue[i - 1] * Y`的状态
+* 再计算`red[i] = red[i - 1] + blue[i] * X`的状态
+* 最后`red[n]`即为转化的最大值
+```
 
 
 
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    typedef long long LL;
-    
-    const int N = 20; 
-    
-    LL n, x, y;
-    
-    LL m = 1;
-    
-    LL red[N], blue[N];
-    
-    int main(){
-    
-        cin >> n >> x >> y;
-    
-        red[1] = 0, blue[1] = 1;
-    
-        for(int i = 2; i <= n; i ++){
-            blue[i] = red[i - 1] + blue[i - 1] * y;
-            red[i] = red[i - 1] + blue[i] * x;
-        }
-    
-    //  for(int i = 1; i <= n; i ++) cout << blue[i] << ' ' ;
-    //  cout << endl;
-    
-        cout << red[n] << endl;
-    
-        return 0;
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+typedef long long LL;
+
+const int N = 20; 
+
+LL n, x, y;
+
+LL m = 1;
+
+LL red[N], blue[N];
+
+int main(){
+
+    cin >> n >> x >> y;
+
+    red[1] = 0, blue[1] = 1;
+
+    for(int i = 2; i <= n; i ++){
+        blue[i] = red[i - 1] + blue[i - 1] * y;
+        red[i] = red[i - 1] + blue[i] * x;
     }
+
+//  for(int i = 1; i <= n; i ++) cout << blue[i] << ' ' ;
+//  cout << endl;
+
+    cout << red[n] << endl;
+
+    return 0;
+
+}
+```
 
 * * *

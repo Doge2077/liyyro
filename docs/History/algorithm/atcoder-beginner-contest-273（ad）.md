@@ -14,8 +14,10 @@ description: ""
 **题目大意** ：
 
   * 求 $f(k)$ 如下： 
-    * $f(0) = 1$;
-    * $f(k) = k \times f(k - 1)$
+```java
+* $f(0) = 1$;
+* $f(k) = k \times f(k - 1)$
+```
 
 
 
@@ -30,65 +32,67 @@ description: ""
 * * *
 
 **代码** ：
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;cstring&gt;
-    #include &lt;cstdio&gt;
-    #include &lt;algorithm&gt;
-    #include &lt;cmath&gt;
-    #include &lt;sstream&gt;
-    #include &lt;vector&gt;
-    #include &lt;queue&gt;
-    #include &lt;stack&gt;
-    #include &lt;map&gt;
-    #include &lt;set&gt;
-    #include &lt;unordered_map&gt;
-    #include &lt;unordered_set&gt;
-    
-    using namespace std;
-    
-    #define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
-    #define re register
-    #define fi first
-    #define se second
-    #define endl '\n'
-    
-    typedef long long LL;
-    typedef pair&lt;int, int&gt; PII;
-    typedef pair&lt;LL, LL&gt; PLL;
-    
-    const int N = 1e6 + 3;
-    const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
-    const double eps = 1e-6, PI = acos(-1);
-    
-    LL f(LL n){
-        if(n == 0) return 1;
-        else return n * f(n - 1);
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;sstream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+#include &lt;unordered_map&gt;
+#include &lt;unordered_set&gt;
+
+using namespace std;
+
+#define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
+#define re register
+#define fi first
+#define se second
+#define endl '\n'
+
+typedef long long LL;
+typedef pair&lt;int, int&gt; PII;
+typedef pair&lt;LL, LL&gt; PLL;
+
+const int N = 1e6 + 3;
+const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
+const double eps = 1e-6, PI = acos(-1);
+
+LL f(LL n){
+    if(n == 0) return 1;
+    else return n * f(n - 1);
+}
+
+void solve(){
+
+    LL n; cin >> n;
+    cout << f(n) << endl;
+
+}
+
+int main(){
+
+    IOS;
+
+    int _ = 1;
+
+    // cin >> _;
+
+    while(_ --){
+        solve();
     }
-    
-    void solve(){
-    
-        LL n; cin >> n;
-        cout << f(n) << endl;
-    
-    }
-    
-    int main(){
-    
-        IOS;
-    
-        int _ = 1;
-    
-        // cin >> _;
-    
-        while(_ --){
-            solve();
-        }
-    
-        return 0;
-    
-    }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -117,70 +121,72 @@ description: ""
 * * *
 
 **代码** ：
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;cstring&gt;
-    #include &lt;cstdio&gt;
-    #include &lt;algorithm&gt;
-    #include &lt;cmath&gt;
-    #include &lt;sstream&gt;
-    #include &lt;vector&gt;
-    #include &lt;queue&gt;
-    #include &lt;stack&gt;
-    #include &lt;map&gt;
-    #include &lt;set&gt;
-    #include &lt;unordered_map&gt;
-    #include &lt;unordered_set&gt;
-    
-    using namespace std;
-    
-    #define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
-    #define re register
-    #define fi first
-    #define se second
-    #define endl '\n'
-    
-    typedef long long LL;
-    typedef pair&lt;int, int&gt; PII;
-    typedef pair&lt;LL, LL&gt; PLL;
-    
-    const int N = 1e6 + 3;
-    const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
-    const double eps = 1e-6, PI = acos(-1);
-    
-    void solve(){
-    
-        LL x; int k;
-        cin >> x >> k;
-    
-        LL fac = 1;
-        for (int i = 1; i <= k; i ++) {
-            fac *= 10;
-            LL a = x / fac, b = ceil(1.0 * x / fac);
-            a *= fac; b *= fac;
-            if(abs(a - x) < abs(b - x)) x = a;
-            else x = b;
-        }
-        cout << x << endl;
-    
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;sstream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+#include &lt;unordered_map&gt;
+#include &lt;unordered_set&gt;
+
+using namespace std;
+
+#define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
+#define re register
+#define fi first
+#define se second
+#define endl '\n'
+
+typedef long long LL;
+typedef pair&lt;int, int&gt; PII;
+typedef pair&lt;LL, LL&gt; PLL;
+
+const int N = 1e6 + 3;
+const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
+const double eps = 1e-6, PI = acos(-1);
+
+void solve(){
+
+    LL x; int k;
+    cin >> x >> k;
+
+    LL fac = 1;
+    for (int i = 1; i <= k; i ++) {
+        fac *= 10;
+        LL a = x / fac, b = ceil(1.0 * x / fac);
+        a *= fac; b *= fac;
+        if(abs(a - x) < abs(b - x)) x = a;
+        else x = b;
     }
-    
-    int main(){
-    
-        IOS;
-    
-        int _ = 1;
-    
-        // cin >> _;
-    
-        while(_ --){
-            solve();
-        }
-    
-        return 0;
-    
+    cout << x << endl;
+
+}
+
+int main(){
+
+    IOS;
+
+    int _ = 1;
+
+    // cin >> _;
+
+    while(_ --){
+        solve();
     }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -194,7 +200,9 @@ description: ""
 
   * 给定一个长度为 $n$ 的整数序列 $A={A_1,A_2,\dots,A_n}$。
   * 对于 $k = 0,1,2,\dots,N-1$： 
-    * 在序列 $A$ 中存在多少个大于 $A_i$ 的数正好有 $k_i$ 个 。
+```java
+* 在序列 $A$ 中存在多少个大于 $A_i$ 的数正好有 $k_i$ 个 。
+```
 
 
 
@@ -210,83 +218,85 @@ description: ""
 * * *
 
 **代码** ：
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;cstring&gt;
-    #include &lt;cstdio&gt;
-    #include &lt;algorithm&gt;
-    #include &lt;cmath&gt;
-    #include &lt;sstream&gt;
-    #include &lt;vector&gt;
-    #include &lt;queue&gt;
-    #include &lt;stack&gt;
-    #include &lt;map&gt;
-    #include &lt;set&gt;
-    #include &lt;unordered_map&gt;
-    #include &lt;unordered_set&gt;
-    
-    using namespace std;
-    
-    #define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
-    #define re register
-    #define fi first
-    #define se second
-    #define endl '\n'
-    
-    typedef long long LL;
-    typedef pair&lt;int, int&gt; PII;
-    typedef pair&lt;LL, LL&gt; PLL;
-    
-    const int N = 1e6 + 3;
-    const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
-    const double eps = 1e-6, PI = acos(-1);
-    
-    LL a[N];
-    int idx;
-    LL b[N];
-    LL c[N];
-    map&lt;LL,int&gt; vis;
-    
-    void solve(){
-    
-        int n; cin >> n;
-        for(int i = 0; i < n; i ++) {
-            cin >> a[i];
-            if(vis[a[i]] == 0){
-                vis[a[i]] = 1;
-                b[idx ++] = a[i];
-            }
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;sstream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+#include &lt;unordered_map&gt;
+#include &lt;unordered_set&gt;
+
+using namespace std;
+
+#define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
+#define re register
+#define fi first
+#define se second
+#define endl '\n'
+
+typedef long long LL;
+typedef pair&lt;int, int&gt; PII;
+typedef pair&lt;LL, LL&gt; PLL;
+
+const int N = 1e6 + 3;
+const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
+const double eps = 1e-6, PI = acos(-1);
+
+LL a[N];
+int idx;
+LL b[N];
+LL c[N];
+map&lt;LL,int&gt; vis;
+
+void solve(){
+
+    int n; cin >> n;
+    for(int i = 0; i < n; i ++) {
+        cin >> a[i];
+        if(vis[a[i]] == 0){
+            vis[a[i]] = 1;
+            b[idx ++] = a[i];
         }
-    
-        sort(b, b + n, greater&lt;LL&gt;());
-    
-        for(int i = 0; i < n; i ++){
-            int t = lower_bound(b, b + idx, a[i], greater&lt;LL&gt;()) - b;
-            c[t] ++;
-        }
-    
-        for(int i = 0; i < n; i ++){
-            cout << c[i] << endl;
-        }
-    
     }
-    
-    int main(){
-    
-        IOS;
-    
-        int _ = 1;
-    
-        // cin >> _;
-    
-        while(_ --){
-            solve();
-        }
-    
-        return 0;
-    
+
+    sort(b, b + n, greater&lt;LL&gt;());
+
+    for(int i = 0; i < n; i ++){
+        int t = lower_bound(b, b + idx, a[i], greater&lt;LL&gt;()) - b;
+        c[t] ++;
     }
+
+    for(int i = 0; i < n; i ++){
+        cout << c[i] << endl;
+    }
+
+}
+
+int main(){
+
+    IOS;
+
+    int _ = 1;
+
+    // cin >> _;
+
+    while(_ --){
+        solve();
+    }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -320,127 +330,129 @@ description: ""
 * * *
 
 **代码** ：
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;cstring&gt;
-    #include &lt;cstdio&gt;
-    #include &lt;algorithm&gt;
-    #include &lt;cmath&gt;
-    #include &lt;sstream&gt;
-    #include &lt;vector&gt;
-    #include &lt;queue&gt;
-    #include &lt;stack&gt;
-    #include &lt;map&gt;
-    #include &lt;set&gt;
-    #include &lt;unordered_map&gt;
-    #include &lt;unordered_set&gt;
-    
-    using namespace std;
-    
-    #define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
-    #define re register
-    #define fi first
-    #define se second
-    #define endl '\n'
-    
-    typedef long long LL;
-    typedef pair&lt;int, int&gt; PII;
-    typedef pair&lt;LL, LL&gt; PLL;
-    
-    const int N = 1e6 + 3;
-    const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
-    const double eps = 1e-6, PI = acos(-1);
-    
-    map&lt;LL, vector&lt;LL&gt;&gt; dx, dy;
-    
-    void solve(){
-    
-        LL l, w, x, y; cin >> l >> w >> x >> y;
-    
-        map&lt;LL,set&lt;LL&gt;&gt; dx, dy;
-    
-        int n; cin >> n;
-        while(n --){
-            LL a, b;
-            cin >> a >> b;
-            dx[a].insert(b);
-            dy[b].insert(a);
-        }
-    
-        for (auto &&i : dx){
-            i.second.insert(0);
-            i.second.insert(w + 1);
-        }
-        for (auto &&i : dy){
-            i.second.insert(0);
-            i.second.insert(l + 1);
-        }
-    
-        int q; cin >> q;
-        while(q --> 0){
-            char op;
-            LL k;
-            cin >> op >> k;
-    
-            if(op == 'L'){
-                LL ny = y - k;
-                if (dx.find(x) == dx.end()) {
-                    y = max(ny, (LL)1);
-                }
-                else{
-                    auto it = dx[x].lower_bound(y);
-                    it = prev(it);
-                    y = max(*it + 1, ny);
-                }
-            }
-            else if(op == 'R'){
-                LL ny = y + k;
-                if (dx.find(x) == dx.end()) {
-                    y = min(ny, w);
-                }
-                else{
-                    auto it = dx[x].lower_bound(y);
-                    y = min(*it - 1, ny);
-                }
-            }
-            else if(op == 'U'){
-                LL nx = x - k;
-                if (dy.find(y) == dy.end()) {
-                    x = max(nx, (LL)1);
-                }
-                else{
-                    auto it = dy[y].lower_bound(x);
-                    it = prev(it);
-                    x = max(*it + 1, nx);
-                }
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;sstream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+#include &lt;unordered_map&gt;
+#include &lt;unordered_set&gt;
+
+using namespace std;
+
+#define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
+#define re register
+#define fi first
+#define se second
+#define endl '\n'
+
+typedef long long LL;
+typedef pair&lt;int, int&gt; PII;
+typedef pair&lt;LL, LL&gt; PLL;
+
+const int N = 1e6 + 3;
+const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
+const double eps = 1e-6, PI = acos(-1);
+
+map&lt;LL, vector&lt;LL&gt;&gt; dx, dy;
+
+void solve(){
+
+    LL l, w, x, y; cin >> l >> w >> x >> y;
+
+    map&lt;LL,set&lt;LL&gt;&gt; dx, dy;
+
+    int n; cin >> n;
+    while(n --){
+        LL a, b;
+        cin >> a >> b;
+        dx[a].insert(b);
+        dy[b].insert(a);
+    }
+
+    for (auto &&i : dx){
+        i.second.insert(0);
+        i.second.insert(w + 1);
+    }
+    for (auto &&i : dy){
+        i.second.insert(0);
+        i.second.insert(l + 1);
+    }
+
+    int q; cin >> q;
+    while(q --> 0){
+        char op;
+        LL k;
+        cin >> op >> k;
+
+        if(op == 'L'){
+            LL ny = y - k;
+            if (dx.find(x) == dx.end()) {
+                y = max(ny, (LL)1);
             }
             else{
-                LL nx = x + k;
-                if (dy.find(y) == dy.end()) {
-                    x = min(nx, l);
-                }
-                else{
-                    auto it = dy[y].lower_bound(x);
-                    x = min(*it - 1, nx);
-                }
+                auto it = dx[x].lower_bound(y);
+                it = prev(it);
+                y = max(*it + 1, ny);
             }
-    
-            cout << x << ' ' << y << endl;
         }
-    }
-    int main(){
-    
-        IOS;
-    
-        int _ = 1;
-    
-        // cin >> _;
-    
-        while(_ --){
-            solve();
+        else if(op == 'R'){
+            LL ny = y + k;
+            if (dx.find(x) == dx.end()) {
+                y = min(ny, w);
+            }
+            else{
+                auto it = dx[x].lower_bound(y);
+                y = min(*it - 1, ny);
+            }
         }
-    
-        return 0;
-    
+        else if(op == 'U'){
+            LL nx = x - k;
+            if (dy.find(y) == dy.end()) {
+                x = max(nx, (LL)1);
+            }
+            else{
+                auto it = dy[y].lower_bound(x);
+                it = prev(it);
+                x = max(*it + 1, nx);
+            }
+        }
+        else{
+            LL nx = x + k;
+            if (dy.find(y) == dy.end()) {
+                x = min(nx, l);
+            }
+            else{
+                auto it = dy[y].lower_bound(x);
+                x = min(*it - 1, nx);
+            }
+        }
+
+        cout << x << ' ' << y << endl;
     }
+}
+int main(){
+
+    IOS;
+
+    int _ = 1;
+
+    // cin >> _;
+
+    while(_ --){
+        solve();
+    }
+
+    return 0;
+
+}
+```

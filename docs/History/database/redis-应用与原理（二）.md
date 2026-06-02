@@ -74,8 +74,10 @@ RDB 是 Redis 默认开启的全量数据快照保存方案：
   * 子进程不直接拷贝硬盘数据，而是拷贝父进程的页表，但实际上仍然和父进程共享同一物理地址（共享数据）
   * 子进程执行 bgsave 操作会生成临时的 RDB 文件，不会直接修改原有的 RDB 文件
   * 为了避免脏写，这里 fork 时又引入了 copy-on-write 的技术： 
-    * 主进程读操作访问共享内存，此时不会复制数据
-    * 主进程发生写操作，会复制一份物理地址的数据副本进行写入，子进程仍然读取原来的旧版数据
+```java
+* 主进程读操作访问共享内存，此时不会复制数据
+* 主进程发生写操作，会复制一份物理地址的数据副本进行写入，子进程仍然读取原来的旧版数据
+```
 
 
 
@@ -127,12 +129,16 @@ AOF 的持久化实现原理分为四大步骤：
 
   * AOF 默认是关闭的，修改 redis.conf 文件的 `appendonly yes` 即可开启
   * 频率配置： 
-    * `always` 同步刷盘：数据可靠，但性能影响大
-    * `everysec` 每秒刷盘：性能适中，最多丢失一秒数据
-    * `no` 系统控制刷盘：性能最好，可靠性差，容易丢失大量数据
+```java
+* `always` 同步刷盘：数据可靠，但性能影响大
+* `everysec` 每秒刷盘：性能适中，最多丢失一秒数据
+* `no` 系统控制刷盘：性能最好，可靠性差，容易丢失大量数据
+```
   * 设置重写： 
-    * 用 `bgrewriteaof` 重写 AOF 文件，用最少命令达到相同效果
-    * 可设置文件大小到大一定阈值自动触发
+```java
+* 用 `bgrewriteaof` 重写 AOF 文件，用最少命令达到相同效果
+* 可设置文件大小到大一定阈值自动触发
+```
 
 
 
@@ -273,17 +279,19 @@ AOF 重写函数会进行大量的写入操作，调用该函数的线程将被�
   * 在 initServer 中会调用 ACLUpdateDefaultUserPassword(server.requirepass) 函数设置 default 用户的密码
 
   * /* Set the password for the "default" ACL user. This implements supports for
-        * requirepass config, so passing in NULL will set the user to be nopass. */
-        void ACLUpdateDefaultUserPassword(sds password) {
-          ACLSetUser(DefaultUser,"resetpass",-1);
-          if (password) {
-              sds aclop = sdscatlen(sdsnew(">"), password, sdslen(password));
-              ACLSetUser(DefaultUser,aclop,sdslen(aclop));
-              sdsfree(aclop);
-          } else {
-              ACLSetUser(DefaultUser,"nopass",-1);
-          }
-        }
+```java
+    * requirepass config, so passing in NULL will set the user to be nopass. */
+    void ACLUpdateDefaultUserPassword(sds password) {
+      ACLSetUser(DefaultUser,"resetpass",-1);
+      if (password) {
+          sds aclop = sdscatlen(sdsnew(">"), password, sdslen(password));
+          ACLSetUser(DefaultUser,aclop,sdslen(aclop));
+          sdsfree(aclop);
+      } else {
+          ACLSetUser(DefaultUser,"nopass",-1);
+      }
+    }
+```
 
 
 
@@ -295,18 +303,20 @@ AOF 重写函数会进行大量的写入操作，调用该函数的线程将被�
 * * *
 
 查看 redis.conf 配置：
-    
-    
-    # IMPORTANT NOTE: starting with Redis 6 "requirepass" is just a compatibility
-    # layer on top of the new ACL system. The option effect will be just setting
-    # the password for the default user. Clients will still authenticate using
-    # AUTH &lt;password&gt; as usually, or more explicitly with AUTH default &lt;password&gt;
-    # if they follow the new protocol: both will work.
-    #
-    # The requirepass is not compatible with aclfile option and the ACL LOAD
-    # command, these will cause requirepass to be ignored.
-    #
-    # requirepass foobared
+```java
+
+
+# IMPORTANT NOTE: starting with Redis 6 "requirepass" is just a compatibility
+# layer on top of the new ACL system. The option effect will be just setting
+# the password for the default user. Clients will still authenticate using
+# AUTH &lt;password&gt; as usually, or more explicitly with AUTH default &lt;password&gt;
+# if they follow the new protocol: both will work.
+#
+# The requirepass is not compatible with aclfile option and the ACL LOAD
+# command, these will cause requirepass to be ignored.
+#
+# requirepass foobared
+```
 
 自 Redis 6.0 起，`requirepass` 只是针对 default 用户的配置，由于 redis 加载配置后会读取 aclfile，重新新建全局 Users 对象，此举会调用 ACLInitDefaultUser 函数重新新建 nopass 的 default 用户，因此导致配置的 `requirepass` 失效
 
@@ -362,8 +372,10 @@ Redis 的 key 存在过期时间，设置命令如下：
 
   * 在 Redis 内部，当我们给某个 key 设置过期时间时，Redis 会给该 key 带上过期时间存入一个过期字典（redisdb）中
   * 每次查询一个 key 时，Redis 会先从过期字典查询该键是否存在： 
-    * 不存在则正常返回
-    * 存在则取该 key 的时间和当前系统时间对比判定是否过期
+```java
+* 不存在则正常返回
+* 存在则取该 key 的时间和当前系统时间对比判定是否过期
+```
   * 对于过期的 key 会根据过期删除策略进行处理
 
 
@@ -385,60 +397,62 @@ Redis 提供了三种过期策略：
 * * *
 
 查看 Redis 源码 db.c，其中执行惰性删除的逻辑会反复调用 `expireIfNeeded` 函数对 key 其进行检查：
-    
-    
-    /* Return values for expireIfNeeded */
-    typedef enum {
-        KEY_VALID = 0, /* Could be volatile and not yet expired, non-volatile, or even non-existing key. */
-        KEY_EXPIRED, /* Logically expired but not yet deleted. */
-        KEY_DELETED /* The key was deleted now. */
-    } keyStatus;
-    
-    keyStatus expireIfNeeded(redisDb *db, robj *key, int flags) {
-        if (server.lazy_expire_disabled) return KEY_VALID;  // 未设置过期策略直接返回 key 值
-        if (!keyIsExpired(db,key)) return KEY_VALID;
-    
-        /* If we are running in the context of a replica, instead of
-         * evicting the expired key from the database, we return ASAP:
-         * the replica key expiration is controlled by the master that will
-         * send us synthesized DEL operations for expired keys. The
-         * exception is when write operations are performed on writable
-         * replicas.
-         *
-         * Still we try to return the right information to the caller,
-         * that is, KEY_VALID if we think the key should still be valid, 
-         * KEY_EXPIRED if we think the key is expired but don't want to delete it at this time.
-         *
-         * When replicating commands from the master, keys are never considered
-         * expired. */
-        // 这里说明了，从节点的 key 过期策略是由主节点控制的，如果是在复制主节点的命令时，键永远不会被视为已过期
-        if (server.masterhost != NULL) {   
-            if (server.current_client && (server.current_client->flags & CLIENT_MASTER)) return KEY_VALID;
-            if (!(flags & EXPIRE_FORCE_DELETE_EXPIRED)) return KEY_EXPIRED;
-        }
-    
-        /* In some cases we're explicitly instructed to return an indication of a
-         * missing key without actually deleting it, even on masters. */
-        if (flags & EXPIRE_AVOID_DELETE_EXPIRED)
-            return KEY_EXPIRED;
-    
-        /* If 'expire' action is paused, for whatever reason, then don't expire any key.
-         * Typically, at the end of the pause we will properly expire the key OR we
-         * will have failed over and the new primary will send us the expire. */
-        if (isPausedActionsWithUpdate(PAUSE_ACTION_EXPIRE)) return KEY_EXPIRED;
-    
-        /* The key needs to be converted from static to heap before deleted */
-        int static_key = key->refcount == OBJ_STATIC_REFCOUNT;
-        if (static_key) {
-            key = createStringObject(key->ptr, sdslen(key->ptr));
-        }
-        /* Delete the key */
-        deleteExpiredKeyAndPropagate(db,key);
-        if (static_key) {
-            decrRefCount(key);
-        }
-        return KEY_DELETED;
+```java
+
+
+/* Return values for expireIfNeeded */
+typedef enum {
+    KEY_VALID = 0, /* Could be volatile and not yet expired, non-volatile, or even non-existing key. */
+    KEY_EXPIRED, /* Logically expired but not yet deleted. */
+    KEY_DELETED /* The key was deleted now. */
+} keyStatus;
+
+keyStatus expireIfNeeded(redisDb *db, robj *key, int flags) {
+    if (server.lazy_expire_disabled) return KEY_VALID;  // 未设置过期策略直接返回 key 值
+    if (!keyIsExpired(db,key)) return KEY_VALID;
+
+    /* If we are running in the context of a replica, instead of
+     * evicting the expired key from the database, we return ASAP:
+     * the replica key expiration is controlled by the master that will
+     * send us synthesized DEL operations for expired keys. The
+     * exception is when write operations are performed on writable
+     * replicas.
+     *
+     * Still we try to return the right information to the caller,
+     * that is, KEY_VALID if we think the key should still be valid, 
+     * KEY_EXPIRED if we think the key is expired but don't want to delete it at this time.
+     *
+     * When replicating commands from the master, keys are never considered
+     * expired. */
+    // 这里说明了，从节点的 key 过期策略是由主节点控制的，如果是在复制主节点的命令时，键永远不会被视为已过期
+    if (server.masterhost != NULL) {   
+        if (server.current_client && (server.current_client->flags & CLIENT_MASTER)) return KEY_VALID;
+        if (!(flags & EXPIRE_FORCE_DELETE_EXPIRED)) return KEY_EXPIRED;
     }
+
+    /* In some cases we're explicitly instructed to return an indication of a
+     * missing key without actually deleting it, even on masters. */
+    if (flags & EXPIRE_AVOID_DELETE_EXPIRED)
+        return KEY_EXPIRED;
+
+    /* If 'expire' action is paused, for whatever reason, then don't expire any key.
+     * Typically, at the end of the pause we will properly expire the key OR we
+     * will have failed over and the new primary will send us the expire. */
+    if (isPausedActionsWithUpdate(PAUSE_ACTION_EXPIRE)) return KEY_EXPIRED;
+
+    /* The key needs to be converted from static to heap before deleted */
+    int static_key = key->refcount == OBJ_STATIC_REFCOUNT;
+    if (static_key) {
+        key = createStringObject(key->ptr, sdslen(key->ptr));
+    }
+    /* Delete the key */
+    deleteExpiredKeyAndPropagate(db,key);
+    if (static_key) {
+        decrRefCount(key);
+    }
+    return KEY_DELETED;
+}
+```
 
 * * *
 
@@ -447,28 +461,30 @@ Redis 提供了三种过期策略：
 * * *
 
 查看 Redis 源码 expire.c，其中执行定期删除的逻辑在 `void activeExpireCycle(int type)` 中：
-    
-    
-    void activeExpireCycle(int type) {
-        /* Adjust the running parameters according to the configured expire
-         * effort. The default effort is 1, and the maximum configurable effort
-         * is 10. */
-        unsigned long
-        effort = server.active_expire_effort-1, /* Rescale from 0 to 9. */
-    
-        // 每次循环取出过期键的数量
-        config_keys_per_loop = ACTIVE_EXPIRE_CYCLE_KEYS_PER_LOOP +
-                               ACTIVE_EXPIRE_CYCLE_KEYS_PER_LOOP/4*effort,
-        // FAST 模式下的执行周期
-        config_cycle_fast_duration = ACTIVE_EXPIRE_CYCLE_FAST_DURATION +
-                                     ACTIVE_EXPIRE_CYCLE_FAST_DURATION/4*effort,
-    
-        // SLOW 模式的执行周期
-        config_cycle_slow_time_perc = ACTIVE_EXPIRE_CYCLE_SLOW_TIME_PERC +
-                                      2*effort,
-        config_cycle_acceptable_stale = ACTIVE_EXPIRE_CYCLE_ACCEPTABLE_STALE-
-                                        effort;
-        ...........
+```java
+
+
+void activeExpireCycle(int type) {
+    /* Adjust the running parameters according to the configured expire
+     * effort. The default effort is 1, and the maximum configurable effort
+     * is 10. */
+    unsigned long
+    effort = server.active_expire_effort-1, /* Rescale from 0 to 9. */
+
+    // 每次循环取出过期键的数量
+    config_keys_per_loop = ACTIVE_EXPIRE_CYCLE_KEYS_PER_LOOP +
+                           ACTIVE_EXPIRE_CYCLE_KEYS_PER_LOOP/4*effort,
+    // FAST 模式下的执行周期
+    config_cycle_fast_duration = ACTIVE_EXPIRE_CYCLE_FAST_DURATION +
+                                 ACTIVE_EXPIRE_CYCLE_FAST_DURATION/4*effort,
+
+    // SLOW 模式的执行周期
+    config_cycle_slow_time_perc = ACTIVE_EXPIRE_CYCLE_SLOW_TIME_PERC +
+                                  2*effort,
+    config_cycle_acceptable_stale = ACTIVE_EXPIRE_CYCLE_ACCEPTABLE_STALE-
+                                    effort;
+    ...........
+```
 
 定期删除的周期配置在 redis.conf 中，其中 `hz 10` 默认值每秒进行 10 次过期检查
 
@@ -517,149 +533,159 @@ LRU 全称为 Least Recently Used，最近最少使用，会选择淘汰最近�
 * * *
 
 首先来看一下 Redis 源码中 server.h 中对 redisObject 的定义：
-    
-    
-    struct redisObject {
-        unsigned type:4;
-        unsigned encoding:4;
-        unsigned lru:LRU_BITS; /* LRU time (relative to global lru_clock) or
-                                * LFU data (least significant 8 bits frequency
-                                * and most significant 16 bits access time). */
-        int refcount;
-        void *ptr;
-    };
+```java
+
+
+struct redisObject {
+    unsigned type:4;
+    unsigned encoding:4;
+    unsigned lru:LRU_BITS; /* LRU time (relative to global lru_clock) or
+                            * LFU data (least significant 8 bits frequency
+                            * and most significant 16 bits access time). */
+    int refcount;
+    void *ptr;
+};
+```
 
 其中 lru 的值在创建对象时会被初始化，在 object.c 中：
-    
-    
-    // typedef struct redisObject robj;
-    robj *createObject(int type, void *ptr) {
-        robj *o = zmalloc(sizeof(*o));
-        o->type = type;
-        o->encoding = OBJ_ENCODING_RAW;
-        o->ptr = ptr;
-        o->refcount = 1;
-        o->lru = 0;
-        return o;
-    }
-    
-    void initObjectLRUOrLFU(robj *o) {
-        if (o->refcount == OBJ_SHARED_REFCOUNT)
-            return;
-        /* Set the LRU to the current lruclock (minutes resolution), or
-         * alternatively the LFU counter. */
-        if (server.maxmemory_policy & MAXMEMORY_FLAG_LFU) {
-            o->lru = (LFUGetTimeInMinutes() << 8) | LFU_INIT_VAL;
-        } else {
-            o->lru = LRU_CLOCK();
-        }
+```java
+
+
+// typedef struct redisObject robj;
+robj *createObject(int type, void *ptr) {
+    robj *o = zmalloc(sizeof(*o));
+    o->type = type;
+    o->encoding = OBJ_ENCODING_RAW;
+    o->ptr = ptr;
+    o->refcount = 1;
+    o->lru = 0;
+    return o;
+}
+
+void initObjectLRUOrLFU(robj *o) {
+    if (o->refcount == OBJ_SHARED_REFCOUNT)
         return;
+    /* Set the LRU to the current lruclock (minutes resolution), or
+     * alternatively the LFU counter. */
+    if (server.maxmemory_policy & MAXMEMORY_FLAG_LFU) {
+        o->lru = (LFUGetTimeInMinutes() << 8) | LFU_INIT_VAL;
+    } else {
+        o->lru = LRU_CLOCK();
     }
+    return;
+}
+```
 
 Redis 在每一个对象的结构体中添加了 lru 字段，用于记录此数据最后一次访问的时间戳，这里是基于全局 LRU 时钟计算的
 
 如果一个 key 被访问了，则会调用 db.c 中的 `lookupKey` 函数对 lru 字段进行更新：
-    
-    
-    robj *lookupKey(redisDb *db, robj *key, int flags) {
-        // 通过 dbFind 函数查找给定的键（key）如果找到，则获取键对应的值
-        dictEntry *de = dbFind(db, key->ptr);
-        robj *val = NULL;
-        if (de) {
-            val = dictGetVal(de);
-            /* Forcing deletion of expired keys on a replica makes the replica
-             * inconsistent with the master. We forbid it on readonly replicas, but
-             * we have to allow it on writable replicas to make write commands
-             * behave consistently.
-             *
-             * It's possible that the WRITE flag is set even during a readonly
-             * command, since the command may trigger events that cause modules to
-             * perform additional writes. */
-    
-            // 处理键过期的情况
-            int is_ro_replica = server.masterhost && server.repl_slave_ro;
-            int expire_flags = 0;
-            if (flags & LOOKUP_WRITE && !is_ro_replica)
-                expire_flags |= EXPIRE_FORCE_DELETE_EXPIRED;
-            if (flags & LOOKUP_NOEXPIRE)
-                expire_flags |= EXPIRE_AVOID_DELETE_EXPIRED;
-            if (expireIfNeeded(db, key, expire_flags) != KEY_VALID) {
-                /* The key is no longer valid. */
-                val = NULL;
-            }
+```java
+
+
+robj *lookupKey(redisDb *db, robj *key, int flags) {
+    // 通过 dbFind 函数查找给定的键（key）如果找到，则获取键对应的值
+    dictEntry *de = dbFind(db, key->ptr);
+    robj *val = NULL;
+    if (de) {
+        val = dictGetVal(de);
+        /* Forcing deletion of expired keys on a replica makes the replica
+         * inconsistent with the master. We forbid it on readonly replicas, but
+         * we have to allow it on writable replicas to make write commands
+         * behave consistently.
+         *
+         * It's possible that the WRITE flag is set even during a readonly
+         * command, since the command may trigger events that cause modules to
+         * perform additional writes. */
+
+        // 处理键过期的情况
+        int is_ro_replica = server.masterhost && server.repl_slave_ro;
+        int expire_flags = 0;
+        if (flags & LOOKUP_WRITE && !is_ro_replica)
+            expire_flags |= EXPIRE_FORCE_DELETE_EXPIRED;
+        if (flags & LOOKUP_NOEXPIRE)
+            expire_flags |= EXPIRE_AVOID_DELETE_EXPIRED;
+        if (expireIfNeeded(db, key, expire_flags) != KEY_VALID) {
+            /* The key is no longer valid. */
+            val = NULL;
         }
-    
-        if (val) {
-            /* Update the access time for the ageing algorithm.
-             * Don't do it if we have a saving child, as this will trigger
-             * a copy on write madness. */
-            // 更新访问时间
-            if (server.current_client && server.current_client->flags & CLIENT_NO_TOUCH &&
-                server.current_client->cmd->proc != touchCommand)
-                flags |= LOOKUP_NOTOUCH;
-            if (!hasActiveChildProcess() && !(flags & LOOKUP_NOTOUCH)){
-                if (server.maxmemory_policy & MAXMEMORY_FLAG_LFU) {
-                    updateLFU(val);         // 策略为 LFU，更新使用频率
-                } else {
-                    val->lru = LRU_CLOCK();  // 策略为 LRU，更新时间戳 
-                }
-            }
-    
-            if (!(flags & (LOOKUP_NOSTATS | LOOKUP_WRITE)))
-                server.stat_keyspace_hits++;
-            /* TODO: Use separate hits stats for WRITE */
-        } else {
-            if (!(flags & (LOOKUP_NONOTIFY | LOOKUP_WRITE)))
-                notifyKeyspaceEvent(NOTIFY_KEY_MISS, "keymiss", key, db->id);
-            if (!(flags & (LOOKUP_NOSTATS | LOOKUP_WRITE)))
-                server.stat_keyspace_misses++;
-            /* TODO: Use separate misses stats and notify event for WRITE */
-        }
-    
-        return val;
     }
 
+    if (val) {
+        /* Update the access time for the ageing algorithm.
+         * Don't do it if we have a saving child, as this will trigger
+         * a copy on write madness. */
+        // 更新访问时间
+        if (server.current_client && server.current_client->flags & CLIENT_NO_TOUCH &&
+            server.current_client->cmd->proc != touchCommand)
+            flags |= LOOKUP_NOTOUCH;
+        if (!hasActiveChildProcess() && !(flags & LOOKUP_NOTOUCH)){
+            if (server.maxmemory_policy & MAXMEMORY_FLAG_LFU) {
+                updateLFU(val);         // 策略为 LFU，更新使用频率
+            } else {
+                val->lru = LRU_CLOCK();  // 策略为 LRU，更新时间戳 
+            }
+        }
+
+        if (!(flags & (LOOKUP_NOSTATS | LOOKUP_WRITE)))
+            server.stat_keyspace_hits++;
+        /* TODO: Use separate hits stats for WRITE */
+    } else {
+        if (!(flags & (LOOKUP_NONOTIFY | LOOKUP_WRITE)))
+            notifyKeyspaceEvent(NOTIFY_KEY_MISS, "keymiss", key, db->id);
+        if (!(flags & (LOOKUP_NOSTATS | LOOKUP_WRITE)))
+            server.stat_keyspace_misses++;
+        /* TODO: Use separate misses stats and notify event for WRITE */
+    }
+
+    return val;
+}
+```
+
 当 Redis 进行内存淘汰时，会使用随机采样的方式来淘汰数据，查看源码 evict.c：
-    
-    
-    struct evictionPoolEntry {
-        unsigned long long idle;    /* Object idle time (inverse frequency for LFU) */
-        sds key;                    /* Key name. */
-        sds cached;                 /* Cached SDS object for key name. */
-        int dbid;                   /* Key DB number. */
-        int slot;                   /* Slot. */
-    };
+```java
+
+
+struct evictionPoolEntry {
+    unsigned long long idle;    /* Object idle time (inverse frequency for LFU) */
+    sds key;                    /* Key name. */
+    sds cached;                 /* Cached SDS object for key name. */
+    int dbid;                   /* Key DB number. */
+    int slot;                   /* Slot. */
+};
+```
 
 这里定义了一个淘汰池，所有待淘汰的 key 会通过 `evictionPoolPopulate` 函数填入：
-    
-    
-    int evictionPoolPopulate(redisDb *db, kvstore *samplekvs, struct evictionPoolEntry *pool) {
-        int j, k, count;
-        dictEntry *samples[server.maxmemory_samples];
-    
-        int slot = kvstoreGetFairRandomDictIndex(samplekvs);
-    
-        // 从字典中获取一些键，结果存放到 samples 中，并且返回获取的键的数量。所选取的键的数量不能超过 server.maxmemory_samples
-        count = kvstoreDictGetSomeKeys(samplekvs,slot,samples,server.maxmemory_samples);
-        // 循环采样，对抽样得到的键进行处理
-        for (j = 0; j < count; j++) {
-            unsigned long long idle;
-            sds key;
-            robj *o;
-            dictEntry *de;
-    
-            de = samples[j];
-            key = dictGetKey(de);
-    
-            /* If the dictionary we are sampling from is not the main
-             * dictionary (but the expires one) we need to lookup the key
-             * again in the key dictionary to obtain the value object. */
-            if (server.maxmemory_policy != MAXMEMORY_VOLATILE_TTL) {
-                if (samplekvs != db->keys)
-                    de = kvstoreDictFind(db->keys, slot, key);
-                o = dictGetVal(de);
-            }
-            ............
+```java
+
+
+int evictionPoolPopulate(redisDb *db, kvstore *samplekvs, struct evictionPoolEntry *pool) {
+    int j, k, count;
+    dictEntry *samples[server.maxmemory_samples];
+
+    int slot = kvstoreGetFairRandomDictIndex(samplekvs);
+
+    // 从字典中获取一些键，结果存放到 samples 中，并且返回获取的键的数量。所选取的键的数量不能超过 server.maxmemory_samples
+    count = kvstoreDictGetSomeKeys(samplekvs,slot,samples,server.maxmemory_samples);
+    // 循环采样，对抽样得到的键进行处理
+    for (j = 0; j < count; j++) {
+        unsigned long long idle;
+        sds key;
+        robj *o;
+        dictEntry *de;
+
+        de = samples[j];
+        key = dictGetKey(de);
+
+        /* If the dictionary we are sampling from is not the main
+         * dictionary (but the expires one) we need to lookup the key
+         * again in the key dictionary to obtain the value object. */
+        if (server.maxmemory_policy != MAXMEMORY_VOLATILE_TTL) {
+            if (samplekvs != db->keys)
+                de = kvstoreDictFind(db->keys, slot, key);
+            o = dictGetVal(de);
+        }
+        ............
+```
 
 * * *
 
@@ -681,17 +707,19 @@ Redis 实现的 LFU 算法也是一种近似 LFU 算法
 * * *
 
 首先，仍然从 Redis 源码中 server.h 中对 redisObject 的定义入手：
-    
-    
-    struct redisObject {
-        unsigned type:4;
-        unsigned encoding:4;
-        unsigned lru:LRU_BITS; /* LRU time (relative to global lru_clock) or
-                                * LFU data (least significant 8 bits frequency
-                                * and most significant 16 bits access time). */
-        int refcount;
-        void *ptr;
-    };
+```java
+
+
+struct redisObject {
+    unsigned type:4;
+    unsigned encoding:4;
+    unsigned lru:LRU_BITS; /* LRU time (relative to global lru_clock) or
+                            * LFU data (least significant 8 bits frequency
+                            * and most significant 16 bits access time). */
+    int refcount;
+    void *ptr;
+};
+```
 
 之前在 LRU 算法原理时我仅仅提到 lru 字段作为 LRU 算法的时间戳来使用，但如果选择 LFU 算法，该字段将被拆分为两部分：
 
@@ -701,51 +729,57 @@ Redis 实现的 LFU 算法也是一种近似 LFU 算法
 
 
 之后仍然是 db.c 中的 `lookupKey` 函数，这次具体来看 LRU 的更新策略：
-    
-    
-            if (!hasActiveChildProcess() && !(flags & LOOKUP_NOTOUCH)){
-                if (server.maxmemory_policy & MAXMEMORY_FLAG_LFU) {
-                    updateLFU(val);         // 策略为 LFU，更新使用频率
-                } else {
-                    val->lru = LRU_CLOCK();  // 策略为 LRU，更新时间戳 
-                }
+```java
+
+
+        if (!hasActiveChildProcess() && !(flags & LOOKUP_NOTOUCH)){
+            if (server.maxmemory_policy & MAXMEMORY_FLAG_LFU) {
+                updateLFU(val);         // 策略为 LFU，更新使用频率
+            } else {
+                val->lru = LRU_CLOCK();  // 策略为 LRU，更新时间戳 
             }
+        }
+```
 
 更新策略为调用了 `updateLFU`：
-    
-    
-    void updateLFU(robj *val) {
-        // 根据距离上次访问的时长，衰减访问次数
-        unsigned long counter = LFUDecrAndReturn(val);
-        // 根据当前访问更新访问次数
-        counter = LFULogIncr(counter);
-        // 更新 lru 变量值
-        val->lru = (LFUGetTimeInMinutes()<<8) | counter;
-    }
+```java
+
+
+void updateLFU(robj *val) {
+    // 根据距离上次访问的时长，衰减访问次数
+    unsigned long counter = LFUDecrAndReturn(val);
+    // 根据当前访问更新访问次数
+    counter = LFULogIncr(counter);
+    // 更新 lru 变量值
+    val->lru = (LFUGetTimeInMinutes()<<8) | counter;
+}
+```
 
 Redis 执行 LFU 淘汰策略和 LRU 基本类似，也是将所有待淘汰的 key 通过 `evictionPoolPopulate` 函数填入，区别在于填充策略的选择：
-    
-    
-            /* Calculate the idle time according to the policy. This is called
-             * idle just because the code initially handled LRU, but is in fact
-             * just a score where a higher score means better candidate. */
-            if (server.maxmemory_policy & MAXMEMORY_FLAG_LRU) {
-                idle = estimateObjectIdleTime(o);
-            } else if (server.maxmemory_policy & MAXMEMORY_FLAG_LFU) {
-                /* When we use an LRU policy, we sort the keys by idle time
-                 * so that we expire keys starting from greater idle time.
-                 * However when the policy is an LFU one, we have a frequency
-                 * estimation, and we want to evict keys with lower frequency
-                 * first. So inside the pool we put objects using the inverted
-                 * frequency subtracting the actual frequency to the maximum
-                 * frequency of 255. */
-                idle = 255-LFUDecrAndReturn(o);
-            } else if (server.maxmemory_policy == MAXMEMORY_VOLATILE_TTL) {
-                /* In this case the sooner the expire the better. */
-                idle = ULLONG_MAX - (long)dictGetVal(de);
-            } else {
-                serverPanic("Unknown eviction policy in evictionPoolPopulate()");
-            }
+```java
+
+
+        /* Calculate the idle time according to the policy. This is called
+         * idle just because the code initially handled LRU, but is in fact
+         * just a score where a higher score means better candidate. */
+        if (server.maxmemory_policy & MAXMEMORY_FLAG_LRU) {
+            idle = estimateObjectIdleTime(o);
+        } else if (server.maxmemory_policy & MAXMEMORY_FLAG_LFU) {
+            /* When we use an LRU policy, we sort the keys by idle time
+             * so that we expire keys starting from greater idle time.
+             * However when the policy is an LFU one, we have a frequency
+             * estimation, and we want to evict keys with lower frequency
+             * first. So inside the pool we put objects using the inverted
+             * frequency subtracting the actual frequency to the maximum
+             * frequency of 255. */
+            idle = 255-LFUDecrAndReturn(o);
+        } else if (server.maxmemory_policy == MAXMEMORY_VOLATILE_TTL) {
+            /* In this case the sooner the expire the better. */
+            idle = ULLONG_MAX - (long)dictGetVal(de);
+        } else {
+            serverPanic("Unknown eviction policy in evictionPoolPopulate()");
+        }
+```
 
 * * *
 
