@@ -1,0 +1,104 @@
+:root {
+  --vp-c-default-1: var(--vp-c-gray-1);
+  --vp-c-default-2: var(--vp-c-gray-2);
+  --vp-c-default-3: var(--vp-c-gray-3);
+  --vp-c-default-soft: var(--vp-c-gray-soft);
+
+  --vp-c-brand-1: var(--vp-c-indigo-1);
+  --vp-c-brand-2: var(--vp-c-indigo-2);
+  --vp-c-brand-3: var(--vp-c-indigo-3);
+  --vp-c-brand-soft: var(--vp-c-indigo-soft);
+
+  --vp-font-family-base: Noto Sans SC, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --vp-font-family-mono: JetBrainsMono, Fira Code, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #34c5fe 30%, #416dff);
+
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #34c5fe91 70%, #416dff9a 30%);
+  --vp-home-hero-image-filter: blur(44px);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --vp-home-hero-image-filter: blur(56px);
+  }
+}
+
+@media (min-width: 960px) {
+  :root {
+    --vp-home-hero-image-filter: blur(68px);
+  }
+}
+
+:root {
+  --vp-custom-block-tip-border: transparent;
+  --vp-custom-block-tip-text: var(--vp-c-text-1);
+  --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
+  --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
+}
+
+.custom-block-title {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.custom-block.info {
+  background-color: rgb(73 179 255 / 14%);
+  border-left-color: rgb(73 179 255);
+  border-left-width: 4px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.custom-block.warning {
+  background-color: rgb(234 179 8 / 14%);
+  border-left-color: rgb(234, 179, 8);
+  border-left-width: 4px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.custom-block.danger {
+  background-color: rgb(244 63 94 / 14%);
+  border-left-color: rgb(244, 63, 94);
+  border-left-width: 4px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.vp-doc strong {
+  font-weight: 900;
+}
+
+.vp-doc blockquote {
+  border-left: 4px solid #3bc539;
+  background-color: #3bc53914;
+}
+
+.vp-doc blockquote p {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.footnotes {
+  font-size: 14px;
+  color: var(--vp-c-text-2);
+  background-color: #438fd610;
+  border-radius: 10px;
+  border-left: 4px solid #3451b27a;
+  padding: 2px 20px 2px;
+}
+
+/* MathJax 公式样式 */
+mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+}
+
+mjx-container svg {
+  overflow: visible;
+}

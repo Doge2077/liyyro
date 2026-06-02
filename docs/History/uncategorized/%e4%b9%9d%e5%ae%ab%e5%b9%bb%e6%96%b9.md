@@ -1,0 +1,114 @@
+---
+title: "九宫幻方"
+date: 2023-03-10
+categories: [Q&amp;A, 模拟]
+description: ""
+---
+
+[Original Link](&lt;https://www.acwing.com/problem/content/3165/&gt;)
+
+**思想** ：
+
+  * 极致的暴力，极致的享受。
+  * 将九宫格，去除中间的 $5$ 后转换为一维 `string` 来记录；
+  * 列举出所有的情况，进行枚举比较，合法则方案加一。
+
+
+
+转换方法如下：
+    
+    
+    对于九宫格：
+    4 9 2
+    3 5 7
+    8 1 6
+    去掉 5 后，顺时针螺旋排列为 4 9 2 7 6 1 8 3
+    然后顺时针旋转九宫格：
+    8 3 4
+    1 5 9
+    6 7 2
+    去掉 5 后，顺时针螺旋排列为 8 3 4 9 2 7 6 1
+    由此可知，所有满足条件的方案转换为一维 string 后，只有如下四种情况：
+    4 9 2 7 6 1 8 3
+    8 3 4 9 2 7 6 1
+    6 1 8 3 4 9 2 7
+    2 7 6 1 8 3 4 9
+    
+    另外，将该原始九宫格镜像可以得到另外四种情况。
+
+**代码** ：
+    
+    
+    #include &lt;bits/stdc++.h&gt;
+    using namespace std;
+    
+    const int N = 10;
+    
+    int mp[N][N];   // 当前状态
+    string st[N];   // 转换为一维的原始九宫格和镜像九宫格的 string
+    string vis[N];  // 所有旋转九宫格的 string
+    
+    void solve(){
+    
+        st[0] = "49276183";  // 原始九宫格
+        st[1] = "29438167";  // 镜像九宫格
+    
+        int pos = 0;  // 总共可能存在的状态数
+        for(int i = 0; i < 2; i ++){
+            vis[pos] = st[i];
+            for(int j = pos + 1, k = 0; k < 3; j ++, k ++){
+                vis[j] = vis[j - 1].substr(2) + vis[j - 1].substr(0, 2);  // 取前两个数加到后面即为旋转一次的状态
+            }
+            pos += 4;
+        }
+    
+        string s = "";
+        int op;  // 记录中间的数
+        for(int i = 0; i < 3; i ++){
+            for(int j = 0; j < 3; j ++){
+                cin >> mp[i][j];  // 读入原始状态
+                if(i == j && i == 1) op = mp[i][j];
+            }
+        }
+    
+        // 将初始状态转换为一维 string
+        s += char(mp[0][0] + '0');
+        s += char(mp[0][1] + '0');
+        s += char(mp[0][2] + '0');
+        s += char(mp[1][2] + '0');
+        s += char(mp[2][2] + '0');
+        s += char(mp[2][1] + '0');
+        s += char(mp[2][0] + '0');
+        s += char(mp[1][0] + '0');
+    
+        int cnt = 0;
+        string ans;
+        for(int i = 0; i < pos; i ++){
+            string t = vis[i];  // 暂存这种可能状态
+            bool flag = 1;
+            for(int j = 0; j < t.size(); j ++){
+                if(s[j] != t[j] && s[j] != '0'){  // 不相等且不为 0，说明不可能为该状态
+                    flag = 0; break;
+                }
+            }
+            if(flag){  // 可能为该状态
+                cnt ++;  // 方案数增加
+                if(cnt > 1){  // 存在多余方案直接跳出
+                    cout << "Too Many" << endl;
+                    return ;
+                }
+                ans = t;  // 记录该状态
+            }
+        }
+    
+        // 还原状态并输出
+        cout << ans[0] << ' ' << ans[1] << ' ' << ans[2] << endl;
+        cout << ans[7] << ' ' << 5 << ' ' << ans[3] << endl;
+        cout << ans[6] << ' ' << ans[5] << ' ' << ans[4] << endl;
+    
+    }
+    
+    int main(){
+        solve();
+        return 0;
+    }

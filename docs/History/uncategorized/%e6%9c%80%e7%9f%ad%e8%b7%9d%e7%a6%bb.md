@@ -1,0 +1,48 @@
+---
+title: "最短距离"
+date: 2023-02-21
+categories: [Q&amp;A, 前缀和]
+description: ""
+---
+
+[Original Link](&lt;https://www.acwing.com/problem/content/1532/&gt;)
+
+**思想** ：
+
+  * 前缀和。
+  * 由于出口为环状，故将数组首尾相连。
+  * 构造前缀和数组，即可得到在任意出口顺时针方向或逆时针向走到对应出口的距离之和。
+  * 对于每次询问，输出顺时针和逆时针方向上，两个出口最短的距离即可。
+
+
+
+**代码** ：
+    
+    
+    #include &lt;bits/stdc++.h&gt;
+    using namespace std;
+    
+    const int N = 1e6 + 3;
+    
+    typedef long long LL;
+    
+    int a[N];
+    
+    void solve(){
+        int n; cin >> n;
+        for(int i = 1; i <= n; i ++){
+            cin >> a[i]; a[i + n] = a[i];  //将数组首尾相连，即进行拼接
+        }
+        for(int i = 1; i <= n * 2; i ++) a[i] += a[i - 1];  //构造前缀和
+        int m; cin >> m;
+        while(m --){
+            int l, r; cin >> l >> r;
+            if(l > r) swap(l, r);  //若 l > r，交换，保证 l < r
+            cout << min(a[r - 1] - a[l - 1], a[l + n - 1] - a[r - 1]) << endl;  //a[r - 1] - a[l - 1] 为顺时针
+        }                                                                 //a[l + n - 1] - a[r - 1] 为逆时针
+    }
+    
+    int main(){
+        solve();
+        return 0;
+    }

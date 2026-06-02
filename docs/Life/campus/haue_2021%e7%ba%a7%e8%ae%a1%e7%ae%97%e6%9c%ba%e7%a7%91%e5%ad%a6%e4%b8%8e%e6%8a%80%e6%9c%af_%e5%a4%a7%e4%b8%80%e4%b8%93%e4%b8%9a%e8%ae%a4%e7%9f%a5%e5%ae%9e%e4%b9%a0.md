@@ -1,0 +1,515 @@
+---
+title: "HAUE_2021级计算机科学与技术_大一专业认知实习"
+date: 2022-06-18
+categories: [University Homeworks]
+description: ""
+---
+
+# 1.环境搭建
+
+* * *
+
+## 1.1 电路模拟环境+3D建模环境
+
+  * 使用老师提供的网站：[AUTUDESK](&lt;https://www.tinkercad.com/&gt;)
+
+  * 在该网站注册账号即可免费使用，可以最低限度满足本次项目要求
+
+
+
+
+**使用说明**
+
+  * 电路模拟 
+    1. 点击**创建新电路** ![img](https://img-blog.csdnimg.cn/95f8cb4dc13c4ea28f0175e624b9428a.jpeg)![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+    2. 选择相应组件组合即可
+  * 3D建模 
+    1. 点击**创建新设计\**![img](https://img-blog.csdnimg.cn/5d77634fe2bf491db252930c17916138.jpeg)
+    2. 选择合适的3D组件组合即可
+
+
+
+* * *
+
+## 1.2蓝牙小车控制代码环境
+
+  * 使用`Arduino`[官网](&lt;https://www.arduino.cc/en/software&gt;)的`IDE`选择对应版本下载即可![img](https://img-blog.csdnimg.cn/46ad880e20904df1a68df077f13b8bcd.png)
+
+
+
+**Tips**
+
+  * 在AUTUDESK模拟电路时，可以将代码导入，测试代码的正确性![img](https://img-blog.csdnimg.cn/65bd5be75c6043b1b6d2b443fc5220c0.jpeg)![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+  * 基于`Arduion`电路板使用不同语言的函数的[参考文献](&lt;https://www.arduino.cc/reference/en/&gt;)![img](https://img-blog.csdnimg.cn/86f22e24729c48268e616001637a7026.png)![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+  * **对于该项目，我们只需掌握`Digital I/O`相关的函数即可**
+
+
+
+# 2.Arduino串口通信
+
+* * *
+
+## 2.1 Arduino串口
+
+* * *
+
+`Arduino`采用`USART`通信模式，可以有**硬串口** ，**软串口** 两种实现方式。
+
+通常将`Arduino UNO`上自带的串口`0（RX）`、`1（TX）`称为**硬件串口** ，可与外围串口设备通信。而使用`SoftwareSerial`类库模拟成的串口，称为**软件模拟串口（简称软串口）** 。如果要连接更多的串口设备，可以使用软串口。
+
+* * *
+
+## 2.2 系统函数
+
+1、初始化程序
+
+setup()函数中的代码只会被运行一次，通常用来做一下初始化工作；
+
+2、循环主程序
+
+loop()函数中的代码会被无限次地重复运行，程序的主体部分会写在这里；
+
+* * *
+
+## 2.3 串口函数
+
+* * *
+
+### **2.3.1.Serial.begin()**
+
+**描述** ：开启串口，通常置于setup()函数中。 **原型：**
+
+  * Serial.begin(speed)
+  * Serial.begin(speed, config)
+
+
+
+**参数：**
+
+  * speed：波特率，一般取值9600,115200等。
+  * config：设置数据位、校验位和停止位。默认SERIAL_8N1表示8个数据位，无校验位，1个停止位。
+
+
+
+**返回值** ：无。
+
+* * *
+
+### **2.3.2.Serial.print()**
+
+**描述：** 串口输出数据，写入字符数据到串口。 **原型：**
+
+  * Serial.print(val)
+  * Serial.print(val, format)
+
+
+
+**参数：** val：打印的值，任意数据类型。 config：输出的数据格式。BIN(二进制)、OCT(八进制)、DEC(十进制)、HEX(十六进制)。对于浮点数，此参数指定要使用的小数位数。 **示例：**
+    
+    
+    Serial.print(78, BIN) 得到 “1001110”
+    Serial.print(78, OCT) 得到 “116”
+    Serial.print(78, DEC) 得到 “78”
+    Serial.print(78, HEX) 得到 “4E”
+    Serial.print(1.23456, 0) 得到 “1”
+    Serial.print(1.23456, 2) 得到 “1.23”
+    Serial.print(1.23456, 4) 得到 “1.2346”
+    Serial.print(‘N’) 得到 “N”
+    Serial.print(“Hello world.”) 得到 “Hello world.”
+
+**返回值：** 返回写入的字节数。 **Serial.println()** 可以实现换行输出
+
+* * *
+
+### **2.3.3.Serial.available()**
+
+**描述：** 判断串口缓冲区的状态，返回从串口缓冲区读取的字节数。 **原型：** Serial.available() **参数：** 无。 返回值：可读取的字节数。
+
+* * *
+
+### **2.3.4.Serial.read()**
+
+**描述：** 读取串口数据，**一次读一个字符** ，读完后删除已读数据。 **原型：** Serial.read() **参数：** 无。 **返回值：** 返回串口缓存中第一个可读字节，当没有可读数据时返回-1，整数类型。
+
+* * *
+
+## 2.4 Digital I/O
+
+* * *
+
+### **2.4.1.digitalRead()**
+
+**描述：** 从指定的数字引脚读取值，无论是`HIGH`还是`LOW`。
+
+**原型：** digitalRead(pin)
+
+**参数：**`pin`：读取的 Arduino 引脚号
+
+**返回值：**`HIGH`或者`LOW`
+
+**示例：**
+
+将引脚 13 设置为与引脚 7 相同的值，声明为输入。
+    
+    
+    int ledPin = 13;  // LED connected to digital pin 13
+    int inPin = 7;    // pushbutton connected to digital pin 7
+    int val = 0;      // variable to store the read value
+    
+    void setup() {
+      pinMode(ledPin, OUTPUT);  // sets the digital pin 13 as output
+      pinMode(inPin, INPUT);    // sets the digital pin 7 as input
+    }
+    
+    void loop() {
+      val = digitalRead(inPin);   // read the input pin
+      digitalWrite(ledPin, val);  // sets the LED to the button's value
+    }
+
+* * *
+
+### **2.4.2.digitalWrite()**
+
+**描述：**
+
+将一个`HIGH`或一个`LOW`值写入数字引脚。
+
+  * 如果引脚已配置为`OUTPUT`with `pinMode()`，则其电压将设置为相应的值： 5V（或 3.3V 板上的 3.3V）为`HIGH`， 0V（接地）为`LOW`。
+  * 如果引脚配置为`INPUT`,`digitalWrite()`将启用 ( `HIGH`) 或禁用 ( `LOW`) 输入引脚上的内部上拉电阻。建议将 设置`pinMode()`为`INPUT_PULLUP`启用内部上拉电阻，参考[数字引脚](&lt;http://arduino.cc/en/Tutorial/DigitalPins&gt;)教程。
+  * 如果不设置`pinMode()`，`OUTPUT`将 LED 连接到引脚，调用 时`digitalWrite(HIGH)`，LED 可能会显得暗淡。没有明确设置`pinMode()`，`digitalWrite()`将启用内部上拉电阻，其作用类似于一个大限流电阻。
+
+
+
+**原型：** digitalWrite(pin, value)
+
+**参数：**
+
+  * `pin`：Arduino 引脚号。
+  * `value`:`HIGH`或`LOW`.
+
+
+
+**返回值：** 无
+
+**示例:**
+    
+    
+    //该代码使数字引脚 13 an并通过在和之间以一秒的速度OUTPUT交替来切换它。
+    
+    void setup() {
+      pinMode(13, OUTPUT);    // sets the digital pin 13 as output
+    }
+    
+    void loop() {
+      digitalWrite(13, HIGH); // sets the digital pin 13 on
+      delay(1000);            // waits for a second
+      digitalWrite(13, LOW);  // sets the digital pin 13 off
+      delay(1000);            // waits for a second
+    }
+
+* * *
+
+### 2.4.3.pinMode()
+
+**描述:**
+
+将指定的引脚配置为输入或输出。有关引脚功能的详细信息，参考[数字引脚](&lt;http://arduino.cc/en/Tutorial/DigitalPins&gt;)页面。
+
+从 `Arduino 1.0.1` 开始，可以使用 `mode` 启用内部上拉电阻`INPUT_PULLUP`。此外，该`INPUT`模式明确禁用内部上拉。
+
+**原型：** pinMode(pin, mode)
+
+**参数**
+
+  * `pin`：要设置模式的 Arduino 引脚号。
+  * `mode`: `INPUT`,`OUTPUT`或`INPUT_PULLUP`. 参考[数字引脚](&lt;http://arduino.cc/en/Tutorial/DigitalPins&gt;)页面。
+
+
+
+**返回值：** 无
+
+**示例：**
+    
+    
+    //该代码使数字引脚 13OUTPUT和切换它HIGH和LOW
+    
+    void setup() {
+      pinMode(13, OUTPUT);    // sets the digital pin 13 as output
+    }
+    
+    void loop() {
+      digitalWrite(13, HIGH); // sets the digital pin 13 on
+      delay(1000);            // waits for a second
+      digitalWrite(13, LOW);  // sets the digital pin 13 off
+      delay(1000);            // waits for a second
+    }
+
+* * *
+
+# 3.制作流程
+
+* * *
+
+## 3.1 电路模拟过程
+
+* * *
+
+### 3.1.1 模拟硬件
+
+  * 首先，需要在模拟环境中添加一块Arduino电路板
+  * 其次，需要四个直流电机，用于实现行进及转向控制功能
+
+
+
+* * *
+
+### 3.1.2 模拟代码
+
+  * **可以先在IDE环境中编译，之后导入虚拟环境中模拟**![img](https://img-blog.csdnimg.cn/bdb50fbcf2344b648b28c62174e1a658.png)
+
+
+
+**（1）. 前进、后退及停止功能**
+
+实现该功能，需要控制引脚输出的信号，使得**两个引脚在直流电机的接口产生电位差** ，且要保证四个电机的电位差相等，使得小车可以沿着统一方向行驶，当**不存在电位差时，电机停止运作** ，实现停止功能。
+
+**前进代码的实现：**
+    
+    
+    void car_go(){
+    
+     digitalWrite(p1,HIGH);
+    
+     digitalWrite(p2,LOW);
+    
+     digitalWrite(p3,HIGH);
+    
+     digitalWrite(p4,LOW);
+    
+    }
+
+**执行后的结果**![img](https://img-blog.csdnimg.cn/d9c26de5f7b24f83b93f63a7cee4f8fc.png)
+
+**可以看到四个电机均向正方向转动**
+
+**后退代码的实现**
+    
+    
+    void car_back(){
+    
+     digitalWrite(p1,LOW);
+    
+     digitalWrite(p2,HIGH);
+    
+     digitalWrite(p3,LOW);
+    
+     digitalWrite(p4,HIGH);
+    
+    }
+
+**执行后的结果**![img](https://img-blog.csdnimg.cn/6c3665d924b34ad1bf552da71fbbd551.png)
+
+**可以看到四个电机均向反方向转动**
+
+**停止代码的实现**
+    
+    
+    void car_stop(){
+    
+     digitalWrite(p1,LOW);
+    
+     digitalWrite(p2,LOW);
+    
+     digitalWrite(p3,LOW);
+    
+     digitalWrite(p4,LOW);
+    
+    }
+
+![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+**执行后的结果**![img](https://img-blog.csdnimg.cn/452a674375014fb6862abce52c39ef08.png)
+
+**可以看到四个电机均停止转动**
+
+**（2）. 转向功能**
+
+实现小车转向功能，可以控制两侧电机运作方向相反，同侧电机运作方向同步，**通过改变引脚的输出信号** ，可以实现该功能。
+
+**小车左转向代码的实现**
+    
+    
+    void car_left(){
+    
+     digitalWrite(p1,LOW);
+    
+     digitalWrite(p2,HIGH);
+    
+     digitalWrite(p3,HIGH);
+    
+     digitalWrite(p4,LOW);
+    
+    }
+
+**执行后的结果**![img](https://img-blog.csdnimg.cn/540fcc20ee2d46d29d55184a4143562a.png)
+
+**可以看到上方同侧电机正向转动，下方同侧电机反向转动**
+
+**小车右转向代码的实现**
+    
+    
+    void car_right(){
+    
+     digitalWrite(p1,HIGH);
+    
+     digitalWrite(p2,LOW);
+    
+     digitalWrite(p3,LOW);
+    
+     digitalWrite(p4,HIGH);
+    
+    }
+
+**执行后的结果**![img](https://img-blog.csdnimg.cn/f8348194717e4200b2751f726bbe67da.png)
+
+**可以看到上方同侧电机反向转动，下方同侧电机正向转动**
+
+**（3）. HC-06蓝牙模块链接功能**
+
+对Arduino链接HC-06蓝牙模块后，在启动时需要对串口进行链接
+
+**链接图**
+
+![img](https://img-blog.csdnimg.cn/2d7c0a88b9dd46adab1446fbb64e6d79.png)![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)编辑
+
+**代码调试**
+    
+    
+    #include &lt;SoftwareSerial.h&gt;
+    
+    SoftwareSerial BT(8, 9);  //新建对象，接收脚为8，发送脚为9
+    
+    char val1;  //存储接收的变量
+    
+    void setup() {
+    
+      Serial.begin(9600);   //与电脑的串口连接
+    
+      Serial.println("BT is ready!");
+    
+      BT.begin(9600);  //设置蓝牙模块波特率
+    
+    }
+    
+    void loop() {
+    
+      //如果串口接收到数据，就输出到蓝牙串口
+    
+      if (Serial.available()) {
+    
+        val 1= Serial.read();
+    
+        BT.print(val1);
+    
+      }
+    
+      //如果接收到蓝牙模块的数据，输出到屏幕
+    
+      if (BT.available()) {
+    
+        val1 = BT.read();
+    
+        Serial.print(val1);
+    
+      }
+    
+    }
+
+![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+**（4）. 蓝牙模块数据处理功能**
+
+当通过蓝牙向小车板载的HC-06蓝牙模块发出信号时，小车需要对接收到的蓝牙信号进行处理，以实现对小车的控制
+
+**小车蓝牙信息处理代码的实现**
+    
+    
+    if(Serial.available()>0){ //当接收信号的返回值大于0时说明接收到了信号
+    
+      char val=Serial.read(); //读入接收的信号值
+    
+      if(val=='f'){ //当信号为’f’时，执行前进的代码
+    
+       car_go();
+    
+      }
+    
+      else if(val=='b'){  //当信号为’b’时，执行后退的代码
+    
+       car_back();
+    
+      }
+    
+      else if(val=='l'){  //当信号为’l’时，执行左转的代码
+    
+       car_left();
+    
+      }
+    
+      else if(val=='r'){  //当信号为’r’时，执行右转的代码
+    
+       car_right();
+    
+      }
+    
+      else{ //当信号非法时，执行停止的代码
+    
+       car_stop();
+    
+      }
+    
+     }
+
+* * *
+
+## 3.2 3D建模过程
+
+* * *
+
+### 3.2.1 模型选择
+
+  * 根据个人风格的不同，选择内置库中自己喜欢的模型组合即可，以下是我的建模成品图
+
+
+
+**主视图**![img](https://img-blog.csdnimg.cn/b2346349a06b4d6581dd5f81ba82b84f.png)
+
+**左视图**![img](https://img-blog.csdnimg.cn/bede7e2cc5624cf689465c53650a8365.png)
+
+**俯视图**![img](https://img-blog.csdnimg.cn/4d2b4c5e50334e23966308c7474c063b.png)
+
+* * *
+
+## 3.3 焊接过程
+
+  * **推荐看我好基友的这篇优质详解**[大一专业认知实习](&lt;https://blog.csdn.net/couchpotatoshy/article/details/124944867?spm=1001.2014.3001.5502&gt;)
+
+
+
+* * *
+
+# 4.成果导出
+
+* * *
+
+## 4.1 导出电路图
+
+![img](https://img-blog.csdnimg.cn/3d2c8219989c484cbbd7a12c83704d7d.jpeg)
+
+![img](https://img-blog.csdnimg.cn/662bd0bb5f344016a233c236a93ef4b9.jpeg)
+
+* * *
+
+## 4.2 导出3D建模
+
+![img](https://img-blog.csdnimg.cn/c57e481960364c4e951e0b90f67cc54f.jpeg)

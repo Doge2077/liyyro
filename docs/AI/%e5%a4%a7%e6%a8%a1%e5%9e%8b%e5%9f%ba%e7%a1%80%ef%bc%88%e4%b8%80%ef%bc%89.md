@@ -1,0 +1,960 @@
+---
+title: "大模型基础（一）"
+date: 2025-04-22
+categories: [AI, AI]
+description: ""
+---
+
+# 基础认知
+
+* * *
+
+## **人工智能（AI, Artificial Intelligence）**
+
+  * **定义** ：最广泛的技术概念，旨在使机器模拟人类智能行为。 
+  * **核心能力** ： 
+    * 理解自然语言 
+    * 识别图像/声音 
+    * 解决问题与推理 
+    * 自主决策与学习 
+  * **特点** ： 
+    * 涵盖所有智能系统的研究与开发 
+    * 不限定具体实现方式（包括规则引擎、机器学习等）。 
+  * **应用场景** ：智能助手、自动驾驶、机器人、游戏AI等。
+
+
+
+* * *
+
+## **机器学习（ML, Machine Learning）**
+
+  * **定义** ：实现AI的核心方法，通过数据驱动模型自动改进任务性能。 
+  * **核心原理** ： 
+    * 依赖算法和统计模型，从数据中“学习”规律。 
+    * 无需显式编程指令（与传统程序不同）。 
+  * **典型技术** ： 
+    * 监督学习：线性回归、支持向量机（SVM）、决策树 
+    * 无监督学习：聚类（如K-means）、降维（如PCA） 
+    * 强化学习：Q-learning、策略梯度 
+  * **特点** ： 
+    * 数据依赖性高，性能随数据量提升。 
+    * 需人工设计特征（传统方法中）。 
+  * **应用场景** ：预测分析、推荐系统、欺诈检测等。
+
+
+
+* * *
+
+## **深度学习（DL, Deep Learning）**
+
+  * **定义** ：机器学习的分支，基于深层神经网络结构进行学习。 
+  * **核心原理** ： 
+    * 使用多层（“深度”）神经网络自动提取数据特征。 
+    * 擅长处理高维度、非结构化数据（如图像、文本、音频）。 
+  * **典型模型** ： 
+    * 卷积神经网络（CNN）：图像识别 
+    * 循环神经网络（RNN）：序列数据（如语言模型） 
+    * 生成对抗网络（GAN）：数据生成 
+  * **特点** ： 
+    * 需大规模数据和算力支持。 
+    * 减少人工特征工程，自动学习抽象特征。 
+  * **应用场景** ：计算机视觉、语音识别、自然语言处理（NLP）等。
+
+
+
+* * *
+
+## **层级关系**
+
+**AI ⊃ ML ⊃ DL**
+
+  * **AI** 是顶层目标，**ML** 是实现AI的核心路径，**DL** 是ML中依赖深度神经网络的高阶方法。 
+  * **关键区别** ： 
+    * ML依赖人工特征工程，DL通过多层网络自动提取特征。 
+    * DL在复杂任务（如图像分类）中表现更优，但需更大算力和数据量。 
+
+
+
+* * *
+
+## 时间线
+
+* * *
+
+**1\. 符号主义（20世纪50-70年代）**
+
+  * **1950年** ：图灵设计国际象棋程序，提出“图灵测试”概念。 
+  * **1962年** ：IBM Arthur Samuel的跳棋程序战胜人类高手（**第一次AI浪潮** ）。 
+  * **特点** ：以专家系统和规则逻辑为主导，依赖符号推理。
+
+
+
+**2\. 统计主义（20世纪80-2000年）**
+
+  * **1993年** ：Vapnik提出支持向量机（SVM），成为统计学习代表方法。 
+  * **1997年** ：IBM“深蓝”战胜国际象棋冠军卡斯帕罗夫（**第二次AI浪潮** ）。 
+  * **特点** ：基于概率统计模型解决分类、预测问题。
+
+
+
+**3\. 神经网络与深度学习（21世纪初期-2016年）**
+
+  * **2012年** ：AlexNet在ImageNet竞赛夺冠，引爆深度学习革命（卷积神经网络崛起）。 
+  * **2016年** ：Google AlphaGo战胜李世石（**第三次AI浪潮** ）。 
+  * **特点** ：神经网络复兴，依赖大数据和算力提升。
+
+
+
+**4\. 大规模预训练模型时代（2017年-至今）**
+
+  * **2017年** ：Google提出Transformer框架（NLP领域里程碑）。 
+  * **2018年** ： **BERT** （双向预训练模型）和**GPT** （生成式预训练）问世，开启大模型竞赛。 
+  * **2022年** ：OpenAI发布ChatGPT，推动AIGC（生成式AI）普及。 
+  * **2023年-至今** ：全球“百模大战”（如GPT-4、文心一言、Claude等），大模型进入高速迭代阶段。 
+
+
+
+**符号推理 → 统计学习 → 神经网络 → 大模型AIGC**
+
+每次突破均伴随算法创新（如Transformer）、算力提升（GPU/TPU）和数据规模化（互联网文本/多模态数据）。当前焦点已从专用AI转向通用人工智能（AGI）探索。
+
+* * *
+
+## 深度学习框架
+
+* * *
+
+对比维度 | **PyTorch** | **TensorFlow** | **PaddlePaddle** | **ONNX**  
+---|---|---|---|---  
+**开发者/机构** | Facebook（Meta） | Google | 百度 | 微软主导，社区维护  
+**发布年份** | 2016 | 2015 | 2016 | 2017  
+**编程语言** | Python（底层C++） | Python（底层C++、CUDA） | Python（底层C++） | 协议标准（支持多种语言）  
+**动态图/静态图** | 动态为主，支持TorchScript静态图 | 静态图为主，TF 2.x默认动态图（Eager Execution） | 动静结合，默认静态图 | 非框架，主要是模型交换格式  
+**可视化工具** | TensorBoard（兼容），torch.utils.tensorboard | TensorBoard | VisualDL（自研） | 无直接可视化工具，可配合其他工具  
+**训练易用性** | 简单易用，面向研究 | TF 2.x后也较易用，TF 1.x偏复杂 | API设计类似PyTorch，中文文档友好 | 非训练框架，负责模型格式交换和推理  
+**部署支持** | TorchScript、ONNX、TorchServe等 | TensorFlow Lite、TensorFlow.js、TF Serving等 | Paddle Lite、Paddle Serving、Paddle.js等 | ONNX Runtime 可部署多平台，如移动端、服务器、浏览器等  
+**推理性能** | 良好，支持ONNX加速推理 | 很强，TF Serving + XLA优化 | 不错，国产设备适配优化良好 | 优秀，尤其适配硬件后端如NVIDIA TensorRT、OpenVINO等  
+**社区活跃度** | 非常活跃，学术界主流 | 非常活跃，工业界广泛使用 | 中国社区活跃，海外影响力略低 | 中立框架，支持多框架模型转换，社区支持不错  
+**模型生态** | HuggingFace、TorchHub等丰富 | TensorFlow Hub、TF Model Zoo | PaddleHub、PaddleNLP、PaddleDetection等 | 提供通用模型格式支持，许多主流模型支持导出为ONNX格式  
+**硬件支持** | GPU（NVIDIA）、CPU、MPS（Mac）、部分TPU支持 | 全面支持GPU、TPU、CPU等 | 支持GPU（NVIDIA）、昇腾、昆仑芯、CPU等 | ONNX Runtime 支持 GPU、CPU、NPU、TPU 等多种硬件后端  
+**跨平台部署** | 支持 | 支持 | 支持 | 强，适合在多平台间迁移模型  
+**中文文档支持** | 一般，社区翻译 | 一般，官方翻译为主 | 强，官方中文文档完善 | 一般，偏向开发者为主  
+  
+* * *
+
+## 环境配置
+
+* * *
+
+  * 安装 Miniconda：&lt;https://www.anaconda.com/docs/getting-started/miniconda/install#power-shell&gt;
+
+  * 创建虚拟环境：
+
+  * conda create -n ai python=3.12 -y # 创建一个虚拟环境 ai
+        conda activate ai                 # 激活虚拟环境
+
+  * 安装 Pytorch：&lt;https://pytorch.org/&gt;
+
+  * # 在官网选择相应Cuda版本，以win11+4060为例
+        pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+
+  * 验证安装：
+
+  * python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"
+
+  * 输出：
+
+  * 2.6.0+cu126
+        True
+        # 安装成功
+
+
+
+
+* * *
+
+# 张量基础
+
+* * *
+
+## 概念
+
+* * *
+
+张量（Tensor）是 **多维数组** 的一种通用表示，是 PyTorch 中存储和操作数据的基本结构。
+
+维度 | 名称 | 举例  
+---|---|---  
+0 维 | 标量 (scalar) | `7`  
+1 维 | 向量 (vector) | `[7, 7]`  
+2 维 | 矩阵 (matrix) | `[[7, 8], [9, 10]]`  
+3 维及以上 | 多维张量 | `[[[1, 2], [3, 4]], [[5, 6], [7, 8]]]`  
+  
+* * *
+
+## 创建张量
+
+* * *
+    
+    
+    import torch
+    
+    # 从列表创建张量
+    a = torch.tensor([1, 2, 3])
+    
+    # 指定形状创建全0、全1张量
+    zeros = torch.zeros(2, 3)
+    ones = torch.ones(2, 3)
+    
+    # 指定值填充
+    full_tensor = torch.full((2, 3), 9)
+    print(full_tensor)
+    
+    # 随机张量
+    rand = torch.rand(2, 2)       # 均匀分布
+    randn = torch.randn(2, 2)     # 正态分布
+    randint = torch.randint(0, 10, (2, 2))  # 整数张量
+    
+    # 等差数列张量
+    linear = torch.linspace(0, 1, steps=5)
+    
+    # 相同形状张量复制结构
+    like = torch.ones_like(rand)
+
+  * **张量维度查看** ：使用 `.ndim` 或 `.dim()`
+  * **形状查看** ：使用 `.shape`
+  * **取值** ：当张量只有一个值的时候，使用 `.item()`
+
+
+
+创建随机张量跟随机种子有关：
+    
+    
+    print(torch.random.initial_seed()) # 每次运行都不一样
+    
+    torch.random.manual_seed(1145141919810) # 手动设置随机种子
+
+* * *
+
+## 类型转换
+
+* * *
+
+数字类型：
+    
+    
+    # 创建浮点型张量
+    t = torch.tensor([1.5, 2.5], dtype=torch.float32)
+    
+    # 转换为整型
+    t_int = t.int()
+    
+    # 转换为64位浮点
+    t_double = t.double()
+    
+    # 查看数据类型
+    print(t.dtype, t_int.dtype, t_double.dtype)
+    
+    data=torch.full([2,3],10)
+    print (data.dtype)
+    
+    #将data元素类型转换为64位浮类型
+    data=data.type(torch.DoubleTensor)
+    print (data.dtype)
+    
+    #转换为其他类型
+    data=data.type(torch.ShortTensor)
+    data=data.type(torch.IntTensor)
+    data=data.type(torch.LongTensor)
+    data=data.type(torch.FloatTensor)
+
+Numpy数组转换：
+    
+    
+    import torch
+    
+    data_tensor = torch.tensor([2, 3, 4])
+    # 使用 .numpy() 方法进行转换
+    data_numpy = data_tensor.numpy()
+    
+    print(type(data_tensor))  # &lt;class 'torch.Tensor'&gt;
+    print(type(data_numpy))   # &lt;class 'numpy.ndarray'&gt;
+    
+    # data_tensor 和 data_numpy 共享内存，修改后同步
+    data_numpy[0] = 100
+    
+    print(data_tensor)  # tensor([100,   3,   4])
+    print(data_numpy)   # [100   3   4]
+
+使用对象拷贝：
+    
+    
+    import torch
+    
+    # 创建 PyTorch 张量
+    data_tensor = torch.tensor([2, 3, 4])
+    
+    # 正确转换为 NumPy 且不共享内存：先 clone，再 detach，再 .numpy()
+    data_numpy = data_tensor.clone().detach().numpy()
+    
+    print(type(data_tensor))  # &lt;class 'torch.Tensor'&gt;
+    print(type(data_numpy))   # &lt;class 'numpy.ndarray'&gt;
+    
+    # 不共享内存：修改一个，另一个不会变
+    data_tensor[0] = 100
+    data_numpy[0] = 999
+    
+    print("data_tensor:", data_tensor)  # tensor([100,   3,   4])
+    print("data_numpy :", data_numpy)   # [999   3   4]
+
+* * *
+
+## 基本运算
+
+* * *
+
+运算 | 操作符方式 | 不改变原张量 | **改变原张量**  
+---|---|---|---  
+加法 | `a + b` | `a.add(b)` | `a.add_(b)`  
+减法 | `a - b` | `a.sub(b)` | `a.sub_(b)`  
+乘法 | `a * b` | `a.mul(b)` | `a.mul_(b)`  
+除法 | `a / b` | `a.div(b)` | `a.div_(b)`  
+取负 | `-a` | `a.neg()` | `a.neg_()`  
+      
+    
+    import torch
+    
+    # 创建两个张量
+    a = torch.tensor([1.0, 2.0, 3.0])
+    b = torch.tensor([10.0, 20.0, 30.0])
+    
+    # -------- 运算符方式（推荐 & 简洁） --------
+    print("加法:", a + b)
+    print("减法:", a - b)
+    print("乘法:", a * b)
+    print("除法:", a / b)
+    print("取负:", -a)
+    
+    # -------- 函数方式（不修改原始张量） --------
+    print("加法:", a.add(b))    # 等同于 a + b
+    print("减法:", a.sub(b))    # 等同于 a - b
+    print("乘法:", a.mul(b))    # 等同于 a * b 或 torch.mul(a, b)
+    print("除法:", a.div(b))    # 等同于 a / b
+    print("取负:", a.neg())     # 等同于 -a
+    
+    # 原始张量未改变
+    print("a 原值未变:", a)
+    
+    # -------- 函数方式（带下划线：修改原始张量） --------
+    a.add_(b)
+    print("a += b 后:", a)
+    
+    a.sub_(b)
+    print("a -= b 后:", a)
+    
+    a.mul_(b)
+    print("a *= b 后:", a)
+    
+    a.div_(b)
+    print("a /= b 后:", a)
+    
+    a.neg_()
+    print("a 取负后:", a)
+
+* * *
+
+## 点积运算
+
+* * *
+
+点积定义： [latex] \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{n} a_i b_i [/latex]
+
+点积展开（n = 3）： [latex] \mathbf{a} \cdot \mathbf{b} = a_1 b_1 + a_2 b_2 + a_3 b_3 [/latex]
+
+矩阵乘法形式 [latex] \mathbf{a} \cdot \mathbf{b} = \begin{bmatrix} a_1 & a_2 & \dots & a_n \end{bmatrix} \begin{bmatrix} b_1 \\\ b_2 \\\ \vdots \\\ b_n \end{bmatrix} = \sum_{i=1}^{n} a_i b_i [/latex]
+
+点积与夹角的关系: [latex] \mathbf{a} \cdot \mathbf{b} = \|\mathbf{a}\| \|\mathbf{b}\| \cos{\theta} [/latex]
+
+例如设： [latex] A = \begin{bmatrix} 1 & 2 & 3 \\\ 4 & 5 & 6 \end{bmatrix}, \quad B = \begin{bmatrix} 7 & 8 & 9 \\\ 10 & 11 & 12 \\\ 13 & 14 & 15 \end{bmatrix} [/latex]
+
+矩阵乘积： [latex] AB = \begin{bmatrix} 1\cdot7 + 2\cdot10 + 3\cdot13 & 1\cdot8 + 2\cdot11 + 3\cdot14 & 1\cdot9 + 2\cdot12 + 3\cdot15 \\\ 4\cdot7 + 5\cdot10 + 6\cdot13 & 4\cdot8 + 5\cdot11 + 6\cdot14 & 4\cdot9 + 5\cdot12 + 6\cdot15 \end{bmatrix} = \begin{bmatrix} 66 & 72 & 78 \\\ 156 & 171 & 186 \end{bmatrix} [/latex] 使用 PyTorch 的 `@` 运算（矩阵乘法）：
+    
+    
+    import torch
+    
+    # 定义两个矩阵
+    a = torch.tensor([[1, 2, 3],
+                      [4, 5, 6]])
+    
+    b = torch.tensor([[7, 8, 9],
+                      [10, 11, 12],
+                      [13, 14, 15]])
+    
+    # 使用 @ 运算符进行矩阵乘法
+    result = a @ b
+    
+    print("a @ b =\n", result)
+
+使用 NumPy 的 `@` 运算：
+    
+    
+    import numpy as np
+    
+    # 定义两个 NumPy 矩阵
+    a = np.array([[1, 2, 3],
+                  [4, 5, 6]])
+    
+    b = np.array([[7, 8, 9],
+                  [10, 11, 12],
+                  [13, 14, 15]])
+    
+    # 使用 @ 运算符进行矩阵乘法
+    result = a @ b
+    
+    print("a @ b =\n", result)
+
+* * *
+
+## 行列索引
+
+* * *
+
+操作 | 代码 | 说明  
+---|---|---  
+获取第 0 行 | `a[0]` | 返回 `[10, 20, 30]`  
+获取第 1 行第 2 列的值 | `a[1][2]` 或 `a[1, 2]` | 返回 `60`  
+获取第 2 列 | `a[:, 2]` | 返回 `[30, 60, 90]`（所有行的第 2 列）  
+获取第 0 列 | `a[:, 0]` | 返回 `[10, 40, 70]`  
+获取第 0~1 行 | `a[0:2]` | 返回前两行  
+获取第 1~2 行，第 0~1 列 | `a[1:3, 0:2]` | 取子矩阵  
+      
+    
+    import torch
+    
+    a = torch.tensor([
+        [10, 20, 30],
+        [40, 50, 60],
+        [70, 80, 90]
+    ])
+    
+    print("原始张量:\n", a)
+    print("第0行:", a[0])
+    print("第1行第2列的元素:", a[1, 2])
+    print("第2列:", a[:, 2])
+    print("第0~1行:\n", a[0:2])
+    print("第1~2行，第0~1列:\n", a[1:3, 0:2])
+    
+    
+    import torch
+    
+    tensor_3d = torch.tensor([
+        [  # 第0个矩阵 (0层)
+            [1, 2, 3, 4],
+            [5, 6, 7, 8],
+            [9, 10, 11, 12]
+        ],
+        [  # 第1个矩阵 (1层)
+            [13, 14, 15, 16],
+            [17, 18, 19, 20],
+            [21, 22, 23, 24]
+        ]
+    ])
+    
+    print("第0层:\n", tensor_3d[0])
+    print("第1层第2行:", tensor_3d[1, 2])
+    print("第0层第1行第2列的元素:", tensor_3d[0, 1, 2])
+    print("所有层的第2行:\n", tensor_3d[:, 2])
+    print("所有层第1行第0列的值:", tensor_3d[:, 1, 0])
+
+* * *
+
+## 形状操作
+
+* * *
+
+函数名 | 功能描述 | 重点备注  
+---|---|---  
+`reshape()` | 改变张量形状，返回新张量 | 不一定共享内存，推荐用  
+`view()` | 改变张量形状，返回视图 | 要求连续内存  
+`squeeze()` | 去掉维度为1的维度 | 变“瘦”  
+`unsqueeze()` | 增加一个维度 | 变“胖”  
+`transpose()` | 交换两个维度 | 用于2D或高维张量  
+`permute()` | 按任意顺序排列维度 | 比`transpose()`更灵活  
+`contiguous()` | 将张量在内存中变为连续 | 通常和`view()`一起用  
+      
+    
+    import torch
+    
+    # 重新定义形状
+    x = torch.arange(6)         # [0, 1, 2, 3, 4, 5]
+    y = x.reshape(2, 3)         # 变成 2x3 张量
+    print(y)
+    
+    # 返回形状变换的视图
+    x = torch.arange(6)
+    y = x.view(2, 3)            # 要求 x 是连续的
+    print(y)
+    
+    # 使张量连续存储
+    x = torch.tensor([[1, 2], [3, 4]])
+    y = x.t()                  # 转置后内存非连续
+    z = y.contiguous().view(4) # 先 contiguous 再 view 才不会报错
+    print(z)
+    
+    # 去除大小为1的维度
+    x = torch.randn(1, 3, 1, 5)
+    print("原形状:", x.shape)
+    y = x.squeeze()
+    print("去除1维:", y.shape)
+    
+    # 只去掉第0维（如果是1）
+    z = x.squeeze(0)
+    print("仅squeeze(0):", z.shape)
+    
+    # 增加一个维度（反squeeze）
+    x = torch.tensor([1, 2, 3])     # shape: [3]
+    y = x.unsqueeze(0)              # shape: [1, 3]
+    z = x.unsqueeze(1)              # shape: [3, 1]
+    print("原:", x.shape, "unsqueeze(0):", y.shape, "unsqueeze(1):", z.shape)
+    
+    # 交换两个维度
+    x = torch.randn(2, 3)
+    print("原形状:", x.shape)
+    y = x.transpose(0, 1)
+    print("转置后:", y.shape)
+    
+    # 任意维度排列组合
+    x = torch.randn(2, 3, 4)          # [Batch, Channel, Width]
+    y = x.permute(0, 2, 1)            # 改为 [Batch, Width, Channel]
+    print("原:", x.shape, "permute后:", y.shape)
+
+* * *
+
+## 张量拼接
+
+* * *
+
+方式 | 是否增加维度 | 场景推荐  
+---|---|---  
+`torch.cat()` | 否 | 沿现有维度拼接  
+`torch.stack()` | ✅ 是 | 构造新维度，构造 batch  
+`torch.hstack()` | 否 | 类似横向拼接  
+`torch.vstack()` | 否 | 类似纵向拼接  
+`torch.dstack()` | ✅ 是 | 堆叠到第三个维度（图像）  
+  
+沿指定维度拼接多个张量：
+    
+    
+    import torch
+    
+    a = torch.tensor([[1, 2], [3, 4]])
+    b = torch.tensor([[5, 6], [7, 8]])
+    
+    # 沿dim=0拼接（行拼接）
+    cat0 = torch.cat((a, b), dim=0)
+    print("dim=0:\n", cat0)
+    
+    # 沿dim=1拼接（列拼接）
+    cat1 = torch.cat((a, b), dim=1)
+    print("dim=1:\n", cat1)
+
+增加新维度后进行拼接（类似堆叠）：
+    
+    
+    a = torch.tensor([1, 2])
+    b = torch.tensor([3, 4])
+    
+    # 在新维度（dim=0）堆叠
+    stack0 = torch.stack((a, b), dim=0)
+    print("stack0:\n", stack0)  # shape: (2, 2)
+    
+    # 在新维度（dim=1）堆叠
+    stack1 = torch.stack((a, b), dim=1)
+    print("stack1:\n", stack1)  # shape: (2, 2)
+
+`torch.hstack()` 和 `torch.vstack()`（类似 numpy）：
+    
+    
+    a = torch.tensor([1, 2])
+    b = torch.tensor([3, 4])
+    
+    # 横向拼接（dim=1）
+    print(torch.hstack((a, b)))  # 输出：[1, 2, 3, 4]
+    
+    # 竖向拼接（dim=0）
+    print(torch.vstack((a, b)))  # 输出：[[1, 2], [3, 4]]
+
+`torch.dstack()` — 沿第三个维度堆叠：
+    
+    
+    a = torch.tensor([[1, 2]])
+    b = torch.tensor([[3, 4]])
+    
+    # dstack: 最后加一个维度
+    print(torch.dstack((a, b)))  # 输出形状: [1, 2, 2]
+
+* * *
+
+# 自动微分
+
+* * *
+
+## 反向传播
+
+* * *
+
+### 概念
+
+* * *
+
+反向传播（Backpropagation）是一种高效的**链式法则（链式求导）算法** ，用于计算神经网络中每个参数的梯度，从而进行优化（如梯度下降）。
+
+先通过前向传播计算输出和损失，再通过反向传播逐层把误差“传回去”，计算每个参数对误差的贡献（导数），再用优化器更新参数。
+
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2025/04/自动微分.png)
+
+* * *
+
+### 数学原理
+
+* * *
+
+**前向传播** ：
+
+对于一个 $l$ 层的神经网络，前向传播过程可表示为：
+
+[latex] \begin{aligned} \mathbf{z}^{(l)} &= \mathbf{W}^{(l)}\mathbf{a}^{(l-1)} + \mathbf{b}^{(l)} \\\ \mathbf{a}^{(l)} &= f^{(l)}(\mathbf{z}^{(l)}) \end{aligned} [/latex]
+
+其中：
+
+  * $\mathbf{W}^{(l)}$ 是第 $l$ 层的权重矩阵
+  * $\mathbf{b}^{(l)}$ 是第 $l$ 层的偏置向量
+  * $f^{(l)}$ 是第 $l$ 层的激活函数
+  * $\mathbf{a}^{(l)}$ 是第 $l$ 层的激活值（$\mathbf{a}^{(0)} = \mathbf{x}$ 为输入）
+
+
+
+**损失函数** ：
+
+定义损失函数 $J(\theta)$，其中 $\theta$ 表示所有参数 ($\mathbf{W}, \mathbf{b}$):
+
+[latex] J(\theta) = \frac{1}{m}\sum_{i=1}^m L(\mathbf{y}^{(i)}, \mathbf{a}^{(L)(i)}) [/latex]
+
+**链式法则** ：
+
+反向传播的关键是计算损失函数对各层参数的偏导数
+
+首先计算输出层的误差 $\delta^{(L)}$:
+
+[latex] \delta^{(L)} = \frac{\partial J}{\partial \mathbf{z}^{(L)&#125;&#125; = \frac{\partial J}{\partial \mathbf{a}^{(L)&#125;&#125; \odot f'^{(L)}(\mathbf{z}^{(L)}) [/latex]
+
+其中 $\odot$ 表示逐元素相乘（Hadamard积）。
+
+再计算隐藏层误差，对于 $l = L-1, L-2, ..., 1$，误差反向传播：
+
+[latex] \delta^{(l)} = \left((\mathbf{W}^{(l+1)})^\top \delta^{(l+1)}\right) \odot f'^{(l)}(\mathbf{z}^{(l)}) [/latex]
+
+最后参数梯度计算，利用误差 $\delta^{(l)}$ 计算参数梯度：
+
+[latex] \begin{aligned} \frac{\partial J}{\partial \mathbf{W}^{(l)&#125;&#125; &= \delta^{(l)} (\mathbf{a}^{(l-1)})^\top \\\ \frac{\partial J}{\partial \mathbf{b}^{(l)&#125;&#125; &= \delta^{(l)} \end{aligned} [/latex]
+
+反向传播算法可总结为：
+
+  1. 前向传播计算各层激活值
+  2. 计算输出层误差 $\delta^{(L)}$
+  3. 反向传播误差至各隐藏层
+  4. 计算各层参数梯度
+  5. 使用梯度下降更新参数
+
+
+
+反向传播本质上是多元微积分中链式法则的递归应用。
+
+以两层神经网络为例： [latex] \frac{\partial J}{\partial \mathbf{W}^{(1)&#125;&#125; = \underbrace{\frac{\partial J}{\partial \mathbf{a}^{(2)&#125;&#125;}_{\text{输出层&#125;&#125; \cdot \underbrace{\frac{\partial \mathbf{a}^{(2)&#125;&#125;{\partial \mathbf{z}^{(2)&#125;&#125;}_{\text{激活导数&#125;&#125; \cdot \underbrace{\frac{\partial \mathbf{z}^{(2)&#125;&#125;{\partial \mathbf{a}^{(1)&#125;&#125;}_{\mathbf{W}^{(2)&#125;&#125; \cdot \underbrace{\frac{\partial \mathbf{a}^{(1)&#125;&#125;{\partial \mathbf{z}^{(1)&#125;&#125;}_{\text{激活导数&#125;&#125; \cdot \underbrace{\frac{\partial \mathbf{z}^{(1)&#125;&#125;{\partial \mathbf{W}^{(1)&#125;&#125;}_{\mathbf{a}^{(0)&#125;&#125; [/latex]
+
+这种链式分解使得我们可以从输出层开始，逐层反向计算梯度，避免重复计算。
+    
+    
+    import torch
+    import torch.nn as nn
+    
+    # 模拟输入
+    x = torch.tensor([[1.0]], requires_grad=True)
+    y_true = torch.tensor([[2.0]])
+    
+    # 模型定义
+    model = nn.Linear(1, 1)  # y = wx + b
+    loss_fn = nn.MSELoss()
+    optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
+    
+    # 前向传播
+    y_pred = model(x)
+    loss = loss_fn(y_pred, y_true)
+    
+    # 反向传播
+    loss.backward()
+    
+    # 查看梯度
+    for name, param in model.named_parameters():
+        print(f"{name} grad:", param.grad)
+    
+    # 更新参数
+    optimizer.step()
+    
+    # 清空梯度
+    optimizer.zero_grad()
+
+* * *
+
+## Pytorch 自动微分机制
+
+* * *
+
+自动微分（Automatic Differentiation，简称 Autograd）是指：自动计算张量的导数（梯度）**，用于模型训练中的** 反向传播。
+
+PyTorch 中只需设置 `requires_grad=True`，它就会记录所有与该张量相关的操作并构建一个计算图（Computational Graph）。
+
+反向传播时，PyTorch 会自动根据链式法则计算所有梯度。
+
+PyTorch 的自动微分采用**动态图机制（Dynamic Computational Graph）** ，主要特点：
+
+  * 每次运算时动态构建计算图；
+  * 正向传播时记录运算过程；
+  * 调用 `.backward()` 自动执行反向传播；
+  * 每个张量有三个重要属性：
+
+属性 | 说明  
+---|---  
+`tensor.data` | 原始数值，不包含梯度信息  
+`tensor.grad` | 当前张量的梯度值（在反向传播后自动赋值）  
+`tensor.requires_grad` | 是否需要对该张量进行求导  
+  
+基础用法：
+    
+    
+    import torch
+    
+    # 创建张量，并启用自动求导
+    x = torch.tensor([2.0], requires_grad=True)
+    
+    # 定义函数 y = x^2 + 3x + 1
+    y = x**2 + 3 * x + 1
+    
+    # 反向传播（自动求导）
+    y.backward()
+    
+    # 查看 dy/dx
+    print(x.grad)  # 输出: tensor([7.])
+
+对多维张量求导：
+    
+    
+    x = torch.tensor([[1., 2.], [3., 4.]], requires_grad=True)
+    y = (x ** 2).sum()  # y = x^2 的和
+    
+    y.backward()  # 自动求导
+    
+    print(x.grad)  # dy/dx = 2x
+
+多次反向传播（需要 retain_graph=True）：
+    
+    
+    x = torch.tensor([1.0], requires_grad=True)
+    
+    y = x ** 2
+    y.backward(retain_graph=True)
+    y.backward()  # 第二次反向传播
+    
+    print(x.grad)  # 注意此时是累加：2+2=4
+
+不需要梯度的操作：
+    
+    
+    x = torch.tensor([2.0], requires_grad=True)
+    
+    with torch.no_grad():
+        y = x * 3
+        print(y.requires_grad)  # False，不追踪梯度
+
+`.detach()`：从计算图中分离：
+    
+    
+    x = torch.tensor([2.0], requires_grad=True)
+    y = x * 3
+    
+    # 分离张量但保留值
+    z = y.detach()
+    print(z.requires_grad)  # False
+
+* * *
+
+## 案例实战
+
+* * *
+
+### 标量梯度计算
+
+* * *
+    
+    
+    import torch
+    
+    def test01():
+        # 输入特征 X，目标值 y
+        x = torch.tensor(5.0)  # 注意是浮点型，才能和 w 匹配
+        y = torch.tensor(0.0)
+    
+        # 设置要更新的权重和偏置的初始值，requires_grad=True 表示需要计算梯度
+        w = torch.tensor(1.0, requires_grad=True, dtype=torch.float32)
+        b = torch.tensor(3.0, requires_grad=True, dtype=torch.float32)
+    
+        # 网络输出值 z = w * x + b
+        z = x * w + b  # 这是线性模型的一次输出
+    
+        # 设置损失函数（均方误差 MSE）
+        loss_fn = torch.nn.MSELoss()
+        loss = loss_fn(z, y)
+    
+        # 自动微分，计算梯度
+        loss.backward()
+    
+        # 打印 w 和 b 的梯度（保存在 .grad 属性中）
+        print("w 的梯度：", w.grad)  # dL/dw
+        print("b 的梯度：", b.grad)  # dL/db
+    
+    # 调用函数
+    test01()
+
+* * *
+
+### 多维张量（矩阵）梯度计算
+
+* * *
+    
+    
+    import torch
+    
+    def test02():
+        # 输入张量 x 为 2*5 矩阵
+        x = torch.ones(2, 5)
+        # 目标值 y 为 2*3 矩阵
+        y = torch.zeros(2, 3)
+    
+        # 设置要更新的权重 w 和偏置 b 的初始值
+        w = torch.randn(5, 3, requires_grad=True)  # 权重矩阵：5 行 3 列
+        b = torch.randn(3, requires_grad=True)     # 偏置向量：3 列
+    
+        # 设置网络的输出值，z = x * w + b
+        z = torch.matmul(x, w) + b  # x 是 2x5，w 是 5x3，结果 z 是 2x3
+    
+        # 设置损失函数（均方误差 MSE）
+        loss_fn = torch.nn.MSELoss()
+        loss = loss_fn(z, y)  # 计算损失，目标是 2x3 矩阵的零张量
+    
+        # 自动微分，计算梯度
+        loss.backward()  # 执行反向传播，计算梯度
+    
+        # 打印 w 和 b 的梯度（梯度存储在 .grad 属性中）
+        print("w 的梯度：", w.grad)  # 打印 w 的梯度
+        print("b 的梯度：", b.grad)  # 打印 b 的梯度
+    
+    # 调用函数
+    test02()
+
+* * *
+
+### 线性回归案例
+
+* * *
+    
+    
+    import matplotlib.pyplot as plt
+    import torch
+    import torch.nn as nn
+    import torch.optim as optim
+    from sklearn.datasets import make_regression
+    from torch.utils.data import DataLoader, TensorDataset
+    
+    # 创建数据集
+    def create_dataset():
+        x, y, coef = make_regression(n_samples=100, n_features=1, noise=10, coef=True, bias=1.5, random_state=0)
+        # 将构建的数据转换为张量类型
+        x = torch.tensor(x, dtype=torch.float32)
+        y = torch.tensor(y, dtype=torch.float32)
+        coef = torch.tensor(coef, dtype=torch.float32)  # 将 coef 转换为 torch 张量
+        return x, y, coef
+    
+    # 可视化数据集
+    def plot_data(x, y, coef):
+        plt.scatter(x, y)
+        x_line = torch.linspace(x.min(), x.max(), 1000)
+        # 使用 torch 操作替代列表推导
+        y_line = coef * x_line + 1.5
+        plt.plot(x_line, y_line, label='Real Line')
+        plt.grid()
+        plt.legend()
+        plt.show()
+    
+    # 生成数据
+    x, y, coef = create_dataset()
+    
+    # 可视化真实的线性回归结果
+    plot_data(x, y, coef)
+    
+    # 构造数据集和数据加载器
+    dataset = TensorDataset(x, y)
+    dataloader = DataLoader(dataset, batch_size=16, shuffle=True)
+    
+    # 构造线性回归模型
+    model = nn.Linear(in_features=1, out_features=1)
+    
+    # 构造平方损失函数
+    criterion = nn.MSELoss()
+    
+    # 构造优化器
+    optimizer = optim.SGD(params=model.parameters(), lr=1e-2)
+    
+    # 训练周期
+    epochs = 100
+    epoch_loss = []
+    
+    # 训练模型
+    for epoch in range(epochs):
+        total_loss = 0.0
+        train_sample = 0.0
+        for train_x, train_y in dataloader:
+            # 将一个batch的训练数据送入模型
+            y_pred = model(train_x)
+            # 计算损失值
+            loss = criterion(y_pred, train_y.reshape(-1, 1))
+            total_loss += loss.item()
+            train_sample += len(train_y)
+    
+            # 梯度清零
+            optimizer.zero_grad()
+            # 反向传播
+            loss.backward()
+            # 更新参数
+            optimizer.step()
+    
+        epoch_loss.append(total_loss / train_sample)
+    
+    # 绘制损失变化曲线
+    plt.plot(range(epochs), epoch_loss)
+    plt.title('Loss Curve')
+    plt.grid()
+    plt.show()
+    
+    # 可视化拟合直线
+    plt.scatter(x, y)
+    x_line = torch.linspace(x.min(), x.max(), 1000)
+    y_pred_line = model(x_line.reshape(-1, 1)).detach().numpy()
+    # 使用 torch 操作替代列表推导
+    y_true_line = coef * x_line + 1.5  # 使用 torch 操作
+    plt.plot(x_line, y_pred_line, label='Predicted Line')
+    plt.plot(x_line, y_true_line.numpy(), label='True Line')  # 转换为 NumPy 数组
+    plt.grid()
+    plt.legend()
+    plt.show()
+
+* * *
