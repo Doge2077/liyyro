@@ -47,12 +47,16 @@ Hibernate Validator：
 
   * 属性：
 
-    * `min`: 最小长度或大小（默认值为0）。
-    * `max`: 最大长度或大小（默认值为Integer.MAX_VALUE）。
+```java
+* `min`: 最小长度或大小（默认值为0）。
+* `max`: 最大长度或大小（默认值为Integer.MAX_VALUE）。
+```
   * 示例:
-        
-        @Size(min = 3, max = 10)
-        private String name;
+```java
+    
+    @Size(min = 3, max = 10)
+    private String name;
+```
 
 
 
@@ -67,11 +71,15 @@ Hibernate Validator：
 
   * 属性:
 
-    * `value`: 最小值。
+```java
+* `value`: 最小值。
+```
   * 示例:
-        
-        @Min(18)
-        private int age;
+```java
+    
+    @Min(18)
+    private int age;
+```
 
 
 
@@ -86,11 +94,15 @@ Hibernate Validator：
 
   * 属性:
 
-    * `value`: 最大值。
+```java
+* `value`: 最大值。
+```
   * 示例:
-        
-        @Max(100)
-        private int score;
+```java
+    
+    @Max(100)
+    private int score;
+```
 
 
 
@@ -104,9 +116,11 @@ Hibernate Validator：
   * **用法** : 用于验证字段必须为`null`。
 
   * 示例:
-        
-        @Null
-        private String middleName;
+```java
+    
+    @Null
+    private String middleName;
+```
 
 
 
@@ -120,9 +134,11 @@ Hibernate Validator：
   * **用法** : 用于验证字段不能为`null`。
 
   * 示例:
-        
-        @NotNull
-        private String firstName;
+```java
+    
+    @NotNull
+    private String firstName;
+```
 
 
 
@@ -136,9 +152,11 @@ Hibernate Validator：
   * **用法** : 用于验证字符串、集合、数组等不能为`null`且必须有元素（即非空）。
 
   * 示例:
-        
-        @NotEmpty
-        private List items;
+```java
+    
+    @NotEmpty
+    private List items;
+```
 
 
 
@@ -150,9 +168,11 @@ Hibernate Validator：
   * **用法** : 用于验证字符串不能为`null`，且去除空白字符后长度必须大于0。
 
   * 示例:
-        
-        @NotBlank
-        private String username;
+```java
+    
+    @NotBlank
+    private String username;
+```
 
 
 
@@ -167,12 +187,16 @@ Hibernate Validator：
 
   * 属性:
 
-    * `regexp`: 正则表达式。
-    * `flags`: 正则表达式的匹配标志（可选）。
+```java
+* `regexp`: 正则表达式。
+* `flags`: 正则表达式的匹配标志（可选）。
+```
   * 示例:
-        
-        @Pattern(regexp = "^[a-zA-Z0-9]+$")
-        private String alphanumeric;
+```java
+    
+    @Pattern(regexp = "^[a-zA-Z0-9]+$")
+    private String alphanumeric;
+```
 
 
 
@@ -187,14 +211,18 @@ Hibernate Validator：
 
 :
 
-    * `value`: 最小值。
-    * `inclusive`: 是否包含最小值，默认为`true`（包含）。
+```java
+* `value`: 最小值。
+* `inclusive`: 是否包含最小值，默认为`true`（包含）。
+```
   * 示例
 
 :
-        
-        @DecimalMin(value = "0.1", inclusive = false)
-        private double price;
+```java
+    
+    @DecimalMin(value = "0.1", inclusive = false)
+    private double price;
+```
 
 
 
@@ -207,12 +235,16 @@ Hibernate Validator：
 
   * 属性:
 
-    * `value`: 最大值。
-    * `inclusive`: 是否包含最大值，默认为`true`（包含）。
+```java
+* `value`: 最大值。
+* `inclusive`: 是否包含最大值，默认为`true`（包含）。
+```
   * 示例:
-        
-        @DecimalMax(value = "100.0", inclusive = true)
-        private double percentage;
+```java
+    
+    @DecimalMax(value = "100.0", inclusive = true)
+    private double percentage;
+```
 
 
 
@@ -225,12 +257,16 @@ Hibernate Validator：
 
   * 属性:
 
-    * `integer`: 最大整数位数。
-    * `fraction`: 最大小数位数。
+```java
+* `integer`: 最大整数位数。
+* `fraction`: 最大小数位数。
+```
   * 示例:
-        
-        @Digits(integer = 5, fraction = 2)
-        private BigDecimal amount;
+```java
+    
+    @Digits(integer = 5, fraction = 2)
+    private BigDecimal amount;
+```
 
 
 
@@ -243,12 +279,16 @@ Hibernate Validator：
 
   * 属性:
 
-    * `regexp`: 正则表达式，默认是一个简单的电子邮件格式。
-    * `flags`: 正则表达式的匹配标志（可选）。
+```java
+* `regexp`: 正则表达式，默认是一个简单的电子邮件格式。
+* `flags`: 正则表达式的匹配标志（可选）。
+```
   * 示例:
-        
-        @Email
-        private String email;
+```java
+    
+    @Email
+    private String email;
+```
 
 
 
@@ -260,9 +300,11 @@ Hibernate Validator：
   * **用法** : 用于验证日期或时间字段的值必须在将来。
 
   * 示例:
-        
-        @Future
-        private LocalDate expirationDate;
+```java
+    
+    @Future
+    private LocalDate expirationDate;
+```
 
 
 
@@ -274,16 +316,18 @@ Hibernate Validator：
 * * *
 
 当校验异常时，会抛出 `MethodArgumentNotValidException` 异常，可以对其添加全局的异常解析：
-    
-    
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map&lt;String, String&gt; handleValidationExceptions(
-      MethodArgumentNotValidException ex) {
-        Map&lt;String, String&gt; errors = new HashMap&lt;&gt;();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
+```java
+
+
+@ExceptionHandler(MethodArgumentNotValidException.class)
+public Map&lt;String, String&gt; handleValidationExceptions(
+  MethodArgumentNotValidException ex) {
+    Map&lt;String, String&gt; errors = new HashMap&lt;&gt;();
+    ex.getBindingResult().getAllErrors().forEach((error) -> {
+        String fieldName = ((FieldError) error).getField();
+        String errorMessage = error.getDefaultMessage();
+        errors.put(fieldName, errorMessage);
+    });
+    return errors;
+}
+```

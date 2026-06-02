@@ -18,36 +18,44 @@ description: ""
 而 `Java` 不同于 `C`，由于 `JVM` 内置了解释器和即时编译器，这使得 `.java` 可以不经过编译就直接通过解释的方式直接运行。关于解释器和即时编译器的内容我们将在以后介绍。
 
 我们来看一段简单的代码：
-    
-    
-    public class Hello {
-        public static void main(String[] args) {
-            System.out.println("Hello world");
-        }
+```java
+
+
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello world");
     }
+}
+```
 
 我们将其保存为 `Hello.java`，然后运行：
-    
-    
-    java Hello.java
+```java
+
+
+java Hello.java
+```
 
 可以看到不出意外地输出了：
 
 ![image-20230905163020567](https://image.itbaima.net/images/40/image-20230905167713407.png)
 
 这样我们就通过解释的方式运行了刚刚编写的 `.java` 文件，但为了更好的理解 `Java` 的类文件结构，我们接下来对 `.java` 文件进行编译：
-    
-    
-    javac Hello.java
+```java
+
+
+javac Hello.java
+```
 
 可以看到在当前目录下生成了一个 `Hello.class` 文件：
 
 ![image-20230905163351158](https://image.itbaima.net/images/40/image-20230905164213676.png)
 
 接下来我们运行：
-    
-    
-    java Hello
+```java
+
+
+java Hello
+```
 
 可以看到不出意外的输出了：
 
@@ -103,9 +111,11 @@ description: ""
 由于字节码实在~~不是人读的~~ 难以理解，如果你感兴趣全部读懂可以自行深入学习（ ~~真的有人用纯字节码编程吗~~ ，我们还是康康能理解一点的东西罢）
 
 我们利用 `javap` 命令对 `.class` 文件反编译，将其输出到文本：
-    
-    
-    javap -v Hello.class > Hello.txt
+```java
+
+
+javap -v Hello.class > Hello.txt
+```
 
 > `javap` 命令的一些常用选项包括：
 > 
@@ -117,74 +127,76 @@ description: ""
 
 
 然后打开 `Hello.txt` 查看：
-    
-    
-    Classfile /L:/JAVA/BasicSyntax/Learn_JVM/code/Hello.class
-      Last modified 2023年9月5日; size 415 bytes
-      SHA-256 checksum 35b1e377d78c81fc0a324af427c3e67c3a468b293c544de8715343f4d97c0c52
-      Compiled from "Hello.java"
-    public class Hello
-      minor version: 0
-      major version: 61
-      flags: (0x0021) ACC_PUBLIC, ACC_SUPER
-      this_class: #21                         // Hello
-      super_class: #2                         // java/lang/Object
-      interfaces: 0, fields: 0, methods: 2, attributes: 1
-    Constant pool:
-       #1 = Methodref          #2.#3          // java/lang/Object."&lt;init&gt;":()V
-       #2 = Class              #4             // java/lang/Object
-       #3 = NameAndType        #5:#6          // "&lt;init&gt;":()V
-       #4 = Utf8               java/lang/Object
-       #5 = Utf8               &lt;init&gt;
-       #6 = Utf8               ()V
-       #7 = Fieldref           #8.#9          // java/lang/System.out:Ljava/io/PrintStream;
-       #8 = Class              #10            // java/lang/System
-       #9 = NameAndType        #11:#12        // out:Ljava/io/PrintStream;
-      #10 = Utf8               java/lang/System
-      #11 = Utf8               out
-      #12 = Utf8               Ljava/io/PrintStream;
-      #13 = String             #14            // Hello world
-      #14 = Utf8               Hello world
-      #15 = Methodref          #16.#17        // java/io/PrintStream.println:(Ljava/lang/String;)V
-      #16 = Class              #18            // java/io/PrintStream
-      #17 = NameAndType        #19:#20        // println:(Ljava/lang/String;)V
-      #18 = Utf8               java/io/PrintStream
-      #19 = Utf8               println
-      #20 = Utf8               (Ljava/lang/String;)V
-      #21 = Class              #22            // Hello
-      #22 = Utf8               Hello
-      #23 = Utf8               Code
-      #24 = Utf8               LineNumberTable
-      #25 = Utf8               main
-      #26 = Utf8               ([Ljava/lang/String;)V
-      #27 = Utf8               SourceFile
-      #28 = Utf8               Hello.java
-    {
-      public Hello();
-        descriptor: ()V
-        flags: (0x0001) ACC_PUBLIC
-        Code:
-          stack=1, locals=1, args_size=1
-             0: aload_0
-             1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
-             4: return
-          LineNumberTable:
-            line 1: 0
-    
-      public static void main(java.lang.String[]);
-        descriptor: ([Ljava/lang/String;)V
-        flags: (0x0009) ACC_PUBLIC, ACC_STATIC
-        Code:
-          stack=2, locals=1, args_size=1
-             0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
-             3: ldc           #13                 // String Hello world
-             5: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-             8: return
-          LineNumberTable:
-            line 3: 0
-            line 4: 8
-    }
-    SourceFile: "Hello.java"
+```java
+
+
+Classfile /L:/JAVA/BasicSyntax/Learn_JVM/code/Hello.class
+  Last modified 2023年9月5日; size 415 bytes
+  SHA-256 checksum 35b1e377d78c81fc0a324af427c3e67c3a468b293c544de8715343f4d97c0c52
+  Compiled from "Hello.java"
+public class Hello
+  minor version: 0
+  major version: 61
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #21                         // Hello
+  super_class: #2                         // java/lang/Object
+  interfaces: 0, fields: 0, methods: 2, attributes: 1
+Constant pool:
+   #1 = Methodref          #2.#3          // java/lang/Object."&lt;init&gt;":()V
+   #2 = Class              #4             // java/lang/Object
+   #3 = NameAndType        #5:#6          // "&lt;init&gt;":()V
+   #4 = Utf8               java/lang/Object
+   #5 = Utf8               &lt;init&gt;
+   #6 = Utf8               ()V
+   #7 = Fieldref           #8.#9          // java/lang/System.out:Ljava/io/PrintStream;
+   #8 = Class              #10            // java/lang/System
+   #9 = NameAndType        #11:#12        // out:Ljava/io/PrintStream;
+  #10 = Utf8               java/lang/System
+  #11 = Utf8               out
+  #12 = Utf8               Ljava/io/PrintStream;
+  #13 = String             #14            // Hello world
+  #14 = Utf8               Hello world
+  #15 = Methodref          #16.#17        // java/io/PrintStream.println:(Ljava/lang/String;)V
+  #16 = Class              #18            // java/io/PrintStream
+  #17 = NameAndType        #19:#20        // println:(Ljava/lang/String;)V
+  #18 = Utf8               java/io/PrintStream
+  #19 = Utf8               println
+  #20 = Utf8               (Ljava/lang/String;)V
+  #21 = Class              #22            // Hello
+  #22 = Utf8               Hello
+  #23 = Utf8               Code
+  #24 = Utf8               LineNumberTable
+  #25 = Utf8               main
+  #26 = Utf8               ([Ljava/lang/String;)V
+  #27 = Utf8               SourceFile
+  #28 = Utf8               Hello.java
+{
+  public Hello();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+         4: return
+      LineNumberTable:
+        line 1: 0
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         3: ldc           #13                 // String Hello world
+         5: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+         8: return
+      LineNumberTable:
+        line 3: 0
+        line 4: 8
+}
+SourceFile: "Hello.java"
+```
 
 上述文件内容就是利用 `javap` 反汇编得到的全部信息，这实际上是因为 `Class` 文件采用了一种类似于 `C` 中结构体的伪结构来存储数据。
 
@@ -206,29 +218,37 @@ description: ""
 
   1. 局部变量加载指令（Load Instructions）：
 
-     * `iload`: 从局部变量表加载一个int类型的变量到操作栈。
-     * `lload`: 从局部变量表加载一个long类型的变量到操作栈。
-     * `fload`: 从局部变量表加载一个float类型的变量到操作栈。
-     * `dload`: 从局部变量表加载一个double类型的变量到操作栈。
-     * `aload`: 从局部变量表加载一个引用类型的变量到操作栈。
+```java
+ * `iload`: 从局部变量表加载一个int类型的变量到操作栈。
+ * `lload`: 从局部变量表加载一个long类型的变量到操作栈。
+ * `fload`: 从局部变量表加载一个float类型的变量到操作栈。
+ * `dload`: 从局部变量表加载一个double类型的变量到操作栈。
+ * `aload`: 从局部变量表加载一个引用类型的变量到操作栈。
+```
   2. 局部变量存储指令（Store Instructions）：
 
-     * `istore`: 将一个int类型的数值从操作数栈存储到局部变量表。
-     * `lstore`: 将一个long类型的数值从操作数栈存储到局部变量表。
-     * `fstore`: 将一个float类型的数值从操作数栈存储到局部变量表。
-     * `dstore`: 将一个double类型的数值从操作数栈存储到局部变量表。
-     * `astore`: 将一个引用类型的数值从操作数栈存储到局部变量表。
+```java
+ * `istore`: 将一个int类型的数值从操作数栈存储到局部变量表。
+ * `lstore`: 将一个long类型的数值从操作数栈存储到局部变量表。
+ * `fstore`: 将一个float类型的数值从操作数栈存储到局部变量表。
+ * `dstore`: 将一个double类型的数值从操作数栈存储到局部变量表。
+ * `astore`: 将一个引用类型的数值从操作数栈存储到局部变量表。
+```
   3. 常量加载指令（Constant Instructions）：
 
-     * `iconst`: 将int类型的常量加载到操作数栈。
-     * `lconst`: 将long类型的常量加载到操作数栈。
-     * `fconst`: 将float类型的常量加载到操作数栈。
-     * `dconst`: 将double类型的常量加载到操作数栈。
-     * `aconst_null`: 将null引用加载到操作数栈。
+```java
+ * `iconst`: 将int类型的常量加载到操作数栈。
+ * `lconst`: 将long类型的常量加载到操作数栈。
+ * `fconst`: 将float类型的常量加载到操作数栈。
+ * `dconst`: 将double类型的常量加载到操作数栈。
+ * `aconst_null`: 将null引用加载到操作数栈。
+```
   4. 操作数栈指令（Stack Instructions）：
 
-     * `bipush`: 将一个字节大小的常量加载到操作数栈。
-     * `sipush`: 将一个短整型大小的常量加载到操作数栈。
+```java
+ * `bipush`: 将一个字节大小的常量加载到操作数栈。
+ * `sipush`: 将一个短整型大小的常量加载到操作数栈。
+```
 
 
 
@@ -240,70 +260,94 @@ description: ""
 
   1. 加法指令（Addition Instructions）：
 
-     * `iadd`: 执行两个int类型操作数的相加操作。
-     * `ladd`: 执行两个long类型操作数的相加操作。
-     * `fadd`: 执行两个float类型操作数的相加操作。
-     * `dadd`: 执行两个double类型操作数的相加操作。
+```java
+ * `iadd`: 执行两个int类型操作数的相加操作。
+ * `ladd`: 执行两个long类型操作数的相加操作。
+ * `fadd`: 执行两个float类型操作数的相加操作。
+ * `dadd`: 执行两个double类型操作数的相加操作。
+```
   2. 减法指令（Subtraction Instructions）：
 
-     * `isub`: 执行两个int类型操作数的相减操作。
-     * `lsub`: 执行两个long类型操作数的相减操作。
-     * `fsub`: 执行两个float类型操作数的相减操作。
-     * `dsub`: 执行两个double类型操作数的相减操作。
+```java
+ * `isub`: 执行两个int类型操作数的相减操作。
+ * `lsub`: 执行两个long类型操作数的相减操作。
+ * `fsub`: 执行两个float类型操作数的相减操作。
+ * `dsub`: 执行两个double类型操作数的相减操作。
+```
   3. 乘法指令（Multiplication Instructions）：
 
-     * `imul`: 执行两个int类型操作数的相乘操作。
-     * `lmul`: 执行两个long类型操作数的相乘操作。
-     * `fmul`: 执行两个float类型操作数的相乘操作。
-     * `dmul`: 执行两个double类型操作数的相乘操作。
+```java
+ * `imul`: 执行两个int类型操作数的相乘操作。
+ * `lmul`: 执行两个long类型操作数的相乘操作。
+ * `fmul`: 执行两个float类型操作数的相乘操作。
+ * `dmul`: 执行两个double类型操作数的相乘操作。
+```
   4. 除法指令（Division Instructions）：
 
-     * `idiv`: 执行两个int类型操作数的相除操作。
-     * `ldiv`: 执行两个long类型操作数的相除操作。
-     * `fdiv`: 执行两个float类型操作数的相除操作。
-     * `ddiv`: 执行两个double类型操作数的相除操作。
+```java
+ * `idiv`: 执行两个int类型操作数的相除操作。
+ * `ldiv`: 执行两个long类型操作数的相除操作。
+ * `fdiv`: 执行两个float类型操作数的相除操作。
+ * `ddiv`: 执行两个double类型操作数的相除操作。
+```
   5. 求余指令（Remainder Instructions）：
 
-     * `irem`: 执行两个int类型操作数的求余操作。
-     * `lrem`: 执行两个long类型操作数的求余操作。
-     * `frem`: 执行两个float类型操作数的求余操作。
-     * `drem`: 执行两个double类型操作数的求余操作。
+```java
+ * `irem`: 执行两个int类型操作数的求余操作。
+ * `lrem`: 执行两个long类型操作数的求余操作。
+ * `frem`: 执行两个float类型操作数的求余操作。
+ * `drem`: 执行两个double类型操作数的求余操作。
+```
   6. 取反指令（Negation Instructions）：
 
-     * `ineg`: 对一个int类型操作数进行取反操作。
-     * `lneg`: 对一个long类型操作数进行取反操作。
-     * `fneg`: 对一个float类型操作数进行取反操作。
-     * `dneg`: 对一个double类型操作数进行取反操作。
+```java
+ * `ineg`: 对一个int类型操作数进行取反操作。
+ * `lneg`: 对一个long类型操作数进行取反操作。
+ * `fneg`: 对一个float类型操作数进行取反操作。
+ * `dneg`: 对一个double类型操作数进行取反操作。
+```
   7. 位移指令（Shift Instructions）：
 
-     * `ishl`: 对一个int类型操作数进行左移操作。
-     * `ishr`: 对一个int类型操作数进行带符号右移操作。
-     * `iushr`: 对一个int类型操作数进行无符号右移操作。
-     * `lshl`: 对一个long类型操作数进行左移操作。
-     * `lshr`: 对一个long类型操作数进行带符号右移操作。
-     * `lushr`: 对一个long类型操作数进行无符号右移操作。
+```java
+ * `ishl`: 对一个int类型操作数进行左移操作。
+ * `ishr`: 对一个int类型操作数进行带符号右移操作。
+ * `iushr`: 对一个int类型操作数进行无符号右移操作。
+ * `lshl`: 对一个long类型操作数进行左移操作。
+ * `lshr`: 对一个long类型操作数进行带符号右移操作。
+ * `lushr`: 对一个long类型操作数进行无符号右移操作。
+```
   8. 按位或指令（Bitwise OR Instructions）：
 
-     * `ior`: 对两个int类型操作数进行按位或操作。
-     * `lor`: 对两个long类型操作数进行按位或操作。
+```java
+ * `ior`: 对两个int类型操作数进行按位或操作。
+ * `lor`: 对两个long类型操作数进行按位或操作。
+```
   9. 按位与指令（Bitwise AND Instructions）：
 
-     * `iand`: 对两个int类型操作数进行按位与操作。
-     * `land`: 对两个long类型操作数进行按位与操作。
+```java
+ * `iand`: 对两个int类型操作数进行按位与操作。
+ * `land`: 对两个long类型操作数进行按位与操作。
+```
   10. 按位异或指令（Bitwise XOR Instructions）：
 
-     * `ixor`: 对两个int类型操作数进行按位异或操作。
-     * `lxor`: 对两个long类型操作数进行按位异或操作。
+```java
+ * `ixor`: 对两个int类型操作数进行按位异或操作。
+ * `lxor`: 对两个long类型操作数进行按位异或操作。
+```
   11. 局部变量自增指令（Increment Instructions）：
 
-     * `iinc`: 对一个int类型的局部变量进行自增操作。
+```java
+ * `iinc`: 对一个int类型的局部变量进行自增操作。
+```
   12. 比较指令（Comparison Instructions）：
 
-     * `dcmpg`: 比较两个double类型操作数的大小（带NaN处理）。
-     * `dcmpl`: 比较两个double类型操作数的大小（带NaN处理）。
-     * `fcmpg`: 比较两个float类型操作数的大小（带NaN处理）。
-     * `fcmpl`: 比较两个float类型操作数的大小（带NaN处理）。
-     * `lcmp`: 比较两个long类型操作数的大小。
+```java
+ * `dcmpg`: 比较两个double类型操作数的大小（带NaN处理）。
+ * `dcmpl`: 比较两个double类型操作数的大小（带NaN处理）。
+ * `fcmpg`: 比较两个float类型操作数的大小（带NaN处理）。
+ * `fcmpl`: 比较两个float类型操作数的大小（带NaN处理）。
+ * `lcmp`: 比较两个long类型操作数的大小。
+```
 
 
 
@@ -315,27 +359,33 @@ description: ""
 
   1. 整数类型转换指令（Integer Conversion Instructions）：
 
-     * `i2l`: 将int类型转换为long类型。
-     * `i2f`: 将int类型转换为float类型。
-     * `i2d`: 将int类型转换为double类型。
-     * `l2i`: 将long类型转换为int类型。
-     * `l2f`: 将long类型转换为float类型。
-     * `l2d`: 将long类型转换为double类型。
-     * `f2i`: 将float类型转换为int类型。
-     * `f2l`: 将float类型转换为long类型。
-     * `f2d`: 将float类型转换为double类型。
-     * `d2i`: 将double类型转换为int类型。
-     * `d2l`: 将double类型转换为long类型。
-     * `d2f`: 将double类型转换为float类型。
+```java
+ * `i2l`: 将int类型转换为long类型。
+ * `i2f`: 将int类型转换为float类型。
+ * `i2d`: 将int类型转换为double类型。
+ * `l2i`: 将long类型转换为int类型。
+ * `l2f`: 将long类型转换为float类型。
+ * `l2d`: 将long类型转换为double类型。
+ * `f2i`: 将float类型转换为int类型。
+ * `f2l`: 将float类型转换为long类型。
+ * `f2d`: 将float类型转换为double类型。
+ * `d2i`: 将double类型转换为int类型。
+ * `d2l`: 将double类型转换为long类型。
+ * `d2f`: 将double类型转换为float类型。
+```
   2. 类型强制转换指令（Type Casting Instructions）：
 
-     * `checkcast`: 检查对象是否可以强制转换为指定类型。
-     * `instanceof`: 检查对象是否是指定类型的实例。
+```java
+ * `checkcast`: 检查对象是否可以强制转换为指定类型。
+ * `instanceof`: 检查对象是否是指定类型的实例。
+```
   3. 数值拓宽和缩窄指令（Numeric Widening and Narrowing Instructions）：
 
-     * `i2b`: 将int类型转换为byte类型。
-     * `i2c`: 将int类型转换为char类型。
-     * `i2s`: 将int类型转换为short类型。
+```java
+ * `i2b`: 将int类型转换为byte类型。
+ * `i2c`: 将int类型转换为char类型。
+ * `i2s`: 将int类型转换为short类型。
+```
 
 
 
@@ -347,18 +397,22 @@ description: ""
 
   1. 对象创建指令（Object Creation Instructions）：
 
-     * `new`: 创建一个新的对象，并将其引用推送到操作数栈上。
-     * `newarray`: 创建一个指定类型的新数组，并将其引用推送到操作数栈上。
-     * `anewarray`: 创建一个引用类型的新数组，并将其引用推送到操作数栈上。
-     * `multianewarray`: 创建一个多维数组，并将其引用推送到操作数栈上。
+```java
+ * `new`: 创建一个新的对象，并将其引用推送到操作数栈上。
+ * `newarray`: 创建一个指定类型的新数组，并将其引用推送到操作数栈上。
+ * `anewarray`: 创建一个引用类型的新数组，并将其引用推送到操作数栈上。
+ * `multianewarray`: 创建一个多维数组，并将其引用推送到操作数栈上。
+```
   2. 对象访问指令（Object Access Instructions）：
 
-     * `getfield`: 从对象中获取实例字段的值，并将其推送到操作数栈上。
-     * `putfield`: 将一个值存储到对象的实例字段中。
-     * `getstatic`: 获取静态字段的值，并将其推送到操作数栈上。
-     * `putstatic`: 将一个值存储到静态字段中。
-     * `arraylength`: 获取数组的长度，并将其推送到操作数栈上。
-     * `aload`: 从局部变量表加载一个引用类型的变量到操作栈上。
+```java
+ * `getfield`: 从对象中获取实例字段的值，并将其推送到操作数栈上。
+ * `putfield`: 将一个值存储到对象的实例字段中。
+ * `getstatic`: 获取静态字段的值，并将其推送到操作数栈上。
+ * `putstatic`: 将一个值存储到静态字段中。
+ * `arraylength`: 获取数组的长度，并将其推送到操作数栈上。
+ * `aload`: 从局部变量表加载一个引用类型的变量到操作栈上。
+```
 
 
 
@@ -370,19 +424,25 @@ description: ""
 
   1. 出栈指令（Pop Instructions）：
 
-     * `pop`: 将操作数栈的栈顶元素出栈。
-     * `pop2`: 将操作数栈的栈顶的一个或两个元素出栈。
+```java
+ * `pop`: 将操作数栈的栈顶元素出栈。
+ * `pop2`: 将操作数栈的栈顶的一个或两个元素出栈。
+```
   2. 复制指令（Duplicate Instructions）：
 
-     * `dup`: 复制操作数栈的栈顶元素，并将复制值重新压入栈顶。
-     * `dup2`: 复制操作数栈的栈顶的一个或两个元素，并将复制值或双份的复制值重新压入栈顶。
-     * `dup_x1`: 复制操作数栈的栈顶元素，并将复制值插入栈顶下面的一个元素之前。
-     * `dup2_x1`: 复制操作数栈的栈顶的一个或两个元素，并将复制值或双份的复制值插入栈顶下面的一个元素之前。
-     * `dup_x2`: 复制操作数栈的栈顶元素，并将复制值插入栈顶下面的两个元素之前。
-     * `dup2_x2`: 复制操作数栈的栈顶的一个或两个元素，并将复制值或双份的复制值插入栈顶下面的两个元素之前。
+```java
+ * `dup`: 复制操作数栈的栈顶元素，并将复制值重新压入栈顶。
+ * `dup2`: 复制操作数栈的栈顶的一个或两个元素，并将复制值或双份的复制值重新压入栈顶。
+ * `dup_x1`: 复制操作数栈的栈顶元素，并将复制值插入栈顶下面的一个元素之前。
+ * `dup2_x1`: 复制操作数栈的栈顶的一个或两个元素，并将复制值或双份的复制值插入栈顶下面的一个元素之前。
+ * `dup_x2`: 复制操作数栈的栈顶元素，并将复制值插入栈顶下面的两个元素之前。
+ * `dup2_x2`: 复制操作数栈的栈顶的一个或两个元素，并将复制值或双份的复制值插入栈顶下面的两个元素之前。
+```
   3. 交换指令（Swap Instruction）：
 
-     * `swap`: 将操作数栈最顶端的两个数值互换。
+```java
+ * `swap`: 将操作数栈最顶端的两个数值互换。
+```
 
 
 
@@ -394,33 +454,39 @@ description: ""
 
   1. 条件分支指令：
 
-     * `ifeq`: 如果栈顶值等于0，则跳转到指定位置。
-     * `iflt`: 如果栈顶值小于0，则跳转到指定位置。
-     * `ifle`: 如果栈顶值小于等于0，则跳转到指定位置。
-     * `ifne`: 如果栈顶值不等于0，则跳转到指定位置。
-     * `ifgt`: 如果栈顶值大于0，则跳转到指定位置。
-     * `ifge`: 如果栈顶值大于等于0，则跳转到指定位置。
-     * `ifnull`: 如果栈顶值为null，则跳转到指定位置。
-     * `ifnonnull`: 如果栈顶值不为null，则跳转到指定位置。
-     * `if_icmpeq`: 如果栈顶两个int值相等，则跳转到指定位置。
-     * `if_icmpne`: 如果栈顶两个int值不相等，则跳转到指定位置。
-     * `if_icmplt`: 如果栈顶第二个int值小于栈顶第一个int值，则跳转到指定位置。
-     * `if_icmpgt`: 如果栈顶第二个int值大于栈顶第一个int值，则跳转到指定位置。
-     * `if_icmple`: 如果栈顶第二个int值小于等于栈顶第一个int值，则跳转到指定位置。
-     * `if_icmpge`: 如果栈顶第二个int值大于等于栈顶第一个int值，则跳转到指定位置。
-     * `if_acmpeq`: 如果栈顶两个引用值相等，则跳转到指定位置。
-     * `if_acmpne`: 如果栈顶两个引用值不相等，则跳转到指定位置。
+```java
+ * `ifeq`: 如果栈顶值等于0，则跳转到指定位置。
+ * `iflt`: 如果栈顶值小于0，则跳转到指定位置。
+ * `ifle`: 如果栈顶值小于等于0，则跳转到指定位置。
+ * `ifne`: 如果栈顶值不等于0，则跳转到指定位置。
+ * `ifgt`: 如果栈顶值大于0，则跳转到指定位置。
+ * `ifge`: 如果栈顶值大于等于0，则跳转到指定位置。
+ * `ifnull`: 如果栈顶值为null，则跳转到指定位置。
+ * `ifnonnull`: 如果栈顶值不为null，则跳转到指定位置。
+ * `if_icmpeq`: 如果栈顶两个int值相等，则跳转到指定位置。
+ * `if_icmpne`: 如果栈顶两个int值不相等，则跳转到指定位置。
+ * `if_icmplt`: 如果栈顶第二个int值小于栈顶第一个int值，则跳转到指定位置。
+ * `if_icmpgt`: 如果栈顶第二个int值大于栈顶第一个int值，则跳转到指定位置。
+ * `if_icmple`: 如果栈顶第二个int值小于等于栈顶第一个int值，则跳转到指定位置。
+ * `if_icmpge`: 如果栈顶第二个int值大于等于栈顶第一个int值，则跳转到指定位置。
+ * `if_acmpeq`: 如果栈顶两个引用值相等，则跳转到指定位置。
+ * `if_acmpne`: 如果栈顶两个引用值不相等，则跳转到指定位置。
+```
   2. 复合条件分支指令：
 
-     * `tableswitch`: 根据一个索引值进行跳转，通过索引值在一张表中查找跳转位置。
-     * `lookupswitch`: 根据一个键值进行跳转，通过键值在一张表中查找跳转位置。
+```java
+ * `tableswitch`: 根据一个索引值进行跳转，通过索引值在一张表中查找跳转位置。
+ * `lookupswitch`: 根据一个键值进行跳转，通过键值在一张表中查找跳转位置。
+```
   3. 无条件分支指令：
 
-     * `goto`: 无条件跳转到指定位置。
-     * `goto_w`: 无条件跳转到指定位置（扩展索引）。
-     * `jsr`: 跳转到指定位置，并将返回地址压入栈顶。
-     * `jsr_w`: 跳转到指定位置（扩展索引），并将返回地址压入栈顶。
-     * `ret`: 返回到指定的局部变量索引位置。
+```java
+ * `goto`: 无条件跳转到指定位置。
+ * `goto_w`: 无条件跳转到指定位置（扩展索引）。
+ * `jsr`: 跳转到指定位置，并将返回地址压入栈顶。
+ * `jsr_w`: 跳转到指定位置（扩展索引），并将返回地址压入栈顶。
+ * `ret`: 返回到指定的局部变量索引位置。
+```
 
 
 
@@ -519,12 +585,14 @@ description: ""
 例如计算：$1 + 1$ 两种指令集看起来是下面这样：
 
 基于栈的指令集：
-    
-    
-    iconst_1
-    iconst_1
-    iadd
-    istore_0
+```java
+
+
+iconst_1
+iconst_1
+iadd
+istore_0
+```
 
 对于上面的指令：
 
@@ -536,10 +604,12 @@ description: ""
 
 
 基于寄存器的指令集：
-    
-    
-    mov eax, 1
-    add eax, 1
+```java
+
+
+mov eax, 1
+add eax, 1
+```
 
 对于上面的指令：
 
@@ -553,22 +623,30 @@ description: ""
 基于栈的指令集：
 
   1. 优点： 
-     * 可移植性：由于不直接依赖硬件寄存器，栈指令集更具可移植性，可以在不同的硬件平台上运行。
-     * 代码紧凑：栈指令集的指令相对较少，使得生成的字节码更紧凑。
-     * 简化编译器实现：栈指令集不需要考虑寄存器分配等问题，编译器的实现相对简单。
+```java
+ * 可移植性：由于不直接依赖硬件寄存器，栈指令集更具可移植性，可以在不同的硬件平台上运行。
+ * 代码紧凑：栈指令集的指令相对较少，使得生成的字节码更紧凑。
+ * 简化编译器实现：栈指令集不需要考虑寄存器分配等问题，编译器的实现相对简单。
+```
   2. 缺点： 
-     * 执行速度较慢：栈指令集需要频繁进行栈操作和内存访问，内存访问开销大，相对于基于寄存器的指令集执行速度较慢。
+```java
+ * 执行速度较慢：栈指令集需要频繁进行栈操作和内存访问，内存访问开销大，相对于基于寄存器的指令集执行速度较慢。
+```
 
 
 
 基于寄存器的指令集：
 
   1. 优点： 
-     * 较高的执行速度：基于寄存器的指令集在执行速度上通常较快，因为寄存器操作速度快，无需频繁的内存访问。
-     * 更接近物理机的指令集：主流物理机的指令集都是基于寄存器的，因此基于寄存器的指令集更贴近硬件实现。
+```java
+ * 较高的执行速度：基于寄存器的指令集在执行速度上通常较快，因为寄存器操作速度快，无需频繁的内存访问。
+ * 更接近物理机的指令集：主流物理机的指令集都是基于寄存器的，因此基于寄存器的指令集更贴近硬件实现。
+```
   2. 缺点： 
-     * 硬件依赖性：基于寄存器的指令集直接依赖硬件寄存器，因此在不同的硬件平台上可能存在差异，可移植性较差。
-     * 编译器复杂性：基于寄存器的指令集需要考虑寄存器分配等复杂问题，编译器的实现相对较复杂。
+```java
+ * 硬件依赖性：基于寄存器的指令集直接依赖硬件寄存器，因此在不同的硬件平台上可能存在差异，可移植性较差。
+ * 编译器复杂性：基于寄存器的指令集需要考虑寄存器分配等复杂问题，编译器的实现相对较复杂。
+```
 
 
 
@@ -579,102 +657,110 @@ description: ""
 * * *
 
 接下看我们具体看一个实际的代码示例：
-    
-    
-    public class Test {
-        public static void main(String[] args) {
-            int a = 114;
-            int b = 514;
-            int c = a + b;
-        }
+```java
+
+
+public class Test {
+    public static void main(String[] args) {
+        int a = 114;
+        int b = 514;
+        int c = a + b;
     }
+}
+```
 
 将上述代码保存为 `Test.java` 然后对其进行编译和反编译：
-    
-    
-    javac Test.java
-    javap -v Test.class
+```java
+
+
+javac Test.java
+javap -v Test.class
+```
 
 可以看到输出了如下内容：
-    
-    
-    Classfile /L:/JAVA/BasicSyntax/Learn_JVM/code/Test.class
-      Last modified 2023年9月6日; size 276 bytes
-      SHA-256 checksum 4064a19d96fe4d72c9d780ef819e1e937b120c31b37482e0b74c70e37c2a5601
-      Compiled from "Test.java"
-    public class Test
-      minor version: 0
-      major version: 61
-      flags: (0x0021) ACC_PUBLIC, ACC_SUPER
-      this_class: #7                          // Test
-      super_class: #2                         // java/lang/Object
-      interfaces: 0, fields: 0, methods: 2, attributes: 1
-    Constant pool:
-       #1 = Methodref          #2.#3          // java/lang/Object."&lt;init&gt;":()V
-       #2 = Class              #4             // java/lang/Object
-       #3 = NameAndType        #5:#6          // "&lt;init&gt;":()V
-       #4 = Utf8               java/lang/Object
-       #5 = Utf8               &lt;init&gt;
-       #6 = Utf8               ()V
-       #7 = Class              #8             // Test
-       #8 = Utf8               Test
-       #9 = Utf8               Code
-      #10 = Utf8               LineNumberTable
-      #11 = Utf8               main
-      #12 = Utf8               ([Ljava/lang/String;)V
-      #13 = Utf8               SourceFile
-      #14 = Utf8               Test.java
-    {
-      public Test();
-        descriptor: ()V
-        flags: (0x0001) ACC_PUBLIC
-        Code:
-          stack=1, locals=1, args_size=1
-             0: aload_0
-             1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
-             4: return
-          LineNumberTable:
-            line 1: 0
-    
-      public static void main(java.lang.String[]);
-        descriptor: ([Ljava/lang/String;)V
-        flags: (0x0009) ACC_PUBLIC, ACC_STATIC
-        Code:
-          stack=2, locals=4, args_size=1
-             0: bipush        114
-             2: istore_1
-             3: sipush        514
-             6: istore_2
-             7: iload_1
-             8: iload_2
-             9: iadd
-            10: istore_3
-            11: return
-          LineNumberTable:
-            line 3: 0
-            line 4: 3
-            line 5: 7
-            line 6: 11
-    }
-    SourceFile: "Test.java"
+```java
+
+
+Classfile /L:/JAVA/BasicSyntax/Learn_JVM/code/Test.class
+  Last modified 2023年9月6日; size 276 bytes
+  SHA-256 checksum 4064a19d96fe4d72c9d780ef819e1e937b120c31b37482e0b74c70e37c2a5601
+  Compiled from "Test.java"
+public class Test
+  minor version: 0
+  major version: 61
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #7                          // Test
+  super_class: #2                         // java/lang/Object
+  interfaces: 0, fields: 0, methods: 2, attributes: 1
+Constant pool:
+   #1 = Methodref          #2.#3          // java/lang/Object."&lt;init&gt;":()V
+   #2 = Class              #4             // java/lang/Object
+   #3 = NameAndType        #5:#6          // "&lt;init&gt;":()V
+   #4 = Utf8               java/lang/Object
+   #5 = Utf8               &lt;init&gt;
+   #6 = Utf8               ()V
+   #7 = Class              #8             // Test
+   #8 = Utf8               Test
+   #9 = Utf8               Code
+  #10 = Utf8               LineNumberTable
+  #11 = Utf8               main
+  #12 = Utf8               ([Ljava/lang/String;)V
+  #13 = Utf8               SourceFile
+  #14 = Utf8               Test.java
+{
+  public Test();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+         4: return
+      LineNumberTable:
+        line 1: 0
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=4, args_size=1
+         0: bipush        114
+         2: istore_1
+         3: sipush        514
+         6: istore_2
+         7: iload_1
+         8: iload_2
+         9: iadd
+        10: istore_3
+        11: return
+      LineNumberTable:
+        line 3: 0
+        line 4: 3
+        line 5: 7
+        line 6: 11
+}
+SourceFile: "Test.java"
+```
 
 我们专注于下列信息：
-    
-    
-    public static void main(java.lang.String[]);
-        descriptor: ([Ljava/lang/String;)V
-        flags: (0x0009) ACC_PUBLIC, ACC_STATIC
-        Code:
-          stack=2, locals=4, args_size=1
-             0: bipush        114
-             2: istore_1
-             3: sipush        514
-             6: istore_2
-             7: iload_1
-             8: iload_2
-             9: iadd
-            10: istore_3
-            11: return
+```java
+
+
+public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=4, args_size=1
+         0: bipush        114
+         2: istore_1
+         3: sipush        514
+         6: istore_2
+         7: iload_1
+         8: iload_2
+         9: iadd
+        10: istore_3
+        11: return
+```
 
 其中：
 
@@ -685,69 +771,73 @@ description: ""
 
 
 我们针对其中的 `main` 入口代码 `Code` 展示解释器的执行过程，其中：
-    
-    
-    stack=2, locals=4, args_size=1
+```java
+
+
+stack=2, locals=4, args_size=1
+```
 
 提示我们这段代码需要深度为 $2$ 的操作数栈、 $4$ 个变量槽的局部变量空间和 $1$ 个方法参数。
 
 根据给定的字节码指令，我们可以模拟执行程序并跟踪操作数栈、局部变量表和程序计数器的动态变化过程。
 
 首先，我们创建一个操作数栈（operand stack）和一个局部变量表（local variable table），并初始化程序计数器（program counter）为0。
-    
-    
-    执行：0: bipush        114
-    操作数栈状态：[114（栈顶）, null]
-    局部变量表状态：[this（索引起始）, null, null, null]
-    程序计数器状态：0
-    
-    
-    执行：2: istore_1
-    操作数栈状态：[null（栈顶）, null]
-    局部变量表状态：[this, 114, null, null]
-    程序计数器状态：2
-    
-    
-    执行：3: sipush        514
-    操作数栈状态：[514（栈顶）, null]
-    局部变量表状态：[this, 114, null, null]
-    程序计数器状态：3
-    
-    
-    执行：6: istore_2
-    操作数栈状态：[nul（栈顶）, null]
-    局部变量表状态：[this, 114, 514, null]
-    程序计数器状态：6
-    
-    
-    执行：7: iload_1
-    操作数栈状态：[114（栈顶）, null]
-    局部变量表状态：[this, 114, 514, null]
-    程序计数器状态：7
-    
-    
-    执行：8: iload_2
-    操作数栈状态：[114（栈顶）, 514]
-    局部变量表状态：[this, 114, 514, null]
-    程序计数器状态：8
-    
-    
-    执行：9: iadd
-    操作数栈状态：[628（栈顶）, null]
-    局部变量表状态：[this, 114, 514, null]
-    程序计数器状态：9
-    
-    
-    执行：10: istore_3
-    操作数栈状态：[null（栈顶）, null]
-    局部变量表状态：[this, 114, 514, 628]
-    程序计数器状态：10
-    
-    
-    执行：11: return
-    操作数栈状态：[null（栈顶）, null]
-    局部变量表状态：[this, 114, 514, 628]
-    程序计数器状态：11
+```java
+
+
+执行：0: bipush        114
+操作数栈状态：[114（栈顶）, null]
+局部变量表状态：[this（索引起始）, null, null, null]
+程序计数器状态：0
+
+
+执行：2: istore_1
+操作数栈状态：[null（栈顶）, null]
+局部变量表状态：[this, 114, null, null]
+程序计数器状态：2
+
+
+执行：3: sipush        514
+操作数栈状态：[514（栈顶）, null]
+局部变量表状态：[this, 114, null, null]
+程序计数器状态：3
+
+
+执行：6: istore_2
+操作数栈状态：[nul（栈顶）, null]
+局部变量表状态：[this, 114, 514, null]
+程序计数器状态：6
+
+
+执行：7: iload_1
+操作数栈状态：[114（栈顶）, null]
+局部变量表状态：[this, 114, 514, null]
+程序计数器状态：7
+
+
+执行：8: iload_2
+操作数栈状态：[114（栈顶）, 514]
+局部变量表状态：[this, 114, 514, null]
+程序计数器状态：8
+
+
+执行：9: iadd
+操作数栈状态：[628（栈顶）, null]
+局部变量表状态：[this, 114, 514, null]
+程序计数器状态：9
+
+
+执行：10: istore_3
+操作数栈状态：[null（栈顶）, null]
+局部变量表状态：[this, 114, 514, 628]
+程序计数器状态：10
+
+
+执行：11: return
+操作数栈状态：[null（栈顶）, null]
+局部变量表状态：[this, 114, 514, 628]
+程序计数器状态：11
+```
 
 上面的执行过程仅仅是一种概念模型，**虚拟机最终会对执行过程做出一系列优化来提高性能** ，实际的运作过程并不会完全符合概念模型的描述。
 
@@ -858,52 +948,58 @@ description: ""
 > “分派”（Dispatch）这个词本身就具有动态性，一般不应用在静态语境之中，这部分原本在英文原版的《Java虚拟机规范》和《Java语言规范》里的说法都是“Method Overload Resolution”，即应该归入上节的“解析”里去讲解，但部分其他外文资料和国内翻译的许多中文资料都将这种行为称为“静态分派”。
 
 为了解释静态分派和重载，我们看如下示例代码：
-    
-    
-    public class StaticDispatch {
-        static abstract class Human {
-        }
-    
-        static class Man extends Human {
-        }
-    
-        static class Woman extends Human {
-        }
-    
-        public void sayHello(Human guy) {
-            System.out.println("hello,guy!");
-        }
-    
-        public void sayHello(Man guy) {
-            System.out.println("hello,gentleman!");
-        }
-    
-        public void sayHello(Woman guy) {
-            System.out.println("hello,lady!");
-        }
-    
-        public static void main(String[] args) {
-            Human man = new Man();
-            Human woman = new Woman();
-            StaticDispatch sr = new StaticDispatch();
-            sr.sayHello(man);
-            sr.sayHello(woman);
-        }
+```java
+
+
+public class StaticDispatch {
+    static abstract class Human {
     }
+
+    static class Man extends Human {
+    }
+
+    static class Woman extends Human {
+    }
+
+    public void sayHello(Human guy) {
+        System.out.println("hello,guy!");
+    }
+
+    public void sayHello(Man guy) {
+        System.out.println("hello,gentleman!");
+    }
+
+    public void sayHello(Woman guy) {
+        System.out.println("hello,lady!");
+    }
+
+    public static void main(String[] args) {
+        Human man = new Man();
+        Human woman = new Woman();
+        StaticDispatch sr = new StaticDispatch();
+        sr.sayHello(man);
+        sr.sayHello(woman);
+    }
+}
+```
 
 上面的代码中定义了一个 `StaticDispatch` 类，包含了一个抽象类 `Human` 和两个继承自 `Human` 的子类 `Man` 和 `Woman`。类中定义了三个重载的 `sayHello` 方法，分别接受 `Human`、`Man` 和 `Woman` 类型的参数，并输出相应的问候语。
 
 理论上我们重载了 `sayHello()` 方法，运行结果应该是：
-    
-    
-    hello,gentleman!
-    hello,lady!
+```java
+
+
+hello,gentleman!
+hello,lady!
+```
 
 但实际上控制台~~哼哼哼啊啊啊~~ 地输出了：
-    
-    
-    hello, guy!
-    hello, guy!
+```java
+
+
+hello, guy!
+hello, guy!
+```
 
 你先别急，让我先急 🤡
 
@@ -917,66 +1013,70 @@ description: ""
 在上面的代码中，`Human` 是静态类型（也叫外观类型），而 `Man` 和 `Woman` 则是实际类型（也叫运行时类型）。
 
 我们用 `javap` 查看反编译结果：
-    
-    
-    Compiled from "StaticDispatch.java"
-    public class StaticDispatch {
-      public StaticDispatch();
-        Code:
-           0: aload_0
-           1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
-           4: return
-    
-      public void sayHello(StaticDispatch$Human);
-        Code:
-           0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
-           3: ldc           #13                 // String hello,guy!
-           5: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-           8: return
-    
-      public void sayHello(StaticDispatch$Man);
-        Code:
-           0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
-           3: ldc           #21                 // String hello,gentleman!
-           5: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-           8: return
-    
-      public void sayHello(StaticDispatch$Woman);
-        Code:
-           0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
-           3: ldc           #23                 // String hello,lady!
-           5: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-           8: return
-    
-      public static void main(java.lang.String[]);
-        Code:
-           0: new           #25                 // class StaticDispatch$Man
-           3: dup
-           4: invokespecial #27                 // Method StaticDispatch$Man."&lt;init&gt;":()V
-           7: astore_1
-           8: new           #28                 // class StaticDispatch$Woman
-          11: dup
-          12: invokespecial #30                 // Method StaticDispatch$Woman."&lt;init&gt;":()V
-          15: astore_2
-          16: new           #31                 // class StaticDispatch
-          19: dup
-          20: invokespecial #33                 // Method "&lt;init&gt;":()V
-          23: astore_3
-          24: aload_3
-          25: aload_1
-          26: invokevirtual #34                 // Method sayHello:(LStaticDispatch$Human;)V
-          29: aload_3
-          30: aload_2
-          31: invokevirtual #34                 // Method sayHello:(LStaticDispatch$Human;)V
-          34: return
-    }
+```java
+
+
+Compiled from "StaticDispatch.java"
+public class StaticDispatch {
+  public StaticDispatch();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+       4: return
+
+  public void sayHello(StaticDispatch$Human);
+    Code:
+       0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       3: ldc           #13                 // String hello,guy!
+       5: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       8: return
+
+  public void sayHello(StaticDispatch$Man);
+    Code:
+       0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       3: ldc           #21                 // String hello,gentleman!
+       5: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       8: return
+
+  public void sayHello(StaticDispatch$Woman);
+    Code:
+       0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       3: ldc           #23                 // String hello,lady!
+       5: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       8: return
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: new           #25                 // class StaticDispatch$Man
+       3: dup
+       4: invokespecial #27                 // Method StaticDispatch$Man."&lt;init&gt;":()V
+       7: astore_1
+       8: new           #28                 // class StaticDispatch$Woman
+      11: dup
+      12: invokespecial #30                 // Method StaticDispatch$Woman."&lt;init&gt;":()V
+      15: astore_2
+      16: new           #31                 // class StaticDispatch
+      19: dup
+      20: invokespecial #33                 // Method "&lt;init&gt;":()V
+      23: astore_3
+      24: aload_3
+      25: aload_1
+      26: invokevirtual #34                 // Method sayHello:(LStaticDispatch$Human;)V
+      29: aload_3
+      30: aload_2
+      31: invokevirtual #34                 // Method sayHello:(LStaticDispatch$Human;)V
+      34: return
+}
+```
 
 可以明显地看到 `main` 方法里面的 `26` 和 `31` 是我们的方法调用：
-    
-    
-    26: invokevirtual #34                 // Method sayHello:(LStaticDispatch$Human;)V
-    ......
-    31: invokevirtual #34                 // Method sayHello:(LStaticDispatch$Human;)V
+```java
+
+
+26: invokevirtual #34                 // Method sayHello:(LStaticDispatch$Human;)V
+......
+31: invokevirtual #34                 // Method sayHello:(LStaticDispatch$Human;)V
+```
 
 反编译结果已经指明了，尽管 `invokevirtual` 可以根据对象的实际类型进行动态分派，但在静态分派的情况下，编译器已经确定了要调用的方法，因此不会进行动态分派，而是直接调用编译时选择的方法。
 
@@ -985,30 +1085,36 @@ description: ""
 这样也就不难理解了，由于 `man` 和 `woman` 的静态类型都是 `Human`，所以会调用 `Human` 的 `sayHello()` 方法。
 
 但如果我们对原代码稍作修改：
-    
-    
-    public static void main(String[] args) {
-            Human man = new Man();
-            Human woman = new Woman();
-            StaticDispatch sr = new StaticDispatch();
-            sr.sayHello((Man) man);  
-            sr.sayHello((Woman) woman);
-    }
+```java
+
+
+public static void main(String[] args) {
+        Human man = new Man();
+        Human woman = new Woman();
+        StaticDispatch sr = new StaticDispatch();
+        sr.sayHello((Man) man);  
+        sr.sayHello((Woman) woman);
+}
+```
 
 再次编译运行，可以看到结果如下：
-    
-    
-    hello,gentleman!
-    hello,lady!
+```java
+
+
+hello,gentleman!
+hello,lady!
+```
 
 我们用 `javap` 查看反编译结果：
-    
-    
-    26: checkcast     #25                 // class StaticDispatch$Man
-    29: invokevirtual #34                 // Method sayHello:(LStaticDispatch$Man;)V
-    ......
-    34: checkcast     #28                 // class StaticDispatch$Woman
-    37: invokevirtual #38                 // Method sayHello:(LStaticDispatch$Woman;)V
+```java
+
+
+26: checkcast     #25                 // class StaticDispatch$Man
+29: invokevirtual #34                 // Method sayHello:(LStaticDispatch$Man;)V
+......
+34: checkcast     #28                 // class StaticDispatch$Woman
+37: invokevirtual #38                 // Method sayHello:(LStaticDispatch$Woman;)V
+```
 
 可以看到在调用方法之前，先进行了 `checkcast` 检查，确认了 `man` 和 `woman` 强制转换为了对应的实际类型，这样在 `invokevirtual` 指令进行方法调用时，指向的就是对应实际类型的 `sayHello()` 方法了。通过进行强制类型转换，即使在静态类型已经确定的情况下，我们仍绕过了静态分派的规则，使得方法的选择基于实际类型而不是静态类型。
 
@@ -1021,118 +1127,134 @@ description: ""
 动态分派（Dynamic Dispatch）是一种在运行时根据对象的实际类型来选择调用的方法的机制，它与 `Java` 语言多态性的另外一个重要体现——重写（Override）有着很密切的关联。
 
 我们将上节示例代码稍作修改：
-    
-    
-    public class DynamicDispatch {
-        static abstract class Human {
-            protected abstract void sayHello();
-        }
-        static class Man extends Human {
-            @Override
-            protected void sayHello() {
-                System.out.println("man say hello");
-            }
-        }
-        static class Woman extends Human {
-            @Override
-            protected void sayHello() {
-                System.out.println("woman say hello");
-            }
-        }
-        public static void main(String[] args) {
-            Human man = new Man();
-            Human woman = new Woman();
-            man.sayHello();
-            woman.sayHello();
-            man = new Woman();
-            man.sayHello();
+```java
+
+
+public class DynamicDispatch {
+    static abstract class Human {
+        protected abstract void sayHello();
+    }
+    static class Man extends Human {
+        @Override
+        protected void sayHello() {
+            System.out.println("man say hello");
         }
     }
+    static class Woman extends Human {
+        @Override
+        protected void sayHello() {
+            System.out.println("woman say hello");
+        }
+    }
+    public static void main(String[] args) {
+        Human man = new Man();
+        Human woman = new Woman();
+        man.sayHello();
+        woman.sayHello();
+        man = new Woman();
+        man.sayHello();
+    }
+}
+```
 
 在上述代码中，`Human` 是一个抽象类，其中声明了一个抽象方法 `sayHello()`，`Man` 和 `Woman` 类都是 `Human` 类的子类，它们分别重写了 `sayHello()` 方法。我们首先创建了 `Man` 和 `Woman` 的实例对象 `man` 和 `woman` 并调用了相应的 `sayHello()` 方法，然后让 `man` 重新赋值为 `Woman` 的实例，并调用其 `sayHello()` 方法。
 
 理论上运行结果应该为：
-    
-    
-    man say hello
-    woman say hello
-    woman say hello
+```java
+
+
+man say hello
+woman say hello
+woman say hello
+```
 
 实际上：
-    
-    
-    man say hello
-    woman say hello
-    woman say hello
+```java
+
+
+man say hello
+woman say hello
+woman say hello
+```
 
 这个运行结果相信不会出乎任何人的意料 🤗
 
 对于习惯了面向对象思维的我们来说，这是一个理所应当的结果，但问题在于 `Java` 虚拟机是如何根据实际类型来分派方法执行版本的呢？
 
 我们继续用 `javap` 大法查看反编译结果：
-    
-    
-    Compiled from "DynamicDispatch.java"
-    public class DynamicDispatch {
-      public DynamicDispatch();
-        Code:
-           0: aload_0
-           1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
-           4: return
-    
-      public static void main(java.lang.String[]);
-        Code:
-           0: new           #7                  // class DynamicDispatch$Man
-           3: dup
-           4: invokespecial #9                  // Method DynamicDispatch$Man."&lt;init&gt;":()V
-           7: astore_1
-           8: new           #10                 // class DynamicDispatch$Woman
-          11: dup
-          12: invokespecial #12                 // Method DynamicDispatch$Woman."&lt;init&gt;":()V
-          15: astore_2
-          16: aload_1
-          17: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
-          20: aload_2
-          21: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
-          24: new           #10                 // class DynamicDispatch$Woman
-          27: dup
-          28: invokespecial #12                 // Method DynamicDispatch$Woman."&lt;init&gt;":()V
-          31: astore_1
-          32: aload_1
-          33: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
-          36: return
-    }
+```java
+
+
+Compiled from "DynamicDispatch.java"
+public class DynamicDispatch {
+  public DynamicDispatch();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+       4: return
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: new           #7                  // class DynamicDispatch$Man
+       3: dup
+       4: invokespecial #9                  // Method DynamicDispatch$Man."&lt;init&gt;":()V
+       7: astore_1
+       8: new           #10                 // class DynamicDispatch$Woman
+      11: dup
+      12: invokespecial #12                 // Method DynamicDispatch$Woman."&lt;init&gt;":()V
+      15: astore_2
+      16: aload_1
+      17: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
+      20: aload_2
+      21: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
+      24: new           #10                 // class DynamicDispatch$Woman
+      27: dup
+      28: invokespecial #12                 // Method DynamicDispatch$Woman."&lt;init&gt;":()V
+      31: astore_1
+      32: aload_1
+      33: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
+      36: return
+}
+```
 
 在 `main` 方法中：
-    
-    
-    Human man = new Man();
-    Human woman = new Woman();
+```java
+
+
+Human man = new Man();
+Human woman = new Woman();
+```
 
 对应字节码指令为：
-    
-    
-     0: new           #7                  // class DynamicDispatch$Man
-     3: dup
-     4: invokespecial #9                  // Method DynamicDispatch$Man."&lt;init&gt;":()V
-     7: astore_1
-     8: new           #10                 // class DynamicDispatch$Woman
-    11: dup
-    12: invokespecial #12                 // Method DynamicDispatch$Woman."&lt;init&gt;":()V
-    15: astore_2
+```java
+
+
+ 0: new           #7                  // class DynamicDispatch$Man
+ 3: dup
+ 4: invokespecial #9                  // Method DynamicDispatch$Man."&lt;init&gt;":()V
+ 7: astore_1
+ 8: new           #10                 // class DynamicDispatch$Woman
+11: dup
+12: invokespecial #12                 // Method DynamicDispatch$Woman."&lt;init&gt;":()V
+15: astore_2
+```
 
 而调用方法：
-    
-    
-    man.sayHello();
-    woman.sayHello();
+```java
+
+
+man.sayHello();
+woman.sayHello();
+```
 
 对应字节码指令为：
-    
-    
-    17: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
-    ......
-    21: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
+```java
+
+
+17: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
+......
+21: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
+```
 
 可以看到 `invokevirtual` 指令注释已经显示了这个常量是 `DynamicDispatch` 类下 `Human.sayHello()`的符号引用，但是这两句指令最终执行的目标方法并不相同。
 
@@ -1156,9 +1278,13 @@ description: ""
 方法的接收者与方法的参数统称为方法的宗量，根据分派基于多少种宗量，可以将分派划分为单分派和多分派两种：
 
   1. 单分派指的是根据方法调用的接收者的类型来确定使用哪个方法实现。 
-     * 在单分派中，方法的选择仅仅依赖于接收者的类型，不考虑方法参数的类型。
+```java
+ * 在单分派中，方法的选择仅仅依赖于接收者的类型，不考虑方法参数的类型。
+```
   2. 多分派指的是根据方法调用的接收者和参数的类型来确定使用哪个方法实现。 
-     * 在多分派中，方法的选择不仅依赖于接收者的类型，还依赖于方法参数的类型。
+```java
+ * 在多分派中，方法的选择不仅依赖于接收者的类型，还依赖于方法参数的类型。
+```
 
 
 
@@ -1178,204 +1304,218 @@ description: ""
 `JDK 7` 为了更好地支持动态类型语言，引入了第五条方法调用的字节码指令 `invokedynamic`，如果你看过我之前写过的[浅谈 Java 中的 Lambda 表达式](&lt;https://lys2021.com/?p=1544&gt;)，其中在 `Lambda` 的本质一节我也提到了它，那么接下来我们好好康康到底怎么个事（
 
 我们沿用其中的示例：
-    
-    
-    public class LambdaTest {
-    
-        public static interface Test {
-            String showTestNumber(Integer param);
-        }
-    
-        public static void main(String[] args) {
-            Test test = param -> "Test number is " + param;
-            System.out.println(test.showTestNumber(114514));
-        }
+```java
+
+
+public class LambdaTest {
+
+    public static interface Test {
+        String showTestNumber(Integer param);
     }
+
+    public static void main(String[] args) {
+        Test test = param -> "Test number is " + param;
+        System.out.println(test.showTestNumber(114514));
+    }
+}
+```
 
 `javac` 编译后再 `javap` 反编译回去得到下面的内容：
-    
-    
-    Classfile /L:/JAVA/BasicSyntax/Learn_JVM/code/LambdaTest.class
-      Last modified 2023年9月6日; size 1445 bytes
-      SHA-256 checksum 3a71d05fe531173bda2fd05e7b9a5a12dc0fd040047f87a59add471744a6a2be
-      Compiled from "LambdaTest.java"
-    public class LambdaTest
-      minor version: 0
-      major version: 61
-      flags: (0x0021) ACC_PUBLIC, ACC_SUPER
-      this_class: #38                         // LambdaTest
-      super_class: #2                         // java/lang/Object
-      interfaces: 0, fields: 0, methods: 3, attributes: 4
-    Constant pool:
-       #1 = Methodref          #2.#3          // java/lang/Object."&lt;init&gt;":()V
-       #2 = Class              #4             // java/lang/Object
-       #3 = NameAndType        #5:#6          // "&lt;init&gt;":()V
-       #4 = Utf8               java/lang/Object
-       #5 = Utf8               &lt;init&gt;
-       #6 = Utf8               ()V
-       #7 = InvokeDynamic      #0:#8          // #0:showTestNumber:()LLambdaTest$Test;
-       #8 = NameAndType        #9:#10         // showTestNumber:()LLambdaTest$Test;
-       #9 = Utf8               showTestNumber
-      #10 = Utf8               ()LLambdaTest$Test;
-      #11 = Fieldref           #12.#13        // java/lang/System.out:Ljava/io/PrintStream;
-      #12 = Class              #14            // java/lang/System
-      #13 = NameAndType        #15:#16        // out:Ljava/io/PrintStream;
-      #14 = Utf8               java/lang/System
-      #15 = Utf8               out
-      #16 = Utf8               Ljava/io/PrintStream;
-      #17 = Integer            114514
-      #18 = Methodref          #19.#20        // java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
-      #19 = Class              #21            // java/lang/Integer
-      #20 = NameAndType        #22:#23        // valueOf:(I)Ljava/lang/Integer;
-      #21 = Utf8               java/lang/Integer
-      #22 = Utf8               valueOf
-      #23 = Utf8               (I)Ljava/lang/Integer;
-      #24 = InterfaceMethodref #25.#26        // LambdaTest$Test.showTestNumber:(Ljava/lang/Integer;)Ljava/lang/String;
-      #25 = Class              #27            // LambdaTest$Test
-      #26 = NameAndType        #9:#28         // showTestNumber:(Ljava/lang/Integer;)Ljava/lang/String;
-      #27 = Utf8               LambdaTest$Test
-      #28 = Utf8               (Ljava/lang/Integer;)Ljava/lang/String;
-      #29 = Methodref          #30.#31        // java/io/PrintStream.println:(Ljava/lang/String;)V
-      #30 = Class              #32            // java/io/PrintStream
-      #31 = NameAndType        #33:#34        // println:(Ljava/lang/String;)V
-      #32 = Utf8               java/io/PrintStream
-      #33 = Utf8               println
-      #34 = Utf8               (Ljava/lang/String;)V
-      #35 = InvokeDynamic      #1:#36         // #1:makeConcatWithConstants:(Ljava/lang/Integer;)Ljava/lang/String;
-      #36 = NameAndType        #37:#28        // makeConcatWithConstants:(Ljava/lang/Integer;)Ljava/lang/String;
-      #37 = Utf8               makeConcatWithConstants
-      #38 = Class              #39            // LambdaTest
-      #39 = Utf8               LambdaTest
-      #40 = Utf8               Code
-      #41 = Utf8               LineNumberTable
-      #42 = Utf8               main
-      #43 = Utf8               ([Ljava/lang/String;)V
-      #44 = Utf8               lambda$main$0
-      #45 = Utf8               SourceFile
-      #46 = Utf8               LambdaTest.java
-      #47 = Utf8               NestMembers
-      #48 = Utf8               BootstrapMethods
-      #49 = MethodHandle       6:#50          // REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
-      #50 = Methodref          #51.#52        // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
-      #51 = Class              #53            // java/lang/invoke/LambdaMetafactory
-      #52 = NameAndType        #54:#55        // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
-      #53 = Utf8               java/lang/invoke/LambdaMetafactory
-      #54 = Utf8               metafactory
-      #55 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
-      #56 = MethodType         #28            //  (Ljava/lang/Integer;)Ljava/lang/String;
-      #57 = MethodHandle       6:#58          // REF_invokeStatic LambdaTest.lambda$main$0:(Ljava/lang/Integer;)Ljava/lang/String;
-      #58 = Methodref          #38.#59        // LambdaTest.lambda$main$0:(Ljava/lang/Integer;)Ljava/lang/String;
-      #59 = NameAndType        #44:#28        // lambda$main$0:(Ljava/lang/Integer;)Ljava/lang/String;
-      #60 = MethodHandle       6:#61          // REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
-      #61 = Methodref          #62.#63        // java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
-      #62 = Class              #64            // java/lang/invoke/StringConcatFactory
-      #63 = NameAndType        #37:#65        // makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
-      #64 = Utf8               java/lang/invoke/StringConcatFactory
-      #65 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
-      #66 = String             #67            // Test number is \u0001
-      #67 = Utf8               Test number is \u0001
-      #68 = Utf8               InnerClasses
-      #69 = Utf8               Test
-      #70 = Class              #71            // java/lang/invoke/MethodHandles$Lookup
-      #71 = Utf8               java/lang/invoke/MethodHandles$Lookup
-      #72 = Class              #73            // java/lang/invoke/MethodHandles
-      #73 = Utf8               java/lang/invoke/MethodHandles
-      #74 = Utf8               Lookup
-    {
-      public LambdaTest();
-        descriptor: ()V
-        flags: (0x0001) ACC_PUBLIC
-        Code:
-          stack=1, locals=1, args_size=1
-             0: aload_0
-             1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
-             4: return
-          LineNumberTable:
-            line 1: 0
-    
-      public static void main(java.lang.String[]);
-        descriptor: ([Ljava/lang/String;)V
-        flags: (0x0009) ACC_PUBLIC, ACC_STATIC
-        Code:
-          stack=3, locals=2, args_size=1
-             0: invokedynamic #7,  0              // InvokeDynamic #0:showTestNumber:()LLambdaTest$Test;
-             5: astore_1
-             6: getstatic     #11                 // Field java/lang/System.out:Ljava/io/PrintStream;
-             9: aload_1
-            10: ldc           #17                 // int 114514
-            12: invokestatic  #18                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
-            15: invokeinterface #24,  2           // InterfaceMethod LambdaTest$Test.showTestNumber:(Ljava/lang/Integer;)Ljava/lang/String;
-            20: invokevirtual #29                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-            23: return
-          LineNumberTable:
-            line 8: 0
-            line 9: 6
-            line 10: 23
-    }
-    SourceFile: "LambdaTest.java"
-    NestMembers:
-      LambdaTest$Test
-    BootstrapMethods:
-      0: #49 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
-        Method arguments:
-          #56 (Ljava/lang/Integer;)Ljava/lang/String;
-          #57 REF_invokeStatic LambdaTest.lambda$main$0:(Ljava/lang/Integer;)Ljava/lang/String;
-          #56 (Ljava/lang/Integer;)Ljava/lang/String;
-      1: #60 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
-        Method arguments:
-          #66 Test number is \u0001
-    InnerClasses:
-      public static #69= #25 of #38;          // Test=class LambdaTest$Test of class LambdaTest
-      public static final #74= #70 of #72;    // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles
+```java
+
+
+Classfile /L:/JAVA/BasicSyntax/Learn_JVM/code/LambdaTest.class
+  Last modified 2023年9月6日; size 1445 bytes
+  SHA-256 checksum 3a71d05fe531173bda2fd05e7b9a5a12dc0fd040047f87a59add471744a6a2be
+  Compiled from "LambdaTest.java"
+public class LambdaTest
+  minor version: 0
+  major version: 61
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #38                         // LambdaTest
+  super_class: #2                         // java/lang/Object
+  interfaces: 0, fields: 0, methods: 3, attributes: 4
+Constant pool:
+   #1 = Methodref          #2.#3          // java/lang/Object."&lt;init&gt;":()V
+   #2 = Class              #4             // java/lang/Object
+   #3 = NameAndType        #5:#6          // "&lt;init&gt;":()V
+   #4 = Utf8               java/lang/Object
+   #5 = Utf8               &lt;init&gt;
+   #6 = Utf8               ()V
+   #7 = InvokeDynamic      #0:#8          // #0:showTestNumber:()LLambdaTest$Test;
+   #8 = NameAndType        #9:#10         // showTestNumber:()LLambdaTest$Test;
+   #9 = Utf8               showTestNumber
+  #10 = Utf8               ()LLambdaTest$Test;
+  #11 = Fieldref           #12.#13        // java/lang/System.out:Ljava/io/PrintStream;
+  #12 = Class              #14            // java/lang/System
+  #13 = NameAndType        #15:#16        // out:Ljava/io/PrintStream;
+  #14 = Utf8               java/lang/System
+  #15 = Utf8               out
+  #16 = Utf8               Ljava/io/PrintStream;
+  #17 = Integer            114514
+  #18 = Methodref          #19.#20        // java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+  #19 = Class              #21            // java/lang/Integer
+  #20 = NameAndType        #22:#23        // valueOf:(I)Ljava/lang/Integer;
+  #21 = Utf8               java/lang/Integer
+  #22 = Utf8               valueOf
+  #23 = Utf8               (I)Ljava/lang/Integer;
+  #24 = InterfaceMethodref #25.#26        // LambdaTest$Test.showTestNumber:(Ljava/lang/Integer;)Ljava/lang/String;
+  #25 = Class              #27            // LambdaTest$Test
+  #26 = NameAndType        #9:#28         // showTestNumber:(Ljava/lang/Integer;)Ljava/lang/String;
+  #27 = Utf8               LambdaTest$Test
+  #28 = Utf8               (Ljava/lang/Integer;)Ljava/lang/String;
+  #29 = Methodref          #30.#31        // java/io/PrintStream.println:(Ljava/lang/String;)V
+  #30 = Class              #32            // java/io/PrintStream
+  #31 = NameAndType        #33:#34        // println:(Ljava/lang/String;)V
+  #32 = Utf8               java/io/PrintStream
+  #33 = Utf8               println
+  #34 = Utf8               (Ljava/lang/String;)V
+  #35 = InvokeDynamic      #1:#36         // #1:makeConcatWithConstants:(Ljava/lang/Integer;)Ljava/lang/String;
+  #36 = NameAndType        #37:#28        // makeConcatWithConstants:(Ljava/lang/Integer;)Ljava/lang/String;
+  #37 = Utf8               makeConcatWithConstants
+  #38 = Class              #39            // LambdaTest
+  #39 = Utf8               LambdaTest
+  #40 = Utf8               Code
+  #41 = Utf8               LineNumberTable
+  #42 = Utf8               main
+  #43 = Utf8               ([Ljava/lang/String;)V
+  #44 = Utf8               lambda$main$0
+  #45 = Utf8               SourceFile
+  #46 = Utf8               LambdaTest.java
+  #47 = Utf8               NestMembers
+  #48 = Utf8               BootstrapMethods
+  #49 = MethodHandle       6:#50          // REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #50 = Methodref          #51.#52        // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #51 = Class              #53            // java/lang/invoke/LambdaMetafactory
+  #52 = NameAndType        #54:#55        // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #53 = Utf8               java/lang/invoke/LambdaMetafactory
+  #54 = Utf8               metafactory
+  #55 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #56 = MethodType         #28            //  (Ljava/lang/Integer;)Ljava/lang/String;
+  #57 = MethodHandle       6:#58          // REF_invokeStatic LambdaTest.lambda$main$0:(Ljava/lang/Integer;)Ljava/lang/String;
+  #58 = Methodref          #38.#59        // LambdaTest.lambda$main$0:(Ljava/lang/Integer;)Ljava/lang/String;
+  #59 = NameAndType        #44:#28        // lambda$main$0:(Ljava/lang/Integer;)Ljava/lang/String;
+  #60 = MethodHandle       6:#61          // REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #61 = Methodref          #62.#63        // java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #62 = Class              #64            // java/lang/invoke/StringConcatFactory
+  #63 = NameAndType        #37:#65        // makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #64 = Utf8               java/lang/invoke/StringConcatFactory
+  #65 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #66 = String             #67            // Test number is \u0001
+  #67 = Utf8               Test number is \u0001
+  #68 = Utf8               InnerClasses
+  #69 = Utf8               Test
+  #70 = Class              #71            // java/lang/invoke/MethodHandles$Lookup
+  #71 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #72 = Class              #73            // java/lang/invoke/MethodHandles
+  #73 = Utf8               java/lang/invoke/MethodHandles
+  #74 = Utf8               Lookup
+{
+  public LambdaTest();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+         4: return
+      LineNumberTable:
+        line 1: 0
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=3, locals=2, args_size=1
+         0: invokedynamic #7,  0              // InvokeDynamic #0:showTestNumber:()LLambdaTest$Test;
+         5: astore_1
+         6: getstatic     #11                 // Field java/lang/System.out:Ljava/io/PrintStream;
+         9: aload_1
+        10: ldc           #17                 // int 114514
+        12: invokestatic  #18                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        15: invokeinterface #24,  2           // InterfaceMethod LambdaTest$Test.showTestNumber:(Ljava/lang/Integer;)Ljava/lang/String;
+        20: invokevirtual #29                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        23: return
+      LineNumberTable:
+        line 8: 0
+        line 9: 6
+        line 10: 23
+}
+SourceFile: "LambdaTest.java"
+NestMembers:
+  LambdaTest$Test
+BootstrapMethods:
+  0: #49 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #56 (Ljava/lang/Integer;)Ljava/lang/String;
+      #57 REF_invokeStatic LambdaTest.lambda$main$0:(Ljava/lang/Integer;)Ljava/lang/String;
+      #56 (Ljava/lang/Integer;)Ljava/lang/String;
+  1: #60 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #66 Test number is \u0001
+InnerClasses:
+  public static #69= #25 of #38;          // Test=class LambdaTest$Test of class LambdaTest
+  public static final #74= #70 of #72;    // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles
+```
 
 我们还是重点灌注 `main` 方法里面的内容：
-    
-    
-    public static void main(java.lang.String[]);
-        descriptor: ([Ljava/lang/String;)V
-        flags: (0x0009) ACC_PUBLIC, ACC_STATIC
-        Code:
-          stack=3, locals=2, args_size=1
-             0: invokedynamic #7,  0              // InvokeDynamic #0:showTestNumber:()LLambdaTest$Test;
-             5: astore_1
-             6: getstatic     #11                 // Field java/lang/System.out:Ljava/io/PrintStream;
-             9: aload_1
-            10: ldc           #17                 // int 114514
-            12: invokestatic  #18                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
-            15: invokeinterface #24,  2           // InterfaceMethod LambdaTest$Test.showTestNumber:(Ljava/lang/Integer;)Ljava/lang/String;
-            20: invokevirtual #29                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-            23: return
-          LineNumberTable:
-            line 8: 0
-            line 9: 6
-            line 10: 23
-    }
+```java
+
+
+public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=3, locals=2, args_size=1
+         0: invokedynamic #7,  0              // InvokeDynamic #0:showTestNumber:()LLambdaTest$Test;
+         5: astore_1
+         6: getstatic     #11                 // Field java/lang/System.out:Ljava/io/PrintStream;
+         9: aload_1
+        10: ldc           #17                 // int 114514
+        12: invokestatic  #18                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        15: invokeinterface #24,  2           // InterfaceMethod LambdaTest$Test.showTestNumber:(Ljava/lang/Integer;)Ljava/lang/String;
+        20: invokevirtual #29                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        23: return
+      LineNumberTable:
+        line 8: 0
+        line 9: 6
+        line 10: 23
+}
+```
 
 其中：
-    
-    
-    0: invokedynamic #7,  0              // InvokeDynamic #0:showTestNumber:()LLambdaTest$Test;
+```java
+
+
+0: invokedynamic #7,  0              // InvokeDynamic #0:showTestNumber:()LLambdaTest$Test;
+```
 
 就对应了我们的：
-    
-    
-    Test test = param -> "Test number is " + param;
+```java
+
+
+Test test = param -> "Test number is " + param;
+```
 
 下面我们来具体展示 `invokedynamic` 指令的运作过程：
 
   1. `0: invokedynamic #7, 0` 提示我们需要找到常量池中索引为 `#7` 的 `InvokeDynamic` 项。根据反编译结果，我们可以找到这个项的描述符为 `#0:showTestNumber:()LLambdaTest$Test;`，这也是 `javap -v` 预先添加的注释内容。
   2. 接下来 `#7` 后面紧跟的 `0` 是我们需要寻找的解析引导方法，即最后的 `BootstrapMethods` 中值为 `0` 的内容，其引导方法描述符指向了 `LambdaMetafactory.metafactory` 方法。
   3. 继续执行引导方法 `#49`：表示调用的静态方法 `LambdaMetafactory.metafactory` 接受六个参数并返回一个`CallSite`对象，参数如下： 
-     * `java/lang/invoke/MethodHandles$Lookup`：表示一个`MethodHandles.Lookup`对象，用于查找要调用的方法
-     * `java/lang/String`：表示一个字符串，用于指定要实现的函数接口的名称。
-     * `java/lang/invoke/MethodType`：表示一个方法类型对象，指定要实现的函数接口的方法签名。
-     * `java/lang/invoke/MethodType`：表示一个方法类型对象，指定要实现的函数接口的方法签名。
-     * `java/lang/invoke/MethodHandle`：表示一个方法句柄，指向要调用的方法。
-     * `java/lang/invoke/MethodType`：表示一个方法类型对象，指定要调用的方法的方法签名。
+```java
+ * `java/lang/invoke/MethodHandles$Lookup`：表示一个`MethodHandles.Lookup`对象，用于查找要调用的方法
+ * `java/lang/String`：表示一个字符串，用于指定要实现的函数接口的名称。
+ * `java/lang/invoke/MethodType`：表示一个方法类型对象，指定要实现的函数接口的方法签名。
+ * `java/lang/invoke/MethodType`：表示一个方法类型对象，指定要实现的函数接口的方法签名。
+ * `java/lang/invoke/MethodHandle`：表示一个方法句柄，指向要调用的方法。
+ * `java/lang/invoke/MethodType`：表示一个方法类型对象，指定要调用的方法的方法签名。
+```
   4. 成功返回后，将 `CallSite` 对象与目标方法进行绑定，该方法有三个参数： 
-     * `#56`：是一个方法类型（`Ljava/lang/invoke/MethodType`）的参数，表示被调用方法的参数类型和返回类型。
-     * `#57`：是一个方法句柄（`Ljava/lang/invoke/MethodHandle`）的参数，表示要调用的方法的句柄。
-     * `#56`：是一个方法类型（`Ljava/lang/invoke/MethodType`）的参数，表示被调用方法的参数类型和返回类型。
+```java
+ * `#56`：是一个方法类型（`Ljava/lang/invoke/MethodType`）的参数，表示被调用方法的参数类型和返回类型。
+ * `#57`：是一个方法句柄（`Ljava/lang/invoke/MethodHandle`）的参数，表示要调用的方法的句柄。
+ * `#56`：是一个方法类型（`Ljava/lang/invoke/MethodType`）的参数，表示被调用方法的参数类型和返回类型。
+```
   5. 结合静态方法 `LambdaMetafactory.metafactory` 的第五个参数（`java/lang/invoke/MethodHandle`方法句柄）可知最终绑定到了 `LambdaTest.lambda$main$0` 方法，这也就是 `Lambda` 表达式最终在 `LambdaTest` 中的 `main` 方法里生成的私有方法。
   6. 最后，由于 `invokedynamic` 指令在一开始调用了`showTestNumber`方法，最终将返回的`CallSite`对象存储在局部变量表中等待调用。
 

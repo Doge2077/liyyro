@@ -30,34 +30,36 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N = 1e6 + 10;
-    
-    int res[N];
-    
-    int main(){
-    
-        int a, b, c, d;
-    
-        cin >> a >> b >> c >> d;
-    
-        for(int i = a; i <= b; i ++) res[i]++;
-    
-        for(int i = c; i <= d; i ++) res[i]++;
-    
-        int cnt = 0;
-        for(int i = 0; i <= 200; i ++) if(res[i] == 2) cnt++;
-    
-        if(cnt) cout << cnt - 1 << endl;
-        else cout << 0 << endl;
-    
-        return 0;
-    
-    }
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 1e6 + 10;
+
+int res[N];
+
+int main(){
+
+    int a, b, c, d;
+
+    cin >> a >> b >> c >> d;
+
+    for(int i = a; i <= b; i ++) res[i]++;
+
+    for(int i = c; i <= d; i ++) res[i]++;
+
+    int cnt = 0;
+    for(int i = 0; i <= 200; i ++) if(res[i] == 2) cnt++;
+
+    if(cnt) cout << cnt - 1 << endl;
+    else cout << 0 << endl;
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -84,50 +86,52 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N = 1010;
-    
-    char mp[N][N];
-    
-    int n;
-    
-    int main(){
-    
-        cin >> n;
-    
-        for(int i = 1; i <= n; i ++){
-            for(int j = 1; j <= n; j++) cin >> mp[i][j];
-        }
-    
-        bool flag = 1;
-        for(int i = 1; i <= n; i ++){
-            for(int j = i + 1; j <= n; j ++){
-                if(mp[i][j] == 'D' && mp[j][i] != 'D'){
-                    flag = 0;
-                    break;
-                }
-                else if(mp[i][j] == 'W' && mp[j][i] != 'L'){
-                    flag = 0;
-                    break;
-                }
-                else if(mp[i][j] == 'L' && mp[j][i] != 'W'){
-                    flag = 0;
-                    break;
-                }
-            }
-            if(!flag) break;
-        }
-    
-        if(flag) cout << "correct" << endl;
-        else cout << "incorrect" << endl;
-    
-        return 0;
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 1010;
+
+char mp[N][N];
+
+int n;
+
+int main(){
+
+    cin >> n;
+
+    for(int i = 1; i <= n; i ++){
+        for(int j = 1; j <= n; j++) cin >> mp[i][j];
     }
+
+    bool flag = 1;
+    for(int i = 1; i <= n; i ++){
+        for(int j = i + 1; j <= n; j ++){
+            if(mp[i][j] == 'D' && mp[j][i] != 'D'){
+                flag = 0;
+                break;
+            }
+            else if(mp[i][j] == 'W' && mp[j][i] != 'L'){
+                flag = 0;
+                break;
+            }
+            else if(mp[i][j] == 'L' && mp[j][i] != 'W'){
+                flag = 0;
+                break;
+            }
+        }
+        if(!flag) break;
+    }
+
+    if(flag) cout << "correct" << endl;
+    else cout << "incorrect" << endl;
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -154,39 +158,41 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    map&lt;string,int&gt; a;
-    
-    int n;
-    
-    const int N = 1e6 + 3;
-    
-    string s[N];
-    
-    int main(){
-    
-        cin >> n;
-    
-        for(int i = 0; i < n; i ++) cin >> s[i];
-    
-        for(int i = 0; i < n; i ++){
-    
-            a[s[i]]++;
-            int t = a[s[i]] - 1;
-            if(t != 0){
-                cout << s[i] << '(' << t << ')' << endl;
-            }
-            else cout << s[i] << endl;
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+map&lt;string,int&gt; a;
+
+int n;
+
+const int N = 1e6 + 3;
+
+string s[N];
+
+int main(){
+
+    cin >> n;
+
+    for(int i = 0; i < n; i ++) cin >> s[i];
+
+    for(int i = 0; i < n; i ++){
+
+        a[s[i]]++;
+        int t = a[s[i]] - 1;
+        if(t != 0){
+            cout << s[i] << '(' << t << ')' << endl;
         }
-    
-        return 0;
-    
+        else cout << s[i] << endl;
+
     }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -207,8 +213,10 @@ description: ""
   * `a[N]`记录$X_i$，`b[N]`记录$Y_i$
   * 状态表示：`dp[i][j]`表示前`i`次投掷，当前计数器值为`j`时得到的钱
   * 状态计算： 
-    * 若投掷结果为正：则`dp[i][j] = dp[i - 1][j - 1] + a[i] + b[j]`
-    * 反之计数器清零，更新之后的结果：`dp[i][0] = max(dp[i][0],dp[i - 1][j])`
+```java
+* 若投掷结果为正：则`dp[i][j] = dp[i - 1][j - 1] + a[i] + b[j]`
+* 反之计数器清零，更新之后的结果：`dp[i][0] = max(dp[i][0],dp[i - 1][j])`
+```
   * 注意开`long long`
 
 
@@ -216,51 +224,53 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    typedef long long LL;
-    
-    LL n,m;
-    
-    const LL N = 5010;
-    
-    LL dp[N][N];
-    
-    LL a[N];
-    LL b[N];
-    
-    int main(){
-    
-        cin >> n >> m;
-    
-        for(int i = 1; i <= n; i ++) cin >> a[i];
-    
-        for(int i = 0; i < m; i ++){
-            int x, y;
-            cin >> x >> y;
-            b[x] = y;
-        }
-    
-        for(int i = 1; i <= n; i ++){
-            for(int j = 1; j <= i; j ++){
-                dp[i][j] = dp[i - 1][j - 1] + a[i] + b[j];
-            }
-    
-            for(int j = 0; j < i; j ++){
-                dp[i][0] = max(dp[i][0],dp[i - 1][j]);
-            }
-    
-        }
-    
-        LL ans = 0;
-    
-        for(int i = 0; i <= n; i ++) ans = max(ans,dp[n][i]);
-    
-        cout << ans << endl;
-    
-        return 0;
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+typedef long long LL;
+
+LL n,m;
+
+const LL N = 5010;
+
+LL dp[N][N];
+
+LL a[N];
+LL b[N];
+
+int main(){
+
+    cin >> n >> m;
+
+    for(int i = 1; i <= n; i ++) cin >> a[i];
+
+    for(int i = 0; i < m; i ++){
+        int x, y;
+        cin >> x >> y;
+        b[x] = y;
     }
+
+    for(int i = 1; i <= n; i ++){
+        for(int j = 1; j <= i; j ++){
+            dp[i][j] = dp[i - 1][j - 1] + a[i] + b[j];
+        }
+
+        for(int j = 0; j < i; j ++){
+            dp[i][0] = max(dp[i][0],dp[i - 1][j]);
+        }
+
+    }
+
+    LL ans = 0;
+
+    for(int i = 0; i <= n; i ++) ans = max(ans,dp[n][i]);
+
+    cout << ans << endl;
+
+    return 0;
+
+}
+```

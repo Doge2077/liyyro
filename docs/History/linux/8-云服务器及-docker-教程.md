@@ -24,33 +24,41 @@ description: ""
   * 首先 `ssh` 登录到自己的服务器
 
 
-    
-    
-    ssh root@xxx.xxx.xxx.xxx  # 注意腾讯云登录的用户不是root，而是ubuntu
+```java
+
+
+ssh root@xxx.xxx.xxx.xxx  # 注意腾讯云登录的用户不是root，而是ubuntu
+```
 
   * 在 `root` 权限账户下创建工作用户 `user` 并赋予 `sudo` 权限
 
 
-    
-    
-    adduser user  # 创建用户acs
-    usermod -aG sudo user  # 给用户acs分配sudo权限
+```java
+
+
+adduser user  # 创建用户acs
+usermod -aG sudo user  # 给用户acs分配sudo权限
+```
 
   * 在本地或云端配置 `user` 用户的别名和免密登录
   * 将祖传配置传过去
 
 
-    
-    
-    scp .bashrc .vimrc .tmux.conf server_name:  # server_name需要换成自己配置的别名
+```java
+
+
+scp .bashrc .vimrc .tmux.conf server_name:  # server_name需要换成自己配置的别名
+```
 
   * 安装 `tmux`
 
 
-    
-    
-    sudo apt-get update
-    sudo apt-get install tmux
+```java
+
+
+sudo apt-get update
+sudo apt-get install tmux
+```
 
   * 打开 `tmux` 安装 `Docker`，参考官方安装[Docker](&lt;https://docs.docker.com/engine/install/ubuntu/&gt;)教程
 
@@ -65,9 +73,11 @@ description: ""
 **将当前用户添加到`docker`用户组**
 
 为了避免每次使用 `docker` 命令都需要加上 `sudo` 权限，可以将当前用户加入安装中自动创建的 `docker` 用户组，参考[官方文档](&lt;https://docs.docker.com/engine/install/linux-postinstall/&gt;)
-    
-    
-    sudo usermod -aG docker $USER
+```java
+
+
+sudo usermod -aG docker $USER
+```
 
 执行完此操作后，需要退出服务器，再重新登录回来，才可以省去 `sudo` 权限。
 
@@ -88,10 +98,14 @@ description: ""
 
   * `docker [contaienr] run -itd ubuntu:20.04`：创建并启动一个容器
 
-    * `docker [contaienr] run -p 20000:22 --name MYDOCKER -itd ubuntu:20.04`： 创建使用 `ubuntu:20.04` 镜像的容器，名为 `MYDOCKER` ，且设置端口映射为：20000:22
+```java
+* `docker [contaienr] run -p 20000:22 --name MYDOCKER -itd ubuntu:20.04`： 创建使用 `ubuntu:20.04` 镜像的容器，名为 `MYDOCKER` ，且设置端口映射为：20000:22
+```
   * `docker ps`：查看本地运行中的容器
 
-    * `docker ps -a`：查看本地所有的容器 
+```java
+* `docker ps -a`：查看本地所有的容器 
+```
   * `docker [container] start CONTAINER`：启动容器 `CONTAINER`
 
   * `docker [container] stop CONTAINER`：停止容器 `CONTAINER`
@@ -100,20 +114,26 @@ description: ""
 
 `docker [container] attach CONTAINER`：进入容器 `CONTAINER`
 
-    * 先按 `Ctrl-p`，再按 `Ctrl-q` 可以挂起容器
+```java
+* 先按 `Ctrl-p`，再按 `Ctrl-q` 可以挂起容器
+```
   * `docker [container] exec CONTAINER COMMAND`：在容器中执行命令
 
   * `docker [container] rm CONTAINER`：删除容器
 
-    * `docker container prune`：删除所有已停止的容器
+```java
+* `docker container prune`：删除所有已停止的容器
+```
   * `docker export -o xxx.tar CONTAINER`：将容器`CONTAINER`导出到本地文件`xxx.tar`中
 
   * `docker import xxx.tar image_name:tag`：将本地文件`xxx.tar`导入成镜像，并将镜像命名为`image_name:tag`
 
   * `docker export/import` 与 `docker save/load`的区别：
 
-    * `export/import` 会丢弃历史记录和元数据信息，仅保存容器当时的快照状态
-    * `save/load` 会保存完整记录，体积更大
+```java
+* `export/import` 会丢弃历史记录和元数据信息，仅保存容器当时的快照状态
+* `save/load` 会保存完整记录，体积更大
+```
   * `docker top CONTAINER`：查看某个容器内的所有进程
 
   * `docker stats`：查看所有容器的统计信息，包括CPU、内存、存储、网络等信息
@@ -132,9 +152,11 @@ description: ""
   * 可通过`ssh`登录自己的对应映射端口的`docker`容器
 
 
-    
-    
-    ssh root@xxx.xxx.xxx.xxx -p 20000  # 将xxx.xxx.xxx.xxx替换成自己租的服务器的IP地址 20000为映射的端口号
+```java
+
+
+ssh root@xxx.xxx.xxx.xxx -p 20000  # 将xxx.xxx.xxx.xxx替换成自己租的服务器的IP地址 20000为映射的端口号
+```
 
   * 记得需要去云平台控制台中修改安全组配置，放行端口20000。 
   * 同样可以配置该`docker`容器的别名和免密登录。

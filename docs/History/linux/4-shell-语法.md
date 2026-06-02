@@ -24,18 +24,22 @@ description: ""
 `Linux`系统中一般默认使用`bash`，文件开头需要写`#! /bin/bash`，指明`bash`为脚本解释器。
 
 **添加可执行权限** ：
-    
-    
-    chmod +x test.sh  #使脚本获得可执行权限
+```java
+
+
+chmod +x test.sh  #使脚本获得可执行权限
+```
 
 **执行** ：
-    
-    
-    ./test.sh  #当前路径下执行
-    
-    /home/acs/test.sh  # 绝对路径下执行
-    
-    ~/test.sh  # 家目录路径下执行
+```java
+
+
+./test.sh  #当前路径下执行
+
+/home/acs/test.sh  # 绝对路径下执行
+
+~/test.sh  # 家目录路径下执行
+```
 
 * * *
 
@@ -44,35 +48,41 @@ description: ""
 **单行注释**
 
 每行中`#`之后的内容均是注释。
-    
-    
-    #这是一行注释
-    
-    echo 'Hello World'  #  这也是注释
+```java
+
+
+#这是一行注释
+
+echo 'Hello World'  #  这也是注释
+```
 
 **多行注释**
-    
-    
-    :<<EOF
-    第一行注释
-    第二行注释
-    第三行注释
-    EOF
+```java
+
+
+:<<EOF
+第一行注释
+第二行注释
+第三行注释
+EOF
+```
 
 其中`EOF`可以换成其它任意字符串。例如：
-    
-    
-    :<<abc
-    第一行注释
-    第二行注释
-    第三行注释
-    abc
-    
-    :<<!
-    第一行注释
-    第二行注释
-    第三行注释
-    !
+```java
+
+
+:<<abc
+第一行注释
+第二行注释
+第三行注释
+abc
+
+:<<!
+第一行注释
+第二行注释
+第三行注释
+!
+```
 
 * * *
 
@@ -81,41 +91,49 @@ description: ""
 **定义变量**
 
 定义变量，不需要加`$`符号，例如：
-    
-    
-    name1='lys'  # 单引号定义字符串
-    name2="lys"  # 双引号定义字符串
-    name3=lys    # 也可以不加引号，同样表示字符串
+```java
+
+
+name1='lys'  # 单引号定义字符串
+name2="lys"  # 双引号定义字符串
+name3=lys    # 也可以不加引号，同样表示字符串
+```
 
 **使用变量**
 
 使用变量，需要加上`$`符号，或者`$` `{}`符号。花括号是可选的，主要为了帮助解释器识别变量边界。
-    
-    
-    name=lys
-    echo $name  # 输出yxc
-    echo ${name}  # 输出yxc
-    echo ${name} is dog  # 输出lys is dog
+```java
+
+
+name=lys
+echo $name  # 输出yxc
+echo ${name}  # 输出yxc
+echo ${name} is dog  # 输出lys is dog
+```
 
 **只读变量**
 
 使用`readonly`或者`declare`可以将变量变为只读。
-    
-    
-    name=lys
-    readonly name
-    declare -r name  # 两种写法均可
-    
-    name=abc  # 会报错，因为此时name只读
+```java
+
+
+name=lys
+readonly name
+declare -r name  # 两种写法均可
+
+name=abc  # 会报错，因为此时name只读
+```
 
 **删除变量**
 
 `unset`可以删除变量。
-    
-    
-    name=lys
-    unset name
-    echo $name  # 输出空行
+```java
+
+
+name=lys
+unset name
+echo $name  # 输出空行
+```
 
 **变量类型**
 
@@ -125,17 +143,21 @@ description: ""
 
 
 **自定义变量改成环境变量** ：
-    
-    
-    acs@9e0ebfcd82d7:~$ name=lys  # 定义变量
-    acs@9e0ebfcd82d7:~$ export name  # 第一种方法
-    acs@9e0ebfcd82d7:~$ declare -x name  # 第二种方法
+```java
+
+
+acs@9e0ebfcd82d7:~$ name=lys  # 定义变量
+acs@9e0ebfcd82d7:~$ export name  # 第一种方法
+acs@9e0ebfcd82d7:~$ declare -x name  # 第二种方法
+```
 
 **环境变量改为自定义变量** ：
-    
-    
-    acs@9e0ebfcd82d7:~$ export name=lys  # 定义环境变量
-    acs@9e0ebfcd82d7:~$ declare +x name  # 改为自定义变量
+```java
+
+
+acs@9e0ebfcd82d7:~$ export name=lys  # 定义环境变量
+acs@9e0ebfcd82d7:~$ declare +x name  # 改为自定义变量
+```
 
 **字符串**
 
@@ -147,23 +169,29 @@ description: ""
   * 双引号中的内容可以执行、可以取变量；
 
 
-    
-    
-    name=lys  # 不用引号
-    echo 'hello, $name \"hh\"'  # 单引号字符串，输出 hello, $name \"hh\"
-    echo "hello, $name \"hh\""  # 双引号字符串，输出 hello, lys "hh"
+```java
+
+
+name=lys  # 不用引号
+echo 'hello, $name \"hh\"'  # 单引号字符串，输出 hello, $name \"hh\"
+echo "hello, $name \"hh\""  # 双引号字符串，输出 hello, lys "hh"
+```
 
 **获取字符串长度** :
-    
-    
-    name="lys"
-    echo ${#name}  # 输出3
+```java
+
+
+name="lys"
+echo ${#name}  # 输出3
+```
 
 **提取子串** :
-    
-    
-    name="hello, lys"
-    echo ${name:0:5}  # 提取从0开始的5个字符 输出hello
+```java
+
+
+name="hello, lys"
+echo ${name:0:5}  # 提取从0开始的5个字符 输出hello
+```
 
 * * *
 
@@ -174,30 +202,36 @@ description: ""
 在执行`shell`脚本时，可以向脚本传递参数。`$1`是第一个参数，`$2`是第二个参数，以此类推。特殊的，`$0`是文件名（包含路径）。例如：
 
 创建文件`test.sh`：
-    
-    
-    #! /bin/bash
-    
-    echo "文件名："$0
-    echo "第一个参数："$1
-    echo "第二个参数："$2
-    echo "第三个参数："$3
-    echo "第四个参数："$4
+```java
+
+
+#! /bin/bash
+
+echo "文件名："$0
+echo "第一个参数："$1
+echo "第二个参数："$2
+echo "第三个参数："$3
+echo "第四个参数："$4
+```
 
 然后执行该脚本：
-    
-    
-    acs@9e0ebfcd82d7:~$ chmod +x test.sh  #添加可执行权限
-    acs@9e0ebfcd82d7:~$ ./test.sh 1 2 3 4
+```java
+
+
+acs@9e0ebfcd82d7:~$ chmod +x test.sh  #添加可执行权限
+acs@9e0ebfcd82d7:~$ ./test.sh 1 2 3 4
+```
 
 输出
-    
-    
-    文件名：./test.sh
-    第一个参数：1
-    第二个参数：2
-    第三个参数：3
-    第四个参数：4
+```java
+
+
+文件名：./test.sh
+第一个参数：1
+第二个参数：2
+第三个参数：3
+第四个参数：4
+```
 
 **其它参数相关变量**
 
@@ -222,72 +256,90 @@ description: ""
 **定义**
 
 数组用小括号表示，元素之间用空格隔开。例如：
-    
-    
-    array=(1 abc "def" lys)
+```java
+
+
+array=(1 abc "def" lys)
+```
 
 也可以直接定义数组中某个元素的值：
-    
-    
-    array[0]=1
-    array[1]=abc
-    array[2]="def"
-    array[3]=lys
+```java
+
+
+array[0]=1
+array[1]=abc
+array[2]="def"
+array[3]=lys
+```
 
 **读取数组中某个元素的值**
-    
-    
-    ${array[index]}
+```java
+
+
+${array[index]}
+```
 
 例如：
-    
-    
-    array=(1 abc "def" lys)
-    echo ${array[0]}  #输出1
-    echo ${array[1]}  #输出abc
-    echo ${array[2]}  #输出def
-    echo ${array[3]}  #输出lys
+```java
+
+
+array=(1 abc "def" lys)
+echo ${array[0]}  #输出1
+echo ${array[1]}  #输出abc
+echo ${array[2]}  #输出def
+echo ${array[3]}  #输出lys
+```
 
 **读取整个数组**
-    
-    
-    ${array[@]}  # 第一种写法
-    ${array[*]}  # 第二种写法
+```java
+
+
+${array[@]}  # 第一种写法
+${array[*]}  # 第二种写法
+```
 
 例如：
-    
-    
-    array=(1 abc "def" lys)
-    
-    echo ${array[@]}  # 第一种写法
-    echo ${array[*]}  # 第二种写法
-    #输出 1 abc "def" lys
+```java
+
+
+array=(1 abc "def" lys)
+
+echo ${array[@]}  # 第一种写法
+echo ${array[*]}  # 第二种写法
+#输出 1 abc "def" lys
+```
 
 **数组长度**
 
 类似于字符串
-    
-    
-    ${#array[@]}  # 第一种写法
-    ${#array[*]}  # 第二种写法
+```java
+
+
+${#array[@]}  # 第一种写法
+${#array[*]}  # 第二种写法
+```
 
 例如：
-    
-    
-    array=(1 abc "def" yxc)
-    
-    echo ${#array[@]}  # 第一种写法
-    echo ${#array[*]}  # 第二种写法
-    #输出 4
+```java
+
+
+array=(1 abc "def" yxc)
+
+echo ${#array[@]}  # 第一种写法
+echo ${#array[*]}  # 第二种写法
+#输出 4
+```
 
 * * *
 
 ### 4.6 expr 命令
 
 `expr`命令用于求表达式的值，格式为：
-    
-    
-    expr 表达式
+```java
+
+
+expr 表达式
+```
 
 **表达式说明** ：
 
@@ -308,13 +360,15 @@ description: ""
 
 
 示例：
-    
-    
-    str="Hello World!"
-    
-    echo `expr length "$str"`  # ``不是单引号，表示执行该命令，输出12
-    echo `expr index "$str" aWd`  # 输出7，下标从1开始
-    echo `expr substr "$str" 2 3`  # 输出 ell
+```java
+
+
+str="Hello World!"
+
+echo `expr length "$str"`  # ``不是单引号，表示执行该命令，输出12
+echo `expr index "$str" aWd`  # 输出7，下标从1开始
+echo `expr substr "$str" 2 3`  # 输出 ell
+```
 
 **整数表达式**
 
@@ -330,17 +384,19 @@ description: ""
 
 
 示例：
-    
-    
-    a=3
-    b=4
-    
-    echo `expr $a + $b`  # 输出7
-    echo `expr $a - $b`  # 输出-1
-    echo `expr $a \* $b`  # 输出12，*需要转义
-    echo `expr $a / $b`  # 输出0，整除
-    echo `expr $a % $b` # 输出3
-    echo `expr \( $a + 1 \) \* \( $b + 1 \)`  # 输出20，值为(a + 1) * (b + 1)
+```java
+
+
+a=3
+b=4
+
+echo `expr $a + $b`  # 输出7
+echo `expr $a - $b`  # 输出-1
+echo `expr $a \* $b`  # 输出12，*需要转义
+echo `expr $a / $b`  # 输出0，整除
+echo `expr $a % $b` # 输出3
+echo `expr \( $a + 1 \) \* \( $b + 1 \)`  # 输出20，值为(a + 1) * (b + 1)
+```
 
 **逻辑关系表达式**
 
@@ -356,23 +412,25 @@ description: ""
 
 
 **示例：**
-    
-    
-    a=3
-    b=4
-    
-    echo `expr $a \> $b`  # 输出0，>需要转义
-    echo `expr $a '<' $b`  # 输出1，也可以将特殊字符用引号引起来
-    echo `expr $a '>=' $b`  # 输出0
-    echo `expr $a \<\= $b`  # 输出1
-    
-    c=0
-    d=5
-    
-    echo `expr $c \& $d`  # 输出0
-    echo `expr $a \& $b`  # 输出3
-    echo `expr $c \| $d`  # 输出5
-    echo `expr $a \| $b`  # 输出3
+```java
+
+
+a=3
+b=4
+
+echo `expr $a \> $b`  # 输出0，>需要转义
+echo `expr $a '<' $b`  # 输出1，也可以将特殊字符用引号引起来
+echo `expr $a '>=' $b`  # 输出0
+echo `expr $a \<\= $b`  # 输出1
+
+c=0
+d=5
+
+echo `expr $c \& $d`  # 输出0
+echo `expr $a \& $b`  # 输出3
+echo `expr $c \| $d`  # 输出5
+echo `expr $a \| $b`  # 输出3
+```
 
 * * *
 
@@ -388,16 +446,18 @@ description: ""
 
 
 **实例：**
-    
-    
-    acs@9e0ebfcd82d7:~$ read name  # 读入name的值
-    acwing lys  # 标准输入
-    acs@9e0ebfcd82d7:~$ echo $name  # 输出name的值
-    acwing lys  #标准输出
-    acs@9e0ebfcd82d7:~$ read -p "Please input your name: " -t 30 name  # 读入name的值，等待时间30秒
-    Please input your name: acwing lys  # 标准输入
-    acs@9e0ebfcd82d7:~$ echo $name  # 输出name的值
-    acwing lys  # 标准输出
+```java
+
+
+acs@9e0ebfcd82d7:~$ read name  # 读入name的值
+acwing lys  # 标准输入
+acs@9e0ebfcd82d7:~$ echo $name  # 输出name的值
+acwing lys  #标准输出
+acs@9e0ebfcd82d7:~$ read -p "Please input your name: " -t 30 name  # 读入name的值，等待时间30秒
+Please input your name: acwing lys  # 标准输入
+acs@9e0ebfcd82d7:~$ echo $name  # 输出name的值
+acwing lys  # 标准输出
+```
 
 * * *
 
@@ -408,104 +468,136 @@ description: ""
 默认`不会在字符串末尾添加换行符`。
 
 命令格式：
-    
-    
-    printf format-string [arguments...]
+```java
+
+
+printf format-string [arguments...]
+```
 
 **用法示例**
 
 脚本内容：
-    
-    
-    printf "%10d.\n" 123  # 占10位，右对齐
-    printf "%-10.2f.\n" 123.123321  # 占10位，保留2位小数，左对齐
-    printf "My name is %s\n" "lys"  # 格式化输出字符串
-    printf "%d * %d = %d\n"  2 3 `expr 2 \* 3` # 表达式的值作为参数
+```java
+
+
+printf "%10d.\n" 123  # 占10位，右对齐
+printf "%-10.2f.\n" 123.123321  # 占10位，保留2位小数，左对齐
+printf "My name is %s\n" "lys"  # 格式化输出字符串
+printf "%d * %d = %d\n"  2 3 `expr 2 \* 3` # 表达式的值作为参数
+```
 
 输出结果：
-    
-    
-       123.
-    123.12    .
-    My name is lys
-    2 * 3 = 6
+```java
+
+
+   123.
+123.12    .
+My name is lys
+2 * 3 = 6
+```
 
 * * *
 
 ### 4.9 echo 命令
 
 `echo`用于输出字符串。命令格式：
-    
-    
-    echo STRING
+```java
+
+
+echo STRING
+```
 
 **显示普通字符串**
-    
-    
-    echo "Hello AC Terminal"
-    echo Hello AC Terminal  # 引号可以省略
+```java
+
+
+echo "Hello AC Terminal"
+echo Hello AC Terminal  # 引号可以省略
+```
 
 **显示转义字符**
-    
-    
-    echo "\"Hello AC Terminal\""  # 注意只能使用双引号，如果使用单引号，则不转义
-    echo \"Hello AC Terminal\"  # 也可以省略双引号
+```java
+
+
+echo "\"Hello AC Terminal\""  # 注意只能使用双引号，如果使用单引号，则不转义
+echo \"Hello AC Terminal\"  # 也可以省略双引号
+```
 
 **显示变量**
-    
-    
-    name=lys
-    echo "My name is $name"  # 输出 My name is lys
+```java
+
+
+name=lys
+echo "My name is $name"  # 输出 My name is lys
+```
 
 **显示换行**
-    
-    
-    echo -e "Hi\n"  # -e 开启转义
-    echo "acwing"  
+```java
+
+
+echo -e "Hi\n"  # -e 开启转义
+echo "acwing"  
+```
 
 输出
-    
-    
-    Hi
-    
-    acwing
+```java
+
+
+Hi
+
+acwing
+```
 
 **显示不换行**
-    
-    
-    echo -e "Hi \c" # -e 开启转义 \c 不换行
-    echo "acwing"
+```java
+
+
+echo -e "Hi \c" # -e 开启转义 \c 不换行
+echo "acwing"
+```
 
 输出
-    
-    
-    Hi acwing
+```java
+
+
+Hi acwing
+```
 
 **显示结果定向至文件**
-    
-    
-    echo "Hello World" > output.txt  # 将内容以覆盖的方式输出到output.txt中
+```java
+
+
+echo "Hello World" > output.txt  # 将内容以覆盖的方式输出到output.txt中
+```
 
 **原样输出字符串，不进行转义或取变量(用单引号)**
-    
-    
-    name=acwing
-    echo '$name\"'
+```java
+
+
+name=acwing
+echo '$name\"'
+```
 
 输出结果
-    
-    
-    $name\"
+```java
+
+
+$name\"
+```
 
 **显示命令的执行结果**
-    
-    
-    echo `date`  #输出日期
+```java
+
+
+echo `date`  #输出日期
+```
 
 输出结果：
-    
-    
-    Sun Apr 10 15:22:15 CST 2022
+```java
+
+
+Sun Apr 10 15:22:15 CST 2022
+```
 
 * * *
 
@@ -531,25 +623,29 @@ description: ""
 
 
 示例：
-    
-    
-    test 2 -lt 3  # 为真，返回值为0
-    echo $?  # 输出上个命令的返回值，输出0
-    
-    
-    acs@9e0ebfcd82d7:~$ ls  # 列出当前目录下的所有文件
-    homework  output.txt  test.sh  tmp
-    acs@9e0ebfcd82d7:~$ test -e test.sh && echo "exist" || echo "Not exist"
-    exist  # test.sh 文件存在
-    acs@9e0ebfcd82d7:~$ test -e test2.sh && echo "exist" || echo "Not exist"
-    Not exist  # testh2.sh 文件不存在
+```java
+
+
+test 2 -lt 3  # 为真，返回值为0
+echo $?  # 输出上个命令的返回值，输出0
+
+
+acs@9e0ebfcd82d7:~$ ls  # 列出当前目录下的所有文件
+homework  output.txt  test.sh  tmp
+acs@9e0ebfcd82d7:~$ test -e test.sh && echo "exist" || echo "Not exist"
+exist  # test.sh 文件存在
+acs@9e0ebfcd82d7:~$ test -e test2.sh && echo "exist" || echo "Not exist"
+Not exist  # testh2.sh 文件不存在
+```
 
 **文件类型判断**
 
 命令格式:
-    
-    
-    test -e filename  # 判断文件是否存在
+```java
+
+
+test -e filename  # 判断文件是否存在
+```
 
 测试参数 | 代表意义  
 ---|---  
@@ -560,9 +656,11 @@ description: ""
 **文件权限判断**
 
 命令格式：
-    
-    
-    test -r filename  # 判断文件是否可读
+```java
+
+
+test -r filename  # 判断文件是否可读
+```
 
 测试参数 | 代表意义  
 ---|---  
@@ -574,9 +672,11 @@ description: ""
 **整数间的比较**
 
 命令格式：
-    
-    
-    test $a -eq $b  # a是否等于b
+```java
+
+
+test $a -eq $b  # a是否等于b
+```
 
 测试参数 | 代表意义  
 ---|---  
@@ -599,9 +699,11 @@ test str1 != str2 | 判断str1是否不等于str2
 **多重条件判定**
 
 命令格式：
-    
-    
-    test -r filename -a -x filename
+```java
+
+
+test -r filename -a -x filename
+```
 
 测试参数 | 代表意义  
 ---|---  
@@ -616,18 +718,20 @@ test str1 != str2 | 判断str1是否不等于str2
 
 
 **例如：**
-    
-    
-    [ 2 -lt 3 ]  # 为真，返回值为0
-    echo $?  # 输出上个命令的返回值，输出0
-    
-    
-    acs@9e0ebfcd82d7:~$ ls  # 列出当前目录下的所有文件
-    homework  output.txt  test.sh  tmp
-    acs@9e0ebfcd82d7:~$ [ -e test.sh ] && echo "exist" || echo "Not exist"
-    exist  # test.sh 文件存在
-    acs@9e0ebfcd82d7:~$ [ -e test2.sh ] && echo "exist" || echo "Not exist"
-    Not exist  # testh2.sh 文件不存在
+```java
+
+
+[ 2 -lt 3 ]  # 为真，返回值为0
+echo $?  # 输出上个命令的返回值，输出0
+
+
+acs@9e0ebfcd82d7:~$ ls  # 列出当前目录下的所有文件
+homework  output.txt  test.sh  tmp
+acs@9e0ebfcd82d7:~$ [ -e test.sh ] && echo "exist" || echo "Not exist"
+exist  # test.sh 文件存在
+acs@9e0ebfcd82d7:~$ [ -e test2.sh ] && echo "exist" || echo "Not exist"
+Not exist  # testh2.sh 文件不存在
+```
 
 **注意** ：
 
@@ -638,11 +742,13 @@ test str1 != str2 | 判断str1是否不等于str2
 
 
 **例如：**
-    
-    
-    name="acwing lys"
-    [ $name == "acwing lys" ]  # 错误，等价于 [ acwing yxc == "acwing lys" ]，参数太多
-    [ "$name" == "acwing lys" ]  # 正确
+```java
+
+
+name="acwing lys"
+[ $name == "acwing lys" ]  # 错误，等价于 [ acwing yxc == "acwing lys" ]，参数太多
+[ "$name" == "acwing lys" ]  # 正确
+```
 
 * * *
 
@@ -655,162 +761,186 @@ test str1 != str2 | 判断str1是否不等于str2
 **单层if**
 
 命令格式：
-    
-    
-    if condition
-    then
-        语句1
-        语句2
-        ...
-    fi
+```java
+
+
+if condition
+then
+    语句1
+    语句2
+    ...
+fi
+```
 
 **示例：**
-    
-    
-    a=3
-    b=4
-    
-    if [ "$a" -lt "$b" ] && [ "$a" -gt 2 ]
-    then
-        echo ${a}在范围内
-    fi
+```java
+
+
+a=3
+b=4
+
+if [ "$a" -lt "$b" ] && [ "$a" -gt 2 ]
+then
+    echo ${a}在范围内
+fi
+```
 
 输出结果：
-    
-    
-    3在范围内
+```java
+
+
+3在范围内
+```
 
 **单层`if-else`**
 
 命令格式
-    
-    
-    if condition
-    then
-        语句1
-        语句2
-        ...
-    else
-        语句1
-        语句2
-        ...
-    fi
+```java
+
+
+if condition
+then
+    语句1
+    语句2
+    ...
+else
+    语句1
+    语句2
+    ...
+fi
+```
 
 **示例：**
-    
-    
-    a=3
-    b=4
-    
-    if ! [ "$a" -lt "$b" ]
-    then
-        echo ${a}不小于${b}
-    else
-        echo ${a}小于${b}
-    fi
+```java
+
+
+a=3
+b=4
+
+if ! [ "$a" -lt "$b" ]
+then
+    echo ${a}不小于${b}
+else
+    echo ${a}小于${b}
+fi
+```
 
 输出结果：
-    
-    
-    3小于4
+```java
+
+
+3小于4
+```
 
 **多层`if-elif-elif-else`**
 
 命令格式
-    
-    
-    if condition
-    then
-        语句1
-        语句2
-        ...
-    elif condition
-    then
-        语句1
-        语句2
-        ...
-    elif condition
-    then
-        语句1
-        语句2
-    else
-        语句1
-        语句2
-        ...
-    fi
+```java
+
+
+if condition
+then
+    语句1
+    语句2
+    ...
+elif condition
+then
+    语句1
+    语句2
+    ...
+elif condition
+then
+    语句1
+    语句2
+else
+    语句1
+    语句2
+    ...
+fi
+```
 
 **示例：**
-    
-    
-    a=4
-    
-    if [ $a -eq 1 ]
-    then
-        echo ${a}等于1
-    elif [ $a -eq 2 ]
-    then
-        echo ${a}等于2
-    elif [ $a -eq 3 ]
-    then
-        echo ${a}等于3
-    else
-        echo 其他
-    fi
+```java
+
+
+a=4
+
+if [ $a -eq 1 ]
+then
+    echo ${a}等于1
+elif [ $a -eq 2 ]
+then
+    echo ${a}等于2
+elif [ $a -eq 3 ]
+then
+    echo ${a}等于3
+else
+    echo 其他
+fi
+```
 
 输出结果：
-    
-    
-    其他
+```java
+
+
+其他
+```
 
 **`case…esac`形式**
 
 类似于`C/C++`中的`switch`语句。
 
 命令格式
-    
-    
-    scase $变量名称 in
-        值1)
-            语句1
-            语句2
-            ...
-            ;;  # 类似于C/C++中的break
-        值2)
-            语句1
-            语句2
-            ...
-            ;;
-        *)  # 类似于C/C++中的default
-            语句1
-            语句2
-            ...
-            ;;
-    esac
+```java
+
+
+scase $变量名称 in
+    值1)
+        语句1
+        语句2
+        ...
+        ;;  # 类似于C/C++中的break
+    值2)
+        语句1
+        语句2
+        ...
+        ;;
+    *)  # 类似于C/C++中的default
+        语句1
+        语句2
+        ...
+        ;;
+esac
+```
 
 **示例：**
-    
-    
-    a=4
-    
-    case $a in
-        1)
-            echo ${a}等于1
-            ;;  
-        2)
-            echo ${a}等于2
-            ;;  
-        3)                                                
-            echo ${a}等于3
-            ;;  
-        *)
-            echo 其他
-            ;;  
-    esac
+```java
+
+
+a=4
+
+case $a in
+    1)
+        echo ${a}等于1
+        ;;  
+    2)
+        echo ${a}等于2
+        ;;  
+    3)                                                
+        echo ${a}等于3
+        ;;  
+    *)
+        echo 其他
+        ;;  
+esac
+```
 
 输出结果：
-    
-    
-    其他
+```java
+
+
+其他
+```
 
 * * *
 
@@ -819,129 +949,153 @@ test str1 != str2 | 判断str1是否不等于str2
 **`for…in…do…done`形式**
 
 命令格式：
-    
-    
-    for var in val1 val2 val3
-    do
-        语句1
-        语句2
-        ...
-    done
+```java
+
+
+for var in val1 val2 val3
+do
+    语句1
+    语句2
+    ...
+done
+```
 
 **示例1** ，输出a 2 cc，每个元素一行：
-    
-    
-    for i in a 2 cc
-    do
-        echo $i
-    done
+```java
+
+
+for i in a 2 cc
+do
+    echo $i
+done
+```
 
 **示例2** ，输出当前路径下的所有文件名，每个文件名一行：
-    
-    
-    for file in `ls`
-    do
-        echo $file
-    done
+```java
+
+
+for file in `ls`
+do
+    echo $file
+done
+```
 
 **示例3** ，输出1-10
-    
-    
-    for i in $(seq 1 10)
-    do
-        echo $i
-    done
+```java
+
+
+for i in $(seq 1 10)
+do
+    echo $i
+done
+```
 
 **示例4** ，使用{1..10} 或者 {a..z}
-    
-    
-    for i in {a..z}
-    do
-        echo $i
-    done
+```java
+
+
+for i in {a..z}
+do
+    echo $i
+done
+```
 
 **`for ((…;…;…)) do…done`形式**
 
 命令格式：
-    
-    
-    for ((expression; condition; expression))
-    do
-        语句1
-        语句2
-    done
+```java
+
+
+for ((expression; condition; expression))
+do
+    语句1
+    语句2
+done
+```
 
 **示例** ，输出1-10，每个数占一行：
-    
-    
-    for ((i=1; i<=10; i++))
-    do
-        echo $i
-    done
+```java
+
+
+for ((i=1; i<=10; i++))
+do
+    echo $i
+done
+```
 
 **`while…do…done`循环**
 
 命令格式：
-    
-    
-    while condition
-    do
-        语句1
-        语句2
-        ...
-    done
+```java
+
+
+while condition
+do
+    语句1
+    语句2
+    ...
+done
+```
 
 **示例** ，文件结束符为Ctrl+d，输入文件结束符后read指令返回false。
-    
-    
-    while read name
-    do
-        echo $name
-    done
+```java
+
+
+while read name
+do
+    echo $name
+done
+```
 
 **`until…do…done`循环**
 
 当条件为**真** 时结束。
 
 命令格式：
-    
-    
-    until condition
-    do
-        语句1
-        语句2
-        ...
-    done
+```java
+
+
+until condition
+do
+    语句1
+    语句2
+    ...
+done
+```
 
 **示例** ，当用户输入yes或者YES时结束，否则一直等待读入。
-    
-    
-    until [ "${word}" == "yes" ] || [ "${word}" == "YES" ]
-    do
-        read -p "Please input yes/YES to stop this program: " word
-    done
+```java
+
+
+until [ "${word}" == "yes" ] || [ "${word}" == "YES" ]
+do
+    read -p "Please input yes/YES to stop this program: " word
+done
+```
 
 **`break`命令**
 
 跳出当前一层循环，注意与`C/C++`不同的是：`break`不能跳出`case`语句。
 
 **示例**
-    
-    
-    while read name
+```java
+
+
+while read name
+do
+    for ((i=1;i<=10;i++))
     do
-        for ((i=1;i<=10;i++))
-        do
-            case $i in
-                8)
-                    break
-                    ;;
-                *)
-                    echo $i
-                    ;;
-            esac
-        done
+        case $i in
+            8)
+                break
+                ;;
+            *)
+                echo $i
+                ;;
+        esac
     done
+done
+```
 
 该示例每读入非EOF的字符串，会输出一遍1-7。 该程序可以输入`Ctrl+d`文件结束符来结束，也可以直接用`Ctrl+c`杀掉该进程。
 
@@ -950,16 +1104,18 @@ test str1 != str2 | 判断str1是否不等于str2
 跳出当前循环。
 
 示例：
-    
-    
-    for ((i=1;i<=10;i++))
-    do
-        if [ `expr $i % 2` -eq 0 ]
-        then
-            continue
-        fi
-        echo $i
-    done
+```java
+
+
+for ((i=1;i<=10;i++))
+do
+    if [ `expr $i % 2` -eq 0 ]
+    then
+        continue
+    fi
+    echo $i
+done
+```
 
 该程序输出1-10中的所有奇数。
 
@@ -991,57 +1147,67 @@ test str1 != str2 | 判断str1是否不等于str2
 函数的`return`值可以通过`$?`来获取。
 
 命令格式：
-    
-    
-    [function] func_name() {  # function关键字可以省略
-        语句1
-        语句2
-        ...
-    }
+```java
+
+
+[function] func_name() {  # function关键字可以省略
+    语句1
+    语句2
+    ...
+}
+```
 
 **不获取`return`值和`stdout`值**
 
 **示例**
-    
-    
-    func() {
-        name=lys
-        echo "Hello $name"
-    }
-    
-    func
+```java
+
+
+func() {
+    name=lys
+    echo "Hello $name"
+}
+
+func
+```
 
 输出结果：
-    
-    
-    Hello lys
+```java
+
+
+Hello lys
+```
 
 **获取`return`值和`stdout`值**
 
 不写`return`时，默认`return 0`。
 
 **示例**
-    
-    
-    func() {
-        name=lys
-        echo "Hello $name"
-    
-        return 123
-    
-    }
-    
-    output=$(func)
-    ret=$?
-    
-    echo "output = $output"
-    echo "return = $ret"
+```java
+
+
+func() {
+    name=lys
+    echo "Hello $name"
+
+    return 123
+
+}
+
+output=$(func)
+ret=$?
+
+echo "output = $output"
+echo "return = $ret"
+```
 
 输出结果：
-    
-    
-    output = Hello lys
-    return = 123
+```java
+
+
+output = Hello lys
+return = 123
+```
 
 * * *
 
@@ -1052,38 +1218,42 @@ test str1 != str2 | 判断str1是否不等于str2
 注意：函数内的`$0`仍然是文件名，而不是函数名。
 
 **示例** ：
-    
-    
-    func() {  # 递归计算 $1 + ($1 - 1) + ($1 - 2) + ... + 0
-        word=""
-        while [ "${word}" != 'y' ] && [ "${word}" != 'n' ]
-        do
-            read -p "要进入func($1)函数吗？请输入y/n：" word
-        done
-    
-        if [ "$word" == 'n' ]
-        then
-            echo 0
-            return 0
-        fi  
-    
-        if [ $1 -le 0 ] 
-        then
-            echo 0
-            return 0
-        fi  
-    
-        sum=$(func $(expr $1 - 1))
-        echo $(expr $sum + $1)
-    
-    }
-    
-    echo $(func 10)
+```java
+
+
+func() {  # 递归计算 $1 + ($1 - 1) + ($1 - 2) + ... + 0
+    word=""
+    while [ "${word}" != 'y' ] && [ "${word}" != 'n' ]
+    do
+        read -p "要进入func($1)函数吗？请输入y/n：" word
+    done
+
+    if [ "$word" == 'n' ]
+    then
+        echo 0
+        return 0
+    fi  
+
+    if [ $1 -le 0 ] 
+    then
+        echo 0
+        return 0
+    fi  
+
+    sum=$(func $(expr $1 - 1))
+    echo $(expr $sum + $1)
+
+}
+
+echo $(func 10)
+```
 
 输出结果：
-    
-    
-    55
+```java
+
+
+55
+```
 
 * * *
 
@@ -1094,27 +1264,33 @@ test str1 != str2 | 判断str1是否不等于str2
 可以在递归函数中定义局部变量。
 
 命令格式：
-    
-    
-    local 变量名=变量值
+```java
+
+
+local 变量名=变量值
+```
 
 **例如** ：
-    
-    
-    #! /bin/bash
-    
-    func() {
-        local name=lys
-        echo $name
-    }
-    func
-    
+```java
+
+
+#! /bin/bash
+
+func() {
+    local name=lys
     echo $name
+}
+func
+
+echo $name
+```
 
 输出结果：
-    
-    
-    lys
+```java
+
+
+lys
+```
 
 第一行为函数内的`name`变量，第二行为函数外调用`name`变量，会发现此时该变量不存在。
 
@@ -1133,31 +1309,35 @@ test str1 != str2 | 判断str1是否不等于str2
 **示例：**
 
 创建脚本`test.sh`，内容如下：
-    
-    
-    #! /bin/bash
-    
-    if [ $# -ne 1 ]  # 如果传入参数个数等于1，则正常退出；否则非正常退出。
-    then
-        echo "arguments not valid"
-        exit 1
-    else
-        echo "arguments valid"
-        exit 0
-    fi
+```java
+
+
+#! /bin/bash
+
+if [ $# -ne 1 ]  # 如果传入参数个数等于1，则正常退出；否则非正常退出。
+then
+    echo "arguments not valid"
+    exit 1
+else
+    echo "arguments valid"
+    exit 0
+fi
+```
 
 执行该脚本：
-    
-    
-    acs@9e0ebfcd82d7:~$ chmod +x test.sh 
-    acs@9e0ebfcd82d7:~$ ./test.sh acwing
-    arguments valid
-    acs@9e0ebfcd82d7:~$ echo $?  # 传入一个参数，则正常退出，exit code为0
-    0
-    acs@9e0ebfcd82d7:~$ ./test.sh 
-    arguments not valid
-    acs@9e0ebfcd82d7:~$ echo $?  # 传入参数个数不是1，则非正常退出，exit code为1
-    1
+```java
+
+
+acs@9e0ebfcd82d7:~$ chmod +x test.sh 
+acs@9e0ebfcd82d7:~$ ./test.sh acwing
+arguments valid
+acs@9e0ebfcd82d7:~$ echo $?  # 传入一个参数，则正常退出，exit code为0
+0
+acs@9e0ebfcd82d7:~$ ./test.sh 
+arguments not valid
+acs@9e0ebfcd82d7:~$ echo $?  # 传入参数个数不是1，则非正常退出，exit code为1
+1
+```
 
 * * *
 
@@ -1185,40 +1365,48 @@ test str1 != str2 | 判断str1是否不等于str2
 `command n>> file` | 将文件描述符`n`以追加方式重定向到`file`中  
   
 **输入和输出重定向**
-    
-    
-    echo -e "Hello \c" > output.txt  # 将stdout重定向到output.txt中
-    echo "World" >> output.txt  # 将字符串追加到output.txt中
-    
-    read str < output.txt  # 从output.txt中读取字符串
-    
-    echo $str  # 输出结果：Hello World
+```java
+
+
+echo -e "Hello \c" > output.txt  # 将stdout重定向到output.txt中
+echo "World" >> output.txt  # 将字符串追加到output.txt中
+
+read str < output.txt  # 从output.txt中读取字符串
+
+echo $str  # 输出结果：Hello World
+```
 
 **同时重定向stdin和stdout**
 
 创建`bash`脚本：
-    
-    
-    #! /bin/bash
-    
-    read a
-    read b
-    
-    echo $(expr "$a" + "$b")
+```java
+
+
+#! /bin/bash
+
+read a
+read b
+
+echo $(expr "$a" + "$b")
+```
 
 创建input.txt，里面的内容为：
-    
-    
-    3
-    4
+```java
+
+
+3
+4
+```
 
 执行命令：
-    
-    
-    acs@9e0ebfcd82d7:~$ chmod +x test.sh  # 添加可执行权限
-    acs@9e0ebfcd82d7:~$ ./test.sh < input.txt > output.txt  # 从input.txt中读取内容，将输出写入output.txt中
-    acs@9e0ebfcd82d7:~$ cat output.txt  # 查看output.txt中的内容
-    7
+```java
+
+
+acs@9e0ebfcd82d7:~$ chmod +x test.sh  # 添加可执行权限
+acs@9e0ebfcd82d7:~$ ./test.sh < input.txt > output.txt  # 从input.txt中读取内容，将输出写入output.txt中
+acs@9e0ebfcd82d7:~$ cat output.txt  # 查看output.txt中的内容
+7
+```
 
 * * *
 
@@ -1229,38 +1417,48 @@ test str1 != str2 | 判断str1是否不等于str2
 类似于`C/C++`中的`include`操作，`bash`也可以引入其他文件中的代码。
 
 **语法格式：**
-    
-    
-    . filename  # 注意点和文件名之间有一个空格
+```java
+
+
+. filename  # 注意点和文件名之间有一个空格
+```
 
 **或：**
-    
-    
-    source filename
+```java
+
+
+source filename
+```
 
 **示例**
 
 创建`test1.sh`，内容为：
-    
-    
-    #! /bin/bash
-    
-    name=lys  # 定义变量name
+```java
+
+
+#! /bin/bash
+
+name=lys  # 定义变量name
+```
 
 然后创建test2.sh，内容为：
-    
-    
-    #! /bin/bash
-    
-    source test1.sh # 或 . test1.sh
-    
-    echo My name is: $name  # 可以使用test1.sh中的变量
+```java
+
+
+#! /bin/bash
+
+source test1.sh # 或 . test1.sh
+
+echo My name is: $name  # 可以使用test1.sh中的变量
+```
 
 执行命令：
-    
-    
-    acs@9e0ebfcd82d7:~$ chmod +x test2.sh  #添加可执行命令
-    acs@9e0ebfcd82d7:~$ ./test2.sh 
-    My name is: lys
+```java
+
+
+acs@9e0ebfcd82d7:~$ chmod +x test2.sh  #添加可执行命令
+acs@9e0ebfcd82d7:~$ ./test2.sh 
+My name is: lys
+```
 
 * * *

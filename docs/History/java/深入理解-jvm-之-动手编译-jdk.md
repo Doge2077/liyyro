@@ -39,9 +39,11 @@ description: ""
 * * *
 
 下载 `JDK12` 源码：
-    
-    
-    wget https://hg.openjdk.org/jdk/jdk12/archive/06222165c35f.tar.gz
+```java
+
+
+wget https://hg.openjdk.org/jdk/jdk12/archive/06222165c35f.tar.gz
+```
 
 > 通过 `Mercurial` 代码版本管理工具从 `Repository` 中直接取得源码
 >     
@@ -49,53 +51,67 @@ description: ""
 >     hg clone https://hg.openjdk.java.net/jdk/jdk12
 
 解压：
-    
-    
-    tar xvf 06222165c35f.tar.gz
+```java
+
+
+tar xvf 06222165c35f.tar.gz
+```
 
 安装 `GCC` 编译器：
-    
-    
-    sudo apt-get install build-essential
+```java
+
+
+sudo apt-get install build-essential
+```
 
 安装后执行：
-    
-    
-    gcc -v
+```java
+
+
+gcc -v
+```
 
 如果版本为 `gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1)` ，版本太高会导致后面编译失败，需要卸载重装 `gcc`：
-    
-    
-    sudo apt-get remove gcc
+```java
+
+
+sudo apt-get remove gcc
+```
 
 安装 `gcc-7`：
-    
-    
-    sudo apt-get install gcc-7
-    sudo apt-get install g++-7
-    
-    # 设置默认选项
-    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 100
-    sudo update-alternatives --config gcc
-    sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 100
-    sudo update-alternatives --config g++
+```java
+
+
+sudo apt-get install gcc-7
+sudo apt-get install g++-7
+
+# 设置默认选项
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 100
+sudo update-alternatives --config gcc
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 100
+sudo update-alternatives --config g++
+```
 
 再次执行 `gcc -v` 可以看到版本为 `gcc version 7.5.0 (Ubuntu 7.5.0-6ubuntu2)` 即可。
 
 进入解压后的 `jdk12-06222165c35f` 目录 ，安装在编译过程中需要的依赖 `FreeType`、`CUPS` 等若干第三方库：
-    
-    
-    sudo apt-get install libfreetype6-dev
-    sudo apt-get install libcups2-dev
-    sudo apt-get install libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
-    sudo apt-get install libasound2-dev
-    sudo apt-get install libffi-dev 
-    sudo apt-get install autoconf
+```java
+
+
+sudo apt-get install libfreetype6-dev
+sudo apt-get install libcups2-dev
+sudo apt-get install libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+sudo apt-get install libasound2-dev
+sudo apt-get install libffi-dev 
+sudo apt-get install autoconf
+```
 
 安装启动 `JDK`：
-    
-    
-    sudo apt-get install openjdk-11-jdk
+```java
+
+
+sudo apt-get install openjdk-11-jdk
+```
 
 * * *
 
@@ -104,32 +120,40 @@ description: ""
 * * *
 
 在解压后的 `jdk12-06222165c35f` 目录下，执行：
-    
-    
-    bash configure --enable-debug --with-jvm-variants=server
+```java
+
+
+bash configure --enable-debug --with-jvm-variants=server
+```
 
 如果缺少未安装的库，根据报错提示安装即可，成功后显示：
 
 ![image-20230829164908588](https://image.itbaima.net/images/40/image-20230829162471905.png)
 
 然后，编译，启动！
-    
-    
-    make images
+```java
+
+
+make images
+```
 
 打开资源管理查看进程，可以看到八核线程~~汗液~~ 狂飙（
 
 ![image-20230829165553313](https://image.itbaima.net/images/40/image-20230829164444852.png)
 
 经过长达十分钟左右的等待后，可以看到编译如下信息，提示编译成功：
-    
-    
-    Finished building target 'images' in configuration 'linux-x86_64-server-fastdebug'
+```java
+
+
+Finished building target 'images' in configuration 'linux-x86_64-server-fastdebug'
+```
 
 该 `linux-x86_64-server-fastdebug` 目录即为我们编译后的 `JDK` 目录，我们进入然后执行：
-    
-    
-    java -version
+```java
+
+
+java -version
+```
 
 可以看到编译后的 `JDK` 默认会带上编译的机器名：
 
@@ -148,16 +172,20 @@ description: ""
 * * *
 
 在 `Windows Terminal` 或 `cmd` 中执行：
-    
-    
-    ipconfig
+```java
+
+
+ipconfig
+```
 
 记录本机 `IPv4` 地址 `xxx.xxx.xxx.xxx`。
 
 在虚拟机 `Terminal` 中执行：
-    
-    
-    ifconfig
+```java
+
+
+ifconfig
+```
 
 记录虚拟机虚拟机的 `ens33:inet` 地址 `yyy.yyy.yyy.yyy`。
 

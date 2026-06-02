@@ -15,23 +15,25 @@ description: ""
 
 
 **结构** ：
-    
-    
-    一个tmux可以包含多个session，一个session可以包含多个window，一个window可以包含多个pane。
-        实例：
-            tmux:
-                session 0:
-                    window 0:
-                        pane 0
-                        pane 1
-                        pane 2
-                        ...
-                    window 1
-                    window 2
+```java
+
+
+一个tmux可以包含多个session，一个session可以包含多个window，一个window可以包含多个pane。
+    实例：
+        tmux:
+            session 0:
+                window 0:
+                    pane 0
+                    pane 1
+                    pane 2
                     ...
-                session 1
-                session 2
+                window 1
+                window 2
                 ...
+            session 1
+            session 2
+            ...
+```
 
 **注意：** 本操作支持的前缀键由默认的`Ctrl+b`更改为`Ctrl+a`
 

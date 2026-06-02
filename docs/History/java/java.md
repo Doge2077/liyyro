@@ -25,13 +25,15 @@ description: ""
 
 
 **Java程序** ：
-    
-    
-    public class HelloWorld {
-        public static void main(String[] args) {
-            System.out.println("Hello World"); 
-        }
+```java
+
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello World"); 
     }
+}
+```
 
 **关于public class HelloWorld** ：
 
@@ -74,26 +76,32 @@ description: ""
 **两种格式** ：
 
   1. **单行注释** ：`// 描述信息`
-     * 通常放在一行代码的上方，或者一条语句的末尾，对该行代码说明。
+```java
+ * 通常放在一行代码的上方，或者一条语句的末尾，对该行代码说明。
+```
   2. **多行注释** ： `/* 描述信息 */`
-     * 通常放在一段代码的上方，对该段代码做整体说明。
+```java
+ * 通常放在一段代码的上方，对该段代码做整体说明。
+```
 
 
 
 **示例** ：
-    
-    
-    public class HelloWorld {
-       /* 这是第一个Java程序
-        * 它将输出 Hello World
-        * 这是一个多行注释的示例
-        */
-        public static void main(String[] args){
-           // 这是单行注释的示例
-           /* 这个也是单行注释的示例 */
-           System.out.println("Hello World"); 
-        }
+```java
+
+
+public class HelloWorld {
+   /* 这是第一个Java程序
+    * 它将输出 Hello World
+    * 这是一个多行注释的示例
+    */
+    public static void main(String[] args){
+       // 这是单行注释的示例
+       /* 这个也是单行注释的示例 */
+       System.out.println("Hello World"); 
     }
+}
+```
 
 * * *
 
@@ -106,20 +114,22 @@ description: ""
 
 
 **A+B 示例** ：
-    
-    
-    import java.util.Scanner;  //导入Scanner包
-    
-    public class Main{
-        public static void main(String[] args){
-            Scanner cin = new Scanner(System.in);
-            int a = cin.nextInt();  //输入a
-            int b = cin.nextInt();  //输入b
-    
-            System.out.println(a + b);  //输出a + b
-    
-        }
+```java
+
+
+import java.util.Scanner;  //导入Scanner包
+
+public class Main{
+    public static void main(String[] args){
+        Scanner cin = new Scanner(System.in);
+        int a = cin.nextInt();  //输入a
+        int b = cin.nextInt();  //输入b
+
+        System.out.println(a + b);  //输出a + b
+
     }
+}
+```
 
 * * *
 
@@ -132,32 +142,36 @@ description: ""
   * 效率低，输入规模较小时使用。
 
 
-    
-    
-    Scanner sc = new Scanner(System.in);
-    String str = sc.next();  // 读入下一个字符串
-    int x = sc.nextInt();  // 读入下一个整数
-    float y = sc.nextFloat();  // 读入下一个单精度浮点数
-    double z = sc.nextDouble();  // 读入下一个双精度浮点数
-    String line = sc.nextLine();  // 读入下一行
+```java
+
+
+Scanner sc = new Scanner(System.in);
+String str = sc.next();  // 读入下一个字符串
+int x = sc.nextInt();  // 读入下一个整数
+float y = sc.nextFloat();  // 读入下一个单精度浮点数
+double z = sc.nextDouble();  // 读入下一个双精度浮点数
+String line = sc.nextLine();  // 读入下一行
+```
 
 **方式2** ：
 
   * 效率较高，输入规模较大时使用。注意需要抛异常。
 
 
-    
-    
-    import java.io.BufferedReader;
-    import java.io.InputStreamReader;
-    
-    public class Main {
-        public static void main(String[] args) throws Exception {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            String str = br.readLine();
-            System.out.println(str);
-        }
+```java
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str = br.readLine();
+        System.out.println(str);
     }
+}
+```
 
 * * *
 
@@ -170,31 +184,35 @@ description: ""
   * 效率低，输出规模较小时使用。
 
 
-    
-    
-    System.out.println(123);  // 输出整数 + 换行
-    System.out.println("Hello World");  // 输出字符串 + 换行
-    System.out.print(123);  // 输出整数
-    System.out.print("lys is dog\n");  // 输出字符串
-    System.out.printf("%04d %.2f\n", 4, 123.456D);  // 格式化输出，float与double都用%f输出
+```java
+
+
+System.out.println(123);  // 输出整数 + 换行
+System.out.println("Hello World");  // 输出字符串 + 换行
+System.out.print(123);  // 输出整数
+System.out.print("lys is dog\n");  // 输出字符串
+System.out.printf("%04d %.2f\n", 4, 123.456D);  // 格式化输出，float与double都用%f输出
+```
 
 **方式2** ：
 
   * 效率较高，输出规模较大时使用。注意需要抛异常。
 
 
-    
-    
-    import java.io.BufferedWriter;
-    import java.io.OutputStreamWriter;
-    
-    public class Main {
-        public static void main(String[] args) throws Exception {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-            bw.write("Hello World\n");
-            bw.flush();  // 需要手动刷新缓冲区
-        }
+```java
+
+
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        bw.write("Hello World\n");
+        bw.flush();  // 需要手动刷新缓冲区
     }
+}
+```
 
 * * *
 
@@ -221,14 +239,16 @@ description: ""
 
 
 **示例** ：
-    
-    
-    public class Main {
-        public static void main(String[] args) {
-            int a = 5;
-            int b, c = a, d = 10 / 2;
-        }
+```java
+
+
+public class Main {
+    public static void main(String[] args) {
+        int a = 5;
+        int b, c = a, d = 10 / 2;
     }
+}
+```
 
 * * *
 
@@ -406,10 +426,12 @@ description: ""
   * 转换从低级到高级。
 
 
-    
-    
-    低  ----------------------------------------->  高
-    byte,short,char —> int —> long —> float —> double 
+```java
+
+
+低  ----------------------------------------->  高
+byte,short,char —> int —> long —> float —> double 
+```
 
   * 不能对 `boolean` 类型进行类型转换。
 
@@ -418,16 +440,20 @@ description: ""
   * 在把容量大的类型转换为容量小的类型时必须使用强制类型转换。
 
   * 转换过程中可能导致溢出或损失精度，例如：
-        
-        int i =128;   
-        byte b = (byte)i;
+```java
+    
+    int i =128;   
+    byte b = (byte)i;
+```
 
 因为 `byte` 类型是 $8$ 位，最大值为 $127$，所以当 `int` 强制转换为 `byte` 类型时，值 $128$ 时候就会导致溢出。
 
   * 浮点数到整数的转换是通过舍弃小数得到，而不是四舍五入，例如：
-        
-        (int)23.7 == 23;        
-        (int)-45.89f == -45
+```java
+    
+    (int)23.7 == 23;        
+    (int)-45.89f == -45
+```
 
 
 
@@ -440,18 +466,20 @@ description: ""
 
 
 **示例**
-    
-    
-    public class Main{
-            public static void main(String[] args){
-                char c1='a';//定义一个char类型
-                int i1 = c1;//char自动类型转换为int
-                System.out.println("char自动类型转换为int后的值等于"+i1);
-                char c2 = 'A';//定义一个char类型
-                int i2 = c2+1;//char 类型和 int 类型计算
-                System.out.println("char类型和int计算后的值等于"+i2);
-            }
-    }
+```java
+
+
+public class Main{
+        public static void main(String[] args){
+            char c1='a';//定义一个char类型
+            int i1 = c1;//char自动类型转换为int
+            System.out.println("char自动类型转换为int后的值等于"+i1);
+            char c2 = 'A';//定义一个char类型
+            int i2 = c2+1;//char 类型和 int 类型计算
+            System.out.println("char类型和int计算后的值等于"+i2);
+        }
+}
+```
 
 * * *
 
@@ -472,15 +500,17 @@ description: ""
 
 
 **示例** ：
-    
-    
-    public class Main{
-        public static void main(String[] args){
-            int i1 = 123;
-            byte b = (byte)i1;//强制类型转换为byte
-            System.out.println("int强制类型转换为byte后的值等于"+b);
-        }
+```java
+
+
+public class Main{
+    public static void main(String[] args){
+        int i1 = 123;
+        byte b = (byte)i1;//强制类型转换为byte
+        System.out.println("int强制类型转换为byte后的值等于"+b);
     }
+}
+```
 
 **隐含强制类型转换**
 
@@ -623,48 +653,54 @@ description: ""
 运算 | 运算符 | 数学符号 | 解释  
 ---|---|---|---  
 与 | `&` | $\&$ | 只有两个对应位都为 $1$ 时才为 $1$  
-或 | `|` | [latex] \mid [/latex] | 只要两个对应位中有一个为 $1$ 时就为 $1$  
+或 | `|` | $$
+\mid
+$$ | 只要两个对应位中有一个为 $1$ 时就为 $1$  
 取反 | `~` | $\sim$ | 按位取反，即对应的 $0$ 变为 $1$， $1$ 变为 $0$  
 异或 | `^` | $\oplus$ | 只有两个对应位不同时才为 $1$  
-      
-    
-    &  //与运算
-    0 & 0 = 0 ;
-    0 & 1 = 0 ;
-    1 & 0 = 0 ;
-    1 & 1 = 1 ;
-    
-    |  //或运算
-    0 | 0 = 0 ;
-    0 | 1 = 1 ;
-    1 | 0 = 1 ;
-    1 | 1 = 1 ;
-    
-    ~  //取反运算
-    ~ 0 = 1 ;
-    ~ 1 = 0 ;
-    
-    ^  //异或运算
-    0 ^ 0 = 0 ;
-    0 ^ 1 = 1 ;
-    1 ^ 0 = 1 ;
-    1 ^ 1 = 0 ;
-    
-    >> //右移运算
-    n >> k  //表示 n / 2^k 
-    
-    <<  //左移运算
-    n << k  //表示 n * 2*k
-    
+```java
+  
+
+&  //与运算
+0 & 0 = 0 ;
+0 & 1 = 0 ;
+1 & 0 = 0 ;
+1 & 1 = 1 ;
+
+|  //或运算
+0 | 0 = 0 ;
+0 | 1 = 1 ;
+1 | 0 = 1 ;
+1 | 1 = 1 ;
+
+~  //取反运算
+~ 0 = 1 ;
+~ 1 = 0 ;
+
+^  //异或运算
+0 ^ 0 = 0 ;
+0 ^ 1 = 1 ;
+1 ^ 0 = 1 ;
+1 ^ 1 = 0 ;
+
+>> //右移运算
+n >> k  //表示 n / 2^k 
+
+<<  //左移运算
+n << k  //表示 n * 2*k
+
+```
 
 **常用模板**
-    
-    
-    //求x的第k位数字
-    x >> k & 1 ;
-    
-    //求x的最后一位1
-    x & -x ;
+```java
+
+
+//求x的第k位数字
+x >> k & 1 ;
+
+//求x的最后一位1
+x & -x ;
+```
 
 * * *
 

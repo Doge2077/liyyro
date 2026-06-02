@@ -29,13 +29,15 @@ description: ""
 * * *
 
 **代码** ：
-    
-    
-    class Solution {
-        public int findDelayedArrivalTime(int arrivalTime, int delayedTime) {
-            return (arrivalTime + delayedTime) % 24;
-        }
+```java
+
+
+class Solution {
+    public int findDelayedArrivalTime(int arrivalTime, int delayedTime) {
+        return (arrivalTime + delayedTime) % 24;
     }
+}
+```
 
 * * *
 
@@ -62,17 +64,19 @@ description: ""
 * * *
 
 **代码** ：
-    
-    
-    class Solution {
-        public int sumOfMultiples(int n) {
-            int sum = 0;
-            for(int i = 1; i <= n; i ++){
-                if(i % 3 == 0 || i % 5 == 0 || i % 7 == 0) sum += i;
-            }
-            return sum;
+```java
+
+
+class Solution {
+    public int sumOfMultiples(int n) {
+        int sum = 0;
+        for(int i = 1; i <= n; i ++){
+            if(i % 3 == 0 || i % 5 == 0 || i % 7 == 0) sum += i;
         }
+        return sum;
     }
+}
+```
 
 * * *
 
@@ -106,30 +110,32 @@ description: ""
 * * *
 
 **代码** ：
-    
-    
-    class Solution {
-        public int[] getSubarrayBeauty(int[] nums, int k, int x) {
-            int n = nums.length;
-            int[] res = new int[n - k + 1];  // 答案数组
-            int[] vis = new int[1010];       // 记录窗口中存在数的数量
-            final int base = 50;             // 偏移量
-            for(int i = 0; i < k - 1; i ++) vis[nums[i] + base] ++;  // 初始化窗口
-            for(int i = k - 1; i < n; i ++){
-                int cnt = 0;  // 记录数量
-                vis[nums[i] + base] ++;          // 移入右边界
-                for(int j = 0; j < 110; j ++){
-                    cnt += vis[j];   
-                    if(cnt >= x){
-                        res[i - k + 1] = j - base < 0 ? j - base : 0;
-                        break;
-                    }
+```java
+
+
+class Solution {
+    public int[] getSubarrayBeauty(int[] nums, int k, int x) {
+        int n = nums.length;
+        int[] res = new int[n - k + 1];  // 答案数组
+        int[] vis = new int[1010];       // 记录窗口中存在数的数量
+        final int base = 50;             // 偏移量
+        for(int i = 0; i < k - 1; i ++) vis[nums[i] + base] ++;  // 初始化窗口
+        for(int i = k - 1; i < n; i ++){
+            int cnt = 0;  // 记录数量
+            vis[nums[i] + base] ++;          // 移入右边界
+            for(int j = 0; j < 110; j ++){
+                cnt += vis[j];   
+                if(cnt >= x){
+                    res[i - k + 1] = j - base < 0 ? j - base : 0;
+                    break;
                 }
-                vis[nums[i - k + 1] + base] --;  // 移出左边界
             }
-            return res;  // 返回答案
+            vis[nums[i - k + 1] + base] --;  // 移出左边界
         }
+        return res;  // 返回答案
     }
+}
+```
 
 * * *
 
@@ -152,49 +158,55 @@ description: ""
   * 最大公约数及其性质；
   * 如果一个数列中所有数的最大公约数为 $g$，那么无论如替换数列中任意的两个数为其最大公约数，都无法操作出 $h$ 使得 $h < g$。
   * 证明如下： 
-    * 设原数列为 $a_1, a_2, ..., a_n$，最大公约数为 $g$，操作后得到的数列为 $b_1, b_2, ..., b_n$，最大公约数为 $h$，其中 $h < g$。
-    * 不妨设 $b_1 = h \times k_1$，其中 $k_1$ 为一个整数。则可以将 $b_1 = \gcd(a_1, a_2) \times (a_1 \div \gcd(a_1, a_2))$。
-    * 其中 $a_1 / \gcd(a_1, a_2)$ 是一个整数，故 $h$ 一定整除 $b_1$，即 $h$ 是 $a_1$ 和 $a_2$ 的公约数。
-    * 同理，根据操作规则，$a_2$ 和 $a_3$ 的公约数也是 $h$，以此类推，即 $a[i]$ 和 $a[i + 1]$ 的公约数都是 $h$。
-    * 由于 $h < g$，所以 $h$ 一定不能整除 $a_1$，即将 $a_1$ 和 $a_2$ 替换为 $h$ 的操作一定不能得到最大公约数为 $h$ 且小于 $g$ 的数列 $b_n$。
+```java
+* 设原数列为 $a_1, a_2, ..., a_n$，最大公约数为 $g$，操作后得到的数列为 $b_1, b_2, ..., b_n$，最大公约数为 $h$，其中 $h < g$。
+* 不妨设 $b_1 = h \times k_1$，其中 $k_1$ 为一个整数。则可以将 $b_1 = \gcd(a_1, a_2) \times (a_1 \div \gcd(a_1, a_2))$。
+* 其中 $a_1 / \gcd(a_1, a_2)$ 是一个整数，故 $h$ 一定整除 $b_1$，即 $h$ 是 $a_1$ 和 $a_2$ 的公约数。
+* 同理，根据操作规则，$a_2$ 和 $a_3$ 的公约数也是 $h$，以此类推，即 $a[i]$ 和 $a[i + 1]$ 的公约数都是 $h$。
+* 由于 $h < g$，所以 $h$ 一定不能整除 $a_1$，即将 $a_1$ 和 $a_2$ 替换为 $h$ 的操作一定不能得到最大公约数为 $h$ 且小于 $g$ 的数列 $b_n$。
+```
   * 若可以通过操作得到： 
-    * 当数列存在 $1$ 时，需要操作所有非 $1$ 的元素；
-    * 当不存在 $1$ 时，需要找到一个最短的连续的子数组，使得通过操作得到 $1$。 
+```java
+* 当数列存在 $1$ 时，需要操作所有非 $1$ 的元素；
+* 当不存在 $1$ 时，需要找到一个最短的连续的子数组，使得通过操作得到 $1$。 
+```
 
 
 
 * * *
 
 **代码** ：
-    
-    
-    class Solution {
-        public int minOperations(int[] nums) {
-            int n = nums.length;
-            int t = nums[0];
-            int cnt = t == 1 ? 1 : 0;  // 判断第一个是否为 1
-            for(int i = 1; i < n; i ++){
-                t = gcd(t, nums[i]);
-                if(nums[i] == 1) cnt ++;  // 记录 1 的元素个数
-            }
-            if(t != 1) return -1;  // t != 1 说明不成立
-            if(cnt != 0) return n - cnt;  // 存在 1，最少操作 n - cnt 次
-            int res = n;  // 连续的子数组的长度
-            for (int i = 0; i < n; i ++) {
-                int tt = nums[i];
-                for (int j = i + 1; j < n; j ++) {  // 遍历查找
-                    tt = gcd(tt, nums[j]);
-                    if (tt == 1) {  // 通过操作找到了可以变为 1 的连续子数组
-                        res = Math.min(res, j - i + 1);  // 更新最短长度
-                        break;
-                    }
+```java
+
+
+class Solution {
+    public int minOperations(int[] nums) {
+        int n = nums.length;
+        int t = nums[0];
+        int cnt = t == 1 ? 1 : 0;  // 判断第一个是否为 1
+        for(int i = 1; i < n; i ++){
+            t = gcd(t, nums[i]);
+            if(nums[i] == 1) cnt ++;  // 记录 1 的元素个数
+        }
+        if(t != 1) return -1;  // t != 1 说明不成立
+        if(cnt != 0) return n - cnt;  // 存在 1，最少操作 n - cnt 次
+        int res = n;  // 连续的子数组的长度
+        for (int i = 0; i < n; i ++) {
+            int tt = nums[i];
+            for (int j = i + 1; j < n; j ++) {  // 遍历查找
+                tt = gcd(tt, nums[j]);
+                if (tt == 1) {  // 通过操作找到了可以变为 1 的连续子数组
+                    res = Math.min(res, j - i + 1);  // 更新最短长度
+                    break;
                 }
             }
-            return res + n - 2;  // 去除掉连续子数组的两个边界操作
         }
-    
-        private int gcd(int n, int m){
-            return n % m == 0 ? m : gcd(m, n % m);
-        }
-    
+        return res + n - 2;  // 去除掉连续子数组的两个边界操作
     }
+
+    private int gcd(int n, int m){
+        return n % m == 0 ? m : gcd(m, n % m);
+    }
+
+}
+```

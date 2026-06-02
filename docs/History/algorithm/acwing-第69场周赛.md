@@ -29,30 +29,32 @@ description: ""
 * * *
 
 **代码** ：
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    typedef long long LL;
-    
-    void sovle(){
-    
-        LL x, y, a, b; cin >> x >> y >> a >> b;
-        if((y - x) % (a + b) == 0) cout << (y - x) / (a + b) << endl;
-        else cout << - 1 << endl;
-    
-    }
-    
-    int main(){
-    
-        int _ = 1; cin >> _;
-    
-        while(_ --) sovle();
-    
-        return 0;
-    
-    }
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+typedef long long LL;
+
+void sovle(){
+
+    LL x, y, a, b; cin >> x >> y >> a >> b;
+    if((y - x) % (a + b) == 0) cout << (y - x) / (a + b) << endl;
+    else cout << - 1 << endl;
+
+}
+
+int main(){
+
+    int _ = 1; cin >> _;
+
+    while(_ --) sovle();
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -85,48 +87,50 @@ description: ""
 * * *
 
 **代码** ：
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N = 1e6 + 10;
-    
-    int num[N];
-    
-    int idx;
-    
-    void solve(){
-    
-        int n, a, b, k;
-        cin >> n >> a >> b >> k;
-        string s; cin >> s;
-        int cnt = 0;
-        for(int i = 0; i < s.size(); i ++){
-            if(s[i] == '0'){
-                cnt ++;
-                if(cnt == b){
-                    num[idx ++] = i + 1;
-                    cnt = 0;
-                }
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 1e6 + 10;
+
+int num[N];
+
+int idx;
+
+void solve(){
+
+    int n, a, b, k;
+    cin >> n >> a >> b >> k;
+    string s; cin >> s;
+    int cnt = 0;
+    for(int i = 0; i < s.size(); i ++){
+        if(s[i] == '0'){
+            cnt ++;
+            if(cnt == b){
+                num[idx ++] = i + 1;
+                cnt = 0;
             }
-            else cnt = 0;
         }
-    
-        cout << idx - a + 1 << endl;
-        for(int i = 0; i < idx - a + 1; i ++) cout << num[i] << ' ';
-    
-        return ;
-    
+        else cnt = 0;
     }
-    
-    int main(){
-    
-        solve();
-    
-        return 0;
-    
-    }
+
+    cout << idx - a + 1 << endl;
+    for(int i = 0; i < idx - a + 1; i ++) cout << num[i] << ' ';
+
+    return ;
+
+}
+
+int main(){
+
+    solve();
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -147,11 +151,15 @@ description: ""
   * 数学思维题。
   * 化简该方程为： $a - x = a \oplus x$。
   * 当 $a$ 二进制上的某一位是 $1$ 时： 
-    * $1-0= 1,1\oplus0=1,1-1=0,1 \oplus1 = 0$ 
-    * 故此时 $a$ 与 $x$ 无论是做减法还是异或运算，结果都相同。
+```java
+* $1-0= 1,1\oplus0=1,1-1=0,1 \oplus1 = 0$ 
+* 故此时 $a$ 与 $x$ 无论是做减法还是异或运算，结果都相同。
+```
   * 当 $a$ 二进制上的某一位是 $0$ 时： 
-    * $0 - 0 = 0,0\oplus 0 = 0$
-    * 故此时只有 $x$ 的二进制位也是 $0$ 才可使得等式成立。
+```java
+* $0 - 0 = 0,0\oplus 0 = 0$
+* 故此时只有 $x$ 的二进制位也是 $0$ 才可使得等式成立。
+```
   * 综上，设 $a$ 的二进制位上共有 $m$ 个位的值为 $1$ ，则 $x$ 的可选方案数为 $2^m$ 种。
 
 
@@ -159,32 +167,34 @@ description: ""
 * * *
 
 **代码** ：
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    typedef long long LL;
-    
-    void solve(){
-    
-        LL n; cin >> n;
-        int cnt = 0;
-        while(n){
-            cnt += n & 1;
-            n >>= 1;
-        }
-    
-        cout << (1 << cnt) << endl;
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+typedef long long LL;
+
+void solve(){
+
+    LL n; cin >> n;
+    int cnt = 0;
+    while(n){
+        cnt += n & 1;
+        n >>= 1;
     }
-    
-    int main(){
-    
-        int _ = 1; cin >> _;
-    
-        while(_ --) solve();
-    
-        return 0;
-    
-    }
+
+    cout << (1 << cnt) << endl;
+
+}
+
+int main(){
+
+    int _ = 1; cin >> _;
+
+    while(_ --) solve();
+
+    return 0;
+
+}
+```

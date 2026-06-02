@@ -33,35 +33,45 @@ description: ""
 * * *
 
 **C程序** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h>
 ```
-    
-    int main(){
-    
-        printf("Hello,world!");
-    
-        return 0;
-    }
+```java
+
+int main(){
+
+    printf("Hello,world!");
+
+    return 0;
+}
+```
 
 **C++程序** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int main(){
-    
+```java
+
+int main(){
+
+```
 ```cpp
     cout << "Hello,world!" ;
 ```
-    
-        return 0;
-    }
+```java
+
+    return 0;
+}
+```
 
 **关于 #include**
 
@@ -80,20 +90,26 @@ using namespace std;
   * `using namespace std;` 会将 `std` 中的所有名字引入，我们就可以用 `cout` 代替 `std::cout`
 
 
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 ```
-    
-    int main(){
-    
+```java
+
+int main(){
+
+```
 ```cpp
     std::cout << "Hello,world!" ;
 ```
-    
-        return 0;
-    }
+```java
+
+    return 0;
+}
+```
 
 **关于 main()**
 
@@ -126,33 +142,41 @@ using namespace std;
 **两种格式** ：
 
   1. **单行注释** ：`// 描述信息`
-     * 通常放在一行代码的上方，或者一条语句的末尾，对该行代码说明。
+```java
+ * 通常放在一行代码的上方，或者一条语句的末尾，对该行代码说明。
+```
   2. **多行注释** ： `/* 描述信息 */`
-     * 通常放在一段代码的上方，对该段代码做整体说明。
+```java
+ * 通常放在一段代码的上方，对该段代码做整体说明。
+```
 
 
 
 > 提示：编译器在编译代码时，会忽略注释的内容，注释对程序运行没有影响，C/C++通用该规则。
 
 **示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h>  //这是C语言的头文件
 ```
-    
-    int main(){  //main()函数
-    
-        printf("Hello,world!");  //输出Hello,world!
-    
-        /*  这是多行注释，从本行开始
-    
-        printf("Hello,world!");  //输出输出Hello,world!
-    
-        截止至该行，以上的所有内容不会执行  */    
-    
-        return 0;
-    }
+```java
+
+int main(){  //main()函数
+
+    printf("Hello,world!");  //输出Hello,world!
+
+    /*  这是多行注释，从本行开始
+
+    printf("Hello,world!");  //输出输出Hello,world!
+
+    截止至该行，以上的所有内容不会执行  */    
+
+    return 0;
+}
+```
 
 * * *
 
@@ -179,43 +203,53 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main(){
-    
-        int a;  //定义一个变量a
-    
-        scanf("%d", &a);  //输入a的值
-    
-        printf("%d", a);  //输出a的值
-    
-        return 0;
-    }
+```java
+
+int main(){
+
+    int a;  //定义一个变量a
+
+    scanf("%d", &a);  //输入a的值
+
+    printf("%d", a);  //输出a的值
+
+    return 0;
+}
+```
 
 **C++语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int main(){
-    
-        int a;  //定义一个变量a
-    
-        cin >> a;  //输入a的值
-    
+```java
+
+int main(){
+
+    int a;  //定义一个变量a
+
+    cin >> a;  //输入a的值
+
+```
 ```cpp
     cout << a;  //输出a的值
 ```
-    
-        return 0;
-    }
+```java
+
+    return 0;
+}
+```
 
 **关于变量** ：
 
@@ -279,47 +313,57 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h>
 ```
-    
-    int main(){
-    
-        int a;  //定义一个int型的变量a
-    
-        int b = 10;  //定义一个int型的变量b，初始值为10
-    
-        scanf("%d", &a);
-    
-        printf("%d %d", a, b);  //输出a的值后输出一个空格，再输出b的值
-    
-        return 0;
-    }
+```java
+
+int main(){
+
+    int a;  //定义一个int型的变量a
+
+    int b = 10;  //定义一个int型的变量b，初始值为10
+
+    scanf("%d", &a);
+
+    printf("%d %d", a, b);  //输出a的值后输出一个空格，再输出b的值
+
+    return 0;
+}
+```
 
 **C++语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int main(){
-    
-        int a;  //定义一个int型的变量a
-    
-        int b = 10;  //定义一个int型的变量b，初始值为10
-    
-        cin >> a;
-    
+```java
+
+int main(){
+
+    int a;  //定义一个int型的变量a
+
+    int b = 10;  //定义一个int型的变量b，初始值为10
+
+    cin >> a;
+
+```
 ```cpp
     cout << a << " " << b;  //输出a的值后输出一个空格，再输出b的值
 ```
-    
-        return 0;
-    }
+```java
+
+    return 0;
+}
+```
 
 * * *
 
@@ -352,47 +396,57 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main(){
-    
-        int a;  //定义一个int型的变量a
-    
-        long long b;  //定义一个long long型的变量b
-    
-        scanf("%d %lld", &a, &b);  //读入a和b的值
-    
-        printf("%d %lld", a, b);  //输出a的值后输出一个空格，再输出b的值
-    
-        return 0;
-    }
+```java
+
+int main(){
+
+    int a;  //定义一个int型的变量a
+
+    long long b;  //定义一个long long型的变量b
+
+    scanf("%d %lld", &a, &b);  //读入a和b的值
+
+    printf("%d %lld", a, b);  //输出a的值后输出一个空格，再输出b的值
+
+    return 0;
+}
+```
 
 **C++语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int main(){
-    
-        int a;  //定义一个int型的变量a
-    
-        long long b;  //定义一个long long型的变量b
-    
-        cin >> a >> b;  //读入a和b的值
-    
+```java
+
+int main(){
+
+    int a;  //定义一个int型的变量a
+
+    long long b;  //定义一个long long型的变量b
+
+    cin >> a >> b;  //读入a和b的值
+
+```
 ```cpp
     cout << a << " " << b;  //输出a的值后输出一个空格，再输出b的值
 ```
-    
-        return 0;
-    }
+```java
+
+    return 0;
+}
+```
 
 * * *
 
@@ -424,54 +478,66 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h>
 ```
-    
-    int main(){
-    
-        float a;  //定义一个float型的变量a
-    
-        double b;  //定义一个double型的变量b
-    
-        scanf("%f %lf", &a, &b);  //读入a和b的值
-    
-        printf("%f %lf\n", a, b);  //输出a的值后输出一个空格，再输出b的值再输出回车
-    
-        printf("%.2f %.3lf\n", a, b);  //输出a的值保留2位小数后输出一个空格，再输出b的值保留3位小数再输出回车
-    
-        return 0;
-    }
+```java
+
+int main(){
+
+    float a;  //定义一个float型的变量a
+
+    double b;  //定义一个double型的变量b
+
+    scanf("%f %lf", &a, &b);  //读入a和b的值
+
+    printf("%f %lf\n", a, b);  //输出a的值后输出一个空格，再输出b的值再输出回车
+
+    printf("%.2f %.3lf\n", a, b);  //输出a的值保留2位小数后输出一个空格，再输出b的值保留3位小数再输出回车
+
+    return 0;
+}
+```
 
 **C++语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 #include <iomanip>
 using namespace std;
 ```
-    
-    int main(){
-    
-        float a;  //定义一个float型的变量a
-    
-        double b;  //定义一个double型的变量b
-    
-        cin >> a >> b;  //读入a和b的值
-    
+```java
+
+int main(){
+
+    float a;  //定义一个float型的变量a
+
+    double b;  //定义一个double型的变量b
+
+    cin >> a >> b;  //读入a和b的值
+
+```
 ```cpp
     cout << a << " " << b << endl;  //输出a的值后输出一个空格，再输出b的值再输出回车
 ```
-    
+```java
+
+```
 ```cpp
     cout << setprecision(2) << a << " " << setprecision(3) << b << endl;  //输出a的值保留2位小数后输出一个空格，再输出b的值保留3位小数再输出回车
 ```
-    
-        return 0;
-    }
+```java
+
+    return 0;
+}
+```
 
 **了解更多** ：对于数字是如何在计算机中存储的，可以参考[数字在计算机中的表示](&lt;https://lys2021.com/?p=1528&gt;)
 
@@ -510,43 +576,53 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main(){
-    
-        char a;  //定义一个char型的变量a
-    
-        scanf("%c", &a);  //读入a值
-    
-        printf("%c\n", a);  //输出a的值后输出一个回车
-    
-        return 0;
-    }
+```java
+
+int main(){
+
+    char a;  //定义一个char型的变量a
+
+    scanf("%c", &a);  //读入a值
+
+    printf("%c\n", a);  //输出a的值后输出一个回车
+
+    return 0;
+}
+```
 
 **C++语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int main(){
-    
-        char a;  //定义一个char型的变量a
-    
-        cin >> a;  //读入a值
-    
+```java
+
+int main(){
+
+    char a;  //定义一个char型的变量a
+
+    cin >> a;  //读入a值
+
+```
 ```cpp
     cout << a << endl;  //输出a的值后输出一个回车
 ```
-    
-        return 0;
-    }
+```java
+
+    return 0;
+}
+```
 
 **ASCII码表格** ：
 
@@ -641,70 +717,86 @@ using namespace std;
 
 
 **C++语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 #include <string>
 using namespace std;
 ```
-    
-    int main(){
-    
-        string s1 = "a";  //定义一个string型的变量s1，初始化值为"a"
-    
-        string s2;  //定义一个string型的变量s2
-    
-        cin >> s2;  //读入s2的值
-    
+```java
+
+int main(){
+
+    string s1 = "a";  //定义一个string型的变量s1，初始化值为"a"
+
+    string s2;  //定义一个string型的变量s2
+
+    cin >> s2;  //读入s2的值
+
+```
 ```cpp
     cout << s1 << endl << s2;  //输出s1的值后输出一个回车，再输出s2
 ```
-    
-        return 0;
-    }
+```java
+
+    return 0;
+}
+```
 
 &gt; 更多支持操作参见[string 容器](&lt;https://oi-wiki.org/lang/csl/string/&gt;)。
 
 **C与C++表达字符串的对比** ：
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main(){
-    
-        char a[100] = "lys is a doge";  //C语言可以借助字符数组来达到同样效果
-    
-        printf("%s\n",a);
-    
-        return 0;
-    
-    }
+```java
+
+int main(){
+
+    char a[100] = "lys is a doge";  //C语言可以借助字符数组来达到同样效果
+
+    printf("%s\n",a);
+
+    return 0;
+
+}
+```
 
 **C++语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 #include <string>
 using namespace std;
 ```
-    
-    int main(){
-    
-        string a = "lys is a doge";
-    
+```java
+
+int main(){
+
+    string a = "lys is a doge";
+
+```
 ```cpp
     cout << a << endl;
 ```
-    
-        return 0;
-    
-    }
+```java
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -743,31 +835,39 @@ using namespace std;
 
 
 **C++语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int main(){
-    
-        bool a = false, b = 1;  //定义一个bool型的变量a,b，初始化值为false和1
-    
-        bool n;  //定义一个bool型的变量n
-    
-        cin >> n;  //读入n的值，只能是0或1
-    
+```java
+
+int main(){
+
+    bool a = false, b = 1;  //定义一个bool型的变量a,b，初始化值为false和1
+
+    bool n;  //定义一个bool型的变量n
+
+    cin >> n;  //读入n的值，只能是0或1
+
+```
 ```cpp
     cout << a << " " << b << endl;  //输出a的值后输出一个空格，再输出b的值和一个回车
 ```
-    
+```java
+
+```
 ```cpp
     cout << n << endl;  //输出n的值和一个回车
 ```
-    
-        return 0;
-    }
+```java
+
+    return 0;
+}
+```
 
 * * *
 
@@ -796,27 +896,31 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    #define b 20  //宏定义的方式定义常量
-    
-    int main(){
-    
-        const int a = 10;  //const 方式定义常量
-    
-        /*
-        a = 20;  //a是常量不可修改，否则报错
-        b = 10;  //b是常量不可修改，否则报错
-        */
-    
-        printf("%d %d", a, b);
-    
-        return 0;
-    }
+```java
+
+#define b 20  //宏定义的方式定义常量
+
+int main(){
+
+    const int a = 10;  //const 方式定义常量
+
+    /*
+    a = 20;  //a是常量不可修改，否则报错
+    b = 10;  //b是常量不可修改，否则报错
+    */
+
+    printf("%d %d", a, b);
+
+    return 0;
+}
+```
 
 * * *
 
@@ -976,10 +1080,12 @@ delete | goto | reinterpret_cast | try |
   * 否则，若存在一个变量类型为 `double` ，会将另一变量转换为 `double` 类型；
   * 否则，若存在一个变量类型为 `float` ，会将另一变量转换为 `float` 类型；
   * 否则（即参与运算的两个变量均为整数类型）： 
-    * 若两个变量符号性一致，则将位宽较小的类型转换为位宽较大的类型；
-    * 否则，若无符号变量的位宽不小于带符号变量的位宽，则将带符号数转换为无符号数对应的类型；
-    * 否则，若带符号操作数的类型能表示无符号操作数类型的所有值，则将无符号操作数转换为带符号操作数对应的类型；
-    * 否则，将带符号数转换为相对应的无符号类型。
+```java
+* 若两个变量符号性一致，则将位宽较小的类型转换为位宽较大的类型；
+* 否则，若无符号变量的位宽不小于带符号变量的位宽，则将带符号数转换为无符号数对应的类型；
+* 否则，若带符号操作数的类型能表示无符号操作数类型的所有值，则将无符号操作数转换为带符号操作数对应的类型；
+* 否则，将带符号数转换为相对应的无符号类型。
+```
 
 
 
@@ -1071,42 +1177,52 @@ delete | goto | reinterpret_cast | try |
 `||` | 或 | a || b | 如果a和b有一个为真，则结果为真，二者都为假时，结果为假。  
   
 **C++语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int main(){
-    
-        bool res;
-    
-        bool a, b;
-    
-        cin >> a >> b;
-    
-        res = a && b;  // 当 a 与 b 都为真时则 res 为真
-    
+```java
+
+int main(){
+
+    bool res;
+
+    bool a, b;
+
+    cin >> a >> b;
+
+    res = a && b;  // 当 a 与 b 都为真时则 res 为真
+
+```
 ```cpp
     cout << res << endl;
 ```
-    
-        res = a || b;  // 当 a 或 b 其中一个为真时则 res 为真
-    
+```java
+
+    res = a || b;  // 当 a 或 b 其中一个为真时则 res 为真
+
+```
 ```cpp
     cout << res << endl;
 ```
-    
-        res = !a;  // 当 a 为假时则 res 为真
-    
+```java
+
+    res = !a;  // 当 a 为假时则 res 为真
+
+```
 ```cpp
     cout << res << endl;
 ```
-    
-        return 0;
-    
-    }
+```java
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -1126,50 +1242,58 @@ using namespace std;
 运算 | 运算符 | 数学符号 | 解释  
 ---|---|---|---  
 与 | `&` | $\&$ | 只有两个对应位都为 $1$ 时才为 $1$  
-或 | `|` | [latex] \mid [/latex] | 只要两个对应位中有一个为 $1$ 时就为 $1$  
+或 | `|` | $$
+\mid
+$$ | 只要两个对应位中有一个为 $1$ 时就为 $1$  
 取反 | `~` | $\sim$ | 按位取反，即对应的 $0$ 变为 $1$， $1$ 变为 $0$  
 异或 | `^` | $\oplus$ | 只有两个对应位不同时才为 $1$  
-      
-    
-    &  //与运算
-    0 & 0 = 0 ;
-    0 & 1 = 0 ;
-    1 & 0 = 0 ;
-    1 & 1 = 1 ;
-    
-    |  //或运算
-    0 | 0 = 0 ;
-    0 | 1 = 1 ;
-    1 | 0 = 1 ;
-    1 | 1 = 1 ;
-    
-    ~  //取反运算
-    ~ 0 = 1 ;
-    ~ 1 = 0 ;
-    
-    ^  //异或运算
-    0 ^ 0 = 0 ;
-    0 ^ 1 = 1 ;
-    1 ^ 0 = 1 ;
-    1 ^ 1 = 0 ;
-    
-    >> //右移运算
-    n >> k  //表示 n / 2^k 
-    
+```java
+  
+
+&  //与运算
+0 & 0 = 0 ;
+0 & 1 = 0 ;
+1 & 0 = 0 ;
+1 & 1 = 1 ;
+
+|  //或运算
+0 | 0 = 0 ;
+0 | 1 = 1 ;
+1 | 0 = 1 ;
+1 | 1 = 1 ;
+
+~  //取反运算
+~ 0 = 1 ;
+~ 1 = 0 ;
+
+^  //异或运算
+0 ^ 0 = 0 ;
+0 ^ 1 = 1 ;
+1 ^ 0 = 1 ;
+1 ^ 1 = 0 ;
+
+>> //右移运算
+n >> k  //表示 n / 2^k 
+
+```
 ```cpp
 <<  //左移运算
 n << k  //表示 n * 2*k
 ```
-    
+```java
+
+```
 
 **常用模板**
-    
-    
-    //求x的第k位数字
-    x >> k & 1 ;
-    
-    //求x的最后一位1
-    x & -x ;
+```java
+
+
+//求x的第k位数字
+x >> k & 1 ;
+
+//求x的最后一位1
+x & -x ;
+```
 
 **取反及补码**
 
@@ -1179,7 +1303,9 @@ n << k  //表示 n * 2*k
 
   * 补码：在二进制表示下，正数和 $0$ 的补码为其本身，负数的补码是将其对应正数按位取反后加一。
 
-  * 例如： [latex] \begin{aligned} 5&=(00000101)_2\\\\\\\ \sim 5&=(11111010)_2=-6\\\\\\\ -5的补码&=(11111011)_2\\\\\\\ \sim(-5)&=(00000100)=4\\\\\\\ \end{aligned} [/latex]
+  * 例如： $$
+\begin{aligned} 5&=(00000101)_2\\\\\\\ \sim 5&=(11111010)_2=-6\\\\\\\ -5的补码&=(11111011)_2\\\\\\\ \sim(-5)&=(00000100)=4\\\\\\\ \end{aligned}
+$$
 
 
 
@@ -1188,7 +1314,9 @@ n << k  //表示 n * 2*k
 
   * 异或运算的逆运算是它本身，也就是说两次异或同一个数最后结果不变，即 $a\oplus b \oplus b = a$。
 
-  * 例如： [latex] \begin{aligned} 5&=(101)_2\\\\\\\ 6&=(110)_2\\\\\\\ 5\& 6&=(100)_2=4\\\\\\\ 5|6&=(111)_2=7\\\\\\\ 5\oplus 6&=(011)_2=3 \end{aligned} [/latex]
+  * 例如： $$
+\begin{aligned} 5&=(101)_2\\\\\\\ 6&=(110)_2\\\\\\\ 5\& 6&=(100)_2=4\\\\\\\ 5|6&=(111)_2=7\\\\\\\ 5\oplus 6&=(011)_2=3 \end{aligned}
+$$
 
 
 
@@ -1199,7 +1327,9 @@ n << k  //表示 n * 2*k
 
   * `num >> i` 表示将 $num$ 的二进制表示向右移动 $i$ 位所得的值。
 
-  * 例如： [latex] \begin{aligned} 11&=(00001011)_2\\\\\\\ 11\lt\lt 3&=(01011000)_2=88\\\\\\\ 11\gt\gt 2&=(00000010)_2=2\\\\\\\ \end{aligned} [/latex]
+  * 例如： $$
+\begin{aligned} 11&=(00001011)_2\\\\\\\ 11\lt\lt 3&=(01011000)_2=88\\\\\\\ 11\gt\gt 2&=(00000010)_2=2\\\\\\\ \end{aligned}
+$$
 
 
 
@@ -1207,8 +1337,10 @@ n << k  //表示 n * 2*k
 **注意** ：
 
   * 移位运算中如果出现如下情况，则其行为未定义： 
-    * 右操作数（即移位数）为负值。
-    * 右操作数大于等于左操作数的位数。
+```java
+* 右操作数（即移位数）为负值。
+* 右操作数大于等于左操作数的位数。
+```
   * 对于左移操作，需要确保移位后的结果能被原数的类型容纳，否则行为也是未定义的。对一个负数执行左移操作也未定义。
   * 对于右移操作，右侧多余的位将会被舍弃，而左侧较为复杂：对于无符号数，会在左侧补 $0$ ；而对于有符号数，则会用最高位的数（其实就是符号位，非负数为 $0$，负数为 $1$）补齐。
   * **位运算的优先级低于算术运算符** （除了取反），而按位与、按位或及异或低于比较运算符。
@@ -1234,34 +1366,42 @@ n << k  //表示 n * 2*k
 
 
 **C++代码示例** :
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int main(){
-    
-        int res;
-    
-        res = 1 + 2, 3 + 4, 5 + 6;
-        //得到 res 的值为 3 而不是 11，因为赋值运算符 "=" 的优先级比逗号运算符高，先进行了赋值运算才进行逗号运算。
-    
+```java
+
+int main(){
+
+    int res;
+
+    res = 1 + 2, 3 + 4, 5 + 6;
+    //得到 res 的值为 3 而不是 11，因为赋值运算符 "=" 的优先级比逗号运算符高，先进行了赋值运算才进行逗号运算。
+
+```
 ```cpp
     cout << res << endl;
 ```
-    
-        res = (1 + 2, 3 + 4, 5 + 6);
-        // 若要让 res 的值得到逗号运算的结果则应将整个表达式用括号提高优先级，此时res 的值才为 11。
-    
+```java
+
+    res = (1 + 2, 3 + 4, 5 + 6);
+    // 若要让 res 的值得到逗号运算的结果则应将整个表达式用括号提高优先级，此时res 的值才为 11。
+
+```
 ```cpp
     cout << res << endl;
 ```
-    
-        return 0;
-    
-    }
+```java
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -1321,93 +1461,111 @@ using namespace std;
 **语法** ：
 
 **基本 if 语句** ：
-    
-    
-    if(条件表达式){
-        //语句
-    }
+```java
+
+
+if(条件表达式){
+    //语句
+}
+```
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main(){
-    
-        int a;  //定义一个int型变量a
-    
-        scanf("%d", &a);  //读入a的值
-    
-        if(a != 0){  //如果a的值不为0
-            printf("%d\n", a);  //输出a的值并输出一个回车
-        }
-    
-        //若a的值为0，则不会执行任何内容，程序正常退出
-    
-        return 0;
+```java
+
+int main(){
+
+    int a;  //定义一个int型变量a
+
+    scanf("%d", &a);  //读入a的值
+
+    if(a != 0){  //如果a的值不为0
+        printf("%d\n", a);  //输出a的值并输出一个回车
     }
+
+    //若a的值为0，则不会执行任何内容，程序正常退出
+
+    return 0;
+}
+```
 
 **if...else 语句** ：
-    
-    
-    if(条件表达式){
-        //语句1
+```java
+
+
+if(条件表达式){
+    //语句1
+}
+else{
+    //语句2
+}
+```
+
+**C语言代码示例** ：
+```java
+
+
+```
+```cpp
+#include <stdio.h> 
+```
+```java
+
+int main(){
+
+    int a;  //定义一个int型变量a
+
+    scanf("%d", &a);  //读入a的值
+
+    if(a != 0){  //如果a的值不为0
+        printf("%d\n", a);  //输出a的值并输出一个回车
     }
     else{
-        //语句2
+        printf("a的值为0！\n");  //若a的值为0，输出"a的值为0！"并输出一个回车
     }
 
-**C语言代码示例** ：
-    
-    
-```cpp
-#include <stdio.h> 
+    return 0;
+}
 ```
-    
-    int main(){
-    
-        int a;  //定义一个int型变量a
-    
-        scanf("%d", &a);  //读入a的值
-    
-        if(a != 0){  //如果a的值不为0
-            printf("%d\n", a);  //输出a的值并输出一个回车
-        }
-        else{
-            printf("a的值为0！\n");  //若a的值为0，输出"a的值为0！"并输出一个回车
-        }
-    
-        return 0;
-    }
 
 **else if 语句** ：
-    
-    
-    if(条件表达式1){
-            //语句1
-        }
-        else if(条件表达式2){
-            //语句2
-        }
-        else{
-            //语句3
-        }
+```java
+
+
+if(条件表达式1){
+        //语句1
+    }
+    else if(条件表达式2){
+        //语句2
+    }
+    else{
+        //语句3
+    }
+```
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main(){
-    
-        int a;  //定义一个int型变量a
-    
-        scanf("%d", &a);  //读入a的值
-    
+```java
+
+int main(){
+
+    int a;  //定义一个int型变量a
+
+    scanf("%d", &a);  //读入a的值
+
+```
 ```cpp
     if(a > 100){  //如果a的值大于100
         printf("%d\n", a - 100);  //输出a - 100的值并输出一个回车
@@ -1422,42 +1580,48 @@ using namespace std;
         printf("a的值为小于0！\n");  //若a的值不满足以上所有条件，输出"a的值小于0！"并输出一个回车
     }
 ```
-    
-        return 0;
-    }
+```java
+
+    return 0;
+}
+```
 
 **嵌套 if 语句** ：
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main(){
-    
-        int a;  //定义一个int型变量a
-    
-        scanf("%d", &a);  //读入a的值
-    
-        if(a > 0){
-            if(a > 100){  //如果a的值大于100
-                printf("%d\n", a - 100);  //输出a - 100的值并输出一个回车
-            }
-            else{
-                printf("%d\n", a + 100);  //输出a + 100的值并输出一个回车
-            }
-        }
-        else if(a == 0){  //若a的值为0
-            printf("a的值为0！\n");  //输出"a的值为0！"并输出一个回车
+```java
+
+int main(){
+
+    int a;  //定义一个int型变量a
+
+    scanf("%d", &a);  //读入a的值
+
+    if(a > 0){
+        if(a > 100){  //如果a的值大于100
+            printf("%d\n", a - 100);  //输出a - 100的值并输出一个回车
         }
         else{
-            printf("a的值为小于0！\n");  //若a的值不满足以上所有条件，输出"a的值小于0！"并输出一个回车
+            printf("%d\n", a + 100);  //输出a + 100的值并输出一个回车
         }
-    
-        return 0;
     }
+    else if(a == 0){  //若a的值为0
+        printf("a的值为0！\n");  //输出"a的值为0！"并输出一个回车
+    }
+    else{
+        printf("a的值为小于0！\n");  //若a的值不满足以上所有条件，输出"a的值小于0！"并输出一个回车
+    }
+
+    return 0;
+}
+```
 
 * * *
 
@@ -1485,24 +1649,28 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main(){
-    
-        int a;  //定义一个int型变量a
-    
-        scanf("%d", &a);  //读入a的值
-    
-        int c = a > 0 ? a : -a;  //若a的值大于0则c = a，否则c = -a
-    
-        printf("%d\n", c);
-    
-        return 0;
-    }
+```java
+
+int main(){
+
+    int a;  //定义一个int型变量a
+
+    scanf("%d", &a);  //读入a的值
+
+    int c = a > 0 ? a : -a;  //若a的值大于0则c = a，否则c = -a
+
+    printf("%d\n", c);
+
+    return 0;
+}
+```
 
 * * *
 
@@ -1517,19 +1685,21 @@ using namespace std;
 
 
 **语法：**
-    
-    
-    switch(条件表达式){
-    
-        case 结果1：执行语句1; break;
-    
-        case 结果2：执行语句2; break;
-    
-        ...
-    
-        default: 执行语句n; break;
-    
-    }
+```java
+
+
+switch(条件表达式){
+
+    case 结果1：执行语句1; break;
+
+    case 结果2：执行语句2; break;
+
+    ...
+
+    default: 执行语句n; break;
+
+}
+```
 
 **注意** ：
 
@@ -1541,44 +1711,48 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main() {
-    
-        //请给电影评分 
-        //10 ~ 9   经典   
-        // 8 ~ 7   非常好
-        // 6 ~ 5   一般
-        // 5分以下 烂片
-    
-        int score;
-    
-        scanf("%d", &score);  //输入分数
-    
-        switch(score){
-        case 10:
-        case 9:
-            printf("经典\n");
-            break;
-        case 8:
-            printf("非常好\n");
-            break;
-        case 7:
-        case 6:
-            printf("一般\n");
-            break;
-        default:
-            printf("烂片\n");
-            break;
-        }
-    
-        return 0;
-    
+```java
+
+int main() {
+
+    //请给电影评分 
+    //10 ~ 9   经典   
+    // 8 ~ 7   非常好
+    // 6 ~ 5   一般
+    // 5分以下 烂片
+
+    int score;
+
+    scanf("%d", &score);  //输入分数
+
+    switch(score){
+    case 10:
+    case 9:
+        printf("经典\n");
+        break;
+    case 8:
+        printf("非常好\n");
+        break;
+    case 7:
+    case 6:
+        printf("一般\n");
+        break;
+    default:
+        printf("烂片\n");
+        break;
     }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -1597,11 +1771,13 @@ using namespace std;
 
 
 **语法** ：
-    
-    
-    while(条件表达式){
-        //语句
-    }
+```java
+
+
+while(条件表达式){
+    //语句
+}
+```
 
 **解释** ：
 
@@ -1617,30 +1793,36 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main() {
-    
-        int n;
-    
-        scanf("%d", &n);
-    
-        int sum = 1;
-    
+```java
+
+int main() {
+
+    int n;
+
+    scanf("%d", &n);
+
+    int sum = 1;
+
+```
 ```cpp
     while(sum <= n){  //当sum小于等于n时执行
         printf("%d\n", sum);  //输出sum的值和回车
         sum ++;  //执行完一次循环，sum的值加1
     }
 ```
-    
-        return 0;
-    
-    }
+```java
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -1655,11 +1837,13 @@ using namespace std;
 
 
 **语法** ：
-    
-    
-    do{
-        //语句
-    }while(条件表达式);
+```java
+
+
+do{
+    //语句
+}while(条件表达式);
+```
 
 **解释** ：
 
@@ -1675,30 +1859,34 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main() {
-    
-        int n;
-    
-        scanf("%d", &n);
-    
-        int sum = 10;
-    
-        do{  
-            printf("%d\n", sum);  //输出sum的值和回车
-            sum --;  //执行完一次循环，sum的值减1
-        }while(sum >= n);  //当sum大于等于n时执行
-    
-        //若输入的n值大于10，则仍会先执行一次语句，再判断循环条件
-    
-        return 0;
-    
-    }
+```java
+
+int main() {
+
+    int n;
+
+    scanf("%d", &n);
+
+    int sum = 10;
+
+    do{  
+        printf("%d\n", sum);  //输出sum的值和回车
+        sum --;  //执行完一次循环，sum的值减1
+    }while(sum >= n);  //当sum大于等于n时执行
+
+    //若输入的n值大于10，则仍会先执行一次语句，再判断循环条件
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -1713,11 +1901,13 @@ using namespace std;
 
 
 **语法** ：
-    
-    
-    for(初始化条件; 判断条件; 更新){
-        //语句
-    }
+```java
+
+
+for(初始化条件; 判断条件; 更新){
+    //语句
+}
+```
 
 **注意** ：
 
@@ -1735,27 +1925,33 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main() {
-    
-        int n;
-    
-        scanf("%d", &n);
-    
+```java
+
+int main() {
+
+    int n;
+
+    scanf("%d", &n);
+
+```
 ```cpp
     for(int i = 1; i <= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行之后，i的值加1
         printf("%d\n", i);  //输出i的值和一个回车
     }
 ```
-    
-        return 0;
-    
-    }
+```java
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -1770,18 +1966,22 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main() {
-    
-        int n;
-    
-        scanf("%d", &n);
-    
+```java
+
+int main() {
+
+    int n;
+
+    scanf("%d", &n);
+
+```
 ```cpp
     for(int i = 1; i <= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行之后，i的值加1
         for(int j = 1; j <= i; j ++){//当j小于等于i时，执行循环体内的语句，执行之后，j的值加1
@@ -1790,10 +1990,12 @@ using namespace std;
         printf("\n");  //执行完内层的循环之后，输出一次回车
     }
 ```
-    
-        return 0;
-    
-    }
+```java
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -1814,69 +2016,81 @@ using namespace std;
 
 
 **C语言代码示例1** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main() {
-    
-        int n;
-    
-        scanf("%d", &n);
-    
+```java
+
+int main() {
+
+    int n;
+
+    scanf("%d", &n);
+
+```
 ```cpp
     for(int i = 1; i <= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行后i的值加1
 ```
-    
-            printf("%d ", i);  //输出i的值和一个空格
-    
-            if(i == 10){  //若i的值为10，则终止循环
-                break;
-            }
-    
+```java
+
+        printf("%d ", i);  //输出i的值和一个空格
+
+        if(i == 10){  //若i的值为10，则终止循环
+            break;
         }
-    
-        //当n小于等于10，会输出1 2 3 ... n
-        //当n大于10时，会输出1 2 3 ... 10
-    
-        return 0;
-    
+
     }
 
+    //当n小于等于10，会输出1 2 3 ... n
+    //当n大于10时，会输出1 2 3 ... 10
+
+    return 0;
+
+}
+```
+
 **C语言代码示例2** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main() {
-    
-        int n;
-    
-        scanf("%d", &n);
-    
+```java
+
+int main() {
+
+    int n;
+
+    scanf("%d", &n);
+
+```
 ```cpp
     for(int i = 1; i <= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行后i的值加1
         for(int j = 1; j <= i; j ++){  //当j小于等于i时，执行循环体内的语句，执行之后，j的值加1
             printf("%d ", j);  //输出j的值
 ```
-    
-                if(j == 5){  //j的值为5时，退出该层循环
-                    break;
-                }
-    
+```java
+
+            if(j == 5){  //j的值为5时，退出该层循环
+                break;
             }
-    
-            printf("\n");  //执行完内层的循环之后，输出一次回车
-    
+
         }
-    
-        return 0;
-    
+
+        printf("\n");  //执行完内层的循环之后，输出一次回车
+
     }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -1897,18 +2111,22 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main() {
-    
-        int n;
-    
-        scanf("%d", &n);
-    
+```java
+
+int main() {
+
+    int n;
+
+    scanf("%d", &n);
+
+```
 ```cpp
     for(int i = 1; i <= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行后i的值加1
         if(i % 2 == 0){  //当i为偶数时，跳过本次循环，不再执行下面的语句
@@ -1917,12 +2135,14 @@ using namespace std;
         printf("%d ", i);  //输出i的值和一个空格
     }
 ```
-    
-        //执行后会输出所有不大于n的所有奇数
-    
-        return 0;
-    
-    }
+```java
+
+    //执行后会输出所有不大于n的所有奇数
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -1967,11 +2187,13 @@ using namespace std;
   * `C99` 之前：元素数量必须是编译时确定的字面量，`C99`开始我们已经可以用变量来定义数组的大小。
 
   * int a[100];
-        
-        int d1 = 100;
-        const int d2 = 100;
-        int a1[d1];  // 正确：C99支持该定义方式
-        int a2[d2];  // 正确：a2 是一个长度为 100 的数组
+```java
+    
+    int d1 = 100;
+    const int d2 = 100;
+    int a1[d1];  // 正确：C99支持该定义方式
+    int a2[d2];  // 正确：a2 是一个长度为 100 的数组
+```
 
 
 
@@ -1987,45 +2209,53 @@ using namespace std;
   * 不能将一个数组直接赋值给另一个数组。
 
   * int a1[3];
-        int a2[3] = a1[3];  // 错误
-        int a3[3];
-        a3 = a1;  // 错误
+```java
+    int a2[3] = a1[3];  // 错误
+    int a3[3];
+    a3 = a1;  // 错误
+```
 
   * 应该尽量**将较大的数组定义为全局变量** ，即将数组声明在 `main()` 函数外的全局区。因为局部变量会被创建在栈区中，过大（大于栈的大小）的数组会爆栈，进而导致 RE。如果将数组声明在全局作用域中，就会在静态区中创建数组。
 
 
 
-    
-    
+```java
+
+
+```
 ```cpp
   #include <stdio.h>
 ```
-    
-      int main(){
-    
-          int a[100000000];  //数组过大，导致爆栈，运行错误，使得程序异常退出
-    
-          printf("数组定义成功");
-    
-          return 0;
-    
-      }
-    
-    
-    
+```java
+
+  int main(){
+
+      int a[100000000];  //数组过大，导致爆栈，运行错误，使得程序异常退出
+
+      printf("数组定义成功");
+
+      return 0;
+
+  }
+
+
+
+```
 ```cpp
   #include <stdio.h>
 ```
-    
-      int a[100000000];  //数组建立在全局区，程序正常运行
-    
-      int main(){
-    
-          printf("数组定义成功");
-    
-          return 0;
-    
-      }
+```java
+
+  int a[100000000];  //数组建立在全局区，程序正常运行
+
+  int main(){
+
+      printf("数组定义成功");
+
+      return 0;
+
+  }
+```
 
 * * *
 
@@ -2048,128 +2278,152 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main() {
-    
-        //定义方式1
-        //数据类型 数组名[元素个数];
-        int score1[10];
-    
-        //利用下标赋值
-        score1[0] = 100;
-        score1[1] = 99;
-        score1[2] = 85;
-    
-        //利用下标输出
-        printf("%d\n", score1[0]);
-        printf("%d\n", score1[1]);
-        printf("%d\n", score1[2]);
-    
-        //第二种定义方式
-        //数据类型 数组名[元素个数] =  {值1，值2 ，值3 ...};
-        //如果{}内不足10个数据，剩余数据用0补全
-        int score2[10] = { 100, 90,80,70,60,50,40,30,20,10 };
-    
-        //逐个输出
-        // printf("%d ",score2[0]);
-        // printf("%d ",score2[1]);
-        // ...
-        // printf("%d ",score2[9]);
-    
+```java
+
+int main() {
+
+    //定义方式1
+    //数据类型 数组名[元素个数];
+    int score1[10];
+
+    //利用下标赋值
+    score1[0] = 100;
+    score1[1] = 99;
+    score1[2] = 85;
+
+    //利用下标输出
+    printf("%d\n", score1[0]);
+    printf("%d\n", score1[1]);
+    printf("%d\n", score1[2]);
+
+    //第二种定义方式
+    //数据类型 数组名[元素个数] =  {值1，值2 ，值3 ...};
+    //如果{}内不足10个数据，剩余数据用0补全
+    int score2[10] = { 100, 90,80,70,60,50,40,30,20,10 };
+
+    //逐个输出
+    // printf("%d ",score2[0]);
+    // printf("%d ",score2[1]);
+    // ...
+    // printf("%d ",score2[9]);
+
+```
 ```cpp
     //一个一个输出太麻烦，因此可以利用循环进行输出
     for (int i = 0; i < 10; i++){
         printf("%d ",score2[i]);
     }
 ```
-    
-        printf("\n");
-    
-        //定义方式3
-        //数据类型 数组名[] =  {值1，值2 ，值3 ...};
-        int score3[] = { 100,90,80,70,60,50,40,30,20,10 };
-    
+```java
+
+    printf("\n");
+
+    //定义方式3
+    //数据类型 数组名[] =  {值1，值2 ，值3 ...};
+    int score3[] = { 100,90,80,70,60,50,40,30,20,10 };
+
+```
 ```cpp
     for (int i = 0; i < 10; i++){
         printf("%d ",score3[i]);
     }
 ```
-    
-        printf("\n");
-    
-        return 0;
-    }
+```java
+
+    printf("\n");
+
+    return 0;
+}
+```
 
 **C++语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int main() {
-    
-        //定义方式1
-        //数据类型 数组名[元素个数];
-        int score1[10];
-    
-        //利用下标赋值
-        score1[0] = 100;
-        score1[1] = 99;
-        score1[2] = 85;
-    
+```java
+
+int main() {
+
+    //定义方式1
+    //数据类型 数组名[元素个数];
+    int score1[10];
+
+    //利用下标赋值
+    score1[0] = 100;
+    score1[1] = 99;
+    score1[2] = 85;
+
+```
 ```cpp
     //利用下标输出
     cout << score1[0] << endl;
     cout << score1[1] << endl;
     cout << score1[2] << endl;
 ```
-    
-        //第二种定义方式
-        //数据类型 数组名[元素个数] =  {值1，值2 ，值3 ...};
-        //如果{}内不足10个数据，剩余数据用0补全
-        int score2[10] = { 100, 90,80,70,60,50,40,30,20,10 };
-    
+```java
+
+    //第二种定义方式
+    //数据类型 数组名[元素个数] =  {值1，值2 ，值3 ...};
+    //如果{}内不足10个数据，剩余数据用0补全
+    int score2[10] = { 100, 90,80,70,60,50,40,30,20,10 };
+
+```
 ```cpp
     //逐个输出
     //cout << score2[0] << " " << endl;
     //...
     //cout << score2[1] << " " << endl;
 ```
-    
+```java
+
+```
 ```cpp
     //一个一个输出太麻烦，因此可以利用循环进行输出
     for (int i = 0; i < 10; i++){
         cout << score2[i] << " ";
     }
 ```
-    
+```java
+
+```
 ```cpp
     cout << endl;
 ```
-    
-        //定义方式3
-        //数据类型 数组名[] =  {值1，值2 ，值3 ...};
-        int score3[] = { 100,90,80,70,60,50,40,30,20,10 };
-    
+```java
+
+    //定义方式3
+    //数据类型 数组名[] =  {值1，值2 ，值3 ...};
+    int score3[] = { 100,90,80,70,60,50,40,30,20,10 };
+
+```
 ```cpp
     for (int i = 0; i < 10; i ++){
         cout << score3[i] << " ";
     }
 ```
-    
+```java
+
+```
 ```cpp
     cout << endl;
 ```
-    
-        return 0;
-    }
+```java
+
+    return 0;
+}
+```
 
 * * *
 
@@ -2192,25 +2446,31 @@ using namespace std;
 
 
 **示例：**
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int main(){
-    
-        //数组名用途
-        //1、可以获取整个数组占用内存空间大小
-        int a[10] = { 1,2,3,4,5,6,7,8,9,10 };
-    
+```java
+
+int main(){
+
+    //数组名用途
+    //1、可以获取整个数组占用内存空间大小
+    int a[10] = { 1,2,3,4,5,6,7,8,9,10 };
+
+```
 ```cpp
     cout << "整个数组所占内存空间为： " << sizeof(a) << endl;  //sizeof() 关键字可以返对应参数的大小
     cout << "每个元素所占内存空间为： " << sizeof(a[0]) << endl;
     cout << "数组的元素个数为： " << sizeof(a) / sizeof(a[0]) << endl;
 ```
-    
+```java
+
+```
 ```cpp
     // //2、可以通过数组名获取到数组首地址
     cout << "数组的首元素值为：" << *a << endl;  //*a 表示解引用，具体参见指针相关内容
@@ -2218,11 +2478,13 @@ using namespace std;
     cout << "数组中第一个元素地址为： " << &a[0] << endl;
     cout << "数组中第二个元素地址为： " << (long long)&a[1] << endl;  //输出地址为10进制
 ```
-    
-        //arr = 100; 错误，数组名是常量，因此不可以赋值
-    
-        return 0;
-    }
+```java
+
+    //arr = 100; 错误，数组名是常量，因此不可以赋值
+
+    return 0;
+}
+```
 
 **总结** ：
 
@@ -2290,25 +2552,29 @@ using namespace std;
 
 
 **C++代码示例**
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int main() {
-    
-        //方式1  
-        //数组类型 数组名 [行数][列数]
-        int a[2][3];
-        a[0][0] = 1;
-        a[0][1] = 2;
-        a[0][2] = 3;
-        a[1][0] = 4;
-        a[1][1] = 5;
-        a[1][2] = 6;
-    
+```java
+
+int main() {
+
+    //方式1  
+    //数组类型 数组名 [行数][列数]
+    int a[2][3];
+    a[0][0] = 1;
+    a[0][1] = 2;
+    a[0][2] = 3;
+    a[1][0] = 4;
+    a[1][1] = 5;
+    a[1][2] = 6;
+
+```
 ```cpp
     for (int i = 0; i < 2; i ++){
         for (int j = 0; j < 3; j ++){
@@ -2317,26 +2583,28 @@ using namespace std;
         cout << endl;
     }
 ```
-    
-        //方式2 
-        //数据类型 数组名[行数][列数] = { {数据1，数据2 } ，{数据3，数据4 } };
-        int a2[2][3] =
-        {
-            {1,2,3},
-            {4,5,6}
-        };
-    
-        //方式3
-        //数据类型 数组名[行数][列数] = { 数据1，数据2 ,数据3，数据4  };
-        int a3[2][3] = { 1,2,3,4,5,6 }; 
-    
-        //方式4 
-        //数据类型 数组名[][列数] = { 数据1，数据2 ,数据3，数据4  };
-        int a4[][3] = { 1,2,3,4,5,6 };
-    
-        return 0;
-    
-    }
+```java
+
+    //方式2 
+    //数据类型 数组名[行数][列数] = { {数据1，数据2 } ，{数据3，数据4 } };
+    int a2[2][3] =
+    {
+        {1,2,3},
+        {4,5,6}
+    };
+
+    //方式3
+    //数据类型 数组名[行数][列数] = { 数据1，数据2 ,数据3，数据4  };
+    int a3[2][3] = { 1,2,3,4,5,6 }; 
+
+    //方式4 
+    //数据类型 数组名[][列数] = { 数据1，数据2 ,数据3，数据4  };
+    int a4[][3] = { 1,2,3,4,5,6 };
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -2359,48 +2627,60 @@ using namespace std;
 
 
 **C++代码示例**
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int main() {
-    
-        //二维数组数组名
-        int a[2][3] =
-        {
-            {1,2,3},
-            {4,5,6}
-        };
-    
+```java
+
+int main() {
+
+    //二维数组数组名
+    int a[2][3] =
+    {
+        {1,2,3},
+        {4,5,6}
+    };
+
+```
 ```cpp
     cout << "二维数组大小： " << sizeof(a) << endl;
     cout << "二维数组一行大小： " << sizeof(a[0]) << endl;
     cout << "二维数组元素大小： " << sizeof(a[0][0]) << endl;
 ```
-    
+```java
+
+```
 ```cpp
     cout << "二维数组行数： " << sizeof(a) / sizeof(a[0]) << endl;
     cout << "二维数组列数： " << sizeof(a[0]) / sizeof(a[0][0]) << endl;
 ```
-    
+```java
+
+```
 ```cpp
     //地址
     cout << "二维数组首地址：" << a << endl;  //默认输出十六进制地址
     cout << "二维数组第一行地址：" << a[0] << endl;  
     cout << "二维数组第二行地址：" << (long long)a[1] << endl;  //输出10进制地址
 ```
-    
+```java
+
+```
 ```cpp
     cout << "二维数组第一个元素地址：" << &a[0][0] << endl;
     cout << "二维数组第二个元素地址：" << &a[0][1] << endl;
 ```
-    
-        return 0;
-    
-    }
+```java
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -2419,25 +2699,29 @@ using namespace std;
 王五 | 60 | 70 | 80  
   
 **C++代码示例**
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 #include <string>
 using namespace std;
 ```
-    
-    int main(){
-    
-        int scores[3][3] =
-        {
-            {100,100,100},
-            {90,50,100},
-            {60,70,80},
-        };
-    
-        string names[3] = { "张三","李四","王五" };
-    
+```java
+
+int main(){
+
+    int scores[3][3] =
+    {
+        {100,100,100},
+        {90,50,100},
+        {60,70,80},
+    };
+
+    string names[3] = { "张三","李四","王五" };
+
+```
 ```cpp
     for (int i = 0; i < 3; i ++){
         int sum = 0;
@@ -2447,9 +2731,11 @@ using namespace std;
         cout << names[i] << "同学总成绩为： " << sum << endl;
     }
 ```
-    
-        return 0;
-    }
+```java
+
+    return 0;
+}
+```
 
 * * *
 
@@ -2488,15 +2774,17 @@ using namespace std;
 
 
 **语法** ： 
-    
-    
-    返回值类型 函数名(参数列表){
-    
-           函数体语句
-    
-           return 表达式;
-    
-    }
+```java
+
+
+返回值类型 函数名(参数列表){
+
+       函数体语句
+
+       return 表达式;
+
+}
+```
 
 **关于声明和定义** ：
 
@@ -2515,13 +2803,15 @@ using namespace std;
   * 声明一个返回值为 `int`，函数名为 `add` 的函数，并定义为求两个 `int` 类型的数之和。
 
 
-    
-    
-    //函数
-    int add(int num1, int num2){  //返回值类型为int，传入两个int型参数num1和num2
-        int sum = num1 + num2;  //函数内执行语句
-        return sum;  //将执行语句后的值返回，该值的数据类型为int
-    }
+```java
+
+
+//函数
+int add(int num1, int num2){  //返回值类型为int，传入两个int型参数num1和num2
+    int sum = num1 + num2;  //函数内执行语句
+    return sum;  //将执行语句后的值返回，该值的数据类型为int
+}
+```
 
 * * *
 
@@ -2542,32 +2832,36 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h>
 ```
-    
-    //函数
-    int add(int num1, int num2){  //返回值类型为int，传入两个int型参数num1和num2
-        int sum = num1 + num2;  //函数内执行语句
-        return sum;  //将执行语句后的值返回，该值的数据类型为int
-    }
-    
-    int main(){
-    
-        int a, b;
-    
-        scanf("%d %d", &a, &b);
-    
-        int c = add(a, b);  //定义一个与add函数返回值相同的int类型的变量c来接收返回值
-    
-        printf("%d\n", c);  //输出该值
-    
-        printf("%d", add(a, b));  //直接输出返回值
-    
-        return 0;
-    }
+```java
+
+//函数
+int add(int num1, int num2){  //返回值类型为int，传入两个int型参数num1和num2
+    int sum = num1 + num2;  //函数内执行语句
+    return sum;  //将执行语句后的值返回，该值的数据类型为int
+}
+
+int main(){
+
+    int a, b;
+
+    scanf("%d %d", &a, &b);
+
+    int c = add(a, b);  //定义一个与add函数返回值相同的int类型的变量c来接收返回值
+
+    printf("%d\n", c);  //输出该值
+
+    printf("%d", add(a, b));  //直接输出返回值
+
+    return 0;
+}
+```
 
 * * *
 
@@ -2586,32 +2880,36 @@ using namespace std;
   * 已知编号为 $1$ 的学生年龄为 $8$ 岁，学生编号每增加 $1$，其年龄增加 $2$，即编号为 $3$ 的学生年龄为 $12$ 岁。现在输入一个学生的编号，要求利用函数递归求不同编号学生的年龄。
 
 
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h>
 ```
-    
-    //函数
-    int age(int n){
-        if(n == 1){  //当编号为1时，返回编号为1的学生年龄
-            return 8;
-        }
-        else{
-            return age(n - 1) + 2;  //否则编号n - 1,递归到下一层age(n - 1)，且年龄 + 2
-        }
+```java
+
+//函数
+int age(int n){
+    if(n == 1){  //当编号为1时，返回编号为1的学生年龄
+        return 8;
     }
-    
-    int main(){
-    
-        int n;
-    
-        scanf("%d", &n);  //输入学生编号
-    
-        printf("%d", age(n));
-    
-        return 0;
+    else{
+        return age(n - 1) + 2;  //否则编号n - 1,递归到下一层age(n - 1)，且年龄 + 2
     }
+}
+
+int main(){
+
+    int n;
+
+    scanf("%d", &n);  //输入学生编号
+
+    printf("%d", age(n));
+
+    return 0;
+}
+```
 
 * * *
 
@@ -2636,32 +2934,36 @@ using namespace std;
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h>
 ```
-    
-    //函数
-    int add(int num1, int num2){  //实参a将值传递给形参num1，实参b将值传递给num2
-        num1 += num2;  //形参num1的值变为num1 + num2
-        return num1;  //将改变值的形参num1的值返回
-    }
-    
-    int main(){
-    
-        int a, b;
-    
-        scanf("%d %d", &a, &b);
-    
-        int c = add(a, b);  //定义一个与add函数返回值相同的int类型的变量c来接收返回值
-    
-        printf("%d\n", c);  //输出该值
-    
-        printf("%d %d\n", a, b);  //输出实参a b 的值，发现a和b并未改变
-    
-        return 0;
-    }
+```java
+
+//函数
+int add(int num1, int num2){  //实参a将值传递给形参num1，实参b将值传递给num2
+    num1 += num2;  //形参num1的值变为num1 + num2
+    return num1;  //将改变值的形参num1的值返回
+}
+
+int main(){
+
+    int a, b;
+
+    scanf("%d %d", &a, &b);
+
+    int c = add(a, b);  //定义一个与add函数返回值相同的int类型的变量c来接收返回值
+
+    printf("%d\n", c);  //输出该值
+
+    printf("%d %d\n", a, b);  //输出实参a b 的值，发现a和b并未改变
+
+    return 0;
+}
+```
 
 * * *
 
@@ -2714,42 +3016,52 @@ using namespace std;
 
 
 **C++语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int main(){
-    
-        int a = 10;
-        int &b = a;  //创建a的别名为b 必须初始化 
-    
+```java
+
+int main(){
+
+    int a = 10;
+    int &b = a;  //创建a的别名为b 必须初始化 
+
+```
 ```cpp
     cout << "a = " << a <<endl;
     cout << "b = " << b << endl;  //b的值同a 
 ```
-    
-        //修改a的值 
-        a = 20;
-    
+```java
+
+    //修改a的值 
+    a = 20;
+
+```
 ```cpp
     cout << "a = " << a <<endl;  //a的值改变
     cout << "b = " << b <<endl;  //b的值也发生改变 
 ```
-    
-        //修改b的值 
-        b = 100;
-    
+```java
+
+    //修改b的值 
+    b = 100;
+
+```
 ```cpp
     cout << "a = " << a <<endl;  //a的值也发生改变 
     cout << "b = " << b <<endl;  //b的值改变
 ```
-    
-        return 0;
-    
-    }
+```java
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -2765,34 +3077,40 @@ using namespace std;
 
 
 **C++语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int main(){
-    
-        int a = 10;
-        int b = 20;
-    
-        //int &c; //错误，引用必须初始化
-    
-        int &c = a; 
-    
-        //&c = b;  //一旦初始化后，就不可以更改
-        c = b; //这是赋值操作，不是更改引用
-    
+```java
+
+int main(){
+
+    int a = 10;
+    int b = 20;
+
+    //int &c; //错误，引用必须初始化
+
+    int &c = a; 
+
+    //&c = b;  //一旦初始化后，就不可以更改
+    c = b; //这是赋值操作，不是更改引用
+
+```
 ```cpp
     cout << "a = " << a << endl;
     cout << "b = " << b << endl;
     cout << "c = " << c << endl;
 ```
-    
-        return 0;
-    
-    }
+```java
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -2807,36 +3125,44 @@ using namespace std;
 
 
 **C++代码示例**
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 using namespace std;
 ```
-    
-    int add(int &num1, int &num2){  //a通过引用的方式传递给num1, b也通过引用的方式传递给num2
-        num1 += num2;  //num1的值改变，则函数体外的实参a也将改变
-        return num1;
-    }
-    
-    int main(){
-    
-        int a, b;
-    
-        cin >> a >> b;
-    
-        int c = add(a, b);
-    
+```java
+
+int add(int &num1, int &num2){  //a通过引用的方式传递给num1, b也通过引用的方式传递给num2
+    num1 += num2;  //num1的值改变，则函数体外的实参a也将改变
+    return num1;
+}
+
+int main(){
+
+    int a, b;
+
+    cin >> a >> b;
+
+    int c = add(a, b);
+
+```
 ```cpp
     cout << c << endl;
 ```
-    
+```java
+
+```
 ```cpp
     cout << a << endl;
 ```
-    
-        return 0;
-    }
+```java
+
+    return 0;
+}
+```
 
 * * *
 
@@ -2857,26 +3183,32 @@ using namespace std;
 * * *
 
 **语法** ：
-    
-    
-    // 尽管形式不同，但这三个call函数是等价的
-    void call(int *a){
-        语句;
-    }
-    void call(int a[]){
-        语句;
-    }
-    void call(int a[10]){
-        语句;
-    }
+```java
+
+
+// 尽管形式不同，但这三个call函数是等价的
+void call(int *a){
+    语句;
+}
+void call(int a[]){
+    语句;
+}
+void call(int a[10]){
+    语句;
+}
+```
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h>
 ```
-    
+```java
+
+```
 ```cpp
 void call_1(int a[], int n){
     printf("调用call_1输出数组：\n");
@@ -2886,7 +3218,9 @@ void call_1(int a[], int n){
     printf("\n");
 }
 ```
-    
+```java
+
+```
 ```cpp
 void call_2(int a[], int n){
     printf("调用call_2输出数组：\n");
@@ -2897,15 +3231,17 @@ void call_2(int a[], int n){
     printf("\n");
 }
 ```
-    
-    int main(){
-    
-        int n = 10;
-    
-        int nums[n] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    
-        call_1(nums, n);
-    
+```java
+
+int main(){
+
+    int n = 10;
+
+    int nums[n] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+    call_1(nums, n);
+
+```
 ```cpp
     printf("调用call_1之后的数组值：\n");
     for(int i = 0; i < n; i ++){
@@ -2913,9 +3249,11 @@ void call_2(int a[], int n){
     }
     printf("\n");
 ```
-    
-        call_2(nums, n);
-    
+```java
+
+    call_2(nums, n);
+
+```
 ```cpp
     printf("调用call_1之后的数组值：\n");
     for(int i = 0; i < n; i ++){
@@ -2923,11 +3261,13 @@ void call_2(int a[], int n){
     }
     printf("\n");
 ```
-    
-        return 0;
-    
-    }
-    
+```java
+
+    return 0;
+
+}
+
+```
 
 * * *
 
@@ -2936,23 +3276,29 @@ void call_2(int a[], int n){
 * * *
 
 **语法** ：
-    
-    
-    // 多维数组中，除了第一维之外，其余维度的大小必须指定
-    void call(int (*a)[10]){
-        语句;
-    }
-    void call(int a[][10]){
-        语句;
-    }
+```java
+
+
+// 多维数组中，除了第一维之外，其余维度的大小必须指定
+void call(int (*a)[10]){
+    语句;
+}
+void call(int a[][10]){
+    语句;
+}
+```
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h>
 ```
-    
+```java
+
+```
 ```cpp
 void call(int a[][3], int n, int m){
     printf("调用call输出二维数组：\n");
@@ -2966,19 +3312,23 @@ void call(int a[][3], int n, int m){
     printf("\n");
 }
 ```
-    
-    int main(){
-    
-        int n = 2, m = 3;
-    
-```cpp
-    int nums[2][3] = {{1, 2, 3}, {4, 5, 6}};
+```java
+
+int main(){
+
+    int n = 2, m = 3;
+
 ```
-    
-        call(nums, n, m);
-    
-        printf("调用call后，输出二维数组：\n");
-    
+```cpp
+    int nums[2][3] = &#123;&#123;1, 2, 3}, {4, 5, 6&#125;&#125;;
+```
+```java
+
+    call(nums, n, m);
+
+    printf("调用call后，输出二维数组：\n");
+
+```
 ```cpp
     for(int i = 0; i < n; i ++){
         for(int j = 0; j < m; j ++){
@@ -2988,11 +3338,13 @@ void call(int a[][3], int n, int m){
         printf("\n");
     }
 ```
-    
-        return 0;
-    
-    }
-    
+```java
+
+    return 0;
+
+}
+
+```
 
 * * *
 
@@ -3038,31 +3390,35 @@ void call(int a[][3], int n, int m){
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h>
 ```
-    
-    int main(){
-    
-        //1、指针的定义
-        int a = 10; //定义整型变量a
-    
-        //指针定义语法： 数据类型 * 变量名 ;
-        int * p;
-    
-        //指针变量赋值
-        p = &a; //指针指向变量a的地址
-        printf("&a = %d\n", &a); //打印数据a的地址
-        printf("p = %d\n", p);  //打印指针变量p
-    
-        //2、指针的使用
-        //通过*操作指针变量指向的内存
-        printf("*p = %d\n", *p);
-    
-        return 0;
-    }
+```java
+
+int main(){
+
+    //1、指针的定义
+    int a = 10; //定义整型变量a
+
+    //指针定义语法： 数据类型 * 变量名 ;
+    int * p;
+
+    //指针变量赋值
+    p = &a; //指针指向变量a的地址
+    printf("&a = %d\n", &a); //打印数据a的地址
+    printf("p = %d\n", p);  //打印指针变量p
+
+    //2、指针的使用
+    //通过*操作指针变量指向的内存
+    printf("*p = %d\n", *p);
+
+    return 0;
+}
+```
 
 * * *
 
@@ -3077,31 +3433,35 @@ void call(int a[][3], int n, int m){
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h>
 ```
-    
-    int main(){
-    
-        int a = 10;
-    
-        int * p;
-        p = &a; //指针指向数据a的地址
-    
-        printf("*p = %d\n", *p); //* 解引用
-        printf("sizeof(*p) = %d\n",sizeof(*p));
-    
-        printf("\n");
-    
-        printf("sizeof(int *) = %d\n",sizeof(int *));
-        printf("sizeof(char *) = %d\n",sizeof(char *));
-        printf("sizeof(float *) = %d\n",sizeof(float *));
-        printf("sizeof(double *) = %d\n",sizeof(double *));
-    
-        return 0;
-    }
+```java
+
+int main(){
+
+    int a = 10;
+
+    int * p;
+    p = &a; //指针指向数据a的地址
+
+    printf("*p = %d\n", *p); //* 解引用
+    printf("sizeof(*p) = %d\n",sizeof(*p));
+
+    printf("\n");
+
+    printf("sizeof(int *) = %d\n",sizeof(int *));
+    printf("sizeof(char *) = %d\n",sizeof(char *));
+    printf("sizeof(float *) = %d\n",sizeof(float *));
+    printf("sizeof(double *) = %d\n",sizeof(double *));
+
+    return 0;
+}
+```
 
 * * *
 
@@ -3128,24 +3488,28 @@ void call(int a[][3], int n, int m){
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h>
 ```
-    
-    int main(){
-    
-        //指针变量p指向内存地址编号为0的空间
-        int * p = NULL;
-    
-        //访问空指针报错 
-        //内存编号0 ~255为系统占用内存，不允许用户访问
-        printf("*p = %d\n", *p);
-    
-        return 0;
-    
-    }
+```java
+
+int main(){
+
+    //指针变量p指向内存地址编号为0的空间
+    int * p = NULL;
+
+    //访问空指针报错 
+    //内存编号0 ~255为系统占用内存，不允许用户访问
+    printf("*p = %d\n", *p);
+
+    return 0;
+
+}
+```
 
 **野指针** ：
 
@@ -3160,22 +3524,26 @@ void call(int a[][3], int n, int m){
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h>
 ```
-    
-    int main(){
-    
-        //指针变量p指向内存地址编号为0x1100的空间
-        int * p = (int *)0x1100;
-    
-        //访问野指针运行错误 
-        printf("*p = %d\n", *p);
-    
-        return 0;
-    }
+```java
+
+int main(){
+
+    //指针变量p指向内存地址编号为0x1100的空间
+    int * p = (int *)0x1100;
+
+    //访问野指针运行错误 
+    printf("*p = %d\n", *p);
+
+    return 0;
+}
+```
 
 * * *
 
@@ -3198,36 +3566,40 @@ void call(int a[][3], int n, int m){
 
 
 **C语言代码示例：**
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main() {
-    
-        int a = 10;
-        int b = 10;
-    
-        const int * p1 = &a; 
-        p1 = &b; //正确
-        //*p1 = 100;  报错
-        printf("const修饰的是指针时，指针指向可以改，指针指向的值不可以更改\n");
-    
-        int * const p2 = &a;
-        //p2 = &b; //错误
-        *p2 = 100; //正确
-        printf("const修饰的是常量时，指针指向不可以改，指针指向的值可以更改\n");
-    
-        //const既修饰指针又修饰常量
-        const int * const p3 = &a;
-        //p3 = &b; //错误
-        //*p3 = 100; //错误
-        printf("const既修饰指针又修饰常量时，指针指向和指针指向的值都不可以更改\n");
-    
-        return 0;
-    
-    }
+```java
+
+int main() {
+
+    int a = 10;
+    int b = 10;
+
+    const int * p1 = &a; 
+    p1 = &b; //正确
+    //*p1 = 100;  报错
+    printf("const修饰的是指针时，指针指向可以改，指针指向的值不可以更改\n");
+
+    int * const p2 = &a;
+    //p2 = &b; //错误
+    *p2 = 100; //正确
+    printf("const修饰的是常量时，指针指向不可以改，指针指向的值可以更改\n");
+
+    //const既修饰指针又修饰常量
+    const int * const p3 = &a;
+    //p3 = &b; //错误
+    //*p3 = 100; //错误
+    printf("const既修饰指针又修饰常量时，指针指向和指针指向的值都不可以更改\n");
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -3248,21 +3620,25 @@ void call(int a[][3], int n, int m){
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    int main(){
-    
-        int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    
-        int * p = a;  //指向数组的指针
-    
-        printf("下标访问数组首元素： %d\n", a[0]);
-        printf("指针访问数组首元素： %d\n", *p);
-    
+```java
+
+int main(){
+
+    int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+    int * p = a;  //指向数组的指针
+
+    printf("下标访问数组首元素： %d\n", a[0]);
+    printf("指针访问数组首元素： %d\n", *p);
+
+```
 ```cpp
     for (int i = 0; i < 10; i++){
         //利用指针遍历数组
@@ -3270,10 +3646,12 @@ void call(int a[][3], int n, int m){
         p ++;
     }
 ```
-    
-        return 0;
-    
-    }
+```java
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -3295,45 +3673,49 @@ void call(int a[][3], int n, int m){
 
 
 **C语言代码示例：**
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    //值传递，不改变实参
-    void swap_1(int a, int b){
-        int t = a;
-        a = b;
-        b = t;
-        printf("调用swap_1： a = %d b = %d\n", a, b);
-    }
-    
-    //地址传递，修改实参
-    void swap_2(int *a, int *b){
-        int t = *a;
-        *a = *b;
-        *b = t;
-        printf("调用swap_2： a = %d b = %d\n", *a, *b);
-    }
-    
-    int main(){
-    
-        int a, b;
-    
-        a = 10, b = 20;
-    
-        swap_1(a, b);
-    
-        printf("调用swap_1后，a = %d b = %d\n", a, b);
-    
-        swap_2(&a, &b);
-    
-        printf("调用swap_2后，a = %d b = %d\n", a, b);
-    
-        return 0;
-    
-    }
+```java
+
+//值传递，不改变实参
+void swap_1(int a, int b){
+    int t = a;
+    a = b;
+    b = t;
+    printf("调用swap_1： a = %d b = %d\n", a, b);
+}
+
+//地址传递，修改实参
+void swap_2(int *a, int *b){
+    int t = *a;
+    *a = *b;
+    *b = t;
+    printf("调用swap_2： a = %d b = %d\n", *a, *b);
+}
+
+int main(){
+
+    int a, b;
+
+    a = 10, b = 20;
+
+    swap_1(a, b);
+
+    printf("调用swap_1后，a = %d b = %d\n", a, b);
+
+    swap_2(&a, &b);
+
+    printf("调用swap_2后，a = %d b = %d\n", a, b);
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -3354,12 +3736,16 @@ void call(int a[][3], int n, int m){
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
+```java
+
+```
 ```cpp
 //冒泡排序函数
 void bubbleSort(int * num, int len){ //int * num 也可以写为int num[]
@@ -3374,7 +3760,9 @@ void bubbleSort(int * num, int len){ //int * num 也可以写为int num[]
     }
 }
 ```
-    
+```java
+
+```
 ```cpp
 //打印数组函数
 void printArray(int num[], int len){
@@ -3384,25 +3772,29 @@ void printArray(int num[], int len){
     printf("\n");
 }
 ```
-    
-    int main() {
-    
-        int a[10] = {4, 3, 6, 9, 1, 2, 10 ,8 ,7 ,5};
-        int len = sizeof(a) / sizeof(int);
-    
-        bubbleSort(a, len);
-    
-        printArray(a, len);
-    
-        printf("调用以上函数后，原数组的值：\n");
-    
+```java
+
+int main() {
+
+    int a[10] = {4, 3, 6, 9, 1, 2, 10 ,8 ,7 ,5};
+    int len = sizeof(a) / sizeof(int);
+
+    bubbleSort(a, len);
+
+    printArray(a, len);
+
+    printf("调用以上函数后，原数组的值：\n");
+
+```
 ```cpp
     for(int i = 0; i < 10; i ++) printf("%d ", a[i]);
 ```
-    
-        return 0;
-    
-    }
+```java
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -3428,48 +3820,52 @@ void printArray(int num[], int len){
 * * *
 
 **语法** ：
-    
-    
-    //定义结构体类型
-    struct 结构体名{
-        数据类型 变量名1;
-        数据类型 变量名2;
-        ...
-    };
-    
-    //创建变量方式
-    //方式1
-    struct 结构体名{
-        数据类型 变量名1;
-        数据类型 变量名2;
-        ...
-    }变量名;
-    
-    //方式2
-    struct 结构体名 变量名;
-    //方式3
-    struct 结构体名 变量名 = {值1, 值2, ...};
+```java
+
+
+//定义结构体类型
+struct 结构体名{
+    数据类型 变量名1;
+    数据类型 变量名2;
+    ...
+};
+
+//创建变量方式
+//方式1
+struct 结构体名{
+    数据类型 变量名1;
+    数据类型 变量名2;
+    ...
+}变量名;
+
+//方式2
+struct 结构体名 变量名;
+//方式3
+struct 结构体名 变量名 = {值1, 值2, ...};
+```
 
 **解释** ：
-    
-    
-    //定义结构体类型
-    struct point{
-        int x;
-        int y;
-    };
-    
-    //创建变量方式
-    //方式1
-    struct point{
-        int x;
-        int y;
-    }a;
-    
-    //方式2
-    struct point b;
-    //方式3
-    struct point c = {1,2};
+```java
+
+
+//定义结构体类型
+struct point{
+    int x;
+    int y;
+};
+
+//创建变量方式
+//方式1
+struct point{
+    int x;
+    int y;
+}a;
+
+//方式2
+struct point b;
+//方式3
+struct point c = {1,2};
+```
 
   * 上例中定义了一个名为 `point` 的结构体，两个成员元素 `x, y`，类型都为 `int`。
   * 可以在定义结构体类型时直接创建变量，如第一种方式。
@@ -3486,33 +3882,37 @@ void printArray(int num[], int len){
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    //结构体定义
-    struct student{
-        //成员列表
-        char name[100];  //姓名
-        int age;      //年龄
-        int score;    //分数
-    }stu3;  //结构体变量创建方式3
-    
-    int main(){
-    
-        //结构体变量创建方式1
-        student stu1; //struct 关键字可以省略
-    
-        //结构体变量创建方式2
-        struct student stu2 = {"lys", 14, 100};
-    
-        printf("姓名：%s 年龄：%d 分数：%d\n",stu2.name, stu2.age, stu2.score);
-    
-        return 0;
-    
-    }
+```java
+
+//结构体定义
+struct student{
+    //成员列表
+    char name[100];  //姓名
+    int age;      //年龄
+    int score;    //分数
+}stu3;  //结构体变量创建方式3
+
+int main(){
+
+    //结构体变量创建方式1
+    student stu1; //struct 关键字可以省略
+
+    //结构体变量创建方式2
+    struct student stu2 = {"lys", 14, 100};
+
+    printf("姓名：%s 年龄：%d 分数：%d\n",stu2.name, stu2.age, stu2.score);
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -3527,49 +3927,57 @@ void printArray(int num[], int len){
 
 
 **语法** ：
-    
-    
-    //定义结构体类型
-    struct 结构体名{
-        数据类型 变量名1;
-        数据类型 变量名2;
-        ...
-    }数组名[数组长度];
+```java
+
+
+//定义结构体类型
+struct 结构体名{
+    数据类型 变量名1;
+    数据类型 变量名2;
+    ...
+}数组名[数组长度];
+```
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    //结构体定义
-    struct student{
-        //成员列表
-        char name[100];  //姓名
-        int age;      //年龄
-        int score;    //分数
+```java
+
+//结构体定义
+struct student{
+    //成员列表
+    char name[100];  //姓名
+    int age;      //年龄
+    int score;    //分数
+};
+
+int main() {
+
+    //结构体数组
+    student stu[3]=
+    {
+        {"lys", 14, 99 },
+        {"ccf", 14, 99 },
+        {"hfcj", 99, 0}
     };
-    
-    int main() {
-    
-        //结构体数组
-        student stu[3]=
-        {
-            {"lys", 14, 99 },
-            {"ccf", 14, 99 },
-            {"hfcj", 99, 0}
-        };
-    
+
+```
 ```cpp
     for (int i = 0; i < 3; i++){
         printf("姓名：%s 年龄：%d 成绩：%d\n", stu[i].name, stu[i].age, stu[i].score);
     }
 ```
-    
-        return 0;
-    
-    }
+```java
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -3598,33 +4006,37 @@ void printArray(int num[], int len){
 
 
 **C语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    //结构体定义
-    struct student{
-        //成员列表
-        char name[100];  //姓名
-        int age;      //年龄
-        int score;    //分数
-    };
-    
-    int main(){
-    
-        student stu = {"lys", 14, 0};
-    
-        student * p = &stu;
-    
-        p -> score = 100; //指针通过 -> 操作符可以访问成员
-    
-        printf("姓名：%s 年龄：%d 成绩：%d\n", p -> name, p -> age, p -> score);
-    
-        return 0;
-    
-    }
+```java
+
+//结构体定义
+struct student{
+    //成员列表
+    char name[100];  //姓名
+    int age;      //年龄
+    int score;    //分数
+};
+
+int main(){
+
+    student stu = {"lys", 14, 0};
+
+    student * p = &stu;
+
+    p -> score = 100; //指针通过 -> 操作符可以访问成员
+
+    printf("姓名：%s 年龄：%d 成绩：%d\n", p -> name, p -> age, p -> score);
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -3639,44 +4051,50 @@ void printArray(int num[], int len){
 
 
 **C语言代码示例：**
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    //学生结构体定义
-    struct student{
-        //成员列表
-        char name[100];  //姓名
-        int age;      //年龄
-        int score;    //分数
-    };
-    
-    //教师结构体定义
-    struct teacher{
-        //成员列表
-        int id; //职工编号
-        char name[100];  //教师姓名
-        int age;   //教师年龄
-        student stu; //子结构体 学生
-    };
-    
-    int main(){
-    
-```cpp
-    struct teacher t1 = {114514, "野兽仙贝", 24, {"lys", 14, 100}};
+```java
+
+//学生结构体定义
+struct student{
+    //成员列表
+    char name[100];  //姓名
+    int age;      //年龄
+    int score;    //分数
+};
+
+//教师结构体定义
+struct teacher{
+    //成员列表
+    int id; //职工编号
+    char name[100];  //教师姓名
+    int age;   //教师年龄
+    student stu; //子结构体 学生
+};
+
+int main(){
+
 ```
-    
-        t1.stu.age = 19;
-        t1.stu.score = 19;
-    
-        printf("教师职工编号: %d 教师姓名：%s 教师年龄：%d\n",t1.id, t1.name, t1.age);
-        printf("该教师的学生姓名：%s 学生年龄：%d 学生分数：%d\n",t1.stu.name, t1.stu.age, t1.stu.score);
-    
-        return 0;
-    
-    }
+```cpp
+    struct teacher t1 = {114514, "野兽仙贝", 24, {"lys", 14, 100&#125;&#125;;
+```
+```java
+
+    t1.stu.age = 19;
+    t1.stu.score = 19;
+
+    printf("教师职工编号: %d 教师姓名：%s 教师年龄：%d\n",t1.id, t1.name, t1.age);
+    printf("该教师的学生姓名：%s 学生年龄：%d 学生分数：%d\n",t1.stu.name, t1.stu.age, t1.stu.score);
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -3698,55 +4116,59 @@ void printArray(int num[], int len){
 
 
 **示例：**
-    
-    
+```java
+
+
+```
 ```cpp
 #include <stdio.h> 
 ```
-    
-    //学生结构体定义
-    struct student{
-        //成员列表
-        char name[100];  //姓名
-        int age;      //年龄
-        int score;    //分数
-    };
-    
+```java
+
+//学生结构体定义
+struct student{
+    //成员列表
+    char name[100];  //姓名
+    int age;      //年龄
+    int score;    //分数
+};
+
+//值传递
+void call_1(student stu){
+    stu.age = 24;
+    printf("调用call_1时stu的值：\n");
+    printf("姓名：%s 年龄：%d 分数：%d\n", stu.name, stu.age, stu.score);
+    printf("\n");
+}
+
+//地址传递
+void call_2(student *stu){
+    stu -> age = 24;
+    printf("调用call_2时stu的值：\n");
+    printf("姓名：%s 年龄：%d 分数：%d\n", stu -> name, stu -> age, stu -> score);
+    printf("\n");
+}
+
+int main(){
+
+    student stu = {"lys",14,100};
+
     //值传递
-    void call_1(student stu){
-        stu.age = 24;
-        printf("调用call_1时stu的值：\n");
-        printf("姓名：%s 年龄：%d 分数：%d\n", stu.name, stu.age, stu.score);
-        printf("\n");
-    }
-    
+    call_1(stu);
+    printf("调用call_1后stu的值：\n");
+    printf("姓名：%s 年龄：%d 分数：%d\n", stu.name, stu.age, stu.score);
+    printf("\n");
+
     //地址传递
-    void call_2(student *stu){
-        stu -> age = 24;
-        printf("调用call_2时stu的值：\n");
-        printf("姓名：%s 年龄：%d 分数：%d\n", stu -> name, stu -> age, stu -> score);
-        printf("\n");
-    }
-    
-    int main(){
-    
-        student stu = {"lys",14,100};
-    
-        //值传递
-        call_1(stu);
-        printf("调用call_1后stu的值：\n");
-        printf("姓名：%s 年龄：%d 分数：%d\n", stu.name, stu.age, stu.score);
-        printf("\n");
-    
-        //地址传递
-        call_2(&stu);
-        printf("调用call_2后stu的值：\n");
-        printf("姓名：%s 年龄：%d 分数：%d\n", stu.name, stu.age, stu.score);
-        printf("\n");
-    
-        return 0;
-    
-    }
+    call_2(&stu);
+    printf("调用call_2后stu的值：\n");
+    printf("姓名：%s 年龄：%d 分数：%d\n", stu.name, stu.age, stu.score);
+    printf("\n");
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -3766,47 +4188,55 @@ void printArray(int num[], int len){
 
 
 **C++语言代码示例** ：
-    
-    
+```java
+
+
+```
 ```cpp
 #include <iostream>
 #include <algorithm>
 using namespace std;
 ```
-    
-    struct student{
-        int num;
-        string name;
-        int sum;
-    };
-    
+```java
+
+struct student{
+    int num;
+    string name;
+    int sum;
+};
+
+```
 ```cpp
 bool cmp(student &s1, student &s2){
     if(s1.sum == s2.sum) return s1.num < s2.num;
     return s1.sum > s2.sum;
 }
 ```
-    
-    int main(){
-    
-        student stu[5] = {
-            {202111, "Aa", 88},
-            {202112, "Bb", 92},
-            {202113, "Cc", 73},
-            {202114, "Dd", 92},
-            {202115, "Ee", 89},
-        };
-    
-        sort(stu, stu + 5, cmp);
-    
+```java
+
+int main(){
+
+    student stu[5] = {
+        {202111, "Aa", 88},
+        {202112, "Bb", 92},
+        {202113, "Cc", 73},
+        {202114, "Dd", 92},
+        {202115, "Ee", 89},
+    };
+
+    sort(stu, stu + 5, cmp);
+
+```
 ```cpp
     for(int i = 0; i < 5; i ++){
         cout << stu[i].num << " " << stu[i].name << " " << stu[i].sum << endl;
     }
 ```
-    
-        return 0;
-    
-    }
+```java
+
+    return 0;
+
+}
+```
 
 * * *

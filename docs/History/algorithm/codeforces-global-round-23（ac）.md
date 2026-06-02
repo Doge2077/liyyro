@@ -15,8 +15,10 @@ description: ""
 
   * 给定长度为 $n$ 只包含 $0,1$ 的序列 $a$，和一个整数 $k$，保证 $(2\le k\le n\le 50)$。
   * 不限次数进行如下操作： 
-    * 将连续且相邻的两个元素变为较小的一个。
-    * 将连续的 $k$ 个区间的元素变为区间内元素最大的哪一个。
+```java
+* 将连续且相邻的两个元素变为较小的一个。
+* 将连续的 $k$ 个区间的元素变为区间内元素最大的哪一个。
+```
   * 求给出的序列是否可以变为只包含 $1$ 的序列。
 
 
@@ -33,69 +35,71 @@ description: ""
 * * *
 
 **代码** ：
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;cstring&gt;
-    #include &lt;cstdio&gt;
-    #include &lt;algorithm&gt;
-    #include &lt;cmath&gt;
-    #include &lt;sstream&gt;
-    #include &lt;vector&gt;
-    #include &lt;queue&gt;
-    #include &lt;stack&gt;
-    #include &lt;map&gt;
-    #include &lt;set&gt;
-    #include &lt;unordered_map&gt;
-    #include &lt;unordered_set&gt;
-    
-    using namespace std;
-    
-    #define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
-    #define re register
-    #define fi first
-    #define se second
-    #define endl '\n'
-    
-    typedef long long LL;
-    typedef pair&lt;int, int&gt; PII;
-    typedef pair&lt;LL, LL&gt; PLL;
-    
-    const int N = 1e6 + 3;
-    const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
-    const double eps = 1e-6, PI = acos(-1);
-    
-    void solve(){
-    
-        int n, k; cin >> n >> k;
-    
-        bool flag = 0;
-    
-        for(int i = 0; i < n; i ++){
-            int x; cin >> x;
-            if(x == 1) flag = 1;
-        }
-    
-        if(flag) cout << "YES" << endl;
-        else cout << "NO" << endl;
-    
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;sstream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+#include &lt;unordered_map&gt;
+#include &lt;unordered_set&gt;
+
+using namespace std;
+
+#define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
+#define re register
+#define fi first
+#define se second
+#define endl '\n'
+
+typedef long long LL;
+typedef pair&lt;int, int&gt; PII;
+typedef pair&lt;LL, LL&gt; PLL;
+
+const int N = 1e6 + 3;
+const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
+const double eps = 1e-6, PI = acos(-1);
+
+void solve(){
+
+    int n, k; cin >> n >> k;
+
+    bool flag = 0;
+
+    for(int i = 0; i < n; i ++){
+        int x; cin >> x;
+        if(x == 1) flag = 1;
     }
-    
-    int main(){
-    
-        IOS;
-    
-        int _ = 1;
-    
-        cin >> _;
-    
-        while(_ --){
-            solve();
-        }
-    
-        return 0;
-    
+
+    if(flag) cout << "YES" << endl;
+    else cout << "NO" << endl;
+
+}
+
+int main(){
+
+    IOS;
+
+    int _ = 1;
+
+    cin >> _;
+
+    while(_ --){
+        solve();
     }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -109,9 +113,11 @@ description: ""
 
   * 给定长度为 $n$ 只包含 $0,1$ 的序列 $a$。
   * 不限次数进行如下操作： 
-    * 选择两个下标 $1 \le i,j\le n,i\ne j$。
-    * 使得 $a_j = a_j + a_i$；
-    * 将 $a_i$ 从 $a$ 中去除。
+```java
+* 选择两个下标 $1 \le i,j\le n,i\ne j$。
+* 使得 $a_j = a_j + a_i$；
+* 将 $a_i$ 从 $a$ 中去除。
+```
   * 若最终可以通过上述操作将 $a$ 变为非严格单调递增的序列，则求出最小操作次数，否则输出 $-1$。
 
 
@@ -130,72 +136,74 @@ description: ""
 * * *
 
 **代码** ：
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;cstring&gt;
-    #include &lt;cstdio&gt;
-    #include &lt;algorithm&gt;
-    #include &lt;cmath&gt;
-    #include &lt;sstream&gt;
-    #include &lt;vector&gt;
-    #include &lt;queue&gt;
-    #include &lt;stack&gt;
-    #include &lt;map&gt;
-    #include &lt;set&gt;
-    #include &lt;unordered_map&gt;
-    #include &lt;unordered_set&gt;
-    
-    using namespace std;
-    
-    #define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
-    #define re register
-    #define fi first
-    #define se second
-    #define endl '\n'
-    
-    typedef long long LL;
-    typedef pair&lt;int, int&gt; PII;
-    typedef pair&lt;LL, LL&gt; PLL;
-    
-    const int N = 1e6 + 3;
-    const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
-    const double eps = 1e-6, PI = acos(-1);
-    
-    int a[N], b[N];
-    
-    void solve(){
-    
-        int n; cin >> n;
-    
-        for(int i = 0; i < n; i ++){
-            cin >> a[i];
-            b[i] = a[i];
-        }
-        sort(b, b + n);
-        int cnt = 0;
-        for(int i = 0; i < n; i ++){
-            if(a[i] != b[i]) cnt ++;
-        }
-        cout << cnt / 2 << endl;
-    
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;sstream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+#include &lt;unordered_map&gt;
+#include &lt;unordered_set&gt;
+
+using namespace std;
+
+#define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
+#define re register
+#define fi first
+#define se second
+#define endl '\n'
+
+typedef long long LL;
+typedef pair&lt;int, int&gt; PII;
+typedef pair&lt;LL, LL&gt; PLL;
+
+const int N = 1e6 + 3;
+const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
+const double eps = 1e-6, PI = acos(-1);
+
+int a[N], b[N];
+
+void solve(){
+
+    int n; cin >> n;
+
+    for(int i = 0; i < n; i ++){
+        cin >> a[i];
+        b[i] = a[i];
     }
-    
-    int main(){
-    
-        IOS;
-    
-        int _ = 1;
-    
-        cin >> _;
-    
-        while(_ --){
-            solve();
-        }
-    
-        return 0;
-    
+    sort(b, b + n);
+    int cnt = 0;
+    for(int i = 0; i < n; i ++){
+        if(a[i] != b[i]) cnt ++;
     }
+    cout << cnt / 2 << endl;
+
+}
+
+int main(){
+
+    IOS;
+
+    int _ = 1;
+
+    cin >> _;
+
+    while(_ --){
+        solve();
+    }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -230,85 +238,87 @@ description: ""
 * * *
 
 **代码** ：
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;cstring&gt;
-    #include &lt;cstdio&gt;
-    #include &lt;algorithm&gt;
-    #include &lt;cmath&gt;
-    #include &lt;sstream&gt;
-    #include &lt;vector&gt;
-    #include &lt;queue&gt;
-    #include &lt;stack&gt;
-    #include &lt;map&gt;
-    #include &lt;set&gt;
-    #include &lt;unordered_map&gt;
-    #include &lt;unordered_set&gt;
-    
-    using namespace std;
-    
-    #define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
-    #define re register
-    #define fi first
-    #define se second
-    #define endl '\n'
-    
-    typedef long long LL;
-    typedef pair&lt;int, int&gt; PII;
-    typedef pair&lt;LL, LL&gt; PLL;
-    
-    const int N = 1e6 + 3;
-    const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
-    const double eps = 1e-6, PI = acos(-1);
-    
-    int a[N];
-    
-    void solve(){
-    
-        int n; cin >> n;
-    
-        for(int i = 1; i <= n; i ++) cin >> a[i];
-    
-        priority_queue&lt;PII, vector&lt;PII&gt;, greater&lt;PII&gt;&gt; b;
-    
-        for(int i = 2; i <= n; i ++){
-            int t = a[i] - a[i - 1];
-            if(t <= 0){
-                b.push({-t + 1, i});
-            }
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;sstream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+#include &lt;unordered_map&gt;
+#include &lt;unordered_set&gt;
+
+using namespace std;
+
+#define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
+#define re register
+#define fi first
+#define se second
+#define endl '\n'
+
+typedef long long LL;
+typedef pair&lt;int, int&gt; PII;
+typedef pair&lt;LL, LL&gt; PLL;
+
+const int N = 1e6 + 3;
+const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
+const double eps = 1e-6, PI = acos(-1);
+
+int a[N];
+
+void solve(){
+
+    int n; cin >> n;
+
+    for(int i = 1; i <= n; i ++) cin >> a[i];
+
+    priority_queue&lt;PII, vector&lt;PII&gt;, greater&lt;PII&gt;&gt; b;
+
+    for(int i = 2; i <= n; i ++){
+        int t = a[i] - a[i - 1];
+        if(t <= 0){
+            b.push({-t + 1, i});
         }
-    
-        if(b.empty()){
-            for(int i = 1; i <= n; i ++) cout << 1 << ' ';
-        }
-        else{
-            auto p = b.top();
-            for(int i = 1 ; i <= n; i ++){
-                if(i >= p.fi && !b.empty()){
-                    cout << p.se << ' ';
-                    b.pop(); p = b.top();
-                }
-                else cout << 1 << ' ';
-            }
-        }
-    
-        cout << endl;
-    
     }
-    
-    int main(){
-    
-        IOS;
-    
-        int _ = 1;
-    
-        cin >> _;
-    
-        while(_ --){
-            solve();
-        }
-    
-        return 0;
-    
+
+    if(b.empty()){
+        for(int i = 1; i <= n; i ++) cout << 1 << ' ';
     }
+    else{
+        auto p = b.top();
+        for(int i = 1 ; i <= n; i ++){
+            if(i >= p.fi && !b.empty()){
+                cout << p.se << ' ';
+                b.pop(); p = b.top();
+            }
+            else cout << 1 << ' ';
+        }
+    }
+
+    cout << endl;
+
+}
+
+int main(){
+
+    IOS;
+
+    int _ = 1;
+
+    cin >> _;
+
+    while(_ --){
+        solve();
+    }
+
+    return 0;
+
+}
+```

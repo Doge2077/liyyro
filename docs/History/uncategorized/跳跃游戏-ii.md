@@ -18,23 +18,25 @@ description: ""
 
 
 **代码** ：
-    
-    
-    class Solution {
-        public int jump(int[] nums) {
-            int ans = 0, n = nums.length;
-            if(n <= 1) return 0;  // 当长度只有 1 时无需操作
-            for(int i = 0; i < n; i ++){
-                int res = 0, idx = 0;
-                if(i + nums[i] >= n - 1) return ans + 1;  // 下一步的最远距离正好到达终点
-                for(int j = i + 1; j <= i + nums[i]; j ++){  // 遍历找到能到达最远距离的方案
-                    if(j + nums[j] >= idx){
-                        idx = j + nums[j];
-                        res = j;
-                    }
+```java
+
+
+class Solution {
+    public int jump(int[] nums) {
+        int ans = 0, n = nums.length;
+        if(n <= 1) return 0;  // 当长度只有 1 时无需操作
+        for(int i = 0; i < n; i ++){
+            int res = 0, idx = 0;
+            if(i + nums[i] >= n - 1) return ans + 1;  // 下一步的最远距离正好到达终点
+            for(int j = i + 1; j <= i + nums[i]; j ++){  // 遍历找到能到达最远距离的方案
+                if(j + nums[j] >= idx){
+                    idx = j + nums[j];
+                    res = j;
                 }
-                i = res - 1; ans ++;  // 更新 i 和 ans
             }
-            return ans;
+            i = res - 1; ans ++;  // 更新 i 和 ans
         }
+        return ans;
     }
+}
+```

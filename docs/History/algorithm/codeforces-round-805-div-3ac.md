@@ -31,40 +31,42 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    typedef long long LL;
-    
-    void solve(){
-    
-        LL n;
-        cin >> n;
-    
-        LL p = 1e11;
-    
-        while(p > n){
-            p /= 10;
-        }
-    
-        cout << n - p <<endl;
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+typedef long long LL;
+
+void solve(){
+
+    LL n;
+    cin >> n;
+
+    LL p = 1e11;
+
+    while(p > n){
+        p /= 10;
     }
-    
-    int main(){
-    
-        int _;
-        cin >> _;
-    
-        while(_--){
-            solve();
-        }
-    
-        return 0;
-    
+
+    cout << n - p <<endl;
+
+}
+
+int main(){
+
+    int _;
+    cin >> _;
+
+    while(_--){
+        solve();
     }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -94,57 +96,59 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    void solve(){
-    
-        string s;
-    
-        cin >> s;
-    
-        int flag = 0;
-    
-        bool vis[300];
-    
-        memset(vis,0,sizeof vis);
-    
-        int cnt = 0;
-    
-        for(int i = 0; i < s.size(); i ++){
-            if(!vis[s[i]]){
-                cnt ++;
-                if(cnt == 4){
-                    cnt = 1;
-                    flag ++;
-                    memset(vis,0,sizeof vis);
-                }
-                vis[s[i]] = 1;
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+void solve(){
+
+    string s;
+
+    cin >> s;
+
+    int flag = 0;
+
+    bool vis[300];
+
+    memset(vis,0,sizeof vis);
+
+    int cnt = 0;
+
+    for(int i = 0; i < s.size(); i ++){
+        if(!vis[s[i]]){
+            cnt ++;
+            if(cnt == 4){
+                cnt = 1;
+                flag ++;
+                memset(vis,0,sizeof vis);
             }
-        }   
-    
-        if(cnt) flag ++;
-    
-        cout << flag << endl;
-    
-    }
-    
-    int main(){
-    
-        int _;
-    
-        cin >> _;
-    
-        while(_--){
-            solve();
+            vis[s[i]] = 1;
         }
-    
-        return 0;
-    
+    }   
+
+    if(cnt) flag ++;
+
+    cout << flag << endl;
+
+}
+
+int main(){
+
+    int _;
+
+    cin >> _;
+
+    while(_--){
+        solve();
     }
-    
+
+    return 0;
+
+}
+
+```
 
 * * *
 
@@ -174,54 +178,56 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    void solve(){
-    
-        int n, m;
-    
-        cin >> n >> m;
-    
-        map&lt;int,int&gt; l, r;
-    
-        for(int i = 1; i <= n; i ++){
-            int x;
-            cin >> x;
-            if(l[x] == 0){
-                l[x] = r[x] = i;
-            }
-            else{
-                l[x] = min(l[x],i);
-                r[x] = max(r[x],i);
-            }
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+void solve(){
+
+    int n, m;
+
+    cin >> n >> m;
+
+    map&lt;int,int&gt; l, r;
+
+    for(int i = 1; i <= n; i ++){
+        int x;
+        cin >> x;
+        if(l[x] == 0){
+            l[x] = r[x] = i;
         }
-    
-        while(m --){
-            int x, y;
-            cin >> x >> y;
-            if(l[x] != 0 && l[y] != 0){
-                if(l[x] < r[y]) cout << "YES" << endl;
-                else cout << "NO" << endl;
-            }
+        else{
+            l[x] = min(l[x],i);
+            r[x] = max(r[x],i);
+        }
+    }
+
+    while(m --){
+        int x, y;
+        cin >> x >> y;
+        if(l[x] != 0 && l[y] != 0){
+            if(l[x] < r[y]) cout << "YES" << endl;
             else cout << "NO" << endl;
         }
-    
+        else cout << "NO" << endl;
     }
-    
-    int main(){
-        int _;
-    
-        cin >> _;
-    
-        while(_--){
-            solve();
-        }   
-    
-        return 0;
-    
-    }
+
+}
+
+int main(){
+    int _;
+
+    cin >> _;
+
+    while(_--){
+        solve();
+    }   
+
+    return 0;
+
+}
+```
 
 * * *

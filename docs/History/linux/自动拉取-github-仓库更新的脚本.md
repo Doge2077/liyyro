@@ -30,55 +30,57 @@ description: ""
 ## 编写脚本文件
 
 * * *
-    
-    
-    #!/bin/bash
-    
-    # 读取用户环境变量
-    . /etc/profile
-    source /root/.bashrc
-    source /root/.profile
-    
-    # 导入 mkdocs 环境变量
-    MKDOCS_PATH="/usr/local/bin/mkdocs"
-    
-    # 日志文件路径
-    LOG_FILE="/wiki/log/update.log"
-    ERROR_LOG_FILE="/wiki/log/error.log"
-    
-    # 任务执行时间
-    update_time=$(date +"%Y-%m-%d %H:%M:%S")
-    tag_bar="====================================================================================================="
-    
-    # 进入 haue-cs-wiki 目录
-    cd /wiki/haue-cs-wiki
-    
-    # 执行 git pull 操作
-    git_pull_output=$(git pull 2>&1)
-    git_pull_status=$?
-    
-    # 执行 mkdocs 构建
-    mk_build_output=$($MKDOCS_PATH 2>&1)
-    mk_build_status=$?
-    
-    if [ $git_pull_status == 0 ] && [ $mk_build_status == 0 ]
+```java
+
+
+#!/bin/bash
+
+# 读取用户环境变量
+. /etc/profile
+source /root/.bashrc
+source /root/.profile
+
+# 导入 mkdocs 环境变量
+MKDOCS_PATH="/usr/local/bin/mkdocs"
+
+# 日志文件路径
+LOG_FILE="/wiki/log/update.log"
+ERROR_LOG_FILE="/wiki/log/error.log"
+
+# 任务执行时间
+update_time=$(date +"%Y-%m-%d %H:%M:%S")
+tag_bar="====================================================================================================="
+
+# 进入 haue-cs-wiki 目录
+cd /wiki/haue-cs-wiki
+
+# 执行 git pull 操作
+git_pull_output=$(git pull 2>&1)
+git_pull_status=$?
+
+# 执行 mkdocs 构建
+mk_build_output=$($MKDOCS_PATH 2>&1)
+mk_build_status=$?
+
+if [ $git_pull_status == 0 ] && [ $mk_build_status == 0 ]
+then
+    echo -e "$tag_bar\n$update_time: no errors occured 😘\n$tag_bar" >> "$ERROR_LOG_FILE"
+    echo -e "$tag_bar\n$update_time: git pull successfully 🤗" >> "$LOG_FILE"
+    echo -e "$update_time: mkdocs build successfully 😎\n$tag_bar\n" >> "$LOG_FILE"
+else
+    echo -e "$tag_bar\n$update_time: oops! errors occured 😅\n$tag_bar" >> "$LOG_FILE"
+    echo -e "$tag_bar" >> "$ERROR_LOG_FILE"
+    if [ $git_pull_status != 0 ]
     then
-        echo -e "$tag_bar\n$update_time: no errors occured 😘\n$tag_bar" >> "$ERROR_LOG_FILE"
-        echo -e "$tag_bar\n$update_time: git pull successfully 🤗" >> "$LOG_FILE"
-        echo -e "$update_time: mkdocs build successfully 😎\n$tag_bar\n" >> "$LOG_FILE"
-    else
-        echo -e "$tag_bar\n$update_time: oops! errors occured 😅\n$tag_bar" >> "$LOG_FILE"
-        echo -e "$tag_bar" >> "$ERROR_LOG_FILE"
-        if [ $git_pull_status != 0 ]
-        then
-            echo -e "$update_time: git pull failed 🥵\nError: $git_pull_output" >> "$ERROR_LOG_FILE"
-        fi
-        if [ $mk_build_status != 0 ]
-        then
-            echo -e "$update_time: mkdocs build failed 🤡\nError: $mk_build_output" >> "$ERROR_LOG_FILE"
-        fi
-        echo -e "$tag_bar\n" >> "$ERROR_LOG_FILE"
+        echo -e "$update_time: git pull failed 🥵\nError: $git_pull_output" >> "$ERROR_LOG_FILE"
     fi
+    if [ $mk_build_status != 0 ]
+    then
+        echo -e "$update_time: mkdocs build failed 🤡\nError: $mk_build_output" >> "$ERROR_LOG_FILE"
+    fi
+    echo -e "$tag_bar\n" >> "$ERROR_LOG_FILE"
+fi
+```
 
 **注意** ：
 
@@ -98,16 +100,20 @@ description: ""
 第一次使用会提示选择需要使用的编辑器，选择适合自己的即可。
 
 在注册表中编辑：
-    
-    
-    0 0 * * * /bin/bash /path/script.sh
+```java
+
+
+0 0 * * * /bin/bash /path/script.sh
+```
 
 其中 `/path/script.sh` 为执行脚本文件所在的绝对路径。
 
 然后退出编辑，重新加载：
-    
-    
-    sudo service cron reload
+```java
+
+
+sudo service cron reload
+```
 
 对于执行时间的设置，在 `crontab` 文件中，时间表达式由五个 `* * * * *` 字段组成，分别表示分钟、小时、日期、月份和星期几。
 
@@ -115,19 +121,29 @@ description: ""
 
   1. 第一个字段：分钟（取值范围：0-59）
 
-     * `*` 表示每分钟都匹配，即每分钟触发任务。
+```java
+ * `*` 表示每分钟都匹配，即每分钟触发任务。
+```
   2. 第二个字段：小时（取值范围：0-23）
 
-     * `*` 表示每小时都匹配，即每小时触发任务。
+```java
+ * `*` 表示每小时都匹配，即每小时触发任务。
+```
   3. 第三个字段：日期（取值范围：1-31）
 
-     * `*` 表示每天都匹配，即每天触发任务。
+```java
+ * `*` 表示每天都匹配，即每天触发任务。
+```
   4. 第四个字段：月份（取值范围：1-12）
 
-     * `*` 表示每个月都匹配，即每个月触发任务。
+```java
+ * `*` 表示每个月都匹配，即每个月触发任务。
+```
   5. 第五个字段：星期几（取值范围：0-6，其中 0 表示星期日）
 
-     * `*` 表示每个星期都匹配，即每个星期触发任务。
+```java
+ * `*` 表示每个星期都匹配，即每个星期触发任务。
+```
 
 
 

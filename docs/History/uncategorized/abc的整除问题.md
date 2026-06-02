@@ -26,17 +26,21 @@ description: ""
 $1\le A\le B\le 1\times 10^{18}, 1\le C\le 1\times 10^{18}$。
 
 **样例输入** ：
-    
-    
-    2
-    4 8 2
-    3 100 4
+```java
+
+
+2
+4 8 2
+3 100 4
+```
 
 **样例输出** ：
-    
-    
-    3
-    25
+```java
+
+
+3
+25
+```
 
 **思想** ：
 
@@ -47,60 +51,62 @@ $1\le A\le B\le 1\times 10^{18}, 1\le C\le 1\times 10^{18}$。
 
 
 **代码** ：
-    
-    
-    #include &lt;iostream&gt;
-    #include &lt;cstring&gt;
-    #include &lt;cstdio&gt;
-    #include &lt;algorithm&gt;
-    #include &lt;cmath&gt;
-    #include &lt;sstream&gt;
-    #include &lt;vector&gt;
-    #include &lt;queue&gt;
-    #include &lt;stack&gt;
-    #include &lt;map&gt;
-    #include &lt;set&gt;
-    #include &lt;unordered_map&gt;
-    #include &lt;unordered_set&gt;
-    #include &lt;bits/stdc++.h&gt;
-    
-    using namespace std;
-    
-    #define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
-    #define re register
-    #define fi first
-    #define se second
-    #define endl '\n'
-    
-    typedef long long LL;
-    typedef pair&lt;int, int&gt; PII;
-    typedef pair&lt;LL, LL&gt; PLL;
-    
-    const int N = 1e6 + 3;
-    const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
-    const double eps = 1e-6, PI = acos(-1);
-    
-    LL a, b, c;
-    
-    void solve(){
-        cin >> a >> b >> c;
-        cout << b / c - a / c + (a % c == 0) << endl;
+```java
+
+
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;sstream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+#include &lt;unordered_map&gt;
+#include &lt;unordered_set&gt;
+#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+#define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
+#define re register
+#define fi first
+#define se second
+#define endl '\n'
+
+typedef long long LL;
+typedef pair&lt;int, int&gt; PII;
+typedef pair&lt;LL, LL&gt; PLL;
+
+const int N = 1e6 + 3;
+const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
+const double eps = 1e-6, PI = acos(-1);
+
+LL a, b, c;
+
+void solve(){
+    cin >> a >> b >> c;
+    cout << b / c - a / c + (a % c == 0) << endl;
+}
+
+int main(){
+
+    IOS;
+
+    int _ = 1;
+
+    cin >> _;
+
+    while(_ --){
+        solve();
     }
-    
-    int main(){
-    
-        IOS;
-    
-        int _ = 1;
-    
-        cin >> _;
-    
-        while(_ --){
-            solve();
-        }
-    
-        return 0;
-    
-    }
+
+    return 0;
+
+}
+```
 
 * * *

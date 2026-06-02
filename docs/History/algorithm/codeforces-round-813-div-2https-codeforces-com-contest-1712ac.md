@@ -31,47 +31,49 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    #define re register
-    
-    const int N = 1e6 + 3;
-    
-    int a[N];
-    
-    void solve(){
-    
-        int n, k;
-    
-        cin >> n >> k;
-    
-        for(re int i = 1; i <= n; i ++) cin >> a[i];
-    
-        int cnt = 0;
-    
-        for(re int i = 1; i <= k; i ++) if(a[i] > k) cnt ++;
-    
-        cout << cnt << endl;
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+#define re register
+
+const int N = 1e6 + 3;
+
+int a[N];
+
+void solve(){
+
+    int n, k;
+
+    cin >> n >> k;
+
+    for(re int i = 1; i <= n; i ++) cin >> a[i];
+
+    int cnt = 0;
+
+    for(re int i = 1; i <= k; i ++) if(a[i] > k) cnt ++;
+
+    cout << cnt << endl;
+
+}
+
+int main(){
+
+//  solve();
+
+    int _;
+    cin >> _;
+
+    while(_ --){
+        solve();
     }
-    
-    int main(){
-    
-    //  solve();
-    
-        int _;
-        cin >> _;
-    
-        while(_ --){
-            solve();
-        }
-    
-        return 0;
-    
-    }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -98,53 +100,57 @@ description: ""
   * 则有 $gcd(i,a_i + 1) = 1$
   * 故 $a _i = i +1, a_{i + 1} = i$ 时，满足题意
   * 即： 
-    * $n$ 为偶数时，遵循排列：$2,1,4,3,6,5,\dots ,n,n-1$
-    * $n$ 为奇数时，遵循排列：$1,3,2,5,4,7,6\dots ,n,n-1$
+```java
+* $n$ 为偶数时，遵循排列：$2,1,4,3,6,5,\dots ,n,n-1$
+* $n$ 为奇数时，遵循排列：$1,3,2,5,4,7,6\dots ,n,n-1$
+```
 
 
 
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    #define re register
-    
-    void solve(){
-    
-        int n;
-    
-        cin >> n;
-    
-        if(n % 2 == 0){
-            for(re int i = 2; i <= n; i += 2) cout << i << " " << i - 1 << " ";
-        }
-        else{
-            cout << 1 << " ";
-            for(re int i = 3; i <= n; i += 2) cout << i << " " << i - 1 << " ";
-        }
-    
-        cout << endl;
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+#define re register
+
+void solve(){
+
+    int n;
+
+    cin >> n;
+
+    if(n % 2 == 0){
+        for(re int i = 2; i <= n; i += 2) cout << i << " " << i - 1 << " ";
     }
-    
-    int main(){
-    
-    //  solve();
-    
-        int _;
-        cin >> _;
-    
-        while(_ --){
-            solve();
-        }
-    
-        return 0;
-    
+    else{
+        cout << 1 << " ";
+        for(re int i = 3; i <= n; i += 2) cout << i << " " << i - 1 << " ";
     }
+
+    cout << endl;
+
+}
+
+int main(){
+
+//  solve();
+
+    int _;
+    cin >> _;
+
+    while(_ --){
+        solve();
+    }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -168,8 +174,10 @@ description: ""
 
   * `int a[N]`存储数组元素，`set&lt;int&gt; b`存储当前枚举到`i`之前，需要将 $a_i$ 变为 $0$ 的 $x$ 值
   * 从`i = 2`开始枚举`a[i]`： 
-    * 先判断`a[i]`是否在`b`中，若存在，则更新`a[i] = 0`
-    * 若`a[i - 1] > a[i]`，说明需要将`a[i - 1]`更新，将`b.insert(a[i - 1])`，且要使得`i`之前所有的`a[j] == a[i - 1]`的元素更新为 $0$，且在更新时，要将`a[j] != 0`的元素也加入`b`中
+```java
+* 先判断`a[i]`是否在`b`中，若存在，则更新`a[i] = 0`
+* 若`a[i - 1] > a[i]`，说明需要将`a[i - 1]`更新，将`b.insert(a[i - 1])`，且要使得`i`之前所有的`a[j] == a[i - 1]`的元素更新为 $0$，且在更新时，要将`a[j] != 0`的元素也加入`b`中
+```
   * 由于我们按顺序枚举，故在`i`之前的序列一定满足不严格单调递增，在枚举结束之后，`b`中元素个数即为操作次数
 
 
@@ -177,61 +185,63 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    #define re register
-    
-    const int N = 1e6 + 3;
-    
-    int a[N];
-    
-    set&lt;int&gt; b;
-    
-    void solve(){
-    
-        int n;
-        cin >> n;
-    
-        for(re int i = 1; i <= n; i ++) cin >> a[i];
-    
-        for(re int i = 2; i <= n; i ++){
-    
-            if(b.count(a[i]) > 0) a[i] = 0;
-    
-            if(a[i - 1] > a[i]){
-                b.insert(a[i - 1]);
-                a[i - 1] = 0;
-                for(re int j = i - 1; a[j] != 0 && j >= 1; j --){
-                    b.insert(a[j]);
-                    a[j] = 0;
-                }
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+#define re register
+
+const int N = 1e6 + 3;
+
+int a[N];
+
+set&lt;int&gt; b;
+
+void solve(){
+
+    int n;
+    cin >> n;
+
+    for(re int i = 1; i <= n; i ++) cin >> a[i];
+
+    for(re int i = 2; i <= n; i ++){
+
+        if(b.count(a[i]) > 0) a[i] = 0;
+
+        if(a[i - 1] > a[i]){
+            b.insert(a[i - 1]);
+            a[i - 1] = 0;
+            for(re int j = i - 1; a[j] != 0 && j >= 1; j --){
+                b.insert(a[j]);
+                a[j] = 0;
             }
-    
         }
-    
-        cout << b.size() << endl;
-    
-        b.clear();
-    
+
     }
-    
-    int main(){
-    
-    //  solve();
-    
-        int _;
-        cin >> _;
-    
-        while(_ --){
-            solve();
-        }
-    
-        return 0;
-    
+
+    cout << b.size() << endl;
+
+    b.clear();
+
+}
+
+int main(){
+
+//  solve();
+
+    int _;
+    cin >> _;
+
+    while(_ --){
+        solve();
     }
+
+    return 0;
+
+}
+```
 
 * * *
 

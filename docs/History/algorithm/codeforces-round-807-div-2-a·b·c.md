@@ -28,45 +28,47 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N=1e6+3;
-    
-    int a[N];
-    
-    int main(){
-    
-        int t;
-    
-        scanf("%d",&t);
-    
-        while(t--){
-    
-            int n,x;
-            scanf("%d%d",&n,&x);
-    
-            for(int i=0;i<n*2;i++) scanf("%d",&a[i]);
-    
-            sort(a,a+n*2);  //排序
-    
-            bool flag=1;
-            for(int i=0,j=n;i<n;i++,j++){  //i从0~n-1  j从n~2*n-1
-                if(a[j]-a[i]<x){
-                    flag=0;
-                    break;
-                }
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N=1e6+3;
+
+int a[N];
+
+int main(){
+
+    int t;
+
+    scanf("%d",&t);
+
+    while(t--){
+
+        int n,x;
+        scanf("%d%d",&n,&x);
+
+        for(int i=0;i<n*2;i++) scanf("%d",&a[i]);
+
+        sort(a,a+n*2);  //排序
+
+        bool flag=1;
+        for(int i=0,j=n;i<n;i++,j++){  //i从0~n-1  j从n~2*n-1
+            if(a[j]-a[i]<x){
+                flag=0;
+                break;
             }
-            if(flag) printf("YES\n");
-            else printf("NO\n");
-    
         }
-    
-        return 0;
-    
+        if(flag) printf("YES\n");
+        else printf("NO\n");
+
     }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -91,49 +93,51 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    int t;
-    
-    const int N=1e6+3;
-    
-    int a[N];
-    
-    int main(){
-    
-        cin>>t;
-    
-        while(t--){
-    
-            int n;
-    
-            cin>>n;
-    
-            for(int i=0;i&lt;n;i++) cin&gt;&gt;a[i];
-    
-            int p=0;
-    
-            while(p<n&&a[p]==0) p++;
-    
-            long long cnt=0;
-    
-            for(int i=p;i<n-1;i++){
-    
-                cnt+=a[i];
-                if(a[i]==0) cnt++;
-    
-            }
-    
-            cout<<cnt<<endl;
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int t;
+
+const int N=1e6+3;
+
+int a[N];
+
+int main(){
+
+    cin>>t;
+
+    while(t--){
+
+        int n;
+
+        cin>>n;
+
+        for(int i=0;i&lt;n;i++) cin&gt;&gt;a[i];
+
+        int p=0;
+
+        while(p<n&&a[p]==0) p++;
+
+        long long cnt=0;
+
+        for(int i=p;i<n-1;i++){
+
+            cnt+=a[i];
+            if(a[i]==0) cnt++;
+
         }
-    
-        return 0;
-    
+
+        cout<<cnt<<endl;
+
     }
+
+    return 0;
+
+}
+```
 
 * * *
 
@@ -163,67 +167,69 @@ description: ""
 * * *
 
 ### 代码
-    
-    
-    #include &lt;bits/stdc++.h&gt;
-    using namespace std;
-    
-    const int N=1e6+3;
-    
-    typedef long long LL;
-    
-    LL l[N],r[N],nl[N],nr[N];
-    //l和r数组存储每次copy的l和r
-    //nl和nr数组存储copy之后，l和r的位置 
-    
-    void solve(){
-    
-        LL n,m,q;
-    
-        cin>>n>>m>>q;
-    
-        string s;
-    
-        cin>>s;
-    
-        nl[0]=0,nr[0]=n;
-    
-        for(int i=1;i<=m;i++){
-    
-            cin>>l[i]>>r[i];
-            nl[i]=nr[i-1]+1;  //更新nl 
-            nr[i]=nl[i]+(r[i]-l[i]+1)-1;  //更新nr 
-    
-        }
-    
-        while(q--){
-    
-            LL k;
-            cin>>k;
-    
-            for(int i=m;i>=1;i--){  //枚举区间
-                if(nl[i]<=k&&k<=nr[i]) k-=nl[i]-l[i];
-            }
-    
-            cout<<s[k-1]<<endl;
-    
-        }
-    
+```java
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N=1e6+3;
+
+typedef long long LL;
+
+LL l[N],r[N],nl[N],nr[N];
+//l和r数组存储每次copy的l和r
+//nl和nr数组存储copy之后，l和r的位置 
+
+void solve(){
+
+    LL n,m,q;
+
+    cin>>n>>m>>q;
+
+    string s;
+
+    cin>>s;
+
+    nl[0]=0,nr[0]=n;
+
+    for(int i=1;i<=m;i++){
+
+        cin>>l[i]>>r[i];
+        nl[i]=nr[i-1]+1;  //更新nl 
+        nr[i]=nl[i]+(r[i]-l[i]+1)-1;  //更新nr 
+
     }
-    
-    int main(){
-    
-        LL t;
-    
-        cin>>t;
-    
-        while(t--){
-            solve();
+
+    while(q--){
+
+        LL k;
+        cin>>k;
+
+        for(int i=m;i>=1;i--){  //枚举区间
+            if(nl[i]<=k&&k<=nr[i]) k-=nl[i]-l[i];
         }
-    
-        return 0;
-    
+
+        cout<<s[k-1]<<endl;
+
     }
+
+}
+
+int main(){
+
+    LL t;
+
+    cin>>t;
+
+    while(t--){
+        solve();
+    }
+
+    return 0;
+
+}
+```
 
 * * *
 

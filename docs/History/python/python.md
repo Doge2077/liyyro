@@ -32,10 +32,12 @@ description: ""
 ## 1.0 type()函数
 
 * * *
-    
-    
-    type(变量)
-    print(type(变量)) # 打印出变量的数据类型
+```java
+
+
+type(变量)
+print(type(变量)) # 打印出变量的数据类型
+```
 
 * * *
 
@@ -44,10 +46,12 @@ description: ""
 * * *
 
 不需要像 `C/C++` 一样先定义，直接声明即可。
-    
-    
-    a = 2
-    print(type(a))
+```java
+
+
+a = 2
+print(type(a))
+```
 
 * * *
 
@@ -56,12 +60,14 @@ description: ""
 * * *
 
 与 `C/C++` 不同，`Python` 中的 `float` 精度更高，范围在 `-3.4028235 x 10^38 ~ 3.4028235 x 10^38` 之间。
-    
-    
-    a = 2.333
-    b = 5.
-    print(type(a))
-    print(type(b))
+```java
+
+
+a = 2.333
+b = 5.
+print(type(a))
+print(type(b))
+```
 
 * * *
 
@@ -70,10 +76,12 @@ description: ""
 * * *
 
 在 `Python` 中可以直接表示复数类型。
-    
-    
-    a = 1 + 2j
-    print(type(a))
+```java
+
+
+a = 1 + 2j
+print(type(a))
+```
 
 * * *
 
@@ -89,14 +97,16 @@ description: ""
   * 向下取整除法 ：`//`
 
 
-    
-    
-    a = 10
-    b = 3
-    c = a / b
-    d = a // b
-    print("c: ", c, type(c))
-    print("d: ", d, type(d))
+```java
+
+
+a = 10
+b = 3
+c = a / b
+d = a // b
+print("c: ", c, type(c))
+print("d: ", d, type(d))
+```
 
 可以得知，`/` 运算返回一个 `float` 类型，而 `//` 返回 `int` 类型。
 
@@ -109,14 +119,16 @@ description: ""
   * 取余：`%`
 
 
-    
-    
-    a = 10
-    b = 3
-    c = a % b
-    d = b % a
-    print("c: ", c, type(c))
-    print("d: ", d, type(d))
+```java
+
+
+a = 10
+b = 3
+c = a % b
+d = b % a
+print("c: ", c, type(c))
+print("d: ", d, type(d))
+```
 
 `%` 运算返回 `int` 类型。
 
@@ -130,14 +142,16 @@ description: ""
   * 乘方：`**`
 
 
-    
-    
-    a = 10
-    b = 3.0
-    c = a * b
-    d = a ** b
-    print("c: ", c, type(c))
-    print("d: ", d, type(d))
+```java
+
+
+a = 10
+b = 3.0
+c = a * b
+d = a ** b
+print("c: ", c, type(c))
+print("d: ", d, type(d))
+```
 
 `*` 或 `**` 运算返回精度更高的类型。
 
@@ -155,18 +169,20 @@ description: ""
   * 小于等于：`<=`
 
 
-    
-    
-    a = 1
-    b = 2
-    c = 1
-    print(a == b)
-    print(a == c)
-    print(a != b)
-    print(a > b)
-    print(a >= c)
-    print(a < b)
-    print(b <= c)
+```java
+
+
+a = 1
+b = 2
+c = 1
+print(a == b)
+print(a == c)
+print(a != b)
+print(a > b)
+print(a >= c)
+print(a < b)
+print(b <= c)
+```
 
 * * *
 
@@ -179,50 +195,60 @@ description: ""
 * * *
 
 声明即可赋值：
-    
-    
-    a = 'abcd'
-    b = "abcd"
-    c = """abcd"""
-    print("a: ", a, type(a))
-    print("b: ", b, type(b))
-    print("c: ", c, type(c))
-    print(a, b, c)
+```java
+
+
+a = 'abcd'
+b = "abcd"
+c = """abcd"""
+print("a: ", a, type(a))
+print("b: ", b, type(b))
+print("c: ", c, type(c))
+print(a, b, c)
+```
 
 `\` 用于转义，例如：
-    
-    
-    # a = 'a'bc'd' 错误语句
-    b = "a'bc'd"
-    c = "a\'bc\'d"
-    # print("a: ", a, type(a))
-    print("b: ", b, type(b))
-    print("c: ", c, type(c))
+```java
+
+
+# a = 'a'bc'd' 错误语句
+b = "a'bc'd"
+c = "a\'bc\'d"
+# print("a: ", a, type(a))
+print("b: ", b, type(b))
+print("c: ", c, type(c))
+```
 
 取消全部的转义在前面加上 `r`：
-    
-    
-    print("a\nbcd")
-    print(r"a\nbcd")
+```java
+
+
+print("a\nbcd")
+print(r"a\nbcd")
+```
 
 字符串字面值可以包含多行，使用三重引号：`"""..."""` 或 `'''...'''`：
-    
-    
-    a = """
-        'a' is a string
-        Python is instring
-    """
-    print(a)
+```java
+
+
+a = """
+    'a' is a string
+    Python is instring
+"""
+print(a)
+```
 
 使用 `+` 进行拼接，`*` 进行重复：
-    
-    
-    a = "abcd"
-    b = "efgh"
-    c = a + b
-    d = a * 2 + b * 3
-    print("c: ", c, type(c))
-    print("d: ", d, type(d))
+```java
+
+
+a = "abcd"
+b = "efgh"
+c = a + b
+d = a * 2 + b * 3
+print("c: ", c, type(c))
+print("d: ", d, type(d))
+```
 
 * * *
 
@@ -235,37 +261,45 @@ description: ""
 * * *
 
 字符串支持索引（下标访问），第一个字符的索引是 0，单个字符没有专用的类型，就是长度为一的字符串：
-    
-    
-    a = "abcd"
-    print(a[0])
-    print(a[2])
+```java
+
+
+a = "abcd"
+print(a[0])
+print(a[2])
+```
 
 索引支持负数，用负数索引时，从右边开始计数：
-    
-    
-    a = "abcd"
-    print(a[0])
-    print(a[-0])  # -0 和 0 一样
-    print(a[1])
-    print(a[-1])  # 负数索引从 -1 开始
+```java
+
+
+a = "abcd"
+print(a[0])
+print(a[-0])  # -0 和 0 一样
+print(a[1])
+print(a[-1])  # 负数索引从 -1 开始
+```
 
 `Python` 字符串不能修改，是 [immutable](&lt;https://docs.python.org/zh-cn/3.9/glossary.html#term-immutable&gt;) 的：
-    
-    
-    a = "abcd"
-    # a[0] = "d"  报错
+```java
+
+
+a = "abcd"
+# a[0] = "d"  报错
+```
 
 值得注意的是，由于 `Python` 中的字符串是不可改变的，连接两个字符串会创建一个新的字符串，而不是修改一个现有的字符串：
-    
-    
-    string = "abc defg hijk"
-    new_string = ""
-    for i in string:
-        if i != ' ':
-            new_string += i
-    
-    print(new_string)
+```java
+
+
+string = "abc defg hijk"
+new_string = ""
+for i in string:
+    if i != ' ':
+        new_string += i
+
+print(new_string)
+```
 
 * * *
 
@@ -281,25 +315,27 @@ description: ""
   * 其中步长可省略，默认为`1`，切片返回一个新的字符串。
 
 
-    
-    
-    a = "abcd"
-    b = a[0:2]
-    c = a[2:4]
-    d = a[:2]
-    e = a[2:]
-    f = a[:]
-    g = a[0:4:2]
-    h = a[-1::-1]
-    i = a[0:100]
-    print(b)
-    print(c)
-    print(d)  # 起始索引默认为 0
-    print(e)  # 结束索引默认为字符串结尾
-    print(f)
-    print(g)  # 步长为 2，每 2 个元素取一个
-    print(h)  # 步长为负数，从左往右切
-    print(i)  # 切片越界自动处理
+```java
+
+
+a = "abcd"
+b = a[0:2]
+c = a[2:4]
+d = a[:2]
+e = a[2:]
+f = a[:]
+g = a[0:4:2]
+h = a[-1::-1]
+i = a[0:100]
+print(b)
+print(c)
+print(d)  # 起始索引默认为 0
+print(e)  # 结束索引默认为字符串结尾
+print(f)
+print(g)  # 步长为 2，每 2 个元素取一个
+print(h)  # 步长为负数，从左往右切
+print(i)  # 切片越界自动处理
+```
 
 **注意** ：索引越界会报错，切片越界会自动处理。
 
@@ -308,20 +344,22 @@ description: ""
 ## 3.3 常用内置函数
 
 * * *
-    
-    
-    a = "lys is a dog"
-    print(len(a))  # len() 返回字符串的长度，
-    
-    print(a.title())  # 给每个单词首字母大写
-    print(a.upper())  # 把所有字母变成大写
-    a = a.upper()
-    print(a.lower())  # 把所有字母变成小写
-    
-    b = "   lys is a dog   "
-    print(b.lstrip())  # 去除头空格
-    print(b.rstrip())  # 去除尾空格
-    print(b.strip())  # 去除头尾空格
+```java
+
+
+a = "lys is a dog"
+print(len(a))  # len() 返回字符串的长度，
+
+print(a.title())  # 给每个单词首字母大写
+print(a.upper())  # 把所有字母变成大写
+a = a.upper()
+print(a.lower())  # 把所有字母变成小写
+
+b = "   lys is a dog   "
+print(b.lstrip())  # 去除头空格
+print(b.rstrip())  # 去除尾空格
+print(b.strip())  # 去除头尾空格
+```
 
 * * *
 
@@ -330,18 +368,20 @@ description: ""
 * * *
 
 `Python` 支持多种复合数据类型，可将不同值组合在一起。最常用的列表，是用方括号标注，逗号分隔的一组值。列表可以包含不同类型的元素，但一般情况下，各个元素的类型相同：
-    
-    
-    a = [1, 2, 3, 4]
-    b = ['a', 'b', 'c', 'd']
-    c = ['a', '2', '3.33', "cde"]
-    d = a + b  # 支持 + 合并
-    e = c * 2 + d * 3  # 支持 * 合并
-    print("a: ", a, type(a))
-    print("b: ", b, type(b))
-    print("c: ", c, type(c))
-    print("d: ", d, type(d))
-    print("e: ", e, type(e))
+```java
+
+
+a = [1, 2, 3, 4]
+b = ['a', 'b', 'c', 'd']
+c = ['a', '2', '3.33', "cde"]
+d = a + b  # 支持 + 合并
+e = c * 2 + d * 3  # 支持 * 合并
+print("a: ", a, type(a))
+print("b: ", b, type(b))
+print("c: ", c, type(c))
+print("d: ", d, type(d))
+print("e: ", e, type(e))
+```
 
 * * *
 
@@ -354,25 +394,29 @@ description: ""
 * * *
 
 和数组操作相同：
-    
-    
-    a = [1, 2, 3, 4]
-    b = ['a', 'b', 'c', 'd']
-    c = ['a', '2', '3.33', "cde"]
-    print(a[0])
-    print(b[1])
-    print(c[2])
+```java
+
+
+a = [1, 2, 3, 4]
+b = ['a', 'b', 'c', 'd']
+c = ['a', '2', '3.33', "cde"]
+print(a[0])
+print(b[1])
+print(c[2])
+```
 
 与 [immutable](&lt;https://docs.python.org/zh-cn/3.9/glossary.html#term-immutable&gt;) 字符串不同, 列表是 [mutable](&lt;https://docs.python.org/zh-cn/3.9/glossary.html#term-mutable&gt;) 类型，其内容可以改变：
-    
-    
-    a = [1, 2, 3, 4]
-    b = ['a', 'b', 'c', 'd']
-    c = ['a', '2', '3.33', "cde"]
-    a[0], b[1], c[2] = 100, 'x', "abc"
-    print("a: ", a, type(a))
-    print("b: ", b, type(b))
-    print("c: ", c, type(c))
+```java
+
+
+a = [1, 2, 3, 4]
+b = ['a', 'b', 'c', 'd']
+c = ['a', '2', '3.33', "cde"]
+a[0], b[1], c[2] = 100, 'x', "abc"
+print("a: ", a, type(a))
+print("b: ", b, type(b))
+print("c: ", c, type(c))
+```
 
 * * *
 
@@ -381,75 +425,81 @@ description: ""
 * * *
 
 切片操作返回包含请求元素的新列表，切片操作会返回列表的[浅拷贝](&lt;https://docs.python.org/zh-cn/3.9/library/copy.html#shallow-vs-deep-copy&gt;)：
-    
-    
-    a = [1, 2, 3, 4]
-    b = a[0:2]
-    c = a[2:]
-    print(b)
-    print(c)
+```java
+
+
+a = [1, 2, 3, 4]
+b = a[0:2]
+c = a[2:]
+print(b)
+print(c)
+```
 
 * * *
 
 ## 4.2 嵌套列表
 
 * * *
-    
-    
-    a = [1, 2, 3, 4]
-    b = ['a', 'b', 'c', 'd']
-    c = ['a', '2', '3.33', "cde"]
-    e = [a, b, c]
-    print("e: ", e, type(e))
-    print(e[0][0], e[1][1], e[2][2])
+```java
+
+
+a = [1, 2, 3, 4]
+b = ['a', 'b', 'c', 'd']
+c = ['a', '2', '3.33', "cde"]
+e = [a, b, c]
+print("e: ", e, type(e))
+print(e[0][0], e[1][1], e[2][2])
+```
 
 * * *
 
 ## 4.3 列表常用内置函数
 
 * * *
-    
-    
-    a = [1, 2, 3, 4]
-    print("len(a): ", len(a))  # len() 返回列表的长度
-    
-    a.append(5)  # 在 a 末尾添加元素 5
-    print("a.append(5): ", a)
-    
-    a.insert(1, 3)  # 在位置 1 处插入元素 3
-    print("a.insert(1, 3): " ,a)
-    
-    a.remove(3)  # 删除第一个值为 3 的元素
-    print("a.remove(3): ", a)
-    # a.remove(0)  删除的元素不存在则会触发 ValueError 异常
-    
-    a.pop(0)  # pop(i) 删除指定位置 i 的元素
-    print("a.pop(0):", a)
-    a.pop()  # 未传入参数时默认删除末尾元素
-    print(a)
-    
-    a = [1, 2, 3, 4, 5]
-    del a[1:3]  # 删除列表的切片
-    print("del a[1:3]:", a)
-    
-    a = [6, 5, 4, 3, 2, 1, 1]
-    print("a.count(1): ", a.count(1))  # count(x) 返回值为 x 的元素出现的次数
-    
-    a.sort()  # 默认从小到大排序
-    print("a.sort(): ", a)
-    a.sort(reverse=True)  # 传入参数从大到小排序
-    print("a.sort(reverse=True): ", a)
-    
-    b = sorted(a)  # 默认从小到大排序
-    print("b: ", b)
-    b = sorted(a, reverse=True) # 传入参数从大到小排序
-    print("b: ", b)
-    
-    a.reverse()  # 翻转列表中的元素
-    print("a.reverse()", a)
-    
-    a.clear()  # 清空
-    print(len(a))
+```java
+
+
+a = [1, 2, 3, 4]
+print("len(a): ", len(a))  # len() 返回列表的长度
+
+a.append(5)  # 在 a 末尾添加元素 5
+print("a.append(5): ", a)
+
+a.insert(1, 3)  # 在位置 1 处插入元素 3
+print("a.insert(1, 3): " ,a)
+
+a.remove(3)  # 删除第一个值为 3 的元素
+print("a.remove(3): ", a)
+# a.remove(0)  删除的元素不存在则会触发 ValueError 异常
+
+a.pop(0)  # pop(i) 删除指定位置 i 的元素
+print("a.pop(0):", a)
+a.pop()  # 未传入参数时默认删除末尾元素
+print(a)
+
+a = [1, 2, 3, 4, 5]
+del a[1:3]  # 删除列表的切片
+print("del a[1:3]:", a)
+
+a = [6, 5, 4, 3, 2, 1, 1]
+print("a.count(1): ", a.count(1))  # count(x) 返回值为 x 的元素出现的次数
+
+a.sort()  # 默认从小到大排序
+print("a.sort(): ", a)
+a.sort(reverse=True)  # 传入参数从大到小排序
+print("a.sort(reverse=True): ", a)
+
+b = sorted(a)  # 默认从小到大排序
+print("b: ", b)
+b = sorted(a, reverse=True) # 传入参数从大到小排序
+print("b: ", b)
+
+a.reverse()  # 翻转列表中的元素
+print("a.reverse()", a)
+
+a.clear()  # 清空
+print(len(a))
+```
 
 * * *
 
@@ -458,22 +508,26 @@ description: ""
 * * *
 
 元组由多个用逗号隔开的值组成：
-    
-    
-    a = 1, 2, 3, 4
-    print("a: ", a, type(a))
-    b = ('a', 'b', 'c', 'd', a)  # 由 () 表示一个元组，可嵌套使用
-    print("b: ", b, type(b))
+```java
+
+
+a = 1, 2, 3, 4
+print("a: ", a, type(a))
+b = ('a', 'b', 'c', 'd', a)  # 由 () 表示一个元组，可嵌套使用
+print("b: ", b, type(b))
+```
 
 输出时，元组都要由圆括号标注，这样才能正确地解释嵌套元组。输入时，圆括号可有可无，不过经常是必须的（如果元组是更大的表达式的一部分）。不允许为元组中的单个元素赋值，当然，可以创建含列表等可变对象的元组。
 
 元组同样支持索引和切片：
-    
-    
-    a = 1, 2, 'a', 'b'
-    print(a[0])
-    print(a[1:3])
-    # a[0] = 0  不可修改
+```java
+
+
+a = 1, 2, 'a', 'b'
+print(a[0])
+print(a[1:3])
+# a[0] = 0  不可修改
+```
 
 虽然，元组与列表很像，但使用场景不同，用途也不同。元组是 [immutable](&lt;https://docs.python.org/zh-cn/3.9/glossary.html#term-immutable&gt;) （不可变的），一般可包含异质元素序列，通过解包索引访问（如果是 [`namedtuples`](&lt;https://docs.python.org/zh-cn/3.9/library/collections.html#collections.namedtuple&gt;)，可以属性访问）。列表是 [mutable](&lt;https://docs.python.org/zh-cn/3.9/glossary.html#term-mutable&gt;) （可变的），列表元素一般为同质类型，可迭代访问。
 
@@ -489,36 +543,38 @@ description: ""
   * `deepcopy` 是深拷贝，会递归复制对象的内部结构，从而生成一个完全独立的对象，不会与原对象产生任何关系。
 
 
-    
-    
-    import copy
-    
-    a = [1, 2, 3]
-    b = [4, 5, 6]
-    c = [a, b]  # c 中包含 a, b 两个子对象
-    d = c
-    print("a: ", id(a))
-    print("b: ", id(b))
-    print("c: ", id(c))
-    print("d: ", id(d))  # id(d) == id(c) 说明 d 和 c 是相同的对象
-    
-    print()
-    
-    d = copy.copy(c)
-    print("c: ", id(c))
-    print("copy(d): ", id(d))  # copy(d) 生成了一个新的对象
-    print("a: ", id(a))
-    print("c[0]: ", id(c[0]))
-    print("copy(d[0]): ", id(d[0]))  # d[0] 和 c[0] 是相同的对象，说明新生成的对象没有改变原来 c 中的子对象
-    
-    print()
-    
-    d = copy.deepcopy(c)
-    print("c: ", id(c))
-    print("copy(d): ", id(d))  # copy(d) 生成了一个新的对象
-    print("a: ", id(a))
-    print("c[0]: ", id(c[0]))
-    print("copy(d[0]): ", id(d[0]))  # d[0] 和 c[0] 不是相同的对象，说明新生成的 d 是一个完全独立的对象
+```java
+
+
+import copy
+
+a = [1, 2, 3]
+b = [4, 5, 6]
+c = [a, b]  # c 中包含 a, b 两个子对象
+d = c
+print("a: ", id(a))
+print("b: ", id(b))
+print("c: ", id(c))
+print("d: ", id(d))  # id(d) == id(c) 说明 d 和 c 是相同的对象
+
+print()
+
+d = copy.copy(c)
+print("c: ", id(c))
+print("copy(d): ", id(d))  # copy(d) 生成了一个新的对象
+print("a: ", id(a))
+print("c[0]: ", id(c[0]))
+print("copy(d[0]): ", id(d[0]))  # d[0] 和 c[0] 是相同的对象，说明新生成的对象没有改变原来 c 中的子对象
+
+print()
+
+d = copy.deepcopy(c)
+print("c: ", id(c))
+print("copy(d): ", id(d))  # copy(d) 生成了一个新的对象
+print("a: ", id(a))
+print("c[0]: ", id(c[0]))
+print("copy(d[0]): ", id(d[0]))  # d[0] 和 c[0] 不是相同的对象，说明新生成的 d 是一个完全独立的对象
+```
 
 **总结** ：：`deepcopy` 会生成一个独立的对象，而 `copy` 只是对对象的引用。
 
@@ -535,24 +591,28 @@ description: ""
 * * *
 
 集合是由**不重复元素组成的无序容器** ，基本用法包括成员检测、消除重复元素。集合对象支持合集、交集、差集、对称差分等数学运算。
-    
-    
-    a = {1, 2, 3, 4, 5}
-    print("a: ", a, type(a))
+```java
+
+
+a = {1, 2, 3, 4, 5}
+print("a: ", a, type(a))
+```
 
 集合运算：
-    
-    
-    a = {1, 2, 3, 4, 5}
-    b = {2, 4, 5}
-    print("1 in a is", 1 in a)
-    print("1 in b is", 1 in b)
-    print("a = b is", a == b)
-    print("a - b =", a - b)
-    print("b - a =", b - a)
-    print("a | b =", a | b)
-    print("a & b =", a & b)
-    print("a ^ b =", a ^ b)
+```java
+
+
+a = {1, 2, 3, 4, 5}
+b = {2, 4, 5}
+print("1 in a is", 1 in a)
+print("1 in b is", 1 in b)
+print("a = b is", a == b)
+print("a - b =", a - b)
+print("b - a =", b - a)
+print("a | b =", a | b)
+print("a & b =", a & b)
+print("a ^ b =", a ^ b)
+```
 
 * * *
 
@@ -561,40 +621,46 @@ description: ""
 * * *
 
 字典为键值对的集合，字典的键必须是唯一的：
-    
-    
-    a = {1:'a', 2:'b', 3:'c', 4:'d'}
-    print("a: ", a, type(a))
-    print("a[1]: ", a[1])
-    
-    b = {'a':1, "bcd":2, 3.4:"e"}
-    print("b: ", b, type(b))
-    print("b['a']: ", b['a'])
+```java
+
+
+a = {1:'a', 2:'b', 3:'c', 4:'d'}
+print("a: ", a, type(a))
+print("a[1]: ", a[1])
+
+b = {'a':1, "bcd":2, 3.4:"e"}
+print("b: ", b, type(b))
+print("b['a']: ", b['a'])
+```
 
 与以连续整数为索引的序列不同，字典以关键字为索引，关键字通常是字符串或数字，也可以是其他任意不可变类型。只包含字符串、数字、元组的元组，也可以用作关键字。但如果元组直接或间接地包含了可变对象，就不能用作关键字。列表不能当关键字，因为列表可以用索引、切片、`append()` 、`extend()` 等方法修改。
-    
-    
-    a = {'name': 'wjq', 'sex': 'male', 'qq': 1145141919}
-    print(a.get('name'))  # 通过键获取值，且不会报错
-    a.pop('qq')  # 删除键为 qq 的键值对
-    print(a.keys())  # 获取所有的键
-    print(a.values())  # 获取所有的值
-    a['name'] = 'lys'  # 改值
-    print("a: ", a, type(a))
+```java
+
+
+a = {'name': 'wjq', 'sex': 'male', 'qq': 1145141919}
+print(a.get('name'))  # 通过键获取值，且不会报错
+a.pop('qq')  # 删除键为 qq 的键值对
+print(a.keys())  # 获取所有的键
+print(a.values())  # 获取所有的值
+a['name'] = 'lys'  # 改值
+print("a: ", a, type(a))
+```
 
 合并两个键值不冲突的字典可以使用如下方法：
-    
-    
-    a = {1:'a', 2:'b'}
-    b = {3:'c', 4:'d'}
-    
-    c = a
-    c.update(b)  # 内置函数 update
-    
-    d = {**a, **b}  # 解包合并
-    
-    print("c: ", c)
-    print("d: ", d)
+```java
+
+
+a = {1:'a', 2:'b'}
+b = {3:'c', 4:'d'}
+
+c = a
+c.update(b)  # 内置函数 update
+
+d = {**a, **b}  # 解包合并
+
+print("c: ", c)
+print("d: ", d)
+```
 
 * * *
 
@@ -603,31 +669,35 @@ description: ""
 * * *
 
 条件表达式为真时执行语句：
-    
-    
-    a = int(input("input 'a' number: "))
-    if a == 0:
-        print("'a' is zero", end='')
-    elif a > 0:
-        print("'a' is a positive number", end='')
-    else:
-        print("'a' is a negative number")
+```java
+
+
+a = int(input("input 'a' number: "))
+if a == 0:
+    print("'a' is zero", end='')
+elif a > 0:
+    print("'a' is a positive number", end='')
+else:
+    print("'a' is a negative number")
+```
 
 支持嵌套：
-    
-    
-    a = int(input("input 'a' number: "))
-    if a == 0:
-        print("'a' is zero", end='')
-    elif a > 0:
-        if a > 100:
-            print("'a' is a positive number and 'a' is bigger than 100", end='')
-        elif a == 100 :
-            print("'a' is equal to 100", end='')
-        else :
-            print("'a' is a positive number and 'a' is smaller than 100", end='')
-    else:
-        print("'a' is a negative number")
+```java
+
+
+a = int(input("input 'a' number: "))
+if a == 0:
+    print("'a' is zero", end='')
+elif a > 0:
+    if a > 100:
+        print("'a' is a positive number and 'a' is bigger than 100", end='')
+    elif a == 100 :
+        print("'a' is equal to 100", end='')
+    else :
+        print("'a' is a positive number and 'a' is smaller than 100", end='')
+else:
+    print("'a' is a negative number")
+```
 
 **注意** ：条件表达式的本质是得到一个 `bool` 值，以下非条件表达式的值也会被视为 `False`：
 
@@ -645,14 +715,16 @@ description: ""
 * * *
 
 [`while`](&lt;https://docs.python.org/zh-cn/3.9/reference/compound_stmts.html?highlight=while#while&gt;) 语句用于在表达式保持为真的情况下重复地执行：
-    
-    
-    flag = 10
-    a = 0
-    while a < flag:
-        print(a, end=' ')
-        a += 1
-    print("\na:", a)
+```java
+
+
+flag = 10
+a = 0
+while a < flag:
+    print(a, end=' ')
+    a += 1
+print("\na:", a)
+```
 
 其余扩展用法同 `for` 语句相同，详见下面内容。
 
@@ -667,35 +739,41 @@ description: ""
 * * *
 
 `Python` 的 `for` 语句不迭代算术递增数值，也不给予用户定义迭代步骤和暂停条件的能力，而是迭代列表或字符串等任意序列，元素的迭代顺序与在序列中出现的顺序一致。
-    
-    
-    a = [1, 2, 3, 4, 5]
-    for i in a:
-        print(i, end=' ')
-    print()
-    b = [1, 2.333, 'a', "bcd"]
-    for i in b:
-        print(i, type(i))
+```java
+
+
+a = [1, 2, 3, 4, 5]
+for i in a:
+    print(i, end=' ')
+print()
+b = [1, 2.333, 'a', "bcd"]
+for i in b:
+    print(i, type(i))
+```
 
 **注意** ：在 `Python` 中，在使用 `for` 循环遍历列表元素时，不能直接在循环体中删除列表元素，这样会导致迭代错误。
-    
-    
-    a = [1, 2, 3, 4, 5, 6, 7, 8]
-    for i in range(len(a)):
-        if a[i] % 2 == 0:
-            del a[i]
-    print(a)
-    # IndexError: list index out of range
+```java
+
+
+a = [1, 2, 3, 4, 5, 6, 7, 8]
+for i in range(len(a)):
+    if a[i] % 2 == 0:
+        del a[i]
+print(a)
+# IndexError: list index out of range
+```
 
 要在遍历时修改集合的内容，应该**遍历该集合的副本或创建新的集合** ：
-    
-    
-    a = [1, 2, 3, 4, 5, 6, 7, 8]
-    b = []
-    for i in range(len(a)):
-        if a[i] % 2 != 0:
-            b.append(a[i])
-    print(b)
+```java
+
+
+a = [1, 2, 3, 4, 5, 6, 7, 8]
+b = []
+for i in range(len(a)):
+    if a[i] % 2 != 0:
+        b.append(a[i])
+print(b)
+```
 
 * * *
 
@@ -704,13 +782,15 @@ description: ""
 * * *
 
 [`range`](&lt;https://docs.python.org/zh-cn/3.9/library/stdtypes.html#range&gt;) 类型表示不可变的数字序列，通常用于在 [`for`](&lt;https://docs.python.org/zh-cn/3.9/reference/compound_stmts.html#for&gt;) 循环中循环指定的次数。
-    
-    
-    for i in range(10):
-        print(i, end=' ')
-    
-    a = list(range(10))  # 生成一个列表 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    print(a)
+```java
+
+
+for i in range(10):
+    print(i, end=' ')
+
+a = list(range(10))  # 生成一个列表 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(a)
+```
 
 生成的序列不包含给定的终止数值；`range(10)` 生成 `10` 个值，这是一个长度为 `10` 的序列，其中的元素索引都是合法的。
 
@@ -719,40 +799,48 @@ description: ""
   * 步进值省略时默认为 `1`，可以为负数。
 
 
-    
-    
-    for i in range(1, 10):
-        print(i, end=' ')
-    print()
-    for i in range(0, 10, 2):
-        print(i, end=' ')
-    print()
-    for i in range(0, -10, -1):
-        print(i, end=' ')
+```java
+
+
+for i in range(1, 10):
+    print(i, end=' ')
+print()
+for i in range(0, 10, 2):
+    print(i, end=' ')
+print()
+for i in range(0, -10, -1):
+    print(i, end=' ')
+```
 
 [`range()`](&lt;https://docs.python.org/zh-cn/3.9/library/stdtypes.html#range&gt;) 和 [`len()`](&lt;https://docs.python.org/zh-cn/3.9/library/functions.html#len&gt;) 组合在一起，可以按索引迭代序列，等价于 [`enumerate()`](&lt;https://docs.python.org/zh-cn/3.9/library/functions.html#enumerate&gt;) 函数：
-    
-    
-    a = [1, 2, 3, 4, 5]
-    for i in range(len(a)):
-        print(f"index: {i}, value: {a[i]}")
-    print()
-    for i, v in enumerate(a):
-        print(f"index: {i}, value: {v}")
+```java
+
+
+a = [1, 2, 3, 4, 5]
+for i in range(len(a)):
+    print(f"index: {i}, value: {a[i]}")
+print()
+for i, v in enumerate(a):
+    print(f"index: {i}, value: {v}")
+```
 
 只输出 `range()`:
-    
-    
-    print(range(1, 10))
-    # range(1, 10)  输出内容
+```java
+
+
+print(range(1, 10))
+# range(1, 10)  输出内容
+```
 
 [`range()`](&lt;https://docs.python.org/zh-cn/3.9/library/stdtypes.html#range&gt;) 返回对象的操作和列表很像，但其实这两种对象不是一回事。迭代时，该对象基于所需序列返回连续项，并没有生成真正的列表，从而节省了空间。
 
 这种对象称为可迭代对象 [iterable](&lt;https://docs.python.org/zh-cn/3.9/glossary.html#term-iterable&gt;)，函数或程序结构可通过该对象获取连续项，直到所有元素全部迭代完毕。[`for`](&lt;https://docs.python.org/zh-cn/3.9/reference/compound_stmts.html#for&gt;) 语句就是这样的架构，[`sum()`](&lt;https://docs.python.org/zh-cn/3.9/library/functions.html#sum&gt;) 是一种把可迭代对象作为参数的函数：
-    
-    
-    print(sum(range(1, 5)))  #sum 计算了 1 + 2 + 3 + 4 的值
-    # 10  输出内容
+```java
+
+
+print(sum(range(1, 5)))  #sum 计算了 1 + 2 + 3 + 4 的值
+# 10  输出内容
+```
 
 * * *
 
@@ -763,49 +851,55 @@ description: ""
 ### 8.3.1 嵌套 if 语句
 
 * * *
-    
-    
-    a = [1, 2, 3, 4, 5, 6, 7, 8]
-    for i in a:
-        if i % 2 == 0:
-            print(i, end=' ')
-        else :
-            print(-1, end=' ')
+```java
+
+
+a = [1, 2, 3, 4, 5, 6, 7, 8]
+for i in a:
+    if i % 2 == 0:
+        print(i, end=' ')
+    else :
+        print(-1, end=' ')
+```
 
 * * *
 
 ### 8.3.2 嵌套循环语句
 
 * * *
-    
-    
-    a = [0, 1, 2, 3, 4, 5]
-    b = [[], []]
-    for i in list(range(len(b))):
-        for j in a:
-            b[i].append(j)
-    print(b)
+```java
+
+
+a = [0, 1, 2, 3, 4, 5]
+b = [[], []]
+for i in list(range(len(b))):
+    for j in a:
+        b[i].append(j)
+print(b)
+```
 
 * * *
 
 ### 8.3.3 break、continue、pass 语句
 
 * * *
-    
-    
-    a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-    for i in a:
-        if i % 2 == 0:
-            continue
-            # pass  不执行任何内容，此处效果和continue 相同
-        elif i % 3 == 0:
-            print(i, end=' ')
-    print()
-    for i in a:
-        if i % 5 != 0:
-            print(i, end=' ')
-        else:
-            break  # 提前跳出本层循环
+```java
+
+
+a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+for i in a:
+    if i % 2 == 0:
+        continue
+        # pass  不执行任何内容，此处效果和continue 相同
+    elif i % 3 == 0:
+        print(i, end=' ')
+print()
+for i in a:
+    if i % 5 != 0:
+        print(i, end=' ')
+    else:
+        break  # 提前跳出本层循环
+```
 
 * * *
 
@@ -814,71 +908,87 @@ description: ""
 * * *
 
 在字典中循环时，用 `items()` 方法可同时取出键和对应的值：
-    
-    
-    a = {1:'a', 2:'b', 3:'c', 4:'d'}
-    for k, v in a.items():
-        print(f"key:{k}, value:{v}")
+```java
+
+
+a = {1:'a', 2:'b', 3:'c', 4:'d'}
+for k, v in a.items():
+    print(f"key:{k}, value:{v}")
+```
 
 若只需要字典中的值，可以用 `values()` 方法：
-    
-    
-    a = {1:'a', 2:'b', 3:'c', 4:'d'}
-    for v in a.values():
-        print(f"value:{v}")
+```java
+
+
+a = {1:'a', 2:'b', 3:'c', 4:'d'}
+for v in a.values():
+    print(f"value:{v}")
+```
 
 在序列中循环时，用 [`enumerate()`](&lt;https://docs.python.org/zh-cn/3.9/library/functions.html#enumerate&gt;) 函数可以同时取出位置索引和对应的值：
-    
-    
-    a = [1, 2, 3, 4, 5]
-    for i, v in enumerate(a):
-        print(f"index:{i}, value:{v}")
+```java
+
+
+a = [1, 2, 3, 4, 5]
+for i, v in enumerate(a):
+    print(f"index:{i}, value:{v}")
+```
 
 同时循环两个或多个序列时，用 [`zip()`](&lt;https://docs.python.org/zh-cn/3.9/library/functions.html#zip&gt;) 函数可以将其内的元素一一匹配：
-    
-    
-    questions = ['name', 'quest', 'favorite color']
-    answers = ['lys', 'the holy grail', 'blue']
-    for q, a in zip(questions, answers):
-        # print(f"What is your {q}? It is {a}.")
-        print("What is your {0}? It is {1}.".format(q, a))
+```java
+
+
+questions = ['name', 'quest', 'favorite color']
+answers = ['lys', 'the holy grail', 'blue']
+for q, a in zip(questions, answers):
+    # print(f"What is your {q}? It is {a}.")
+    print("What is your {0}? It is {1}.".format(q, a))
+```
 
 逆向循环序列时，调用 [`reversed()`](&lt;https://docs.python.org/zh-cn/3.9/library/functions.html#reversed&gt;) 函数：
-    
-    
-    a = [1, 2, 3, 4, 5]
-    for i in reversed(a):
-        print(i, end=' ')
+```java
+
+
+a = [1, 2, 3, 4, 5]
+for i in reversed(a):
+    print(i, end=' ')
+```
 
 按指定顺序循环序列，可以用 [`sorted()`](&lt;https://docs.python.org/zh-cn/3.9/library/functions.html#sorted&gt;) 函数，在不改动原序列的基础上，返回一个重新的序列：
-    
-    
-    a = [2, 5, 1, 4, 3]
-    for i in sorted(a):
-        print(i, end=' ')
-    print()
-    for i in sorted(a, reverse=True):
-        print(i, end=' ')
-    print()
-    for i in a:
-        print(i, end=' ')
+```java
+
+
+a = [2, 5, 1, 4, 3]
+for i in sorted(a):
+    print(i, end=' ')
+print()
+for i in sorted(a, reverse=True):
+    print(i, end=' ')
+print()
+for i in a:
+    print(i, end=' ')
+```
 
 使用 [`set()`](&lt;https://docs.python.org/zh-cn/3.9/library/stdtypes.html#set&gt;) 去除序列中的重复元素。使用 [`sorted()`](&lt;https://docs.python.org/zh-cn/3.9/library/functions.html#sorted&gt;) 加 [`set()`](&lt;https://docs.python.org/zh-cn/3.9/library/stdtypes.html#set&gt;) 则按排序后的顺序，循环遍历序列中的唯一元素：
-    
-    
-    a = [1, 3, 1, 2, 3, 4, 5, 4, 3, 2, 1, 5, 4]
-    for i in sorted(set(a)):
-        print(i, end=' ')
+```java
+
+
+a = [1, 3, 1, 2, 3, 4, 5, 4, 3, 2, 1, 5, 4]
+for i in sorted(set(a)):
+    print(i, end=' ')
+```
 
 `for` 支持推导式表达：
-    
-    
-    a = list(range(1, 10))
-    print("a: ", a)
-    b = [i*i for i in a]  # b 为 a 中元素的平方
-    print("b: ", b)
-    c = {k:v for k,v in zip(a, b)}
-    print("c: ", c)
+```java
+
+
+a = list(range(1, 10))
+print("a: ", a)
+b = [i*i for i in a]  # b 为 a 中元素的平方
+print("b: ", b)
+c = {k:v for k,v in zip(a, b)}
+print("c: ", c)
+```
 
 * * *
 
@@ -891,24 +1001,30 @@ description: ""
 * * *
 
 [格式化字符串字面值](&lt;https://docs.python.org/zh-cn/3.9/reference/lexical_analysis.html#f-strings&gt;) （简称为 f-字符串）在字符串前加前缀 `f` 或 `F`，通过 `{expression}` 表达式，把 `Python` 表达式的值添加到字符串内：
-    
-    
-    a = 100
-    b = 'lys'
-    print(f"{b} is {a} years old")
+```java
+
+
+a = 100
+b = 'lys'
+print(f"{b} is {a} years old")
+```
 
 格式说明符是可选的，写在表达式后面，可以更好地控制格式化值的方式。下例将 `pi` 舍入到小数点后三位：
-    
-    
-    import math
-    print(f'The value of pi is approximately {math.pi:.3f}.')
+```java
+
+
+import math
+print(f'The value of pi is approximately {math.pi:.3f}.')
+```
 
 在 `':'` 后传递整数，为该字段设置最小字符宽度，常用于列对齐：
-    
-    
-    table = {1:'a', 2:'bc', 3:'def', 4:'ghij'}
-    for k, v in table.items():
-        print(f'key is {k:5} ==> value is {v:5} in this table')
+```java
+
+
+table = {1:'a', 2:'bc', 3:'def', 4:'ghij'}
+for k, v in table.items():
+    print(f'key is {k:5} ==> value is {v:5} in this table')
+```
 
 * * *
 
@@ -917,24 +1033,32 @@ description: ""
 * * *
 
 [`str.format()`](&lt;https://docs.python.org/zh-cn/3.9/library/stdtypes.html#str.format&gt;) 方法的基本用法如下所示：
-    
-    
-    print("{} is a {}.".format('lys', 'dog'))
+```java
+
+
+print("{} is a {}.".format('lys', 'dog'))
+```
 
 花括号及之内的字符（称为格式字段）被替换为传递给 [`str.format()`](&lt;https://docs.python.org/zh-cn/3.9/library/stdtypes.html#str.format&gt;) 方法的对象。花括号中的数字表示传递给 [`str.format()`](&lt;https://docs.python.org/zh-cn/3.9/library/stdtypes.html#str.format&gt;) 方法的对象所在的位置：
-    
-    
-    print("{0} is a {2} and {1} is a {2}, too.".format('lys', 'wjq', 'dog'))
+```java
+
+
+print("{0} is a {2} and {1} is a {2}, too.".format('lys', 'wjq', 'dog'))
+```
 
 [`str.format()`](&lt;https://docs.python.org/zh-cn/3.9/library/stdtypes.html#str.format&gt;) 方法中使用关键字参数名引用值：
-    
-    
-    print("{name1} is a {name3} and {name2} is a {name3}, too.".format(name1='lys', name2='wjq', name3='dog'))
+```java
+
+
+print("{name1} is a {name3} and {name2} is a {name3}, too.".format(name1='lys', name2='wjq', name3='dog'))
+```
 
 上述方法也可以交叉使用：
-    
-    
-    print("{name1} is a {0} and {name2} is a {0}, too.".format('dog', name1='lys', name2='wjq'))
+```java
+
+
+print("{name1} is a {0} and {name2} is a {0}, too.".format('dog', name1='lys', name2='wjq'))
+```
 
 * * *
 
@@ -947,25 +1071,27 @@ description: ""
 * * *
 
 利用 `try`，`except`，`finally`，`else` 语句处理异常：
-    
-    
-    a = 100
-    b = 0;
-    d = [1, 2, 3, 4]
-    try:
-        c = a / b
-        e = d[10]  # 前两条语句异常，只会处理第一条语句异常，直接跳出 try，进入 except 匹配异常
-        f = a + b  # 若前两条语句无异常，执行 else 中的语句
-    except ValueError:  # 异常匹配
-        print("ValueError")
-    except ZeroDivisionError:
-        print("ZeroDivisionError")
-    except IndexError:
-        print("IndexError")
-    else:
-        print("No Error Exist")  # try 无异常则执行
-    finally:  # 无论是否有其他异常都会执行
-        print("Over")
+```java
+
+
+a = 100
+b = 0;
+d = [1, 2, 3, 4]
+try:
+    c = a / b
+    e = d[10]  # 前两条语句异常，只会处理第一条语句异常，直接跳出 try，进入 except 匹配异常
+    f = a + b  # 若前两条语句无异常，执行 else 中的语句
+except ValueError:  # 异常匹配
+    print("ValueError")
+except ZeroDivisionError:
+    print("ZeroDivisionError")
+except IndexError:
+    print("IndexError")
+else:
+    print("No Error Exist")  # try 无异常则执行
+finally:  # 无论是否有其他异常都会执行
+    print("Over")
+```
 
   * 首先，执行 `try` 子句（[`try`](&lt;https://docs.python.org/zh-cn/3.9/reference/compound_stmts.html#try&gt;) 和 [`except`](&lt;https://docs.python.org/zh-cn/3.9/reference/compound_stmts.html#except&gt;) 关键字之间的（多行）语句）。
   * 如果没有触发异常，则跳过 `except` 子句，[`try`](&lt;https://docs.python.org/zh-cn/3.9/reference/compound_stmts.html#try&gt;) 语句执行完毕。
@@ -977,23 +1103,25 @@ description: ""
 
 
 其中，`except` 可以用元组命名多个异常：
-    
-    
-    a = 100
-    b = 0;
-    d = [1, 2, 3, 4]
-    Errors = (ValueError, RuntimeError, FloatingPointError, IndexError, TypeError, ZeroDivisionError)
-    try:
-        c = a / b
-        e = d[10]  # 前两条语句异常，只会处理第一条语句异常，直接跳出 try，进入 except 匹配异常
-        f = a + b  # 若前两条语句无异常，执行 else 中的语句
-    except Errors:
-        print("Errors")
-    else:
-        print("No Error Exist")  # try 无异常则执行
-    finally:  # 无论是否有其他异常都会执行
-        print("Over")
-        # print(f)
+```java
+
+
+a = 100
+b = 0;
+d = [1, 2, 3, 4]
+Errors = (ValueError, RuntimeError, FloatingPointError, IndexError, TypeError, ZeroDivisionError)
+try:
+    c = a / b
+    e = d[10]  # 前两条语句异常，只会处理第一条语句异常，直接跳出 try，进入 except 匹配异常
+    f = a + b  # 若前两条语句无异常，执行 else 中的语句
+except Errors:
+    print("Errors")
+else:
+    print("No Error Exist")  # try 无异常则执行
+finally:  # 无论是否有其他异常都会执行
+    print("Over")
+    # print(f)
+```
 
 * * *
 
@@ -1002,18 +1130,20 @@ description: ""
 * * *
 
 [`raise`](&lt;https://docs.python.org/zh-cn/3.9/reference/simple_stmts.html#raise&gt;) 语句支持强制触发指定的异常：
-    
-    
-    a = 100
-    b = 0
-    try:
-        c = b / a
-        raise ZeroDivisionError('Zero  can be divided')
-    except ZeroDivisionError:
-        print("ZeroDivisionError")
-        raise
-    finally:
-        print("Over")
+```java
+
+
+a = 100
+b = 0
+try:
+    c = b / a
+    raise ZeroDivisionError('Zero  can be divided')
+except ZeroDivisionError:
+    print("ZeroDivisionError")
+    raise
+finally:
+    print("Over")
+```
 
 * * *
 
@@ -1026,20 +1156,24 @@ description: ""
 * * *
 
 使用关键字 [`def`](&lt;https://docs.python.org/zh-cn/3.9/reference/compound_stmts.html#def&gt;) 定义函数，后跟函数名与括号内的形参列表：
-    
-    
-    def solve(n):
-        """Print 1 to n"""
-        for i in range(1, n + 1):
-            print(i, end=' ')
-    
-    a = int(input())
-    solve(a)
+```java
+
+
+def solve(n):
+    """Print 1 to n"""
+    for i in range(1, n + 1):
+        print(i, end=' ')
+
+a = int(input())
+solve(a)
+```
 
 函数内的第一条语句是字符串时，该字符串就是文档字符串，也称为 _docstring_ ，详见[文档字符串](&lt;https://docs.python.org/zh-cn/3.9/tutorial/controlflow.html#tut-docstrings&gt;)。利用文档字符串可以自动生成在线文档或打印版文档。
-    
-    
-    print(solve.__doc__)  # 打印出 solve 的说明
+```java
+
+
+print(solve.__doc__)  # 打印出 solve 的说明
+```
 
 * * *
 
@@ -1048,35 +1182,41 @@ description: ""
 * * *
 
 函数定义时，参数列表的值可以设置初始值作为默认值参数：
-    
-    
-    def solve(age=24, name="lys", status="dog"):
-        print(f"{name} is", end=' ')
-        print(f"{age} years old, and {name}", end=' ')
-        print(f"is a {status} .")
-    
-    solve()  # 函数参数都存在默认值调用
+```java
+
+
+def solve(age=24, name="lys", status="dog"):
+    print(f"{name} is", end=' ')
+    print(f"{age} years old, and {name}", end=' ')
+    print(f"is a {status} .")
+
+solve()  # 函数参数都存在默认值调用
+```
 
 若存在未初始化的参数，则可以 `kwarg=value` 形式的 [关键字参数](&lt;https://docs.python.org/zh-cn/3.9/glossary.html#term-keyword-argument&gt;) 调用函数：
-    
-    
-    def solve(age, name="lys", status="dog"):
-        print(f"{name} is", end=' ')
-        print(f"{age} years old, and {name}", end=' ')
-        print(f"is a {status} .")
-    
-    solve(114514)  # 第一个参数是必选参数，剩余参数可不选
-    solve(114514, "LYS")  # 不声明关键字会默认匹配除默认参数后的最近的关键字参数
-    solve(114514, name="LYS")
-    solve(14, status="debu cat", name="Hiiro")  # 传入关键字参数与参数列表的关键字对应
+```java
+
+
+def solve(age, name="lys", status="dog"):
+    print(f"{name} is", end=' ')
+    print(f"{age} years old, and {name}", end=' ')
+    print(f"is a {status} .")
+
+solve(114514)  # 第一个参数是必选参数，剩余参数可不选
+solve(114514, "LYS")  # 不声明关键字会默认匹配除默认参数后的最近的关键字参数
+solve(114514, name="LYS")
+solve(14, status="debu cat", name="Hiiro")  # 传入关键字参数与参数列表的关键字对应
+```
 
 除上述调用方法外，以下调用非法：
-    
-    
-    solve()  # 缺省 age 参数
-    solve(name="Hiiro")  # 缺省 age 参数
-    solve(age=114514, "debu cat")  # debu cat 需要照应一个关键字
-    solve(114514, age=1919)  # age 存在多个不同的值
+```java
+
+
+solve()  # 缺省 age 参数
+solve(name="Hiiro")  # 缺省 age 参数
+solve(age=114514, "debu cat")  # debu cat 需要照应一个关键字
+solve(114514, age=1919)  # age 存在多个不同的值
+```
 
 **总结** ：
 
@@ -1093,31 +1233,35 @@ description: ""
 * * *
 
 需要将序列作为参数时，用 `*` 操作符把实参从列表或元组解包出来：
-    
-    
-    name1 = [114514, 'Lys', 'dog']
-    name2 = (14, 'Hiiro', 'debu cat')
-    
-    def solve(age, name, status):
-        print(f"{name} is", end=' ')
-        print(f"{age} years old, and {name}", end=' ')
-        print(f"is a {status} .")
-    
-    solve(*name1)
-    solve(*name2)
+```java
+
+
+name1 = [114514, 'Lys', 'dog']
+name2 = (14, 'Hiiro', 'debu cat')
+
+def solve(age, name, status):
+    print(f"{name} is", end=' ')
+    print(f"{age} years old, and {name}", end=' ')
+    print(f"is a {status} .")
+
+solve(*name1)
+solve(*name2)
+```
 
 同样，字典可以用 `**` 操作符传递关键字参数：
-    
-    
-    name1 = {'age':114514, 'name':'Lys', 'status':'dog'}
-    
-    def solve(age=24, name='Van', status='XainBei'):
-        print(f"{name} is", end=' ')
-        print(f"{age} years old, and {name}", end=' ')
-        print(f"is a {status} .")
-    
-    solve(**name1)
-    # solve(*name1) Output: name is age years old, and name is a status . 
+```java
+
+
+name1 = {'age':114514, 'name':'Lys', 'status':'dog'}
+
+def solve(age=24, name='Van', status='XainBei'):
+    print(f"{name} is", end=' ')
+    print(f"{age} years old, and {name}", end=' ')
+    print(f"is a {status} .")
+
+solve(**name1)
+# solve(*name1) Output: name is age years old, and name is a status . 
+```
 
 * * *
 
@@ -1126,41 +1270,43 @@ description: ""
 * * *
 
 [`return`](&lt;https://docs.python.org/zh-cn/3.9/reference/simple_stmts.html#return&gt;) 语句返回函数的值。`return` 语句不带表达式参数时，返回 `None`。函数执行完毕退出也返回 `None`：
-    
-    
-    # 返回值
-    def solve(n):
-        """Show 1 * 2 * ... * n"""
-        if n > 1:
-            return solve(n - 1) * n
-        else:
-            return 1
-    
-    a = int(input())
-    print(solve(a))
-    
-    
-    # 返回一个 list
-    def solve(n):
-        """Create a list which is the first n terms of the Fibonacci series"""
-        fib = [0, 1]
-        for i in range(2, n):
-            fib.append(fib[i - 1] + fib[i - 2])
-        return fib
-    
-    a = int(input())
-    print(solve(a))
-    
-    
-    # 返回多个值
-    def solve(a, b):
-        return a + b, a - b
-    
-    n , m = solve(1, 2)  # 用对应数量的变量接收
-    print(f"n = {n}, m = {m}")
-    
-    t = solve(1, 2)  # 用一个值接收，则会返回一个元组
-    print(f"t: {t}", type(t))
+```java
+
+
+# 返回值
+def solve(n):
+    """Show 1 * 2 * ... * n"""
+    if n > 1:
+        return solve(n - 1) * n
+    else:
+        return 1
+
+a = int(input())
+print(solve(a))
+
+
+# 返回一个 list
+def solve(n):
+    """Create a list which is the first n terms of the Fibonacci series"""
+    fib = [0, 1]
+    for i in range(2, n):
+        fib.append(fib[i - 1] + fib[i - 2])
+    return fib
+
+a = int(input())
+print(solve(a))
+
+
+# 返回多个值
+def solve(a, b):
+    return a + b, a - b
+
+n , m = solve(1, 2)  # 用对应数量的变量接收
+print(f"n = {n}, m = {m}")
+
+t = solve(1, 2)  # 用一个值接收，则会返回一个元组
+print(f"t: {t}", type(t))
+```
 
 * * *
 
@@ -1169,39 +1315,43 @@ description: ""
 * * *
 
 函数内部只作引用的 `Python` 变量隐式视为全局变量。如果在函数内部任何位置为变量赋值，则除非明确声明为全局变量，否则均将其视为局部变量：
-    
-    
-    a = 1
-    
-    def use():
-        print(f"use: {a}")
-    
-    def change():
-        a = 114514
-    
-    use()
-    change()  # 调用函数
-    
-    print(a)  # a 的值不发生改变
+```java
+
+
+a = 1
+
+def use():
+    print(f"use: {a}")
+
+def change():
+    a = 114514
+
+use()
+change()  # 调用函数
+
+print(a)  # a 的值不发生改变
+```
 
 可以看到，`use()` 函数在只做引用的情况下将 `a` 视为了全局变量，而在 `change()` 函数中对 `a` 做修改，则将 `a` 视为了局部变量，并没有改变其值。
 
 使用关键词 [`global`](&lt;https://docs.python.org/zh-cn/3.9/reference/simple_stmts.html#global&gt;) 声明变量，将被视为全局变量，在函数对象中更改不再视为局部变量：
-    
-    
-    a = 1
-    
-    def use():
-        print(f"use: {a}")
-    
-    def change():
-        global a
-        a = 114514
-    
-    use()
-    change()  # 调用函数
-    
-    print(a)  # a 的值不发生改变
+```java
+
+
+a = 1
+
+def use():
+    print(f"use: {a}")
+
+def change():
+    global a
+    a = 114514
+
+use()
+change()  # 调用函数
+
+print(a)  # a 的值不发生改变
+```
 
 * * *
 
@@ -1210,20 +1360,22 @@ description: ""
 * * *
 
 [`lambda`](&lt;https://docs.python.org/zh-cn/3.9/reference/expressions.html#lambda&gt;) 表达式（有时称为 lambda 构型）被用于创建匿名函数。 表达式 `lambda parameters: expression` 会产生一个函数对象 ：
-    
-    
-    f = lambda a, b: a + b
-    print(f(1, 2))
-    
-    
-    def solve(n):
-        return lambda t: t + n
-    
-    a = 114
-    f = solve(a)
-    print(f(1000))
-    
-    print(solve(114)(1000))  # 或直接调用
+```java
+
+
+f = lambda a, b: a + b
+print(f(1, 2))
+
+
+def solve(n):
+    return lambda t: t + n
+
+a = 114
+f = solve(a)
+print(f(1000))
+
+print(solve(114)(1000))  # 或直接调用
+```
 
 * * *
 
@@ -1234,15 +1386,17 @@ description: ""
 函数闭包是一种特殊的函数，它不仅包含函数代码，还引用了它外部作用域中的一些变量。这种引用关系使得闭包可以在外部作用域中的变量保持其生存周期，即使闭包被销毁。
 
 闭包可以用于缓存函数的结果，避免重复计算；也可以用于实现装饰器等高阶函数。
-    
-    
-    def outer_function(x):
-        def inner_function(y):
-            return x + y
-        return inner_function
-    
-    closure = outer_function(10)
-    print(closure(5))  # Output: 15
+```java
+
+
+def outer_function(x):
+    def inner_function(y):
+        return x + y
+    return inner_function
+
+closure = outer_function(10)
+print(closure(5))  # Output: 15
+```
 
 * * *
 
@@ -1253,49 +1407,57 @@ description: ""
 装饰器其实也是一种闭包，作为一种[语法糖](&lt;https://en.wikipedia.org/wiki/Syntactic_sugar#:~:text=In%20computer%20science%2C%20syntactic%20sugar,style%20that%20some%20may%20prefer.&gt;)在 `Python` 中广泛使用，当对某个冗长的函数加上其他功能，利用装饰器可以在不修改原本函数内容的同时增添新的功能：
 
 现在有 `solve()` 函数如下：
-    
-    
-    def solve():
-        print("Function solve is called.")
+```java
+
+
+def solve():
+    print("Function solve is called.")
+```
 
 若要求再输出一行 `"Calling finished."`
 
 简单方法如下：
-    
-    
-    def solve():
-        print("Function solve is called.")
-        print("Calling finished.")
+```java
+
+
+def solve():
+    print("Function solve is called.")
+    print("Calling finished.")
+```
 
 闭包思路如下：
-    
-    
-    def solve():
-        print("Function solve is called.")
-    
-    def addition(func):
-        def inner():
-            func()
-            print("Calling finished.")
-        return inner
-    
-    Func = addition(solve)
-    Func()
+```java
+
+
+def solve():
+    print("Function solve is called.")
+
+def addition(func):
+    def inner():
+        func()
+        print("Calling finished.")
+    return inner
+
+Func = addition(solve)
+Func()
+```
 
 语法糖思路如下：
-    
-    
-    def addition(func):
-        def inner():
-            func()
-            print("Calling finished.")
-        return inner
-    
-    @addition
-    def solve():
-        print("Function solve is called.")
-    
-    solve()
+```java
+
+
+def addition(func):
+    def inner():
+        func()
+        print("Calling finished.")
+    return inner
+
+@addition
+def solve():
+    print("Function solve is called.")
+
+solve()
+```
 
 由此可以看出，利用语法糖可以在不改变原函数内容和调用的情况下增加修改。
 
@@ -1306,59 +1468,63 @@ description: ""
 * * *
 
 `yield`是用于实现迭代器。它可以在函数中生成多个值，每次运行到 `yield` 语句时都会暂停函数的执行并返回一个值。下次调用函数时，会从上次暂停的地方继续执行：
-    
-    
-    def solve():
-        for i in range(1, 10):
-            yield i
-    
-    func = solve()  # 得到生成器对象
-    print(func)  # 得到生成器时，是不会执行函数内部代码的
-    
-    # 使用next()对象进入生成器，执行代码，同时可以用变量的到 yield 的返回值
-    num = next(func)
-    print(num)
-    
-    num = next(func)
-    print(num)
-    
-    # next 方法在执行完后会抛出 StopIteration 异常表示生成器已经结束，需要捕获该异常
-    # 若没有执行完用 del 释放资源
-    del func
-    
-    # 重新得到生成器对象并用 for 迭代所有数据，此方法不会抛出异常
-    func = solve()
-    for i in func:
-        print(i, end=' ')
+```java
+
+
+def solve():
+    for i in range(1, 10):
+        yield i
+
+func = solve()  # 得到生成器对象
+print(func)  # 得到生成器时，是不会执行函数内部代码的
+
+# 使用next()对象进入生成器，执行代码，同时可以用变量的到 yield 的返回值
+num = next(func)
+print(num)
+
+num = next(func)
+print(num)
+
+# next 方法在执行完后会抛出 StopIteration 异常表示生成器已经结束，需要捕获该异常
+# 若没有执行完用 del 释放资源
+del func
+
+# 重新得到生成器对象并用 for 迭代所有数据，此方法不会抛出异常
+func = solve()
+for i in func:
+    print(i, end=' ')
+```
 
 生成器是一种特殊的迭代器，可以动态生成值。它可以使代码简洁，并且对大数据集的处理效率更高。
 
 实际上，在生成器函数中，我们可以使用 `变量1 = yield 变量2` 的方式将生成器**封存** ，直到下次对生成器对象使用 `send(value)` 方法将 `value` 的值赋给 `变量1` 之后，才可以继续往下执行代码。
-    
-    
-    def solve():
-        for i in range(10):
-            v = yield i
-            print(v)
-    
-    func = solve()  # 得到生成器对象
-    
-    func.send(None)  # 传入第一个值必须为 None
-    
+```java
+
+
+def solve():
+    for i in range(10):
+        v = yield i
+        print(v)
+
+func = solve()  # 得到生成器对象
+
+func.send(None)  # 传入第一个值必须为 None
+
+num = func.send("Counting: ")
+print(num)
+
+num = func.send("Counting: ")
+print(num)
+
+del func
+
+func = solve()
+func.send(None)
+
+for i in range(9):
     num = func.send("Counting: ")
     print(num)
-    
-    num = func.send("Counting: ")
-    print(num)
-    
-    del func
-    
-    func = solve()
-    func.send(None)
-    
-    for i in range(9):
-        num = func.send("Counting: ")
-        print(num)
+```
 
 * * *
 
@@ -1371,36 +1537,42 @@ description: ""
 模块包含可执行语句及函数定义。这些语句用于初始化模块，且仅在 `import` 语句第一次遇到模块名时执行。
 
 首先创建一个名为 `solve.py` 的文件：
-    
-    
-    def Sum(n):
-        """Calculate the sum of list and return the result"""
-        t = 0;
-        for i in range(len(n)):
-            t += n[i]
-        return t
-    
-    def Fib(n):
-        """Create a list which is the first n terms of the Fibonacci series"""
-        fib = [0, 1]
-        for i in range(2, n):
-            fib.append(fib[i - 1] + fib[i - 2])
-        return fib
+```java
+
+
+def Sum(n):
+    """Calculate the sum of list and return the result"""
+    t = 0;
+    for i in range(len(n)):
+        t += n[i]
+    return t
+
+def Fib(n):
+    """Create a list which is the first n terms of the Fibonacci series"""
+    fib = [0, 1]
+    for i in range(2, n):
+        fib.append(fib[i - 1] + fib[i - 2])
+    return fib
+```
 
 在该文件中，我们定义了 `Sum` 和 `fib` 函数，接下来在另一个 `.py` 文件里导入并使用：
-    
-    
-    from solve import Sum
-    from solve import Fib
-    a = [1, 2, 3, 4]
-    print(Fib(Sum(a)))
+```java
+
+
+from solve import Sum
+from solve import Fib
+a = [1, 2, 3, 4]
+print(Fib(Sum(a)))
+```
 
 也可以一次性导入该模块中所有的函数定义：
-    
-    
-    from solve import *
-    a = [1, 2, 3, 4]
-    print(Fib(Sum(a)))
+```java
+
+
+from solve import *
+a = [1, 2, 3, 4]
+print(Fib(Sum(a)))
+```
 
 * * *
 
@@ -1504,30 +1676,32 @@ description: ""
 > 对象之间相互独立，多个名称（在多个作用域内）可以绑定到同一个对象。 
 
 下面示例引用不同作用域和名称空间，以及 [`global`](&lt;https://docs.python.org/zh-cn/3.9/reference/simple_stmts.html#global&gt;) 和 [`nonlocal`](&lt;https://docs.python.org/zh-cn/3.9/reference/simple_stmts.html#nonlocal&gt;) 会如何影响变量绑定：
-    
-    
-    def solve():
-        def do_local():
-            spam = "local spam"
-    
-        def do_nonlocal():
-            nonlocal spam
-            spam = "nonlocal spam"
-    
-        def do_global():
-            global spam
-            spam = "global spam"
-    
-        spam = "test spam"  # 此处 spam 为 solve() 命名空间下的一个局部变量
-        do_local()
-        print("After local assignment:", spam)  # 调用 do_local() 修改 spam 会隐性的视为 do_local() 的局部变量
-        do_nonlocal()
-        print("After nonlocal assignment:", spam)  # 此处 spam 被 nonlocal 修饰，会绑定之前在最近的包含作用域中绑定的除全局变量以外的变量，即其绑定到了 solve() 命名空间下的 spam
-        do_global()
-        print("After global assignment:", spam)  # 此处 spam 被 global 修饰，即此处的 spam 为全局变量，位置在 solve 之外的全局区
-    
-    solve()
-    print("In global scope:", spam)
+```java
+
+
+def solve():
+    def do_local():
+        spam = "local spam"
+
+    def do_nonlocal():
+        nonlocal spam
+        spam = "nonlocal spam"
+
+    def do_global():
+        global spam
+        spam = "global spam"
+
+    spam = "test spam"  # 此处 spam 为 solve() 命名空间下的一个局部变量
+    do_local()
+    print("After local assignment:", spam)  # 调用 do_local() 修改 spam 会隐性的视为 do_local() 的局部变量
+    do_nonlocal()
+    print("After nonlocal assignment:", spam)  # 此处 spam 被 nonlocal 修饰，会绑定之前在最近的包含作用域中绑定的除全局变量以外的变量，即其绑定到了 solve() 命名空间下的 spam
+    do_global()
+    print("After global assignment:", spam)  # 此处 spam 被 global 修饰，即此处的 spam 为全局变量，位置在 solve 之外的全局区
+
+solve()
+print("In global scope:", spam)
+```
 
 * * *
 
@@ -1536,10 +1710,12 @@ description: ""
 * * *
 
 使用 `class` 关键字定义一个类：
-    
-    
-    class ClassName:
-        """This is a Class"""
+```java
+
+
+class ClassName:
+    """This is a Class"""
+```
 
 类定义与函数定义 ([`def`](&lt;https://docs.python.org/zh-cn/3.9/reference/compound_stmts.html#def&gt;) 语句) 一样必须被执行才会起作用，支持文档字符串。
 
@@ -1559,68 +1735,78 @@ description: ""
 
 
 属性引用使用 `Python` 中所有属性引用所使用的标准语法: `obj.name`。 有效的属性名称是类对象被创建时存在于类命名空间中的所有名称。 因此，如果类定义是这样的:
-    
-    
-    class MyClass:
-        """A simple example class"""
-        i = 114514
-    
-        def f(self):
-            print("Lys is a dog.")
+```java
+
+
+class MyClass:
+    """A simple example class"""
+    i = 114514
+
+    def f(self):
+        print("Lys is a dog.")
+```
 
 那么 `MyClass.i` 和 `MyClass.f()` 就是有效的属性引用，将分别返回一个整数和一个函数对象。 类属性也可以被赋值，因此可以通过赋值来更改 `MyClass.i` 的值。 `__doc__` 也是一个有效的属性，将返回所属类的文档字符串: `"A simple example class"`。
 
 类的实例化使用函数表示法。 可以把类对象视为是返回该类的一个新实例的不带参数的函数：
-    
-    
-    class MyClass:
-        """A simple example class"""
-        i = 114514
-    
-        def f(self):
-            print("Lys is a dog.")
-    
-    x = MyClass()  # 获得一个类的实例
+```java
+
+
+class MyClass:
+    """A simple example class"""
+    i = 114514
+
+    def f(self):
+        print("Lys is a dog.")
+
+x = MyClass()  # 获得一个类的实例
+```
 
 创建类的新实例并将此对象分配给局部变量 `x`。
 
 实例化操作（“调用”类对象）会创建一个空对象。 许多类喜欢创建带有特定初始状态的自定义实例。 为此类定义可能包含一个名为 [`__init__()`](&lt;https://docs.python.org/zh-cn/3.9/reference/datamodel.html#object.__init__&gt;) 的特殊方法，就像这样:
-    
-    
-    def __init__(self):
-        self.data = []
+```java
+
+
+def __init__(self):
+    self.data = []
+```
 
 当一个类定义了 [`__init__()`](&lt;https://docs.python.org/zh-cn/3.9/reference/datamodel.html#object.__init__&gt;) 方法时，类的实例化操作会自动为新创建的类实例发起调用 [`__init__()`](&lt;https://docs.python.org/zh-cn/3.9/reference/datamodel.html#object.__init__&gt;)。 因此在这个示例中，可以通过以下语句获得一个经初始化的新实例：
-    
-    
-    class MyClass:
-        """A simple example class"""
-    
-        def __init__(self):
-            self.i = 1919
-    
-        def f(self):
-            print("Lys is a dog.")
-    
-    x = MyClass()  # 获得一个经过初始化的实例，其中 x.i = 1919
+```java
+
+
+class MyClass:
+    """A simple example class"""
+
+    def __init__(self):
+        self.i = 1919
+
+    def f(self):
+        print("Lys is a dog.")
+
+x = MyClass()  # 获得一个经过初始化的实例，其中 x.i = 1919
+```
 
 当然，[`__init__()`](&lt;https://docs.python.org/zh-cn/3.9/reference/datamodel.html#object.__init__&gt;) 方法还可以有额外参数以实现更高灵活性。 在这种情况下，提供给类实例化运算符的参数将被传递给 [`__init__()`](&lt;https://docs.python.org/zh-cn/3.9/reference/datamodel.html#object.__init__&gt;)，如：
-    
-    
-    class MyClass:
-        """A simple example class"""
-    
-        def __init__(self, num1, num2):
-            self.i = num1
-            self.j = num2
-    
-        def f(self):
-            print("Lys is a dog.")
-    
-    x = MyClass(114514, 1919)
-    
-    x.f()
-    print(x.i, x.j)
+```java
+
+
+class MyClass:
+    """A simple example class"""
+
+    def __init__(self, num1, num2):
+        self.i = num1
+        self.j = num2
+
+    def f(self):
+        print("Lys is a dog.")
+
+x = MyClass(114514, 1919)
+
+x.f()
+print(x.i, x.j)
+```
 
 **注意** ：在我们执行 `x = MyClass()`，生成了一个实例对象 `x`，这个实例对象有两种有效的属性名称：
 
@@ -1628,24 +1814,26 @@ description: ""
   * 方法
 
 
-    
-    
-    class MyClass:
-        def __init__(self):
-            i = 114514
-    
-        i = 1919
-    
-        def hello(self):
-            return "Hello world"
-    
-    print(MyClass.i)
-    print(MyClass.hello)
-    
-    x = MyClass()
-    print(x.i)
-    print(x.hello)
-    print(x.hello())
+```java
+
+
+class MyClass:
+    def __init__(self):
+        i = 114514
+
+    i = 1919
+
+    def hello(self):
+        return "Hello world"
+
+print(MyClass.i)
+print(MyClass.hello)
+
+x = MyClass()
+print(x.i)
+print(x.hello)
+print(x.hello())
+```
 
   * `MyClass.i` 是类变量，它的值可以通过类名直接访问，它的值在所有实例之间共享。
   * `MyClass.hello` 是类方法，这是一个可调用的对象，但需要通过实例调用，而不是直接通过类名调用，直接调用返回该方法的地址。
@@ -1666,82 +1854,90 @@ description: ""
 * * *
 
 和 `C++` 等支持面向对象的语言一样，`Python` 的类也支持继承，其派生类定义语法如下：
-    
-    
-    class DerivedClassName(BaseClassName):
-        """This is a derived class"""
+```java
+
+
+class DerivedClassName(BaseClassName):
+    """This is a derived class"""
+```
 
 名称 `BaseClassName` 必须定义于包含派生类定义的作用域中。 
 
 子类不声明新属性将全部继承父类属性和方法：
-    
-    
-    class Father:
-        """This is father class."""
-        def __init__(self):
-            self.i = 114514
-            self.j = 1919
-    
-        def show(self, num):
-            print(f"{self.__doc__}: {num}")
-    
-    class Son(Father):
-        """This is son class"""
-    
-    x = Father()
-    x.show(x.i)
-    
-    y = Son()
-    y.show(y.i)  # 子类继承了父类全部属性和方法
+```java
+
+
+class Father:
+    """This is father class."""
+    def __init__(self):
+        self.i = 114514
+        self.j = 1919
+
+    def show(self, num):
+        print(f"{self.__doc__}: {num}")
+
+class Son(Father):
+    """This is son class"""
+
+x = Father()
+x.show(x.i)
+
+y = Son()
+y.show(y.i)  # 子类继承了父类全部属性和方法
+```
 
 子类声明新属性，父类属性不继承，但可以直接调用父类方法：
-    
-    
-    class Father:
-        """This is father class."""
-        def __init__(self):
-            self.i = 114514
-            self.j = 1919
-    
-        def show(self, num):
-            print(f"{self.__doc__}: {num}")
-    
-    class Son(Father):
-        """This is son class"""
-        def __init__(self):
-            self.k = 1145141919
-    
-    x = Father()
-    x.show(x.i)
-    
-    y = Son()
-    # y.show(y.i)  # 不再继承父类属性
-    y.show(y.k)  # 但仍继承父类方法
+```java
+
+
+class Father:
+    """This is father class."""
+    def __init__(self):
+        self.i = 114514
+        self.j = 1919
+
+    def show(self, num):
+        print(f"{self.__doc__}: {num}")
+
+class Son(Father):
+    """This is son class"""
+    def __init__(self):
+        self.k = 1145141919
+
+x = Father()
+x.show(x.i)
+
+y = Son()
+# y.show(y.i)  # 不再继承父类属性
+y.show(y.k)  # 但仍继承父类方法
+```
 
 若仍要保留父类属性，可再次初始化父类属性：
-    
-    
-    class Father:
-        """This is father class."""
-        def __init__(self):
-            self.i = 114514
-            self.j = 1919
-    
-        def show(self, num):
-            print(f"{self.__doc__}: {num}")
-    
-    class Son(Father):
-        """This is son class"""
-        def __init__(self):
-            Father.__init__(self)  # 调用父类的初始化属性
-            self.k = 1145141919
-    
-    x = Father()
-    x.show(x.i)
-    
-    y = Son()
-    y.show(y.i)  # 重新继承了父类属性
-    y.show(y.k)  # 仍继承父类方法
+```java
+
+
+class Father:
+    """This is father class."""
+    def __init__(self):
+        self.i = 114514
+        self.j = 1919
+
+    def show(self, num):
+        print(f"{self.__doc__}: {num}")
+
+class Son(Father):
+    """This is son class"""
+    def __init__(self):
+        Father.__init__(self)  # 调用父类的初始化属性
+        self.k = 1145141919
+
+x = Father()
+x.show(x.i)
+
+y = Son()
+y.show(y.i)  # 重新继承了父类属性
+y.show(y.k)  # 仍继承父类方法
+```
 
 * * *
 
@@ -1750,51 +1946,55 @@ description: ""
 * * *
 
 `Python` 也支持一种多重继承。 带有多个基类的类定义语句如下所示：
-    
-    
-    class DerivedClassName(Base1, Base2, Base3):
-        """This is a multiple derived class"""
+```java
+
+
+class DerivedClassName(Base1, Base2, Base3):
+    """This is a multiple derived class"""
+```
 
 注意，多重继承需要子类调用基类的 `__init__` 方法，否则只继承第一个基类的属性：
-    
-    
-    class Father:
-        """This is father class."""
-        def __init__(self):
-            self.i = 114514
-    
-    class Mother:
-        """This is mother class."""
-        def __init__(self):
-            self.j = 1919
-    
-    class Son(Father, Mother):
-        """This is son class"""
-    
-    x = Son()
-    print(x.i)
-    # print(x.j)  # 缺少调用父类的 __init__ 方法的情况下，j 属性未定义。
-    
-    
-    class Father:
-        """This is father class."""
-        def __init__(self):
-            self.i = 114514
-    
-    class Mother:
-        """This is mother class."""
-        def __init__(self):
-            self.j = 1919
-    
-    class Son(Father, Mother):
-        """This is son class"""
-        def __init__(self):  # 调用基类的 __init__ 方法
-            Father.__init__(self)
-            Mother.__init__(self)
-    
-    x = Son()
-    print(x.i)
-    print(x.j)
+```java
+
+
+class Father:
+    """This is father class."""
+    def __init__(self):
+        self.i = 114514
+
+class Mother:
+    """This is mother class."""
+    def __init__(self):
+        self.j = 1919
+
+class Son(Father, Mother):
+    """This is son class"""
+
+x = Son()
+print(x.i)
+# print(x.j)  # 缺少调用父类的 __init__ 方法的情况下，j 属性未定义。
+
+
+class Father:
+    """This is father class."""
+    def __init__(self):
+        self.i = 114514
+
+class Mother:
+    """This is mother class."""
+    def __init__(self):
+        self.j = 1919
+
+class Son(Father, Mother):
+    """This is son class"""
+    def __init__(self):  # 调用基类的 __init__ 方法
+        Father.__init__(self)
+        Mother.__init__(self)
+
+x = Son()
+print(x.i)
+print(x.j)
+```
 
 在一般情况下，搜索从父类所继承属性的操作是深度优先、从左至右的，当层次结构中存在重叠时不会在同一个类中搜索两次。 因此，如果某一属性在 `DerivedClassName` 中未找到，则会到 `Base1` 中搜索它，然后（递归地）到 `Base1` 的基类中搜索，如果在那里未找到，再到 `Base2` 中搜索，依此类推。
 
@@ -1811,23 +2011,25 @@ description: ""
 任何形式为 `__spam` 的标识符（至少带有两个前缀下划线，至多一个后缀下划线）的文本将被替换为 `_classname__spam`，其中 `classname` 为去除了前缀下划线的当前类名称。这种改写不考虑标识符的句法位置，只要它出现在类定义内部就会进行。
 
 直观地，这些被改写的名称不会被子类继承，有助于让子类重载方法而不破坏类内方法调用：
-    
-    
-    class Father:
-        """This is father class."""
-        def __init__(self):
-            self.i = 114514
-            self.__j = 1919
-    
-        def show(self, num):
-            print(f"{self.__doc__}: {num}")
-    
-    class Son(Father):
-        """This is son class"""
-    
-    y = Son()
-    y.show(y.i)  # 子类继承了 i
-    # y.show(y.j)  # 没有继承 j
+```java
+
+
+class Father:
+    """This is father class."""
+    def __init__(self):
+        self.i = 114514
+        self.__j = 1919
+
+    def show(self, num):
+        print(f"{self.__doc__}: {num}")
+
+class Son(Father):
+    """This is son class"""
+
+y = Son()
+y.show(y.i)  # 子类继承了 i
+# y.show(y.j)  # 没有继承 j
+```
 
 * * *
 
@@ -1846,12 +2048,14 @@ description: ""
 #### `__doc__`
 
 表示类的描述信息：
-    
-    
-    class solve:
-        """This is a class."""
-    
-    print(solve.__doc__)
+```java
+
+
+class solve:
+    """This is a class."""
+
+print(solve.__doc__)
+```
 
 * * *
 
@@ -1861,14 +2065,16 @@ description: ""
   * `__class__` 表示当前操作的对象所在的类。
 
 
-    
-    
-    class solve:
-        """This is a class."""
-    
-    x = solve()
-    print(x.__module__)
-    print(x.__class__)
+```java
+
+
+class solve:
+    """This is a class."""
+
+x = solve()
+print(x.__module__)
+print(x.__class__)
+```
 
 * * *
 
@@ -1893,14 +2099,16 @@ description: ""
 #### `__del__`
 
 `__new__` 和 `__init__` 是对象的构造器， `__del__` 是对象的销毁器，在实例将被销毁时调用。 如果一个基类具有 `__del__()` 方法，则其所派生的类如果也有 `__del__()` 方法，就必须显式地调用它以确保实例基类部分的正确清除。
-    
-    
-    class solve:
-        """This is a class."""
-        def __del__(self):
-            print("Class __del__() is called.")
-    
-    x = solve()
+```java
+
+
+class solve:
+    """This is a class."""
+    def __del__(self):
+        print("Class __del__() is called.")
+
+x = solve()
+```
 
 一般情况下无需显示调用 `__del__` ，由解释器在进行垃圾回收时自动触发执行的。
 
@@ -1928,33 +2136,35 @@ description: ""
 `__ge__(self, other)` | 定义大于等于符号的行为 `>=`  
   
 创建一个自定义的 `str` 类，其中排序不再按照字典序，而是按照去掉空格的字符串的长度排序：
-    
-    
-    class String(str):
-        """This is a string class."""
-    
-        def __new__(cls, string):
-            new_string = ""
-            for i in string:
-                if i != ' ':
-                    new_string += i
-            return str.__new__(cls, new_string)
-    
-        def __gt__(self, other):
-            return len(self) > len(other)
-    
-        def __lt__(self, other):
-            return len(self) < len(other)
-    
-    x = String("abc def")
-    y = String("114 514 1919")
-    
-    if x.__gt__(y):
-        print(f"True length {x} is longer than {y}.")
-    elif x.__lt__(y):
-        print(f"True length {x} is shorter than {y}.")
-    else:
-        print(f"True length {x} is equal to {y}.")
+```java
+
+
+class String(str):
+    """This is a string class."""
+
+    def __new__(cls, string):
+        new_string = ""
+        for i in string:
+            if i != ' ':
+                new_string += i
+        return str.__new__(cls, new_string)
+
+    def __gt__(self, other):
+        return len(self) > len(other)
+
+    def __lt__(self, other):
+        return len(self) < len(other)
+
+x = String("abc def")
+y = String("114 514 1919")
+
+if x.__gt__(y):
+    print(f"True length {x} is longer than {y}.")
+elif x.__lt__(y):
+    print(f"True length {x} is shorter than {y}.")
+else:
+    print(f"True length {x} is equal to {y}.")
+```
 
 * * *
 
