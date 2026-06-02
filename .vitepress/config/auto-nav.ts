@@ -19,38 +19,34 @@ interface MarkdownFile {
   path: string
 }
 
-// 递归获取 .md 文件（排除 index.md）
-function getMarkdownFiles(dir: string, basePath: string = ''): MarkdownFile[] {
+// 获取指定目录下的 .md 文件（不递归，排除 index.md）
+function getMarkdownFiles(dir: string): MarkdownFile[] {
   const files: MarkdownFile[] = []
   if (!fs.existsSync(dir)) return files
   
   for (const f of fs.readdirSync(dir)) {
     const fullPath = path.join(dir, f)
-    const relativePath = basePath ? `${basePath}/${f}` : f
+    if (fs.statSync(fullPath).isDirectory()) continue
+    if (!f.endsWith('.md') || f === 'index.md') continue
     
-    if (fs.statSync(fullPath).isDirectory()) {
-      files.push(...getMarkdownFiles(fullPath, relativePath))
-    } else if (f.endsWith('.md') && f !== 'index.md') {
-      try {
-        const content = fs.readFileSync(fullPath, 'utf-8')
-        const { data } = matter(content)
-        const name = f.replace('.md', '')
-        files.push({
-          name,
-          title: data.title || name,
-          date: data.date ? new Date(data.date) : new Date(0),
-          path: relativePath.replace('.md', '')
-        })
-      } catch {
-        // 解析失败时使用文件名
-        const name = f.replace('.md', '')
-        files.push({
-          name,
-          title: name,
-          date: new Date(0),
-          path: relativePath.replace('.md', '')
-        })
-      }
+    try {
+      const content = fs.readFileSync(fullPath, 'utf-8')
+      const { data } = matter(content)
+      const name = f.replace('.md', '')
+      files.push({
+        name,
+        title: data.title || name,
+        date: data.date ? new Date(data.date) : new Date(0),
+        path: name
+      })
+    } catch {
+      const name = f.replace('.md', '')
+      files.push({
+        name,
+        title: name,
+        date: new Date(0),
+        path: name
+      })
     }
   }
   return files
@@ -68,7 +64,7 @@ export function generateNav(): DefaultTheme.NavItem[] {
              d !== '.vitepress' &&
              !d.startsWith('.')
     })
-    .sort() // 按字母排序：AI, History, Life
+    .sort()
   
   return dirs.map(dir => ({
     text: SECTION_MAP[dir] || dir,
@@ -94,7 +90,7 @@ export function generateSidebar(): DefaultTheme.Sidebar {
   for (const firstDir of firstLevelDirs) {
     const firstPath = path.join(docsDir, firstDir)
     
-    // 检查是否有二级目录
+    // 获取二级目录
     const secondLevelDirs = fs.readdirSync(firstPath)
       .filter(d => {
         const fullPath = path.join(firstPath, d)
@@ -102,7 +98,7 @@ export function generateSidebar(): DefaultTheme.Sidebar {
       })
       .sort()
     
-    // 检查一级目录下是否有 .md 文件（不包括 index.md）
+    // 获取一级目录下的直接 .md 文件
     const directFiles = getMarkdownFiles(firstPath)
       .sort((a, b) => b.date.getTime() - a.date.getTime())
     
@@ -120,13 +116,13 @@ export function generateSidebar(): DefaultTheme.Sidebar {
           collapsed: false,
           items: files.map(f => ({
             text: f.title,
-            link: `/${firstDir}/${f.path}`
+            link: `/${firstDir}/${secondDir}/${f.path}`
           }))
         })
       }
     }
     
-    // 添加一级目录下的直接文件
+    // 添加一级目录下的直接文件（不包括在子目录中的文件）
     if (directFiles.length > 0) {
       items.push({
         text: '文章',
