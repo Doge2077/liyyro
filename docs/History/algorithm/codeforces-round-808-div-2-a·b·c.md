@@ -5,27 +5,31 @@ categories: [ALGORITHM, Q&amp;A, 数学, Codeforces, 贪心]
 description: ""
 ---
 
-* * *
+---
 
 ## A. Difference Operations
 
-* * *
+---
 
 ### 原题链接
 
 [Origional Link](&lt;https://codeforces.com/contest/1708/problem/A&gt;)
 
-* * *
+---
 
 ### 思想
 
-  * 若$a_i(i>=2)$可以通过$$
+* 若$a_i(i>=2)$可以通过
+
+$$
 a_i=a_i-a_{i-1}
 $$变为$0$
   * 说明：$$
 a_{i-1}|a_i
 $$
-  * 若$$
+* 若
+
+$$
 a_{i-1}(i>=2)
 $$可以通过$$
 a_{i-1}=a_{i-1}-a_{i-2}
@@ -38,7 +42,7 @@ $$
 
 
 
-* * *
+---
 
 ### 代码
 ```java
@@ -90,17 +94,17 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## B. Difference of GCDs
 
-* * *
+---
 
 ### 原题链接
 
 [Origional Link](&lt;https://codeforces.com/contest/1708/problem/B&gt;)
 
-* * *
+---
 
 ### 思想
 
@@ -111,11 +115,11 @@ int main(){
 
 
 
-* * *
+---
 
 ### 代码
 
-* * *
+---
 ```java
 
 
@@ -167,17 +171,17 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## C. Doremy's IQ
 
-* * *
+---
 
 ### 原题链接
 
 [Origional Link](&lt;https://codeforces.com/contest/1708/problem/C&gt;)
 
-* * *
+---
 
 ### 思想
 
@@ -191,7 +195,7 @@ int main(){
 
 
 
-* * *
+---
 
 ### 代码
 ```java
@@ -245,7 +249,7 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## 后记
 

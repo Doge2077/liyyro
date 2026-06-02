@@ -5,15 +5,15 @@ categories: [ALGORITHM, Q&amp;A]
 description: ""
 ---
 
-* * *
+---
 
 ## A 4497. 分糖果
 
-* * *
+---
 
 ### 描述
 
-* * *
+---
 
 [原题链接](&lt;https://www.acwing.com/problem/content/4500/&gt;)
 
@@ -50,7 +50,7 @@ description: ""
 51
 ```
 
-* * *
+---
 
 ### 思想
 
@@ -102,7 +102,7 @@ vector&lt;int&gt; div(vector&lt;int&gt; &A,int b,int &r){
 }
 ```
 
-* * *
+---
 
 ### 代码
 ```java
@@ -185,15 +185,15 @@ int main(){
 
 ```
 
-* * *
+---
 
 ## B 4498. 指针
 
-* * *
+---
 
 ### 描述
 
-* * *
+---
 
 [原题链接](&lt;https://www.acwing.com/problem/content/4501/&gt;)
 
@@ -266,7 +266,7 @@ NO
 YES
 ```
 
-* * *
+---
 
 ### 思想
 
@@ -276,7 +276,7 @@ YES
 
 
 
-* * *
+---
 
 ### 代码
 ```java
@@ -323,15 +323,15 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## C 4499. 画圆
 
-* * *
+---
 
 ### 描述
 
-* * *
+---
 
 [原题链接](&lt;https://www.acwing.com/problem/content/4502/&gt;)
 
@@ -377,11 +377,11 @@ int main(){
 5.000000 5.000000 10.000000
 ```
 
-* * *
+---
 
 ### 思想
 
-* * *
+---
 
   * 分析题目可知： 
 ```java
@@ -392,7 +392,7 @@ int main(){
 
 
 
-* * *
+---
 
 ### 代码
 ```java

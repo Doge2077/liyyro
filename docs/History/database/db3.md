@@ -7,7 +7,7 @@ description: ""
 
 ## 3.0 参考资料
 
-* * *
+---
 
   * [白马程序员JavaWeb [已授权]](&lt;https://www.bilibili.com/video/BV1CL4y1i7qR/?spm_id_from=333.999.0.0&vd_source=ce95ad6607d316dd76f87b90ab69fa3f&gt;)
   * [菜鸟教程 SQL教程](&lt;https://www.runoob.com/sql/sql-tutorial.html&gt;)
@@ -15,15 +15,15 @@ description: ""
 
 
 
-* * *
+---
 
 ## 3.1 SQL 简介
 
-* * *
+---
 
 ### 3.1.1 SQL 概念及特点
 
-* * *
+---
 
 **基本概念** ：
 
@@ -44,11 +44,11 @@ description: ""
 
 
 
-* * *
+---
 
 ### 3.1.2 SQL 语言的类型
 
-* * *
+---
 
   * 数据查询语言（DQL，Data Query Language）：基本结构是由SELECT子句，FROM子句，WHERE子句组成的查询块。
   * 数据操纵语言（DML，Data Manipulation Language）：是SQL语言中，负责对数据库对象运行数据访问工作的指令集，以INSERT、UPDATE、DELETE三种指令为核心，分别代表插入、更新与删除，是开发以数据为中心的应用程序必定会使用到的指令。
@@ -59,11 +59,11 @@ description: ""
 
 我们平时所说的CRUD其实就是增删改查（Create/Retrieve/Update/Delete）
 
-* * *
+---
 
 ### 3.1.3 SQL 基本约定
 
-* * *
+---
 
 **SQL大小写不敏感** ：
 
@@ -95,11 +95,11 @@ description: ""
 
 
 
-* * *
+---
 
 ### 3.1.4 MySQL 简介
 
-* * *
+---
 
   * `MySQL` 为关系型数据库系统（Relational Database Management System）
   * `MySQL` 支持大型的数据库。可以处理拥有上千万条记录的大型数据库。
@@ -108,23 +108,23 @@ description: ""
 
 
 
-* * *
+---
 
 ## 3.2 基础语法
 
-* * *
+---
 
 本节讲解 `SQL` 基础语法，具体语法示例则利用 `MySQL` 演示。
 
-* * *
+---
 
 ### 3.2.1 数据库定义语言（DDL）
 
-* * *
+---
 
 #### 数据库操作
 
-* * *
+---
 
 通过 `CREATE DATABASE` 来创建一个数据库：
 ```java
@@ -175,11 +175,11 @@ SET NAMES utf8mb4;
 SHOW VARIABLES LIKE 'character_set%';
 ```
 
-* * *
+---
 
 #### SQL数据类型
 
-* * *
+---
 
 以下的数据类型用于字符串存储：
 
@@ -207,11 +207,11 @@ SHOW VARIABLES LIKE 'character_set%';
 
 
 
-* * *
+---
 
 #### 创建表
 
-* * *
+---
 
 数据库创建完成后，我们一般通过 `CREATE TALBE` 语句来创建一张表：
 ```java
@@ -225,11 +225,11 @@ CREATE TABLE 表名(
 )
 ```
 
-* * *
+---
 
 #### 创建索引
 
-* * *
+---
 
 在数据量变得非常庞大时，通过创建索引，能够大大提高的查询效率：
 ```java
@@ -266,11 +266,11 @@ CREATE INDEX sc_idx ON sc (Grade);
 
 
 
-* * *
+---
 
 #### 列级约束条件
 
-* * *
+---
 
 列级约束有六种：
 
@@ -283,11 +283,11 @@ CREATE INDEX sc_idx ON sc (Grade);
 
 
 
-* * *
+---
 
 #### 表级约束条件
 
-* * *
+---
 
 表级约束有四种：主键、外键、唯一、检查
 
@@ -314,11 +314,11 @@ CREATE TABLE Course (
 )ENGINE=INNODB DEFAULT CHARSET=utf8;  # ENGINE 设置存储引擎，CHARSET 设置字符集
 ```
 
-* * *
+---
 
 #### 修改表
 
-* * *
+---
 
 如果我们想修改表结构，我们可以通过 `ALTER TABLE` 来进行修改：
 ```java
@@ -358,11 +358,11 @@ ALTER TABLE Course
 DROP Ctype;
 ```
 
-* * *
+---
 
 #### 删除表
 
-* * *
+---
 
 我们可以通过`drop table`来删除一个表：
 ```java
@@ -382,15 +382,15 @@ DROP TABLE 表名[RESTRICT|CASCADE]
 DROP TABLE Course;
 ```
 
-* * *
+---
 
 ### 3.2.2 数据库操纵语言（DML）
 
-* * *
+---
 
 #### 插入数据
 
-* * *
+---
 
 使用 `INSERT INTO` 语句来向数据库中插入一条数据（一条记录）：
 ```java
@@ -428,11 +428,11 @@ Sno | Cno | Grade
 INSERT INTO SC(Sno, Cno, Grade) VALUES(200215122, 2, 90);
 ```
 
-* * *
+---
 
 #### 修改数据
 
-* * *
+---
 
 我们可以通过 `UPDATE` 语句来更新表中的数据：
 ```java
@@ -450,11 +450,11 @@ UPDATE 表名 SET 列名=值,... WHERE 条件
 UPDATE Course SET Ccredit=4 WHERE Cno='2';
 ```
 
-* * *
+---
 
 #### 删除数据
 
-* * *
+---
 
 我们可以通过使用 `DELETE` 来删除表中的数据：
 ```java
@@ -479,15 +479,15 @@ DELETE FROM 表名 WHERE 条件
 DELETE FROM Course WHERE Cno='2';
 ```
 
-* * *
+---
 
 ### 3.2.3 数据库查询语言（DQL）
 
-* * *
+---
 
 #### 单表查询
 
-* * *
+---
 
 单使用 `SELECT` 语句来进行单表查询：
 ```java
@@ -522,11 +522,11 @@ SELECT * FROM 表名 WHERE 条件
 SELECT * FROM SC WHERE Grade > 90;
 ```
 
-* * *
+---
 
 #### 常用查询条件
 
-* * *
+---
 
   * 一般的比较运算符，包括 `=`、`>`、`<`、`>=`、`<=`、`!=` 等，其中 `!=` 也可以用 `<>` 表示；
   * 是否在集合中：`IN`、`NOT IN`；
@@ -544,11 +544,11 @@ SELECT * FROM SC WHERE Grade > 90;
 SELECT Sno FROM Student WHERE Sname LIKE '_雨%' OR Sname LIKE '_玉%'; 
 ```
 
-* * *
+---
 
 #### 排序查询
 
-* * *
+---
 
 通过 `ORDER BY` 来将查询结果进行排序：
 ```java
@@ -577,11 +577,11 @@ SELECT * FROM 表名 WHERE 条件 ORDER BY 列名1 ASC|DESC, 列名2 ASC|DESC
 SELECT * FROM SC WHERE Grade > 90 ORDER BY Grade DESC;
 ```
 
-* * *
+---
 
 #### 聚集函数
 
-* * *
+---
 
 聚集函数一般用作统计，包括：
 
@@ -612,11 +612,11 @@ FROM SC
 WHERE Cno = '2';
 ```
 
-* * *
+---
 
 #### 分组和分页查询
 
-* * *
+---
 
 通过 `GROUP BY` 来对查询结果进行分组，需结合聚合函数一起使用：
 ```java
@@ -658,11 +658,11 @@ GROUP BY Sno
 HAVING SUM(Grade) > 200;
 ```
 
-* * *
+---
 
 #### 外连接查询
 
-* * *
+---
 
 在 `SQL` 中，支持以下连接查询：
 
@@ -693,11 +693,11 @@ LEFT JOIN SC
 ON Student.Sno = SC.Sno;
 ```
 
-* * *
+---
 
 #### 自身连接查询
 
-* * *
+---
 
 除上述连接查询外，`MySQL` 还支持自身连接查询。
 
@@ -708,11 +708,11 @@ ON Student.Sno = SC.Sno;
 SELECT * FROM 表名 别名1, 表名 别名2
 ```
 
-* * *
+---
 
 #### 嵌套查询
 
-* * *
+---
 
 将查询的结果作为另一个查询的条件，比如：
 ```java
@@ -721,15 +721,15 @@ SELECT * FROM 表名 别名1, 表名 别名2
 SELECT * FROM 表名 WHERE 列名 = (SELECT 列名 FROM 表名 WHERE 条件)
 ```
 
-* * *
+---
 
 ### 3.2.4 数据库控制语言（DCL）
 
-* * *
+---
 
 #### 创建用户
 
-* * *
+---
 
 通过 `CREATER USER` 来创建用户：
 ```java
@@ -761,11 +761,11 @@ CREATE USER 'LYS' IDENTIFIED BY '1145141919';
 CREATE USER 'LYS'@'114.114.19.19' IDENTIFIED BY '514180';
 ```
 
-* * *
+---
 
 #### 登陆用户
 
-* * *
+---
 
 通过 `cmd` 去登陆 `mysql`：
 ```java
@@ -783,11 +783,11 @@ SHOW DATABASES;
 
 虽然此用户能够成功登录，但是并不能查看完整的数据库列表，这是因为**此用户还没有权限** ！
 
-* * *
+---
 
 #### 用户授权
 
-* * *
+---
 
 我们可以通过 `root` 用户使用 `grant` 来为一个数据库用户进行授权：
 ```java
@@ -817,15 +817,15 @@ GRANT ALL ON * TO 'LYS' WITH GRANT OPTION;  #给 LYS 用户授权所有数据库
 REVOKE ALL ON * FROM 'LYS';  # 收回 LYS 的全部权限QAQ
 ```
 
-* * *
+---
 
 ### 3.2.5 视图
 
-* * *
+---
 
 #### 视图的本质
 
-* * *
+---
 
   * 可以视数据库为一个大楼，里面的房间视为表，房间里的人就是一个个具体的数据；
   * 那么视图相当于在这个房间上面开了一个“窗口”能够根据用户的需要来查看数据；
@@ -834,11 +834,11 @@ REVOKE ALL ON * FROM 'LYS';  # 收回 LYS 的全部权限QAQ
 
 
 
-* * *
+---
 
 #### 创建视图
 
-* * *
+---
 
 通过 `CREATE VIEW` 来创建视图;
 ```java
@@ -861,11 +861,11 @@ CREATE VIEW 视图名称(列名) AS 子查询语句 [WITH CHECK OPTION];
 
 
 
-* * *
+---
 
 #### 删除视图
 
-* * *
+---
 
 通过 `DROP` 来删除一个视图：
 ```java
@@ -874,11 +874,11 @@ CREATE VIEW 视图名称(列名) AS 子查询语句 [WITH CHECK OPTION];
 DROP VIEW 视图名称
 ```
 
-* * *
+---
 
 #### 视图示例
 
-* * *
+---
 
 在 `MySQL` 中，建立一个名为 `v_stu_c` 的视图，显示学生的学号、姓名、所学课程的课程编号，并利用视图查询学号为200215122的学生情况。
 ```java
@@ -894,15 +894,15 @@ FROM v_stu_c
 WHERE Sno = '200215122';
 ```
 
-* * *
+---
 
 ### 3.2.6 数据库完整性
 
-* * *
+---
 
 #### 触发器
 
-* * *
+---
 
 在某种条件下会**自动触发** ，在 `SELECT`/`UPDATE`/`DELETE` 时，会自动执行我们预先设定的内容，触发器通常用于检查内容的安全性，相比直接添加约束，触发器显得更加灵活。
 
@@ -937,11 +937,11 @@ SHOW TRIGGERS
 DROP TRIGGER 触发器名称
 ```
 
-* * *
+---
 
 #### 事务
 
-* * *
+---
 
 **概念** ：
 
@@ -999,4 +999,4 @@ COMMIT;  # 提交事务
 # 一旦提交，就无法再进行回滚了！
 ```
 
-* * *
+---

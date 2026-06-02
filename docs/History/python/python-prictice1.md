@@ -7,15 +7,15 @@ description: ""
 
 ## 第一次练习
 
-* * *
+---
 
 [下载习题](&lt;https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/01/Python基础练习题一.txt&gt;)
 
-* * *
+---
 
 ## 1\. 姓名
 
-* * *
+---
 ```java
 
 
@@ -24,11 +24,11 @@ for i in names:
     print(i)
 ```
 
-* * *
+---
 
 ## 2\. 问候
 
-* * *
+---
 ```java
 
 
@@ -37,11 +37,11 @@ for i in names:
     print(f"hello,{i}!")
 ```
 
-* * *
+---
 
 ## 3\. 嘉宾名单
 
-* * *
+---
 ```java
 
 
@@ -50,11 +50,11 @@ for i in names:
     print(f"Hello,{i}! Would you like to have a dinner for me?")
 ```
 
-* * *
+---
 
 ## 4\. 修改嘉宾名单
 
-* * *
+---
 ```java
 
 
@@ -67,11 +67,11 @@ for i in names:
     print(f"Hello,{i}! Would you like to have a dinner for me?")
 ```
 
-* * *
+---
 
 ## 5\. 添加嘉宾
 
-* * *
+---
 ```java
 
 
@@ -84,11 +84,11 @@ for i in names:
     print(f"Hello,{i}! Would you like to have a dinner for me?")
 ```
 
-* * *
+---
 
 ## 6\. 缩减名单
 
-* * *
+---
 ```java
 
 
@@ -108,11 +108,11 @@ del names[:]
 print(names)
 ```
 
-* * *
+---
 
 ## 7\. 放眼世界
 
-* * *
+---
 ```java
 
 

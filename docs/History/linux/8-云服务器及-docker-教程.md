@@ -66,7 +66,7 @@ sudo apt-get install tmux
 
 如果 `apt-get` 下载软件速度较慢，可以参考[清华大学开源软件镜像站](&lt;https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/&gt;)中的内容，修改软件源。
 
-* * *
+---
 
 ### 8.2 Docker教程
 

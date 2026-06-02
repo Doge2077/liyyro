@@ -7,7 +7,7 @@ description: ""
 
 # 简介
 
-* * *
+---
 
 [Neo4j](&lt;https://neo4j.com/&gt;) 是用 `Java` 实现的开源 `NoSQL` 图数据库。从2003年开始开发，2007年正式发布第一版，其源码托管于 [GitHub](&lt;https://github.com/neo4j/neo4j&gt;)。
 
@@ -15,15 +15,15 @@ description: ""
 
 `Neo4j` 作为图数据库中的代表产品，已经在众多的行业项目中进行了应用，如：网络管理、软件分析、组织和项目管理、社交项目等方面。
 
-* * *
+---
 
 # 安装
 
-* * *
+---
 
 ## Docker 部署
 
-* * *
+---
 
 这里为了便于练习，我将其使用 `Docker` 部署到了我滴云服务器上，参考 [Docker部署](&lt;https://neo4j.com/docs/operations-manual/4.4/docker/&gt;)，其他部署方式[参考](&lt;https://neo4j.com/docs/operations-manual/4.4/&gt;)。
 
@@ -52,11 +52,11 @@ docker run \
 
 然后运行脚本部署即可，`browser` 管理端口为 `7474`。
 
-* * *
+---
 
 ## Browser
 
-* * *
+---
 
 `Browser` 端是 `Neo4j` 提供的一个图形用户界面（GUI）工具，用于管理和操作 `Neo4j` 图数据库。
 
@@ -77,11 +77,11 @@ docker run \
 
 
 
-* * *
+---
 
 ## Cypher-shell
 
-* * *
+---
 
 `Cypher-shell` 是 `Neo4j` 提供的官方命令行工具，用于执行 `Cypher` 语言。
 
@@ -106,11 +106,11 @@ docker exec -it <容器名> cypher-shell -u <用户名> -p <密码>
 :exit
 ```
 
-* * *
+---
 
 # Cypher 基础语法
 
-* * *
+---
 
 `Cypher` 是用于图形数据库 `Neo4j` 的查询语言，它用于在图形数据库中进行数据检索和操作。`Cypher` 的语法简洁而直观，旨在提供一种易于理解和使用的方式来查询和操作图形数据。
 
@@ -121,11 +121,11 @@ docker exec -it <容器名> cypher-shell -u <用户名> -p <密码>
 
 
 
-* * *
+---
 
 ## 数据结构
 
-* * *
+---
 
 在学习 `Cypher` 语法前，首先需要了解 `Neo4j` 数据库的数据结构。
 
@@ -161,11 +161,11 @@ docker exec -it <容器名> cypher-shell -u <用户名> -p <密码>
 
 
 
-* * *
+---
 
 ## 数据库操作
 
-* * *
+---
 
 创建数据库：
 ```java
@@ -213,15 +213,15 @@ STOP DATABASE name;
 
 社区版只能同时运行一个数据库实例，如果存在正在运行的实例则启动失败🤡，想同时管理多个还是用企业版吧（
 
-* * *
+---
 
 ## CREATE
 
-* * *
+---
 
 ### 创建节点
 
-* * *
+---
 
 使用 `CREATE` 命令来创建节点：
 ```java
@@ -267,11 +267,11 @@ CREATE (n:DOG {name: "LYS", age: 14}), (m:CAT {name: "Hiiro", age: 17});
 CREATE (:DOG {name: "LYS", age: 14}), (:CAT {name: "Hiiro", age: 17});
 ```
 
-* * *
+---
 
 ### 创建关系
 
-* * *
+---
 
 创建两个节点的同时创建关系：
 ```java
@@ -303,11 +303,11 @@ CREATE (n:DOG {name: "LYS"}) -[:IN_FAN] -> (i:CAT {name: "Hiiro"}) -[:WORK_FOR]-
 
 **注意** ：在 `Cypher` 中，节点之间的关系在创建后不能修改，想要修改只能删除原有关系再重新创建新的关系。
 
-* * *
+---
 
 ## RETURN
 
-* * *
+---
 
 `RETURN` 语句可以返回 `Cypher` 的执行结果。
 
@@ -335,11 +335,11 @@ RETURN n.name AS LYS_NAME;
 
 更多关于 `RETURN` 的用法将在下文陆续提到。
 
-* * *
+---
 
 ## MATCH
 
-* * *
+---
 
 首先我们导入一些数据用于后面的示例：
 ```java
@@ -350,11 +350,11 @@ CREATE(n:DOG {name: "LYS", age: 14}) -[:LOVER]-> (:BIRD {name: "Astesia", age: 1
 CREATE(:WORKER:DOG {name: "打工人", age: 60}) -[:WORK_FOR]-> (:BOSS:DOG {name: "老板", age: 20}), (:DOG {name: "黑心老板", age: 0}), (:DOG {name: "黑心老板", age: 1}), (:DOG {name: "伤心打工人", age: 520}), (:DOG {name: "快乐打工人", age: 520}) -[:WORK_FOR]-> (:DOG {name: "良心老板", age: 1314});
 ```
 
-* * *
+---
 
 ### 条件查询
 
-* * *
+---
 
 查询所有的节点及其关系：
 ```java
@@ -419,11 +419,11 @@ MATCH(n:DOG {name:"打工人"}) -[r]-> (m:DOG {name: "老板"})
 RETURN type(r);
 ```
 
-* * *
+---
 
 ### 关系深度查询
 
-* * *
+---
 
 > 六度分隔（Six Degrees of Separation）理论。
 > 
@@ -485,11 +485,11 @@ WHERE n.name = "LYS" AND m.name = "ChenRay"
 RETURN path;
 ```
 
-* * *
+---
 
 ### 分页查询
 
-* * *
+---
 
 使用 `SKIP` 和 `LIMIT` 子句来指定要跳过的结果数量和要返回的结果数量：
 ```java
@@ -533,11 +533,11 @@ ORDER BY n.age ASC
 SKIP 2 LIMIT 2;
 ```
 
-* * *
+---
 
 ## SET & REMOVE
 
-* * *
+---
 
 使用 `SET` 和 `REMOVE` 对节点进行标签、属性的更新。
 
@@ -602,11 +602,11 @@ REMOVE n.status, n.money, n:BOSS:STUDENT
 RETURN n;
 ```
 
-* * *
+---
 
 ## DELETE
 
-* * *
+---
 
 删除节点：
 ```java
@@ -647,11 +647,11 @@ MATCH(n)
 DETACH DELETE n;
 ```
 
-* * *
+---
 
 ## 索引
 
-* * *
+---
 
 `Neo4j` 中同样支持索引，创建索引，以提高在大型数据集上对节点和关系进行查找和匹配的速度。
 
@@ -674,11 +674,11 @@ DETACH DELETE n;
 
 此外，`Neo4j` 还提供了全文索引（Full-Text Index）和空间索引（Spatial Index）等特定类型的索引，用于支持全文搜索和地理空间查询。这些特定类型的索引也有其特定的底层实现，这里不再做深究。
 
-* * *
+---
 
 ### 创建索引
 
-* * *
+---
 
 对节点属性创建索引：
 ```java
@@ -698,11 +698,11 @@ CREATE INDEX ON :RELATIONSHIP_TYPE(property)
 
 这将在具有特定关系类型（RELATIONSHIP_TYPE）的关系上创建一个属性（property）的索引。
 
-* * *
+---
 
 ### 索引查询
 
-* * *
+---
 
 对节点属性使用索引：
 ```java
@@ -726,11 +726,11 @@ RETURN r
 
 这将使用关系属性的索引来查找具有特定属性值的关系。
 
-* * *
+---
 
 ### 删除索引
 
-* * *
+---
 
 使用 `DROP INDEX` 删除索引，例如：
 ```java
@@ -741,11 +741,11 @@ DROP INDEX ON :Label(property)
 
 这将删除特定标签（Label）上的属性（property）索引。
 
-* * *
+---
 
 # 官方文档参考
 
-* * *
+---
 
   * [Neo4j 4.4 安装](&lt;https://neo4j.com/docs/operations-manual/4.4/installation/&gt;)
   * [Cypher Manual 4.4](&lt;https://neo4j.com/docs/cypher-manual/4.4/introduction/&gt;)

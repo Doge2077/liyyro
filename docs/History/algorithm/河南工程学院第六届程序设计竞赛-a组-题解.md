@@ -7,7 +7,7 @@ description: ""
 
 ## 远古时期的签到题
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1477&gt;)
 
@@ -224,11 +224,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## 开根
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1478&gt;)
 
@@ -305,11 +305,11 @@ int main()
 }
 ```
 
-* * *
+---
 
 ## 乖乖♂站好
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1479&gt;)
 
@@ -431,11 +431,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## 毒瘤题
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1480&gt;)
 
@@ -509,11 +509,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## LYS 拿 HF 的U盘
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1481&gt;)
 
@@ -660,11 +660,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## 步数
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1482&gt;)
 
@@ -716,8 +716,6 @@ $1 \le n \le 10^6$
 
 ```java
 * 怎么建图
-```
-
 ```java
 * 怎么求树的最长链
 ```
@@ -814,11 +812,11 @@ int main()
 }
 ```
 
-* * *
+---
 
 ## 到达龙湖最美大学
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1483&gt;)
 
@@ -963,11 +961,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## LYS 的小小游戏
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1484&gt;)
 
@@ -1102,11 +1100,11 @@ int main()
 }
 ```
 
-* * *
+---
 
 ## 欧拉幻树
 
-* * *
+---
 
 [原题链接](&lt;http://www.haueacm.top/problem.php?id=1485&gt;)
 

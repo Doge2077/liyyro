@@ -7,11 +7,11 @@ description: ""
 
 # utf8mb4基本介绍
 
-* * *
+---
 
 ## 基本特性
 
-* * *
+---
 
   * utf8mb4是MySQL中一种字符集编码，它可以存储和处理Unicode字符。
 
@@ -20,41 +20,41 @@ description: ""
 
 
 
-* * *
+---
 
 ## 与utf8mb3的区别
 
-* * *
+---
 
 ### 版本上
 
-* * *
+---
 
   * utf8mb4字符集在MySQL的版本5.5.3及之后开始支持。
   * 在此之前的MySQL版本，只支持utf8字符集，即utf8mb3。
 
 
 
-* * *
+---
 
 ### 编码上
 
-* * *
+---
 
   * 在MySQL中，utf8字符集实际上只支持最多3字节的UTF-8编码。这意味着它无法正确存储和处理一些特殊字符，如一些表情符号和一些辅助字符。
   * 为了解决utf8字符集的限制，MySQL引入了utf8mb4字符集。utf8mb4字符集支持最多4字节的UTF-8编码，可以表示更广泛的字符范围，包括一些特殊字符和表情符号。
 
 
 
-* * *
+---
 
 # utf8mb4排序规则
 
-* * *
+---
 
 ## 常见排序规则
 
-* * *
+---
 
   * utf8mb4_general_ci： 
 ```java
@@ -82,11 +82,11 @@ description: ""
 
 除了上述常见的排序规则，MySQL还提供了其他一些排序规则，如utf8mb4_unicode_520_ci、utf8mb4_unicode_520_bin等。这些规则可以根据具体需求选择使用。
 
-* * *
+---
 
 ### 默认排序规则
 
-* * *
+---
 
 当设置表的默认字符集为utf8mb4字符集但未明确指定排序规则时：
 
@@ -97,11 +97,11 @@ description: ""
 
 
 
-* * *
+---
 
 ### 兼容性问题
 
-* * *
+---
 
 由于utf8mb4_0900_ai_ci排序规则时MySQL 8.0引入的排序规则，因此将MySQL 8.0版本的表导入到MySQL 5.7或MySQL 5.6版本时，会存在字符集无法识别的问题。
 
@@ -112,7 +112,7 @@ description: ""
 
 
 
-* * *
+---
 
 ### utf8mb4_unicode_ci和utf8mb4_general_ci对比
 
@@ -130,15 +130,15 @@ description: ""
 
 
 
-* * *
+---
 
 ## 服务器级别排序参数控制
 
-* * *
+---
 
 ### collation_server
 
-* * *
+---
 
   * 在MySQL 5.6版本中引 `collation_server` 作为系统变量，用于指定服务器级别的默认字符集校对规则（collation）。
   * 它定义了**在创建新表时使用的默认字符集校对规则**
@@ -161,11 +161,11 @@ SHOW VARIABLES LIKE 'collation_server';
 
 
 
-* * *
+---
 
 ### 默认参数规则
 
-* * *
+---
 
   * 如果服务启动时未指定参数collation_database的值，则默认继承参数collation_server的值。
   * 如果创建数据库时未指定排序规则，则默认使用参数collation_database的值。

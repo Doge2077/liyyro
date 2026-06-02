@@ -9,15 +9,15 @@ description: ""
 
 该系列的 `GitHub` 仓库：&lt;https://github.com/Doge2077/learn-jvm&gt;
 
-* * *
+---
 
 ## 构建编译环境
 
-* * *
+---
 
 ### 系统准备
 
-* * *
+---
 
 > 在官方文档上要求编译 `OpenJDK` 至少需要 `2～4GB` 的内存空间（CPU核心数越多，需要的内存越大），而且至少要 `6～8GB` 的空闲磁盘空间，不要看 `OpenJDK` 源码的大小只有不到 `600MB`，要完成编译，过程中会产生大量的中间文件，并且编译出不同优化级别（Product、FastDebug、SlowDebug）的 `HotSpot` 虚拟机可能要重复生成这些中间文件，这都会占用大量磁盘空间。
 
@@ -32,11 +32,11 @@ description: ""
 
 **注意** ：所有文件所在目录都不能包含中文。
 
-* * *
+---
 
 ### 环境准备
 
-* * *
+---
 
 下载 `JDK12` 源码：
 ```java
@@ -113,11 +113,11 @@ sudo apt-get install autoconf
 sudo apt-get install openjdk-11-jdk
 ```
 
-* * *
+---
 
 ## 进行编译
 
-* * *
+---
 
 在解压后的 `jdk12-06222165c35f` 目录下，执行：
 ```java
@@ -161,15 +161,15 @@ java -version
 
 然后我们就可以对着 `JDK` 进行激情乱搞了（bushi
 
-* * *
+---
 
 ## 在 Clion 中调试
 
-* * *
+---
 
 ### 连接到虚拟机
 
-* * *
+---
 
 在 `Windows Terminal` 或 `cmd` 中执行：
 ```java
@@ -211,11 +211,11 @@ ifconfig
 
 之后进行 `ssh` 登录即可连接，若需要继续配置免密登录，可以参考教程：[ssh 登录和 scp 传输](&lt;https://lys2021.com/?p=784&gt;)
 
-* * *
+---
 
 ### Clion 导入项目
 
-* * *
+---
 
 建议安装 `JetBrains Gateway` 进行操作，当然你也可以直接使用 `Clion` 进行导入，步骤是一样滴（
 
@@ -241,4 +241,4 @@ ifconfig
 
 到这一步，恭喜你可以开始愉快的玩耍了（xjbg
 
-* * *
+---

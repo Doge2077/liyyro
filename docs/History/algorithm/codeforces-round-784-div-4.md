@@ -7,7 +7,7 @@ description: ""
 
 ## A. Division?
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/group/50jVAfUiqO/contest/1669/problem/A&gt;)
 
@@ -17,7 +17,7 @@ description: ""
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -25,7 +25,7 @@ description: ""
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -89,11 +89,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## B. Triple
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/group/50jVAfUiqO/contest/1669/problem/B&gt;)
 
@@ -103,7 +103,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -112,7 +112,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -182,11 +182,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## C. Odd/Even Increments
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/group/50jVAfUiqO/contest/1669/problem/C&gt;)
 
@@ -201,7 +201,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -212,7 +212,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -286,11 +286,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## D. Colorful Stamp
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/group/50jVAfUiqO/contest/1669/problem/D&gt;)
 
@@ -304,7 +304,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -319,7 +319,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -425,11 +425,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## E. 2-Letter Strings
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/group/50jVAfUiqO/contest/1669/problem/E&gt;)
 
@@ -440,7 +440,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -451,7 +451,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -529,11 +529,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## F. Eating Candies
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/group/50jVAfUiqO/contest/1669/problem/F&gt;)
 
@@ -545,7 +545,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -556,7 +556,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java

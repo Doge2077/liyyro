@@ -5,17 +5,17 @@ categories: [ALGORITHM, Q&amp;A, 模拟, Codeforces, 贪心, 前缀和]
 description: ""
 ---
 
-* * *
+---
 
 ## A. Three Doors
 
-* * *
+---
 
 ### 原题链接
 
 [Origional Link](&lt;https://codeforces.com/contest/1709/problem/A&gt;)
 
-* * *
+---
 
 ### 思想
 
@@ -24,7 +24,7 @@ description: ""
 
 
 
-* * *
+---
 
 ### 代码
 ```java
@@ -69,17 +69,17 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## B. Also Try Minecraft
 
-* * *
+---
 
 ### 原题链接
 
 [Origional Link](&lt;https://codeforces.com/contest/1709/problem/B&gt;)
 
-* * *
+---
 
 ### 思想
 
@@ -90,7 +90,7 @@ int main(){
 
 **注意** ：开`long long`！开`long long`！开`long long`！
 
-* * *
+---
 
 ### 代码
 ```java
@@ -153,17 +153,17 @@ signed main(){
 }
 ```
 
-* * *
+---
 
 ## C. Recover an RBS
 
-* * *
+---
 
 ### 原题链接
 
 [Origional Link](&lt;https://codeforces.com/contest/1709/problem/C&gt;)
 
-* * *
+---
 
 ### 思想
 
@@ -184,7 +184,7 @@ signed main(){
 
 
 
-* * *
+---
 
 ### 代码
 ```java
@@ -239,7 +239,7 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## 后记
 

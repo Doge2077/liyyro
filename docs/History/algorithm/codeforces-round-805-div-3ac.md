@@ -5,11 +5,11 @@ categories: [ALGORITHM, Q&amp;A, 模拟, Codeforces]
 description: ""
 ---
 
-* * *
+---
 
 ## A. Round Down the Price
 
-* * *
+---
 
 ### 题目大意
 
@@ -20,7 +20,7 @@ description: ""
 
 
 
-* * *
+---
 
 ### 思想
 
@@ -28,7 +28,7 @@ description: ""
 
 
 
-* * *
+---
 
 ### 代码
 ```java
@@ -68,11 +68,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## B. Polycarp Writes a String from Memory
 
-* * *
+---
 
 ### 题目大意
 
@@ -83,7 +83,7 @@ int main(){
 
 
 
-* * *
+---
 
 ### 思想
 
@@ -93,7 +93,7 @@ int main(){
 
 
 
-* * *
+---
 
 ### 代码
 ```java
@@ -150,11 +150,11 @@ int main(){
 
 ```
 
-* * *
+---
 
 ## C. Train and Queries
 
-* * *
+---
 
 ### 题目大意
 
@@ -166,7 +166,7 @@ int main(){
 
 
 
-* * *
+---
 
 ### 思路
 
@@ -175,7 +175,7 @@ int main(){
 
 
 
-* * *
+---
 
 ### 代码
 ```java
@@ -230,4 +230,4 @@ int main(){
 }
 ```
 
-* * *
+---

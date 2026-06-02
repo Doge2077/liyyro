@@ -7,7 +7,7 @@ description: ""
 
 ## A. Floor Number
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/group/gsTQwPns6J/contest/1426/problem/A&gt;)
 
@@ -18,7 +18,7 @@ description: ""
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -32,7 +32,7 @@ description: ""
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -102,11 +102,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## B. Symmetric Matrix
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/group/gsTQwPns6J/contest/1426/problem/B&gt;)
 
@@ -117,7 +117,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -127,7 +127,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -197,11 +197,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## C. Increase and Copy
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/group/gsTQwPns6J/contest/1426/problem/C&gt;)
 
@@ -217,7 +217,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -232,7 +232,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -295,11 +295,11 @@ int main(){
 }
 ```
 
-* * *
+---
 
 ## D. Non-zero Segments
 
-* * *
+---
 
 [Origional Link](&lt;https://codeforces.com/group/gsTQwPns6J/contest/1426/problem/D&gt;)
 
@@ -310,7 +310,7 @@ int main(){
 
 
 
-* * *
+---
 
 **思想** ;
 
@@ -324,7 +324,7 @@ int main(){
 
 
 
-* * *
+---
 
 **代码** ：
 ```java

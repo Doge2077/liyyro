@@ -7,7 +7,7 @@ description: ""
 
 ## [2651\. 计算列车到站时间](&lt;https://leetcode.cn/problems/calculate-delayed-arrival-time/&gt;)
 
-* * *
+---
 
 **题目大意** ：
 
@@ -17,7 +17,7 @@ description: ""
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -26,7 +26,7 @@ description: ""
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -39,11 +39,11 @@ class Solution {
 }
 ```
 
-* * *
+---
 
 ## [2652\. 倍数求和](&lt;https://leetcode.cn/problems/sum-multiples/&gt;)
 
-* * *
+---
 
 **题目大意** ：
 
@@ -52,7 +52,7 @@ class Solution {
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -61,7 +61,7 @@ class Solution {
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -78,11 +78,11 @@ class Solution {
 }
 ```
 
-* * *
+---
 
 ## [2653\. 滑动子数组的美丽值](&lt;https://leetcode.cn/problems/sliding-subarray-beauty/&gt;)
 
-* * *
+---
 
 **题目大意** ：
 
@@ -92,7 +92,7 @@ class Solution {
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -107,7 +107,7 @@ class Solution {
 
 
 
-* * *
+---
 
 **代码** ：
 ```java
@@ -137,11 +137,11 @@ class Solution {
 }
 ```
 
-* * *
+---
 
 ## [2654\. 使数组所有元素变成 1 的最少操作次数](&lt;https://leetcode.cn/problems/minimum-number-of-operations-to-make-all-array-elements-equal-to-1/&gt;)
 
-* * *
+---
 
 **题目大意** ：
 
@@ -151,7 +151,7 @@ class Solution {
 
 
 
-* * *
+---
 
 **思想** ：
 
@@ -173,7 +173,7 @@ class Solution {
 
 
 
-* * *
+---
 
 **代码** ：
 ```java

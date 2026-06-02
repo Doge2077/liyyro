@@ -7,15 +7,15 @@ description: ""
 
 ## 第二次练习
 
-* * *
+---
 
 [下载习题](&lt;https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/01/python基础练习题二.txt&gt;)
 
-* * *
+---
 
 ## 1\. 外星人颜色
 
-* * *
+---
 ```java
 
 
@@ -24,11 +24,11 @@ if AlienColor == 'green':
     print("Player gets 5 points.")
 ```
 
-* * *
+---
 
 ## 2\. 外星人2
 
-* * *
+---
 ```java
 
 
@@ -39,11 +39,11 @@ else:
     print("Player gets 10 points.")
 ```
 
-* * *
+---
 
 ## 3\. 外星人的颜色3
 
-* * *
+---
 ```java
 
 
@@ -56,11 +56,11 @@ else:
     print("Player gets 15 points.")
 ```
 
-* * *
+---
 
 ## 4\. 人生的不同阶段
 
-* * *
+---
 ```java
 
 
@@ -94,11 +94,11 @@ else:
     print("It's an elder")
 ```
 
-* * *
+---
 
 ## 5\. 判断序列（例如列表）为空？
 
-* * *
+---
 ```java
 
 
@@ -115,11 +115,11 @@ else:
     print("Not empty.")
 ```
 
-* * *
+---
 
 ## 6\. 多维列表
 
-* * *
+---
 ```java
 
 
@@ -140,11 +140,11 @@ for i in range(len(a)):
     print()
 ```
 
-* * *
+---
 
 ## 7\. 序列打包
 
-* * *
+---
 ```java
 
 
@@ -155,4 +155,4 @@ for k, v in info.items():
     print(f"Name: {k}, NowAge: {v}")
 ```
 
-* * *
+---

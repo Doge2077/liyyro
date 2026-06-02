@@ -9,21 +9,21 @@ description: ""
 
 该系列的 `GitHub` 仓库：&lt;https://github.com/Doge2077/learn-jvm&gt;
 
-* * *
+---
 
 ## 运行时数据区域
 
-* * *
+---
 
 `Java` 虚拟机在执行 `Java` 程序的过程中会把它所管理的内存划分为以下数据区域。
 
 ![image-20230831150214981](https://image.itbaima.net/images/40/image-20230831157163998.png)
 
-* * *
+---
 
 ### 程序计数器
 
-* * *
+---
 
 程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。
 
@@ -38,11 +38,11 @@ description: ""
 
 值得注意的是，在 《Java 虚拟机规范中》，计数器所在的内存区域是唯一一个没有规定任何 `OutOfMemoryError` 情况的区域。这意味着计数器不会因为内存不足而导致 `OutOfMemoryError` 异常。
 
-* * *
+---
 
 ### Java 虚拟机栈
 
-* * *
+---
 
 `Java` 虚拟机中的虚拟机栈（Java Virtual Machine Stack），它是线程私有的，其生命周期与线程相同。
 
@@ -56,11 +56,11 @@ description: ""
 
 一般情况下，局部变量表所需的内存空间在编译期间确定，并在方法运行期间不会改变大小（变量槽的数量）。
 
-* * *
+---
 
 ### 本地方法栈
 
-* * *
+---
 
 本地方法栈（Native Method Stacks）与虚拟机栈所发挥的作用相似，其区别只是虚拟机栈为虚拟机执行 `Java` 方法（也就是字节 码）服务，而本地方法栈则是为虚拟机使用到的本地（Native）方法服务。
 
@@ -68,11 +68,11 @@ description: ""
 
 对于HotSpot虚拟机，它将本地方法栈（Native Method Stack）和虚拟机栈（Java Virtual Machine Stack）合二为一，这意味着它可以在同一个栈中管理 `Java` 方法和本地方法的执行。
 
-* * *
+---
 
 ### Java 堆
 
-* * *
+---
 
 `Java` 堆（Java Heap）是虚拟机所管理的内存中最大的一块，**被所有线程共享** 的一块内存区域，在虚拟机启动时创建。
 
@@ -85,11 +85,11 @@ description: ""
 
 如果在 `Java` 堆中没有内存完成实例分配，并且堆也无法再扩展时，`Java` 虚拟机将会抛出 `OutOfMemoryError` 异常。
 
-* * *
+---
 
 ### 方法区
 
-* * *
+---
 
 方法区（Method Area）与Java堆一样，是**各个线程共享** 的内存区域：
 
@@ -102,11 +102,11 @@ description: ""
 
 如果方法区无法满足新的内存分配需求时，将抛出 `OutOfMemoryError` 异常。
 
-* * *
+---
 
 ### 运行时常量池
 
-* * *
+---
 
 运行时常量池（Runtime Constant Pool）是方法区的一部分：
 
@@ -125,11 +125,11 @@ description: ""
 
 运行时常量池是方法区的一部分，自然受到方法区内存的限制，当常量池无法再申请到内存时会抛出 `OutOfMemoryError` 异常。
 
-* * *
+---
 
 ### 直接内存
 
-* * *
+---
 
 直接内存（Direct Memory）并不是虚拟机运行时数据区的一部分，也不是《Java虚拟机规范》中定义的内存区域。
 
@@ -137,15 +137,15 @@ description: ""
 
 配置虚拟机参数时，要根据实际内存去设置 `-Xmx` 等参数信息，忽略掉直接内存，会使得各个内存区域总和大于物理内存限制（包括物理的和操作系统级的限制），从而导致动态扩展时出现 `OutOfMemoryError` 异常。
 
-* * *
+---
 
 ## HotSpot 虚拟机对象
 
-* * *
+---
 
 ### 对象的创建
 
-* * *
+---
 
 当 `Java` 虚拟机遇到一条字节码 `new` 指令时：
 
@@ -173,11 +173,11 @@ description: ""
 
 
 
-* * *
+---
 
 ### 对象的内存布局
 
-* * *
+---
 
 在 `HotSpot` 虚拟机里，对象在堆内存中的存储布局可以划分为三个部分：
 
@@ -187,11 +187,11 @@ description: ""
 
 
 
-* * *
+---
 
 ### 对象的访问定位
 
-* * *
+---
 
 `Java` 程序会通过栈上的 `reference` 数据来操作堆上的具体对象，主流访问方式有以下两种：
 
@@ -202,15 +202,15 @@ description: ""
 
 句柄访问在对象被移动（垃圾收集时移动对象是非常普遍的行为）时只会改变句柄中的实例数据指针，而 `reference` 本身不需要被修改。而指针访问最大的好处就是速度更快，节省了一次指针定位的时间开销。
 
-* * *
+---
 
 ## 实战 ：OOM 异常
 
-* * *
+---
 
 ### Java 堆异常
 
-* * *
+---
 ```java
 
 
@@ -239,11 +239,11 @@ Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
 
 `java.lang.OutOfMemoryError: Java heap space` 表明了该异常是 `Java` 堆空间异常。
 
-* * *
+---
 
 ### 虚拟机栈和本地方法栈溢出
 
-* * *
+---
 
 由于 `HotSpot` 虚拟机中并不区分虚拟机栈和本地方法栈，因此对于 `HotSpot` 来说，`-Xoss` 参数（设置本地方法栈大小）虽然存在，但实际上是没有任何效果的，栈容量只能由 `-Xss` 参数来设定。
 
@@ -364,11 +364,11 @@ Exception in thread "main" java.lang.StackOverflowError
 
 这是因为 `HotSpot` 虚拟机的栈是不可动态扩展的，所以在 `HotSpot` 虚拟机上不会由于虚拟机栈无法扩展而导致 `OutOfMemoryError` 异常，这点我们在最初章节已经提到过了。
 
-* * *
+---
 
 ### 方法区和运行时常量池溢出
 
-* * *
+---
 
 运行时常量池是方法区的一部分，所以这两个区域的溢出测试可以放到一起进行。
 
@@ -423,11 +423,11 @@ java -Xmx6m RuntimeConstantPoolOOM
 Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
 ```
 
-* * *
+---
 
 ### 本机直接内存溢出
 
-* * *
+---
 
 直接内存（Direct Memory）的容量大小可通过 `-XX:MaxDirectMemorySize` 参数来指定，如果不去指定，则默认与 `Java` 堆最大值（由 `-Xmx` 指定）一致。
 
@@ -464,4 +464,4 @@ Exception in thread "main" java.lang.OutOfMemoryError
 
 这是由于在上述代码的每次循环中，`unsafe.allocateMemory(_1MB)` 会调用 `Unsafe` 类的 `allocateMemory` 方法来分配 `1MB` 的直接内存空间，最终导致直接内存溢出。
 
-* * *
+---
