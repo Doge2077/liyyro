@@ -15,8 +15,6 @@ description: ""
 
 数据量不大：
 ```java
-
-
 Scanner sc = new Scanner(System.in);
 int a = sc.nextInt();
 char op = sc.nextLine().charAt(0);
@@ -24,27 +22,24 @@ char op = sc.nextLine().charAt(0);
 
 如果比较大可以换：
 ```java
-
-
-Scanner sc = new Scanner(new BufferedInputStream(System.in))
+Scanner sc = new Scanner(new BufferedInputStream(System.in));
 ```
 
 不嫌麻烦可以写：
 ```java
-
+import java.io.*;
 
 public class Main {
-
     static BufferedReader cin = new BufferedReader(new InputStreamReader(System.in));
     static PrintWriter cout = new PrintWriter(new OutputStreamWriter(System.out));
 
     public static void main(String[] args) throws IOException {
         int a = Integer.parseInt(cin.readLine());
         cout.println(a);
-//        cin.close();
         cout.flush();
         cout.println(a);
         cout.flush();
+        cin.close();
     }
 }
 ```
@@ -55,8 +50,6 @@ public class Main {
 
 ---
 ```java
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -69,7 +62,7 @@ public class Main {
 
     static void solve() {
         int n = cin.nextInt();
-        for (int i = 0; i < n; i ++) {
+        for (int i = 0; i < n; i++) {
             char op = cin.nextChar();
             cout.println(op);
         }
@@ -78,52 +71,57 @@ public class Main {
     public static void main(String[] args) {
         int t = 1;
 //        t = cin.nextInt();
-        for (int i = 0; i < t; i ++) {
+        for (int i = 0; i < t; i++) {
             solve();
         }
         cout.flush();
     }
 
     static class Cin {
-
         static BufferedReader br;
         static StringTokenizer st;
+    }
+}
+```java
+import java.io.*;
+import java.util.StringTokenizer;
 
-        Cin() {
-            br = new BufferedReader(new InputStreamReader(System.in));
-        }
+public class Cin {
+    private BufferedReader br;
+    private StringTokenizer st;
 
-        String next() {
-            String s = "";
-            while (st == null || !st.hasMoreElements()) {
-                try {
-                    s = br.readLine();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                st = new StringTokenizer(s);
-            }
-            return st.nextToken();
-        }
-
-        int nextInt() {
-            return Integer.parseInt(next());
-        }
-
-        double nextDouble() {
-            return Double.parseDouble(next());
-        }
-
-        long nextLong() {
-            return Long.parseLong(next());
-        }
-
-        char nextChar() {
-            return next().charAt(0);
-        }
-
+    public Cin() {
+        br = new BufferedReader(new InputStreamReader(System.in));
     }
 
+    public String next() {
+        String s = "";
+        while (st == null || !st.hasMoreElements()) {
+            try {
+                s = br.readLine();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            st = new StringTokenizer(s);
+        }
+        return st.nextToken();
+    }
+
+    public int nextInt() {
+        return Integer.parseInt(next());
+    }
+
+    public double nextDouble() {
+        return Double.parseDouble(next());
+    }
+
+    public long nextLong() {
+        return Long.parseLong(next());
+    }
+
+    public char nextChar() {
+        return next().charAt(0);
+    }
 }
 ```
 
@@ -133,10 +131,10 @@ public class Main {
 
 ---
 ```java
-
+import java.io.BufferedInputStream;
+import java.util.Scanner;
 
 public class Main {
-
     static Scanner sc = new Scanner(new BufferedInputStream(System.in));
 
     public static void main(String[] args) {
@@ -150,4 +148,4 @@ public class Main {
 
 ---
 
-## 
+##

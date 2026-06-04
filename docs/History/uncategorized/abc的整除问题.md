@@ -5,7 +5,7 @@ categories: [Q&amp;A, 思维]
 description: ""
 ---
 
-[原题链接](&lt;http://www.haueacm.top/problem.php?id=1423&gt;)
+[原题链接](http://www.haueacm.top/problem.php?id=1423)
 
 **描述** ：
 
@@ -26,8 +26,7 @@ description: ""
 $1\le A\le B\le 1\times 10^{18}, 1\le C\le 1\times 10^{18}$。
 
 **样例输入** ：
-```java
-
+```text
 
 2
 4 8 2
@@ -35,8 +34,7 @@ $1\le A\le B\le 1\times 10^{18}, 1\le C\le 1\times 10^{18}$。
 ```
 
 **样例输出** ：
-```java
-
+```text
 
 3
 25
@@ -44,15 +42,12 @@ $1\le A\le B\le 1\times 10^{18}, 1\le C\le 1\times 10^{18}$。
 
 **思想** ：
 
-  * 签到题。
+* 签到题。
   * 考虑 $A$ 和 $B$ 是 $C$ 的最大多少整数倍，得到差值。
   * 然后考虑 $A$ 是否可以被 $C$ 整除，若可以，则差值加一即可。
 
-
-
 **代码** ：
-```java
-
+```cpp
 
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
@@ -89,24 +84,22 @@ LL a, b, c;
 
 void solve(){
     cin >> a >> b >> c;
-    cout << b / c - a / c + (a % c == 0) << endl;
+    cout &lt;&lt; b / c - a / c + (a % c == 0) &lt;&lt; endl;
 }
 
 int main(){
 
-    IOS;
+IOS;
 
-    int _ = 1;
+int _ = 1;
 
-    cin >> _;
+cin &gt;> _;
 
-    while(_ --){
+while(_ --){
         solve();
     }
 
-    return 0;
+return 0;
 
 }
 ```
-
----

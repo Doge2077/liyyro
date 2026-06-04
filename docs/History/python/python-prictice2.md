@@ -9,16 +9,15 @@ description: ""
 
 ---
 
-[下载习题](&lt;https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/01/python基础练习题二.txt&gt;)
+[下载习题](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/01/python基础练习题二.txt)
 
 ---
 
-## 1\. 外星人颜色
+## 1. 外星人颜色
 
 ---
-```java
 
-
+```python
 AlienColor = 'green'
 if AlienColor == 'green':
     print("Player gets 5 points.")
@@ -26,12 +25,11 @@ if AlienColor == 'green':
 
 ---
 
-## 2\. 外星人2
+## 2. 外星人2
 
 ---
-```java
 
-
+```python
 AlienColor = 'green'
 if AlienColor == 'green':
     print("Player gets 5 points by shooting this alien.")
@@ -41,12 +39,11 @@ else:
 
 ---
 
-## 3\. 外星人的颜色3
+## 3. 外星人的颜色3
 
 ---
-```java
 
-
+```python
 AlienColor = 'green'
 if AlienColor == 'green':
     print("Player gets 5 points.")
@@ -58,27 +55,26 @@ else:
 
 ---
 
-## 4\. 人生的不同阶段
+## 4. 人生的不同阶段
 
 ---
-```java
 
-
+```python
 age = 24
-if age < 2:
+if age &lt; 2:
     print("It's a baby")
-elif age >= 2 and age < 4:
+elif age &gt;= 2 and age &lt; 4:
     print("It's a child")
-elif age >= 4 and age < 13:
+elif age &gt;= 4 and age &lt; 13:
     print("It's a tween")
-elif age >= 13 and age < 18:
+elif age &gt;= 13 and age &lt; 18:
     print("It's a teenager")
-elif age >= 18 and age < 65:
+elif age &gt;= 18 and age < 65:
     print("It's an adult")
 else:
     print("It's an elder")
 
-#另一种解法
+# 另一种解法
 age = 24
 if age < 2:
     print("It's a baby")
@@ -96,19 +92,18 @@ else:
 
 ---
 
-## 5\. 判断序列（例如列表）为空？
+## 5. 判断序列（例如列表）为空？
 
 ---
-```java
 
-
+```python
 a = []
 if len(a) == 0:
     print("Empty.")
 else:
     print("Not empty.")
 
-#另一种解法
+# 另一种解法
 if not a:
     print("Empty.")
 else:
@@ -117,13 +112,14 @@ else:
 
 ---
 
-## 6\. 多维列表
+## 6. 多维列表
 
 ---
-```java
 
+```python
+```
 
-a = ["str, 12345", ('tunpe', 2) ,{'dict':{'dict': {'dict': 4&#125;&#125;}]
+a = ["str, 12345", ('tunpe', 2), {'dict': {'dict': {'dict': 4}}}]
 for i in range(len(a)):
     if i == 0:
         print(a[i], end=' ')
@@ -138,15 +134,13 @@ for i in range(len(a)):
                 for k3, v3 in v2.items():
                     print(f"key: {k3}, value: {v3}", end=' ')
     print()
-```
 
 ---
 
 ## 7\. 序列打包
 
 ---
-```java
-
+```python
 
 name = ['lys', 'wjq', 'hfcj', 'xhz', 'jcg']
 age = [104, 504, 1909, 14, 3.14]
@@ -154,5 +148,3 @@ info = {k:v + 10 for k, v in zip(name, age)}
 for k, v in info.items():
     print(f"Name: {k}, NowAge: {v}")
 ```
-
----

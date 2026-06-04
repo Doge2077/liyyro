@@ -9,15 +9,14 @@ description: ""
 
 ---
 
-[下载习题](&lt;https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/01/Python基础练习题一.txt&gt;)
+[下载习题](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/01/Python基础练习题一.txt)
 
 ---
 
-## 1\. 姓名
+## 1. 姓名
 
 ---
-```java
-
+```python
 
 names = ['wjq', 'lys', 'hfcj', 'xhz', 'jcg']
 for i in names:
@@ -26,11 +25,10 @@ for i in names:
 
 ---
 
-## 2\. 问候
+## 2. 问候
 
 ---
-```java
-
+```python
 
 names = ['wjq', 'lys', 'hfcj', 'xhz', 'jcg']
 for i in names:
@@ -39,11 +37,10 @@ for i in names:
 
 ---
 
-## 3\. 嘉宾名单
+## 3. 嘉宾名单
 
 ---
-```java
-
+```python
 
 names = ['wjq', 'hfcj', 'xhz', 'jcg']
 for i in names:
@@ -52,11 +49,10 @@ for i in names:
 
 ---
 
-## 4\. 修改嘉宾名单
+## 4. 修改嘉宾名单
 
 ---
-```java
-
+```python
 
 names = ['wjq', 'hfcj', 'xhz', 'jcg']
 for i in names:
@@ -69,11 +65,10 @@ for i in names:
 
 ---
 
-## 5\. 添加嘉宾
+## 5. 添加嘉宾
 
 ---
-```java
-
+```python
 
 names = ['wjq', 'hfcj', 'xhz', 'jcg']
 print("I have found a bigger table for the party")
@@ -86,12 +81,11 @@ for i in names:
 
 ---
 
-## 6\. 缩减名单
+## 6. 缩减名单
 
 ---
-```java
 
-
+```python
 names = ['wjq', 'hfcj', 'xhz', 'jcg']
 print("I have found a bigger table for the party")
 names.insert(0, 'lrh')
@@ -99,7 +93,7 @@ names.insert(len(names)//2, 'mcc')
 names.append('lsh')
 for i in names:
     print(f"Hello,{i}! Would you like to have a dinner for me?")
-print(f"Unfortunately, I could only invite tow guys to the party!")
+print(f"Unfortunately, I could only invite two guys to the party!")
 while(len(names) > 2):
     names.pop()
 for i in names:
@@ -110,12 +104,11 @@ print(names)
 
 ---
 
-## 7\. 放眼世界
+## 7. 放眼世界
 
 ---
-```java
 
-
+```python
 locations = ['Singapore', 'Hong Kong', 'Australia', 'Russia', 'Spain', 'France']
 for i in locations:
     print(i)

@@ -9,44 +9,42 @@ description: ""
 
 ---
 
-**词法规则** ：
-```java
-
-
-<标识符>::=<字母>
-<标识符>::=<标识符><字母>
-<标识符>::=<标识符><数字>
-<常量>::＝<无符号整数>
-<无符号整数>::=<数字序列>
-<数字序列>::=<数字序列><数字>
-<数字序列>::=<数字>
-<字母>::=a|b|c|……|x|y|z
-<数字>::=0|1|2|3|4|5|6|7|8|9
-<加法运算符>::＝+|-
-<乘法运算符>::=*|／
-<关系运算符>::＝<|>|!=|>=|<=|==
-<分界符>::＝,|;|(|)|{|}
-<保留字>::＝main|int|if|else|while|do
+**词法规则**：
+```cpp
+&lt;标识符&gt;::=&lt;字母&gt;
+&lt;标识符&gt;::=&lt;标识符&gt;&lt;字母&gt;
+&lt;标识符&gt;::=&lt;标识符&gt;&lt;数字&gt;
+&lt;常量&gt;::=&lt;无符号整数&gt;
+&lt;无符号整数&gt;::=&lt;数字序列&gt;
+&lt;数字序列&gt;::=&lt;数字序列&gt;&lt;数字&gt;
+&lt;数字序列&gt;::=&lt;数字&gt;
+&lt;字母&gt;::=a|b|c|……|x|y|z
+&lt;数字&gt;::=0|1|2|3|4|5|6|7|8|9
+&lt;加法运算符&gt;::=+|-
+&lt;乘法运算符&gt;::=*|／
+&lt;关系运算符&gt;::=&lt;|&gt;|!=|>=|&lt;=|==
+&lt;分界符&gt;::=,|;|(|)|{|}
+&lt;保留字&gt;::=main|int|if|else|while|do
 ```
 
-**符号表** ：
+**符号表**：
 
-单词符号 | 种类码 | 单词符号 | 种类码  
----|---|---|---  
-标识符 | 0 | 整数 | 24  
-main | 1 | >= | 10  
-int | 2 | <= | 11  
-if | 3 | == | 12  
-else | 4 | , | 13  
-while | 5 | ; | 14  
-do | 6 | ) | 15  
-< | 7 | ( | 16  
-> | 8 | { | 17  
-!= | 9 | } | 18  
-+ | 19 | - | 20  
-* | 21 | / | 22  
-= | 23 |  |   
-  
+| 单词符号 | 种类码 | 单词符号 | 种类码 |
+|---------|--------|---------|--------|
+| 标识符   | 0      | 整数    | 24     |
+| main    | 1      | >=      | 10     |
+| int     | 2      | &lt;=      | 11     |
+| if      | 3      | ==      | 12     |
+| else    | 4      | ,       | 13     |
+| while   | 5      | ;       | 14     |
+| do      | 6      | )       | 15     |
+| &lt;       | 7      | (       | 16     |
+| &gt;       | 8      | {       | 17     |
+| !=      | 9      | }       | 18     |
+| +       | 19     | -       | 20     |
+| *       | 21     | /       | 22     |
+| =       | 23     |         |        |
+
 根据词法规则和符号表，制作词法分析器
 
 ---
@@ -55,21 +53,17 @@ do | 6 | ) | 15
 
 ---
 
-  * 利用两个 `unordered_map` 分别存储关键字和其他符号的映射规则
+* 利用两个 `unordered_map` 分别存储关键字和其他符号的映射规则
   * 对于原程序中的空格符需要忽略
   * 利用 `std::ifstream` 读入文件，`std::istreambuf_iterator` 来遍历
-  * 将字符拼接识，判断即可
-
-
+  * 将字符拼接识别，判断即可
 
 ---
 
 ## 代码
 
 ---
-```java
-
-
+```cpp
 #include &lt;iostream&gt;
 #include &lt;fstream&gt;
 #include &lt;string&gt;
@@ -83,10 +77,11 @@ std::unordered_map&lt;std::string, int&gt; keywords = {
 
 // 运算符和界符及其种别码
 std::unordered_map&lt;std::string, int&gt; symbols = {
-    {"<", 7}, {">", 8}, {"!=", 9}, {">=", 10}, {"<=", 11}, {"==", 12}, {",", 13}, 
+    {"&lt;", 7}, {"&gt;", 8}, {"!=", 9}, {">=", 10}, {"&lt;=", 11}, {"==", 12}, {",", 13}, 
     {";", 14}, {"(", 15}, {")", 16}, {"{", 17}, {"}", 18}, {"+", 19}, {"-", 20}, 
     {"*", 21}, {"/", 22}, {"=", 23}
 };
+```
 
 // 检查是否是关键字或者符号，是的话返回种别码，否则返回0
 int isKeywordOrSymbol(const std::string& str) {
@@ -102,38 +97,41 @@ bool isLetterOrDigit(char ch) {
 
 void tokenize(const std::string& code, std::ostream &out) {
     std::string token;
-    for (size_t i = 0; i < code.length(); ++i) {
+    for (size_t i = 0; i &lt; code.length(); ++i) {
         if (isspace(static_cast&lt;unsigned char&gt;(code[i]))) {
             continue; // 忽略空格
         } else if (isLetterOrDigit(code[i])) {
             // 处理标识符和关键字
             token.clear();
-            while (i < code.length() && isLetterOrDigit(code[i])) {
+            while (i &lt; code.length() && isLetterOrDigit(code[i])) {
                 token += code[i++];
             }
             --i; // 回退到上一个字符
-            int code = isKeywordOrSymbol(token);
-            out << "(" << token << "," << (code ? code : 24) << ")" << std::endl;
+            int tokenCode = isKeywordOrSymbol(token);
+            out &lt;&lt; "(" &lt;&lt; token &lt;&lt; "," &lt;&lt; (tokenCode ? tokenCode : 24) &lt;&lt; ")" &lt;&lt; std::endl;
         } else {
             // 处理符号
             token = code[i];
-            if (i + 1 < code.length() && symbols.count(token + code[i + 1])) {
+            if (i + 1 &lt; code.length() && symbols.count(token + code[i + 1])) {
                 token += code[++i];
             }
-            out << "(" << token << "," << symbols[token] << ")" << std::endl;
+            out &lt;&lt; "(" &lt;&lt; token &lt;&lt; "," &lt;&lt; symbols[token] &lt;&lt; ")" &lt;&lt; std::endl;
         }
     }
 }
 
 int main() {
-    std::string inputPath = "C:\\Users\\LYS\\Downloads\\s.c"; // 输入文件路径
-    std::string outputPath = "C:\\Users\\LYS\\Desktop\\result.txt";        // 输出文件路径
+    std::string inputPath = "C:\\Users\\LYS\\Downloads\\s.c";  // 输入文件路径
+    std::string outputPath = "C:\\Users\\LYS\\Desktop\\result.txt";  // 输出文件路径
+    // 其他代码应在此处添加，但用户未提供完整main函数体，因此保持原样
+}
 
+```
     std::ifstream fileIn(inputPath);
     std::ofstream fileOut(outputPath);
 
     if (!fileIn.is_open() || !fileOut.is_open()) {
-        std::cerr << "文件位置或权限错误" << std::endl;
+        std::cerr &lt;&lt; "文件路径或权限错误" &lt;&lt; std::endl;
         return -1;
     }
 
