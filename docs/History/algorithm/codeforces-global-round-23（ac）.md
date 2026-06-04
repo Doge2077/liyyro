@@ -11,7 +11,7 @@ description: ""
 
 [Original Link](https://codeforces.com/contest/1746/problem/A)
 
-**题目大意** ：
+**题目大意**：
 
 * 给定长度为 $n$ 只包含 $0,1$ 的序列 $a$，和一个整数 $k$，保证 $(2\le k\le n\le 50)$。
   * 不限次数进行如下操作：
@@ -21,16 +21,15 @@ description: ""
 
 ---
 
-**思想** ：
+**思想**：
 
 * 签到题。
   * 保证 $(2\le k\le n\le 50)$ 即保证了只要序列里含有 $1$，便可不断执行操作二，即只要存在 $1$ 即可。
 
 ---
 
-**代码** ：
+**代码**：
 ```cpp
-
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -62,35 +61,24 @@ const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
 const double eps = 1e-6, PI = acos(-1);
 
 void solve(){
-
-int n, k; cin >> n >> k;
-
-bool flag = 0;
-
-for(int i = 0; i &lt; n; i ++){
+    int n, k; cin >> n >> k;
+    bool flag = 0;
+    for(int i = 0; i &lt; n; i ++){
         int x; cin &gt;> x;
         if(x == 1) flag = 1;
     }
-
-if(flag) cout &lt;&lt; "YES" &lt;&lt; endl;
+    if(flag) cout &lt;&lt; "YES" &lt;&lt; endl;
     else cout &lt;&lt; "NO" &lt;&lt; endl;
-
 }
 
 int main(){
-
-IOS;
-
-int _ = 1;
-
-cin &gt;> _;
-
-while(_ --){
+    IOS;
+    int _ = 1;
+    cin &gt;> _;
+    while(_ --){
         solve();
     }
-
-return 0;
-
+    return 0;
 }
 ```
 
@@ -185,7 +173,7 @@ int main(){
 
 ---
 
-**C. Permutation Operations**
+## C. Permutation Operations
 
 [Original Link](https://codeforces.com/contest/1746/problem/C)
 
@@ -199,7 +187,7 @@ int main(){
 
 ---
 
-**思路**：
+**思想**：
 
 * 思维题。
   * 记录每一对逆序对的差值（绝对值），第 $i$ 次操作需要补足该差值。
@@ -240,46 +228,14 @@ int main() {
 
     for (int i = 1; i &lt;= n; ++i) {
         if (pq.empty() || pq.top().first &gt; i) {
-            cout &lt;&lt; 1 &lt;&lt; " ";
+            cout << 1 << " ";
         } else {
-            cout &lt;&lt; pq.top().second &lt;&lt; " ";
+            cout << pq.top().second << " ";
             pq.pop();
         }
     }
-    cout &lt;&lt; "\n";
+    cout << "\n";
 
     return 0;
 }
 ```
-
-void solve() {
-    if (b.empty()) {
-        for (int i = 1; i &lt;= n; i++) cout &lt;&lt; 1 &lt;&lt; ' ';
-    } else {
-        auto p = b.top();
-        for (int i = 1; i &lt;= n; i++) {
-            if (i &gt;= p.first && !b.empty()) {
-                cout &lt;&lt; p.second &lt;&lt; ' ';
-                b.pop();
-                p = b.top();
-            } else {
-                cout &lt;&lt; 1 &lt;&lt; ' ';
-            }
-        }
-    }
-
-    cout &lt;&lt; endl;
-}
-
-int main() {
-    IOS;
-
-    int _ = 1;
-    cin &gt;> _;
-
-    while (_--) {
-        solve();
-    }
-
-    return 0;
-}

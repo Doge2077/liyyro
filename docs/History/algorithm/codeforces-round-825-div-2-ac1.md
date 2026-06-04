@@ -9,7 +9,7 @@ description: ""
 
 ---
 
-[Origional Link](&lt;https://codeforces.com/contest/1736/problem/A&gt;)
+[Original Link](https://codeforces.com/contest/1736/problem/A)
 
 **题目大意** ：
 
@@ -29,14 +29,13 @@ description: ""
   * 分为两种情况讨论：不排序 $a$ 直接操作和先排序 $a$ 再操作的情况。 
   * 同时遍历一遍 $a$ 和 $b$，记录 `a[i] != b[i]` 的次数即为不排序 $a$ 直接操作时，需要改变 $a_i$ 的步数，记为 $cnt$。
   * 将 $a$ 进行排序，尽可能的一一对应 $b$，由于对排序无要求，则只需记录 $a$ 和 $b$ 中相同元素出现的次数，分别设为 $t,p$。 
-  * 那么在进行一次排序后，最少改变 $a$ 的步数即为 `abs(t - 1)`。
+  * 那么在进行一次排序后，最少改变 $a$ 的步数即为 `abs(t - p)`。
   * 综合上述两种情况最少步数为 `min(cnt, abs(t - p) + 1)`
 
 ---
 
 **代码** ：
-```java
-
+```cpp
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -69,45 +68,15 @@ const double eps = 1e-6, PI = acos(-1);
 
 int a[N], b[N];
 
-void solve(){
+void solve() {
+    int n; cin >> n;
 
-int n; cin >> n;
-
-int p = 0, t = 0;
-    for(int i = 0; i &lt; n; i ++){
+    int p = 0, t = 0;
+    for (int i = 0; i &lt; n; i++) {
         cin &gt;> a[i];
-        if(a[i] == 1) p ++;
+        if (a[i] == 1) p++;
     }
 
-```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
-
-using namespace std;
-
-#define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
-#define re register
-#define fi first
-#define se second
-#define endl '\n'
-
-typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
-
-void solve() {
-    // ... 未显示的代码部分 ...
     for (int i = 0; i &lt; n; i++) {
         cin &gt;> b[i];
         if (b[i] == 1) t++;
@@ -165,8 +134,8 @@ int main() {
         \]
     *   实际上，\(b_1\) 和 \(b_{n+1}\) 总是存在（例如，取 \(b_1 = a_1\) 和 \(b_{n+1} = a_n\)）。
 
-**代码**：（如上 C++ 代码所示）
-
+**代码**：
+```cpp
 const int N = 1e6 + 10;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
 const double eps = 1e-6, PI = acos(-1);
@@ -236,8 +205,6 @@ int main(){
 ---
 
 **代码**：
-```java
-// 代码内容将在此处插入
 ```cpp
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;

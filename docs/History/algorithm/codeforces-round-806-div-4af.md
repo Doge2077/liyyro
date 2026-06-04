@@ -13,14 +13,14 @@ description: ""
 
 [Original Link](https://codeforces.com/contest/1703/problem/A)
 
-* 判断是否是`yes`顺序的不区分大小写的字符串
+* 判断是否是不区分大小写的“yes”字符串
   * 是则输出`YES`，否则输出`NO`
 
 ---
 
 ### 思想
 
-* 读入暴力判断
+* 读入字符串后暴力判断每个字符
 
 ---
 
@@ -60,14 +60,14 @@ int main(){
 
 [Original Link](https://codeforces.com/contest/1703/problem/B)
 
-* 共$A \sim Z$道题，第一次出现送出两个气球，后续出现送出一个气球
+* 共 $A$ 到 $Z$ 道题，第一次出现送出两个气球，后续出现送出一个气球
   * 求比赛共送出多少气球
 
 ---
 
 ### 思想
 
-* `vis[i]`标记是否出现过
+* `vis[i]`标记字母是否出现过
   * 未出现的送出两个，出现过送出一个
   * 遍历字符串求和
 
@@ -119,16 +119,16 @@ int main(){
 
 [Original Link](https://codeforces.com/contest/1703/problem/C)
 
-* 每个密码锁有$n$个轮子，轮子上有$0\sim 9$
-  * 给出最终位置显示的数字$a_i$，和第$i$个位置的$b_i$次操作
+* 每个密码锁有 $n$ 个轮子，轮子上有 $0$ 到 $9$ 的数字
+  * 给出最终位置显示的数字 $a_i$，和第 $i$ 个位置的 $b_i$ 次操作
   * 求原始的数字
 
 ### 思想
 
 * 模拟
-  * `ans[i]`存储第$i$位的最终数字，用`flag`存储操作的偏移量
-  * 若为`U`则`flag --`，反之`flag ++`
-  * 对于`ans[i]`，加上其偏移量并取正整数模，即`ans[i] = ( ans[i] + flag % 10 + 10 ) % 10`即为原始数字
+  * `ans[i]`存储第 $i$ 位的最终数字，用 `flag` 存储操作的偏移量
+  * 若为 `U` 则 `flag--`，反之 `flag++`
+  * 对于 `ans[i]`，加上其偏移量并取正整数模，即 `ans[i] = (ans[i] + flag % 10 + 10) % 10` 即为原始数字
 
 ---
 
@@ -182,19 +182,19 @@ int main(){
 
 [Original Link](https://codeforces.com/contest/1703/problem/D)
 
-* 给定$n$个长度不超过$8$的字符串$s$
-  * 若对于$s_i = s_j + s_k$成立，则$s_i$标记为$1$，否则标记为$0$
+* 给定 $n$ 个长度不超过 $8$ 的字符串 $s$
+  * 若对于 $s_i = s_j + s_k$ 成立，则 $s_i$ 标记为 $1$，否则标记为 $0$
 
 ---
 
 ### 思想
 
-* $n$比较大，但$s_i$较短
-  * 对于$s_i$，每次构造两个$s_i$的字串$s_i',s_i''$，对字串进行查询
-  * 若两个字串都可以找到，则标记$s_i$为$1$，反之为$0$
-  * 利用`s[N]`和`set&lt;string&gt; st`同时存储所有的`s[i]`
-  * 遍历`s[i]`，第一个字串从`s[0]`开始，长度为`1 &lt;= j &lt;= s[i].size() - 1 `，第二个字串从`s[j]`开始，长度为`s[i].size() - j`
-  * 利用`st.count(s)`查询字串`s`
+* $n$ 比较大，但 $s_i$ 较短
+  * 对于 $s_i$，每次构造两个 $s_i$ 的子串 $s_i', s_i''$，对子串进行查询
+  * 若两个子串都可以找到，则标记 $s_i$ 为 $1$，反之为 $0$
+  * 利用 `s[N]` 和 `set&lt;string&gt; st` 同时存储所有的 `s[i]`
+  * 遍历 `s[i]`，第一个子串从 `s[0]` 开始，长度为 `1 &lt;= j &lt;= s[i].size() - 1`，第二个子串从 `s[j]` 开始，长度为 `s[i].size() - j`
+  * 利用 `st.count(s)` 查询子串 `s`
 
 ---
 
@@ -207,40 +207,32 @@ void solve(){
     int n;
     cin >> n;
     bool vis[n + 10];
-    memset(vis,0,sizeof vis);
+    memset(vis, 0, sizeof vis);
     set&lt;string&gt; st;
     string s[n + 1];
-    // 代码未完，请提供完整代码
-}
-```
 
-以下是修复错别字和格式问题后的文本：
+    for(int i = 0; i &lt; n; i++){
+        cin &gt;> s[i];
+        st.insert(s[i]);
+    }
 
----
-
-```cpp
-for(int i = 0; i &lt; n; i++){
-    cin &gt;> s[i];
-    st.insert(s[i]);
-}
-
-for(int i = 0; i &lt; n; i++){
-    if(s[i].size() == 1) continue;
-    for(int j = 1; j &lt;= s[i].size() - 1; j++){
-        string s1 = s[i].substr(0, j), s2 = s[i].substr(j, s[i].size() - j);
-        if(st.count(s1) == 1 && st.count(s2) == 1){
-            vis[i] = 1;
-            break;  
+    for(int i = 0; i &lt; n; i++){
+        if(s[i].size() == 1) continue;
+        for(int j = 1; j &lt;= s[i].size() - 1; j++){
+            string s1 = s[i].substr(0, j), s2 = s[i].substr(j, s[i].size() - j);
+            if(st.count(s1) == 1 && st.count(s2) == 1){
+                vis[i] = 1;
+                break;  
+            }
         }
     }
-}
 
-for(int i = 0; i &lt; n; i++){
-    if(vis[i]) cout &lt;&lt; 1;
-    else cout &lt;&lt; 0;
-}
+    for(int i = 0; i &lt; n; i++){
+        if(vis[i]) cout &lt;&lt; 1;
+        else cout &lt;&lt; 0;
+    }
 
-cout &lt;&lt; endl;
+    cout &lt;&lt; endl;
 }
 
 int main(){
@@ -302,36 +294,30 @@ void solve() {
             if (!st[i][j]) {
                 int cnt = 0;
                 if (mp[i][j] == '1') cnt++;
-```
-
----
-
-修复内容：
-1. 修正了错别字：`Origional` → `Original`，`向右选择90度` → `向右旋转90°`。
-2. 规范了代码格式：添加了缺失的代码块标记（第一个代码块原缺失开头的 ```cpp），统一了代码风格（如括号、空格）。
-3. 调整了数学符号的写法（如 $0$、$1$、90°）。
-4. 修正了“思想”部分的不准确描述（原为“三个位置”，现更正为“四个位置”）。
-5. 为第二个代码块添加了正确的语言标记（原为 `java`，实际应为 `cpp`）。
-
-st[i][j] = 1;
-if (mp[j][n - i + 1] == '1') cnt++;
-
-st[j][n - i + 1] = 1;
-if (mp[n - i + 1][n - j + 1] == '1') cnt++;
-
-st[n - i + 1][n - j + 1] = 1;
-if (mp[n - j + 1][i] == '1') cnt++;
-
-st[n - j + 1][i] = 1;
-
-ans += min(cnt, 4 - cnt);
+                st[i][j] = 1;
+                if (mp[j][n - i + 1] == '1') cnt++;
+                st[j][n - i + 1] = 1;
+                if (mp[n - i + 1][n - j + 1] == '1') cnt++;
+                st[n - i + 1][n - j + 1] = 1;
+                if (mp[n - j + 1][i] == '1') cnt++;
+                st[n - j + 1][i] = 1;
+                ans += min(cnt, 4 - cnt);
+            }
         }
     }
+
+    cout &lt;&lt; ans &lt;&lt; endl;
 }
 
-cout &lt;&lt; ans &lt;&lt; endl;
-
+int main() {
+    int _;
+    cin &gt;> _;
+    while (_--) {
+        solve();
+    }
+    return 0;
 }
+```
 
 ---
 
@@ -343,16 +329,16 @@ cout &lt;&lt; ans &lt;&lt; endl;
 
 [Original Link](https://codeforces.com/contest/1703/problem/F)
 
-* 对于数列$a$，找到满足$a_i \lt i\lt a_j&lt;j,1\le i,j\le n$的$i,j$对数
+* 对于数列 $a$，找到满足 $a_i &lt; i &lt; a_j &lt; j$，$1 \le i, j \le n$ 的 $i, j$ 对数
 
 ---
 
 ### 思想
 
-* 对于$a_i \lt i\lt a_j&lt;j,1\le i,j\le n$  
-  * 一定满足`a[i] &lt; i`，将`a[i] &gt;= i`的删去，不参与后续匹配  
-  * 一定满足`i &lt; a[j]`，`{i,j}`的对数为`i`之前的满足`a[i] &lt; i`的数量  
-    * 枚举`j`，二分查找最小满足`i &lt; a[j]`的位置，总数量加上`i`之前的所有满足`a[i] &lt; i`的数量
+* 对于 $a_i &lt; i &lt; a_j &lt; j$，$1 \le i, j \le n$
+  * 一定满足 `a[i] &lt; i`，将 `a[i] &gt;= i` 的删去，不参与后续匹配
+  * 一定满足 `i &lt; a[j]`，`{i, j}` 的对数为 `i` 之前的满足 `a[i] &lt; i` 的数量
+    * 枚举 `j`，二分查找最小满足 `i &lt; a[j]` 的位置，总数量加上 `i` 之前的所有满足 `a[i] &lt; i` 的数量
 
 ---
 

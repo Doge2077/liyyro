@@ -5,7 +5,7 @@ categories: [java, Java]
 description: ""
 ---
 
-## 1\. Java 初识
+## 1. Java 初识
 
 ---
 
@@ -73,18 +73,16 @@ public class HelloWorld {
    ```
 
 **示例**：
-```java```
-
 ```java
 public class HelloWorld {
-   /* 这是第一个Java程序
-    * 它将输出 Hello World
-    * 这是一个多行注释的示例
-    */
-    public static void main(String[] args){
-       // 这是单行注释的示例
-       /* 这个也是单行注释的示例 */
-       System.out.println("Hello World"); 
+    /* 这是第一个Java程序
+     * 它将输出 Hello World
+     * 这是一个多行注释的示例
+     */
+    public static void main(String[] args) {
+        // 这是单行注释的示例
+        /* 这个也是单行注释的示例 */
+        System.out.println("Hello World"); 
     }
 }
 ```
@@ -101,8 +99,8 @@ public class HelloWorld {
 ```java
 import java.util.Scanner;  //导入Scanner包
 
-public class Main{
-    public static void main(String[] args){
+public class Main {
+    public static void main(String[] args) {
         Scanner cin = new Scanner(System.in);
         int a = cin.nextInt();  //输入a。
         int b = cin.nextInt();  //输入b。
@@ -162,7 +160,6 @@ public class Main {
 System.out.println("Hello World");  // 输出并换行
 System.out.print("Hello World");    // 输出但不换行
 System.out.println(123);            // 输出数字
-```java
 System.out.println(123);  // 输出整数 + 换行
 System.out.println("Hello World");  // 输出字符串 + 换行
 System.out.print(123);  // 输出整数
@@ -226,16 +223,16 @@ public class Main {
 
 `Java` 语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。
 
-| 类型名 | 意义 | 字节数 |
-| :--- | :--- | :--- |
-| `byte` | 字节类型 | 1 |
-| `short` | 短整型 | 2 |
-| `int` | 整型 | 4 |
-| `long` | 长整型 | 8 |
-| `float` | 单精度浮点 | 4 |
-| `double` | 双精度浮点 | 8 |
-| `boolean` | 布尔类型 | 1 |
-| `char` | 字符型 | 2 |
+| 类型名    | 意义         | 字节数 |
+| :-------- | :----------- | :----- |
+| `byte`    | 字节型       | 1      |
+| `short`   | 短整型       | 2      |
+| `int`     | 整型         | 4      |
+| `long`    | 长整型       | 8      |
+| `float`   | 单精度浮点型 | 4      |
+| `double`  | 双精度浮点型 | 8      |
+| `boolean` | 布尔型       | 1      |
+| `char`    | 字符型       | 2      |
 
 ---
 
@@ -281,7 +278,7 @@ public class Main {
 **boolean：**  
 * `boolean` 数据类型表示一位的信息。  
   * 只有两个取值：`true` 和 `false`  
-  * 默认值是 false  
+  * 默认值是 `false`  
   * 这种类型只作为一种标志来记录 `true/false` 情况  
 
 **char：**  
@@ -384,8 +381,8 @@ byte b = (byte)i;
 
 **条件**：
 
-* 必须满足转换前的数据类型的位数要低于转换后的数据类型。
-  * 例如：`short` 数据类型的位数为 16 位，就可以自动转换位数为 32 的 `int` 类型，同样 `float` 数据类型的位数为 32，可以自动转换为 64 位的 `double` 类型。
+* 必须满足转换前的数据类型的容量要低于转换后的数据类型。
+  * 例如：`short` 数据类型就可以自动转换为 `int` 类型，同样 `float` 数据类型可以自动转换为 `double` 类型。
 
 **示例**：
 ```java

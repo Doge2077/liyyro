@@ -5,7 +5,7 @@ categories: [ALGORITHM, Q&amp;A, 模拟, 离散化, Codeforces, 思维]
 description: ""
 ---
 
-## A. Division?
+## A. Division
 
 ---
 
@@ -17,7 +17,7 @@ description: ""
 
 ---
 
-**思想**：
+**思路**：
 
 *   签到题。
 
@@ -89,7 +89,7 @@ int main(){
 
 ---
 
-**思想**：
+**思路**：
 
 *   签到题。
     *   用 `map&lt;int,int&gt;` 存出现次数。
@@ -97,8 +97,6 @@ int main(){
 ---
 
 **代码**：
-```cpp
-// 此处应为 B 题的 C++ 代码，但原文未提供完整，故省略。
 ```cpp
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
@@ -182,49 +180,6 @@ int main() {
 **代码**：
 ```cpp
 #include &lt;iostream&gt;
-#include &lt;vector&gt;
-using namespace std;
-
-void solve() {
-    int n;
-    cin >> n;
-    vector&lt;int&gt; a(n);
-    for (int i = 0; i &lt; n; i++) {
-        cin &gt;> a[i];
-    }
-
-    bool oddIndexAllOdd = true, oddIndexAllEven = true;
-    bool evenIndexAllOdd = true, evenIndexAllEven = true;
-
-    for (int i = 0; i &lt; n; i++) {
-        if (i % 2 == 0) { // 注意：题目中下标从1开始，这里编程时从0开始
-            // 对应下标为 i+1 的元素
-            if (a[i] % 2 != 0) evenIndexAllEven = false;
-            else evenIndexAllOdd = false;
-        } else {
-            // 对应下标为 i+1 的元素
-            if (a[i] % 2 != 0) oddIndexAllEven = false;
-            else oddIndexAllOdd = false;
-        }
-    }
-
-    if ((oddIndexAllOdd || oddIndexAllEven) && (evenIndexAllOdd || evenIndexAllEven)) {
-        cout &lt;&lt; "YES" &lt;&lt; endl;
-    } else {
-        cout &lt;&lt; "NO" &lt;&lt; endl;
-    }
-}
-
-int main() {
-    int t;
-    cin &gt;> t;
-    while (t--) {
-        solve();
-    }
-    return 0;
-}
-```cpp
-#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
 #include &lt;algorithm&gt;
@@ -296,7 +251,7 @@ int main() {
   - 将任意相邻的两个字符变为 $RB$ 或 $BR$。
 - 现给出一个变换之后的字符串 $S$，问是否可以从最初全是 $W$ 的状态转换为当前状态。
 
-**思想**：
+**思路**：
 
 * 模拟。
   * 特判 $S$ 长度为 $1$ 和 $2$ 的情况。
@@ -344,50 +299,49 @@ void solve() {
     cin >> n;
     string s;
     cin >> s;
-}
-```cpp
-//特判两种情况
-if(s.size() == 1){
-    if(s == "W") cout &lt;&lt; "YES" &lt;&lt; endl;
-    else cout &lt;&lt; "NO" &lt;&lt; endl;
-}
-else if(s.size() == 2){
-    if(s == "RB" || s == "WW" || s == "BR") cout &lt;&lt; "YES" &lt;&lt; endl;
-    else cout &lt;&lt; "NO" &lt;&lt; endl;
-}
-else{
-    //将 S 以 W 进行分割，判断每个 W 分割的子串
-    int r = 0, b = 0;
-    for(int i = 0; i &lt; s.size(); i ++){
-        if(s[i] == 'W'){  //当遇到 W 则判断截至到上一个 W 的子串的情况
-            if(r + b &lt; 2){  //小于 2 时
-                if(r == b && r == 0) continue;  //上一个子串不含 RB 跳过
-                else{
-                    cout &lt;&lt; "NO" &lt;&lt; endl;  //否则无法达成，直接返回
-                    return ;
-                }
-            }
-            else{  //大于 2 时
-                if(r == 0 || b == 0){  //只含有 R 或者只含有 B 无法满足，直接返回
-                    cout &lt;&lt; "NO" &lt;&lt; endl;
-                    return ;
-                }
-                else r = b = 0;  //否则可以满足，此时重置子串状态
-            }
-        }
-        else{  //没遇到 W 更新子串状态
-            if(s[i] == 'R') r ++;
-            else b ++;
-        }
+    //特判两种情况
+    if(s.size() == 1){
+        if(s == "W") cout &lt;&lt; "YES" &lt;&lt; endl;
+        else cout &lt;&lt; "NO" &lt;&lt; endl;
     }
-
-    if(r + b &lt; 2){  //扫完 S 剩余的最后一个 W 切割的子串
-        if(r == b && b == 0) cout &lt;&lt; "YES" &lt;&lt; endl;
+    else if(s.size() == 2){
+        if(s == "RB" || s == "WW" || s == "BR") cout &lt;&lt; "YES" &lt;&lt; endl;
         else cout &lt;&lt; "NO" &lt;&lt; endl;
     }
     else{
-        if(r == 0 || b == 0) cout &lt;&lt; "NO" &lt;&lt; endl;
-        else cout &lt;&lt; "YES" &lt;&lt; endl;
+        //将 S 以 W 进行分割，判断每个 W 分割的子串
+        int r = 0, b = 0;
+        for(int i = 0; i &lt; s.size(); i ++){
+            if(s[i] == 'W'){  //当遇到 W 则判断截至到上一个 W 的子串的情况
+                if(r + b &lt; 2){  //小于 2 时
+                    if(r == b && r == 0) continue;  //上一个子串不含 RB 跳过
+                    else{
+                        cout &lt;&lt; "NO" &lt;&lt; endl;  //否则无法达成，直接返回
+                        return ;
+                    }
+                }
+                else{  //大于 2 时
+                    if(r == 0 || b == 0){  //只含有 R 或者只含有 B 无法满足，直接返回
+                        cout &lt;&lt; "NO" &lt;&lt; endl;
+                        return ;
+                    }
+                    else r = b = 0;  //否则可以满足，此时重置子串状态
+                }
+            }
+            else{  //没遇到 W 更新子串状态
+                if(s[i] == 'R') r ++;
+                else b ++;
+            }
+        }
+
+        if(r + b &lt; 2){  //扫完 S 剩余的最后一个 W 切割的子串
+            if(r == b && b == 0) cout &lt;&lt; "YES" &lt;&lt; endl;
+            else cout &lt;&lt; "NO" &lt;&lt; endl;
+        }
+        else{
+            if(r == 0 || b == 0) cout &lt;&lt; "NO" &lt;&lt; endl;
+            else cout &lt;&lt; "YES" &lt;&lt; endl;
+        }
     }
 }
 
@@ -404,6 +358,10 @@ int main(){
 }
 ```
 
+---
+
+## E. 字符串匹配
+
 [Original Link](https://codeforces.com/group/50jVAfUiqO/contest/1669/problem/E)
 
 **题目大意**：
@@ -413,7 +371,7 @@ int main(){
 
 ---
 
-**思想**：
+**思路**：
 
 * 离散化。
     * 记录所有相同的 $S$ 的数量。
@@ -478,6 +436,34 @@ int main(){
     IOS;
     return 0;
 }
+```
+
+---
+
+## F. Eating Candies
+
+---
+
+[Original Link](https://codeforces.com/group/50jVAfUiqO/contest/1669/problem/F)
+
+**题目大意**
+
+- 给定若干个糖及其重量 $w_i$。
+- 两个人从两头开始吃，不能跳过顺序。
+- 保证两人吃到的重量相同的情况下，最多能吃掉几颗糖。
+
+---
+
+**思路**：
+
+- 双指针，模拟。
+  - 分别记录两人当前吃掉的糖的重量。
+  - 当前一个人吃掉的重量大于后一个人，则后一个人吃糖（指针移动），反之亦然。
+  - 每当吃掉的糖重量相等时，更新吃掉的糖果的数量。
+
+---
+
+**代码**：
 ```cpp
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
@@ -539,45 +525,3 @@ int main() {
     return 0;
 }
 ```
-
----
-
-## F. Eating Candies
-
----
-
-[Original Link](https://codeforces.com/group/50jVAfUiqO/contest/1669/problem/F)
-
-**题目大意**
-
-- 给定若干个糖及其重量 $w_i$。
-- 两个人从两头开始吃，不能跳过顺序。
-- 保证两人吃到的重量相同的情况下，最多能吃掉几颗糖。
-
----
-
-**思想**：
-
-- 双指针，模拟。
-  - 分别记录两人当前吃掉的糖的重量。
-  - 当前一个人吃掉的重量大于后一个人，则后一个人吃糖（指针移动），反之亦然。
-  - 每当吃掉的糖重量相等时，更新吃掉的糖果的数量。
-
----
-
-**代码**：
-```cpp
-// （代码已在上方修复并整合）
-```cpp
-while (_--) {
-    solve();
-}
-
-return 0;
-}
-```
-
-**修复内容：**
-1. `while(_ --)` → `while (_--)`：去掉 `--` 前的多余空格，符合常见 C++ 编码规范
-2. 统一了缩进格式（使用 4 空格缩进）
-3. 花括号 `{` 前添加了空格，保持风格一致

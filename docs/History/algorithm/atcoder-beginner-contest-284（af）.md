@@ -104,7 +104,6 @@ int main(){
 
 **代码** ：
 ```cpp
-```cpp
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -165,7 +164,7 @@ int main() {
 
 ---
 
-[原题链接](https://atcoder.jp/contests/abc284/tasks/abc284_c)
+[Original Link](https://atcoder.jp/contests/abc284/tasks/abc284_c)
 
 **题目大意**：
 
@@ -195,54 +194,6 @@ int main() {
 using namespace std;
 
 #define IOS ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr)
-#define re register
-#define fi first
-#define se second
-#define endl '\n'
-
-typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
-
-const int N = 1e6 + 3;
-const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
-const double eps = 1e-6, PI = acos(-1);
-
-int n, m;
-int p[N];
-
-int find(int x) {
-    if (p[x] != x) p[x] = find(p[x]);
-    return p[x];
-}
-
-int main() {
-    IOS;
-    cin >> n >> m;
-    for (int i = 1; i &lt;= n; i++) p[i] = i;
-    
-    for (int i = 0; i &lt; m; i++) {
-        int a, b;
-        cin &gt;> a >> b;
-        p[find(a)] = find(b);
-    }
-    
-    int cnt = 0;
-    for (int i = 1; i &lt;= n; i++) {
-        if (p[i] == i) cnt++;
-    }
-    
-    cout &lt;&lt; cnt &lt;&lt; endl;
-    return 0;
-}
-```
-
-好的，我已仔细检查并修复了您提供文本中的错别字和格式问题。以下是修复后的文本：
-
-```cpp
-using namespace std;
-
-#define IOS ios::sync_with_stdio(false),cin.tie(nullptr),cout.tie(nullptr)
 #define re register
 #define fi first
 #define se second
@@ -347,19 +298,21 @@ int main(){
                 }
             }
         }
-        cout &lt;&lt; p &lt;&lt; “ “ &lt;&lt; q &lt;&lt; endl;
+        cout &lt;&lt; p &lt;&lt; " " &lt;&lt; q &lt;&lt; endl;
     }
     return 0;
 }
 ```
 
-# Count Simple Paths
+---
 
-[Original Link](https://atcoder.jp/contests/abc284/tasks/abc284_e)
+## E - Count Simple Paths
 
 ---
 
-## 题目大意
+[Original Link](https://atcoder.jp/contests/abc284/tasks/abc284_e)
+
+**题目大意**
 
 * 给定一个 $N$ 个顶点，$M$ 条边的无向图。
   * 求从点 $1$ 开始，简单路径（没有重复顶点的路径）的数量 $K$。
@@ -367,7 +320,7 @@ int main(){
 
 ---
 
-## 思想
+**思想**
 
 * 图的深度优先遍历。
   * 遇到可走的路径，数量增加 $1$。
@@ -375,62 +328,9 @@ int main(){
 
 ---
 
-## 代码
+**代码**
 
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-using namespace std;
-
-const int LIMIT = 1000000;
-
-int n, m;
-vector&lt;int&gt; adj[200005];
-bool visited[200005];
-int ans = 0;
-
-void dfs(int u) {
-    ans++;
-    if (ans >= LIMIT) return;
-    
-    visited[u] = true;
-    for (int v : adj[u]) {
-        if (!visited[v]) {
-            dfs(v);
-            if (ans >= LIMIT) break;
-        }
-    }
-    visited[u] = false;  // 回溯
-}
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    
-    cin >> n >> m;
-    
-    for (int i = 0; i &lt; m; i++) {
-        int u, v;
-        cin &gt;> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-    }
-    
-    dfs(1);
-    cout &lt;&lt; min(ans, LIMIT) &lt;&lt; endl;
-    
-    return 0;
-}
-```
-
----
-
-**修复说明：**
-1. `$M $` → `$M$`（去除多余空格）
-2. `1\times 10^6` → `$10^6$`（简化表达）
-3. 补充了完整且正确的代码（原代码与此题无关）
-4. 统一了 Markdown 格式
-
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -517,11 +417,9 @@ int main() {
 
 已知一个长度为 $N$ 的字符串 $S$ 和一个整数 $i(0\le i \le N)$。
   * 定义运算 $f_i(S)$ 生成的字符串如下：
-```cpp
-* $S$ 的前 $i$ 个字符。
-* $S$ 的翻转。
-* $S$ 的最后 $(N-i)$ 个字符。
-```
+    * $S$ 的前 $i$ 个字符。
+    * $S$ 的翻转。
+    * $S$ 的最后 $(N-i)$ 个字符。
   * 若 `S = "abc", i = 2`，则 $f_i(S) = $`"abcbac"`。
   * 现给出某个字符串 $S$ 的长度 $N$ 和经过 $f_i(S)$ 的结果。
   * 求原始字符串 $S$ 和 $i$ 的值。
@@ -579,9 +477,8 @@ ULL Prime[] = {1998585857ul,23333333333ul};
 ULL base[] = {131, 146527, 19260817, 91815541}; // 字符集大小，进制数
 ULL mod[] = {1000000007, 29123,998244353,1000000009,4294967291ull}; // 模数
 ULL h1[N][hash_cnt], h2[N][hash_cnt], p[N][hash_cnt];
-```
 
-//初始化哈希
+// 初始化哈希
 void initHash(ULL n, ULL cnt){
     p[0][cnt] = 1;
     for(int i = 1; i &lt;= n; ++ i) p[i][cnt] = p[i - 1][cnt] * base[cnt] % mod[cnt];
@@ -589,17 +486,17 @@ void initHash(ULL n, ULL cnt){
     for(int i = n; i &gt;= 1; -- i) h2[i][cnt] = (h2[i + 1][cnt] * base[cnt] % mod[cnt] + s[i]) % mod[cnt]; // 逆序hash
 }
 
-//正序HASH
+// 正序HASH
 ULL getHash1(ULL id, ULL l, ULL r){
     return (h1[r][id] - h1[l - 1][id] * p[r - l + 1][id] % mod[id] + mod[id]) % mod[id];
 }
 
-//逆序HASH
+// 逆序HASH
 ULL getHash2(ULL id, ULL l, ULL r){
     return (h2[l][id] - h2[r + 1][id] * p[r - l + 1][id] % mod[id] + mod[id]) % mod[id];
 }
 
-//判断区间是否为回文串，如果区间正逆序哈希值相等，则为回文；
+// 判断区间是否为回文串，如果区间正逆序哈希值相等，则为回文；
 bool isRe(ULL id, ULL l, ULL r){
     return getHash1(id, l, r) == getHash2(id, l, r);
 }
@@ -631,3 +528,4 @@ int main(){
     }
     return 0;
 }
+```

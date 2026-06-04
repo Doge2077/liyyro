@@ -133,23 +133,27 @@ Hibernate Validator：
 
 - **用法**：用于验证字符串、集合、数组等不能为 `null` 且必须有元素（即非空）。
 
-* 示例:
-```java
-    @NotEmpty
-    private List items;
-```
+- 示例：
+
+  ```java
+  @NotEmpty
+  private List items;
+  ```
 
 ---
 
 ### @NotBlank
 
-* **用法** : 用于验证字符串不能为`null`，且去除空白字符后长度必须大于0。
+---
 
-* 示例:
-```java
-    @NotBlank
-    private String username;
-```
+- **用法**：用于验证字符串不能为 `null`，且去除空白字符后长度必须大于 0。
+
+- 示例：
+
+  ```java
+  @NotBlank
+  private String username;
+  ```
 
 ---
 
@@ -157,103 +161,124 @@ Hibernate Validator：
 
 ---
 
-* **用法** : 用于验证字符串字段必须符合指定的正则表达式。
+- **用法**：用于验证字符串字段必须符合指定的正则表达式。
 
-* 属性:
+- 属性：
 
-```java
-* `regexp`: 正则表达式。
-* `flags`: 正则表达式的匹配标志（可选）。
-```
-  * 示例:
-```java
-    @Pattern(regexp = "^[a-zA-Z0-9]+$")
-    private String alphanumeric;
-```
+  ```java
+  regexp: 正则表达式。
+  flags: 正则表达式的匹配标志（可选）。
+  ```
+
+- 示例：
+
+  ```java
+  @Pattern(regexp = "^[a-zA-Z0-9]+$")
+  private String alphanumeric;
+  ```
 
 ---
 
 ### @DecimalMin
 
-* **用法** : 用于验证数值型字段的值不小于指定的最小值（支持小数）。
+---
 
-* 属性:
+- **用法**：用于验证数值型字段的值不小于指定的最小值（支持小数）。
 
-```java
-* `value`: 最小值。
-* `inclusive`: 是否包含最小值，默认为`true`（包含）。
-```
-  * 示例:
-```java
-    @DecimalMin(value = "0.1", inclusive = false)
-    private double price;
-```
+- 属性：
+
+  ```java
+  value: 最小值。
+  inclusive: 是否包含最小值，默认为 true（包含）。
+  ```
+
+- 示例：
+
+  ```java
+  @DecimalMin(value = "0.1", inclusive = false)
+  private double price;
+  ```
 
 ---
 
 ### @DecimalMax
 
-* **用法** : 用于验证数值型字段的值不大于指定的最大值（支持小数）。
+---
 
-* 属性:
+- **用法**：用于验证数值型字段的值不大于指定的最大值（支持小数）。
 
-```java
-* `value`: 最大值。
-* `inclusive`: 是否包含最大值，默认为`true`（包含）。
-```
-  * 示例:
-```java
-    @DecimalMax(value = "100.0", inclusive = true)
-    private double percentage;
-```
+- 属性：
+
+  ```java
+  value: 最大值。
+  inclusive: 是否包含最大值，默认为 true（包含）。
+  ```
+
+- 示例：
+
+  ```java
+  @DecimalMax(value = "100.0", inclusive = true)
+  private double percentage;
+  ```
 
 ---
 
 ### @Digits
 
-* **用法** : 用于验证数值型字段的整数位数和小数位数。
+---
 
-* 属性:
+- **用法**：用于验证数值型字段的整数位数和小数位数。
 
-```java
-* `integer`: 最大整数位数。
-* `fraction`: 最大小数位数。
-```
-  * 示例:
-```java
-    @Digits(integer = 5, fraction = 2)
-    private BigDecimal amount;
-```
+- 属性：
+
+  ```java
+  integer: 最大整数位数。
+  fraction: 最大小数位数。
+  ```
+
+- 示例：
+
+  ```java
+  @Digits(integer = 5, fraction = 2)
+  private BigDecimal amount;
+  ```
 
 ---
 
 ### @Email
 
-* **用法** : 用于验证字符串字段是否符合电子邮件地址的格式。
+---
 
-* 属性:
+- **用法**：用于验证字符串字段是否符合电子邮件地址的格式。
 
-```java
-* `regexp`: 正则表达式，默认是一个简单的电子邮件格式。
-* `flags`: 正则表达式的匹配标志（可选）。
-```
-  * 示例:
-```java
-    @Email
-    private String email;
-```
+- 属性：
+
+  ```java
+  regexp: 正则表达式，默认是一个简单的电子邮件格式。
+  flags: 正则表达式的匹配标志（可选）。
+  ```
+
+- 示例：
+
+  ```java
+  @Email
+  private String email;
+  ```
 
 ---
 
 ### @Future
 
-* **用法** : 用于验证日期或时间字段的值必须在将来。
+---
 
-* 示例:
-```java
-    @Future
-    private LocalDate expirationDate;
-```
+- **用法**：用于验证日期或时间字段的值必须在将来。
+
+- 示例：
+
+  ```java
+  @Future
+  private LocalDate expirationDate;
+  ```
 
 ---
 
@@ -261,7 +286,6 @@ Hibernate Validator：
 
 当校验异常时，会抛出 `MethodArgumentNotValidException` 异常，可以对其添加全局的异常解析：
 ```java
-
 @ExceptionHandler(MethodArgumentNotValidException.class)
 public Map&lt;String, String&gt; handleValidationExceptions(
   MethodArgumentNotValidException ex) {

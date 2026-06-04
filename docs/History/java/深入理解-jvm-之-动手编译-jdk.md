@@ -84,17 +84,6 @@ sudo update-alternatives --config g++
 sudo apt-get install libfreetype6-dev libcups2-dev libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev libasound2-dev libfontconfig1-dev
 ```
 
-以下是修复后的文本：
-
----
-
-sudo apt-get install libfreetype6-dev
-sudo apt-get install libcups2-dev
-sudo apt-get install libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
-sudo apt-get install libasound2-dev
-sudo apt-get install libffi-dev 
-sudo apt-get install autoconf
-
 安装启动 `JDK`：
 ```bash
 sudo apt-get install openjdk-11-jdk
@@ -167,16 +156,6 @@ ifconfig
 > 若提示 `ifconfig not found` 则执行 `sudo apt install net-tools` 安装即可。
 
 然后打开编辑栏的虚拟网络编辑器：
-
----
-**修改说明：**
-1.  **错别字修正**：将 “~~汗液~~” 修正为 “~~汗水~~”。
-2.  **格式修正**：
-    *   将所有标记为 `java` 代码块但实际为 Shell 命令的标记统一改为 `bash`。
-    *   移除了 `bash configure` 和 `make images` 命令前多余的空行，使格式更整洁。
-    *   将图片链接中的反斜杠 `\` 修正为标准的正斜杠 `/`。
-3.  **术语修正**：将 “虚拟网络编辑服务器” 修正为 “虚拟网络编辑器”。
-4.  **语句微调**：将 “虚拟机虚拟机的” 修正为 “虚拟机的”，去除重复用词。
 
 ![image-20230829224327986](https://image.itbaima.net/images/40/image-20230829223203032.png)
 

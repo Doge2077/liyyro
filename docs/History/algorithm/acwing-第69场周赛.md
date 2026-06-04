@@ -7,22 +7,16 @@ description: ""
 
 ## 4615. 相遇问题
 
----
-
 [原题链接](https://www.acwing.com/problem/content/4618/)
 
 **题目大意**：
 
 * 求一维数轴上 $x$ 和 $y$ 分别以速度 $a,b$ 相向而行时，相遇所需时间是否为整数。
 
----
-
-**思想**：
+**思路**：
 
 * 签到题。
   * 输出判断 $a + b$ 是否可以整除 $y - x$ 即可。
-
----
 
 **代码**：
 ```cpp
@@ -52,8 +46,6 @@ int main() {
 
 ## 4616. 击中战舰
 
----
-
 [原题链接](https://www.acwing.com/problem/content/4619/)
 
 **题目大意**：
@@ -63,16 +55,12 @@ int main() {
   * 求最少再打击几个格子可以保证下一次打击绝对命中船。
   * 输出任意方案即可。
 
----
-
-**思想**：
+**思路**：
 
 * 思维题。
   * 由于船的位置不确定，那么对于每个包含连续的 $b$ 个格子的区间一定可以放下一条船。
   * 则我们最终打击的对象在于这些区间中的任意一个格子，因此我们记录所有的这些连续的 $b$ 个格子中任意一个格子的坐标。
   * 最后，由于无效打击的次数最少，假设所有可打击的区间数量为 $x$，则最少打击 $x - a + 1$ 次后，下一次的打击区间必定命中船。
-
----
 
 **代码**：
 ```cpp
@@ -90,6 +78,7 @@ void solve() {
     string s;
     cin >> s;
     int cnt = 0;
+    idx = 0;
     for (int i = 0; i &lt; s.size(); i++) {
         if (s[i] == '0') {
             cnt++;
@@ -97,25 +86,20 @@ void solve() {
                 num[idx++] = i + 1;
                 cnt = 0;
             }
-        } else
+        } else {
             cnt = 0;
+        }
     }
-}
-```
-
-cout &lt;&lt; idx - a + 1 &lt;&lt; endl;
-    for(int i = 0; i &lt; idx - a + 1; i ++) cout &lt;&lt; num[i] &lt;&lt; ' ';
-
-return;
-
+    cout &lt;&lt; idx - a + 1 &lt;&lt; endl;
+    for (int i = 0; i &lt; idx - a + 1; i++) {
+        cout &lt;&lt; num[i] &lt;&lt; ' ';
+    }
+    cout &lt;&lt; endl;
 }
 
-int main(){
-
-solve();
-
-return 0;
-
+int main() {
+    solve();
+    return 0;
 }
 ```
 
@@ -129,8 +113,6 @@ return 0;
 
 * 给定一个非负整数 $a$，请你计算方程 $a-(a \oplus x)-x=0$ 的非负整数解的数量。
 
----
-
 **思路**：
 
 * 数学思维题。
@@ -143,8 +125,6 @@ return 0;
     * 故此时只有 $x$ 的二进制位也是 $0$ 才可使得等式成立。
   * 综上，设 $a$ 的二进制位上共有 $m$ 个位的值为 $1$，则 $x$ 的可选方案数为 $2^m$ 种。
 
----
-
 **代码**：
 ```cpp
 #include &lt;bits/stdc++.h&gt;
@@ -152,21 +132,21 @@ using namespace std;
 
 typedef long long LL;
 
-void solve(){
+void solve() {
     LL n;
     cin >> n;
     int cnt = 0;
-    while(n){
+    while (n) {
         cnt += n & 1;
         n >>= 1;
     }
     cout &lt;&lt; (1LL &lt;&lt; cnt) &lt;&lt; endl;
 }
 
-int main(){
+int main() {
     int _ = 1;
     cin &gt;> _;
-    while(_ --) solve();
+    while (_--) solve();
     return 0;
 }
 ```

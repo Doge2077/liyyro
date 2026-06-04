@@ -71,13 +71,6 @@ int main(){
     }
     return 0;
 }
-```cpp
-while(_--){
-    solve();
-}
-
-return 0;
-}
 ```
 
 ---
@@ -90,11 +83,9 @@ return 0;
 
 **题目大意**
 
-* 给定一个序列 $a$ 和 $q$ 次操作： 
-```cpp
-* 操作 $0~~x_j$ 表示将序列中所有的偶数加上 $x_j$。
-* 操作 $1~~x_j$ 表示将序列中所有的奇数加上 $x_j$。
-```
+* 给定一个序列 $a$ 和 $q$ 次操作：
+  * 操作 $0~~x_j$ 表示将序列中所有的偶数加上 $x_j$。
+  * 操作 $1~~x_j$ 表示将序列中所有的奇数加上 $x_j$。
   * 求每次操作之后的序列之和。
 
 ---
@@ -103,16 +94,12 @@ return 0;
 
 * 思维题。
   * 记录 $a$ 之和以及其偶数和奇数的数量。
-  * 操作为 $0$ 时： 
-```cpp
-* 偶数加偶数，偶数数量不变；
-* 偶数加奇数，奇数数量增加当前偶数的数量。
-```
-  * 操作为 $1$ 时： 
-```cpp
-* 奇数加偶数，奇数数量不变；
-* 奇数加奇数，偶数数量增加当前奇数的数量。
-```
+  * 操作为 $0$ 时：
+    * 偶数加偶数，偶数数量不变；
+    * 偶数加奇数，奇数数量增加当前偶数的数量。
+  * 操作为 $1$ 时：
+    * 奇数加偶数，奇数数量不变；
+    * 奇数加奇数，偶数数量增加当前奇数的数量。
 
 ---
 
@@ -159,9 +146,7 @@ void solve(){
         else odd ++;
         sum += x;
     }
-```
-
-while(q --){
+    while(q --){
         int op, k; cin >> op >> k;
         if(op == 0){
             if(k % 2 == 0) sum += even * k;
@@ -179,23 +164,16 @@ while(q --){
         }
         cout &lt;&lt; sum &lt;&lt; endl;
     }
-
 }
 
 int main(){
-
-IOS;
-
-int _ = 1;
-
-cin &gt;> _;
-
-while(_ --){
+    IOS;
+    int _ = 1;
+    cin &gt;> _;
+    while(_ --){
         solve();
     }
-
-return 0;
-
+    return 0;
 }
 ```
 
@@ -226,7 +204,6 @@ return 0;
 
 **代码** ：
 ```cpp
-
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -253,7 +230,6 @@ typedef long long LL;
 typedef pair&lt;int, int&gt; PII;
 typedef pair&lt;LL, LL&gt; PLL;
 
-```cpp
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
 const double eps = 1e-6, PI = acos(-1);
@@ -305,9 +281,7 @@ int main() {
 
 * 给定一个长度为 $n$ 的正整数序列 $a$，要求通过操作使得所有元素的乘积可以被 $2^n$ 整除。
   * 可以进行如下操作：
-    ```cpp
     * 将 $a_i$ 变为 $a_i \times i$。
-    ```
   * 上述操作每个位置只能进行一次。
   * 求满足题意的最少操作次数。
 
@@ -338,7 +312,6 @@ int main() {
 #include &lt;unordered_set&gt;
 
 using namespace std;
-```
 
 #define IOS ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr)
 #define re register
@@ -396,3 +369,4 @@ int main() {
     }
     return 0;
 }
+```

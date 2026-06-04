@@ -9,7 +9,7 @@ description: ""
 
 ---
 
-## 1\. vector
+## 1. vector
 
 ---
 
@@ -18,7 +18,7 @@ description: ""
 #include &lt;vector&gt;   // 头文件
 vector&lt;int&gt; a;      // 相当于一个长度动态变化的int数组
 vector&lt;int&gt; b[233]; // 相当于第一维长233，第二维长度动态变化的int数组
-struct rec{…};
+struct rec{...};
 vector&lt;rec&gt; c;      // 自定义的结构体类型也可以保存在vector中
 ```
 
@@ -88,8 +88,6 @@ vector&lt;int&gt;::iterator it;
 
 接下来引入两个迭代器 `begin/end`，`begin`函数返回指向`vector`中第一个元素的迭代器。例如`a`是一个非空的`vector`，则`*a.begin()`与`a[0]`的作用相同。
 ```cpp
-// （此处为代码示例的开始，但原文件在此处截断，故保留为注释提示）
-```cpp
 vector&lt;int&gt; a;
 for(int i = 1; i &lt;= 10; i ++) a.push_back(i);
 vector&lt;int&gt;::iterator it = a.begin();
@@ -143,7 +141,7 @@ cout &lt;&lt; a[a.size() - 1] &lt;&lt; endl;
 ```cpp
 #include &lt;queue&gt;  //头文件，包含 queue 和 priority_queue
 queue&lt;int&gt; q;
-struct rec{…}; queue&lt;rec&gt; q;                        //结构体rec中必须定义小于号
+struct rec{...}; queue&lt;rec&gt; q;                        //结构体rec中必须定义小于号
 priority_queue&lt;int&gt; q;                              // 大根堆
 priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;> q;   // 小根堆
 priority_queue&lt;pair&lt;int, int&gt;> q;
@@ -196,7 +194,7 @@ cout &lt;&lt; a.top() &lt;&lt; endl;  //仅支持访问堆顶元素
 
 ---
 
-## 3\. deque
+## 3. deque
 
 ---
 
@@ -219,7 +217,7 @@ clear           // 清空队列
 
 ---
 
-## 4\. set
+## 4. set
 
 ---
 
@@ -310,7 +308,6 @@ cout &lt;&lt; a.count(11) &lt;&lt; endl;
 ```cpp
 #include &lt;map&gt;  //头文件
 map&lt;key_type, value_type&gt; name;
-```
 
 //例如：
 map&lt;long long, bool&gt; vis;
@@ -326,7 +323,6 @@ map&lt;pair&lt;int, int&gt;, vector&lt;int&gt;> test;
 
 `size/empty/clear/begin/end` 均与 `set` 类似，但对于 `insert/erase` 的参数为 `pair&lt;key_type, value_type&gt;`。
 ```cpp
-
 map&lt;int, int&gt; a;
 a.insert({1, 1});
 a.insert({2, 1});
@@ -334,7 +330,6 @@ a.insert({2, 1});
 
 特别的，对于 `find`，`a.find(x)` 在变量名为 `a` 的 `map` 中，查找 `key` 为 `x` 的二元组。
 ```cpp
-
 map&lt;int, int&gt; a;
 a.insert({1, 1});
 a.insert({2, 1});
@@ -353,38 +348,36 @@ else cout &lt;&lt; "NO" &lt;&lt; endl;
 
 除了和 `set` 一样利用迭代器进行访问，`map`也支持 `[]` 操作符进行访问。我们可以很方便地通过 `a[key]` 来得到`key`对应的`value`，还可以对`a[key]`进行赋值操作，改变`key`对应的`value`。
 ```cpp
-
 map&lt;int, int&gt; a;
-    a.insert({1, 1});
-    a.insert({2, 1});
+a.insert({1, 1});
+a.insert({2, 1});
 
 cout &lt;&lt; a[2] &lt;&lt; endl;
-    a[2] = 100;  //修改key = 2 的 value 为 100
-    cout &lt;&lt; a[2] &lt;&lt; endl;
+a[2] = 100;  //修改key = 2 的 value 为 100
+cout &lt;&lt; a[2] &lt;&lt; endl;
 
 //利用迭代器遍历
-    for(map&lt;int, int&gt;::iterator it = a.begin(); it != a.end(); it ++) cout &lt;&lt; (*it).first &lt;&lt; ' ' &lt;&lt; (*it).second &lt;&lt; endl;
+for(map&lt;int, int&gt;::iterator it = a.begin(); it != a.end(); it ++) cout &lt;&lt; (*it).first &lt;&lt; ' ' &lt;&lt; (*it).second &lt;&lt; endl;
 ```
 
 此外，`C++11` 提供了更方便的遍历 `set/map` 的方式：
 ```cpp
-
 map&lt;int, int&gt; a;
-    a.insert({1, 1});
-    a.insert({2, 1});
+a.insert({1, 1});
+a.insert({2, 1});
 
 for(auto &p : a) cout &lt;&lt; p.first &lt;&lt; ' ' &lt;&lt; p.second &lt;&lt; endl;
 
 set&lt;int&gt; b;
-    b.insert(1);
-    b.insert(2);
+b.insert(1);
+b.insert(2);
 
 for(auto &p : b) cout &lt;&lt; p &lt;&lt; endl;
 ```
 
 ---
 
-## 6\. string
+## 6. string
 
 ### 6.1 声明
 ```cpp
@@ -408,11 +401,11 @@ reverse(str1.begin(), str1.end());  //将str1翻转
 
 int p1 = str1.find(str2); //从最左边开始返回str1中首次出现str2首字母的下标，没有时返回-1
 
-int p2 = str1.find(str2,3); //从下标3开始(包括s1[3])返回str1中首次出现str2首字母的下标，没有时返回-1
+int p2 = str1.find(str2,3); //从下标3开始(包括str1[3])返回str1中首次出现str2首字母的下标，没有时返回-1
 
 int p3 = str1.rfind(str2);  //从最右边开始返回str1中首次出现str2首字母的下标，没有时返回-1
 
-int p4 = str1.rfind(str2,3);  //下标3开始(包括s1[3])返回str1中首次出现str2首字母的下标，没有时返回-1
+int p4 = str1.rfind(str2,3);  //下标3开始(包括str1[3])返回str1中首次出现str2首字母的下标，没有时返回-1
 
 string str3 = "1234.567" ;
 
@@ -458,7 +451,6 @@ pair&lt;int, int&gt; d[100];
 在 `pair` 里已经预先定义了所有的比较运算符，包括 `&lt;`、`&gt;`、`&lt;=`、`&gt;=`、`==`、`!=`。当然，这需要组成 `pair` 的两个变量所属的数据类型定义了 `==` 和/或 `&lt;` 运算符。
 
 其中，`&lt;`、`&gt;`、`&lt;=`、`&gt;=` 四个运算符会先比较两个 `pair` 中的第一个变量，在第一个变量相等的情况下再比较第二个变量。
-```cpp
 ```cpp
 pair&lt;int, string&gt; name[10];
 
@@ -524,21 +516,21 @@ cout &lt;&lt; pos4 &lt;&lt; ' ' &lt;&lt; a[pos4] &lt;&lt; endl;
 
 ```cpp
 int a[] = {1, 2, 3, 4, 5};
-    do {
-      for(int i = 0; i &lt; 5; i ++) cout &lt;&lt; a[i] &lt;&lt; " ";
-      cout &lt;&lt; endl;
-    } while(next_permutation(a, a + 5));
+do {
+    for(int i = 0; i &lt; 5; i ++) cout &lt;&lt; a[i] &lt;&lt; " ";
+    cout &lt;&lt; endl;
+} while(next_permutation(a, a + 5));
 
 vector&lt;int&gt; a = {1, 2, 3, 4, 5};
-    do {
-      for(int i = 0; i < a.size(); i ++) cout << a[i] << " ";
-      cout << endl;
-    } while(next_permutation(a.begin(), a.end()));
+do {
+    for(int i = 0; i < a.size(); i ++) cout << a[i] << " ";
+    cout << endl;
+} while(next_permutation(a.begin(), a.end()));
 ```
 
 ---
 
-## 10\. 参考资料 & 了解更多
+## 10. 参考资料 & 了解更多
 
 ---
 

@@ -68,43 +68,43 @@ description: ""
 
 以下是修复错别字和格式问题后的文本：
 
-* 该题以Z字形遍历数组，对于奇数和偶数情况下，边界转向复杂
-  * 扩大原二维数组，使边界转向统一
+* 该题以Z字形遍历数组，对于奇数和偶数情况下，边界转向复杂。
+  * 扩大原二维数组，使边界转向统一。
   * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/2.png)
-  * 观察旋转方向，设初始方向 `dr = 0`
-  * 扩大二维数组，遍历满足在原数组范围内时输出
+  * 观察旋转方向，设初始方向 `dr = 0`。
+  * 扩大二维数组，遍历满足在原数组范围内时输出。
   * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/3.png)
 
 **代码**
 ```cpp
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
-const int N=505;
+const int N = 505;
 
-int a[2*N][2*N];  //定义时直接扩大
+int a[2 * N][2 * N]; // 定义时直接扩大
 
-int main(){
+int main() {
     int n;
-    scanf("%d",&n);
-    for(int i=0;i&lt;n;i++){  //初始化二维数组
-        for(int j=0;j&lt;n;j++){
-            scanf("%d",&a[i][j]);
+    scanf("%d", &n);
+    for (int i = 0; i &lt; n; i++) { // 初始化二维数组
+        for (int j = 0; j &lt; n; j++) {
+            scanf("%d", &a[i][j]);
         }
     }
     // 定义方向：dr=0时向右上，dr=1时向右下，dr=2时向左下，dr=3时向左上
-    int dr=0, dx[]={-1, 1, 1, -1}, dy[]={1, 1, -1, -1};
-    printf("%d ",a[0][0]);  //先将(0,0)位置的数输出
-    int x=0,y=1;  //初始化位置为(0,1)
-    for(int i=0;i&lt;(2*n+1)*n;i++){  //循环遍历扩大后的数组
-        if(x&lt;n && y&lt;n && x&gt;=0 && y>=0){
-            printf("%d ",a[x][y]);  //满足在原始数组范围内输出
+    int dr = 0, dx[] = {-1, 1, 1, -1}, dy[] = {1, 1, -1, -1};
+    printf("%d ", a[0][0]); // 先将(0,0)位置的数输出
+    int x = 0, y = 1; // 初始化位置为(0,1)
+    for (int i = 0; i &lt; (2 * n + 1) * n; i++) { // 循环遍历扩大后的数组
+        if (x &lt; n && y &lt; n && x &gt;= 0 && y >= 0) {
+            printf("%d ", a[x][y]); // 满足在原始数组范围内输出
         }
-        int l=x+dx[dr], r=y+dy[dr];  //临时变量判断下一个要遍历的格子坐标(l,r)
-        if(dr==0 || dr==2 || r&lt;0 || l&lt;0 || r&gt;=n || l>=n){  //如果dr=0或dr=2或(l,r)出界时改变方向
-            dr=(dr+1)%4;
-            l=x+dx[dr], r=y+dy[dr];
+        int l = x + dx[dr], r = y + dy[dr]; // 临时变量判断下一个要遍历的格子坐标(l,r)
+        if (dr == 0 || dr == 2 || r &lt; 0 || l &lt; 0 || r &gt;= n || l >= n) { // 如果dr=0或dr=2或(l,r)出界时改变方向
+            dr = (dr + 1) % 4;
+            l = x + dx[dr], r = y + dy[dr];
         }
-        x=l, y=r;  //更新(x,y)
+        x = l, y = r; // 更新(x,y)
     }
     return 0;
 }
@@ -136,7 +136,7 @@ int main(){
 
 **分析**
 
-* 利用递归进行模拟
+* 利用递归进行模拟。
 
 **代码**
 ```cpp
@@ -144,36 +144,22 @@ int main(){
 using namespace std;
 
 int n, ans;
-```cpp
-void dfs(int u){
-    if(u == n) {
+
+void dfs(int u) {
+    if (u == n) {
         ans++;
         return;
     }
-    if(u > n) return;
-    dfs(u + 1);
-    dfs(u + 2);
-    dfs(u + 3);
+    if (u > n) return;
+    // 当不会超出 n 时进行下一步
+    if (u + 1 &lt;= n) dfs(u + 1);
+    if (u + 2 &lt;= n) dfs(u + 2);
+    if (u + 3 &lt;= n) dfs(u + 3);
 }
 
-int main(){
-    scanf("%d", &n);
-    ans = 0;
-    dfs(0);
-    printf("%d", ans);
-    return 0;
-}
-```
-
-// 当不会超出 n 时进行下一步
-```cpp
-    if(u+1&lt;=n) dfs(u+1);
-    if(u+2&lt;=n) dfs(u+2);
-    if(u+3&lt;=n) dfs(u+3);
-}
-
-int main(){
+int main() {
     cin &gt;> n;
+    ans = 0;
     dfs(0);
     cout &lt;&lt; ans &lt;&lt; endl;
     return 0;
@@ -182,11 +168,11 @@ int main(){
 
 ---
 
-## 2. 课程内容
+## 3. 课程内容
 
 ---
 
-### 2.1 搜索技术简介
+### 3.1 搜索技术简介
 
 ---
 
@@ -207,29 +193,29 @@ int main(){
 
 **思想**
 
-*   搜索技术是**“暴力法”**算法思想的具体实现
-    *   将所有可能的情况都罗列出来，然后逐一检查，从中找到答案
+*   搜索技术是**“暴力法”**算法思想的具体实现。
+    *   将所有可能的情况都罗列出来，然后逐一检查，从中找到答案。
 
 **特点**
 
-*   很多问题只能用暴力法解决，例如猜密码、走迷宫等问题
-    *   对于小规模的问题，暴力法完全够用，而且避免了高级算法需要的复杂编码
+*   很多问题只能用暴力法解决，例如猜密码、走迷宫等问题。
+    *   对于小规模的问题，暴力法完全够用，而且避免了高级算法需要的复杂编码。
     *   把暴力法当作参照(benchmark)。拿到题目后，如果没有其他思路，可以先试试暴力法，在具体编程时常常需要对暴力法进行优化，以减少搜索空间，提高效率。
 
 ---
 
-### 2.2 BFS (广度优先搜索)
+### 3.2 BFS (广度优先搜索)
 
 ---
 
-#### 2.2.1 C++ STL 队列相关操作
+#### 3.2.1 C++ STL 队列相关操作
 
 ---
 
 **特点**
 
-*   先进先出
-*   只允许对队头进行操作
+*   先进先出。
+*   只允许对队头进行操作。
 
 ![队列概念图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/队列概念.png)
 
@@ -250,7 +236,7 @@ int main(){
 #include &lt;queue&gt;
 using namespace std;
 
-struct point {  // 声明 point 为 struct 类型
+struct point { // 声明 point 为 struct 类型
     int x, y;
 };
 
@@ -267,7 +253,7 @@ int main() {
 
 ##### 3. 向队尾插入元素（入队）
 
-**语法：**`.push()`
+**语法：** `.push()`
 
 **eg：**
 ```cpp
@@ -276,51 +262,73 @@ int main() {
 #include &lt;queue&gt;
 using namespace std;
 
-struct point { //声明point为struct类型
+struct point { // 声明point为struct类型
     int x, y;
 };
 
 int main() {
-```
+    queue&lt;int&gt; a; // 定义一个名为a，存储int类型数据的队列
+    queue&lt;string&gt; b; // 定义一个名为b，存储string类型数据的队列
+    queue&lt;point&gt; c; // 定义一个名为c，存储point类型数据的队列
 
-##### 4. 将队头弹出（出队）
+    a.push(1); // 在队列a的末尾添加int类型的元素1
 
-**语法：**`.pop()`
-
-**eg：**
-```cpp
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;queue&gt;
-using namespace std;
-
-struct point { //声明point为struct类型
-    int x, y;
-};
-
-int main() {
-    queue&lt;int&gt; a; //定义一个名为a，存储int类型数据的队列
-    queue&lt;string&gt; b; //定义一个名为b，存储string类型数据的队列
-    queue&lt;point&gt; c; //定义一个名为c，存储point类型数据的队列
-
-    a.push(1); //在队列a的末尾添加int类型的元素1
-    b.push("abc"); //在队列b的末尾添加string类型的元素abc
+    b.push("abc"); // 在队列b的末尾添加string类型的元素abc
+    b.push("cdef"); // 在队列b的末尾添加string类型的元素cdef
 
     point p;
     p.x = 10;
     p.y = 20;
-    c.push(p); //在队列c的末尾添加point类型的元素p，p.x=10, p.y=20
-    c.push({10, 20}); //与c.push(p)等价
+    c.push(p); // 在队列c的末尾添加point类型的元素p, p.x=10, p.y=20
+    c.push({10, 20}); // 与c.push(p)等价
 
-    /*目前队列中的元素：
-    a: 1
-    b: "abc"
-    c: {10,20}, {10,20}
+    return 0;
+}
+```
+
+---
+
+##### 4. 将队头弹出（出队）
+
+**语法：** `.pop()`
+
+**eg：**
+```cpp
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+struct point { // 声明point为struct类型
+    int x, y;
+};
+
+int main() {
+    queue&lt;int&gt; a; // 定义一个名为a，存储int类型数据的队列
+    queue&lt;string&gt; b; // 定义一个名为b，存储string类型数据的队列
+    queue&lt;point&gt; c; // 定义一个名为c，存储point类型数据的队列
+
+    a.push(1); // 在队列a的末尾添加int类型的元素1
+
+    b.push("abc"); // 在队列b的末尾添加string类型的元素abc
+    b.push("cdef");
+
+    point p;
+    p.x = 10;
+    p.y = 20;
+    c.push(p); // 在队列c的末尾添加point类型的元素p, p.x=10, p.y=20
+
+    c.push({10, 20}); // 与c.push(p)等价
+
+    while(!c.empty()) { // 当队列c不为空时弹出队头
+        c.pop();
+    }
+
+    /* 目前队列中的元素：
+       a: 1
+       b: "abc", "cdef"
+       c: (空)
     */
-
-    a.pop(); //将队列a的队头元素弹出，此时队列a为空
-    b.pop(); //将队列b的队头元素弹出，此时队列b为空
-    c.pop(); //将队列c的队头元素弹出，此时队列c还有一个元素{10, 20}
 
     return 0;
 }
@@ -330,7 +338,7 @@ int main() {
 
 ##### 5. 查看队列的长度
 
-**语法：**`.size()`
+**语法：** `.size()`
 
 **eg：**
 ```cpp
@@ -339,55 +347,41 @@ int main() {
 #include &lt;queue&gt;
 using namespace std;
 
-struct point { //声明point为struct类型
+struct point { // 声明point为struct类型
     int x, y;
 };
 
 int main() {
+    queue&lt;int&gt; a; // 定义一个名为a，存储int类型数据的队列
+    queue&lt;string&gt; b; // 定义一个名为b，存储string类型数据的队列
+    queue&lt;point&gt; c; // 定义一个名为c，存储point类型数据的队列
+
+    a.push(1); // 在队列a的末尾添加int类型的元素1
+
+    b.push("abc"); // 在队列b的末尾添加string类型的元素abc
+    b.push("cdef"); // 在队列b的末尾添加string类型的元素cdef
+
+    point p;
+    p.x = 10;
+    p.y = 20;
+    c.push(p); // 在队列c的末尾添加point类型的元素p, p.x=10, p.y=20
+    c.push({10, 20}); // 与c.push(p)等价
+
+    /* 目前队列中的元素：
+       a: 1
+       b: "abc", "cdef"
+       c: {10,20}, {10,20}
+    */
+
+    cout &lt;&lt; a.size() &lt;&lt; endl; // 输出队列a的元素个数为1
+    cout &lt;&lt; b.size() &lt;&lt; endl; // 输出队列b的元素个数为2
+    cout &lt;&lt; c.size() &lt;&lt; endl; // 输出队列c的元素个数为2
+
+    return 0;
+}
 ```
 
 ---
-
-**主要修复：**
-1.  代码语言标记 `java` → `cpp`
-2.  注释中的中文逗号 `，` → 英文逗号 `,`
-3.  统一代码缩进格式
-
-```cpp
-queue&lt;int&gt; a; // 定义一个名为a，存储int类型数据的队列
-queue&lt;string&gt; b; // 定义一个名为b，存储string类型数据的队列
-queue&lt;point&gt; c; // 定义一个名为c，存储point类型数据的队列
-
-a.push(1); // 在队列a的末尾添加int类型的元素1
-
-b.push("abc"); // 在队列b的末尾添加string类型的元素abc
-b.push("cdef"); // 在队列b的末尾添加string类型的元素cdef
-```
-
-point p;
-p.x = 10;
-p.y = 20;
-c.push(p); // 在队列c的末尾添加point类型的元素p, p.x=10, p.y=20
-
-c.push({10, 20}); // 与c.push(p)等价
-
-while(c.size()) { // 当队列c中存在元素时弹出队头
-    c.pop();
-}
-
-/* 目前队列中的元素：
-   a: 1
-   b: "abc", "cdef"
-   c: (空)
-*/
-
-cout &lt;&lt; a.size() &lt;&lt; endl; // 输出队列a的元素个数为1
-cout &lt;&lt; b.size() &lt;&lt; endl; // 输出队列b的元素个数为2
-cout &lt;&lt; c.size() &lt;&lt; endl; // 输出队列c的元素个数为0
-
-return 0;
-}
-```
 
 ##### 6. 查看队列是否为空
 
@@ -441,17 +435,17 @@ int main() {
 
 ---
 
-#### 2.2.2 BFS详解
+#### 3.2.2 BFS详解
 
 ---
 
 ##### 1\. 思想
 
-* 当题目需要对一组数据进行扩展式搜索时可以考虑`BFS`
-  * 搜索时要将已经满足要求的点入队
-  * 不断地弹出队头，以队头元素进行扩展搜索，可以得到若干新的元素
-  * 对这些元素进行判断，满足继续搜索的条件则将该元素入队，否则具体问题具体分析，标记或抛弃
-  * 一般来说，`BFS`在第一次搜到答案时可以直接返回值，提前结束搜索
+* 当题目需要对一组数据进行扩展式搜索时可以考虑`BFS`。
+  * 搜索时要将已经满足要求的点入队。
+  * 不断地弹出队头，以队头元素进行扩展搜索，可以得到若干新的元素。
+  * 对这些元素进行判断，满足继续搜索的条件则将该元素入队，否则具体问题具体分析，标记或抛弃。
+  * 一般来说，`BFS`在第一次搜到答案时可以直接返回值，提前结束搜索。
 
 ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/BFS.png)
 
@@ -493,10 +487,10 @@ No
 
 **分析**
 
-* 走出迷宫需要对每一个点进行搜索
-  * 首先需要记录`S`的坐标
-  * 从`S`开始搜索，需要偏移量数组
-  * 对于`BFS`在搜索时，若搜到`E`点直接返回
+* 走出迷宫需要对每一个点进行搜索。
+  * 首先需要记录`S`的坐标。
+  * 从`S`开始搜索，需要偏移量数组。
+  * 对于`BFS`在搜索时，若搜到`E`点直接返回。
 
 **BFS代码**
 ```cpp
@@ -543,71 +537,34 @@ bool bfs() {
 
 int main() {
     while (cin &gt;> n >> m) {
-        // 输入地图并处理
-    }
-}
-```
+        // 初始化清空数据
+        memset(vis, 0, sizeof vis);
+        memset(mp, 0, sizeof mp);
 
-// 初始化清空数据
-memset(vis, 0, sizeof vis);
-memset(mp, 0, sizeof mp);
-
-for (int i = 1; i &lt;= n; i++) {
-    for (int j = 1; j &lt;= m; j++) {
-        cin &gt;> mp[i][j];
-        if (mp[i][j] == 'S') {  // 标记S的坐标
-            s1 = i;
-            s2 = j;
+        for (int i = 1; i &lt;= n; i++) {
+            for (int j = 1; j &lt;= m; j++) {
+                cin &gt;> mp[i][j];
+                if (mp[i][j] == 'S') {  // 标记S的坐标
+                    s1 = i;
+                    s2 = j;
+                }
+            }
         }
+
+        if (bfs()) cout &lt;&lt; "Yes" &lt;&lt; endl;
+        else cout &lt;&lt; "No" &lt;&lt; endl;
     }
-}
-
-if (bfs()) cout &lt;&lt; "Yes" &lt;&lt; endl;
-else cout &lt;&lt; "No" &lt;&lt; endl;
-
-return 0;
-```cpp
-queue&lt;point&gt; st;  // 定义队列
-st.push({1,1});  // 将起始点的信息入队
-vis[1][1]=1;  // 标记起始点已经走过
-
-while(!st.empty()){
-    auto p=st.front();  // 使 p 获得队头的信息
-    st.pop();  // 将队头出队
-
-    for(int i=0;i&lt;4;i++){  // 循环遍历偏移量数组，搜索四个方向
-        int l=p.x+dx[i], r=p.y+dy[i];
-        if(l&gt;=1 && l&lt;=n && r&gt;=1 && r&lt;=m && mp[l][r]==0 && !vis[l][r]){  // 判断该点是否满足搜索条件
-            ans[l][r]=ans[p.x][p.y]+1;  // 更新答案
-            if(l==n && r==m) return ans[n][m];  // 搜到答案直接返回
-            vis[l][r]=1;  // 标记该点已经走过
-            st.push({l,r});  // 将该点入队，后续继续扩展该点搜索
-        }
-    }
-}
-
-return ans[n][m];  // 没有提前搜到答案，最后返回答案
-}
-
-int main(){
-    cin&gt;>n>>m;
-    for(int i=1;i&lt;=n;i++){
-        for(int j=1;j&lt;=m;j++){
-            cin&gt;>mp[i][j];
-        }
-    }
-    cout&lt;&lt;bfs()&lt;&lt;endl;
     return 0;
 }
 ```
 
 ---
 
-### 2.3 DFS (深度优先搜索)
+### 3.3 DFS (深度优先搜索)
 
 ---
 
-#### 2.3.1 栈与递归
+#### 3.3.1 栈与递归
 
 ---
 
@@ -615,8 +572,8 @@ int main(){
 
 ---
 
-* 栈是一种**后进先出**（LIFO）的数据结构
-  * 只允许对栈顶元素操作，不允许遍历
+* 栈是一种**后进先出**（LIFO）的数据结构。
+  * 只允许对栈顶元素操作，不允许遍历。
 
 ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/栈概念.png)
 
@@ -634,24 +591,24 @@ int main(){
 **例题1 计算 n 的阶乘**
 
 **e.g.：**
-```java
-import java.util.*;
-public class Main {
-    static int n;
+```cpp
+#include &lt;iostream&gt;
+using namespace std;
 
-    static int fx(int u) {
-        // System.out.println("u = " + u);  // 输出每一次递归调用后 u 的值
-        if (u == 1) {
-            return 1;
-        }
-        return fx(u - 1) * u;
-    }
+int n;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        System.out.println(fx(n));
+int fx(int u) {
+    // cout &lt;&lt; "u = " &lt;&lt; u &lt;&lt; endl;  // 输出每一次递归调用后 u 的值
+    if (u == 1) {
+        return 1;
     }
+    return fx(u - 1) * u;
+}
+
+int main() {
+    cin &gt;> n;
+    cout &lt;&lt; fx(n) &lt;&lt; endl;
+    return 0;
 }
 ```
 
@@ -700,14 +657,14 @@ int ans;
 
 void step(int x, int y) {
     if (x == n && y == m) ans++;
-    //当走下一步，没有超出终点时，利用递归进行选择的实现
+    // 当走下一步，没有超出终点时，利用递归进行选择的实现
     if (x + 1 &lt;= n) step(x + 1, y);
     if (y + 1 &lt;= m) step(x, y + 1);
 }
 
 int main() {
     cin &gt;> n >> m;
-    if (n != 0 && m != 0) step(0, 0);  //注意如果起始点和终点重合，则不需要走
+    if (n != 0 && m != 0) step(0, 0);  // 注意如果起始点和终点重合，则不需要走
     cout &lt;&lt; ans &lt;&lt; endl;
     return 0;
 }
@@ -715,7 +672,7 @@ int main() {
 
 ---
 
-#### 2.3.2 DFS详解
+#### 3.3.2 DFS详解
 
 ---
 
@@ -727,7 +684,7 @@ int main() {
 * 重复上述过程，直到将所有可以达到的状态全部遍历。
 * 一般来说，使用`DFS`时，如果提前搜索到答案，只进行标记而不提前返回或退出。
 
-* 当搜索过程中出现明显不满足目标的状态时可以提前返回，减少搜索次数
+* 当搜索过程中出现明显不满足目标的状态时可以提前返回，减少搜索次数。
 
 ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/DFS.png)
 
@@ -763,20 +720,18 @@ S##
 ##E
 ```
 
-## 修复后的文本
-
 **输出样例**
-```cpp
+```
 Yes
 No
 ```
 
 **分析**
 
-* 走出迷宫需要对每一个点进行搜索
-  * 首先需要记录`S`的坐标
-  * 从`S`开始搜索，需要偏移量数组
-  * 对于`DFS`在搜索时，若搜到`E`点则标记答案
+* 走出迷宫需要对每一个点进行搜索。
+  * 首先需要记录`S`的坐标。
+  * 从`S`开始搜索，需要偏移量数组。
+  * 对于`DFS`在搜索时，若搜到`E`点则标记答案。
 
 **DFS代码**
 ```cpp
@@ -805,7 +760,6 @@ void dfs(int x, int y) {
     }
 }
 
-```cpp
 int main() {
     while (cin &gt;> n >> m) {  // 多实例输入
         flag = 0;
@@ -883,11 +837,7 @@ int ans[N];
 int a[N];
 bool vis[N];  // 标记是否使用过该数
 int n;
-```
 
-以下是修复了错别字和格式问题后的文本：
-
-```cpp
 void dfs(int u) {
     if (u == n) {
         for (int i = 0; i &lt; n; i++) {
@@ -919,9 +869,9 @@ int main() {
 
 **扩展**：
 
-*   利用 `STL` 中的 `next_permutation` 函数
+*   利用 `STL` 中的 `next_permutation` 函数。
 
-&gt; `next_permutation` 按照字典序生成下一个排列，复杂度 `O(n)`，排列范围 `[first, last)`
+&gt; `next_permutation` 按照字典序生成下一个排列，复杂度 `O(n)`，排列范围 `[first, last)`。
 
 **代码**：
 ```cpp
@@ -979,51 +929,44 @@ int main() {
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
 
-const int N=510;
+const int N = 510;
 
-bool y[N],l[N],r[N];  //标记是否存在皇后
+bool y[N], l[N], r[N];  // 标记是否存在皇后
 
 int n;
 
 int ans;
 
-void dfs(int u){
-
-if(u==n){
+void dfs(int u) {
+    if (u == n) {
         ans++;
-        return ;
+        return;
     }
 
-for(int i=0;i&lt;n;i++){
-
-if(!y[i]&&!l[u+i+n]&&!r[u-i+n]){  //若该格子的列和对角线的平行线上没有存在过皇后
-            y[i]=l[u+i+n]=r[u-i+n]=1;  //标记
-            dfs(u+1);  //递归到下一层
-            y[i]=l[u+i+n]=r[u-i+n]=0;  //恢复现场
+    for (int i = 0; i &lt; n; i++) {
+        if (!y[i] && !l[u + i + n] && !r[u - i + n]) {  // 若该格子的列和对角线的平行线上没有存在过皇后
+            y[i] = l[u + i + n] = r[u - i + n] = 1;  // 标记
+            dfs(u + 1);  // 递归到下一层
+            y[i] = l[u + i + n] = r[u - i + n] = 0;  // 恢复现场
         }
-
+    }
 }
 
-}
-
-int main(){
-
-cin&gt;>n;
-
-dfs(0);
-
-cout&lt;&lt;ans&lt;&lt;endl;
-
+int main() {
+    cin &gt;> n;
+    dfs(0);
+    cout &lt;&lt; ans &lt;&lt; endl;
+    return 0;
 }
 ```
 
 ---
 
-## 3\. 课后习题
+## 4\. 课后习题
 
 ---
 
-### 3.1 BFS习题
+### 4.1 BFS习题
 
 ---
 
@@ -1041,7 +984,7 @@ cout&lt;&lt;ans&lt;&lt;endl;
 
 ---
 
-### 3.2 DFS习题
+### 4.2 DFS习题
 
 ---
 

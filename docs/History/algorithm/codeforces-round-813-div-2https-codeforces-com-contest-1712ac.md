@@ -95,29 +95,17 @@ using namespace std;
 void solve(){
     int n;
     cin >> n;
-    // ... (其余代码省略，可根据需要补充)
-}
 
-int main(){
-    int _;
-    cin >> _;
-    while(_ --){
-        solve();
+    if (n % 2 == 0) {
+        for (register int i = 2; i &lt;= n; i += 2)
+            cout &lt;&lt; i &lt;&lt; " " &lt;&lt; i - 1 &lt;&lt; " ";
+    } else {
+        cout &lt;&lt; 1 &lt;&lt; " ";
+        for (register int i = 3; i &lt;= n; i += 2)
+            cout &lt;&lt; i &lt;&lt; " " &lt;&lt; i - 1 &lt;&lt; " ";
     }
-    return 0;
-}
-```
 
-if (n % 2 == 0) {
-    for (register int i = 2; i &lt;= n; i += 2)
-        cout &lt;&lt; i &lt;&lt; " " &lt;&lt; i - 1 &lt;&lt; " ";
-} else {
-    cout &lt;&lt; 1 &lt;&lt; " ";
-    for (register int i = 3; i &lt;= n; i += 2)
-        cout &lt;&lt; i &lt;&lt; " " &lt;&lt; i - 1 &lt;&lt; " ";
-}
-
-cout &lt;&lt; endl;
+    cout &lt;&lt; endl;
 }
 
 int main() {
@@ -145,7 +133,7 @@ int main() {
 [Original Link](https://codeforces.com/contest/1712/problem/C)
 
 * 给定长度为 $n$ 的数组 $a$
-  * 每次操作，可以将所有 $a_i = x$ 的元素操作变为 $a_i = 0$
+  * 每次操作，可以将所有 $a_i = x$ 的元素操作变更为 $a_i = 0$
   * 求最少操作多少次，可以使得原数组元素非严格单调递增
 
 ---
@@ -153,7 +141,7 @@ int main() {
 ### 思想
 
 * `int a[N]`存储数组元素，`set&lt;int&gt; b`存储当前枚举到`i`之前，需要将 $a_i$ 变为 $0$ 的 $x$ 值
-  * 从`i = 2`开始枚举`a[i]`： 
+  * 从`i = 2`开始枚举`a[i]`：
     * 先判断`a[i]`是否在`b`中，若存在，则更新`a[i] = 0`
     * 若`a[i - 1] > a[i]`，说明需要将`a[i - 1]`更新，将`b.insert(a[i - 1])`，且要使得`i`之前所有的`a[j] == a[i - 1]`的元素更新为 $0$，且在更新时，要将`a[j] != 0`的元素也加入`b`中
   * 由于我们按顺序枚举，故在`i`之前的序列一定满足非严格单调递增，在枚举结束之后，`b`中元素个数即为操作次数
@@ -208,16 +196,6 @@ int main() {
     }
 
     return 0;
-}
-```cpp
-int _;
-cin >> _;
-
-while (_ --) {
-    solve();
-}
-
-return 0;
 }
 ```
 

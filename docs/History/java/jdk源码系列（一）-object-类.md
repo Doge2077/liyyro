@@ -244,58 +244,57 @@ public class Person {
     private int page;
 
     public Person() {}
-}
-```java
-public Person(String pname, int page) {
-    this.pname = pname;
-    this.page = page;
-}
-
-public int getPage() {
-    return page;
-}
-
-public void setPage(int page) {
-    this.page = page;
-}
-
-public String getPname() {
-    return pname;
-}
-
-public void setPname(String pname) {
-    this.pname = pname;
-}
-
-@Override
-public boolean equals(Object obj) {
-    if (this == obj) { // 引用相等那么两个对象当然相等
-        return true;
+    public Person(String pname, int page) {
+        this.pname = pname;
+        this.page = page;
     }
 
-    /*if (obj == null || !(obj instanceof Person)) { // 对象为空或者不是Person类的实例
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) { // 引用相等那么两个对象当然相等
+            return true;
+        }
+
+        /*if (obj == null || !(obj instanceof Person)) { // 对象为空或者不是Person类的实例
+            return false;
+        }*/
+
+        if (obj == null || (getClass() != obj.getClass())) { // 对象为空或者不是Person类的实例
+            return false;
+        }
+
+        Person otherPerson = (Person) obj;
+        if (otherPerson.getPname().equals(this.getPname()) && otherPerson.getPage() == this.getPage()) {
+            return true;
+        }
         return false;
-    }*/
-
-    if (obj == null || (getClass() != obj.getClass())) { // 对象为空或者不是Person类的实例
-        return false;
     }
 
-    Person otherPerson = (Person) obj;
-    if (otherPerson.getPname().equals(this.getPname()) && otherPerson.getPage() == this.getPage()) {
-        return true;
+    public static void main(String[] args) {
+        Person p1 = new Person("Tom", 21);
+        Person p2 = new Person("Marry", 20);
+        System.out.println(p1 == p2); // false
+        System.out.println(p1.equals(p2)); // false
+
+        Person p3 = new Person("Tom", 21);
+        System.out.println(p1.equals(p3)); // true
     }
-    return false;
-}
-
-public static void main(String[] args) {
-    Person p1 = new Person("Tom", 21);
-    Person p2 = new Person("Marry", 20);
-    System.out.println(p1 == p2); // false
-    System.out.println(p1.equals(p2)); // false
-
-    Person p3 = new Person("Tom", 21);
-    System.out.println(p1.equals(p3)); // true
 }
 ```
 
@@ -304,39 +303,38 @@ public static void main(String[] args) {
 如果不重写 `equals` 方法，那么始终是调用 Object 类的 `equals` 方法，也就是用 `==` 比较两个对象的引用是否相等。
 
 重写 `equals` 方法总结建议：
+
 ```java
-```
-
 @Override
-    public boolean equals(Object otherObject) {
-        // 1、判断比较的两个对象引用是否相等，如果引用相等那么表示是同一个对象，那么当然相等
-        if (this == otherObject) {
-            return true;
-        }
-        // 2、如果 otherObject 为 null，直接返回false，表示不相等
-        if (otherObject == null) { // 对象为空或者不是Person类的实例
-            return false;
-        }
-        // 3、比较 this 和 otherObject 是否是同一个类（注意下面两个只能使用一种）
-        // 3.1：如果 equals 的语义在每个子类中有所改变，就使用 getClass 检测
-        if (this.getClass() != otherObject.getClass()) {
-            return false;
-        }
-        // 3.2：如果所有的子类都有统一的定义，那么使用 instanceof 检测
-        if (!(otherObject instanceof Person)) {
-            return false;
-        }
-
-        // 4、将 otherObject 转换成对应的类类型变量
-        Person other = (Person) otherObject;
-
-        // 5、最后对对象的属性进行比较。使用 == 比较基本类型，使用 equals 比较对象。如果都相等则返回true，否则返回false
-        //    使用 Objects 工具类的 equals 方法防止比较的两个对象有一个为 null 而报错，因为 null.equals() 是会抛异常的
-        return Objects.equals(this.pname, other.pname) && this.page == other.page;
-
-        // 6、注意如果是在子类中定义equals，则要包含 super.equals(other)
-        // return super.equals(other) && Objects.equals(this.pname, other.pname) && this.page == other.page;
+public boolean equals(Object otherObject) {
+    // 1、判断比较的两个对象引用是否相等，如果引用相等那么表示是同一个对象，那么当然相等
+    if (this == otherObject) {
+        return true;
     }
+    // 2、如果 otherObject 为 null，直接返回false，表示不相等
+    if (otherObject == null) { // 对象为空或者不是Person类的实例
+        return false;
+    }
+    // 3、比较 this 和 otherObject 是否是同一个类（注意下面两个只能使用一种）
+    // 3.1：如果 equals 的语义在每个子类中有所改变，就使用 getClass 检测
+    if (this.getClass() != otherObject.getClass()) {
+        return false;
+    }
+    // 3.2：如果所有的子类都有统一的定义，那么使用 instanceof 检测
+    if (!(otherObject instanceof Person)) {
+        return false;
+    }
+
+    // 4、将 otherObject 转换成对应的类类型变量
+    Person other = (Person) otherObject;
+
+    // 5、最后对对象的属性进行比较。使用 == 比较基本类型，使用 equals 比较对象。如果都相等则返回true，否则返回false
+    //    使用 Objects 工具类的 equals 方法防止比较的两个对象有一个为 null 而报错，因为 null.equals() 是会抛异常的
+    return Objects.equals(this.pname, other.pname) && this.page == other.page;
+
+    // 6、注意如果是在子类中定义equals，则要包含 super.equals(other)
+    // return super.equals(other) && Objects.equals(this.pname, other.pname) && this.page == other.page;
+}
 ```
 
 注意，无论何时重写此方法，通常都必须重写 hashCode 方法，以维护 hashCode 方法的一般约定，该方法声明相等对象必须具有相同的哈希代码。
@@ -393,7 +391,6 @@ hashCode 的值存储在Java对象头里的，Hotspot虚拟机的对象头主要
 
 源码 Object 类中定义如下：
 ```java
-
 // 是一个用 native 声明的本地方法，作用是返回对象的散列码，是 int 类型的数值。
 public native int hashCode();
 ```
@@ -403,7 +400,6 @@ public native int hashCode();
 
 查看：`src\share\native\java\lang\Object.c`
 ```java
-
 JNIEXPORT void JNICALL//jni调用
 //全路径：java_lang_Object_registerNatives是java对应的包下方法
 Java_java_lang_Object_registerNatives(JNIEnv *env, jclass cls)
@@ -416,8 +412,6 @@ Java_java_lang_Object_registerNatives(JNIEnv *env, jclass cls)
 
 对应方法：
 ```java
-```
-
 static JNINativeMethod methods[] = {
     // JAVA方法       返回值  参数                             C++函数
     {"hashCode",    "()I",                    (void *)&JVM_IHashCode},
@@ -426,6 +420,7 @@ static JNINativeMethod methods[] = {
     {"notifyAll",   "()V",                    (void *)&JVM_MonitorNotifyAll},
     {"clone",       "()Ljava/lang/Object;",   (void *)&JVM_Clone},
 };
+```
 
 调用 [src/share/vm/prims/jvm.cpp](https://cr.openjdk.org/~kevinw/webrev.00/src/share/vm/prims/jvm.cpp.html) JVM_IHashCode 方法：
 
@@ -477,59 +472,51 @@ intptr_t ObjectSynchronizer::FastHashCode(Thread *Self, oop obj) {
     markOop mark = ReadStableMark(obj);
 ```
 
-**修复内容：**
-1. `Handle hobj (Self, obj) ;` → `Handle hobj(Self, obj);`（去除多余空格）
-2. `assert (` → `assert(`（去除多余空格）
-3. `obj = hobj() ;` → `obj = hobj();`（去除分号前多余空格）
-4. 统一缩进格式（8空格缩进）
-5. 中文注释标点规范化（`……`→`……`，半角逗号→全角逗号）
-6. `他` → `它`（指代对象应用"它"）
-
 //是否撤销了偏向锁（也就是无锁状态）（neutral：中立，不偏不斜的）
-  if (mark->is_neutral()) {
-    //从mark头上取hash值
-    hash = mark->hash(); 
-    //如果有，直接返回这个hashcode（xor）
-    if (hash) {                       // if it has hash, just return it
-      return hash;
-    }
+    if (mark->is_neutral()) {
+        //从mark头上取hash值
+        hash = mark->hash();
+        //如果有，直接返回这个hashcode（xor）
+        if (hash) {                       // if it has hash, just return it
+            return hash;
+        }
         //如果没有就新生成一个(get_next_hash)
-    hash = get_next_hash(Self, obj);  // allocate a new hash code
-    //生成后，原子性设置，将hash放在对象头里去，这样下次就可以直接取了
-    temp = mark->copy_set_hash(hash); // merge the hash code into header
-    // use (machine word version) atomic operation to install the hash
-    test = (markOop) Atomic::cmpxchg_ptr(temp, obj->mark_addr(), mark);
-    if (test == mark) {
-      return hash;
+        hash = get_next_hash(Self, obj);  // allocate a new hash code
+        //生成后，原子性设置，将hash放在对象头里去，这样下次就可以直接取了
+        temp = mark->copy_set_hash(hash); // merge the hash code into header
+        // use (machine word version) atomic operation to install the hash
+        test = (markOop) Atomic::cmpxchg_ptr(temp, obj->mark_addr(), mark);
+        if (test == mark) {
+            return hash;
+        }
+        // If atomic operation failed, we must inflate the header
+        // into heavy weight monitor. We could add more code here
+        // for fast path, but it does not worth the complexity.
+        //如果已经升级成了重量级锁，那么找到它的monitor
+        //也就是我们所说的内置锁(objectMonitor)，这是c里的数据类型
+        //因为锁升级后，mark里的bit位已经不再存储hashcode，而是指向monitor的地址
+        //而升级的markword呢？被移到了c的monitor里
+    } else if (mark->has_monitor()) {
+        //沿着monitor找header，也就是对象头
+        monitor = mark->monitor();
+        temp = monitor->header();
+        assert(temp->is_neutral(), "invariant");
+        //找到header后取hash返回
+        hash = temp->hash();
+        if (hash) {
+            return hash;
+        }
+        // Skip to the following code to reduce code size
+    } else if (Self->is_lock_owned((address)mark->locker())) {
+        //轻量级锁的话，也是从java对象头移到了c里，叫helper
+        temp = mark->displaced_mark_helper(); // this is a lightweight monitor owned
+        assert(temp->is_neutral(), "invariant");
+        hash = temp->hash();              // by current thread, check if the displaced
+        //找到，返回
+        if (hash) {                       // header contains hash code
+            return hash;
+        }
     }
-    // If atomic operation failed, we must inflate the header
-    // into heavy weight monitor. We could add more code here
-    // for fast path, but it does not worth the complexity.
-    //如果已经升级成了重量级锁，那么找到它的monitor
-    //也就是我们所说的内置锁(objectMonitor)，这是c里的数据类型
-    //因为锁升级后，mark里的bit位已经不再存储hashcode，而是指向monitor的地址
-    //而升级的markword呢？被移到了c的monitor里
-  } else if (mark->has_monitor()) {
-    //沿着monitor找header，也就是对象头
-    monitor = mark->monitor();
-    temp = monitor->header();
-    assert (temp->is_neutral(), "invariant") ;
-    //找到header后取hash返回
-    hash = temp->hash();
-    if (hash) {
-      return hash;
-    }
-    // Skip to the following code to reduce code size
-  } else if (Self->is_lock_owned((address)mark->locker())) {
-    //轻量级锁的话，也是从java对象头移到了c里，叫helper
-    temp = mark->displaced_mark_helper(); // this is a lightweight monitor owned
-    assert (temp->is_neutral(), "invariant") ;
-    hash = temp->hash();              // by current thread, check if the displaced
-    //找到，返回
-    if (hash) {                       // header contains hash code
-      return hash;
-    }
-  }
 ```
 
 **总结：**

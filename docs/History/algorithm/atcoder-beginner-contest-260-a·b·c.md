@@ -102,7 +102,7 @@ bool cmp2(students &s1, students &s2){
         return s1.e &gt; s2.e;
     }
 }
-```
+
 //对总成绩排序
 bool cmp3(students &s1, students &s2) {
     if (s1.m + s1.e == s2.m + s2.e) {
@@ -185,7 +185,6 @@ int main() {
 ---
 
 ### 思想
-```
 
 * 动态规划
   * 状态表示：

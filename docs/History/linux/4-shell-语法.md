@@ -311,7 +311,7 @@ echo `expr substr "$str" 2 3`  # 输出 ell
 ```bash
 a=3
 b=4
-```shell
+
 echo `expr $a + $b`  # 输出7
 echo `expr $a - $b`  # 输出-1
 echo `expr $a \* $b`  # 输出12，*需要转义
@@ -388,7 +388,6 @@ printf format-string [arguments...]
 **用法示例**
 
 脚本内容：
-```shell
 ```bash
 printf "%10d.\n" 123  # 占10位，右对齐
 printf "%-10.2f.\n" 123.123321  # 占10位，保留2位小数，左对齐
@@ -731,7 +730,7 @@ fi
 类似于`C/C++`中的`switch`语句。
 
 命令格式：
-```shell
+```bash
 case $变量 in
   模式1)
     语句1
@@ -746,28 +745,8 @@ case $变量 in
 esac
 ```
 
-case $变量名称 in
-    值1)
-        语句1
-        语句2
-        ...
-        ;;  # 类似于C/C++中的break
-    值2)
-        语句1
-        语句2
-        ...
-        ;;
-    *)  # 类似于C/C++中的default
-        语句1
-        语句2
-        ...
-        ;;
-esac
-```
-
 **示例：**
-```java
-
+```bash
 a=4
 
 case $a in
@@ -787,8 +766,7 @@ esac
 ```
 
 输出结果：
-```java
-
+```bash
 其他
 ```
 
@@ -799,8 +777,7 @@ esac
 **`for…in…do…done`形式**
 
 命令格式：
-```java
-
+```bash
 for var in val1 val2 val3
 do
     语句1
@@ -810,8 +787,7 @@ done
 ```
 
 **示例1** ，输出a 2 cc，每个元素一行：
-```java
-
+```bash
 for i in a 2 cc
 do
     echo $i
@@ -819,8 +795,7 @@ done
 ```
 
 **示例2** ，输出当前路径下的所有文件名，每个文件名一行：
-```java
-
+```bash
 for file in `ls`
 do
     echo $file
@@ -828,8 +803,7 @@ done
 ```
 
 **示例3** ，输出1-10
-```java
-
+```bash
 for i in $(seq 1 10)
 do
     echo $i
@@ -837,8 +811,7 @@ done
 ```
 
 **示例4** ，使用{1..10} 或者 {a..z}
-```java
-
+```bash
 for i in {a..z}
 do
     echo $i
@@ -848,8 +821,7 @@ done
 **`for ((…;…;…)) do…done`形式**
 
 命令格式：
-```java
-
+```bash
 for ((expression; condition; expression))
 do
     语句1
@@ -858,8 +830,7 @@ done
 ```
 
 **示例** ，输出1-10，每个数占一行：
-```java
-
+```bash
 for ((i=1; i&lt;=10; i++))
 do
     echo $i
@@ -869,8 +840,7 @@ done
 **`while…do…done`循环**
 
 命令格式：
-```java
-
+```bash
 while condition
 do
     语句1
@@ -880,8 +850,7 @@ done
 ```
 
 **示例** ，文件结束符为Ctrl+d，输入文件结束符后read指令返回false。
-```java
-
+```bash
 while read name
 do
     echo $name
@@ -893,8 +862,7 @@ done
 当条件为**真** 时结束。
 
 命令格式：
-```java
-
+```bash
 until condition
 do
     语句1
@@ -904,8 +872,7 @@ done
 ```
 
 **示例** ，当用户输入yes或者YES时结束，否则一直等待读入。
-```java
-
+```bash
 until [ "${word}" == "yes" ] || [ "${word}" == "YES" ]
 do
     read -p "Please input yes/YES to stop this program: " word
@@ -918,7 +885,6 @@ done
 
 **示例**
 ```bash
-
 while read name
 do
     for ((i=1;i&lt;=10;i++))
@@ -943,7 +909,6 @@ done
 
 示例：
 ```bash
-
 for ((i=1;i&lt;=10;i++))
 do
     if [ `expr $i % 2` -eq 0 ]
@@ -961,7 +926,7 @@ done
 否则可以直接关闭进程：
 
 1. 使用`top`命令找到进程的PID
-  2. 输入`kill -9 PID`即可关掉此进程
+2. 输入`kill -9 PID`即可关掉此进程
 
 ---
 
@@ -983,7 +948,6 @@ done
 
 命令格式：
 ```bash
-
 [function] func_name() {  # function关键字可以省略
     语句1
     语句2
@@ -995,7 +959,6 @@ done
 
 **示例**
 ```bash
-
 func() {
     name=lys
     echo "Hello $name"
@@ -1006,7 +969,6 @@ func
 
 输出结果：
 ```bash
-
 Hello lys
 ```
 
@@ -1016,7 +978,6 @@ Hello lys
 
 **示例**
 ```bash
-
 func() {
     name=lys
     echo "Hello $name"
@@ -1034,8 +995,6 @@ echo "return = $ret"
 
 输出结果：
 ```bash
-
-```shell
 output="Hello lys"
 return=123
 ```
@@ -1110,7 +1069,6 @@ echo $name
 输出结果：
 ```shell
 lys
-
 ```
 第一行为函数内的 `name` 变量，第二行为函数外调用 `name` 变量，会发现此时该变量不存在。
 
@@ -1141,7 +1099,6 @@ fi
 ```
 
 执行该脚本：
-```shell
 ```bash
 acs@9e0ebfcd82d7:~$ chmod +x test.sh 
 acs@9e0ebfcd82d7:~$ ./test.sh acwing
@@ -1156,7 +1113,7 @@ acs@9e0ebfcd82d7:~$ echo $?  # 传入参数个数不是1，则非正常退出，
 
 ---
 
-### 4.14 引入外部脚本
+### 4.15 引入外部脚本
 
 ---
 
@@ -1177,11 +1134,26 @@ source filename
 创建`test1.sh`，内容为：
 ```bash
 #! /bin/bash
+name=lys  # 定义变量name  
+```
+
+然后创建test2.sh，内容为：
+```bash
+#! /bin/bash
+source test1.sh # 或 . test1.sh
+echo My name is: $name  # 可以使用test1.sh中的变量
+```
+
+执行命令：
+```bash
+acs@9e0ebfcd82d7:~$ chmod +x test2.sh  # 添加可执行权限
+acs@9e0ebfcd82d7:~$ ./test2.sh 
+My name is: lys
 ```
 
 ---
 
-### 4.15 文件重定向
+### 4.16 文件重定向
 
 ---
 
@@ -1236,28 +1208,4 @@ acs@9e0ebfcd82d7:~$ chmod +x test.sh  # 添加可执行权限
 acs@9e0ebfcd82d7:~$ ./test.sh &lt; input.txt &gt; output.txt  # 从input.txt中读取内容，将输出写入output.txt中
 acs@9e0ebfcd82d7:~$ cat output.txt  # 查看output.txt中的内容
 7
-```
-
----
-
-**主要修复内容：**
-1. 修正了章节顺序（4.14 应在 4.15 之前）
-2. 将所有 ` ```java ` 修正为 ` ```bash `（代码实际是 bash 脚本）
-3. 修正了列表项的缩进格式
-
-name=lys  # 定义变量name  
-```
-
-然后创建test2.sh，内容为：
-```bash
-#! /bin/bash
-source test1.sh # 或 . test1.sh
-echo My name is: $name  # 可以使用test1.sh中的变量
-```
-
-执行命令：
-```bash
-acs@9e0ebfcd82d7:~$ chmod +x test2.sh  # 添加可执行权限
-acs@9e0ebfcd82d7:~$ ./test2.sh 
-My name is: lys
 ```

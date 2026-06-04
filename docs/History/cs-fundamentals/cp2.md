@@ -5,7 +5,7 @@ categories: [Compilation Principle]
 description: ""
 ---
 
-**词法的**（Lexical）：与语言的单词或词汇有关，但有别于语言的文法和结构的。
+**词法分析的**（Lexical）：与语言的单词或词汇有关，但有别于语言的语法和结构。
 
 词法分析器以字符流作为输入，生成一系列的名字、关键字和标点符号，同时抛弃单词之间的空白符和注释。程序中每一点都有可能出现空白符和注释；如果让语法分析器来处理它们就会使得语法分析过于复杂，这便是将词法分析从语法分析中分离出去的主要原因。词法分析并不很复杂，但是我们却使用能力强大的形式化方法和工具来实现它，因为类似的形式化方法对语法分析研究很有帮助，并且类似的工具还可以应用于编译器以外的其他领域。
 
@@ -15,32 +15,32 @@ description: ""
 
 ---
 
-词法单词是字符组成的序列，它可以看成是程序设计语言的文法单位。程序设计语言的词法单词可以归类为有限的几组单词类型。例如，典型程序设计语言的一些单词类型为：
+词法单词是字符组成的序列，它可以看成是程序设计语言的语法单位。程序设计语言的词法单词可以归类为有限的几组单词类型。例如，典型程序设计语言的一些单词类型为：
 
-类型 | 例子
----|---
-ID | `foo`，`n14`，`last`
-NUM | `10`，`00`，`515`，`082`
-REAL | `66.1`，`.33`，`10.`，`1e6`，`2.2e-10`
-IF | `if`
-COMMA | `,`
-LPAREN | `(`
-RPAREN | `)`
+| 类型    | 例子                         |
+| ------- | ---------------------------- |
+| ID      | `foo`，`n14`，`last`         |
+| NUM     | `10`，`00`，`515`，`082`     |
+| REAL    | `66.1`，`.33`，`10.`，`1e6`，`2.2e-10` |
+| IF      | `if`                         |
+| COMMA   | `,`                          |
+| LPAREN  | `(`                          |
+| RPAREN  | `)`                          |
 
 `IF`、`VOID`、`RETURN` 等由字母字符组成的单词称为保留字（reserved word），在多数语言中，它们不能作为标识符使用。
 
 非单词的例子：
 
-类型 | 例子
----|---
-注释 | `/* Try again */`
-预处理命令 | `#include &lt;stdio.h&gt;`，`#define NUMS 5, 6`
-宏 | `NUMS`
-空格符，制表符，换行符 | ` `，`\t`，`\n`
+| 类型             | 例子                                   |
+| ---------------- | -------------------------------------- |
+| 注释             | `/* Try again */`                      |
+| 预处理命令       | `#include &lt;stdio.h&gt;`，`#define NUMS 5, 6` |
+| 宏               | `NUMS`                                 |
+| 空格符、制表符、换行符 | ` `，`\t`，`\n`                        |
 
 例如，对于下列程序：
-```java
 
+```java
 float match0(char *s) /* find a zero */
 {
     if(!strncmp(s, "0,0", 3))
@@ -49,8 +49,8 @@ float match0(char *s) /* find a zero */
 ```
 
 词法分析器将返回下列单词流：
-```java
 
+```java
 FLOAT ID(match0) LPAREN CHAR STAR ID(s) RPAREN
 LBRACE IF LPAREN BANG ID(strncmp) LPAREN ID(s) 
 COMMA STRING(0.0) COMMA NUM(3) RPAREN RPAREN 
@@ -77,38 +77,20 @@ RETURN REAL(0.0) SEMI RBRACE EOF
 
 以这种方式谈论语言时，我们并没有给其中的字符串赋予任何含义，而只是企图确定每个字符串是否属于其语言。为了用有限的描述来指明这类（很可能是无限的）语言，我们将使用正则表达式（regular expression）表示法。每个正则表达式代表一个字符串集合。
 
-* 符号（symbol）：对于语言字母表中的每个符号 $a$，正则表达式 $a$ 表示仅包含字符串 $a$ 的语言。 
-  * 可选（alternation）：对于给定的两个正则表达式 $M$ 和 $N$，可选操作符（`|`）形成一个新的正则表达式 $M~|~N$。如果一个字符串属于语言 $M$ 或者语言 $N$，则它属于语言 $M~|~N$。因此，$a~|~b$ 组成的语言包含 $a$ 和 $b$ 这两个字符串。 
-  * 联结（concatenation）：对于给定的两个正则表达式 $M$ 和 $N$，联结操作符（`·`）形成一个新的正则表达式 $M·N$。如果一个字符串是任意两个字符串 $\alpha $ 和 $\beta$ 的联结，且 $\alpha$ 属于语言 $M$，$\beta$ 属于语言 $N$，则该字符串属于 $M·N$ 组成的语言。因此，正则表达式 $(a~|~b)·a$ 定义了一个包含两个字符串 $aa$ 和 $ba$ 的语言。 
-  * $\epsilon$ （epsilon）：正则表达式 $\epsilon$ 表示仅含一个空字符串的语言。因此，$(a·b)~|~\epsilon$ 表示语言 `{" ", "ab"}`。 
-* 重复（repetition）：对于给定的正则表达式 $M$，它的克林（Kleene）闭包是
+* **符号（symbol）**：对于语言字母表中的每个符号 $a$，正则表达式 $a$ 表示仅包含字符串 $a$ 的语言。
+  * **可选（alternation）**：对于给定的两个正则表达式 $M$ 和 $N$，可选操作符（`|`）形成一个新的正则表达式 $M|N$。如果一个字符串属于语言 $M$ 或者语言 $N$，则它属于语言 $M|N$。因此，$a|b$ 组成的语言包含 $a$ 和 $b$ 这两个字符串。
+  * **联结（concatenation）**：对于给定的两个正则表达式 $M$ 和 $N$，联结操作符（`·`）形成一个新的正则表达式 $M·N$。如果一个字符串是任意两个字符串 $\alpha$ 和 $\beta$ 的联结，且 $\alpha$ 属于语言 $M$，$\beta$ 属于语言 $N$，则该字符串属于 $M·N$ 组成的语言。因此，正则表达式 $(a|b)·a$ 定义了一个包含两个字符串 $aa$ 和 $ba$ 的语言。
+  * $\epsilon$ **（epsilon）**：正则表达式 $\epsilon$ 表示仅含一个空字符串的语言。因此，$(a·b)|\epsilon$ 表示语言 `{" ", "ab"}`。
+* **重复（repetition）**：对于给定的正则表达式 $M$，它的克林（Kleene）闭包是 $M^*$。如果一个字符串是由 $M$ 中的字符串经零至多次联结运算的结果，则该字符串属于 $M^*$。因此，$((a|b)·a)^*$ 表示无穷集合 `{" ", "aa", "ba", "aaaa", "baaa", "aaba", "baba", "aaaaaa", ...}`。
 
-$$
-M^*
-$$。
-
-如果一个字符串是由 $M$ 中的字符串经零至多次联结运算的结果，则该字符串属于
-
-$$
-M^*
-$$。
-
-因此，
-
-$$
-((a~|~b)·a)^*
-$$
-
-表示无穷集合 `{" ", "aa", "ba", "aaaa", "baaa", "aaba", "baba", "aaaaaa", ...}`。
-
-通过使用符号、可选、联结、闭包和克林闭包，我们可以规定与程序设计语言词法单词相对应的 `ASCII` 字符集。在书写正则表达式时，我们有时会省略联结操作符或 $\epsilon$ 符号，并假定克林闭包的优先级高于联结运算，联结运算的优先级高于可选运算，所以 $ab~|~c$ 表示 $(a·b)~|~c$，$(a~|~)$ 表示 $(a~|~\epsilon)$。
+通过使用符号、可选、联结、闭包和克林闭包，我们可以规定与程序设计语言词法单词相对应的 `ASCII` 字符集。在书写正则表达式时，我们有时会省略联结操作符或 $\epsilon$ 符号，并假定克林闭包的优先级高于联结运算，联结运算的优先级高于可选运算，所以 $ab|c$ 表示 $(a·b)|c$，$(a|)$ 表示 $(a|\epsilon)$。
 
 ### 2.2.2 二义性文法的处理
 
-对于某些带有二义性的文法，例如 `if8`，应当将它看成是一个标识符，还是两个单词 `if` 和 `8`？字符串 `" if 89"` 是以一个标识符开头还是以一个保留字开头？$Lex$ 和其他类似的词法分析器使用了两条重要的消除二义性的规则：
+对于某些带有二义性的文法，例如 `if8`，应当将它看成是一个标识符，还是两个单词 `if` 和 `8`？字符串 `" if 89"` 是以一个标识符开头还是以一个保留字开头？`Lex` 和其他类似的词法分析器使用了两条重要的消除二义性的规则：
 
-* 最长匹配：初始输入子串中，取可与任何正则表达式匹配的那个最长的字符串作为下一个单词。
-  * 规则优先：对于一个特定的最长初始子串，第一个与之匹配的正则表达式决定了这个子串的单词类型。也就是说，正则表达式规则的书写顺序有意义。
+* **最长匹配**：初始输入子串中，取可与任何正则表达式匹配的那个最长的字符串作为下一个单词。
+  * **规则优先**：对于一个特定的最长初始子串，第一个与之匹配的正则表达式决定了这个子串的单词类型。也就是说，正则表达式规则的书写顺序有意义。
 
 因此，依据最长匹配规则，`if8` 是一个标识符；根据优先规则，`if` 是一个保留字。
 
@@ -122,7 +104,7 @@ $$
 
 **有限自动机**：有一个有限状态集合和一些从一个状态通向另一个状态的边，每条边上标记有一个符号；其中一个状态是初态，某些状态是终态。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/有限自动机1.png)
+![有限自动机示例](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/有限自动机1.png)
 
 上图给出了一些有限自动机的例子。为了讨论方便我们给每个状态一个编号。每个例子中的初态都是编号为 `1` 的状态。标有多个字符的边是多条平行边的缩写形式；因此，在机器 `ID` 中，实际上有 `26` 条边从状态 `1` 通向状态 `2`，每条边用不同的字母标记。
 
@@ -143,9 +125,9 @@ $$
 
 ---
 
-非确定有限自动机 (NFA) 是一种需要对从一个状态出发的多条标有相同符号的边进行选择的自动机。它也可能存在标有 $\epsilon$（希腊字母）的边，这种边可以在不接收输入字符的情况下进行状态转换。
+非确定有限自动机（NFA）是一种需要对从一个状态出发的多条标有相同符号的边进行选择的自动机。它也可能存在标有 $\epsilon$ 的边，这种边可以在不接收输入字符的情况下进行状态转换。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/非确定有限自动机1.png)
+![非确定有限自动机示例](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/非确定有限自动机1.png)
 
 如上图，在初态时，根据输入的字母，自动机既可向左转换，也可向右转换。若选择了向左转换，则接收的是长度为 `3` 的倍数的字符串；若选择了向右转换，则接收的是长度为偶数的字符串。因此，由这个 `NFA` 识别的语言是长度为 `2` 的倍数或 `3` 的倍数的所有由字母 `a` 组成的字符串的集合。
 
@@ -165,21 +147,21 @@ $$
 
 例如，单个符号的正则表达式 $a$ 转换成的 `NFA` 为：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA1.png)
+![单符号NFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA1.png)
 
 由 $a$ 和 $b$ 经联结运算而形成的正则表达式 $ab$ 对应的 `NFA` 是由两个 `NFA` 组合而成的，即将 $a$ 的头与 $b$ 的尾连接起来。由此得到的自动机有一个用 $a$ 标记的尾和一个从 $b$ 边进入的头。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA2.png)
+![联结NFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA2.png)
 
 一般而言，任何一个正则表达式 $M$ 都有一个具有尾和头的 `NFA`：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA3.png)
+![一般NFA结构](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA3.png)
 
 我们可以归纳地定义正则表达式到 `NFA` 的转换。一个正则表达式或者是原语（单个符号或 $\epsilon$），或者是由多个较小的表达式组合而成。类似地，`NFA` 或者是基本元素，或者是由多个较小的 `NFA` 组合而成。
 
 将正则表达式转换至 `NFA`，我们利用单词 `IF`、`ID`、`NUM` 以及 `error` 的一些表达式来举例说明这种转换算法。每个表达式都转换成了一个 `NFA`，每个 `NFA` 的头是用不同单词类型标记的终态结点，并且每一个表达式的尾汇合成一个新的初始结点。由此得到的结果（在合并了某些等价的 `NFA` 状态之后）如下图所示：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA4.png)
+![复合NFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA4.png)
 
 ---
 
@@ -189,30 +171,64 @@ $$
 
 用计算机程序实现确定的有限自动机（DFA）较容易。但实现 `NFA` 则要困难一些，因为大多数计算机都没有足够好的可以进行“猜测”的硬件。下面给出一个由四个正则表达式转换成的 `NFA`：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA5.png)
+![待转换的NFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA5.png)
 
 我们用一个字符串 `"in"` 来模拟，计算所有的 $\epsilon$ 闭包：
 
-* 从状态 `1` 开始，NFA 需选择一个 ε 转换，此时可能处于 `{1, 4, 9, 14}` 中的任一状态。
-  * 首先计算 `{1}` 的 ε 闭包。显然，在接收输入的第一个字符之前，无法转移到其他状态，因此接下来应根据字符 `i` 进行转换。
+* 从状态 `1` 开始，NFA 需选择一个 $\epsilon$ 转换，此时可能处于 `{1, 4, 9, 14}` 中的任一状态。
+  * 首先计算 `{1}` 的 $\epsilon$ 闭包。显然，在接收输入的第一个字符之前，无法转移到其他状态，因此接下来应根据字符 `i` 进行转换。
   * 从状态 `1` 可转移到状态 `2`，从状态 `4` 可转移到状态 `5`，而状态 `9` 无后续转移，状态 `14` 则可转移到状态 `15`。因此，得到状态集合 `{2, 5, 15}`。
-  * 继续计算，从状态 `5` 有一个 ε 转移到状态 `8`，从状态 `8` 有一个 ε 转移到状态 `6`。因此，当前 NFA 所处的状态集合为 `{2, 5, 6, 8, 15}`。
-  * 针对下一个输入字符 `n`，从状态 `6` 可转移到状态 `7`，而状态 `2`、`5`、`8` 和 `15` 均无对应转移。因此，得到状态集合 `{7}`，其 ε 闭包为 `{6, 7, 8}`。
+  * 继续计算，从状态 `5` 有一个 $\epsilon$ 转移到状态 `8`，从状态 `8` 有一个 $\epsilon$ 转移到状态 `6`。因此，当前 NFA 所处的状态集合为 `{2, 5, 6, 8, 15}`。
+  * 针对下一个输入字符 `n`，从状态 `6` 可转移到状态 `7`，而状态 `2`、`5`、`8` 和 `15` 均无对应转移。因此，得到状态集合 `{7}`，其 $\epsilon$ 闭包为 `{6, 7, 8}`。
 
-至此，已处理完字符串 `"in"`。在所得的可能状态集合中，状态 `8` 是终态，因此 `n` 被识别为一个 `ID` 单词。
+至此，已处理完字符串 `"in"`。在所得的可能状态集合中，状态 `8` 是终态，因此 `in` 被识别为一个 `ID` 单词。
 
-我们形式化地定义 $\epsilon$ 闭包如下。 令 $edge(s,c)$ 是从状态 $s$ 沿着标有 $c$ 的一条边可到达的所有 `NFA` 状态的集合。对于状态集合$S$，$closure(S)$ 是从 $S$ 中的状态出发，无需接收任何字符，即只通过 $\epsilon$ 边便可到达的状态组成的集合。这种经过 $\epsilon$ 边的概念可用数学方式表述，即 $closure(S)$ 是满足如下条件的最小集合 $T$： $$
-T = S \cup \big(\bigcup_{x\in T}edge(s, \epsilon ) \big)
-$$ 上述表达式可以通过迭代算法求解： $$
-\begin{aligned} &T; \leftarrow S\\\ &\text {repeat} &T;'\leftarrow T\\\ &&T;\leftarrow T' \big( \bigcup_{s\in T'} \text {edge} (s,\epsilon) \big)\\\ &\text {until} &T;=T' \end{aligned}
-$$ 上述算法可以模拟 `NFA`的状态，接下来，设由 `NFA` 状态 $s_i,s_k,s_l$ 组成的集合 $d=\set{s_i,s_k,s_l}$ 中，从 $d$ 中的状态出发，并吃进输入符号 $c$，将到达 `NFA` 的一个新的状态集合，称这个集合为 $DFAedge(d,c)$： $$
-\text {DFAedge}(d,c) = \text {closure}\big( \bigcup_{s\in d} \text {edge}(s,c) \big)
-$$ 利用 $DFAedge(d,c)$ 可以更形式化地表示 `NFA` 算法，设初态为 $s_1$，输入字符串的字符为 $c_1,\dots c_k$，则算法表示为： $$
-\begin{aligned} d\leftarrow & \text {closure}(\\{s_1\\})\\\ \text for~i&\leftarrow 1~\text to~k\\\ d&\leftarrow \text {DFAedge}(d,c_i) \end{aligned}
-$$ 状态集合运算是代价很高的运算——对进行词法分析的源程序中的每一个字符都做这种运算几乎是不现实的。但是，预先计算出所有的状态集合却是有可能的。由 `NFA` 构造一个 `DFA`，使得 `NFA` 的每一个状态集合都对应于 `DFA` 的一个状态。因为 `NFA` 的状态个数有限 （$n$ 个），所以 `DFA` 的状态个数也是有限的（至多为 $2^n$个）。 一旦有了 $\text{closure}$ 和 $\text {DFAedge}$ 的算法，就很容易构造出 `DFA`。`DFA` 的状态 $d$ ，就是 $\text{closure}(s_1)$，这同 `NFA` 模拟算法一样。抽象而言，如果 $d_j =\text{DFAedge}(d_i,c)$，则存在着一条从 $d_i$ 到 $d_j$ 的标记为 $c$ 的边，令 $\sum$ 是字母表。 $$
-\begin{array}{l} \text { states[0] } \leftarrow\\{\\} ; \quad \text { states[1] } \leftarrow \text { closure }\left(\left\\{s_{1}\right\\}\right) \\\ p \leftarrow 1 ; \quad j \leftarrow 0 \\\ \text { while } j \leq p \\\ \quad \text { foreach } c \in \Sigma \\\ \qquad e \leftarrow \text { DFAedge(states }[j], c) \\\ \qquad \text { if } e=\operatorname{states}[i] \text { for some } i \leq p \\\ \qquad \quad\text { then trans }[j, c\\} \leftarrow i \\\ \qquad \quad\text { else } p \leftarrow p+1 \\\ \qquad \qquad \text { states }[p] \leftarrow e \\\ \qquad \qquad \text { trans }[j, c] \leftarrow p \\\ j \leftarrow j+1 \end{array}
-$$ 该算法不访问 `DFA` 的不可到达状态。因为原则上 `DFA`有 $2^n$ 个状态， 但实际上我们一般找到的只有约 $n$ 个状态是从初态可到达的。这一点对避免 `DFA` 解释器的转换表出现指数级的膨胀很重要，因为这个转换表是编译器的一部分。
+我们形式化地定义 $\epsilon$ 闭包如下。令 $\text{edge}(s, c)$ 是从状态 $s$ 沿着标有 $c$ 的一条边可到达的所有 `NFA` 状态的集合。对于状态集合 $S$，$\text{closure}(S)$ 是从 $S$ 中的状态出发，无需接收任何字符，即只通过 $\epsilon$ 边便可到达的状态组成的集合。这种经过 $\epsilon$ 边的概念可用数学方式表述，即 $\text{closure}(S)$ 是满足如下条件的最小集合 $T$：
+$$
+T = S \cup \left( \bigcup_{x \in T} \text{edge}(x, \epsilon) \right)
+$$
+上述表达式可以通过迭代算法求解：
+$$
+\begin{aligned}
+& T \leftarrow S \\
+& \text{repeat} \\
+& \quad T' \leftarrow T \\
+& \quad T \leftarrow T' \cup \left( \bigcup_{s \in T'} \text{edge}(s, \epsilon) \right) \\
+& \text{until } T = T'
+\end{aligned}
+$$
+上述算法可以模拟 `NFA` 的状态。接下来，设由 `NFA` 状态 $s_i, s_k, s_l$ 组成的集合 $d = \{s_i, s_k, s_l\}$ 中，从 $d$ 中的状态出发，并吃进输入符号 $c$，将到达 `NFA` 的一个新的状态集合，称这个集合为 $\text{DFAedge}(d, c)$：
+$$
+\text{DFAedge}(d, c) = \text{closure}\left( \bigcup_{s \in d} \text{edge}(s, c) \right)
+$$
+利用 $\text{DFAedge}(d, c)$ 可以更形式化地表示 `NFA` 算法，设初态为 $s_1$，输入字符串的字符为 $c_1, \dots, c_k$，则算法表示为：
+$$
+\begin{aligned}
+& d \leftarrow \text{closure}(\{s_1\}) \\
+& \text{for } i \leftarrow 1 \text{ to } k \\
+& \quad d \leftarrow \text{DFAedge}(d, c_i)
+\end{aligned}
+$$
+状态集合运算是代价很高的运算——对进行词法分析的源程序中的每一个字符都做这种运算几乎是不现实的。但是，预先计算出所有的状态集合却是有可能的。由 `NFA` 构造一个 `DFA`，使得 `NFA` 的每一个状态集合都对应于 `DFA` 的一个状态。因为 `NFA` 的状态个数有限（$n$ 个），所以 `DFA` 的状态个数也是有限的（至多为 $2^n$ 个）。
+
+一旦有了 $\text{closure}$ 和 $\text{DFAedge}$ 的算法，就很容易构造出 `DFA`。`DFA` 的状态 $d$，就是 $\text{closure}(\{s_1\})$，这同 `NFA` 模拟算法一样。抽象而言，如果 $d_j = \text{DFAedge}(d_i, c)$，则存在着一条从 $d_i$ 到 $d_j$ 的标记为 $c$ 的边，令 $\Sigma$ 是字母表。
+$$
+\begin{array}{l}
+\text{states}[0] \leftarrow \{\}; \quad \text{states}[1] \leftarrow \text{closure}(\{s_1\}) \\
+p \leftarrow 1; \quad j \leftarrow 0 \\
+\text{while } j \leq p \\
+\quad \text{foreach } c \in \Sigma \\
+\qquad e \leftarrow \text{DFAedge}(\text{states}[j], c) \\
+\qquad \text{if } e = \text{states}[i] \text{ for some } i \leq p \\
+\qquad \quad \text{then trans}[j, c] \leftarrow i \\
+\qquad \text{else } p \leftarrow p + 1 \\
+\qquad \quad \text{states}[p] \leftarrow e \\
+\qquad \quad \text{trans}[j, c] \leftarrow p \\
+j \leftarrow j + 1
+\end{array}
+$$
+该算法不访问 `DFA` 的不可到达状态。因为原则上 `DFA` 有 $2^n$ 个状态，但实际上我们一般找到的只有约 $n$ 个状态是从初态可到达的。这一点对避免 `DFA` 解释器的转换表出现指数级的膨胀很重要，因为这个转换表是编译器的一部分。
 
 由此我们对上述所给出的 NFA 应用该 DFA 算法得到如下图所示自动机。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/NFA转DFA-.png)
+![转换后的DFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/NFA转DFA-.png)

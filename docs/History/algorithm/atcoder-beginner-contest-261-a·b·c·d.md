@@ -9,8 +9,6 @@ description: ""
 
 ## A - Intersection
 
----
-
 ### 题目大意
 
 [Original Link](https://atcoder.jp/contests/abc261/tasks/abc261_a)
@@ -58,8 +56,6 @@ int main() {
 
 ## B - Tournament Result
 
----
-
 ### 题目大意
 
 [Original Link](https://atcoder.jp/contests/abc261/tasks/abc261_b)
@@ -102,8 +98,6 @@ int main() {
 
 ## C - NewFolder(1)
 
----
-
 ### 题目大意
 
 [Original Link](https://atcoder.jp/contests/abc261/tasks/abc261_c)
@@ -121,8 +115,8 @@ int main() {
 ---
 
 ### 代码
-```cpp
 
+```cpp
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
 
@@ -159,39 +153,9 @@ int main() {
 
 ## D - Flipping and Bonus
 
----
-
 ### 题目大意
 
 [Original Link](https://atcoder.jp/contests/abc261/tasks/abc261_d)
-
-```cpp
-bool flag = true;
-for (int i = 1; i &lt;= n; i++) {
-    for (int j = i + 1; j &lt;= n; j++) {
-        if (mp[i][j] == 'D' && mp[j][i] != 'D') {
-            flag = false;
-            break;
-        } else if (mp[i][j] == 'W' && mp[j][i] != 'L') {
-            flag = false;
-            break;
-        } else if (mp[i][j] == 'L' && mp[j][i] != 'W') {
-            flag = false;
-            break;
-        }
-    }
-    if (!flag) break;
-}
-
-if (flag) {
-    cout &lt;&lt; "correct" &lt;&lt; endl;
-} else {
-    cout &lt;&lt; "incorrect" &lt;&lt; endl;
-}
-
-return 0;
-}
-```
 
 投掷硬币为正面，计数器增加，反之计数器清零，给定$N$次投掷硬币为正面得到的钱$X_i$，给定$M$个奖励规则，若计数器的数值达到$C_i$，将获得$Y_i$的奖励，求如何使得得到的钱最多
 
@@ -201,14 +165,15 @@ return 0;
 
 * `a[N]`记录$X_i$，`b[N]`记录$Y_i$
   * 状态表示：`dp[i][j]`表示前`i`次投掷，当前计数器值为`j`时得到的钱
-  * 状态计算： 
+  * 状态计算：
     * 若投掷结果为正：则`dp[i][j] = dp[i - 1][j - 1] + a[i] + b[j]`
-    * 反之计数器清零，更新之后的结果：`dp[i][0] = max(dp[i][0],dp[i - 1][j])`
+    * 反之计数器清零，更新之后的结果：`dp[i][0] = max(dp[i][0], dp[i - 1][j])`
   * 注意开`long long`
 
 ---
 
 ### 代码
+
 ```cpp
 #include &lt;bits/stdc++.h&gt;
 using namespace std;

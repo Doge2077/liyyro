@@ -17,7 +17,6 @@ description: ""
 
 ---
 ```python
-
 names = ['wjq', 'lys', 'hfcj', 'xhz', 'jcg']
 for i in names:
     print(i)
@@ -29,7 +28,6 @@ for i in names:
 
 ---
 ```python
-
 names = ['wjq', 'lys', 'hfcj', 'xhz', 'jcg']
 for i in names:
     print(f"hello,{i}!")
@@ -41,7 +39,6 @@ for i in names:
 
 ---
 ```python
-
 names = ['wjq', 'hfcj', 'xhz', 'jcg']
 for i in names:
     print(f"Hello,{i}! Would you like to have a dinner for me?")
@@ -53,7 +50,6 @@ for i in names:
 
 ---
 ```python
-
 names = ['wjq', 'hfcj', 'xhz', 'jcg']
 for i in names:
     print(f"Hello,{i}! Would you like to have a dinner for me?")
@@ -69,7 +65,6 @@ for i in names:
 
 ---
 ```python
-
 names = ['wjq', 'hfcj', 'xhz', 'jcg']
 print("I have found a bigger table for the party")
 names.insert(0, 'lrh')

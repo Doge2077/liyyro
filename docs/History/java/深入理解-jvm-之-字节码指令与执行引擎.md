@@ -101,7 +101,7 @@ java Hello
 
 我们利用 `javap` 命令对 `.class` 文件反编译，将其输出到文本：
 
-```java
+```shell
 javap -v Hello.class > Hello.txt
 ```
 
@@ -113,9 +113,7 @@ javap -v Hello.class > Hello.txt
 
 然后打开 `Hello.txt` 查看：
 
-```java
 ```
-
 Classfile /L:/JAVA/BasicSyntax/Learn_JVM/code/Hello.class
   Last modified 2023年9月5日; size 415 bytes
   SHA-256 checksum 35b1e377d78c81fc0a324af427c3e67c3a468b293c544de8715343f4d97c0c52
@@ -137,9 +135,38 @@ Constant pool:
    #7 = Fieldref           #8.#9          // java/lang/System.out:Ljava/io/PrintStream;
    #8 = Class              #10            // java/lang/System
    #9 = NameAndType        #11:#12
+  #10 = Utf8               java/lang/System
+  #11 = Utf8               out
+  #12 = Utf8               Ljava/io/PrintStream;
+  #13 = String             #14            // Hello world
+  #14 = Utf8               Hello world
+  #15 = Methodref          #16.#17        // java/io/PrintStream.println:(Ljava/lang/String;)V
+  #16 = Class              #18            // java/io/PrintStream
+  #17 = NameAndType        #19:#20        // println:(Ljava/lang/String;)V
+  #18 = Utf8               java/io/PrintStream
+  #19 = Utf8               println
+  #20 = Utf8               (Ljava/lang/String;)V
+  #21 = Class              #22            // Hello
+  #22 = Utf8               Hello
+  #23 = Utf8               Code
+  #24 = Utf8               LineNumberTable
+  #25 = Utf8               main
+  #26 = Utf8               ([Ljava/lang/String;)V
+  #27 = Utf8               SourceFile
+  #28 = Utf8               Hello.java
+{
+  public Hello();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+         4: return
+      LineNumberTable:
+        line 1: 0
 
-```java
-public static void main(java.lang.String[]);
+  public static void main(java.lang.String[]);
     descriptor: ([Ljava/lang/String;)V
     flags: (0x0009) ACC_PUBLIC, ACC_STATIC
     Code:
@@ -175,11 +202,11 @@ SourceFile: "Hello.java"
 
 1.  局部变量加载指令（Load Instructions）：
 
-    *   `iload`: 从局部变量表加载一个 `int` 类型的变量到操作栈。
-    *   `lload`: 从局部变量表加载一个 `long` 类型的变量到操作栈。
-    *   `fload`: 从局部变量表加载一个 `float` 类型的变量到操作栈。
-    *   `dload`: 从局部变量表加载一个 `double` 类型的变量到操作栈。
-    *   `aload`: 从局部变量表加载一个引用类型的变量到操作栈。
+    *   `iload`: 从局部变量表加载一个 `int` 类型的变量到操作数栈。
+    *   `lload`: 从局部变量表加载一个 `long` 类型的变量到操作数栈。
+    *   `fload`: 从局部变量表加载一个 `float` 类型的变量到操作数栈。
+    *   `dload`: 从局部变量表加载一个 `double` 类型的变量到操作数栈。
+    *   `aload`: 从局部变量表加载一个引用类型的变量到操作数栈。
 
 2.  局部变量存储指令（Store Instructions）：
 
@@ -191,20 +218,16 @@ SourceFile: "Hello.java"
 
 3.  常量加载指令（Constant Instructions）：
 
-```java
- * `iconst`: 将int类型的常量加载到操作数栈。
- * `lconst`: 将long类型的常量加载到操作数栈。
- * `fconst`: 将float类型的常量加载到操作数栈。
- * `dconst`: 将double类型的常量加载到操作数栈。
- * `aconst_null`: 将null引用加载到操作数栈。
-```
+    *   `iconst`: 将 `int` 类型的常量加载到操作数栈。
+    *   `lconst`: 将 `long` 类型的常量加载到操作数栈。
+    *   `fconst`: 将 `float` 类型的常量加载到操作数栈。
+    *   `dconst`: 将 `double` 类型的常量加载到操作数栈。
+    *   `aconst_null`: 将 `null` 引用加载到操作数栈。
 
-### 操作数栈指令（Stack Instructions）
+4.  操作数栈指令（Stack Instructions）：
 
-```java
- * `bipush`: 将一个字节大小的常量加载到操作数栈。
- * `sipush`: 将一个短整型大小的常量加载到操作数栈。
-```
+    *   `bipush`: 将一个字节大小的常量加载到操作数栈。
+    *   `sipush`: 将一个短整型大小的常量加载到操作数栈。
 
 ---
 
@@ -214,105 +237,81 @@ SourceFile: "Hello.java"
 
 1. 加法指令（Addition Instructions）：
 
-```java
- * `iadd`: 执行两个int类型操作数的相加操作。
- * `ladd`: 执行两个long类型操作数的相加操作。
- * `fadd`: 执行两个float类型操作数的相加操作。
- * `dadd`: 执行两个double类型操作数的相加操作。
-```
+    *   `iadd`: 执行两个 `int` 类型操作数的相加操作。
+    *   `ladd`: 执行两个 `long` 类型操作数的相加操作。
+    *   `fadd`: 执行两个 `float` 类型操作数的相加操作。
+    *   `dadd`: 执行两个 `double` 类型操作数的相加操作。
 
 2. 减法指令（Subtraction Instructions）：
 
-```java
- * `isub`: 执行两个int类型操作数的相减操作。
- * `lsub`: 执行两个long类型操作数的相减操作。
- * `fsub`: 执行两个float类型操作数的相减操作。
- * `dsub`: 执行两个double类型操作数的相减操作。
-```
+    *   `isub`: 执行两个 `int` 类型操作数的相减操作。
+    *   `lsub`: 执行两个 `long` 类型操作数的相减操作。
+    *   `fsub`: 执行两个 `float` 类型操作数的相减操作。
+    *   `dsub`: 执行两个 `double` 类型操作数的相减操作。
 
 3. 乘法指令（Multiplication Instructions）：
 
-```java
- * `imul`: 执行两个int类型操作数的相乘操作。
- * `lmul`: 执行两个long类型操作数的相乘操作。
- * `fmul`: 执行两个float类型操作数的相乘操作。
- * `dmul`: 执行两个double类型操作数的相乘操作。
-```
+    *   `imul`: 执行两个 `int` 类型操作数的相乘操作。
+    *   `lmul`: 执行两个 `long` 类型操作数的相乘操作。
+    *   `fmul`: 执行两个 `float` 类型操作数的相乘操作。
+    *   `dmul`: 执行两个 `double` 类型操作数的相乘操作。
 
 4. 除法指令（Division Instructions）：
 
-```java
- * `idiv`: 执行两个int类型操作数的相除操作。
- * `ldiv`: 执行两个long类型操作数的相除操作。
- * `fdiv`: 执行两个float类型操作数的相除操作。
- * `ddiv`: 执行两个double类型操作数的相除操作。
-```
+    *   `idiv`: 执行两个 `int` 类型操作数的相除操作。
+    *   `ldiv`: 执行两个 `long` 类型操作数的相除操作。
+    *   `fdiv`: 执行两个 `float` 类型操作数的相除操作。
+    *   `ddiv`: 执行两个 `double` 类型操作数的相除操作。
 
 5. 求余指令（Remainder Instructions）：
 
-```java
- * `irem`: 执行两个int类型操作数的求余操作。
- * `lrem`: 执行两个long类型操作数的求余操作。
- * `frem`: 执行两个float类型操作数的求余操作。
- * `drem`: 执行两个double类型操作数的求余操作。
-```
+    *   `irem`: 执行两个 `int` 类型操作数的求余操作。
+    *   `lrem`: 执行两个 `long` 类型操作数的求余操作。
+    *   `frem`: 执行两个 `float` 类型操作数的求余操作。
+    *   `drem`: 执行两个 `double` 类型操作数的求余操作。
 
 6. 取反指令（Negation Instructions）：
 
-```java
- * `ineg`: 对一个int类型操作数进行取反操作。
- * `lneg`: 对一个long类型操作数进行取反操作。
- * `fneg`: 对一个float类型操作数进行取反操作。
- * `dneg`: 对一个double类型操作数进行取反操作。
-```
+    *   `ineg`: 对一个 `int` 类型操作数进行取反操作。
+    *   `lneg`: 对一个 `long` 类型操作数进行取反操作。
+    *   `fneg`: 对一个 `float` 类型操作数进行取反操作。
+    *   `dneg`: 对一个 `double` 类型操作数进行取反操作。
 
 7. 位移指令（Shift Instructions）：
 
-```java
- * `ishl`: 对一个int类型操作数进行左移操作。
- * `ishr`: 对一个int类型操作数进行带符号右移操作。
- * `iushr`: 对一个int类型操作数进行无符号右移操作。
- * `lshl`: 对一个long类型操作数进行左移操作。
- * `lshr`: 对一个long类型操作数进行带符号右移操作。
- * `lushr`: 对一个long类型操作数进行无符号右移操作。
-```
+    *   `ishl`: 对一个 `int` 类型操作数进行左移操作。
+    *   `ishr`: 对一个 `int` 类型操作数进行带符号右移操作。
+    *   `iushr`: 对一个 `int` 类型操作数进行无符号右移操作。
+    *   `lshl`: 对一个 `long` 类型操作数进行左移操作。
+    *   `lshr`: 对一个 `long` 类型操作数进行带符号右移操作。
+    *   `lushr`: 对一个 `long` 类型操作数进行无符号右移操作。
 
 8. 按位或指令（Bitwise OR Instructions）：
 
-```java
- * `ior`: 对两个int类型操作数进行按位或操作。
- * `lor`: 对两个long类型操作数进行按位或操作。
-```
+    *   `ior`: 对两个 `int` 类型操作数进行按位或操作。
+    *   `lor`: 对两个 `long` 类型操作数进行按位或操作。
 
 9. 按位与指令（Bitwise AND Instructions）：
 
-```java
- * `iand`: 对两个int类型操作数进行按位与操作。
- * `land`: 对两个long类型操作数进行按位与操作。
-```
+    *   `iand`: 对两个 `int` 类型操作数进行按位与操作。
+    *   `land`: 对两个 `long` 类型操作数进行按位与操作。
 
 10. 按位异或指令（Bitwise XOR Instructions）：
 
-```java
- * `ixor`: 对两个int类型操作数进行按位异或操作。
- * `lxor`: 对两个long类型操作数进行按位异或操作。
-```
+    *   `ixor`: 对两个 `int` 类型操作数进行按位异或操作。
+    *   `lxor`: 对两个 `long` 类型操作数进行按位异或操作。
 
 11. 局部变量自增指令（Increment Instructions）：
 
-```java
- * `iinc`: 对一个int类型的局部变量进行自增操作。
-```
+    *   `iinc`: 对一个 `int` 类型的局部变量进行自增操作。
 
 12. 比较指令（Comparison Instructions）：
 
-```java
- * `dcmpg`: 比较两个double类型操作数的大小（带NaN处理）。
- * `dcmpl`: 比较两个double类型操作数的大小（带NaN处理）。
- * `fcmpg`: 比较两个float类型操作数的大小（带NaN处理）。
- * `fcmpl`: 比较两个float类型操作数的大小（带NaN处理）。
- * `lcmp`: 比较两个long类型操作数的大小。
-```
+    *   `dcmpg`: 比较两个 `double` 类型操作数的大小（带NaN处理）。
+    *   `dcmpl`: 比较两个 `double` 类型操作数的大小（带NaN处理）。
+    *   `fcmpg`: 比较两个 `float` 类型操作数的大小（带NaN处理）。
+    *   `fcmpl`: 比较两个 `float` 类型操作数的大小（带NaN处理）。
+    *   `lcmp`: 比较两个 `long` 类型操作数的大小。
 
 ---
 
@@ -322,35 +321,29 @@ SourceFile: "Hello.java"
 
 1. 整数类型转换指令（Integer Conversion Instructions）：
 
-```java
- * `i2l`: 将int类型转换为long类型。
- * `i2f`: 将int类型转换为float类型。
- * `i2d`: 将int类型转换为double类型。
- * `l2i`: 将long类型转换为int类型。
- * `l2f`: 将long类型转换为float类型。
- * `l2d`: 将long类型转换为double类型。
- * `f2i`: 将float类型转换为int类型。
- * `f2l`: 将float类型转换为long类型。
- * `f2d`: 将float类型转换为double类型。
- * `d2i`: 将double类型转换为int类型。
- * `d2l`: 将double类型转换为long类型。
- * `d2f`: 将double类型转换为float类型。
-```
+    *   `i2l`: 将 `int` 类型转换为 `long` 类型。
+    *   `i2f`: 将 `int` 类型转换为 `float` 类型。
+    *   `i2d`: 将 `int` 类型转换为 `double` 类型。
+    *   `l2i`: 将 `long` 类型转换为 `int` 类型。
+    *   `l2f`: 将 `long` 类型转换为 `float` 类型。
+    *   `l2d`: 将 `long` 类型转换为 `double` 类型。
+    *   `f2i`: 将 `float` 类型转换为 `int` 类型。
+    *   `f2l`: 将 `float` 类型转换为 `long` 类型。
+    *   `f2d`: 将 `float` 类型转换为 `double` 类型。
+    *   `d2i`: 将 `double` 类型转换为 `int` 类型。
+    *   `d2l`: 将 `double` 类型转换为 `long` 类型。
+    *   `d2f`: 将 `double` 类型转换为 `float` 类型。
 
 2. 类型强制转换指令（Type Casting Instructions）：
 
-```java
- * `checkcast`: 检查对象是否可以强制转换为指定类型。
- * `instanceof`: 检查对象是否是指定类型的实例。
-```
+    *   `checkcast`: 检查对象是否可以强制转换为指定类型。
+    *   `instanceof`: 检查对象是否是指定类型的实例。
 
 3. 数值拓宽和缩窄指令（Numeric Widening and Narrowing Instructions）：
 
-```java
- * `i2b`: 将int类型转换为byte类型。
- * `i2c`: 将int类型转换为char类型。
- * `i2s`: 将int类型转换为short类型。
-```
+    *   `i2b`: 将 `int` 类型转换为 `byte` 类型。
+    *   `i2c`: 将 `int` 类型转换为 `char` 类型。
+    *   `i2s`: 将 `int` 类型转换为 `short` 类型。
 
 ---
 
@@ -360,23 +353,19 @@ SourceFile: "Hello.java"
 
 1. 对象创建指令（Object Creation Instructions）：
 
-```java
- * `new`: 创建一个新的对象，并将其引用推送到操作数栈上。
- * `newarray`: 创建一个指定类型的新数组，并将其引用推送到操作数栈上。
- * `anewarray`: 创建一个引用类型的新数组，并将其引用推送到操作数栈上。
- * `multianewarray`: 创建一个多维数组，并将其引用推送到操作数栈上。
-```
+    *   `new`: 创建一个新的对象，并将其引用推送到操作数栈上。
+    *   `newarray`: 创建一个指定类型的新数组，并将其引用推送到操作数栈上。
+    *   `anewarray`: 创建一个引用类型的新数组，并将其引用推送到操作数栈上。
+    *   `multianewarray`: 创建一个多维数组，并将其引用推送到操作数栈上。
 
 2. 对象访问指令（Object Access Instructions）：
 
-```java
- * `getfield`: 从对象中获取实例字段的值，并将其推送到操作数栈上。
- * `putfield`: 将一个值存储到对象的实例字段中。
- * `getstatic`: 获取静态字段的值，并将其推送到操作数栈上。
- * `putstatic`: 将一个值存储到静态字段中。
- * `arraylength`: 获取数组的长度，并将其推送到操作数栈上。
- * `aload`: 从局部变量表加载一个引用类型的变量到操作数栈上。
-```
+    *   `getfield`: 从对象中获取实例字段的值，并将其推送到操作数栈上。
+    *   `putfield`: 将一个值存储到对象的实例字段中。
+    *   `getstatic`: 获取静态字段的值，并将其推送到操作数栈上。
+    *   `putstatic`: 将一个值存储到静态字段中。
+    *   `arraylength`: 获取数组的长度，并将其推送到操作数栈上。
+    *   `aload`: 从局部变量表加载一个引用类型的变量到操作数栈上。
 
 ---
 
@@ -386,27 +375,21 @@ SourceFile: "Hello.java"
 
 1. 出栈指令（Pop Instructions）：
 
-```java
- * `pop`: 将操作数栈的栈顶元素出栈。
- * `pop2`: 将操作数栈的栈顶的一个或两个元素出栈。
-```
+    *   `pop`: 将操作数栈的栈顶元素出栈。
+    *   `pop2`: 将操作数栈的栈顶的一个或两个元素出栈。
 
 2. 复制指令（Duplicate Instructions）：
 
-```java
- * `dup`: 复制操作数栈的栈顶元素，并将复制值重新压入栈顶。
- * `dup2`: 复制操作数栈的栈顶的一个或两个元素，并将复制值或双份的复制值重新压入栈顶。
- * `dup_x1`: 复制操作数栈的栈顶元素，并将复制值插入栈顶下面的一个元素之前。
- * `dup2_x1`: 复制操作数栈的栈顶的一个或两个元素，并将复制值或双份的复制值插入栈顶下面的一个元素之前。
- * `dup_x2`: 复制操作数栈的栈顶元素，并将复制值插入栈顶下面的两个元素之前。
- * `dup2_x2`: 复制操作数栈的栈顶的一个或两个元素，并将复制值或双份的复制值插入栈顶下面的两个元素之前。
-```
+    *   `dup`: 复制操作数栈的栈顶元素，并将复制值重新压入栈顶。
+    *   `dup2`: 复制操作数栈的栈顶的一个或两个元素，并将复制值或双份的复制值重新压入栈顶。
+    *   `dup_x1`: 复制操作数栈的栈顶元素，并将复制值插入栈顶下面的一个元素之前。
+    *   `dup2_x1`: 复制操作数栈的栈顶的一个或两个元素，并将复制值或双份的复制值插入栈顶下面的一个元素之前。
+    *   `dup_x2`: 复制操作数栈的栈顶元素，并将复制值插入栈顶下面的两个元素之前。
+    *   `dup2_x2`: 复制操作数栈的栈顶的一个或两个元素，并将复制值或双份的复制值插入栈顶下面的两个元素之前。
 
 3. 交换指令（Swap Instruction）：
 
-```java
- * `swap`: 将操作数栈最顶端的两个数值互换。
-```
+    *   `swap`: 将操作数栈最顶端的两个数值互换。
 
 ---
 
@@ -415,48 +398,36 @@ SourceFile: "Hello.java"
 ---
 
 1. 条件分支指令：
-```
 
-**主要修复内容：**
-1.  统一了列表项的缩进格式（如“2. 对象访问指令”及“3. 交换指令”前均添加了统一的空格）。
-2.  修正了 `aload` 指令描述中的笔误，将“操作栈”更正为“操作数栈”。
-3.  调整了段落间距，使文档结构更清晰一致。
+    *   `ifeq`: 如果栈顶值等于0，则跳转到指定位置。
+    *   `iflt`: 如果栈顶值小于0，则跳转到指定位置。
+    *   `ifle`: 如果栈顶值小于等于0，则跳转到指定位置。
+    *   `ifne`: 如果栈顶值不等于0，则跳转到指定位置。
+    *   `ifgt`: 如果栈顶值大于0，则跳转到指定位置。
+    *   `ifge`: 如果栈顶值大于等于0，则跳转到指定位置。
+    *   `ifnull`: 如果栈顶值为null，则跳转到指定位置。
+    *   `ifnonnull`: 如果栈顶值不为null，则跳转到指定位置。
+    *   `if_icmpeq`: 如果栈顶两个int值相等，则跳转到指定位置。
+    *   `if_icmpne`: 如果栈顶两个int值不相等，则跳转到指定位置。
+    *   `if_icmplt`: 如果栈顶第二个int值小于栈顶第一个int值，则跳转到指定位置。
+    *   `if_icmpgt`: 如果栈顶第二个int值大于栈顶第一个int值，则跳转到指定位置。
+    *   `if_icmple`: 如果栈顶第二个int值小于等于栈顶第一个int值，则跳转到指定位置。
+    *   `if_icmpge`: 如果栈顶第二个int值大于等于栈顶第一个int值，则跳转到指定位置。
+    *   `if_acmpeq`: 如果栈顶两个引用值相等，则跳转到指定位置。
+    *   `if_acmpne`: 如果栈顶两个引用值不相等，则跳转到指定位置。
 
-* `ifeq`: 如果栈顶值等于0，则跳转到指定位置。
- * `iflt`: 如果栈顶值小于0，则跳转到指定位置。
- * `ifle`: 如果栈顶值小于等于0，则跳转到指定位置。
- * `ifne`: 如果栈顶值不等于0，则跳转到指定位置。
- * `ifgt`: 如果栈顶值大于0，则跳转到指定位置。
- * `ifge`: 如果栈顶值大于等于0，则跳转到指定位置。
- * `ifnull`: 如果栈顶值为null，则跳转到指定位置。
- * `ifnonnull`: 如果栈顶值不为null，则跳转到指定位置。
- * `if_icmpeq`: 如果栈顶两个int值相等，则跳转到指定位置。
- * `if_icmpne`: 如果栈顶两个int值不相等，则跳转到指定位置。
- * `if_icmplt`: 如果栈顶第二个int值小于栈顶第一个int值，则跳转到指定位置。
- * `if_icmpgt`: 如果栈顶第二个int值大于栈顶第一个int值，则跳转到指定位置。
- * `if_icmple`: 如果栈顶第二个int值小于等于栈顶第一个int值，则跳转到指定位置。
- * `if_icmpge`: 如果栈顶第二个int值大于等于栈顶第一个int值，则跳转到指定位置。
- * `if_acmpeq`: 如果栈顶两个引用值相等，则跳转到指定位置。
- * `if_acmpne`: 如果栈顶两个引用值不相等，则跳转到指定位置。
+2. 复合条件分支指令：
 
----
+    *   `tableswitch`: 根据一个索引值进行跳转，通过索引值在一张表中查找跳转位置。
+    *   `lookupswitch`: 根据一个键值进行跳转，通过键值在一张表中查找跳转位置。
 
-  2. 复合条件分支指令：
+3. 无条件分支指令：
 
-```java
- * `tableswitch`: 根据一个索引值进行跳转，通过索引值在一张表中查找跳转位置。
- * `lookupswitch`: 根据一个键值进行跳转，通过键值在一张表中查找跳转位置。
-```
-
-  3. 无条件分支指令：
-
-```java
- * `goto`: 无条件跳转到指定位置。
- * `goto_w`: 无条件跳转到指定位置（扩展索引）。
- * `jsr`: 跳转到指定位置，并将返回地址压入栈顶。
- * `jsr_w`: 跳转到指定位置（扩展索引），并将返回地址压入栈顶。
- * `ret`: 返回到指定的局部变量索引位置。
-```
+    *   `goto`: 无条件跳转到指定位置。
+    *   `goto_w`: 无条件跳转到指定位置（扩展索引）。
+    *   `jsr`: 跳转到指定位置，并将返回地址压入栈顶。
+    *   `jsr_w`: 跳转到指定位置（扩展索引），并将返回地址压入栈顶。
+    *   `ret`: 返回到指定的局部变量索引位置。
 
 ---
 
@@ -539,7 +510,7 @@ SourceFile: "Hello.java"
 例如计算：$1 + 1$，两种指令集看起来是下面这样：
 
 基于栈的指令集：
-```java
+```assembly
 iconst_1
 iconst_1
 iadd
@@ -554,7 +525,7 @@ istore_0
 4.  `istore_0`：将栈顶的整数值存储到局部变量表中索引为 $0$ 的位置。
 
 基于寄存器的指令集：
-```asm
+```assembly
 mov eax, 1
 add eax, 1
 ```
@@ -592,8 +563,6 @@ add eax, 1
 
 接下来我们具体看一个实际的代码示例：
 ```java
-
-```java
 public class Test {
     public static void main(String[] args) {
         int a = 114;
@@ -612,9 +581,7 @@ javap -v Test.class
 
 可以看到输出了如下内容：
 
-```java
 ```
-
 Classfile /L:/JAVA/BasicSyntax/Learn_JVM/code/Test.class
   Last modified 2023年9月6日; size 276 bytes
   SHA-256 checksum 4064a19d96fe4d72c9d780ef819e1e937b120c31b37482e0b74c70e37c2a5601
@@ -653,8 +620,7 @@ Constant pool:
       LineNumberTable:
         line 1: 0
 
-```java
-public static void main(String[] args);
+  public static void main(java.lang.String[]);
     descriptor: ([Ljava/lang/String;)V
     flags: (0x0009) ACC_PUBLIC, ACC_STATIC
     Code:
@@ -668,11 +634,18 @@ public static void main(String[] args);
          9: iadd
         10: istore_3
         11: return
+      LineNumberTable:
+        line 3: 0
+        line 4: 3
+        line 5: 7
+        line 6: 11
+}
+SourceFile: "Test.java"
 ```
 
 我们专注于下列信息：
-```java
-public static void main(String[] args);
+```
+public static void main(java.lang.String[]);
     descriptor: ([Ljava/lang/String;)V
     flags: (0x0009) ACC_PUBLIC, ACC_STATIC
     Code:
@@ -695,7 +668,7 @@ public static void main(String[] args);
     *   `flags: (0x0009) ACC_PUBLIC, ACC_STATIC`：这是方法的标志，其中 `ACC_PUBLIC` 表示该方法是公共的，`ACC_STATIC` 表示该方法是静态的。
 
 我们针对其中的 `main` 入口代码 `Code` 展示解释器的执行过程，其中：
-```java
+```
 stack=2, locals=4, args_size=1
 ```
 
@@ -705,7 +678,7 @@ stack=2, locals=4, args_size=1
 
 首先，我们创建一个操作数栈（operand stack）和一个局部变量表（local variable table），并初始化程序计数器（program counter）为0。
 
-```java
+```
 执行：0: bipush        114
 操作数栈状态：[114（栈顶）, null]
 局部变量表状态：[this（索引起始）, null, null, null]
@@ -879,13 +852,13 @@ public class StaticDispatch {
 上面的代码中定义了一个 `StaticDispatch` 类，包含了一个抽象类 `Human` 和两个继承自 `Human` 的子类 `Man` 和 `Woman`。类中定义了三个重载的 `sayHello` 方法，分别接受 `Human`、`Man` 和 `Woman` 类型的参数，并输出相应的问候语。
 
 理论上我们重载了 `sayHello()` 方法，运行结果应该是：
-```java
+```
 hello,gentleman!
 hello,lady!
 ```
 
 但实际上控制台输出了：
-```java
+```
 hello, guy!
 hello, guy!
 ```
@@ -900,8 +873,7 @@ hello, guy!
 在上面的代码中，`Human` 是静态类型（也叫外观类型），而 `Man` 和 `Woman` 则是实际类型（也叫运行时类型）。
 
 我们用 `javap` 查看反编译结果：
-```java
-
+```
 Compiled from "StaticDispatch.java"
 public class StaticDispatch {
   public StaticDispatch();
@@ -910,29 +882,28 @@ public class StaticDispatch {
        1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
        4: return
 
-public void sayHello(StaticDispatch$Human);
+  public void sayHello(StaticDispatch$Human);
     Code:
        0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
        3: ldc           #13                 // String "hello,guy!"
        5: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
        8: return
 
-public void sayHello(StaticDispatch$Man);
+  public void sayHello(StaticDispatch$Man);
     Code:
        0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
        3: ldc           #21                 // String "hello,gentleman!"
        5: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
        8: return
 
-public void sayHello(StaticDispatch$Woman);
+  public void sayHello(StaticDispatch$Woman);
     Code:
        0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
        3: ldc           #23                 // String "hello,lady!"
        5: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
        8: return
 
-```java
-public static void main(java.lang.String[]);
+  public static void main(java.lang.String[]);
     Code:
        0: new           #25                 // class StaticDispatch$Man
        3: dup
@@ -957,7 +928,7 @@ public static void main(java.lang.String[]);
 ```
 
 可以明显地看到 `main` 方法里面的偏移量 `26` 和 `31` 处是我们的方法调用：
-```java
+```
 26: invokevirtual #34                 // Method sayHello:(LStaticDispatch$Human;)V
 ......
 31: invokevirtual #34                 // Method sayHello:(LStaticDispatch$Human;)V
@@ -971,13 +942,6 @@ public static void main(java.lang.String[]);
 
 但如果我们对原代码稍作修改：
 ```java
-```
-（后续代码示例）
-
-修复后的文本如下：
-
----
-
 public static void main(String[] args) {
         Human man = new Man();
         Human woman = new Woman();
@@ -985,17 +949,18 @@ public static void main(String[] args) {
         sr.sayHello((Man) man);  
         sr.sayHello((Woman) woman);
 }
+```
 
 再次编译运行，可以看到结果如下：
 
-```java
+```
 hello,gentleman!
 hello,lady!
 ```
 
 我们用 `javap` 查看反编译结果：
 
-```java
+```
 26: checkcast     #25                 // class StaticDispatch$Man
 29: invokevirtual #34                 // Method sayHello:(LStaticDispatch$Man;)V
 ......
@@ -1016,14 +981,6 @@ hello,lady!
 我们将上节示例代码稍作修改：
 
 ```java
-```
-
----
-
-**修改说明：**
-1. 删除了第一个代码块前多余的 ` ``` ` 标记
-2. 调整了代码块与正文之间的空行格式，使其更规范
-
 public class DynamicDispatch {
     static abstract class Human {
         protected abstract void sayHello();
@@ -1054,14 +1011,14 @@ public class DynamicDispatch {
 在上述代码中，`Human` 是一个抽象类，其中声明了一个抽象方法 `sayHello()`，`Man` 和 `Woman` 类都是 `Human` 类的子类，它们分别重写了 `sayHello()` 方法。我们首先创建了 `Man` 和 `Woman` 的实例对象 `man` 和 `woman` 并调用了相应的 `sayHello()` 方法，然后让 `man` 重新赋值为 `Woman` 的实例，并调用其 `sayHello()` 方法。
 
 理论上运行结果应该为：
-```java
+```
 man say hello
 woman say hello
 woman say hello
 ```
 
 实际上：
-```java
+```
 man say hello
 woman say hello
 woman say hello
@@ -1072,7 +1029,7 @@ woman say hello
 对于习惯了面向对象思维的我们来说，这是一个理所应当的结果，但问题在于 `Java` 虚拟机是如何根据实际类型来分派方法执行版本的呢？
 
 我们继续用 `javap` 大法查看反编译结果：
-```java
+```
 Compiled from "DynamicDispatch.java"
 public class DynamicDispatch {
   public DynamicDispatch();
@@ -1080,9 +1037,8 @@ public class DynamicDispatch {
        0: aload_0
        1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
        4: return
-```
 
-public static void main(java.lang.String[]);
+  public static void main(java.lang.String[]);
     Code:
        0: new           #7                  // class DynamicDispatch$Man
        3: dup
@@ -1108,14 +1064,12 @@ public static void main(java.lang.String[]);
 
 在 `main` 方法中：
 ```java
-
 Human man = new Man();
 Human woman = new Woman();
 ```
 
 对应字节码指令为：
-```java
-
+```
 0: new           #7                  // class DynamicDispatch$Man
  3: dup
  4: invokespecial #9                  // Method DynamicDispatch$Man."&lt;init&gt;":()V
@@ -1128,13 +1082,12 @@ Human woman = new Woman();
 
 而调用方法：
 ```java
-
 man.sayHello();
 woman.sayHello();
 ```
 
 对应字节码指令为：
-```java
+```
 17: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
 ......
 21: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
@@ -1180,17 +1133,16 @@ public class LambdaTest {
     public static interface Test {
         String showTestNumber(Integer param);
     }
-```java
-public static void main(String[] args) {
-    Test test = param -> "Test number is " + param;
-    System.out.println(test.showTestNumber(114514));
+
+    public static void main(String[] args) {
+        Test test = param -> "Test number is " + param;
+        System.out.println(test.showTestNumber(114514));
+    }
 }
 ```
 
 `javac` 编译后再 `javap` 反编译回去，得到下面的内容：
-```java
 ```
-
 Classfile /L:/JAVA/BasicSyntax/Learn_JVM/code/LambdaTest.class
   Last modified 2023年9月6日; size 1445 bytes
   SHA-256 checksum 3a71d05fe531173bda2fd05e7b9a5a12dc0fd040047f87a59add471744a6a2be
@@ -1290,45 +1242,7 @@ Constant pool:
         line 1: 0
 }
 
-public static void main(java.lang.String[]);
-    descriptor: ([Ljava/lang/String;)V
-    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
-    Code:
-      stack=3, locals=2, args_size=1
-         0: invokedynamic #7, 0              // InvokeDynamic #0:showTestNumber:()LLambdaTest$Test;
-         5: astore_1
-         6: getstatic     #11                 // Field java/lang/System.out:Ljava/io/PrintStream;
-         9: aload_1
-        10: ldc           #17                 // int 114514
-        12: invokestatic  #18                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
-        15: invokeinterface #24, 2           // InterfaceMethod LambdaTest$Test.showTestNumber:(Ljava/lang/Integer;)Ljava/lang/String;
-        20: invokevirtual #29                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-        23: return
-      LineNumberTable:
-        line 8: 0
-        line 9: 6
-        line 10: 23
-}
-SourceFile: "LambdaTest.java"
-NestMembers:
-  LambdaTest$Test
-BootstrapMethods:
-  0: #49 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
-    Method arguments:
-      #56 (Ljava/lang/Integer;)Ljava/lang/String;
-      #57 REF_invokeStatic LambdaTest.lambda$main$0:(Ljava/lang/Integer;)Ljava/lang/String;
-      #56 (Ljava/lang/Integer;)Ljava/lang/String;
-  1: #60 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
-    Method arguments:
-      #66 "Test number is \u0001"
-InnerClasses:
-  public static #69= #25 of #38;          // Test=class LambdaTest$Test of class LambdaTest
-  public static final #74= #70 of #72;    // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles
-
-我们还是重点关注 `main` 方法里面的内容：
-
-```java
-public static void main(java.lang.String[]);
+  public static void main(java.lang.String[]);
     descriptor: ([Ljava/lang/String;)V
     flags: (0x0009) ACC_PUBLIC, ACC_STATIC
     Code:
@@ -1347,39 +1261,13 @@ public static void main(java.lang.String[]);
         line 9: 6
         line 10: 23
 }
-```
-
-其中：
-
-```java
-0: invokedynamic #7,  0              // InvokeDynamic #0:showTestNumber:()LLambdaTest$Test;
-```
-
-就对应了我们的：
-
-```java
-Test test = param -> "Test number is " + param;
-```
-
-下面我们来具体展示 `invokedynamic` 指令的运作过程：
-
-1. `0: invokedynamic #7, 0` 提示我们需要找到常量池中索引为 `#7` 的 `InvokeDynamic` 项。根据反编译结果，我们可以找到这个项的描述符为 `#0:showTestNumber:()LLambdaTest$Test;`，这也是 `javap -v` 预先添加的注释内容。
-  2. 接下来 `#7` 后面紧跟的 `0` 是我们需要寻找的引导方法，即最后的 `BootstrapMethods` 中值为 `0` 的内容，其引导方法描述符指向了 `LambdaMetafactory.metafactory` 方法。
-  3. 继续引导方法 `#49`：表示调用的静态方法 `LambdaMetafactory.metafactory` 接受六个参数并返回一个`CallSite`对象，参数如下： 
-```java
- * `java/lang/invoke/MethodHandles$Lookup`：表示一个`MethodHandles.Lookup`对象，用于查找要调用的方法
- * `java/lang/String`：表示一个字符串，用于指定要实现的函数接口的名称。
- * `java/lang/invoke/MethodType`：表示一个方法类型对象，指定要实现的函数接口的方法签名。
- * `java/lang/invoke/MethodType`：表示一个方法类型对象，指定要调用的方法的方法签名。
- * `java/lang/invoke/MethodHandle`：表示一个方法句柄，指向要调用的方法。
- * `java/lang/invoke/MethodType`：表示一个方法类型对象，指定要调用的方法的方法签名。
-```
-  4. 成功返回后，将 `CallSite` 对象与目标方法进行绑定，该方法有两个参数： 
-```java
- * `#56`：是一个方法类型（`Ljava/lang/invoke/MethodType`）的参数，表示被调用方法的参数类型和返回类型。
- * `#57`：是一个方法句柄（`Ljava/lang/invoke/MethodHandle`）的参数，表示要调用的方法的句柄。
-```
-  5. 结合静态方法 `LambdaMetafactory.metafactory` 的第五个参数（`java/lang/invoke/MethodHandle`方法句柄）可知最终绑定到了 `LambdaTest.lambda$main$0` 方法，这也就是 `Lambda` 表达式最终在 `LambdaTest` 中的 `main` 方法里生成的私有方法。
-  6. 最后，由于 `invokedynamic` 指令通过引导方法调用了 `showTestNumber` 方法，最终将返回的 `CallSite` 对象存储在局部变量表中等待调用。
-
-通过这个过程，`invokedynamic` 指令实现了对 `LambdaTest` 类中 `showTestNumber` 方法的动态调用。
+SourceFile: "LambdaTest.java"
+NestMembers:
+  LambdaTest$Test
+BootstrapMethods:
+  0: #49 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #56 (Ljava/lang/Integer;)Ljava/lang/String;
+      #57 REF_invokeStatic LambdaTest.lambda$main$0:(Ljava/lang/Integer;)Ljava/lang/String;
+      #56 (Ljava/lang/Integer;)Ljava/lang/String;
+  1: #60 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/

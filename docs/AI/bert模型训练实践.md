@@ -159,7 +159,6 @@ else:
 # ========== 加载配置 ==========
 with open("config.json") as f:
     cfg = json.load(f)
-```
 
 # ========== 加载数据 ==========
 tokenizer = BertTokenizer.from_pretrained(cfg["model_name"])
@@ -201,7 +200,6 @@ args = TrainingArguments(
 # ========== 显存监控 Hook ==========
 from transformers import TrainerCallback
 
-```python
 class PrintMemoryCallback(TrainerCallback):
     def on_epoch_begin(self, args, state, control, **kwargs):
         if torch.cuda.is_available():
@@ -225,6 +223,7 @@ trainer.train()
 trainer.save_model(cfg["output_dir"])
 tokenizer.save_pretrained(cfg["output_dir"])
 print("✅ 模型和分词器保存成功！")
+```
 
 ### 使用模型 `predict.py`
 模型会保存到 `./models/`。

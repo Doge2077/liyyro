@@ -28,8 +28,7 @@ description: ""
 ---
 
 **代码** ：
-```java
-
+```cpp
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -66,26 +65,18 @@ LL f(LL n){
 }
 
 void solve(){
-
-LL n; cin >> n;
+    LL n; cin >> n;
     cout &lt;&lt; f(n) &lt;&lt; endl;
-
 }
 
 int main(){
-
-IOS;
-
-int _ = 1;
-
-// cin &gt;> _;
-
-while(_ --){
+    IOS;
+    int _ = 1;
+    // cin &gt;> _;
+    while(_ --){
         solve();
     }
-
-return 0;
-
+    return 0;
 }
 ```
 
@@ -107,12 +98,11 @@ return 0;
 **思想** ：
 
 * 模拟。
-  * 每次操作找到与 $\lfloor \frac{x}{10^i} \rfloor x$ 和 $\lceil \frac{x}{10^i} \rceil x$ 最接近的数，并取代即可。
+  * 每次操作找到与 $\lfloor \frac{x}{10^i} \rfloor \times 10^i$ 和 $\lceil \frac{x}{10^i} \rceil \times 10^i$ 最接近的数，并取代即可。
 
 ---
 
 **代码** ：
-```java
 ```cpp
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
@@ -169,6 +159,8 @@ int main() {
 }
 ```
 
+---
+
 ## C - (K+1)-th Largest Number
 
 ---
@@ -192,8 +184,6 @@ int main() {
 
 **代码**：
 ```cpp
-// 此处应填写对应问题的C++代码
-```
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -288,7 +278,7 @@ int main() {
 * 二分，模拟。 
   * 朝着某一方向走 $l_i$ 步，我们需要快速定位到在其方向上最近的墙的位置或者边界的位置。
   * 考虑二分，同时我们需要存储每一个行对应的列坐标，每一个列对应的行坐标。
-  * 由于坐标范围很大，所以我们考虑 `map&lt;LL, set&lt;LL&gt;&gt;` 来快速查询。
+  * 由于坐标范围很大，所以我们考虑 `map&lt;LL, set&lt;LL&gt;>` 来快速查询。
 
 ---
 
@@ -324,15 +314,10 @@ const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
 const double eps = 1e-6, PI = acos(-1);
 
-map&lt;LL, vector&lt;LL&gt;&gt; dx, dy;
-
 void solve(){
-
-LL l, w, x, y; cin >> l >> w >> x >> y;
-
-map&lt;LL,set&lt;LL&gt;&gt; dx, dy;
-
-int n; cin >> n;
+    LL l, w, x, y; cin >> l >> w >> x >> y;
+    map&lt;LL,set&lt;LL&gt;> dx, dy;
+    int n; cin >> n;
     while(n --){
         LL a, b;
         cin >> a >> b;
@@ -340,7 +325,7 @@ int n; cin >> n;
         dy[b].insert(a);
     }
 
-for (auto &&i : dx){
+    for (auto &&i : dx){
         i.second.insert(0);
         i.second.insert(w + 1);
     }
@@ -348,52 +333,52 @@ for (auto &&i : dx){
         i.second.insert(0);
         i.second.insert(l + 1);
     }
-```
 
-int q;
-cin >> q;
-while (q-- > 0) {
-    char op;
-    LL k;
-    cin >> op >> k;
+    int q;
+    cin >> q;
+    while (q-- > 0) {
+        char op;
+        LL k;
+        cin >> op >> k;
 
-    if (op == 'L') {
-        LL ny = y - k;
-        if (dx.find(x) == dx.end()) {
-            y = max(ny, (LL)1);
+        if (op == 'L') {
+            LL ny = y - k;
+            if (dx.find(x) == dx.end()) {
+                y = max(ny, (LL)1);
+            } else {
+                auto it = dx[x].lower_bound(y);
+                it = prev(it);
+                y = max(*it + 1, ny);
+            }
+        } else if (op == 'R') {
+            LL ny = y + k;
+            if (dx.find(x) == dx.end()) {
+                y = min(ny, w);
+            } else {
+                auto it = dx[x].lower_bound(y);
+                y = min(*it - 1, ny);
+            }
+        } else if (op == 'U') {
+            LL nx = x - k;
+            if (dy.find(y) == dy.end()) {
+                x = max(nx, (LL)1);
+            } else {
+                auto it = dy[y].lower_bound(x);
+                it = prev(it);
+                x = max(*it + 1, nx);
+            }
         } else {
-            auto it = dx[x].lower_bound(y);
-            it = prev(it);
-            y = max(*it + 1, ny);
+            LL nx = x + k;
+            if (dy.find(y) == dy.end()) {
+                x = min(nx, l);
+            } else {
+                auto it = dy[y].lower_bound(x);
+                x = min(*it - 1, nx);
+            }
         }
-    } else if (op == 'R') {
-        LL ny = y + k;
-        if (dx.find(x) == dx.end()) {
-            y = min(ny, w);
-        } else {
-            auto it = dx[x].lower_bound(y);
-            y = min(*it - 1, ny);
-        }
-    } else if (op == 'U') {
-        LL nx = x - k;
-        if (dy.find(y) == dy.end()) {
-            x = max(nx, (LL)1);
-        } else {
-            auto it = dy[y].lower_bound(x);
-            it = prev(it);
-            x = max(*it + 1, nx);
-        }
-    } else {
-        LL nx = x + k;
-        if (dy.find(y) == dy.end()) {
-            x = min(nx, l);
-        } else {
-            auto it = dy[y].lower_bound(x);
-            x = min(*it - 1, nx);
-        }
+
+        cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; endl;
     }
-
-    cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; endl;
 }
 
 int main() {
@@ -407,3 +392,4 @@ int main() {
 
     return 0;
 }
+```

@@ -60,6 +60,7 @@ public interface Show {
 
 继续沿用之前代码示例，现在要求输出 `List` 中的全部元素：
 
+```java
 public class Main {
     public static void main(String[] args) {
         List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 4, 5);
@@ -115,7 +116,6 @@ public interface Test {
 
 利用上述接口，我们使用如下匿名内部类来实现该方法：
 
-```java
 ```java
 public class Main {
     public static void main(String[] args) {
@@ -216,7 +216,7 @@ public class Main {
 
 ## Lambda 的应用
 
-好了，你已经学会 $1 + 1 = 2$ 了，现在来康康更实际的东西吧（
+好了，你已经学会 $1 + 1 = 2$ 了，现在来看看更实际的东西吧（
 
 ### 无参的函数式接口
 
@@ -350,8 +350,6 @@ public int compareTo(Integer anotherInteger) {
 
 如果是以匿名内部类的方式实现，那么代码如下：
 ```java
-```
-
 public class Main {
     public static void main(String[] args) {
         Integer[] array = new Integer[]{4, 5, 9, 3, 2, 8, 1, 0, 6};
@@ -364,19 +362,23 @@ public class Main {
         System.out.println(Arrays.toString(array)); //按从小到大的顺序排列
     }
 }
+```
 
 继续将上述匿名内部类替换为 Lambda 表达式如下：
 
+```java
 public class Main {
     public static void main(String[] args) {
         Integer[] array = new Integer[]{4, 5, 9, 3, 2, 8, 1, 0, 6};
-        Arrays.sort(array, (o1, o2) -&gt; o1.compareTo(o2));
+        Arrays.sort(array, (o1, o2) -> o1.compareTo(o2));
         System.out.println(Arrays.toString(array)); //按从小到大的顺序排列
     }
 }
+```
 
 由于 compareTo 是实例方法，属于对象而非类。如果我们想要引用该方法，可以使用实例方法引用：
 
+```java
 public class Main {
     public static void main(String[] args) {
         Integer[] array = new Integer[]{4, 5, 9, 3, 2, 8, 1, 0, 6};
@@ -384,17 +386,21 @@ public class Main {
         System.out.println(Arrays.toString(array)); //按从小到大的顺序排列
     }
 }
+```
 
 虽然看起来和刚才的 Lambda 表达式相似，但这里使用的是实例方法引用。在这种引用形式中，抽象方法参数列表的第一个参数会成为调用目标对象，后续参数作为该实例方法的参数。因此，`o1` 成为了 `compareTo` 的调用目标，`o2` 作为方法的参数，匹配了实例方法 `compareTo(Integer)` 的签名。
 
 对于构造方法引用，假设接口 `Test` 中有抽象方法 `newTest`：
 
+```java
 public interface Test {
     String newTest(String param);
 }
+```
 
 使用匿名类实现，代码如下：
 
+```java
 public class Main {
     public static void main(String[] args) {
         Test test = new Test() {
@@ -406,6 +412,7 @@ public class Main {
         System.out.println(test.newTest("哼哼哼啊啊啊~"));
     }
 }
+```
 
 而我们注意到该方法其实就是 `String` 中的构造方法，因此我们直接进行构造器引用：
 
