@@ -7,7 +7,7 @@ description: ""
 
 ### 770.单词替换 (stringstream)
 
-[原题链接](&lt;https://www.acwing.com/problem/content/772/&gt;) **描述** ： 输入一个字符串，以回车结束（字符串长度不超过 100）。
+[原题链接](https://www.acwing.com/problem/content/772/) **描述** ： 输入一个字符串，以回车结束（字符串长度不超过 100）。
 
 该字符串由若干个单词组成，单词之间用一个空格隔开，所有单词区分大小写。
 
@@ -25,8 +25,6 @@ description: ""
 
 **输入样例：**
 ```java
-
-
 You want someone to help you
 You
 I
@@ -34,34 +32,28 @@ I
 
 **输出样例：**
 ```java
-
-
 I want someone to help you
 ```
 
 **分析** ：
 
-  * 替换单词字符串，可以利用`stringstream`依次读入，判断输出
-
-
+* 替换单词字符串，可以利用`stringstream`依次读入，判断输出
 
 **代码** ：
-```java
-
-
+```cpp
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
 int main()
 {
-    string s,s1,a,b;
-    getline(cin,s);  //读入
-    cin>>a>>b;
+    string s, s1, a, b;
+    getline(cin, s);  //读入
+    cin >> a >> b;
     stringstream ssin(s);  //初始化
-    while(ssin>>s1){  //依次读入
-        if(s1==a){  //判断
-            cout<<b<<" ";
+    while(ssin >> s1) {  //依次读入
+        if(s1 == a) {  //判断
+            cout &lt;&lt; b &lt;&lt; " ";
         }
-        else cout<<s1<<" ";
+        else cout &lt;&lt; s1 &lt;&lt; " ";
     }
     return 0;
 }
@@ -71,17 +63,16 @@ int main()
 
 #### string 操作
 
-> 
->     string str1 = "abcdefghigklmn" ;
->     
+&gt;     string str1 = "abcdefghigklmn" ;
+>
 >     string str2 = str1.substr(2,5) ;  //将str1从下标2开始的5个字符赋值给str2
->     
->     int p1 = str1.find(str) //从最左边开始返回str1中首次出现str首字母的下标，没有时返回-1
->     
->     int p2 = str1.rfind(str)  //从最右边开始返回str1中首次出现str首字母的下标，没有时返回-1
->     
+>
+>     int p1 = str1.find(str) ; //从最左边开始返回str1中首次出现str首字母的下标，没有时返回-1
+>
+>     int p2 = str1.rfind(str) ;  //从最右边开始返回str1中首次出现str首字母的下标，没有时返回-1
+>
 >     string str3 = "1234.567" ;
->     
->     double nums = atof(str3.c_str())  //将str3转换为float类型
->     
->     int nums = atoi(ser3.c_str())  //将str3转换为int类型
+>
+>     double nums = atof(str3.c_str()) ;  //将str3转换为float类型
+>
+>     int num_i = atoi(str3.c_str()) ;  //将str3转换为int类型

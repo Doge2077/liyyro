@@ -5,66 +5,51 @@ categories: [ALGORITHM, Q&amp;A, 模拟, Codeforces]
 description: ""
 ---
 
----
-
 ## A. Round Down the Price
 
 ---
 
 ### 题目大意
 
-[Origional Link](&lt;https://codeforces.com/contest/1702/problem/A&gt;)
+[Original Link](https://codeforces.com/contest/1702/problem/A)
 
-  * 对于一个数$N$，求其最接近且不大于该数的$10^m$
+* 对于一个数$N$，求其最接近且不大于该数的$10^m$
   * 输出$N-10^m$
-
-
 
 ---
 
 ### 思想
 
-  * 初始化`p = 1e10`，循环枚举`p = p / 10`直到`p < n`
-
-
+* 初始化`p = 1e10`，循环枚举`p = p / 10`直到`p &lt; n`
 
 ---
 
 ### 代码
-```java
-
-
+```cpp
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
 
 typedef long long LL;
 
-void solve(){
-
+void solve() {
     LL n;
     cin >> n;
 
     LL p = 1e11;
-
-    while(p > n){
+    while (p > n) {
         p /= 10;
     }
-
-    cout << n - p <<endl;
-
+    cout &lt;&lt; n - p &lt;&lt; endl;
 }
 
-int main(){
-
+int main() {
     int _;
-    cin >> _;
+    cin &gt;> _;
 
-    while(_--){
+    while (_--) {
         solve();
     }
-
     return 0;
-
 }
 ```
 
@@ -76,78 +61,60 @@ int main(){
 
 ### 题目大意
 
-[Origional Link](&lt;https://codeforces.com/contest/1702/problem/B&gt;)
+[Original Link](https://codeforces.com/contest/1702/problem/B)
 
-  * 对于字符串$S$，每天只能遍历三个不同字母
+* 对于字符串$S$，每天只能遍历三个不同字母
   * 几天可以遍历完$S$
-
-
 
 ---
 
 ### 思想
 
-  * 模拟
+* 模拟
   * `vis[s[i]]`记录`s[i]`是否为新字母，`cnt`记录当天的新字母的个数
   * 当`cnt == 4`说明要开始新的一天，并清空记忆
-
-
 
 ---
 
 ### 代码
-```java
-
-
+```cpp
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
 
-void solve(){
-
+void solve() {
     string s;
-
     cin >> s;
 
     int flag = 0;
-
     bool vis[300];
-
-    memset(vis,0,sizeof vis);
+    memset(vis, 0, sizeof vis);
 
     int cnt = 0;
-
-    for(int i = 0; i < s.size(); i ++){
-        if(!vis[s[i]]){
-            cnt ++;
-            if(cnt == 4){
+    for (int i = 0; i &lt; s.size(); i++) {
+        if (!vis[s[i]]) {
+            cnt++;
+            if (cnt == 4) {
                 cnt = 1;
-                flag ++;
-                memset(vis,0,sizeof vis);
+                flag++;
+                memset(vis, 0, sizeof vis);
             }
             vis[s[i]] = 1;
         }
-    }   
+    }
+    if (cnt) flag++;
 
-    if(cnt) flag ++;
-
-    cout << flag << endl;
-
+    cout &lt;&lt; flag &lt;&lt; endl;
 }
 
-int main(){
-
+int main() {
     int _;
+    cin &gt;> _;
 
-    cin >> _;
-
-    while(_--){
+    while (_--) {
         solve();
     }
-
     return 0;
-
 }
-
 ```
 
 ---
@@ -158,76 +125,65 @@ int main(){
 
 ### 题目大意
 
-[Origional Link](&lt;https://codeforces.com/contest/1702/problem/C&gt;)
+[Original Link](https://codeforces.com/contest/1702/problem/C)
 
-  * 顺次给定$n$个车站，先经过的车站可以走到后面的车站
+### 思想
+
+* 顺次给定$n$个车站，先经过的车站可以走到后面的车站
   * 编号可能重复出现，即可能重复经过一个车站
   * 对于$k$次询问，给出起点和终点车站编号，求是否可以从起始站到终点站
-
-
 
 ---
 
 ### 思路
 
-  * `map&lt;int,int&gt; l, r`分别存储某一编号的站点最左边的下标和最右边的下标
+* `map&lt;int,int&gt; l, r`分别存储某一编号的站点最左边的下标和最右边的下标
   * 对于每次询问，若起始站的最左边的下标小于终点站的最右边的下标，则可行
-
-
 
 ---
 
 ### 代码
-```java
-
-
+```cpp
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
 
-void solve(){
-
+void solve() {
     int n, m;
-
     cin >> n >> m;
 
-    map&lt;int,int&gt; l, r;
+    map&lt;int, int&gt; l, r;
 
-    for(int i = 1; i <= n; i ++){
+    for (int i = 1; i &lt;= n; i++) {
         int x;
-        cin >> x;
-        if(l[x] == 0){
+        cin &gt;> x;
+        if (l[x] == 0) {
             l[x] = r[x] = i;
-        }
-        else{
-            l[x] = min(l[x],i);
-            r[x] = max(r[x],i);
+        } else {
+            l[x] = min(l[x], i);
+            r[x] = max(r[x], i);
         }
     }
 
-    while(m --){
+    while (m--) {
         int x, y;
         cin >> x >> y;
-        if(l[x] != 0 && l[y] != 0){
-            if(l[x] < r[y]) cout << "YES" << endl;
-            else cout << "NO" << endl;
+        if (l[x] != 0 && l[y] != 0) {
+            if (l[x] &lt; r[y])
+                cout &lt;&lt; "YES" &lt;&lt; endl;
+            else
+                cout &lt;&lt; "NO" &lt;&lt; endl;
+        } else {
+            cout &lt;&lt; "NO" &lt;&lt; endl;
         }
-        else cout << "NO" << endl;
     }
-
 }
 
-int main(){
+int main() {
     int _;
-
-    cin >> _;
-
-    while(_--){
+    cin &gt;> _;
+    while (_--) {
         solve();
-    }   
-
+    }
     return 0;
-
 }
 ```
-
----
