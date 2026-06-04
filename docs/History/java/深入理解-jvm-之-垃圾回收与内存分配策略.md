@@ -101,31 +101,29 @@ public class TestReference {
 
         // 创建一个弱引用对象
         WeakReference&lt;Object&gt; weakReference = new WeakReference<>(new Object());
+
+        // 创建一个弱引用对象，并将其引用赋给一个强引用变量
+        WeakReference&lt;Object&gt; weakUseReference = new WeakReference<>(new Object());
+        Object hardUseReference = weakUseReference.get();
+
+        // WeakReference&lt;Object&gt; weakUseReference = new WeakReference<>(hardReference);
+        // Object hardUseReference = weakUseReference;
+
+        // 创建一个虚引用对象，并指定引用队列
+        ReferenceQueue&lt;Object&gt; referenceQueue = new ReferenceQueue<>();
+        PhantomReference&lt;Object&gt; phantomReference = new PhantomReference<>(new Object(), referenceQueue);
+
+        // 执行垃圾回收
+        System.gc();
+
+        // 输出各个引用对象的状态
+        System.out.println("HardReference Obj = " + hardReference);
+        System.out.println("SoftReference Obj = " + softReference.get());
+        System.out.println("WeakReference Obj = " + weakReference.get());
+        System.out.println("HardUseReference Obj = " + hardUseReference);
+        System.out.println("WeakUseReference Obj = " + weakUseReference.get());
+        System.out.println("PhantomReference Obj = " + phantomReference.get());
     }
-}
-```java
-// 创建一个弱引用对象，并将其引用赋给一个强引用变量
-WeakReference&lt;Object&gt; weakUseReference = new WeakReference<>(new Object());
-Object hardUseReference = weakUseReference.get();
-
-// WeakReference&lt;Object&gt; weakUseReference = new WeakReference<>(hardReference);
-// Object hardUseReference = weakUseReference;
-
-// 创建一个虚引用对象，并指定引用队列
-ReferenceQueue&lt;Object&gt; referenceQueue = new ReferenceQueue<>();
-PhantomReference&lt;Object&gt; phantomReference = new PhantomReference<>(new Object(), referenceQueue);
-
-// 执行垃圾回收
-System.gc();
-
-// 输出各个引用对象的状态
-System.out.println("HardReference Obj = " + hardReference);
-System.out.println("SoftReference Obj = " + softReference.get());
-System.out.println("WeakReference Obj = " + weakReference.get());
-System.out.println("HardUseReference Obj = " + hardUseReference);
-System.out.println("WeakUseReference Obj = " + weakUseReference.get());
-System.out.println("PhantomReference Obj = " + phantomReference.get());
-}
 }
 ```
 
@@ -261,9 +259,7 @@ Wasted :(
 即使这两个假说已经很完善了，但在进行新生代的垃圾收集（Minor GC）时，若新生代中的对象有被老年代所引用，为了准确地确定新生代中的存活对象，必须额外遍历整个老年代中的所有对象，以确保可达性分析结果的正确性。然而，遍历整个老年代的所有对象会给内存回收带来很大的性能负担。因此便追加提出了第三条假说：
 
 3. 跨代引用假说（Intergenerational Reference Hypothesis）：
-```java
- * 跨代引用比例相对于同代引用比例来说仅占极少数。
-```
+   * 跨代引用比例相对于同代引用比例来说仅占极少数。
 
 由此我们可以得出推论：**存在互相引用关系的两个对象，倾向于同时生存或者同时消亡**。
 
@@ -280,26 +276,22 @@ Wasted :(
 基于先前的可达性分析和分代收集理论，有如下三种经典的垃圾回收算法：
 
 1.  标记-清除算法（Mark and Sweep）：
-```java
- * 基本的垃圾收集算法之一，共分为标记阶段和清除阶段。
- * 标记阶段：从根对象开始，递归地遍历所有可达对象，并将其标记为活动对象。
- * 清除阶段：遍历整个堆内存，将未被标记的对象认定为垃圾对象，并将其回收。
- * 缺点：执行效率不稳定，且多次执行后会产生大量不连续的内存碎片，进而导致当以后在程序运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作。
-```
+   * 基本的垃圾收集算法之一，共分为标记阶段和清除阶段。
+   * 标记阶段：从根对象开始，递归地遍历所有可达对象，并将其标记为活动对象。
+   * 清除阶段：遍历整个堆内存，将未被标记的对象认定为垃圾对象，并将其回收。
+   * 缺点：执行效率不稳定，且多次执行后会产生大量不连续的内存碎片，进而导致当以后在程序运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作。
+
 2.  标记-复制算法（Copying）：
-```java
- * 该算法是一种**针对新生代的标记算法**。
- * 它将新生代的内存空间划分为两个相等的部分，每次只使用其中一部分。
- * 在垃圾收集过程中，将存活的对象从一个部分复制到另一个部分，同时清除非存活对象。这样，每次垃圾收集后，都会有一部分内存是空闲的，**不会产生内存碎片**。
- * 缺点：该算法仅适用于新生代中垃圾产生率较高的情况，如果新生代内存中多数对象都是存活的，这种算法将会产生大量的内存间复制的开销。
-```
+   * 该算法是一种**针对新生代的标记算法**。
+   * 它将新生代的内存空间划分为两个相等的部分，每次只使用其中一部分。
+   * 在垃圾收集过程中，将存活的对象从一个部分复制到另一个部分，同时清除非存活对象。这样，每次垃圾收集后，都会有一部分内存是空闲的，**不会产生内存碎片**。
+   * 缺点：该算法仅适用于新生代中垃圾产生率较高的情况，如果新生代内存中多数对象都是存活的，这种算法将会产生大量的内存间复制的开销。
+
 3.  标记-整理算法（Mark and Compact）：
-```java
- * 该算法是一种**针对老年代的标记算法**。
- * 它和“标记-清除法”一样首先使用标记阶段来标记活动对象。但在清除阶段做法不同，而是将存活的对象向一端移动，最后清理掉边界之外的内存。
- * 这样可以保持存活对象的连续性，减少内存碎片的产生。
- * 缺点：该算法仅适用于老年代中垃圾产生率较低的情况，如果老年代大部分的对象都是死亡的，那么移动存活对象并更新所有引用这些对象的地方将会是一种极高开销的操作。
-```
+   * 该算法是一种**针对老年代的标记算法**。
+   * 它和“标记-清除法”一样首先使用标记阶段来标记活动对象。但在清除阶段做法不同，而是将存活的对象向一端移动，最后清理掉边界之外的内存。
+   * 这样可以保持存活对象的连续性，减少内存碎片的产生。
+   * 缺点：该算法仅适用于老年代中垃圾产生率较低的情况，如果老年代大部分的对象都是死亡的，那么移动存活对象并更新所有引用这些对象的地方将会是一种极高开销的操作。
 
 &gt; 除了上述三种策略，还有一种“混合式”解决方案，其做法是不在内存分配和访问上增加太大额外负担，让虚拟机平时多数时间都采用标记-清除算法，暂时容忍内存碎片的存在，直到内存空间的碎片化程度已经大到影响对象分配时，再采用标记-整理算法收集一次，以获得规整的内存空间。
 
@@ -338,11 +330,7 @@ Wasted :(
 
 * 该垃圾收集器相当于 `Serial` 收集器的多线程版本，它能够支持多线程垃圾收集。
 
-除了多线程支持以外，其他内容基本与 `Serial` 收集器一致，并且目前某些JVM默认的服务端模式
-
-# 修复后的文本
-
----
+除了多线程支持以外，其他内容基本与 `Serial` 收集器一致，并且目前某些JVM默认的服务端模式下使用。
 
 该垃圾收集器也是一款划时代的垃圾收集器，在 `JDK7` 的时候推出，主要面向服务端，并且在 `JDK9` 时，取代了 `JDK8` 默认的 `Parallel Scavenge + Parallel Old` 的回收方案。
 
@@ -396,17 +384,14 @@ Wasted :(
 3. 将代码块中的列表内容改为普通列表格式，使结构更清晰
 
 长期存活的对象将进入老年代：
-```java
- * `JVM` 给每个对象定义了一个对象年龄（Age）计数器，存储在对象头中。
- * 在 `Eden` 区诞生的对象经历一次 `Minor GC` 后存活会被移动到 `Survivor` 区且年龄计数器加一；
- * 后续在 `Survivor` 区每经历一次 `Minor GC` 且存活继续计数，当年龄计数器达到阈值（默认为15）则会将其移动到老年代。
- * 在虚拟机中可以通过参数 `-XX:MaxTenuringThreshold` 来设置对象晋升到老年代的年龄阈值。
-```
+* `JVM` 给每个对象定义了一个对象年龄（Age）计数器，存储在对象头中。
+* 在 `Eden` 区诞生的对象经历一次 `Minor GC` 后存活会被移动到 `Survivor` 区且年龄计数器加一；
+* 后续在 `Survivor` 区每经历一次 `Minor GC` 且存活继续计数，当年龄计数器达到阈值（默认为15）则会将其移动到老年代。
+* 在虚拟机中可以通过参数 `-XX:MaxTenuringThreshold` 来设置对象晋升到老年代的年龄阈值。
+
 2. 动态对象年龄判定：
-```java
- * 为了能更好地适应不同程序的内存状况，`HotSpot` 虚拟机并不是永远要求对象的年龄必须达到 `-XX:MaxTenuringThreshold` 才能晋升老年代。
- * 如果在 `Survivor` 空间中相同年龄所有对象大小的总和大于 `Survivor` 空间的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，无须等到 `-XX:MaxTenuringThreshold` 中要求的年龄。
-```
+* 为了能更好地适应不同程序的内存状况，`HotSpot` 虚拟机并不是永远要求对象的年龄必须达到 `-XX:MaxTenuringThreshold` 才能晋升老年代。
+* 如果在 `Survivor` 空间中相同年龄所有对象大小的总和大于 `Survivor` 空间的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，无须等到 `-XX:MaxTenuringThreshold` 中要求的年龄。
 
 这种动态对象年龄判定的策略可以有效减少垃圾回收的频率，提高垃圾回收的效率，同时也能够更好地适应不同对象的生命周期。通过将长期存活的对象分配到老年代，并根据对象的年龄进行晋升判定，可以更好地管理内存，并减少垃圾回收对系统性能的影响。
 

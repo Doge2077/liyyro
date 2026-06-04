@@ -104,19 +104,3 @@ int main() {
     return 0;
 }
 ```
-
-if (in(a, b, c, sx, sy)) {  // 若起始点在该圆上
-    st.push(mp[i]);  // 则将该圆作为搜索起始点加入搜索队列
-    vis[i] = 1;  // 标记该圆已经搜到过
-}
-
-}
-
-if (bfs())
-    printf("Yes\n");
-else
-    printf("No\n");
-
-return 0;
-
-}

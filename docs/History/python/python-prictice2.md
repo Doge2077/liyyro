@@ -117,8 +117,6 @@ else:
 ---
 
 ```python
-```
-
 a = ["str, 12345", ('tunpe', 2), {'dict': {'dict': {'dict': 4}}}]
 for i in range(len(a)):
     if i == 0:
@@ -134,14 +132,15 @@ for i in range(len(a)):
                 for k3, v3 in v2.items():
                     print(f"key: {k3}, value: {v3}", end=' ')
     print()
+```
 
 ---
 
-## 7\. 序列打包
+## 7. 序列打包
 
 ---
+
 ```python
-
 name = ['lys', 'wjq', 'hfcj', 'xhz', 'jcg']
 age = [104, 504, 1909, 14, 3.14]
 info = {k:v + 10 for k, v in zip(name, age)}

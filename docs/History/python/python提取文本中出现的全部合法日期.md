@@ -35,18 +35,17 @@ description: ""
 
 ---
 ```python
-
 from datetime import datetime
 import re
 
 def extractDates(text):
     pattern = r"\b(\d{4})[年.-](\d{1,2})[月.-]?(\d{1,2})?[日号]?\b"
     dates = sorted(
-        [
+        set(
             f"{year}.{month.zfill(2)}.{day.zfill(2) if day else '01'}"
             for year, month, day in re.findall(pattern, text)
             if isValidDate(f"{year}.{month.zfill(2)}.{day.zfill(2) if day else '01'}")
-        ],
+        ),
         key=lambda x: tuple(map(int, x.split('.')))
     )
     return dates
@@ -60,5 +59,5 @@ def isValidDate(dateStr):
 
 text = "2022.2.31, 2020.2.29-2022.3.1, 2023.10, 2023.1, 2023年7月5日, 2023年7月, 2023年7月5号, 2023-07-05, 2023-7-5"
 dates = extractDates(text)
-print(dates)  # outputs: ['2020.02.29', '2022.03.01', '2023.01.01', '2023.07.01', '2023.07.05', '2023.07.05', '2023.07.05', '2023.07.05', '2023.10.01']
+print(dates)  # outputs: ['2020.02.29', '2022.03.01', '2023.01.01', '2023.07.01', '2023.07.05', '2023.10.01']
 ```

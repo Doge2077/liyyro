@@ -66,15 +66,16 @@ description: ""
 * 统一规范：使用纯大写可以统一 `SQL` 命令语句的书写规范，方便代码的维护和修改。
 * 避免歧义：在 `SQL` 命令语句中使用纯大写可以避免大小写混用导致的语法错误和歧义。
   * 虽然 `SQL` 对大小写不敏感，但是在 `SQL` 命令语句中使用纯大写仍然是一个良好的习惯和最佳实践。
+```
 
-**SQL语句的分号和逗号** ：
+**SQL语句的分号和逗号**：
 
 * 某些数据库系统要求在每条 `SQL` 语句的末端使用分号。
 * 分号是在数据库系统中分隔每条 `SQL` 语句的标准方法，这样就可以在对服务器的相同请求中执行一条以上的 `SQL` 语句。
 * 逗号通常用来分隔列名或表达式、值或子查询等元素。
 * 至于某些长语句使用逗号，在不同的数据库系统中有不同的分隔规则。
 
-**SQL支持注释** ：
+**SQL支持注释**：
 
 * 通过使用 `--` 或是 `#` 来编写注释内容，也可以使用 `/* 注释内容 */` 来进行多行注释。
 
@@ -85,7 +86,7 @@ description: ""
 ---
 
 * `MySQL` 为关系型数据库系统（Relational Database Management System）
-  * `MySQL` 支持大型的数据库。可以处理拥有上千万条记录的大型数据库。
+  * `MySQL` 支持大型数据库。可以处理拥有上千万条记录的大型数据库。
   * `MySQL` 使用标准的 `SQL` 数据语言形式。
   * `MySQL` 可以运行于多个系统上，并且支持多种语言。
 
@@ -154,7 +155,6 @@ SHOW VARIABLES LIKE 'character_set%';
 * `VARCHAR(n)`：也可以存储任意数量字符串，长度不固定，但不能超过 n，不会用空格填充。
 
 以下数据类型用于存储数字：
-```
 
 * `SMALLINT`：用于存储小的整数，范围在 (-32768, 32767)；
   * `INT`：用于存储一般的整数，范围在 (-2147483648, 2147483647)；
@@ -176,7 +176,7 @@ SHOW VARIABLES LIKE 'character_set%';
 ---
 
 数据库创建完成后，我们一般通过 `CREATE TABLE` 语句来创建一张表：
-```java
+```sql
 CREATE TABLE 表名(
     列名 数据类型 [列级约束条件],
     列名 数据类型 [列级约束条件],
@@ -192,7 +192,7 @@ CREATE TABLE 表名(
 ---
 
 在数据量变得非常庞大时，通过创建索引，能够大大提高查询效率：
-```java
+```sql
 # 创建索引
 CREATE INDEX 索引名称 ON 表名 (列名)
 
@@ -201,14 +201,14 @@ SHOW INDEX FROM 表名
 ```
 
 删除索引：
-```java
+```sql
 DROP INDEX 索引名称 ON 表名
 ```
 
 **例如**：
 
 在 `MySQL` 中，为 SC 表的 “Grade” 字段创建一个普通索引，命名为 `sc_idx`。
-```java
+```sql
 CREATE INDEX sc_idx ON SC (Grade);
 ```
 
@@ -251,7 +251,6 @@ Cno | CHAR | 4 | 否 |  | 是 |  | 课程号
 Cname | CHAR | 40 | 是 |  |  |  | 课程名
 Cpno | CHAR | 4 | 是 |  |  | 是 | 先行课
 Ccredit | SMALLINT |  | 是 |  |  |  | 学分
-```java
 
 ```sql
 CREATE TABLE Course (
@@ -345,7 +344,6 @@ Sno | Cno | Grade
   
 插入一条数据 `{200215122, 2, 90}`
 ```sql
-
 INSERT INTO SC(Sno, Cno, Grade) VALUES(200215122, 2, 90);
 ```
 
@@ -357,15 +355,13 @@ INSERT INTO SC(Sno, Cno, Grade) VALUES(200215122, 2, 90);
 
 我们可以通过 `UPDATE` 语句来更新表中的数据：
 ```sql
-
 UPDATE 表名 SET 列名=值,... WHERE 条件
 ```
 
-**例如** ：
+**例如**：
 
 在 `MySQL` 中，将Course表中的课程号为“2”的学分改为4：
 ```sql
-
 UPDATE Course SET Ccredit=4 WHERE Cno='2';
 ```
 
@@ -377,21 +373,18 @@ UPDATE Course SET Ccredit=4 WHERE Cno='2';
 
 我们可以通过使用 `DELETE` 来删除表中的数据：
 ```sql
-
 DELETE FROM 表名
 ```
 
 通过这种方式，将删除表中全部数据，我们也可以使用 `WHERE` 来添加条件，只删除指定的数据：
 ```sql
-
 DELETE FROM 表名 WHERE 条件
 ```
 
-**例如** ：
+**例如**：
 
 在 `MySQL` 中，删除 `Course` 表中的课程号为“2”的数据：
 ```sql
-
 DELETE FROM Course WHERE Cno='2';
 ```
 
@@ -407,7 +400,6 @@ DELETE FROM Course WHERE Cno='2';
 
 使用 `SELECT` 语句来进行单表查询：
 ```sql
-
 # 指定查询某一列数据
 SELECT 列名[,列名] FROM 表名
 
@@ -423,15 +415,13 @@ SELECT DISTINCT 列名 FROM 表名
 
 添加 `WHERE` 子句以限定查询目标，且支持正则表达式：
 ```sql
-
 SELECT * FROM 表名 WHERE 条件
 ```
 
-**例如** ：
+**例如**：
 
 在 `MySQL` 中，在 `SC` 表中查询成绩大于90分的学生的全部信息：
 ```sql
-
 SELECT * FROM SC WHERE Grade > 90;
 ```
 
@@ -446,11 +436,10 @@ SELECT * FROM SC WHERE Grade > 90;
   * 字符模糊匹配：`LIKE`，`NOT LIKE`；
   * 多重条件连接查询：`AND`、`OR`、`NOT`；
 
-**例如** ：
+**例如**：
 
 在 `MySQL` 中，查询Student表中名字的第二个字是“雨”或“玉”的同学的学号Sno：
 ```sql
-
 SELECT Sno FROM Student WHERE Sname LIKE '_雨%' OR Sname LIKE '_玉%'; 
 ```
 
@@ -462,7 +451,6 @@ SELECT Sno FROM Student WHERE Sname LIKE '_雨%' OR Sname LIKE '_玉%';
 
 通过 `ORDER BY` 来将查询结果进行排序：
 ```sql
-
 SELECT * FROM 表名 WHERE 条件 ORDER BY 列名 ASC|DESC
 ```
 
@@ -800,7 +788,7 @@ SHOW ENGINES;
 * 持久性：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。
 
 我们通过以下例子来探究事务的使用：
-```java
+```sql
 START TRANSACTION;  # 开始事务
 
 INSERT INTO orders (customer_id, total_price) VALUES (1, 100.0);  # 向订单表中插入一个订单记录

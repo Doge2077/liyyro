@@ -37,7 +37,7 @@ ssh user@hostname -p 22
 
 创建文件 `~/.ssh/config`。
 
-用`Vim`打开文件中输入：
+用`Vim`打开文件并输入：
 ```bash
 Host myserver1
     HostName IP地址或域名
@@ -72,7 +72,7 @@ ssh-keygen
 
 也可以使用如下命令一键添加公钥：
 ```bash
-ssh-copy-id myserver  #mysever是配置免密登录的服务器名称
+ssh-copy-id myserver  #myserver是配置免密登录的服务器名称
 ```
 
 **总结**：
@@ -101,15 +101,13 @@ scp source1 source2 destination
 
 **复制文件夹**：
 ```bash
-
-```shell
 scp -r ~/tmp myserver:/home/acs/  # 将本地主目录中的 tmp 文件夹复制到 myserver 服务器的 /home/acs/ 目录下。
 scp -r ~/tmp myserver:homework/   # 将本地主目录中的 tmp 文件夹复制到 myserver 服务器的 ~/homework/ 目录下。
 scp -r myserver:homework .        # 将 myserver 服务器中的 ~/homework/ 文件夹复制到本地当前目录下。
 ```
 
 **指定服务器的端口号**：
-```shell
+```bash
 scp -P 22 source1 source2 destination
 ```
 
@@ -117,6 +115,6 @@ scp -P 22 source1 source2 destination
 
 > 使用 `scp` 配置其他服务器的 `vim` 和 `tmux`：
 >
-> ```shell
+> ```bash
 > scp ~/.vimrc ~/.tmux.conf myserver:~
 > ```

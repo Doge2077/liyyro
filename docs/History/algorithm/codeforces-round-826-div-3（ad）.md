@@ -29,7 +29,6 @@ description: ""
 
 **代码** ：
 ```cpp
-
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -59,7 +58,7 @@ typedef pair&lt;LL, LL&gt; PLL;
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
 const double eps = 1e-6, PI = acos(-1);
-```
+
 void solve() {
     string s1, s2;
     cin >> s1 >> s2;
@@ -128,7 +127,6 @@ int main() {
 
 **代码**：
 ```cpp
-```cpp
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
@@ -180,20 +178,14 @@ void solve(){
     }
 }
 
-int main(){
-
-IOS;
-
-int _ = 1;
-
-cin &gt;> _;
-
-while(_ --){
+int main() {
+    IOS;
+    int _ = 1;
+    cin &gt;> _;
+    while(_ --) {
         solve();
     }
-
-return 0;
-
+    return 0;
 }
 ```
 
@@ -206,8 +198,6 @@ return 0;
 [Original Link](https://codeforces.com/contest/1741/problem/C)
 
 **题目大意** ：
-
-以下是修复错别字和格式问题后的文本：
 
 * 给定一个长度为 $n$ 的数组，将其分成连续不重叠的若干区间，使得各区间内元素之和相等。
   * 求满足上述条件的切分方案下，最长的一个区间的最小可能值。
@@ -265,7 +255,54 @@ void solve(){
         a[i] += a[i - 1];
     }
     int res = INF;
+    for(int i = 1; i &lt;= n; i ++){
+        int t = a[i] - a[0];
+        int p = i;
+        int k = i + 1;
+        for(int j = i + 1; j &lt;= n; j ++){
+            if(a[j] - a[k - 1] == t){
+                p = max(p, j - k + 1);
+                k = j + 1;
+            }
+            else if(a[j] - a[k - 1] &gt; t) break;
+        }
+        if(k != n + 1) p = INF;
+        res = min(res, p);
+    }
+
+    cout &lt;&lt; res &lt;&lt; endl;
 }
+
+int main() {
+    IOS;
+    int _ = 1;
+    cin &gt;> _;
+    while(_ --) {
+        solve();
+    }
+    return 0;
+}
+```
+
+---
+
+## D. Masha and a Beautiful Tree
+
+---
+
+[Original Link](https://codeforces.com/contest/1741/problem/D)
+
+**题目大意**：
+
+* 给定一个满二叉树（即树的叶子节点数目为 $2^n$），叶子节点的权值是 $1 - n$ 的排列，每个节点拥有不同的权值。
+  * 一次操作可以交换一个子树的两个儿子，求最小化交换的操作使得叶子节点上的权值递增。
+
+**思路**：
+
+* 归并。
+  * 子儿子交换的过程，类比于归并排序的过程。
+
+**代码**：
 ```cpp
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
@@ -292,60 +329,6 @@ using namespace std;
 typedef long long LL;
 typedef pair&lt;int, int&gt; PII;
 typedef pair&lt;LL, LL&gt; PLL;
-
-// --- D. Masha and a Beautiful Tree ---
-// Original Link: https://codeforces.com/contest/1741/problem/D
-
-/*
-**题目大意**：
-* 给定一个满二叉树（即树的叶子节点数目为 $2^n$），叶子节点的权值是 $1 - n$ 的排列，每个节点拥有不同的权值。
-  * 一次操作可以交换一个子树的两个儿子，求最小化交换的操作使得叶子节点上的权值递增。
-
-**思路**：
-* 归并。
-  * 子儿子交换的过程，类比于归并排序的过程。
-*/
-
-void solve() {
-    int n;
-    cin >> n;
-    vector&lt;int&gt; a(n + 1);
-    for (int i = 1; i &lt;= n; i++) {
-        cin &gt;> a[i];
-    }
-    
-    int res = 0;
-    // 假设这里的逻辑是为了处理某个问题，但原代码片段不完整
-    // 由于原代码片段上下文不完整，这里保留原格式但无法编译
-    // 以下为原提供的代码片段，但可能无法直接运行
-    for(int i = 1; i &lt;= n; i ++){
-        int t = a[i] - a[0];
-        int p = i;
-        int k = i + 1;  //当前的区间长度
-        for(int j = i + 1; j &lt;= n; j ++){
-            if(a[j] - a[k - 1] == t){
-                p = max(p, j - k + 1);  //最大的区间长度
-                k = j + 1; 
-            }
-            else if(a[j] - a[k - 1] &gt; t) break;  //剪枝
-        }
-        if(k != n + 1) p = INF;  //若最后内部和相等的区间没有用完，则此次切分不成立
-        res = min(res, p);
-    }
-
-    cout &lt;&lt; res &lt;&lt; endl;
-}
-
-int main() {
-    IOS;
-    int _ = 1;
-    cin &gt;> _;
-    while(_ --) {
-        solve();
-    }
-    return 0;
-}
-```
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;

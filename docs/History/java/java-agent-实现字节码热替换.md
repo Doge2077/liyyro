@@ -8,6 +8,7 @@ description: ""
 ## 问题背景
 
 正在运行中的 SpringBoot 项目需要在不停机的情况下，针对某个 Aop 切面的方法体内容进行修改，需要执行字节码替换的类为：
+
 ```java
 package com.test.agent.aop;
 
@@ -23,6 +24,7 @@ public class TestAgentAop {
 ```
 
 我们的目标是将其中的 `logBefore` 方法进行修改，这里用一个简单的示例，可以通过其获取到 controller 入参的所有参数：
+
 ```java
 package com.test.agent.aop;
 
@@ -55,6 +57,7 @@ public class TestAgentAop {
 ### 编写字节码修改探针类
 
 创建 Maven 工程，引入 Javassist 依赖：
+
 ```xml
 &lt;dependencies&gt;
     &lt;dependency&gt;
@@ -67,15 +70,14 @@ public class TestAgentAop {
 
 这里使用 Javassist 操作字节码是因为这种方式比 ASM 直接操作更为容易上手。
 
-添加 `src/main/resources/META-INF/MANIFEST.MF` 探针配置文件
-```java
-// ... 省略后续内容
-```
+添加 `src/main/resources/META-INF/MANIFEST.MF` 探针配置文件：
 
+```
 Manifest-Version: 1.0
 Agent-Class: MyAgent
 Can-Redefine-Classes: true
 Can-Retransform-Classes: true
+```
 
 编写探针类 `MyAgent`：
 
@@ -92,49 +94,47 @@ public class MyAgent {
     static String methodName = "logBefore";                           // 需要替换的方法名称
     static String classPath = "com.test.agent.aop.TestAgentAop";      // 需要替换的方法所在的类
     static String replaceName = "com/test/agent/aop/TestAgentAop";    // 底层类名是以 '/' 区分的
-}
-```
 
-public static void agentmain(String agentArgs, Instrumentation inst) {
-    System.out.println("Agent loading");
-    try {
-        inst.addTransformer(new ClassFileTransformer() {
-            @Override
-            public byte[] transform(ClassLoader loader, String className, Class&lt;?&gt; classBeingRedefined,
-                                    ProtectionDomain protectionDomain, byte[] classfileBuffer) {
-                if (className.equals(replaceName)) {
-                    try {
-                        ClassPool cp = ClassPool.getDefault();
-                        CtClass cc = cp.get(classPath);
-                        CtMethod m = cc.getDeclaredMethod(methodName);
-                        m.setBody("{ "
-                                + "org.aspectj.lang.JoinPoint jp = $1;"
-                                + "System.out.println(\"Method Name: \" + jp.getSignature().getName()); "
-                                + "java.lang.Object[] args = jp.getArgs(); "
-                                + "for (int i = 0; i &lt; args.length; i++) { System.out.println(\"Argument: \" + args[i]); }"
-                                + "}");
-                        return cc.toBytecode();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+    public static void agentmain(String agentArgs, Instrumentation inst) {
+        System.out.println("Agent loading");
+        try {
+            inst.addTransformer(new ClassFileTransformer() {
+                @Override
+                public byte[] transform(ClassLoader loader, String className, Class&lt;?&gt; classBeingRedefined,
+                                        ProtectionDomain protectionDomain, byte[] classfileBuffer) {
+                    if (className.equals(replaceName)) {
+                        try {
+                            ClassPool cp = ClassPool.getDefault();
+                            CtClass cc = cp.get(classPath);
+                            CtMethod m = cc.getDeclaredMethod(methodName);
+                            m.setBody("{ "
+                                    + "org.aspectj.lang.JoinPoint jp = $1;"
+                                    + "System.out.println(\"Method Name: \" + jp.getSignature().getName()); "
+                                    + "java.lang.Object[] args = jp.getArgs(); "
+                                    + "for (int i = 0; i &lt; args.length; i++) { System.out.println(\"Argument: \" + args[i]); }"
+                                    + "}");
+                            return cc.toBytecode();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
+                    return null;
                 }
-                return null;
-            }
-        }, true);
-        Class&lt;?&gt; targetClass = Class.forName(classPath);
-        inst.retransformClasses(targetClass);
-        System.out.println("Agent load successfully!");
-    } catch (Exception e) {
-        e.printStackTrace();
+            }, true);
+            Class&lt;?&gt; targetClass = Class.forName(classPath);
+            inst.retransformClasses(targetClass);
+            System.out.println("Agent load successfully!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 ```
 
 ### 编写字节码热替换类
 
----
-
 这里通过 Attach API 的 `loadAgent()` 方法，将预先打包好的探针动态 Attach 到目标 JVM 上，编写该工具类：
+
 ```java
 import com.sun.tools.attach.VirtualMachine;
 
@@ -161,14 +161,9 @@ public class AttachAgent {
 }
 ```
 
----
-
 ### 执行替换操作
 
----
-
 首先将编写好的探针类与其 MANIFEST.MF 配置一起打包，因此需要在 Maven 中引入：
-```java
 
 ```xml
 &lt;build&gt;
@@ -185,10 +180,6 @@ public class AttachAgent {
         &lt;/plugin&gt;
     &lt;/plugins&gt;
 &lt;/build&gt;
-```java
-        &lt;/plugin&gt;
-    &lt;/plugins&gt;
-&lt;/build&gt;
 ```
 
 然后填写 AttachAgent 中的配置信息：
@@ -196,9 +187,7 @@ public class AttachAgent {
 * pid：使用 `jps -l` 或者 `ps -aux|grep java` 找到对应的 `XXXApplication` JVM 进程 pid
 * agentPath：打包好的 MyAgent.jar 路径
 
-然后运行 AttachAgent 即可完成替换
-
----
+然后运行 AttachAgent 即可完成替换。
 
 ## 注意事项
 

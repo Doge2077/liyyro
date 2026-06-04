@@ -13,7 +13,7 @@ description: ""
 
 ---
 
-上线项目需要公网 `IP` 以及调试需要，因此需提前准备好一个云服务器，购买以及相关环境配置参考：[云服务器及 Docker 教程](https://lys2021.com/8-%e4%ba%91%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8f%8a-docker-%e6%95%99%e7%a8%8b/)。
+上线项目和调试需要公网 `IP`，因此需提前准备好一个云服务器，购买以及相关环境配置参考：[云服务器及 Docker 教程](https://lys2021.com/8-%e4%ba%91%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8f%8a-docker-%e6%95%99%e7%a8%8b/)。
 
 其次，在本地或者任何方便的 `shell` 终端配置好服务器的免密登录，以便随时连接到服务器进行工作。
 
@@ -79,9 +79,9 @@ python3 manage.py runserver 0.0.0.0:8000
 
 首次打开会提示需要将 `xx.xx.xx.xx` 该 IP 加入到 `ALLOWED_HOSTS` 中，一般该设置所在文件位置为 `/acapp/acapp/settings.py`，使用 `vim` 打开文件 `settings.py`，找到 `ALLOWED_HOSTS` 选项添加 IP。
 
-顺便找到 `settings.py` 里的 `TIME_ZONE` 选项，修改时区为 `'Asia/Shanghai'`，以便照应本地时间。
+顺便找到 `settings.py` 里的 `TIME_ZONE` 选项，修改时区为 `'Asia/Shanghai'`，以便对应本地时间。
 
-另一种方法直接全文查找 `ag ALLOWED-HOSTS` 返回文件位置。
+另一种方法直接全文查找 `grep ALLOWED_HOSTS` 返回文件位置。
 
 **注意**：
 
@@ -90,7 +90,7 @@ python3 manage.py runserver 0.0.0.0:8000
 
 ---
 
-## 1.4 创建Django app
+## 1.4 创建 Django app
 
 ---
 
@@ -165,14 +165,13 @@ urlpatterns = [
 ]
 ```
 
-执行语句 `path('', index, name = 'game_index')` 意思为，在用户访问网站的 `/game` 目录时（`path`的路径为 `''`，即为空路径，默认指向当前目录的根目录）会调用 `index` 函数。
+执行语句 `path('', index, name='game_index')` 意思为，在用户访问网站的 `/game` 目录时（`path`的路径为 `''`，即为空路径，默认指向当前目录的根目录）会调用 `index` 函数。
 
 `index` 函数的定义及其执行逻辑存储在 `game/views.py` 中，故需要 `from game.views import index`，其中 `name="index"` 表示它在该 `urls.py` 里的名字。
 
 **acapp/urls.py**
 
 设置子应用的路由仍需要将其加入到整个项目的路由当中：
-```python```
 
 ```python
 from django.contrib import admin

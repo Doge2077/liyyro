@@ -108,18 +108,22 @@ bool vis[N];
 
 void solve(){
     cin >> n >> m;
-```markdown
-# AcWing 4502. 集合操作
+}
+```
 
 ---
 
-## 原题链接
+## 4502. 集合操作
+
+---
+
+### 原题链接
 
 [Original Link](https://www.acwing.com/solution/content/128431/)
 
 ---
 
-## 思想
+### 思想
 
 * $max(s) - mean(s)$ 的最大可能值，取决于 $mean(s)$ 最小值
   * 由题可知序列单调递增
@@ -131,8 +135,7 @@ void solve(){
 
 ---
 
-## 代码
-
+### 代码
 ```cpp
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
@@ -153,35 +156,18 @@ void solve(){
     while (_ --){
         int op;
         cin >> op;
+        if (op == 1) {
+            cin >> a[++idx];
+            s[idx] = s[idx - 1] + a[idx];
+        } else {
+            while (cnt + 1 &lt;= idx && check(cnt + 1) &gt; check(cnt)) ++cnt;
+            printf("%.6lf\n", check(cnt));
+        }
     }
-}
-```
-
----
-```
-
-**主要修复内容：**
-
-| 原文 | 修复后 |
-|------|--------|
-| `Origional Link` | `Original Link` |
-| `最小z值` | `最小值` |
-| `mean(s)$ 最大可能值` 格式 | 添加适当空格 |
-| 代码块标记为 `java` | 改为 `cpp`（因内容是 C++） |
-| 标题格式不一致 | 统一使用 `#` / `##` 格式 |
-| 列表缩进不规范 | 统一缩进层级 |
-
-if (op == 1) {
-    cin >> a[++idx];
-    s[idx] = s[idx - 1] + a[idx];
-} else {
-    while (cnt + 1 &lt;= idx && check(cnt + 1) &gt; check(cnt)) ++cnt;
-    printf("%.6lf\n", check(cnt));
-}
-
 }
 
 int main() {
     solve();
     return 0;
 }
+```

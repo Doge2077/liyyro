@@ -18,10 +18,10 @@ description: ""
 &lt;无符号整数&gt;::=&lt;数字序列&gt;
 &lt;数字序列&gt;::=&lt;数字序列&gt;&lt;数字&gt;
 &lt;数字序列&gt;::=&lt;数字&gt;
-&lt;字母&gt;::=a|b|c|……|x|y|z
+&lt;字母&gt;::=a|b|c|...|x|y|z
 &lt;数字&gt;::=0|1|2|3|4|5|6|7|8|9
 &lt;加法运算符&gt;::=+|-
-&lt;乘法运算符&gt;::=*|／
+&lt;乘法运算符&gt;::=*|/
 &lt;关系运算符&gt;::=&lt;|&gt;|!=|>=|&lt;=|==
 &lt;分界符&gt;::=,|;|(|)|{|}
 &lt;保留字&gt;::=main|int|if|else|while|do
@@ -51,18 +51,15 @@ description: ""
 
 ## 思路
 
----
-
-* 利用两个 `unordered_map` 分别存储关键字和其他符号的映射规则
-  * 对于原程序中的空格符需要忽略
-  * 利用 `std::ifstream` 读入文件，`std::istreambuf_iterator` 来遍历
-  * 将字符拼接识别，判断即可
+- 利用两个 `unordered_map` 分别存储关键字和其他符号的映射规则
+  - 对于原程序中的空格符需要忽略
+  - 利用 `std::ifstream` 读入文件，`std::istreambuf_iterator` 来遍历
+  - 将字符拼接识别，判断即可
 
 ---
 
 ## 代码
 
----
 ```cpp
 #include &lt;iostream&gt;
 #include &lt;fstream&gt;
@@ -81,7 +78,6 @@ std::unordered_map&lt;std::string, int&gt; symbols = {
     {";", 14}, {"(", 15}, {")", 16}, {"{", 17}, {"}", 18}, {"+", 19}, {"-", 20}, 
     {"*", 21}, {"/", 22}, {"=", 23}
 };
-```
 
 // 检查是否是关键字或者符号，是的话返回种别码，否则返回0
 int isKeywordOrSymbol(const std::string& str) {
@@ -123,10 +119,7 @@ void tokenize(const std::string& code, std::ostream &out) {
 int main() {
     std::string inputPath = "C:\\Users\\LYS\\Downloads\\s.c";  // 输入文件路径
     std::string outputPath = "C:\\Users\\LYS\\Desktop\\result.txt";  // 输出文件路径
-    // 其他代码应在此处添加，但用户未提供完整main函数体，因此保持原样
-}
 
-```
     std::ifstream fileIn(inputPath);
     std::ofstream fileOut(outputPath);
 

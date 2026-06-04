@@ -91,7 +91,7 @@ static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16
 static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;
 //默认的填充因子
 static final float DEFAULT_LOAD_FACTOR = 0.75f;
-//当桶(bucket)上的结点数大于这个值时会转成红黑树(JDK1.8新增)
+//当桶(bucket)上的节点数大于这个值时会转成红黑树(JDK1.8新增)
 static final int TREEIFY_THRESHOLD = 8;
 //当桶(bucket)上的节点数小于这个值时会转成链表(JDK1.8新增)
 static final int UNTREEIFY_THRESHOLD = 6;
@@ -177,8 +177,6 @@ public HashMap() {
 
 ### 指定初始容量的构造函数
 ```java
-```
-
 /**
 *
 * @param initialCapacity 指定初始化容量
@@ -277,6 +275,7 @@ public V put(K key, V value) {
 }
 ```
 
+```java
 /**
  * @param hash 索引的位置
  * @param key  键
@@ -379,12 +378,12 @@ void resize(int newCapacity) {
         return;
     }
 
-Entry[] newTable = new Entry[newCapacity];//初始化一个新的Entry数组
+    Entry[] newTable = new Entry[newCapacity];//初始化一个新的Entry数组
     transfer(newTable, initHashSeedAsNeeded(newCapacity));//将数组元素转移到新数组里面
     table = newTable;
     threshold = (int)Math.min(newCapacity * loadFactor, MAXIMUM_CAPACITY + 1);//修改阈值
 }
-```java
+
 void transfer(Entry[] newTable, boolean rehash) {
     int newCapacity = newTable.length;
     for (Entry&lt;K,V&gt; e : table) {//遍历数组
@@ -405,7 +404,6 @@ void transfer(Entry[] newTable, boolean rehash) {
 从这个方法中我们可以看到，JDK1.7中首先是创建一个新的大容量数组，然后依次重新计算原数组中所有元素的索引，并重新赋值。如果数组某个位置发生了哈希冲突，使用的是单链表的头插入方法，同一位置的新元素总是放在链表的头部，这样与原数组中的链表对比，扩容之后的链表可能就会变成倒序的了。
 
 下面我们再看看JDK1.8的：
-```java
 ```java
 final Node&lt;K,V&gt;[] resize() {
     Node&lt;K,V&gt;[] oldTab = table;

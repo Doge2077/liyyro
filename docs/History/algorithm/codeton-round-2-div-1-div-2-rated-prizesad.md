@@ -38,7 +38,7 @@ b =     "1101"
 
 *   由此可知，我们设`b[0]`与`a[k]`对齐。
 
-*   从`a[k + 1]`开始构造`a`的子串`s1`，从`b[1]`开始构造`b`的子串`s2`。
+*   从`a[k+1]`开始构造`a`的子串`s1`，从`b[1]`开始构造`b`的子串`s2`。
 
 *   若`s1 == s2`：
 ```cpp
@@ -95,10 +95,6 @@ int main(){
 ### 题目大意
 
 [Original Link](https://codeforces.com/contest/1704/problem/B)
-
-以下是修复错别字和格式问题后的文本：
-
----
 
 对于固定的整数 \(x\) 和数组 \(a\)，每个元素 \(a_i\) 可以对应到一个区间 \([a_i - x, a_i + x]\)。在该区间内可以任选一个整数 \(v\)。遍历数组 \(a\) 时，当连续元素对应的区间存在交集时，可以选择同一个 \(v\) 而无需改变；当区间无交集时，则必须改变 \(v\) 的取值。目标是求出最少需要改变 \(v\) 值的次数。
 
@@ -212,9 +208,9 @@ void solve() {
         st.push(vis[i + 1] - vis[i] - 1); // 将未感染的区间的长度加入
     }
 
-    int cnt = 0; // 存储未感染的区间长度
-    for (int i = 0; i + 1 &gt; 0; i++) { // i 代表天数
-        if (!st.empty() && st.top() - i * 4 > 0) { // 经过一天，下一个区间长度 -4
+    int cnt = 0; // 存储保护到的区间长度
+    for (int i = 0; ; i++) { // i 代表天数
+        if (!st.empty() && st.top() - i * 4 &gt; 0) { // 经过一天，下一个区间长度 -4
             int k = st.top() - i * 4; // 设 k 为当前区间经过 i 天后未感染的区间长度
             if (k > 1) k--; // 对于一个端点的保护，会使另一个端点被感染 (长度-1)，若区间长度仅为 1，则只能保护 1 长度
             cnt += k; // 累计保护到的区间长度
@@ -226,19 +222,13 @@ void solve() {
 }
 
 int main() {
-    // 需在此处添加适当的代码调用 solve() 或执行其他逻辑
+    int _;
+    cin &gt;> _;
+    while (_--) {
+        solve();
+    }
+    //  solve();
     return 0;
-}
-```cpp
-int _;
-cin &gt;> _;
-while (_--) {
-    solve();
-}
-
-//  solve();
-
-return 0;
 }
 ```
 
@@ -315,26 +305,24 @@ void solve() {
             cin &gt;> x;
             sum += x * j;
         }
+
+        if (S1 == -1) {
+            S1 = sum;
+            p1 = i;
+        } else if (S1 != -1 && S2 == -1 && S1 != sum) {
+            S2 = sum;
+            p2 = i;
+        }
+
+        if (S1 == sum) cnt1++;
+        if (S2 == sum) cnt2++;
     }
-}
-```cpp
-if (S1 == -1) {
-    S1 = sum;
-    p1 = i;
-} else if (S1 != -1 && S2 == -1 && S1 != sum) {
-    S2 = sum;
-    p2 = i;
-}
 
-if (S1 == sum) cnt1++;
-if (S2 == sum) cnt2++;
-}
-
-if (cnt1 > cnt2) {
-    cout &lt;&lt; p2 &lt;&lt; " " &lt;&lt; S2 - S1 &lt;&lt; endl;
-} else {
-    cout &lt;&lt; p1 &lt;&lt; " " &lt;&lt; S1 - S2 &lt;&lt; endl;
-}
+    if (cnt1 > cnt2) {
+        cout &lt;&lt; p2 &lt;&lt; " " &lt;&lt; S2 - S1 &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; p1 &lt;&lt; " " &lt;&lt; S1 - S2 &lt;&lt; endl;
+    }
 }
 
 int main() {
@@ -352,10 +340,10 @@ int main() {
 
 ## 后记
 
-* **A题**一开始没找到规律，找到规律后居然没有把错误思路的代码删掉，狠狠地吃`WA`的铁头娃  
+* **A题**一开始没找到规律，找到规律后居然没有把错误思路的代码删掉，狠狠地吃了`WA`的铁头娃  
   ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/08/屏幕截图-2022-08-01-115832.png)
-* **B题**读懂题意就很简单了，没什么好说的，就是判断公共区间
+* **B题**读懂题意就很简单了，没什么好说的，就是判断公共区间。
 * **C题**一直在想着怎么维护端点的信息，最后发现根本不需要，只要长度就行了 QAQ
-* **D题**没时间了，太抽象了也看不懂，补题看题解发现证明的想法实在是妙极了，根本想不到
+* **D题**没时间了，太抽象了看不懂，补题看题解发现证明的想法实在是妙极了，根本想不到。
 * 最后还是没能上绿，~~我是废物~~  
   ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/08/屏幕截图-2022-08-01-120032.png)

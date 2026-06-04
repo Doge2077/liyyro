@@ -68,7 +68,7 @@ RDB 是 Redis 默认开启的全量数据快照保存方案：
 * 子进程不直接拷贝硬盘数据，而是拷贝父进程的页表，但实际上仍然和父进程共享同一物理地址（共享数据）
   * 子进程执行 bgsave 操作会生成临时的 RDB 文件，不会直接修改原有的 RDB 文件
   * 为了避免脏写，这里 fork 时又引入了 copy-on-write 的技术：
-```java
+```c
 * 主进程读操作访问共享内存，此时不会复制数据
 * 主进程发生写操作，会复制一份物理地址的数据副本进行写入，子进程仍然读取原来的旧版数据
 ```
@@ -310,8 +310,6 @@ Redis 的 key 存在过期时间，设置命令如下：
 
 其他相关操作：
 
-以下是修复了错别字并调整了格式问题的文本：
-
 * `persist &lt;key&gt;`：移除 key 的过期时间
   * `TTL &lt;key&gt;`：返回 key 的剩余生存时间（精确到秒）
   * `PTTL &lt;key&gt;`：返回 key 的剩余生存时间（精确到毫秒）
@@ -326,7 +324,7 @@ Redis 的 key 存在过期时间，设置命令如下：
 
 * 在 Redis 内部，当我们给某个 key 设置过期时间时，Redis 会将该 key 及其过期时间存入一个过期字典（`redisDb`）中。
   * 每次查询一个 key 时，Redis 会先从过期字典中查询该 key 是否存在：
-```java
+```c
 // 不存在则正常返回
 // 存在则取该 key 的过期时间，并与当前系统时间对比判定是否过期
 ```
@@ -347,7 +345,7 @@ Redis 实际采用的过期删除策略是：惰性删除 + 定期删除。
 ---
 
 查看 Redis 源码 `db.c`，其中执行惰性删除的逻辑会反复调用 `expireIfNeeded` 函数对 key 进行检查：
-```java
+```c
 /* Return values for expireIfNeeded */
 typedef enum {
     KEY_VALID = 0, /* Could be volatile and not yet expired, non-volatile, or even non-existing key. */
@@ -496,6 +494,7 @@ robj *createObject(int type, void *ptr) {
     o->lru = 0;
     return o;
 }
+```
 ```c
 void initObjectLRUOrLFU(robj *o) {
     if (o->refcount == OBJ_SHARED_REFCOUNT)
@@ -621,12 +620,6 @@ int evictionPoolPopulate(redisDb *db, kvstore *samplekvs, struct evictionPoolEnt
         robj *o;
         dictEntry *de;
 ```
-
-**主要修复说明：**
-1.  修正了代码块的语言标识，从错误的 ` ```java ` 改为正确的 ` ```c `。
-2.  在变量声明 `int slot = ...` 前添加了缩进，使其与函数内的其他代码风格保持一致。
-3.  修正了代码注释中“存放”的用词，改为更书面化的“存储”。
-4.  补全了循环 `for` 语句后缺失的左花括号 `{`，使代码结构完整。
 
 ```c
 de = samples[j];

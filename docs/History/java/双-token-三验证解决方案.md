@@ -18,7 +18,7 @@ description: ""
 
 * 有效期设置问题：有效期设置需要对时间做平衡，不能太短也不能太长
   * 续期问题：一旦过期，用户必须重新登录，很难做无感刷新
-  * 无状态问题：token 是无状态的，单 token 颁发后服务端无法主动使其失效
+  * 无状态问题：但 token 颁发后服务端无法主动使其失效
 
 ---
 
@@ -40,7 +40,7 @@ description: ""
 
 * 一验证：前端请求携带 accessToken，验证是否过期，不过期放行，过期则进入第二个验证环节
   * 二验证：前端请求携带 refreshToken，验证是否过期，不过期进入第三个验证环节，过期则要求用户重新登录
-  * 三验证：在 Redis 中验证 refreshToken 是否存在，存在则颁发新的 accessToken 和 refreshToken 返回前端更新，将原来的 refreshToken 删除，再把新的 refreshToken 存入 Redis
+  * 三验证：在 Redis 中验证 refreshToken 是否存在。存在则颁发新的 accessToken 和 refreshToken 返回前端更新，将原来的 refreshToken 删除，再把新的 refreshToken 存入 Redis。
 
 该机制的 UML 图如下：
 
@@ -56,9 +56,8 @@ description: ""
 
 ---
 
-基于 SpringCache 来操作 Redis，利用 MD5 算法对 token 进行加密，防止其作为键的后缀存入时过长，导致“大 KEY”的问题出现
+基于 SpringCache 来操作 Redis，利用 MD5 算法对 token 进行加密，防止其作为键的后缀存入时过长，导致“大 KEY”的问题出现。
 ```java
-
 public class CommonRedisConstants {
     public static class RedisKey {
         /**
@@ -76,7 +75,6 @@ private String createAccessToken(Map&lt;String, Object&gt; claims) {
     // 这里是利用 jjwt 编写的工具类方法，读者可以自行实现相关工具类
     return JwtUtils.generateAccessToken(claims);
 }
-```
 
 // 生成 refreshToken 并存入 Redis
 private String createRefreshToken(Map&lt;String, Object&gt; claims) {
@@ -135,12 +133,12 @@ public class CurrentUserAspect {
             // 请求头未携带 token 的逻辑
         }
     }
-}
-```java
-// 方法执行完后释放资源，防止内存泄漏
-@After("@annotation(currentUser)")
-public void clearUserContext(CurrentUser currentUser) {
-    UserContextUtil.clear();
+
+    // 方法执行完后释放资源，防止内存泄漏
+    @After("@annotation(currentUser)")
+    public void clearUserContext(CurrentUser currentUser) {
+        UserContextUtil.clear();
+    }
 }
 ```
 

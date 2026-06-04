@@ -105,7 +105,6 @@ int main() {
 
 ### 代码
 
----
 ```cpp
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
@@ -129,45 +128,6 @@ void solve() {
     }
     // 代码未完，需补充后续逻辑及输出
 }
-```c
-#include &lt;bits/stdc++.h&gt;
-using namespace std;
-
-const int N = 1e6 + 3;
-
-int a[N];
-
-void solve() {
-    int n, m;
-    cin >> n >> m;
-
-    string s(n, '0');
-
-    for (int i = 0; i &lt; n; i++) cin &gt;> a[i];
-
-    int q = 0;
-
-    for (int i = n - 1; i >= 0; i--) {
-        if (a[i] &lt;= q) s[i] = '1';
-        else if (a[i] &gt; q && q &lt; m) {
-            q++;
-            s[i] = '1';
-        }
-    }
-
-    cout &lt;&lt; s &lt;&lt; "\n";
-}
-
-int main() {
-    int tt;
-    cin &gt;> tt;
-
-    while (tt--) {
-        solve();
-    }
-
-    return 0;
-}
 ```
 
 ---
@@ -187,7 +147,7 @@ int main() {
 *   逆向贪心
     *   从最后一天考虑，设智商上限为 $Q$，最后一天的智商为 $q_i=0$。
     *   若 $a_i \leqslant q_i$，则第 $i$ 天的比赛需要打。
-    *   若 $a_i > q_i$，且 $q_i &lt; Q$ 时，若第 $i$ 天打比赛，则 $q_i = q_i + 1$。
+    *   若 $a_i &gt; q_i$，且 $q_i &lt; Q$ 时，若第 $i$ 天打比赛，则 $q_i = q_i + 1$。
     *   由于 $a_i &gt; q_i$ 的比赛最多打 $Q$ 次，对于前面的比赛要继续打，需要 $q_i$ 尽可能的大。
     *   故当 $a_i > q_i$，且 $q_i &lt; Q$ 时，该第 $i$ 天的比赛必须打，$q_i = q_i + 1$。
     *   若 $a_i &gt; q_i$，且 $q_i = Q$ 时，第 $i$ 天的比赛不能打。
@@ -195,6 +155,7 @@ int main() {
 ---
 
 ### 代码
+
 ```cpp
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
