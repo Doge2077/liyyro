@@ -12,6 +12,15 @@ const SECTION_MAP: Record<string, string> = {
   History: '历史'
 }
 
+// 目录排序配置（数字越小越靠前）
+const DIR_ORDER: Record<string, Record<string, number>> = {
+  'History/algorithm': {
+    '算法讲解': 1,
+    '算法题解': 2,
+    '竞赛题解': 3
+  }
+}
+
 interface MarkdownFile {
   name: string
   title: string
@@ -93,13 +102,23 @@ function generateSidebarItems(dir: string, basePath: string): DefaultTheme.Sideb
   
   if (!fs.existsSync(dir)) return items
   
-  // 获取子目录
+  // 获取子目录（支持自定义排序）
   const subDirs = fs.readdirSync(dir)
     .filter(d => {
       const fullPath = path.join(dir, d)
       return fs.statSync(fullPath).isDirectory()
     })
-    .sort()
+    .sort((a, b) => {
+      // 检查是否有自定义排序配置
+      const relPath = path.relative(docsDir, dir)
+      const orderConfig = DIR_ORDER[relPath]
+      if (orderConfig) {
+        const orderA = orderConfig[a] ?? 999
+        const orderB = orderConfig[b] ?? 999
+        if (orderA !== orderB) return orderA - orderB
+      }
+      return a.localeCompare(b)
+    })
   
   // 获取当前目录下的 .md 文件，按逻辑顺序排序
   const files = getMarkdownFiles(dir)
