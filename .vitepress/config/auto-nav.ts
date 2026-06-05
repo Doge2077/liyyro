@@ -70,7 +70,7 @@ function generateSidebarItems(dir: string, basePath: string): DefaultTheme.Sideb
   const files = getMarkdownFiles(dir)
     .sort((a, b) => b.date.getTime() - a.date.getTime())
   
-  // 添加子目录分组
+  // 添加子目录分组（默认收起）
   for (const subDir of subDirs) {
     const subPath = path.join(dir, subDir)
     const subItems = generateSidebarItems(subPath, `${basePath}/${subDir}`)
@@ -78,22 +78,20 @@ function generateSidebarItems(dir: string, basePath: string): DefaultTheme.Sideb
     if (subItems.length > 0) {
       items.push({
         text: subDir,
-        collapsed: false,
+        collapsed: true,
         items: subItems
       })
     }
   }
   
-  // 添加当前目录下的文件
+  // 直接添加当前目录下的文件（不加"文章"层级）
   if (files.length > 0) {
-    items.push({
-      text: '文章',
-      collapsed: false,
-      items: files.map(f => ({
+    for (const f of files) {
+      items.push({
         text: f.title,
         link: `${basePath}/${f.path}`
-      }))
-    })
+      })
+    }
   }
   
   return items
