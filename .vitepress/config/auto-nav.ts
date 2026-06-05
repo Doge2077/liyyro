@@ -17,6 +17,37 @@ interface MarkdownFile {
   title: string
   date: Date
   path: string
+  order: number
+}
+
+// 从标题中提取数字（用于排序）
+function extractNumber(title: string): number {
+  // 匹配中文数字
+  const chineseNums: Record<string, number> = {
+    '一': 1, '二': 2, '三': 3, '四': 4, '五': 5,
+    '六': 6, '七': 7, '八': 8, '九': 9, '十': 10,
+    '十一': 11, '十二': 12, '十三': 13, '十四': 14, '十五': 15
+  }
+  
+  // 尝试匹配 "（一）" 或 "(一)" 格式
+  const chineseMatch = title.match(/[（(]([一二三四五六七八九十]+)[）)]/)
+  if (chineseMatch) {
+    return chineseNums[chineseMatch[1]] || 999
+  }
+  
+  // 尝试匹配数字格式如 "第1章" 或 "1." 或 "1-" 开头
+  const numMatch = title.match(/^(?:第)?(\d+)[章节目篇.、-]/)
+  if (numMatch) {
+    return parseInt(numMatch[1])
+  }
+  
+  // 尝试匹配标题中的第一个数字
+  const firstNum = title.match(/\d+/)
+  if (firstNum) {
+    return parseInt(firstNum[0])
+  }
+  
+  return 999 // 没有数字的排在最后
 }
 
 // 获取指定目录下的 .md 文件（不递归，排除 index.md）
@@ -33,11 +64,14 @@ function getMarkdownFiles(dir: string): MarkdownFile[] {
       const content = fs.readFileSync(fullPath, 'utf-8')
       const { data } = matter(content)
       const name = f.replace('.md', '')
+      const title = data.title || name
+      
       files.push({
         name,
-        title: data.title || name,
+        title,
         date: data.date ? new Date(data.date) : new Date(0),
-        path: name
+        path: name,
+        order: data.order || extractNumber(title)
       })
     } catch {
       const name = f.replace('.md', '')
@@ -45,7 +79,8 @@ function getMarkdownFiles(dir: string): MarkdownFile[] {
         name,
         title: name,
         date: new Date(0),
-        path: name
+        path: name,
+        order: extractNumber(name)
       })
     }
   }
@@ -66,9 +101,16 @@ function generateSidebarItems(dir: string, basePath: string): DefaultTheme.Sideb
     })
     .sort()
   
-  // 获取当前目录下的 .md 文件
+  // 获取当前目录下的 .md 文件，按逻辑顺序排序
   const files = getMarkdownFiles(dir)
-    .sort((a, b) => b.date.getTime() - a.date.getTime())
+    .sort((a, b) => {
+      // 先按 order 排序
+      if (a.order !== b.order) {
+        return a.order - b.order
+      }
+      // order 相同时按日期降序
+      return b.date.getTime() - a.date.getTime()
+    })
   
   // 添加子目录分组（默认收起）
   for (const subDir of subDirs) {
