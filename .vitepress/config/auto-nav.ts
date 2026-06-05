@@ -52,6 +52,53 @@ function getMarkdownFiles(dir: string): MarkdownFile[] {
   return files
 }
 
+// 递归生成侧边栏项
+function generateSidebarItems(dir: string, basePath: string): DefaultTheme.SidebarItem[] {
+  const items: DefaultTheme.SidebarItem[] = []
+  
+  if (!fs.existsSync(dir)) return items
+  
+  // 获取子目录
+  const subDirs = fs.readdirSync(dir)
+    .filter(d => {
+      const fullPath = path.join(dir, d)
+      return fs.statSync(fullPath).isDirectory()
+    })
+    .sort()
+  
+  // 获取当前目录下的 .md 文件
+  const files = getMarkdownFiles(dir)
+    .sort((a, b) => b.date.getTime() - a.date.getTime())
+  
+  // 添加子目录分组
+  for (const subDir of subDirs) {
+    const subPath = path.join(dir, subDir)
+    const subItems = generateSidebarItems(subPath, `${basePath}/${subDir}`)
+    
+    if (subItems.length > 0) {
+      items.push({
+        text: subDir,
+        collapsed: false,
+        items: subItems
+      })
+    }
+  }
+  
+  // 添加当前目录下的文件
+  if (files.length > 0) {
+    items.push({
+      text: '文章',
+      collapsed: false,
+      items: files.map(f => ({
+        text: f.title,
+        link: `${basePath}/${f.path}`
+      }))
+    })
+  }
+  
+  return items
+}
+
 // 扫描一级目录 -> 生成 nav
 export function generateNav(): DefaultTheme.NavItem[] {
   if (!fs.existsSync(docsDir)) return []
@@ -72,7 +119,7 @@ export function generateNav(): DefaultTheme.NavItem[] {
   }))
 }
 
-// 扫描二级目录 -> 生成 sidebar
+// 扫描目录 -> 生成 sidebar（支持多级）
 export function generateSidebar(): DefaultTheme.Sidebar {
   if (!fs.existsSync(docsDir)) return {}
   
@@ -89,50 +136,7 @@ export function generateSidebar(): DefaultTheme.Sidebar {
 
   for (const firstDir of firstLevelDirs) {
     const firstPath = path.join(docsDir, firstDir)
-    
-    // 获取二级目录
-    const secondLevelDirs = fs.readdirSync(firstPath)
-      .filter(d => {
-        const fullPath = path.join(firstPath, d)
-        return fs.statSync(fullPath).isDirectory()
-      })
-      .sort()
-    
-    // 获取一级目录下的直接 .md 文件
-    const directFiles = getMarkdownFiles(firstPath)
-      .sort((a, b) => b.date.getTime() - a.date.getTime())
-    
-    const items: DefaultTheme.SidebarItem[] = []
-    
-    // 添加二级目录分组
-    for (const secondDir of secondLevelDirs) {
-      const secondPath = path.join(firstPath, secondDir)
-      const files = getMarkdownFiles(secondPath)
-        .sort((a, b) => b.date.getTime() - a.date.getTime())
-      
-      if (files.length > 0) {
-        items.push({
-          text: secondDir,
-          collapsed: false,
-          items: files.map(f => ({
-            text: f.title,
-            link: `/${firstDir}/${secondDir}/${f.path}`
-          }))
-        })
-      }
-    }
-    
-    // 添加一级目录下的直接文件（不包括在子目录中的文件）
-    if (directFiles.length > 0) {
-      items.push({
-        text: '文章',
-        collapsed: false,
-        items: directFiles.map(f => ({
-          text: f.title,
-          link: `/${firstDir}/${f.path}`
-        }))
-      })
-    }
+    const items = generateSidebarItems(firstPath, `/${firstDir}`)
     
     if (items.length > 0) {
       sidebar[`/${firstDir}/`] = items
