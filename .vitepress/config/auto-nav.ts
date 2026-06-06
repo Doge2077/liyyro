@@ -96,61 +96,60 @@ function getMarkdownFiles(dir: string): MarkdownFile[] {
   return files
 }
 
+// 从名称中提取数字前缀用于排序
+function extractOrderFromName(name: string): number {
+  const match = name.match(/^(\d+)[.\s]/)
+  return match ? parseInt(match[1]) : 999
+}
+
 // 递归生成侧边栏项
 function generateSidebarItems(dir: string, basePath: string): DefaultTheme.SidebarItem[] {
   const items: DefaultTheme.SidebarItem[] = []
   
   if (!fs.existsSync(dir)) return items
   
-  // 获取子目录（支持自定义排序）
+  // 获取子目录
   const subDirs = fs.readdirSync(dir)
     .filter(d => {
       const fullPath = path.join(dir, d)
       return fs.statSync(fullPath).isDirectory()
     })
-    .sort((a, b) => {
-      // 检查是否有自定义排序配置
-      const relPath = path.relative(docsDir, dir)
-      const orderConfig = DIR_ORDER[relPath]
-      if (orderConfig) {
-        const orderA = orderConfig[a] ?? 999
-        const orderB = orderConfig[b] ?? 999
-        if (orderA !== orderB) return orderA - orderB
-      }
-      return a.localeCompare(b)
-    })
   
-  // 获取当前目录下的 .md 文件，按逻辑顺序排序
+  // 获取当前目录下的 .md 文件
   const files = getMarkdownFiles(dir)
-    .sort((a, b) => {
-      // 先按 order 排序
-      if (a.order !== b.order) {
-        return a.order - b.order
+  
+  // 合并子目录和文件，统一排序
+  type Entry = { type: 'dir'; name: string } | { type: 'file'; name: string; title: string; path: string; order: number }
+  const entries: Entry[] = [
+    ...subDirs.map(d => ({ type: 'dir' as const, name: d })),
+    ...files.map(f => ({ type: 'file' as const, name: f.name, title: f.title, path: f.path, order: f.order }))
+  ]
+  
+  // 按数字前缀排序
+  entries.sort((a, b) => {
+    const orderA = extractOrderFromName(a.name)
+    const orderB = extractOrderFromName(b.name)
+    if (orderA !== orderB) return orderA - orderB
+    return a.name.localeCompare(b.name)
+  })
+  
+  // 按排序顺序添加到 items
+  for (const entry of entries) {
+    if (entry.type === 'dir') {
+      const subPath = path.join(dir, entry.name)
+      const subItems = generateSidebarItems(subPath, `${basePath}/${entry.name}`)
+      
+      if (subItems.length > 0) {
+        items.push({
+          text: entry.name,
+          collapsed: true,
+          items: subItems
+        })
       }
-      // order 相同时按日期降序
-      return b.date.getTime() - a.date.getTime()
-    })
-  
-  // 添加子目录分组（默认收起）
-  for (const subDir of subDirs) {
-    const subPath = path.join(dir, subDir)
-    const subItems = generateSidebarItems(subPath, `${basePath}/${subDir}`)
-    
-    if (subItems.length > 0) {
+    } else {
       items.push({
-        text: subDir,
-        collapsed: true,
-        items: subItems
-      })
-    }
-  }
-  
-  // 直接添加当前目录下的文件（不加"文章"层级）
-  if (files.length > 0) {
-    for (const f of files) {
-      items.push({
-        text: f.title,
-        link: `${basePath}/${f.path}`
+        text: entry.title,
+        link: `${basePath}/${entry.path}`
       })
     }
   }
