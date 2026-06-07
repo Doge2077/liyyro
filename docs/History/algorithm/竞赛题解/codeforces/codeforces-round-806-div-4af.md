@@ -1,9 +1,12 @@
----
+﻿---
 title: "Codeforces Round #806 (Div. 4)(A~F)"
 date: 2022-07-28
-categories: [ALGORITHM, Q&amp;A, 模拟, 二分, Codeforces]
+categories: [ALGORITHM, Q&A, 模拟, 二分, Codeforces]
 description: ""
 ---
+
+# codeforces-round-806-div-4af
+
 
 ## A. YES or YES?
 
@@ -26,7 +29,7 @@ description: ""
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 void solve(){
@@ -36,13 +39,13 @@ void solve(){
     if(s[0] != 'y' && s[0] != 'Y') flag = 0;
     if(s[1] != 'e' && s[1] != 'E') flag = 0;
     if(s[2] != 's' && s[2] != 'S') flag = 0;
-    if(s.size() == 3 && flag) cout &lt;&lt; "YES" &lt;&lt; endl;
-    else cout &lt;&lt; "NO" &lt;&lt; endl;
+    if(s.size() == 3 && flag) cout << "YES" << endl;
+    else cout << "NO" << endl;
 }
 
 int main(){
     int _;
-    cin &gt;> _;
+    cin >> _;
     while(_--){
         solve();
     }
@@ -75,7 +78,7 @@ int main(){
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1010;
@@ -96,12 +99,12 @@ void solve(){
         }
         else cnt++;
     }
-    cout &lt;&lt; cnt &lt;&lt; endl;
+    cout << cnt << endl;
 }
 
 int main(){
     int _;
-    cin &gt;> _;
+    cin >> _;
     while(_--){
         solve();
     }
@@ -134,7 +137,7 @@ int main(){
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1010;
@@ -145,10 +148,10 @@ int ans[N];
 
 void solve(){
     cin >> n;
-    for(int i = 1; i &lt;= n; i ++) cin &gt;> ans[i];
-    for(int i = 1; i &lt;= n; i ++){
+    for(int i = 1; i <= n; i ++) cin >> ans[i];
+    for(int i = 1; i <= n; i ++){
         int m;
-        cin &gt;> m;
+        cin >> m;
         int flag = 0;
         while(m--){
             char op;
@@ -158,13 +161,13 @@ void solve(){
         }
         ans[i] = (ans[i] + flag % 10 + 10) % 10;
     }
-    for(int i = 1; i &lt;= n; i ++) cout &lt;&lt; ans[i] &lt;&lt; " ";
-    cout &lt;&lt; endl;
+    for(int i = 1; i <= n; i ++) cout << ans[i] << " ";
+    cout << endl;
 }
 
 int main(){
     int _;
-    cin &gt;> _;
+    cin >> _;
     while(_--){
         solve();
     }
@@ -200,7 +203,7 @@ int main(){
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 void solve(){
@@ -208,17 +211,17 @@ void solve(){
     cin >> n;
     bool vis[n + 10];
     memset(vis, 0, sizeof vis);
-    set&lt;string&gt; st;
+    set<string> st;
     string s[n + 1];
 
-    for(int i = 0; i &lt; n; i++){
-        cin &gt;> s[i];
+    for(int i = 0; i < n; i++){
+        cin >> s[i];
         st.insert(s[i]);
     }
 
-    for(int i = 0; i &lt; n; i++){
+    for(int i = 0; i < n; i++){
         if(s[i].size() == 1) continue;
-        for(int j = 1; j &lt;= s[i].size() - 1; j++){
+        for(int j = 1; j <= s[i].size() - 1; j++){
             string s1 = s[i].substr(0, j), s2 = s[i].substr(j, s[i].size() - j);
             if(st.count(s1) == 1 && st.count(s2) == 1){
                 vis[i] = 1;
@@ -227,17 +230,17 @@ void solve(){
         }
     }
 
-    for(int i = 0; i &lt; n; i++){
-        if(vis[i]) cout &lt;&lt; 1;
-        else cout &lt;&lt; 0;
+    for(int i = 0; i < n; i++){
+        if(vis[i]) cout << 1;
+        else cout << 0;
     }
 
-    cout &lt;&lt; endl;
+    cout << endl;
 }
 
 int main(){
     int _;
-    cin &gt;> _;
+    cin >> _;
     while(_--){
         solve();
     }
@@ -271,7 +274,7 @@ int main(){
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 110;
@@ -284,12 +287,12 @@ void solve() {
     cin >> n;
     memset(st, 0, sizeof(st));
 
-    for (int i = 1; i &lt;= n; i++) cin &gt;> mp[i] + 1;
+    for (int i = 1; i <= n; i++) cin >> mp[i] + 1;
 
     int ans = 0;
 
-    for (int i = 1; i &lt;= n; i++) {
-        for (int j = 1; j &lt;= n; j++) {
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
             if (i == j && n % 2 == 1) continue;
             if (!st[i][j]) {
                 int cnt = 0;
@@ -306,12 +309,12 @@ void solve() {
         }
     }
 
-    cout &lt;&lt; ans &lt;&lt; endl;
+    cout << ans << endl;
 }
 
 int main() {
     int _;
-    cin &gt;> _;
+    cin >> _;
     while (_--) {
         solve();
     }
@@ -345,7 +348,7 @@ int main() {
 ### 代码
 
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1e6 + 3;
@@ -356,7 +359,7 @@ typedef long long LL;
 
 LL cnt;
 
-vector&lt;int&gt; st;
+vector<int> st;
 
 void solve(){
     int n;
@@ -365,20 +368,20 @@ void solve(){
     st.clear();
     cnt = 0;
 
-    for (int i = 1; i &lt;= n; i ++) cin &gt;> a[i];
+    for (int i = 1; i <= n; i ++) cin >> a[i];
 
-    for (int i = 1; i &lt;= n; i ++){
-        if (a[i] &gt;= i) continue;
+    for (int i = 1; i <= n; i ++){
+        if (a[i] >= i) continue;
         cnt += (lower_bound(st.begin(), st.end(), a[i]) - st.begin());
         st.push_back(i);
     }
 
-    cout &lt;&lt; cnt &lt;&lt; endl;
+    cout << cnt << endl;
 }
 
 int main(){
     int _;
-    cin &gt;> _;
+    cin >> _;
 
     while (_--){
         solve();
@@ -387,3 +390,4 @@ int main(){
     return 0;
 }
 ```
+

@@ -1,9 +1,12 @@
----
+﻿---
 title: "ABC的整除问题"
 date: 2023-02-25
-categories: [Q&amp;A, 思维]
+categories: [Q&A, 思维]
 description: ""
 ---
+
+# abc的整除问题
+
 
 [原题链接](http://www.haueacm.top/problem.php?id=1423)
 
@@ -46,20 +49,20 @@ $1\le A\le B\le 1\times 10^{18}, 1\le C\le 1\times 10^{18}$。
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
-#include &lt;bits/stdc++.h&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -70,8 +73,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -81,16 +84,17 @@ LL a, b, c;
 
 void solve() {
     cin >> a >> b >> c;
-    cout &lt;&lt; b / c - a / c + (a % c == 0) &lt;&lt; endl;
+    cout << b / c - a / c + (a % c == 0) << endl;
 }
 
 int main() {
     IOS;
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while (_--) {
         solve();
     }
     return 0;
 }
 ```
+

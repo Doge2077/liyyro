@@ -1,9 +1,12 @@
----
+﻿---
 title: "LeetCode 第 342 场周赛"
 date: 2023-04-26
-categories: [Q&amp;A, LeetCode, 最大公约数, 滑动窗口]
+categories: [Q&A, LeetCode, 最大公约数, 滑动窗口]
 description: ""
 ---
+
+# leetcode-第-342-场周赛
+
 
 ## [2651. 计算列车到站时间](https://leetcode.cn/problems/calculate-delayed-arrival-time/)
 
@@ -60,7 +63,7 @@ class Solution {
 class Solution {
     public int sumOfMultiples(int n) {
         int sum = 0;
-        for (int i = 1; i &lt;= n; i++) {
+        for (int i = 1; i <= n; i++) {
             if (i % 3 == 0 || i % 5 == 0 || i % 7 == 0) sum += i;
         }
         return sum;
@@ -104,13 +107,13 @@ class Solution {
         int[] res = new int[n - k + 1];  // 答案数组
         int[] vis = new int[1010];       // 记录窗口中出现的数字的数量
         final int base = 50;             // 偏移量
-        for (int i = 0; i &lt; k - 1; i++) vis[nums[i] + base]++;  // 初始化窗口
-        for (int i = k - 1; i &lt; n; i++) {
+        for (int i = 0; i < k - 1; i++) vis[nums[i] + base]++;  // 初始化窗口
+        for (int i = k - 1; i < n; i++) {
             int cnt = 0;  // 记录数量
             vis[nums[i] + base]++;           // 移入右边界
-            for (int j = 0; j &lt; 110; j++) {
+            for (int j = 0; j < 110; j++) {
                 cnt += vis[j];
-                if (cnt &gt;= x) {
+                if (cnt >= x) {
                     res[i - k + 1] = j - base < 0 ? j - base : 0;
                     break;
                 }
@@ -185,3 +188,4 @@ class Solution {
     }
 }
 ```
+

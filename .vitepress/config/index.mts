@@ -29,6 +29,9 @@ export default defineConfig({
     image: {
       lazyLoading: true
     },
+    headers: {
+      level: [1, 2, 3]
+    },
     config: (md) => {
       md.use(footnote)
       md.use(markdownItMathjax3)

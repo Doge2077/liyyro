@@ -1,13 +1,16 @@
----
+﻿---
 title: "浅谈 C/C++ 的输入输出"
 date: 2023-02-26
 categories: [C/C++]
 description: ""
 ---
 
-# Markdown 修正版
+# ccpp-inputoutput
 
-## 0. 叠甲，过
+
+## Markdown 修正版
+
+### 0. 叠甲，过
 
 ---
 
@@ -15,11 +18,11 @@ description: ""
 
 ---
 
-## 1. 谈谈输入输出缓冲区
+### 1. 谈谈输入输出缓冲区
 
 ---
 
-### 1.1 基本概念
+#### 1.1 基本概念
 
 ---
 
@@ -33,7 +36,7 @@ description: ""
 
 ---
 
-#### 输入输出流
+##### 输入输出流
 
 ---
 
@@ -44,7 +47,7 @@ description: ""
 
 ---
 
-#### 标准输入输出流
+##### 标准输入输出流
 
 ---
 
@@ -59,7 +62,7 @@ description: ""
 
 ---
 
-#### 文件输入输出流
+##### 文件输入输出流
 
 ---
 
@@ -75,11 +78,11 @@ description: ""
 
 ---
 
-### 1.2 输入输出缓冲区
+#### 1.2 输入输出缓冲区
 
 ---
 
-#### 什么是输入输出缓冲区？
+##### 什么是输入输出缓冲区？
 
 ---
 
@@ -94,7 +97,7 @@ description: ""
 
 ---
 
-#### 为什么要设置输入输出缓冲区？
+##### 为什么要设置输入输出缓冲区？
 
 ---
 
@@ -109,11 +112,11 @@ description: ""
 
 ---
 
-#### C/C++ 的输入输出缓冲区有何不同？
+##### C/C++ 的输入输出缓冲区有何不同？
 
 ---
 
-##### 别急别急别急
+###### 别急别急别急
 
 ---
 
@@ -137,7 +140,7 @@ description: ""
 
 ---
 
-##### 急急急急急急
+###### 急急急急急急
 
 ---
 
@@ -165,11 +168,11 @@ description: ""
 
 ---
 
-## 2. 谈谈输入输出的方式
+### 2. 谈谈输入输出的方式
 
 ---
 
-### 2.1 C/C++ 的输入和输出
+#### 2.1 C/C++ 的输入和输出
 
 ---
 
@@ -186,7 +189,7 @@ description: ""
 
 ---
 
-#### scanf() 和 printf()
+##### scanf() 和 printf()
 
 ---
 
@@ -211,7 +214,7 @@ description: ""
 
 观察下列代码：
 ```c
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main(){
     int n;                  //声明 int 类型变量 n
@@ -249,7 +252,7 @@ int main(){
 
 观察如下改进后的代码：
 ```c
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main(){
     int n;                  //声明 int 类型变量 n
@@ -279,7 +282,7 @@ int main(){
 
 ---
 
-#### C++ 中的 cin 和 cout
+##### C++ 中的 cin 和 cout
 
 ---
 
@@ -301,7 +304,7 @@ int main(){
 
 ---
 
-#### getchar() 和 getline()
+##### getchar() 和 getline()
 
 ---
 
@@ -318,8 +321,8 @@ int main(){
 
 观察下列代码：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;string&gt;
+#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -327,10 +330,10 @@ int main() {
     string s;
 
     getline(cin, s);  // 读入 string 类型 s
-    cout &lt;&lt; "First: " &lt;&lt; s &lt;&lt; endl;  // 输出 s
+    cout << "First: " << s << endl;  // 输出 s
 
     getline(cin, s);  // 再次读入
-    cout &lt;&lt; "Second: " &lt;&lt; s &lt;&lt; endl;  // 再次输出 s
+    cout << "Second: " << s << endl;  // 再次输出 s
 
     return 0;
 }
@@ -364,8 +367,8 @@ Second: 514
 
 我们尝试重新指定 `getline()` 的分隔符，修改得到如下代码：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;string&gt;
+#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -373,10 +376,10 @@ int main() {
     string s;
 
     getline(cin, s, ',');  // 以逗号为分隔符读入字符串 s
-    cout &lt;&lt; "First: " &lt;&lt; s &lt;&lt; endl;  // 输出 s
+    cout << "First: " << s << endl;  // 输出 s
 
     getline(cin, s, ',');  // 再次读入
-    cout &lt;&lt; "Second: " &lt;&lt; s &lt;&lt; endl;  // 再次输出 s
+    cout << "Second: " << s << endl;  // 再次输出 s
 
     return 0;
 }
@@ -405,8 +408,8 @@ Second:
 
 为避免此问题，需要手动清除缓冲区中的换行符。可以使用 `cin.ignore()` 或 `cin.get()`，更推荐的方法如下：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;string&gt;
+#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -414,14 +417,14 @@ int main() {
     string s;
 
     getline(cin, s, ',');  // 以逗号为分隔符读入字符串 s
-    cout &lt;&lt; "First: " &lt;&lt; s &lt;&lt; endl;  // 输出 s
+    cout << "First: " << s << endl;  // 输出 s
 
     // 忽略输入缓冲区中残留的换行符
     cin.ignore();
     // 也可以使用 cin.get();
 
     getline(cin, s, ',');  // 再次读入
-    cout &lt;&lt; "Second: " &lt;&lt; s &lt;&lt; endl;  // 再次输出 s
+    cout << "Second: " << s << endl;  // 再次输出 s
 
     return 0;
 }
@@ -437,7 +440,7 @@ Second: 514
 
 ---
 
-#### `stringstream`
+##### `stringstream`
 
 ---
 
@@ -458,9 +461,9 @@ Second: 514
 
 观察如下代码：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;sstream&gt;
+#include <iostream>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -471,10 +474,10 @@ int main() {
     double height = 1.86;
     string status = "is a dog";
 
-    s &lt;&lt; "Name: " &lt;&lt; name &lt;&lt; ", Age: " &lt;&lt; age &lt;&lt; ", Height: " &lt;&lt; height &lt;&lt; ", Status: " &lt;&lt; status;
+    s << "Name: " << name << ", Age: " << age << ", Height: " << height << ", Status: " << status;
     string str = s.str();
 
-    cout &lt;&lt; str &lt;&lt; endl;
+    cout << str << endl;
 
     return 0;
 }
@@ -484,9 +487,9 @@ int main() {
 
 再比如，观察如下代码：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;sstream&gt;
+#include <iostream>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -498,7 +501,7 @@ int main() {
     string str;
 
     while(ss >> str){
-        cout &lt;&lt; str &lt;&lt; endl;
+        cout << str << endl;
     }
 
     return 0;
@@ -522,7 +525,7 @@ dog.
 
 ---
 
-### 2.2 关闭 C++ 标准流同步
+#### 2.2 关闭 C++ 标准流同步
 
 ---
 
@@ -554,11 +557,11 @@ cout.tie(0);
 
 ---
 
-## 3. 最后的练习
+### 3. 最后的练习
 
 ---
 
-### 3.1 泛凯撒加密
+#### 3.1 泛凯撒加密
 
 ---
 
@@ -595,15 +598,15 @@ $0 \le k \le 100$。
 
 ---
 
-### 3.2 题解
+#### 3.2 题解
 
 ---
 
 你已经是一个成熟的 $\text{ACMer}$ 了，要学会自己分析并解决问题。~~实在解决不了就解决自己吧~~。
 
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
+#include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -613,10 +616,10 @@ void solve(){
     k %= 26;
     getchar();  //清空缓冲区中的 '\n'
     while(getline(cin, s)){
-        for(int i = 0; i &lt; s.size(); i ++){
+        for(int i = 0; i < s.size(); i ++){
             char st = s[i];
-            if(st &gt;= 'a' && st &lt;= 'z') cout &lt;&lt; char(st - k &lt; 'a' ? st - k + 26 : st - k);
-            else if(st &gt;= 'A' && st <= 'Z') cout << char(st - k < 'A' ? st - k + 26 : st - k);
+            if(st >= 'a' && st <= 'z') cout << char(st - k < 'a' ? st - k + 26 : st - k);
+            else if(st >= 'A' && st <= 'Z') cout << char(st - k < 'A' ? st - k + 26 : st - k);
             else if(st == '?') break;
             else cout << st;
         }
@@ -629,3 +632,4 @@ int main(){
     return 0;
 }
 ```
+

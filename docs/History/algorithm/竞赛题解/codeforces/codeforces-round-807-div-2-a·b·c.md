@@ -1,9 +1,12 @@
----
+﻿---
 title: "Codeforces Round #807 (Div 2.) A·B·C"
 date: 2022-07-18
-categories: [ALGORITHM, Q&amp;A, 模拟, 字符串, Codeforces]
+categories: [ALGORITHM, Q&A, 模拟, 字符串, Codeforces]
 description: ""
 ---
+
+# codeforces-round-807-div-2-a·b·c
+
 
 ---
 
@@ -27,7 +30,7 @@ description: ""
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N=1e6+3;
@@ -39,12 +42,12 @@ int main(){
     while(t--){
         int n,x;
         scanf("%d%d",&n,&x);
-        for(int i=0;i&lt;n*2;i++) scanf("%d",&a[i]);
+        for(int i=0;i<n*2;i++) scanf("%d",&a[i]);
         sort(a,a+n*2);  //排序
 
         bool flag=1;
-        for(int i=0,j=n;i&lt;n;i++,j++){  //i从0~n-1  j从n~2*n-1
-            if(a[j]-a[i]&lt;x){
+        for(int i=0,j=n;i<n;i++,j++){  //i从0~n-1  j从n~2*n-1
+            if(a[j]-a[i]<x){
                 flag=0;
                 break;
             }
@@ -78,7 +81,7 @@ int main(){
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 int t;
@@ -90,15 +93,15 @@ int main(){
     while(t--){
         int n;
         cin>>n;
-        for(int i=0;i&lt;n;i++) cin&gt;>a[i];
+        for(int i=0;i<n;i++) cin>>a[i];
         int p=0;
-        while(p&lt;n && a[p]==0) p++;
+        while(p<n && a[p]==0) p++;
         long long cnt=0;
-        for(int i=p;i&lt;n-1;i++){
+        for(int i=p;i<n-1;i++){
             cnt+=a[i];
             if(a[i]==0) cnt++;
         }
-        cout&lt;&lt;cnt&lt;&lt;endl;
+        cout<<cnt<<endl;
     }
     return 0;
 }
@@ -131,7 +134,7 @@ int main(){
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1e6 + 3;
@@ -150,8 +153,8 @@ void solve() {
     cin >> s;
 
     nl[0] = 0, nr[0] = n;
-    for (int i = 1; i &lt;= m; i++) {
-        cin &gt;> l[i] >> r[i];
+    for (int i = 1; i <= m; i++) {
+        cin >> l[i] >> r[i];
         nl[i] = nr[i - 1] + 1;  // 更新nl
         nr[i] = nl[i] + (r[i] - l[i] + 1) - 1;  // 更新nr
     }
@@ -160,15 +163,15 @@ void solve() {
         LL k;
         cin >> k;
         for (int i = m; i >= 1; i--) {  // 枚举区间
-            if (nl[i] &lt;= k && k &lt;= nr[i]) k -= nl[i] - l[i];
+            if (nl[i] <= k && k <= nr[i]) k -= nl[i] - l[i];
         }
-        cout &lt;&lt; s[k - 1] &lt;&lt; endl;
+        cout << s[k - 1] << endl;
     }
 }
 
 int main() {
     LL t;
-    cin &gt;> t;
+    cin >> t;
     while (t--) {
         solve();
     }
@@ -184,3 +187,4 @@ int main() {
   * $B$题比赛时写麻烦了，最后`TLE`了，补题才发现自己把自己绕晕了
   * $C$题实在是难到怀疑人生了，前后搞了好几个小时才想通，希望自己以后不要这么笨了
   * 剩下的题实在是不行，毕竟还是个大菜鸟，交给未来吧，加油！
+

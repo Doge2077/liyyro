@@ -1,9 +1,12 @@
----
+﻿---
 title: "计算机组成原理：2. 计算机的发展及应用"
 date: 2023-02-20
 categories: [Principles of Computer Composition]
 description: ""
 ---
+
+# pcc2
+
 
 ## 2.1 计算机发展史
 

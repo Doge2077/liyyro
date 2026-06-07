@@ -1,9 +1,12 @@
----
+﻿---
 title: "5. ssh登录和scp传输"
 date: 2022-09-02
 categories: [Linux, Linux]
 description: ""
 ---
+
+# 5-ssh登录和scp传输
+
 
 ### 5.1 SSH 登录
 

@@ -1,9 +1,12 @@
----
+﻿---
 title: "Python 第二次作业及解答"
 date: 2023-01-31
 categories: [python, Python]
 description: ""
 ---
+
+# python-prictice2
+
 
 ## 第二次练习
 
@@ -61,15 +64,15 @@ else:
 
 ```python
 age = 24
-if age &lt; 2:
+if age < 2:
     print("It's a baby")
-elif age &gt;= 2 and age &lt; 4:
+elif age >= 2 and age < 4:
     print("It's a child")
-elif age &gt;= 4 and age &lt; 13:
+elif age >= 4 and age < 13:
     print("It's a tween")
-elif age &gt;= 13 and age &lt; 18:
+elif age >= 13 and age < 18:
     print("It's a teenager")
-elif age &gt;= 18 and age < 65:
+elif age >= 18 and age < 65:
     print("It's an adult")
 else:
     print("It's an elder")
@@ -147,3 +150,4 @@ info = {k:v + 10 for k, v in zip(name, age)}
 for k, v in info.items():
     print(f"Name: {k}, NowAge: {v}")
 ```
+

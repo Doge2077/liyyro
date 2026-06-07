@@ -1,9 +1,12 @@
----
+﻿---
 title: "快速上手 Mac 电脑"
 date: 2023-12-25
 categories: [Tips]
 description: ""
 ---
+
+# 快速上手-mac-电脑
+
 
 ## 触摸板操作
 

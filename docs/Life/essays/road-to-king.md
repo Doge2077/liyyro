@@ -1,9 +1,12 @@
----
+﻿---
 title: "二本学院非科班天崩开局，如何逆天改命拿下大厂后端"
 date: 2024-11-17
 categories: [Essays]
 description: ""
 ---
+
+# road-to-king
+
 
 ## 天崩开局，如何破局自救
 

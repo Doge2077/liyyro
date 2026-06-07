@@ -1,9 +1,12 @@
----
+﻿---
 title: "简易C语言词法分析程序"
 date: 2024-03-21
 categories: [Compilation Principle]
 description: ""
 ---
+
+# 简易c语言词法分析程序
+
 
 ## 问题
 
@@ -11,20 +14,20 @@ description: ""
 
 **词法规则**：
 ```cpp
-&lt;标识符&gt;::=&lt;字母&gt;
-&lt;标识符&gt;::=&lt;标识符&gt;&lt;字母&gt;
-&lt;标识符&gt;::=&lt;标识符&gt;&lt;数字&gt;
-&lt;常量&gt;::=&lt;无符号整数&gt;
-&lt;无符号整数&gt;::=&lt;数字序列&gt;
-&lt;数字序列&gt;::=&lt;数字序列&gt;&lt;数字&gt;
-&lt;数字序列&gt;::=&lt;数字&gt;
-&lt;字母&gt;::=a|b|c|...|x|y|z
-&lt;数字&gt;::=0|1|2|3|4|5|6|7|8|9
-&lt;加法运算符&gt;::=+|-
-&lt;乘法运算符&gt;::=*|/
-&lt;关系运算符&gt;::=&lt;|&gt;|!=|>=|&lt;=|==
-&lt;分界符&gt;::=,|;|(|)|{|}
-&lt;保留字&gt;::=main|int|if|else|while|do
+<标识符>::=<字母>
+<标识符>::=<标识符><字母>
+<标识符>::=<标识符><数字>
+<常量>::=<无符号整数>
+<无符号整数>::=<数字序列>
+<数字序列>::=<数字序列><数字>
+<数字序列>::=<数字>
+<字母>::=a|b|c|...|x|y|z
+<数字>::=0|1|2|3|4|5|6|7|8|9
+<加法运算符>::=+|-
+<乘法运算符>::=*|/
+<关系运算符>::=<|>|!=|>=|<=|==
+<分界符>::=,|;|(|)|{|}
+<保留字>::=main|int|if|else|while|do
 ```
 
 **符号表**：
@@ -61,20 +64,20 @@ description: ""
 ## 代码
 
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;fstream&gt;
-#include &lt;string&gt;
-#include &lt;unordered_map&gt;
-#include &lt;cctype&gt;
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <unordered_map>
+#include <cctype>
 
 // 关键字和对应的种别码
-std::unordered_map&lt;std::string, int&gt; keywords = {
+std::unordered_map<std::string, int> keywords = {
     {"main", 1}, {"int", 2}, {"if", 3}, {"else", 4}, {"while", 5}, {"do", 6}
 };
 
 // 运算符和界符及其种别码
-std::unordered_map&lt;std::string, int&gt; symbols = {
-    {"&lt;", 7}, {"&gt;", 8}, {"!=", 9}, {">=", 10}, {"&lt;=", 11}, {"==", 12}, {",", 13}, 
+std::unordered_map<std::string, int> symbols = {
+    {"<", 7}, {">", 8}, {"!=", 9}, {">=", 10}, {"<=", 11}, {"==", 12}, {",", 13}, 
     {";", 14}, {"(", 15}, {")", 16}, {"{", 17}, {"}", 18}, {"+", 19}, {"-", 20}, 
     {"*", 21}, {"/", 22}, {"=", 23}
 };
@@ -88,30 +91,30 @@ int isKeywordOrSymbol(const std::string& str) {
 
 // 检查字符是否是字母或数字
 bool isLetterOrDigit(char ch) {
-    return isalpha(static_cast&lt;unsigned char&gt;(ch)) || isdigit(static_cast&lt;unsigned char&gt;(ch));
+    return isalpha(static_cast<unsigned char>(ch)) || isdigit(static_cast<unsigned char>(ch));
 }
 
 void tokenize(const std::string& code, std::ostream &out) {
     std::string token;
-    for (size_t i = 0; i &lt; code.length(); ++i) {
-        if (isspace(static_cast&lt;unsigned char&gt;(code[i]))) {
+    for (size_t i = 0; i < code.length(); ++i) {
+        if (isspace(static_cast<unsigned char>(code[i]))) {
             continue; // 忽略空格
         } else if (isLetterOrDigit(code[i])) {
             // 处理标识符和关键字
             token.clear();
-            while (i &lt; code.length() && isLetterOrDigit(code[i])) {
+            while (i < code.length() && isLetterOrDigit(code[i])) {
                 token += code[i++];
             }
             --i; // 回退到上一个字符
             int tokenCode = isKeywordOrSymbol(token);
-            out &lt;&lt; "(" &lt;&lt; token &lt;&lt; "," &lt;&lt; (tokenCode ? tokenCode : 24) &lt;&lt; ")" &lt;&lt; std::endl;
+            out << "(" << token << "," << (tokenCode ? tokenCode : 24) << ")" << std::endl;
         } else {
             // 处理符号
             token = code[i];
-            if (i + 1 &lt; code.length() && symbols.count(token + code[i + 1])) {
+            if (i + 1 < code.length() && symbols.count(token + code[i + 1])) {
                 token += code[++i];
             }
-            out &lt;&lt; "(" &lt;&lt; token &lt;&lt; "," &lt;&lt; symbols[token] &lt;&lt; ")" &lt;&lt; std::endl;
+            out << "(" << token << "," << symbols[token] << ")" << std::endl;
         }
     }
 }
@@ -124,11 +127,11 @@ int main() {
     std::ofstream fileOut(outputPath);
 
     if (!fileIn.is_open() || !fileOut.is_open()) {
-        std::cerr &lt;&lt; "文件路径或权限错误" &lt;&lt; std::endl;
+        std::cerr << "文件路径或权限错误" << std::endl;
         return -1;
     }
 
-    std::string content((std::istreambuf_iterator&lt;char&gt;(fileIn)), (std::istreambuf_iterator&lt;char&gt;()));
+    std::string content((std::istreambuf_iterator<char>(fileIn)), (std::istreambuf_iterator<char>()));
 
     // 执行词法分析，并将结果重定向输出到文件
     tokenize(content, fileOut);
@@ -140,3 +143,4 @@ int main() {
     return 0;
 }
 ```
+

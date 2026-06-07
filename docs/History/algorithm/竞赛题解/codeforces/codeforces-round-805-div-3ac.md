@@ -1,9 +1,12 @@
----
+﻿---
 title: "Codeforces Round #805 (Div. 3)(A~C)"
 date: 2022-07-29
-categories: [ALGORITHM, Q&amp;A, 模拟, Codeforces]
+categories: [ALGORITHM, Q&A, 模拟, Codeforces]
 description: ""
 ---
+
+# codeforces-round-805-div-3ac
+
 
 ## A. Round Down the Price
 
@@ -26,7 +29,7 @@ description: ""
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 typedef long long LL;
@@ -39,12 +42,12 @@ void solve() {
     while (p > n) {
         p /= 10;
     }
-    cout &lt;&lt; n - p &lt;&lt; endl;
+    cout << n - p << endl;
 }
 
 int main() {
     int _;
-    cin &gt;> _;
+    cin >> _;
 
     while (_--) {
         solve();
@@ -78,7 +81,7 @@ int main() {
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 void solve() {
@@ -90,7 +93,7 @@ void solve() {
     memset(vis, 0, sizeof vis);
 
     int cnt = 0;
-    for (int i = 0; i &lt; s.size(); i++) {
+    for (int i = 0; i < s.size(); i++) {
         if (!vis[s[i]]) {
             cnt++;
             if (cnt == 4) {
@@ -103,12 +106,12 @@ void solve() {
     }
     if (cnt) flag++;
 
-    cout &lt;&lt; flag &lt;&lt; endl;
+    cout << flag << endl;
 }
 
 int main() {
     int _;
-    cin &gt;> _;
+    cin >> _;
 
     while (_--) {
         solve();
@@ -142,18 +145,18 @@ int main() {
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 void solve() {
     int n, m;
     cin >> n >> m;
 
-    map&lt;int, int&gt; l, r;
+    map<int, int> l, r;
 
-    for (int i = 1; i &lt;= n; i++) {
+    for (int i = 1; i <= n; i++) {
         int x;
-        cin &gt;> x;
+        cin >> x;
         if (l[x] == 0) {
             l[x] = r[x] = i;
         } else {
@@ -166,22 +169,23 @@ void solve() {
         int x, y;
         cin >> x >> y;
         if (l[x] != 0 && l[y] != 0) {
-            if (l[x] &lt; r[y])
-                cout &lt;&lt; "YES" &lt;&lt; endl;
+            if (l[x] < r[y])
+                cout << "YES" << endl;
             else
-                cout &lt;&lt; "NO" &lt;&lt; endl;
+                cout << "NO" << endl;
         } else {
-            cout &lt;&lt; "NO" &lt;&lt; endl;
+            cout << "NO" << endl;
         }
     }
 }
 
 int main() {
     int _;
-    cin &gt;> _;
+    cin >> _;
     while (_--) {
         solve();
     }
     return 0;
 }
 ```
+

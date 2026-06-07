@@ -1,9 +1,12 @@
----
+﻿---
 title: "编译原理：2. 词法分析"
 date: 2023-02-07
 categories: [Compilation Principle]
 description: ""
 ---
+
+# cp2
+
 
 **词法分析的**（Lexical）：与语言的单词或词汇有关，但有别于语言的语法和结构。
 

@@ -1,9 +1,12 @@
----
+﻿---
 title: "Python提取文本中出现的全部合法日期"
 date: 2023-07-05
 categories: [Python, Tips]
 description: ""
 ---
+
+# python提取文本中出现的全部合法日期
+
 
 ## 需求
 

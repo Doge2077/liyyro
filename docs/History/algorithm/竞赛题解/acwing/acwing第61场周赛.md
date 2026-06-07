@@ -1,9 +1,12 @@
----
+﻿---
 title: "AcWing第61场周赛"
 date: 2022-07-24
-categories: [ALGORITHM, Q&amp;A]
+categories: [ALGORITHM, Q&A]
 description: ""
 ---
+
+# acwing第61场周赛
+
 
 ---
 
@@ -58,15 +61,15 @@ description: ""
 * 高精度加法：用倒序的 `vector&lt;int&gt;` 存储两个大数 `A` 和 `B`，进行高精度加法。
 ```cpp
 // 高精度加法
-vector&lt;int&gt; add(vector&lt;int&gt; &A, vector&lt;int&gt; &B) {
-    if (A.size() &lt; B.size()) return add(B, A); // 确保A的长度大于等于B
+vector<int> add(vector<int> &A, vector<int> &B) {
+    if (A.size() < B.size()) return add(B, A); // 确保A的长度大于等于B
 
     int k = 0; // 定义进位，初始化为0
-    vector&lt;int&gt; C; // 存储结果
+    vector<int> C; // 存储结果
 
-    for (int i = 0; i &lt; A.size(); i++) { // 按位相加
+    for (int i = 0; i < A.size(); i++) { // 按位相加
         k += A[i]; // 加上A的当前位
-        if (i &lt; B.size()) k += B[i]; // 如果B还有当前位，则加上
+        if (i < B.size()) k += B[i]; // 如果B还有当前位，则加上
         C.push_back(k % 10); // 存入当前位的结果
         k /= 10; // 更新进位
     }
@@ -80,8 +83,8 @@ vector&lt;int&gt; add(vector&lt;int&gt; &A, vector&lt;int&gt; &B) {
 * 高精度除以低精度：用倒序的 `vector&lt;int&gt;` 存储被除数 `A`，进行高精度除以低精度运算，并获得余数。
 ```cpp
 // 高精度除以低精度
-vector&lt;int&gt; div(vector&lt;int&gt; &A, int b, int &r) {
-    vector&lt;int&gt; C; // 存储结果
+vector<int> div(vector<int> &A, int b, int &r) {
+    vector<int> C; // 存储结果
     r = 0; // 初始化余数为0
     for (int i = A.size() - 1; i >= 0; i--) { // 从最高位开始计算
         int k = r * 10 + A[i]; // 当前位的被除数
@@ -96,19 +99,19 @@ vector&lt;int&gt; div(vector&lt;int&gt; &A, int b, int &r) {
 
 **完整解题代码**
 ```cpp
-#include&lt;bits/stdc++.h&gt;
+#include<bits/stdc++.h>
 using namespace std;
 
 // 高精度加法
-vector&lt;int&gt; add(vector&lt;int&gt; &A, vector&lt;int&gt; &B) {
-    if (A.size() &lt; B.size()) return add(B, A);
+vector<int> add(vector<int> &A, vector<int> &B) {
+    if (A.size() < B.size()) return add(B, A);
 
     int k = 0;
-    vector&lt;int&gt; C;
+    vector<int> C;
 
-    for (int i = 0; i &lt; A.size(); i++) {
+    for (int i = 0; i < A.size(); i++) {
         k += A[i];
-        if (i &lt; B.size()) k += B[i];
+        if (i < B.size()) k += B[i];
         C.push_back(k % 10);
         k /= 10;
     }
@@ -118,8 +121,8 @@ vector&lt;int&gt; add(vector&lt;int&gt; &A, vector&lt;int&gt; &B) {
 }
 
 // 高精度除以低精度
-vector&lt;int&gt; div(vector&lt;int&gt; &A, int b, int &r) {
-    vector&lt;int&gt; C;
+vector<int> div(vector<int> &A, int b, int &r) {
+    vector<int> C;
     r = 0;
     for (int i = A.size() - 1; i >= 0; i--) {
         int k = r * 10 + A[i];
@@ -132,7 +135,7 @@ vector&lt;int&gt; div(vector&lt;int&gt; &A, int b, int &r) {
 }
 
 void solve() {
-    vector&lt;int&gt; A, B, C;
+    vector<int> A, B, C;
     string a, b, c;
     int r;
     cin >> a >> b >> c;
@@ -141,17 +144,17 @@ void solve() {
     for (int i = b.size() - 1; i >= 0; i--) B.push_back(b[i] - '0');
     for (int i = c.size() - 1; i >= 0; i--) C.push_back(c[i] - '0');
 
-    vector&lt;int&gt; sum = add(A, B);
+    vector<int> sum = add(A, B);
     sum = add(sum, C); // sum = A + B + C
-    vector&lt;int&gt; res = div(sum, 2, r); // res = sum / 2
+    vector<int> res = div(sum, 2, r); // res = sum / 2
 
-    for (int i = res.size() - 1; i >= 0; i--) cout &lt;&lt; res[i];
-    cout &lt;&lt; endl;
+    for (int i = res.size() - 1; i >= 0; i--) cout << res[i];
+    cout << endl;
 }
 
 int main() {
     int T;
-    cin &gt;> T;
+    cin >> T;
     while (T--) {
         solve();
     }
@@ -241,7 +244,7 @@ YES
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 int n;
@@ -263,12 +266,12 @@ void dfs(int u, int cur_angle) {
 
 int main() {
     cin >> n;
-    for (int i = 0; i &lt; n; i++) {
-        cin &gt;> a[i];
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
     }
     dfs(0, 0);
-    if (flag) cout &lt;&lt; "YES" &lt;&lt; endl;
-    else cout &lt;&lt; "NO" &lt;&lt; endl;
+    if (flag) cout << "YES" << endl;
+    else cout << "NO" << endl;
     return 0;
 }
 ```
@@ -344,8 +347,8 @@ int main() {
 ### 代码
 
 ```cpp
-#include &lt;cstdio&gt;
-#include &lt;cmath&gt;
+#include <cstdio>
+#include <cmath>
 
 void solve() {
     double R, x1, y1, x2, y2;
@@ -385,3 +388,4 @@ int main() {
     return 0;
 }
 ```
+

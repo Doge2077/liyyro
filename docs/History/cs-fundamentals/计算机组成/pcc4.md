@@ -1,9 +1,12 @@
----
+﻿---
 title: "计算机组成原理：4. 存储器"
 date: 2023-03-20
 categories: [Principles of Computer Composition]
 description: ""
 ---
+
+# pcc4
+
 
 ## 4.1 概述
 

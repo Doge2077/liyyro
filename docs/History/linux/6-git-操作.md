@@ -1,9 +1,12 @@
----
+﻿---
 title: "6. git 操作"
 date: 2022-09-02
 categories: [Linux, Linux]
 description: ""
 ---
+
+# 6-git-操作
+
 
 ### 6.1 Git 基本概念
 

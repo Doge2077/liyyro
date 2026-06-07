@@ -1,9 +1,12 @@
----
+﻿---
 title: "河南工程学院第六届程序设计竞赛-A组-题解"
 date: 2023-12-17
 categories: [ALGORITHM]
 description: ""
 ---
+
+# 河南工程学院第六届程序设计竞赛-a组-题解
+
 
 ## 远古时期的签到题
 
@@ -53,20 +56,20 @@ $0\le N \le 1\times10^{18}$。
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
-#include &lt;stdio.h&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
+#include <stdio.h>
 
 using namespace std;
 
@@ -77,8 +80,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int M = 1e7 + 10;
@@ -89,20 +92,20 @@ void solve(){
     LL n; cin >> n;
     int cnt = 0;
     if(n == 0){
-        cout &lt;&lt; 1 &lt;&lt; endl;
+        cout << 1 << endl;
         return ;
     }
     while(n){
         cnt += (n & 1 == 1 ? 0 : 1);
-        n &gt;>= 1;
+        n >>= 1;
     }
-    cout &lt;&lt; cnt &lt;&lt; endl;
+    cout << cnt << endl;
 }
 
 int main(){
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while(_ --){
         solve();
     }
@@ -116,19 +119,19 @@ int main(){
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -139,8 +142,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -152,7 +155,7 @@ string to_p(long long x, long long p){
     if(x == 0) return "0";
     while(x){
         long long k = x % p; char c;
-        if(k &lt; 10) c = k + '0';
+        if(k < 10) c = k + '0';
         else c = k + 'A' - 10;
         ans = c + ans;
         x /= p;
@@ -163,9 +166,9 @@ string to_p(long long x, long long p){
 //将string类型的x从p进制转换为10进制，返回值为long long类型
 long long to_x(string x, long long p){
     long long ans = 0;
-    for(int i = 0; i &lt; x.size(); i ++){
+    for(int i = 0; i < x.size(); i ++){
         long long k = 0;
-        if(x[i] &gt;= '0' && x[i] &lt;= '9') k = x[i] - '0';
+        if(x[i] >= '0' && x[i] <= '9') k = x[i] - '0';
         else k = x[i] - 'A' + 10;
         ans = ans * p + k;
     }
@@ -178,19 +181,19 @@ string r_to_p(string x, long long r, long long p){
 }
 
 void solve(){
-    string s; cin &gt;> s;
+    string s; cin >> s;
     string p = r_to_p(s, (LL)10, (LL)2);
     int cnt = 0;
-    for(int i = 0; i &lt; p.size(); i ++){
+    for(int i = 0; i < p.size(); i ++){
         if(p[i] == '0') cnt ++;
     }
-    cout &lt;&lt; cnt &lt;&lt; endl;
+    cout << cnt << endl;
 }
 
 int main(){
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while(_ --){
         solve();
     }
@@ -239,7 +242,7 @@ $1 \le n \le 10^6$
 
 **代码**：
 ```cpp
-#include&lt;bits/stdc++.h&gt;
+#include<bits/stdc++.h>
 using namespace std;
 int main()
 {
@@ -249,7 +252,7 @@ int main()
 }
 ```
 ```cpp
-#include&lt;bits/stdc++.h&gt;
+#include<bits/stdc++.h>
 using namespace std;
 int main()
 {
@@ -318,20 +321,20 @@ $1\le N \le 1\times 10^6, 1\le h_i \le 2$。
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
-#include &lt;stdio.h&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
+#include <stdio.h>
 
 using namespace std;
 
@@ -342,8 +345,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int M = 1e7 + 10;
@@ -356,24 +359,24 @@ struct people{
 }p[N];
 
 bool cmp(people &p1, people &p2){
-    if(p1.h == p2.h) return p1.x &lt; p2.x;
-    return p1.h &lt; p2.h; 
+    if(p1.h == p2.h) return p1.x < p2.x;
+    return p1.h < p2.h; 
 }
 
 void solve(){
-    int n; cin &gt;> n;
-    for(int i = 0; i &lt; n; i++){
-        double l; cin &gt;> l;
+    int n; cin >> n;
+    for(int i = 0; i < n; i++){
+        double l; cin >> l;
         p[i] = {i + 1, l};
     }
     sort(p, p + n, cmp);
-    for(int i = 0; i &lt; n; i++) cout &lt;&lt; p[i].x &lt;&lt; ' ';
+    for(int i = 0; i < n; i++) cout << p[i].x << ' ';
 }
 
 int main(){
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while(_--){
         solve();
     }
@@ -430,12 +433,12 @@ $1\le m \le n \le 10^9$
 
 **代码**：
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
 
 int C(int n, int m) {
-    if (n &lt; m) return 0;
+    if (n < m) return 0;
     if (!m) return 1;
     return (C(n - 1, m - 1) + C(n - 1, m)) % 40353607;
 }
@@ -443,9 +446,9 @@ int C(int n, int m) {
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    int n, m; cin &gt;> n >> m;
-    if (n > 24) cout &lt;&lt; 0 &lt;&lt; endl;
-    else cout &lt;&lt; C(n, m) &lt;&lt; endl;
+    int n, m; cin >> n >> m;
+    if (n > 24) cout << 0 << endl;
+    else cout << C(n, m) << endl;
 
     return 0;
 }
@@ -512,19 +515,19 @@ $1\le N \le 1\times 10^6,1\le G\le 1\times 10^9$。
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -535,8 +538,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -547,38 +550,38 @@ int a[N];
 void solve(){
     int n; cin >> n;
     string s; cin >> s;
-    for(int i = 0; i &lt; n; i ++) cin &gt;> a[i];
+    for(int i = 0; i < n; i ++) cin >> a[i];
     LL sum = 0;
     int pos = s.find("1");
     if(pos == -1){
-        cout &lt;&lt; 0 &lt;&lt; endl;
+        cout << 0 << endl;
         return ;
     }
-    for(int i = pos; i &lt; n; i ++){
+    for(int i = pos; i < n; i ++){
         if(s[i] == '1'){
             int cnt = 1;
             int t = a[i];
             sum += t;
-            for(int j = i + 1; j &lt; n; j ++){
+            for(int j = i + 1; j < n; j ++){
                 if(s[j] == '0') break;
                 else cnt ++;
                 t = min(t, a[j]);
                 sum += a[j];
             }
-            if(i - 1 &gt;= 0){
+            if(i - 1 >= 0){
                 int p = a[i - 1];
                 if(p > t) sum += p - t;
             }
             i += cnt - 1;
         }
     }
-    cout &lt;&lt; sum &lt;&lt; endl;
+    cout << sum << endl;
 }
 
 int main(){
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while(_ --){
         solve();
     }
@@ -640,9 +643,9 @@ $1 \le n \le 10^6$
 
 * 在这里不能直接去暴力建图，需要先预处理出来一个数组来存储每个数的约数之和。
 ```c
-for(int i=1; i&lt;=n; i++)
+for(int i=1; i<=n; i++)
 {
-   for(int j=2; j&lt;=n/i; j++)
+   for(int j=2; j<=n/i; j++)
    {
      sum[i*j] += i;
    }
@@ -657,7 +660,7 @@ for(int i=1; i&lt;=n; i++)
 
 **代码**：
 ```cpp
-#include&lt;bits/stdc++.h&gt;
+#include<bits/stdc++.h>
 using namespace std;
 int he[2000010], ne[2000010], e[2000010], ver[2000010];
 int d[2000010], tot = 0, st[2000010];
@@ -672,7 +675,7 @@ int ans = 0, p;
 int sum[1000010];
 void dfs(int x, int y, int z)
 {
-    if(ans &lt; z)
+    if(ans < z)
     {
         ans = z;
         p = x;
@@ -688,24 +691,24 @@ void dfs(int x, int y, int z)
 int main()
 {
     int n;
-    cin &gt;> n;
-    for(int i = 1; i &lt;= n; i++)
+    cin >> n;
+    for(int i = 1; i <= n; i++)
     {
-        for(int j = 2; j &lt;= n / i; j++)
+        for(int j = 2; j <= n / i; j++)
         {
             sum[i * j] += i;
         }
     }
-    for(int i = 2; i &lt;= n; i++)
+    for(int i = 2; i <= n; i++)
     {
-        if(i &gt; sum[i])
+        if(i > sum[i])
         {
             add(sum[i], i, 1);
             add(i, sum[i], 1);
         }
     }
     int anss = 0;
-    for(int i = 1; i &lt;= n; i++)
+    for(int i = 1; i <= n; i++)
     {
         if(!st[i])
         {
@@ -715,7 +718,7 @@ int main()
             anss = max(anss, ans);
         }
     }
-    cout &lt;&lt; anss;
+    cout << anss;
 }
 ```
 
@@ -783,19 +786,19 @@ $1\le N,M \le 1\times 10^6,0\le d,h\le 10^9$。
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -806,8 +809,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -818,8 +821,8 @@ LL a[N], b[N];
 void solve(){
     int n, m; cin >> n >> m;
     LL flag = 0;
-    for(int i = 1; i &lt;= n; i++){
-        cin &gt;> a[i];
+    for(int i = 1; i <= n; i++){
+        cin >> a[i];
         flag = max(flag, a[i]);
         a[i] += a[i - 1];
         b[i] = flag;
@@ -827,14 +830,14 @@ void solve(){
     while(m--){
         int x; cin >> x;
         if(x == 0){
-            cout &lt;&lt; 0 &lt;&lt; ' ';
+            cout << 0 << ' ';
             continue;
         }
         int pos = upper_bound(b, b + n, x) - b;
-        if(b[pos] &gt; x) pos--;
-        cout &lt;&lt; a[pos] &lt;&lt; ' ';
+        if(b[pos] > x) pos--;
+        cout << a[pos] << ' ';
     }
-    cout &lt;&lt; endl;
+    cout << endl;
 }
 
 int main(){
@@ -842,7 +845,7 @@ int main(){
     cin.tie(0);
 
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
 
     while(_--){
         solve();
@@ -911,7 +914,7 @@ $1 \le n \le 1000$
 
 **代码**：
 ```cpp
-#include&lt;bits/stdc++.h&gt;
+#include<bits/stdc++.h>
 using namespace std;
 int a[1100][1100],n;
 int main()
@@ -920,24 +923,24 @@ int main()
     int ll=(n+1)/2;
     int cnt=0,pp=1;
     int oo=n;
-    for(int i=1;i&lt;=ll;i++)
+    for(int i=1;i<=ll;i++)
     {
         cnt++;
         int x;
-        cin&gt;>x;
+        cin>>x;
         if(x==1)
         {
-            for(int j=cnt;j&lt;=n;j++)
+            for(int j=cnt;j<=n;j++)
             {
                 a[cnt][j]=pp;
                 pp++;
             }
-            for(int j=cnt+1;j&lt;=n;j++)
+            for(int j=cnt+1;j<=n;j++)
             {
                 a[j][n]=pp;
                 pp++;
             }
-            for(int j=n-1;j&gt;=cnt;j--)
+            for(int j=n-1;j>=cnt;j--)
             {
                 a[n][j]=pp;
                 pp++;
@@ -950,17 +953,17 @@ int main()
         }
         if(x==-1)
         {
-            for(int j=cnt;j&lt;=n;j++)
+            for(int j=cnt;j<=n;j++)
             {
                 a[j][cnt]=pp;
                 pp++;
             }
-            for(int j=cnt+1;j&lt;=n;j++)
+            for(int j=cnt+1;j<=n;j++)
             {
                 a[n][j]=pp;
                 pp++;
             }
-            for(int j=n-1;j&gt;=cnt;j--)
+            for(int j=n-1;j>=cnt;j--)
             {
                 a[j][n]=pp;
                 pp++;
@@ -973,11 +976,11 @@ int main()
         }
         n--;
     }
-    for(int i=1;i&lt;=oo;i++)
+    for(int i=1;i<=oo;i++)
     {
-        for(int j=1;j&lt;=oo;j++)
-            cout&lt;&lt;a[i][j]&lt;&lt;' ';
-        cout&lt;&lt;endl;
+        for(int j=1;j<=oo;j++)
+            cout<<a[i][j]<<' ';
+        cout<<endl;
     }
 }
 ```
@@ -1057,19 +1060,19 @@ $1 \le n \le 2\times 10^5$，$\sum n \le 5\times 10^5$
 ```
 
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -1081,24 +1084,24 @@ using namespace std;
 
 typedef long long LL;
 typedef unsigned long long ULL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
 const double eps = 1e-6, PI = acos(-1);
 
-vector&lt;vector&lt;int&gt;> tree;  // 存储树的邻接表
-vector&lt;int&gt; ans;           // 存储每个节点到其父节点的边权
-vector&lt;int&gt; vis;           // 存储每个节点在排列中的位置
-vector&lt;int&gt; res;           // 存储排列
+vector<vector<int>> tree;  // 存储树的邻接表
+vector<int> ans;           // 存储每个节点到其父节点的边权
+vector<int> vis;           // 存储每个节点在排列中的位置
+vector<int> res;           // 存储排列
 int n, flag = 1;           // n为节点个数，flag用于判断是否满足欧拉幻树的定义
 
 // 检查是否满足欧拉幻树的定义
 void check(int x, int fa) {
     for (auto y : tree[x]) {
         if (y == fa) continue;
-        if (res[y] &lt; res[x]) flag = 0;  // 如果存在满足条件的边，则不满足欧拉幻树的定义
+        if (res[y] < res[x]) flag = 0;  // 如果存在满足条件的边，则不满足欧拉幻树的定义
         check(y, x);
     }
 }
@@ -1113,12 +1116,12 @@ void dfs(int x, int fa, int deep) {
 }
 
 void solve() {
-    cin &gt;> n;
-    tree = vector&lt;vector&lt;int&gt;>(n);
+    cin >> n;
+    tree = vector<vector<int>>(n);
     int root = -1;
-    for (int i = 0; i &lt; n; i++) {
+    for (int i = 0; i < n; i++) {
         int x;
-        cin &gt;> x;
+        cin >> x;
         x--;
         if (x == i) {
             root = x;  // 找到根节点
@@ -1127,38 +1130,39 @@ void solve() {
         tree[x].push_back(i);
         tree[i].push_back(x);
     }
-    res = vector&lt;int&gt;(n);
-    vector&lt;int&gt; st(n);
-    for (int i = 0; i &lt; n; i++) {
-        cin &gt;> st[i];
+    res = vector<int>(n);
+    vector<int> st(n);
+    for (int i = 0; i < n; i++) {
+        cin >> st[i];
         st[i]--;
         res[st[i]] = i;  // 将排列中的位置记录在res数组中
     }
     flag = 1;
     check(root, -1);  // 检查是否满足欧拉幻树的定义
-    ans = vector&lt;int&gt;(n);
+    ans = vector<int>(n);
     if (!flag) {
-        cout &lt;&lt; -1 &lt;&lt; "\n";  // 如果不满足欧拉幻树的定义，则输出-1
+        cout << -1 << "\n";  // 如果不满足欧拉幻树的定义，则输出-1
         return;
     }
-    vis = vector&lt;int&gt;(n);
+    vis = vector<int>(n);
     int cnt = 0;
-    for (int i = 0; i &lt; n; i++) {
+    for (int i = 0; i < n; i++) {
         vis[st[i]] = cnt++;  // 将排列中的位置映射到节点编号
     }
     dfs(root, -1, 0);
-    for (int i = 0; i &lt; n; i++) {
-        cout &lt;&lt; ans[i] &lt;&lt; " \n"[i == n - 1];  // 输出结果
+    for (int i = 0; i < n; i++) {
+        cout << ans[i] << " \n"[i == n - 1];  // 输出结果
     }
 }
 
 int main() {
     IOS;
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while (_--) {
         solve();
     }
     return 0;
 }
 ```
+

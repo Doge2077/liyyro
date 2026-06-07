@@ -47,6 +47,7 @@ interface Post {
   categories?: string[]
   tags?: string[]
   section: string
+  order: number
 }
 
 const tabs = [
@@ -108,11 +109,16 @@ onMounted(async () => {
         description: fm.description || '',
         categories: fm.categories || [],
         tags: fm.tags || [],
-        section
+        section,
+        order: fm.order ?? 9999
       })
     }
     
-    allPosts.value = posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    allPosts.value = posts.sort((a, b) => {
+      if (a.order !== b.order) return a.order - b.order
+      // 如果 order 相同，按日期倒序
+      return new Date(b.date).getTime() - new Date(a.date).getTime()
+    })
   } catch (e) {
     console.error('Failed to load posts:', e)
   } finally {

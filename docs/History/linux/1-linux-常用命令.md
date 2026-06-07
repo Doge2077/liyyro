@@ -1,9 +1,12 @@
----
+﻿---
 title: "1. Linux 常用命令"
 date: 2022-07-03
 categories: [Linux, Linux]
 description: ""
 ---
+
+# 1-linux-常用命令
+
 
 ```bash
 ### 1.1 ctrl c && ctrl u && clear

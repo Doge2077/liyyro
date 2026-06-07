@@ -1,9 +1,12 @@
----
+﻿---
 title: "Spring Validation 详解"
 date: 2024-08-14
 categories: [Java]
 description: ""
 ---
+
+# spring-validation-详解
+
 
 ## 校验框架
 
@@ -287,9 +290,9 @@ Hibernate Validator：
 当校验异常时，会抛出 `MethodArgumentNotValidException` 异常，可以对其添加全局的异常解析：
 ```java
 @ExceptionHandler(MethodArgumentNotValidException.class)
-public Map&lt;String, String&gt; handleValidationExceptions(
+public Map<String, String> handleValidationExceptions(
   MethodArgumentNotValidException ex) {
-    Map&lt;String, String&gt; errors = new HashMap<>();
+    Map<String, String> errors = new HashMap<>();
     ex.getBindingResult().getAllErrors().forEach((error) -> {
         String fieldName = ((FieldError) error).getField();
         String errorMessage = error.getDefaultMessage();
@@ -298,3 +301,4 @@ public Map&lt;String, String&gt; handleValidationExceptions(
     return errors;
 }
 ```
+

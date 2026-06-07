@@ -1,23 +1,26 @@
----
+﻿---
 title: "2022_HAUE_计算机学院暑期培训——BFS&DFS"
 date: 2022-06-17
 categories: [ALGORITHM, BFS, DFS, University Activities]
 description: ""
 ---
 
-# 2022_HAUE_计算机学院暑期培训——BFS&DFS
+# 2022_haue_计算机学院暑期培训-bfsdfs
 
-## 1. 预习内容
 
-### 1.1 阅读资料
+## 2022_HAUE_计算机学院暑期培训——BFS&DFS
+
+### 1. 预习内容
+
+#### 1.1 阅读资料
 
 * [偏移量数组的使用](https://www.acwing.com/solution/content/88832/)
 * [C++ STL中queue相关操作](https://www.acwing.com/blog/content/10796/)
 * [字典序的定义](https://blog.csdn.net/qq_37050329/article/details/86637183?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165553478016781432925354%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=165553478016781432925354&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-86637183-null-null.142^v17^pc_rank_34,157^v15^new_3&utm_term=%E5%AD%97%E5%85%B8%E5%BA%8F&spm=1018.2226.3001.4187)
 
-### 1.2 练习题目
+#### 1.2 练习题目
 
-#### 1. Z字形扫描
+##### 1. Z字形扫描
 
 [原题链接](http://www.haueacm.top/problem.php?id=1284)
 
@@ -77,7 +80,7 @@ description: ""
 
 **代码**
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 const int N = 505;
 
@@ -86,8 +89,8 @@ int a[2 * N][2 * N]; // 定义时直接扩大
 int main() {
     int n;
     scanf("%d", &n);
-    for (int i = 0; i &lt; n; i++) { // 初始化二维数组
-        for (int j = 0; j &lt; n; j++) {
+    for (int i = 0; i < n; i++) { // 初始化二维数组
+        for (int j = 0; j < n; j++) {
             scanf("%d", &a[i][j]);
         }
     }
@@ -95,12 +98,12 @@ int main() {
     int dr = 0, dx[] = {-1, 1, 1, -1}, dy[] = {1, 1, -1, -1};
     printf("%d ", a[0][0]); // 先将(0,0)位置的数输出
     int x = 0, y = 1; // 初始化位置为(0,1)
-    for (int i = 0; i &lt; (2 * n + 1) * n; i++) { // 循环遍历扩大后的数组
-        if (x &lt; n && y &lt; n && x &gt;= 0 && y >= 0) {
+    for (int i = 0; i < (2 * n + 1) * n; i++) { // 循环遍历扩大后的数组
+        if (x < n && y < n && x >= 0 && y >= 0) {
             printf("%d ", a[x][y]); // 满足在原始数组范围内输出
         }
         int l = x + dx[dr], r = y + dy[dr]; // 临时变量判断下一个要遍历的格子坐标(l,r)
-        if (dr == 0 || dr == 2 || r &lt; 0 || l &lt; 0 || r &gt;= n || l >= n) { // 如果dr=0或dr=2或(l,r)出界时改变方向
+        if (dr == 0 || dr == 2 || r < 0 || l < 0 || r >= n || l >= n) { // 如果dr=0或dr=2或(l,r)出界时改变方向
             dr = (dr + 1) % 4;
             l = x + dx[dr], r = y + dy[dr];
         }
@@ -112,7 +115,7 @@ int main() {
 
 ---
 
-## 2. 上楼梯
+### 2. 上楼梯
 
 [原题链接](http://www.haueacm.top/problem.php?id=1285)
 
@@ -140,7 +143,7 @@ int main() {
 
 **代码**
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 int n, ans;
@@ -152,27 +155,27 @@ void dfs(int u) {
     }
     if (u > n) return;
     // 当不会超出 n 时进行下一步
-    if (u + 1 &lt;= n) dfs(u + 1);
-    if (u + 2 &lt;= n) dfs(u + 2);
-    if (u + 3 &lt;= n) dfs(u + 3);
+    if (u + 1 <= n) dfs(u + 1);
+    if (u + 2 <= n) dfs(u + 2);
+    if (u + 3 <= n) dfs(u + 3);
 }
 
 int main() {
-    cin &gt;> n;
+    cin >> n;
     ans = 0;
     dfs(0);
-    cout &lt;&lt; ans &lt;&lt; endl;
+    cout << ans << endl;
     return 0;
 }
 ```
 
 ---
 
-## 3. 课程内容
+### 3. 课程内容
 
 ---
 
-### 3.1 搜索技术简介
+#### 3.1 搜索技术简介
 
 ---
 
@@ -204,11 +207,11 @@ int main() {
 
 ---
 
-### 3.2 BFS (广度优先搜索)
+#### 3.2 BFS (广度优先搜索)
 
 ---
 
-#### 3.2.1 C++ STL 队列相关操作
+##### 3.2.1 C++ STL 队列相关操作
 
 ---
 
@@ -219,21 +222,21 @@ int main() {
 
 ![队列概念图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/队列概念.png)
 
-##### 1. 头文件
+###### 1. 头文件
 
 *   `#include &lt;queue&gt;`
 
 ---
 
-##### 2. 定义与声明
+###### 2. 定义与声明
 
 *   `queue&lt;数据类型&gt; 名称`
 
 **eg：**
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;queue&gt;
+#include <iostream>
+#include <string>
+#include <queue>
 using namespace std;
 
 struct point { // 声明 point 为 struct 类型
@@ -241,9 +244,9 @@ struct point { // 声明 point 为 struct 类型
 };
 
 int main() {
-    queue&lt;int&gt; a;       // 定义一个名为 a，存储 int 类型数据的队列
-    queue&lt;string&gt; b;    // 定义一个名为 b，存储 string 类型数据的队列
-    queue&lt;point&gt; c;     // 定义一个名为 c，存储 point 类型数据的队列
+    queue<int> a;       // 定义一个名为 a，存储 int 类型数据的队列
+    queue<string> b;    // 定义一个名为 b，存储 string 类型数据的队列
+    queue<point> c;     // 定义一个名为 c，存储 point 类型数据的队列
 
     return 0;
 }
@@ -251,15 +254,15 @@ int main() {
 
 ---
 
-##### 3. 向队尾插入元素（入队）
+###### 3. 向队尾插入元素（入队）
 
 **语法：** `.push()`
 
 **eg：**
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;queue&gt;
+#include <iostream>
+#include <string>
+#include <queue>
 using namespace std;
 
 struct point { // 声明point为struct类型
@@ -267,9 +270,9 @@ struct point { // 声明point为struct类型
 };
 
 int main() {
-    queue&lt;int&gt; a; // 定义一个名为a，存储int类型数据的队列
-    queue&lt;string&gt; b; // 定义一个名为b，存储string类型数据的队列
-    queue&lt;point&gt; c; // 定义一个名为c，存储point类型数据的队列
+    queue<int> a; // 定义一个名为a，存储int类型数据的队列
+    queue<string> b; // 定义一个名为b，存储string类型数据的队列
+    queue<point> c; // 定义一个名为c，存储point类型数据的队列
 
     a.push(1); // 在队列a的末尾添加int类型的元素1
 
@@ -288,15 +291,15 @@ int main() {
 
 ---
 
-##### 4. 将队头弹出（出队）
+###### 4. 将队头弹出（出队）
 
 **语法：** `.pop()`
 
 **eg：**
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;queue&gt;
+#include <iostream>
+#include <string>
+#include <queue>
 using namespace std;
 
 struct point { // 声明point为struct类型
@@ -304,9 +307,9 @@ struct point { // 声明point为struct类型
 };
 
 int main() {
-    queue&lt;int&gt; a; // 定义一个名为a，存储int类型数据的队列
-    queue&lt;string&gt; b; // 定义一个名为b，存储string类型数据的队列
-    queue&lt;point&gt; c; // 定义一个名为c，存储point类型数据的队列
+    queue<int> a; // 定义一个名为a，存储int类型数据的队列
+    queue<string> b; // 定义一个名为b，存储string类型数据的队列
+    queue<point> c; // 定义一个名为c，存储point类型数据的队列
 
     a.push(1); // 在队列a的末尾添加int类型的元素1
 
@@ -336,15 +339,15 @@ int main() {
 
 ---
 
-##### 5. 查看队列的长度
+###### 5. 查看队列的长度
 
 **语法：** `.size()`
 
 **eg：**
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;queue&gt;
+#include <iostream>
+#include <string>
+#include <queue>
 using namespace std;
 
 struct point { // 声明point为struct类型
@@ -352,9 +355,9 @@ struct point { // 声明point为struct类型
 };
 
 int main() {
-    queue&lt;int&gt; a; // 定义一个名为a，存储int类型数据的队列
-    queue&lt;string&gt; b; // 定义一个名为b，存储string类型数据的队列
-    queue&lt;point&gt; c; // 定义一个名为c，存储point类型数据的队列
+    queue<int> a; // 定义一个名为a，存储int类型数据的队列
+    queue<string> b; // 定义一个名为b，存储string类型数据的队列
+    queue<point> c; // 定义一个名为c，存储point类型数据的队列
 
     a.push(1); // 在队列a的末尾添加int类型的元素1
 
@@ -373,9 +376,9 @@ int main() {
        c: {10,20}, {10,20}
     */
 
-    cout &lt;&lt; a.size() &lt;&lt; endl; // 输出队列a的元素个数为1
-    cout &lt;&lt; b.size() &lt;&lt; endl; // 输出队列b的元素个数为2
-    cout &lt;&lt; c.size() &lt;&lt; endl; // 输出队列c的元素个数为2
+    cout << a.size() << endl; // 输出队列a的元素个数为1
+    cout << b.size() << endl; // 输出队列b的元素个数为2
+    cout << c.size() << endl; // 输出队列c的元素个数为2
 
     return 0;
 }
@@ -383,15 +386,15 @@ int main() {
 
 ---
 
-##### 6. 查看队列是否为空
+###### 6. 查看队列是否为空
 
 **语法：** `.empty()`
 
 **eg：**
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;queue&gt;
+#include <iostream>
+#include <string>
+#include <queue>
 using namespace std;
 
 struct point { // 声明point为struct类型
@@ -399,9 +402,9 @@ struct point { // 声明point为struct类型
 };
 
 int main() {
-    queue&lt;int&gt; a; // 定义一个名为a，存储int类型数据的队列
-    queue&lt;string&gt; b; // 定义一个名为b，存储string类型数据的队列
-    queue&lt;point&gt; c; // 定义一个名为c，存储point类型数据的队列
+    queue<int> a; // 定义一个名为a，存储int类型数据的队列
+    queue<string> b; // 定义一个名为b，存储string类型数据的队列
+    queue<point> c; // 定义一个名为c，存储point类型数据的队列
 
     a.push(1); // 在队列a的末尾添加int类型的元素1
 
@@ -425,9 +428,9 @@ int main() {
        c: (空)
     */
 
-    cout &lt;&lt; a.empty() &lt;&lt; endl; // 队列a不空，输出0
-    cout &lt;&lt; b.empty() &lt;&lt; endl; // 队列b不空，输出0
-    cout &lt;&lt; c.empty() &lt;&lt; endl; // 队列c为空，输出1
+    cout << a.empty() << endl; // 队列a不空，输出0
+    cout << b.empty() << endl; // 队列b不空，输出0
+    cout << c.empty() << endl; // 队列c为空，输出1
 
     return 0;
 }
@@ -435,11 +438,11 @@ int main() {
 
 ---
 
-#### 3.2.2 BFS详解
+##### 3.2.2 BFS详解
 
 ---
 
-##### 1\. 思想
+###### 1\. 思想
 
 * 当题目需要对一组数据进行扩展式搜索时可以考虑`BFS`。
   * 搜索时要将已经满足要求的点入队。
@@ -449,7 +452,7 @@ int main() {
 
 ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/BFS.png)
 
-##### 2\. 走出迷宫（BFS）
+###### 2\. 走出迷宫（BFS）
 
 [原题链接](http://www.haueacm.top/problem.php?id=1288)
 
@@ -494,7 +497,7 @@ No
 
 **BFS代码**
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 510;
@@ -514,7 +517,7 @@ struct point {  // 用于记录点的信息
 };
 
 bool bfs() {
-    queue&lt;point&gt; st;  // 定义队列
+    queue<point> st;  // 定义队列
     st.push({s1, s2});  // 将 S 点的信息入队
     vis[s1][s2] = 1;  // 标记 S 点为走过
 
@@ -522,9 +525,9 @@ bool bfs() {
         auto p = st.front();  // 使 p 获得队头的信息
         st.pop();  // 将队头出队
 
-        for (int i = 0; i &lt; 4; i++) {  // 循环遍历偏移量数组，搜索四个方向
+        for (int i = 0; i < 4; i++) {  // 循环遍历偏移量数组，搜索四个方向
             int l = p.x + dx[i], r = p.y + dy[i];
-            if (l &gt;= 1 && l &lt;= n && r &gt;= 1 && r &lt;= m && !vis[l][r] && mp[l][r] != '#') {  // 判断该点是否满足搜索条件
+            if (l >= 1 && l <= n && r >= 1 && r <= m && !vis[l][r] && mp[l][r] != '#') {  // 判断该点是否满足搜索条件
                 if (mp[l][r] == 'E') return 1;  // 搜到答案直接返回
                 vis[l][r] = 1;  // 标记该点已经走过
                 st.push({l, r});  // 将该点入队，后续继续扩展该点搜索
@@ -536,14 +539,14 @@ bool bfs() {
 }
 
 int main() {
-    while (cin &gt;> n >> m) {
+    while (cin >> n >> m) {
         // 初始化清空数据
         memset(vis, 0, sizeof vis);
         memset(mp, 0, sizeof mp);
 
-        for (int i = 1; i &lt;= n; i++) {
-            for (int j = 1; j &lt;= m; j++) {
-                cin &gt;> mp[i][j];
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                cin >> mp[i][j];
                 if (mp[i][j] == 'S') {  // 标记S的坐标
                     s1 = i;
                     s2 = j;
@@ -551,8 +554,8 @@ int main() {
             }
         }
 
-        if (bfs()) cout &lt;&lt; "Yes" &lt;&lt; endl;
-        else cout &lt;&lt; "No" &lt;&lt; endl;
+        if (bfs()) cout << "Yes" << endl;
+        else cout << "No" << endl;
     }
     return 0;
 }
@@ -560,15 +563,15 @@ int main() {
 
 ---
 
-### 3.3 DFS (深度优先搜索)
+#### 3.3 DFS (深度优先搜索)
 
 ---
 
-#### 3.3.1 栈与递归
+##### 3.3.1 栈与递归
 
 ---
 
-##### 1. 栈的特点
+###### 1. 栈的特点
 
 ---
 
@@ -579,7 +582,7 @@ int main() {
 
 ---
 
-##### 2. 简单递归
+###### 2. 简单递归
 
 ---
 
@@ -592,13 +595,13 @@ int main() {
 
 **e.g.：**
 ```cpp
-#include &lt;iostream&gt;
+#include <iostream>
 using namespace std;
 
 int n;
 
 int fx(int u) {
-    // cout &lt;&lt; "u = " &lt;&lt; u &lt;&lt; endl;  // 输出每一次递归调用后 u 的值
+    // cout << "u = " << u << endl;  // 输出每一次递归调用后 u 的值
     if (u == 1) {
         return 1;
     }
@@ -606,8 +609,8 @@ int fx(int u) {
 }
 
 int main() {
-    cin &gt;> n;
-    cout &lt;&lt; fx(n) &lt;&lt; endl;
+    cin >> n;
+    cout << fx(n) << endl;
     return 0;
 }
 ```
@@ -648,7 +651,7 @@ int main() {
 
 **代码**
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 int n, m;
@@ -658,25 +661,25 @@ int ans;
 void step(int x, int y) {
     if (x == n && y == m) ans++;
     // 当走下一步，没有超出终点时，利用递归进行选择的实现
-    if (x + 1 &lt;= n) step(x + 1, y);
-    if (y + 1 &lt;= m) step(x, y + 1);
+    if (x + 1 <= n) step(x + 1, y);
+    if (y + 1 <= m) step(x, y + 1);
 }
 
 int main() {
-    cin &gt;> n >> m;
+    cin >> n >> m;
     if (n != 0 && m != 0) step(0, 0);  // 注意如果起始点和终点重合，则不需要走
-    cout &lt;&lt; ans &lt;&lt; endl;
+    cout << ans << endl;
     return 0;
 }
 ```
 
 ---
 
-#### 3.3.2 DFS详解
+##### 3.3.2 DFS详解
 
 ---
 
-##### 1. 思想
+###### 1. 思想
 
 * 利用递归，将大问题拆分为同类型的小问题解决。
 * 一般情况下，从初始状态出发，进行扩展得到若干新的状态。
@@ -690,7 +693,7 @@ int main() {
 
 ---
 
-##### 2. 走出迷宫（DFS）
+###### 2. 走出迷宫（DFS）
 
 [原题链接](http://www.haueacm.top/problem.php?id=1288)
 
@@ -735,7 +738,7 @@ No
 
 **DFS代码**
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 510;
@@ -751,9 +754,9 @@ void dfs(int x, int y) {
     if (mp[x][y] == 'E') {
         flag = 1;     // 标记答案
     }
-    for (int i = 0; i &lt; 4; i++) {  // 循环遍历偏移量数组，搜索四个方向
+    for (int i = 0; i < 4; i++) {  // 循环遍历偏移量数组，搜索四个方向
         int l = x + dx[i], r = y + dy[i];
-        if (l &gt;= 1 && l &lt;= n && r &gt;= 1 && r &lt;= m && !vis[l][r] && mp[l][r] != '#') {
+        if (l >= 1 && l <= n && r >= 1 && r <= m && !vis[l][r] && mp[l][r] != '#') {
             vis[l][r] = 1;  // 标记该点已经走过
             dfs(l, r);      // 继续以该点搜索
         }
@@ -761,14 +764,14 @@ void dfs(int x, int y) {
 }
 
 int main() {
-    while (cin &gt;> n >> m) {  // 多实例输入
+    while (cin >> n >> m) {  // 多实例输入
         flag = 0;
         memset(vis, 0, sizeof vis);
         memset(mp, 0, sizeof mp);
         
-        for (int i = 1; i &lt;= n; i++) {
-            for (int j = 1; j &lt;= m; j++) {
-                cin &gt;> mp[i][j];
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                cin >> mp[i][j];
                 if (mp[i][j] == 'S') {  // 标记S的坐标
                     s1 = i;
                     s2 = j;
@@ -778,8 +781,8 @@ int main() {
         
         dfs(s1, s2);
         
-        if (flag) cout &lt;&lt; "Yes" &lt;&lt; endl;
-        else cout &lt;&lt; "No" &lt;&lt; endl;
+        if (flag) cout << "Yes" << endl;
+        else cout << "No" << endl;
     }
     return 0;
 }
@@ -787,7 +790,7 @@ int main() {
 
 ---
 
-##### 3. 排列数字
+###### 3. 排列数字
 
 [原题链接](http://www.haueacm.top/problem.php?id=1294)
 
@@ -828,7 +831,7 @@ int main() {
 
 **代码**
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1e6 + 3;
@@ -840,14 +843,14 @@ int n;
 
 void dfs(int u) {
     if (u == n) {
-        for (int i = 0; i &lt; n; i++) {
-            cout &lt;&lt; ans[i] &lt;&lt; " ";
+        for (int i = 0; i < n; i++) {
+            cout << ans[i] << " ";
         }
-        cout &lt;&lt; endl;
+        cout << endl;
         return;
     }
 
-    for (int i = 0; i &lt; n; i++) {
+    for (int i = 0; i < n; i++) {
         if (!vis[a[i]]) {
             vis[a[i]] = 1;  // 标记为使用过
             ans[u] = a[i];  // 选择该数
@@ -858,8 +861,8 @@ void dfs(int u) {
 }
 
 int main() {
-    cin &gt;> n;
-    for (int i = 0; i &lt; n; i++) {  // 初始化
+    cin >> n;
+    for (int i = 0; i < n; i++) {  // 初始化
         a[i] = i + 1;
     }
     dfs(0);
@@ -875,19 +878,19 @@ int main() {
 
 **代码**：
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 int main() {
     int n, a[1000];  // a[] 用于存放排列
     cin >> n;
-    for (int i = 1; i &lt;= n; i++) {
+    for (int i = 1; i <= n; i++) {
         a[i] = i;  // 初始化排列
     }
     do {
-        for (int i = 1; i &lt;= n; i++) {  // 循环输出排列
-            cout &lt;&lt; a[i] &lt;&lt; " ";
+        for (int i = 1; i <= n; i++) {  // 循环输出排列
+            cout << a[i] << " ";
         }
-        cout &lt;&lt; endl;
+        cout << endl;
     } while (next_permutation(a + 1, a + n + 1));  // 如果存在下一个排列，则生成并执行
     return 0;
 }
@@ -895,7 +898,7 @@ int main() {
 
 ---
 
-##### 4. N 皇后
+###### 4. N 皇后
 
 [原题链接](http://www.haueacm.top/problem.php?id=1286)
 
@@ -926,7 +929,7 @@ int main() {
 
 **代码**
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 510;
@@ -943,7 +946,7 @@ void dfs(int u) {
         return;
     }
 
-    for (int i = 0; i &lt; n; i++) {
+    for (int i = 0; i < n; i++) {
         if (!y[i] && !l[u + i + n] && !r[u - i + n]) {  // 若该格子的列和对角线的平行线上没有存在过皇后
             y[i] = l[u + i + n] = r[u - i + n] = 1;  // 标记
             dfs(u + 1);  // 递归到下一层
@@ -953,49 +956,49 @@ void dfs(int u) {
 }
 
 int main() {
-    cin &gt;> n;
+    cin >> n;
     dfs(0);
-    cout &lt;&lt; ans &lt;&lt; endl;
+    cout << ans << endl;
     return 0;
 }
 ```
 
 ---
 
-## 4\. 课后习题
+### 4\. 课后习题
 
 ---
 
-### 4.1 BFS习题
+#### 4.1 BFS习题
 
 ---
 
-#### 1\. 地牢大师
+##### 1\. 地牢大师
 
 * 原题链接：&lt;http://www.haueacm.top/problem.php?id=1293&gt;
 * 题解：&lt;https://lys2021.com/265-2/&gt;
 
 ---
 
-#### 2\. 移动骑士
+##### 2\. 移动骑士
 
 * 原题链接：&lt;http://www.haueacm.top/problem.php?id=1295&gt;
 * 题解：&lt;https://lys2021.com/1102-%e7%a7%bb%e5%8a%a8%e9%aa%91%e5%a3%ab/&gt;
 
 ---
 
-### 4.2 DFS习题
+#### 4.2 DFS习题
 
 ---
 
-#### 1\. 全排列
+##### 1\. 全排列
 
 * 原题链接：&lt;http://www.haueacm.top/problem.php?id=1287&gt;
 * 题解：&lt;https://lys2021.com/3429-%e5%85%a8%e6%8e%92%e5%88%97/&gt;
 
 ---
 
-#### 2\. 不同路径数
+##### 2\. 不同路径数
 
 * 原题链接：&lt;http://www.haueacm.top/problem.php?id=1292&gt;
 
@@ -1003,8 +1006,9 @@ int main() {
 
 ---
 
-##### 3. N皇后PLUS
+###### 3. N皇后PLUS
 
 [原题链接](http://www.haueacm.top/problem.php?id=1291)
 
 [题解](https://lys2021.com/843-n-%e7%9a%87%e5%90%8e%e9%97%ae%e9%a2%98/)
+

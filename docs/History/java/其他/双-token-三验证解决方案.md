@@ -1,9 +1,12 @@
----
+﻿---
 title: "双 Token 三验证解决方案"
 date: 2024-08-01
 categories: [Software Architect]
 description: ""
 ---
+
+# 双-token-三验证解决方案
+
 
 ## 问题分析
 
@@ -71,13 +74,13 @@ public class CommonRedisConstants {
 private StringRedisTemplate stringRedisTemplate;
 
 // 生成 accessToken
-private String createAccessToken(Map&lt;String, Object&gt; claims) {
+private String createAccessToken(Map<String, Object> claims) {
     // 这里是利用 jjwt 编写的工具类方法，读者可以自行实现相关工具类
     return JwtUtils.generateAccessToken(claims);
 }
 
 // 生成 refreshToken 并存入 Redis
-private String createRefreshToken(Map&lt;String, Object&gt; claims) {
+private String createRefreshToken(Map<String, Object> claims) {
     String refreshToken = JwtUtils.generateRefreshToken(claims);
     // redisKey 的形式为固定前缀+md5转换的token
     String redisKey = String.format(CommonRedisConstants.RedisKey.REFRESH_TOKEN_PREFIX, MD5Util.generateMd5Str(refreshToken));
@@ -187,3 +190,4 @@ public AdminLoginVO refreshLogin(String refreshToken) {
     return new AdminLoginVO(accessToken, newRefreshToken);
 }
 ```
+

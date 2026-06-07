@@ -1,9 +1,12 @@
----
+﻿---
 title: "AcWing 第62场周赛"
 date: 2022-07-30
-categories: [ALGORITHM, Q&amp;A, 数学]
+categories: [ALGORITHM, Q&A, 数学]
 description: ""
 ---
+
+# acwing-第62场周赛
+
 
 ---
 
@@ -27,19 +30,19 @@ description: ""
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1e6 + 10;
 
-pair&lt;int,int&gt; a[N];
+pair<int,int> a[N];
 
 void solve(){
     int n;
     cin >> n;
-    for(int i = 0; i &lt; n; i ++){
+    for(int i = 0; i < n; i ++){
         int x;
-        cin &gt;> x;
+        cin >> x;
         a[i] = {x, i + 1};
     }
 
@@ -50,7 +53,7 @@ void solve(){
     int ans[10];
     ans[cnt] = a[0].second;
 
-    for(int i = 1; i &lt; n; i ++){
+    for(int i = 1; i < n; i ++){
         if(a[i].first != flag){
             flag = a[i].first;
             ans[++cnt] = a[i].second;
@@ -59,9 +62,9 @@ void solve(){
     }
 
     if(cnt == 2){
-        for(int i = 0; i &lt;= cnt ; i ++) cout &lt;&lt; ans[i] &lt;&lt; " ";
+        for(int i = 0; i <= cnt ; i ++) cout << ans[i] << " ";
     }
-    else cout &lt;&lt; -1 &lt;&lt; " " &lt;&lt; -1 &lt;&lt; " " &lt;&lt; -1;
+    else cout << -1 << " " << -1 << " " << -1;
 }
 
 int main(){
@@ -97,13 +100,13 @@ int main(){
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1e6 + 10;
 
 int n, m;
-map&lt;int,int&gt; num;
+map<int,int> num;
 bool vis[N];
 
 void solve(){
@@ -137,7 +140,7 @@ void solve(){
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1e6 + 10;
@@ -160,7 +163,7 @@ void solve(){
             cin >> a[++idx];
             s[idx] = s[idx - 1] + a[idx];
         } else {
-            while (cnt + 1 &lt;= idx && check(cnt + 1) &gt; check(cnt)) ++cnt;
+            while (cnt + 1 <= idx && check(cnt + 1) > check(cnt)) ++cnt;
             printf("%.6lf\n", check(cnt));
         }
     }
@@ -171,3 +174,4 @@ int main() {
     return 0;
 }
 ```
+

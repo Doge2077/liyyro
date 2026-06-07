@@ -3,8 +3,8 @@ import { generateNav, generateSidebar } from './auto-nav'
 
 export const zh = defineConfig({
   lang: 'zh-Hans',
-  title: 'lys2021',
-  description: '个人博客',
+  title: 'AI Life History',
+  description: 'Personal Blog',
   themeConfig: {
     nav: generateNav(),
     sidebar: generateSidebar(),

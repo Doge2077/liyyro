@@ -1,9 +1,12 @@
----
+﻿---
 title: "2. Tmux 操作"
 date: 2022-07-06
 categories: [Linux]
 description: ""
 ---
+
+# 2-tmux-操作
+
 
 ### 2.1 Tmux 简介
 

@@ -1,9 +1,12 @@
----
+﻿---
 title: "AtCoder Beginner Contest 260 (A·B·C)"
 date: 2022-07-26
-categories: [ALGORITHM, Q&amp;A, AtCoder, DP]
+categories: [ALGORITHM, Q&A, AtCoder, DP]
 description: ""
 ---
+
+# atcoder-beginner-contest-260-a·b·c
+
 
 ## A - A Unique Letter
 
@@ -25,7 +28,7 @@ description: ""
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1000;
@@ -35,16 +38,16 @@ int a[N];
 int main(){
     string s;
     cin >> s;
-    for(int i = 0; i &lt; s.size(); i++){
+    for(int i = 0; i < s.size(); i++){
         a[s[i]]++;
     }
-    for(int i = 'a'; i &lt;= 'z'; i++){
+    for(int i = 'a'; i <= 'z'; i++){
         if(a[i] == 1){
-            cout &lt;&lt; (char)i &lt;&lt; endl;
+            cout << (char)i << endl;
             return 0;
         }
     }
-    cout &lt;&lt; -1 &lt;&lt; endl;
+    cout << -1 << endl;
     return 0;
 }
 ```
@@ -73,7 +76,7 @@ int main(){
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1e6 + 3;
@@ -88,46 +91,46 @@ bool vis[N];
 // 对数学成绩排序
 bool cmp1(students &s1, students &s2){
     if(s1.m == s2.m){
-        return s1.p &lt; s2.p;
+        return s1.p < s2.p;
     } else {
-        return s1.m &gt; s2.m;
+        return s1.m > s2.m;
     }
 }
 
 // 对英语成绩排序
 bool cmp2(students &s1, students &s2){
     if(s1.e == s2.e){
-        return s1.p &lt; s2.p;
+        return s1.p < s2.p;
     } else {
-        return s1.e &gt; s2.e;
+        return s1.e > s2.e;
     }
 }
 
 //对总成绩排序
 bool cmp3(students &s1, students &s2) {
     if (s1.m + s1.e == s2.m + s2.e) {
-        return s1.p &lt; s2.p;
+        return s1.p < s2.p;
     } else {
-        return s1.m + s1.e &gt; s2.m + s2.e;
+        return s1.m + s1.e > s2.m + s2.e;
     }
 }
 
 int main() {
     cin >> n >> x >> y >> z;
 
-    for (int i = 0; i &lt; n; i++) {
-        cin &gt;> stu[i].m;
+    for (int i = 0; i < n; i++) {
+        cin >> stu[i].m;
         stu[i].p = i + 1;
     }
 
-    for (int i = 0; i &lt; n; i++) {
-        cin &gt;> stu[i].e;
+    for (int i = 0; i < n; i++) {
+        cin >> stu[i].e;
     }
 
     if (x) {
         int flag = 0;
         sort(stu, stu + n, cmp1);
-        for (int i = 0; flag &lt; x; i++) {
+        for (int i = 0; flag < x; i++) {
             if (!vis[stu[i].p]) {
                 vis[stu[i].p] = 1;
                 flag++;
@@ -138,7 +141,7 @@ int main() {
     if (y) {
         int flag = 0;
         sort(stu, stu + n, cmp2);
-        for (int i = 0; flag &lt; y; i++) {
+        for (int i = 0; flag < y; i++) {
             if (!vis[stu[i].p]) {
                 vis[stu[i].p] = 1;
                 flag++;
@@ -149,7 +152,7 @@ int main() {
     if (z) {
         int flag = 0;
         sort(stu, stu + n, cmp3);
-        for (int i = 0; flag &lt; z; i++) {
+        for (int i = 0; flag < z; i++) {
             if (!vis[stu[i].p]) {
                 vis[stu[i].p] = 1;
                 flag++;
@@ -157,9 +160,9 @@ int main() {
         }
     }
 
-    for (int i = 1; i &lt;= n; i++) {
+    for (int i = 1; i <= n; i++) {
         if (vis[i]) {
-            cout &lt;&lt; i &lt;&lt; endl;
+            cout << i << endl;
         }
     }
 
@@ -199,7 +202,7 @@ int main() {
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 typedef long long LL;
@@ -227,3 +230,4 @@ int main() {
     return 0;
 }
 ```
+

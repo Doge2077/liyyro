@@ -1,9 +1,12 @@
----
+﻿---
 title: "BERT模型训练实践"
 date: 2025-04-21
 categories: [AI, AI]
 description: ""
 ---
+
+# bert模型训练实践
+
 
 **平台**：Windows 11 + NVIDIA RTX 4060 + CUDA 12.6 + Miniconda + PyTorch + Hugging Face Transformers
 

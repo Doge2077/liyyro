@@ -1,9 +1,12 @@
----
+﻿---
 title: "Java-Agent 实现字节码热替换"
 date: 2024-07-23
 categories: [Java, Tips]
 description: ""
 ---
+
+# java-agent-实现字节码热替换
+
 
 ## 问题背景
 
@@ -38,7 +41,7 @@ public class TestAgentAop {
         System.out.println("Method Name: " + joinPoint.getSignature().getName());
         // 输出该方法下的所有入参
         Object[] args = joinPoint.getArgs();
-        for (int i = 0; i &lt; args.length; i++) {
+        for (int i = 0; i < args.length; i++) {
             System.out.println("Argument: " + args[i]);
         }
     }
@@ -59,13 +62,13 @@ public class TestAgentAop {
 创建 Maven 工程，引入 Javassist 依赖：
 
 ```xml
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.javassist&lt;/groupId&gt;
-        &lt;artifactId&gt;javassist&lt;/artifactId&gt;
-        &lt;version&gt;3.20.0-GA&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
+<dependencies>
+    <dependency>
+        <groupId>org.javassist</groupId>
+        <artifactId>javassist</artifactId>
+        <version>3.20.0-GA</version>
+    </dependency>
+</dependencies>
 ```
 
 这里使用 Javassist 操作字节码是因为这种方式比 ASM 直接操作更为容易上手。
@@ -100,7 +103,7 @@ public class MyAgent {
         try {
             inst.addTransformer(new ClassFileTransformer() {
                 @Override
-                public byte[] transform(ClassLoader loader, String className, Class&lt;?&gt; classBeingRedefined,
+                public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
                                         ProtectionDomain protectionDomain, byte[] classfileBuffer) {
                     if (className.equals(replaceName)) {
                         try {
@@ -111,7 +114,7 @@ public class MyAgent {
                                     + "org.aspectj.lang.JoinPoint jp = $1;"
                                     + "System.out.println(\"Method Name: \" + jp.getSignature().getName()); "
                                     + "java.lang.Object[] args = jp.getArgs(); "
-                                    + "for (int i = 0; i &lt; args.length; i++) { System.out.println(\"Argument: \" + args[i]); }"
+                                    + "for (int i = 0; i < args.length; i++) { System.out.println(\"Argument: \" + args[i]); }"
                                     + "}");
                             return cc.toBytecode();
                         } catch (Exception e) {
@@ -121,7 +124,7 @@ public class MyAgent {
                     return null;
                 }
             }, true);
-            Class&lt;?&gt; targetClass = Class.forName(classPath);
+            Class<?> targetClass = Class.forName(classPath);
             inst.retransformClasses(targetClass);
             System.out.println("Agent load successfully!");
         } catch (Exception e) {
@@ -166,20 +169,20 @@ public class AttachAgent {
 首先将编写好的探针类与其 MANIFEST.MF 配置一起打包，因此需要在 Maven 中引入：
 
 ```xml
-&lt;build&gt;
-    &lt;plugins&gt;
-        &lt;plugin&gt;
-            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-            &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
-            &lt;version&gt;3.1.0&lt;/version&gt;
-            &lt;configuration&gt;
-                &lt;archive&gt;
-                    &lt;manifestFile&gt;src/main/resources/META-INF/MANIFEST.MF&lt;/manifestFile&gt;
-                &lt;/archive&gt;
-            &lt;/configuration&gt;
-        &lt;/plugin&gt;
-    &lt;/plugins&gt;
-&lt;/build&gt;
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.1.0</version>
+            <configuration>
+                <archive>
+                    <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+                </archive>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 ```
 
 然后填写 AttachAgent 中的配置信息：
@@ -194,3 +197,4 @@ public class AttachAgent {
 * 替换的 JavaAgent 需要和目标项目使用的 JDK 保持一致
 * Javassist 需要引用的类型需要附加其所在的包，例如，使用 `Object` 应指定 `java.lang.Object`
 * 不能使用增强 for 循环、lambda、方法引用等高级语法，如果需要应考虑 ASM 实现
+

@@ -1,9 +1,12 @@
----
+﻿---
 title: "Python 第一次作业及解答"
 date: 2023-01-29
 categories: [python, Python]
 description: ""
 ---
+
+# python-prictice1
+
 
 ## 第一次练习
 

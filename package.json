@@ -5,7 +5,7 @@
   "scripts": {
     "docs:dev": "vitepress dev --port 8081",
     "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "docs:preview": "vitepress preview --port 8080"
   },
   "dependencies": {
     "@nolebase/vitepress-plugin-enhanced-readabilities": "^2.4.0",

@@ -1,9 +1,12 @@
----
+﻿---
 title: "Summer in Bulgaria"
 date: 2022-06-19
 categories: [Photos, Trip]
 description: ""
 ---
+
+# summer-in-bulgaria-continually-updating
+
 
 ## 1. About this journal
 

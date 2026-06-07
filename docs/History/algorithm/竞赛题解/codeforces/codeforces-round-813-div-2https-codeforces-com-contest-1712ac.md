@@ -1,9 +1,12 @@
----
+﻿---
 title: "Codeforces Round #813 (Div. 2)(A~C)"
 date: 2022-08-14
-categories: [ALGORITHM, Q&amp;A, 模拟, 数学, Codeforces]
+categories: [ALGORITHM, Q&A, 模拟, 数学, Codeforces]
 description: ""
 ---
+
+# codeforces-round-813-div-2https-codeforces-com-contest-1712ac
+
 
 ## A. Wonderful Permutation
 
@@ -28,7 +31,7 @@ description: ""
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 #define re register
@@ -40,16 +43,16 @@ int a[N];
 void solve(){
     int n, k;
     cin >> n >> k;
-    for(re int i = 1; i &lt;= n; i ++) cin &gt;> a[i];
+    for(re int i = 1; i <= n; i ++) cin >> a[i];
     int cnt = 0;
-    for(re int i = 1; i &lt;= k; i ++) if(a[i] &gt; k) cnt ++;
-    cout &lt;&lt; cnt &lt;&lt; endl;
+    for(re int i = 1; i <= k; i ++) if(a[i] > k) cnt ++;
+    cout << cnt << endl;
 }
 
 int main(){
     //  solve();
     int _;
-    cin &gt;> _;
+    cin >> _;
     while(_ --){
         solve();
     }
@@ -87,7 +90,7 @@ int main(){
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 #define re register
@@ -97,22 +100,22 @@ void solve(){
     cin >> n;
 
     if (n % 2 == 0) {
-        for (register int i = 2; i &lt;= n; i += 2)
-            cout &lt;&lt; i &lt;&lt; " " &lt;&lt; i - 1 &lt;&lt; " ";
+        for (register int i = 2; i <= n; i += 2)
+            cout << i << " " << i - 1 << " ";
     } else {
-        cout &lt;&lt; 1 &lt;&lt; " ";
-        for (register int i = 3; i &lt;= n; i += 2)
-            cout &lt;&lt; i &lt;&lt; " " &lt;&lt; i - 1 &lt;&lt; " ";
+        cout << 1 << " ";
+        for (register int i = 3; i <= n; i += 2)
+            cout << i << " " << i - 1 << " ";
     }
 
-    cout &lt;&lt; endl;
+    cout << endl;
 }
 
 int main() {
 //  solve();
 
     int _;
-    cin &gt;> _;
+    cin >> _;
 
     while (_--) {
         solve();
@@ -150,7 +153,7 @@ int main() {
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 #define re register
@@ -158,17 +161,17 @@ using namespace std;
 const int N = 1e6 + 3;
 
 int a[N];
-set&lt;int&gt; b;
+set<int> b;
 
 void solve() {
     int n;
     cin >> n;
 
-    for (re int i = 1; i &lt;= n; i++)
-        cin &gt;> a[i];
+    for (re int i = 1; i <= n; i++)
+        cin >> a[i];
 
-    for (re int i = 2; i &lt;= n; i++) {
-        if (b.count(a[i]) &gt; 0)
+    for (re int i = 2; i <= n; i++) {
+        if (b.count(a[i]) > 0)
             a[i] = 0;
 
         if (a[i - 1] > a[i]) {
@@ -181,7 +184,7 @@ void solve() {
         }
     }
 
-    cout &lt;&lt; b.size() &lt;&lt; endl;
+    cout << b.size() << endl;
     b.clear();
 }
 
@@ -189,7 +192,7 @@ int main() {
     // solve();
 
     int _;
-    cin &gt;> _;
+    cin >> _;
 
     while (_--) {
         solve();
@@ -207,3 +210,4 @@ int main() {
 * $B$ 真的是 $\color{red}{\text{WA}}$ 到飞起，怎么会有我这种推出来 $\gcd(i, a_i + 1) = 1$ 的规律还解不出来的人，建议自己 `remake`  
 * $C$ 一开始思路很乱，后来发现模拟就好了，写完直接交一发就过，没什么算法难度  
 * 手速场狂 $\color{red}{\text{WA}}$ 两道 $A, B$ `nt` 题的我真是没救了，前几场着实给我打破防了，这回还好最后没放弃，继续努力吧
+

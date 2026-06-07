@@ -102,3 +102,81 @@ mjx-container {
 mjx-container svg {
   overflow: visible;
 }
+
+/* 一级标题样式 */
+.vp-doc h1 {
+  display: block !important;
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  line-height: 40px !important;
+  letter-spacing: -0.02em;
+  margin: 0;
+  padding: 0;
+  color: var(--vp-c-text-1);
+}
+
+@media (min-width: 768px) {
+  .vp-doc h1 {
+    font-size: 32px !important;
+  }
+}
+
+/* 优化主页面样式 */
+.VPHome {
+  padding-bottom: 48px;
+}
+
+.VPFeatures {
+  padding: 0 24px;
+}
+
+.VPFeature {
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.VPFeature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.VPHero .name {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.VPHero .text {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+}
+
+.VPHero .tagline {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--vp-c-text-3);
+}
+
+/* 优化按钮样式 */
+.VPButton.brand {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.VPButton.brand:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.VPButton.alt {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.VPButton.alt:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}

@@ -1,9 +1,12 @@
----
+﻿---
 title: "CodeTON Round 2 (Div. 1 + Div. 2, Rated, Prizes!)(A~D)"
 date: 2022-08-01
-categories: [ALGORITHM, Q&amp;A, 模拟, 数学, Codeforces, 贪心]
+categories: [ALGORITHM, Q&A, 模拟, 数学, Codeforces, 贪心]
 description: ""
 ---
+
+# codeton-round-2-div-1-div-2-rated-prizesad
+
 
 ## A. Two 0-1 Sequences
 
@@ -51,7 +54,7 @@ b =     "1101"
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 void solve(){
@@ -69,15 +72,15 @@ void solve(){
     if(s1 == s2){
         int flag = 0;
         if(a.rfind(b[0], k) != -1) flag = 1;
-        if(flag) cout &lt;&lt; "YES" &lt;&lt; endl;
-        else cout &lt;&lt; "NO" &lt;&lt; endl;
+        if(flag) cout << "YES" << endl;
+        else cout << "NO" << endl;
     }
-    else cout &lt;&lt; "NO" &lt;&lt; endl;
+    else cout << "NO" << endl;
 }
 
 int main(){
     int _;
-    cin &gt;> _;
+    cin >> _;
     while(_ --){
         solve();
     }
@@ -112,7 +115,7 @@ int main(){
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long LL;
 
@@ -123,11 +126,11 @@ void solve() {
     LL t;
     cin >> t;
     LL l = t - x, r = t + x; // 初始区间
-    for(int i = 1; i &lt; n; i++) {
+    for(int i = 1; i < n; i++) {
         LL y;
-        cin &gt;> y;
+        cin >> y;
         LL p1 = y - x, p2 = y + x;
-        if(max(p1, l) &lt;= min(p2, r)) { // 是否存在公共区间
+        if(max(p1, l) <= min(p2, r)) { // 是否存在公共区间
             l = max(p1, l);  // 更新公共区间左边界
             r = min(p2, r);  // 更新公共区间右边界
         }
@@ -137,12 +140,12 @@ void solve() {
             r = p2;
         }
     }
-    cout &lt;&lt; cnt &lt;&lt; endl;
+    cout << cnt << endl;
 }
 
 int main() {
     int _;
-    cin &gt;> _;
+    cin >> _;
     while(_--) {
         solve();
     }
@@ -185,32 +188,32 @@ int main() {
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 void solve() {
     int n, m;
     cin >> n >> m;
 
-    vector&lt;int&gt; vis; // vis 存储最先被感染的房屋编号
-    for (int i = 0; i &lt; m; i++) {
+    vector<int> vis; // vis 存储最先被感染的房屋编号
+    for (int i = 0; i < m; i++) {
         int x;
-        cin &gt;> x;
+        cin >> x;
         vis.push_back(x);
     }
 
     sort(vis.begin(), vis.end()); // 将编号从小到大排序
 
-    priority_queue&lt;int&gt; st; // 优先队列维护当前最大长度的区间
+    priority_queue<int> st; // 优先队列维护当前最大长度的区间
     st.push(n - vis.back() + vis[0] - 1); // 将首尾相连的区间长度加入
 
-    for (int i = 0; i + 1 &lt; vis.size(); i++) {
+    for (int i = 0; i + 1 < vis.size(); i++) {
         st.push(vis[i + 1] - vis[i] - 1); // 将未感染的区间的长度加入
     }
 
     int cnt = 0; // 存储保护到的区间长度
     for (int i = 0; ; i++) { // i 代表天数
-        if (!st.empty() && st.top() - i * 4 &gt; 0) { // 经过一天，下一个区间长度 -4
+        if (!st.empty() && st.top() - i * 4 > 0) { // 经过一天，下一个区间长度 -4
             int k = st.top() - i * 4; // 设 k 为当前区间经过 i 天后未感染的区间长度
             if (k > 1) k--; // 对于一个端点的保护，会使另一个端点被感染 (长度-1)，若区间长度仅为 1，则只能保护 1 长度
             cnt += k; // 累计保护到的区间长度
@@ -218,12 +221,12 @@ void solve() {
         } else break;
     }
 
-    cout &lt;&lt; n - cnt &lt;&lt; endl; // 区间总长 - 保护的区间长度 = 被感染的区间长度 = 被感染的房屋数量
+    cout << n - cnt << endl; // 区间总长 - 保护的区间长度 = 被感染的区间长度 = 被感染的房屋数量
 }
 
 int main() {
     int _;
-    cin &gt;> _;
+    cin >> _;
     while (_--) {
         solve();
     }
@@ -285,7 +288,7 @@ int main() {
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 typedef long long LL;
@@ -298,11 +301,11 @@ void solve() {
     LL cnt1 = 0, cnt2 = 0;  // cnt记录S的数量
     LL p1, p2;  // 存储第一次出现S的编号
 
-    for (LL i = 1; i &lt;= n; i++) {
+    for (LL i = 1; i <= n; i++) {
         LL sum = 0;
-        for (LL j = 1; j &lt;= m; j++) {
+        for (LL j = 1; j <= m; j++) {
             LL x;
-            cin &gt;> x;
+            cin >> x;
             sum += x * j;
         }
 
@@ -319,15 +322,15 @@ void solve() {
     }
 
     if (cnt1 > cnt2) {
-        cout &lt;&lt; p2 &lt;&lt; " " &lt;&lt; S2 - S1 &lt;&lt; endl;
+        cout << p2 << " " << S2 - S1 << endl;
     } else {
-        cout &lt;&lt; p1 &lt;&lt; " " &lt;&lt; S1 - S2 &lt;&lt; endl;
+        cout << p1 << " " << S1 - S2 << endl;
     }
 }
 
 int main() {
     LL _;
-    cin &gt;> _;
+    cin >> _;
     while (_--) {
         solve();
     }
@@ -347,3 +350,4 @@ int main() {
 * **D题**没时间了，太抽象了看不懂，补题看题解发现证明的想法实在是妙极了，根本想不到。
 * 最后还是没能上绿，~~我是废物~~  
   ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/08/屏幕截图-2022-08-01-120032.png)
+

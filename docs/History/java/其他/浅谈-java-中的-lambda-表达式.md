@@ -1,9 +1,12 @@
----
+﻿---
 title: "浅谈 Java 中的 Lambda 表达式"
 date: 2023-08-27
 categories: [Java, lambda]
 description: ""
 ---
+
+# 浅谈-java-中的-lambda-表达式
+
 
 `Lambda` 表达式是一种匿名函数，它可以作为参数传递给方法或存储在变量中。在 `Java 8` 中，它和函数式接口一起，共同构建了函数式编程的框架。
 
@@ -19,7 +22,7 @@ description: ""
 ```java
 public class Main {
     public static void main(String[] args) {
-        List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
         for (Integer item : list) {
             System.out.println(item);
         }
@@ -31,7 +34,7 @@ public class Main {
 ```java
 public class Main {
     public static void main(String[] args) {
-        List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
         list.forEach(System.out::println);
     }
 }
@@ -54,7 +57,7 @@ public class Main {
 其中，对于实现类来说，由于接口只需要实现某种功能，我们完全可以使用匿名内部类来实现。例如，我们把输出 `List` 的全部元素抽象为一个接口 `Show`，其中提供了一个函数方法 `showAllItems`。
 ```java
 public interface Show {
-    void showAllItems(List&lt;Integer&gt; list);
+    void showAllItems(List<Integer> list);
 }
 ```
 
@@ -63,10 +66,10 @@ public interface Show {
 ```java
 public class Main {
     public static void main(String[] args) {
-        List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
         Show show = new Show() {
             @Override
-            public void ShowAllItems(List&lt;Integer&gt; arrayList) {
+            public void ShowAllItems(List<Integer> arrayList) {
                 for (Integer item : arrayList) System.out.println(item);
             }
         };
@@ -84,7 +87,7 @@ public class Main {
 ```java
 public class Main {
     public static void main(String[] args) {
-        List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
         Show show = param -> {
             for (Integer item : param) System.out.println(item);
         };
@@ -275,7 +278,7 @@ public interface Runnable {
 public class Main {
     public static void main(String[] args) {
         Integer[] array = new Integer[]{4, 5, 9, 3, 2, 8, 1, 0, 6};
-        Arrays.sort(array, new Comparator&lt;Integer&gt;() {
+        Arrays.sort(array, new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
                 return o1 - o2;
@@ -319,7 +322,7 @@ public class Main {
 我们使用上节数组排序的例子来举例，即使我们已经利用 `Lambda` 表达式进行了大幅度的简化，但这还不够。我们查看 `Integer` 类，其中有一个叫做 `compare` 的静态方法：
 ```java
 public static int compare(int x, int y) {
-    return (x &lt; y) ? -1 : ((x == y) ? 0 : 1);
+    return (x < y) ? -1 : ((x == y) ? 0 : 1);
 }
 ```
 
@@ -353,7 +356,7 @@ public int compareTo(Integer anotherInteger) {
 public class Main {
     public static void main(String[] args) {
         Integer[] array = new Integer[]{4, 5, 9, 3, 2, 8, 1, 0, 6};
-        Arrays.sort(array, new Comparator&lt;Integer&gt;() {
+        Arrays.sort(array, new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
                 return o1.compareTo(o2);
@@ -421,7 +424,7 @@ import java.util.function.Supplier;
 
 public class Main {
     public static void main(String[] args) {
-        Supplier&lt;String&gt; stringSupplier = String::new;
+        Supplier<String> stringSupplier = String::new;
         System.out.println(stringSupplier.get()); // 使用 get() 方法构造一个新的 String 对象
     }
 }
@@ -461,3 +464,4 @@ public class Main {
 *   [在Java代码中写Lambda表达式是种怎样的体验](https://www.zhihu.com/question/37872003/answer/1009015660)
 
 ---
+

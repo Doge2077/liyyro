@@ -1,9 +1,12 @@
----
+﻿---
 title: "河南工程学院2022级新生周赛（五）题解"
 date: 2022-10-23
-categories: [Q&amp;A, 二分, University Activities, 思维]
+categories: [Q&A, 二分, University Activities, 思维]
 description: ""
 ---
+
+# haueacm202205answer
+
 
 ## A. HF 的智能小车车
 
@@ -52,19 +55,19 @@ L
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -75,8 +78,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -84,16 +87,16 @@ const double eps = 1e-6, PI = acos(-1);
 
 void solve() {
     char op; cin >> op;
-    if(op == 'R') cout &lt;&lt; 'L' &lt;&lt; endl;
-    else if(op == 'L') cout &lt;&lt; 'R' &lt;&lt; endl;
-    else if(op == 'U') cout &lt;&lt; 'D' &lt;&lt; endl;
-    else cout &lt;&lt; 'U' &lt;&lt; endl;
+    if(op == 'R') cout << 'L' << endl;
+    else if(op == 'L') cout << 'R' << endl;
+    else if(op == 'U') cout << 'D' << endl;
+    else cout << 'U' << endl;
 }
 
 int main() {
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while (_--) {
         solve();
     }
@@ -165,19 +168,19 @@ $1\le k\le 100$，$1\le n_i,m_i,P_i\le 3$。
   * 枚举初始位置，模拟在该开局的条件下的得分。
 
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -188,8 +191,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -203,28 +206,28 @@ struct Operator {
 
 void solve() {
     int n; cin >> n;
-    for (int i = 1; i &lt;= n; i++) {
-        int a, b, c; cin &gt;> a >> b >> c;
+    for (int i = 1; i <= n; i++) {
+        int a, b, c; cin >> a >> b >> c;
         op[i] = {a, b, c};
     }
     int ans = 0;
-    for (int i = 1; i &lt;= 3; i++) {
+    for (int i = 1; i <= 3; i++) {
         pos[1] = pos[2] = pos[3] = 0;
         pos[i] = 1;
         int cnt = 0;
-        for (int j = 1; j &lt;= n; j++) {
+        for (int j = 1; j <= n; j++) {
             swap(pos[op[j].l], pos[op[j].r]);
             cnt += pos[op[j].p];
         }
         ans = max(ans, cnt);
     }
-    cout &lt;&lt; ans &lt;&lt; endl;
+    cout << ans << endl;
 }
 
 int main() {
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while (_--) {
         solve();
     }
@@ -242,19 +245,19 @@ int main() {
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -265,8 +268,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -276,19 +279,19 @@ int ans[N], pos[N];
 
 void solve() {
     int n; cin >> n;
-    for (int i = 1; i &lt;= 3; i++) pos[i] = i;
-    for (int i = 0; i &lt; n; i++) {
-        int a, b, c; cin &gt;> a >> b >> c;
+    for (int i = 1; i <= 3; i++) pos[i] = i;
+    for (int i = 0; i < n; i++) {
+        int a, b, c; cin >> a >> b >> c;
         swap(pos[a], pos[b]);
         ans[pos[c]]++;
     }
-    cout &lt;&lt; max(ans[1], max(ans[2], ans[3])) &lt;&lt; endl;
+    cout << max(ans[1], max(ans[2], ans[3])) << endl;
 }
 
 int main() {
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while (_--) {
         solve();
     }
@@ -347,19 +350,19 @@ BBBBB
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -370,8 +373,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -382,26 +385,26 @@ void solve() {
     char op;
     cin >> n >> op;
 
-    for (int i = 1; i &lt;= n; i++) {
-        for (int j = 1; j &lt;= n - i; j++) cout &lt;&lt; ' ';
-        if (i == 1) cout &lt;&lt; op &lt;&lt; endl;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n - i; j++) cout << ' ';
+        if (i == 1) cout << op << endl;
         else if (i == n) {
-            for (int j = 1; j &lt;= 2 * n - 1; j++) cout &lt;&lt; op;
-            cout &lt;&lt; endl;
+            for (int j = 1; j <= 2 * n - 1; j++) cout << op;
+            cout << endl;
         }
         else {
-            cout &lt;&lt; op;
-            for (int j = 1; j &lt;= 2 * i - 3; j++) cout &lt;&lt; ' ';
-            cout &lt;&lt; op &lt;&lt; endl;
+            cout << op;
+            for (int j = 1; j <= 2 * i - 3; j++) cout << ' ';
+            cout << op << endl;
         }
     }
-    cout &lt;&lt; endl;
+    cout << endl;
 }
 
 int main() {
     IOS;
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while (_--) {
         solve();
     }
@@ -460,19 +463,19 @@ $1 \le t, n, i \le 1 \times 10^3$。
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -483,8 +486,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -495,31 +498,31 @@ int a[N];
 void solve() {
     int n;
     cin >> n;
-    for (int i = 0; i &lt; n; i++) cin &gt;> a[i];
+    for (int i = 0; i < n; i++) cin >> a[i];
     sort(a, a + n);  //排序
 
     LL sum = 0;
-    for (int i = 0; i + 2 &lt; n; i++) {  //枚举第一个边
-        while (a[i] == 0 && i &lt; n) i++;  //从不是 0 的位置开始
-        for (int j = i + 1; j + 1 &lt; n; j++) {  //枚举第二个边
+    for (int i = 0; i + 2 < n; i++) {  //枚举第一个边
+        while (a[i] == 0 && i < n) i++;  //从不是 0 的位置开始
+        for (int j = i + 1; j + 1 < n; j++) {  //枚举第二个边
             int l = j + 1, r = n - 1;
             int p = a[i] + a[j];
-            while (l &lt; r) {  //二分，找到最大的 a[k] &lt; a[i] + a[j]
-                int mid = l + r + 1 &gt;> 1;
-                if (a[mid] &lt; p) l = mid;
+            while (l < r) {  //二分，找到最大的 a[k] < a[i] + a[j]
+                int mid = l + r + 1 >> 1;
+                if (a[mid] < p) l = mid;
                 else r = mid - 1;
             }
-            if (a[l] &lt; p) sum += l - j;  //特判一下是否满足
+            if (a[l] < p) sum += l - j;  //特判一下是否满足
             else sum += l - j - 1;
         }
     }
-    cout &lt;&lt; sum &lt;&lt; endl;
+    cout << sum << endl;
 }
 
 int main() {
     IOS;
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while (_--) solve();
     return 0;
 }
@@ -584,19 +587,19 @@ $1\le n\le 1\times 10^2$，$1\le a,b,c,d\le1\times10^{18}$。
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -607,8 +610,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -617,20 +620,20 @@ const double eps = 1e-6, PI = acos(-1);
 LL a[N];
 
 void solve() {
-    for (int i = 0; i &lt; 4; i++) cin &gt;> a[i];
+    for (int i = 0; i < 4; i++) cin >> a[i];
     sort(a, a + 4);
     if (a[0] + a[3] == a[1] + a[2]) {
-        if (a[0] == a[1] && a[1] == a[2] && a[2] == a[3]) cout &lt;&lt; 1 &lt;&lt; endl;
-        else if (a[0] == a[1] && a[1] != a[2]) cout &lt;&lt; 4 &lt;&lt; endl;
-        else cout &lt;&lt; 8 &lt;&lt; endl;
+        if (a[0] == a[1] && a[1] == a[2] && a[2] == a[3]) cout << 1 << endl;
+        else if (a[0] == a[1] && a[1] != a[2]) cout << 4 << endl;
+        else cout << 8 << endl;
     }
-    else cout &lt;&lt; 0 &lt;&lt; endl;
+    else cout << 0 << endl;
 }
 
 int main() {
     IOS;
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while (_--) {
         solve();
     }
@@ -682,19 +685,19 @@ abc123
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -705,8 +708,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -719,19 +722,19 @@ void solve() {
     bool first = true;
     for (char c : s) {
         int t = c - '0';
-        if (t >= n && t &lt;= m) {
-            if (!first) cout &lt;&lt; ' ';
-            cout &lt;&lt; c;
+        if (t >= n && t <= m) {
+            if (!first) cout << ' ';
+            cout << c;
             first = false;
         }
     }
-    cout &lt;&lt; endl;
+    cout << endl;
 }
 
 int main() {
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while (_--) {
         solve();
     }
@@ -800,19 +803,19 @@ $1\le N \le 1\times 10^6$，$1\le A_i\le 1\times 10^3$。
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -823,8 +826,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -832,21 +835,21 @@ const double eps = 1e-6, PI = acos(-1);
 
 void solve() {
     LL sum = 0;
-    map&lt;int,int&gt; vis;
+    map<int,int> vis;
     int n; cin >> n;
-    for(int i = 0; i &lt; n; i++) {
-        int x; cin &gt;> x;
+    for(int i = 0; i < n; i++) {
+        int x; cin >> x;
         x -= i;
         sum += vis[x];  //加上当前位置之前 x 出现过的次数
         vis[x]++;  //更新次数
     }
-    cout &lt;&lt; sum &lt;&lt; endl;
+    cout << sum << endl;
 }
 
 int main() {
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while(_--) {
         solve();
     }
@@ -918,19 +921,19 @@ $1\le N \le 1\times 10^6$，$1\le A_i\le 1\times10^3$。
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -941,8 +944,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -955,10 +958,10 @@ int gcd(int a, int b){  //求最大公约数
 void solve() {
     int res = -1;
     int n; cin >> n;
-    map&lt;int, int&gt; a;  // 存入出现过的状态
-    for (int i = 1; i &lt;= n; i++) {
+    map<int, int> a;  // 存入出现过的状态
+    for (int i = 1; i <= n; i++) {
         int x;
-        cin &gt;> x;
+        cin >> x;
         a[x] = i;  // 保留最大下标
     }
     for (auto &p : a) {
@@ -968,16 +971,17 @@ void solve() {
             }
         }
     }
-    cout &lt;&lt; res &lt;&lt; endl;
+    cout << res << endl;
 }
 
 int main() {
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while (_--) {
         solve();
     }
     return 0;
 }
 ```
+

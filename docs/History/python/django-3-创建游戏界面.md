@@ -1,9 +1,12 @@
----
+﻿---
 title: "3. 创建游戏界面"
 date: 2022-11-11
 categories: [Django, Django]
 description: ""
 ---
+
+# django-3-创建游戏界面
+
 
 ## 3.1 前期准备
 
@@ -15,32 +18,32 @@ description: ""
 
 进入 `/game/templates/multiends` 打开 `web.html`：
 ```javascript
-&lt;script src="{% static 'js/dist/game.js' %}"&gt;&lt;/script&gt;
+<script src="{% static 'js/dist/game.js' %}"></script>
 ```
 
 使用这种引用方式会将所有的 `js` 对象作为网页内部的全局变量引入，为防止后续引用的 `js` 文件发生命名冲突，我们改为模块化引用。
 
 首先将该文件修改为：
 ```html
-{% load static %}  &lt;!-- 查找并载入静态文件 static 的文件夹 --&gt;
+{% load static %}  <!-- 查找并载入静态文件 static 的文件夹 -->
 
-&lt;head&gt;
-    &lt;link rel="stylesheet" href="https://cdn.acwing.com/static/jquery-ui-dist/jquery-ui.min.css"&gt;
-    &lt;script src="https://cdn.acwing.com/static/jquery/js/jquery-3.3.1.min.js"&gt;&lt;/script&gt;
-    &lt;link rel="stylesheet" href="{% static 'css/game.css' %}"&gt;
-    &lt;!-- 删掉该行：&lt;script src="{% static 'js/dist/game.js' %}"&gt;&lt;/script&gt; -->
-&lt;/head&gt;
+<head>
+    <link rel="stylesheet" href="https://cdn.acwing.com/static/jquery-ui-dist/jquery-ui.min.css">
+    <script src="https://cdn.acwing.com/static/jquery/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/game.css' %}">
+    <!-- 删掉该行：<script src="{% static 'js/dist/game.js' %}"></script> -->
+</head>
 
-&lt;body style="margin: 0"&gt;
-    &lt;div id="ac_game_12345678"&gt;&lt;/div&gt;
-    &lt;!-- 修改此处为： --&gt;
-    &lt;script type="module"&gt;
+<body style="margin: 0">
+    <div id="ac_game_12345678"></div>
+    <!-- 修改此处为： -->
+    <script type="module">
         import {AcGame} from "{% static 'js/dist/game.js' %}";
         $(document).ready(function(){
             let ac_game = new AcGame("ac_game_12345678");
         });
-    &lt;/script&gt;
-&lt;/body&gt;
+    </script>
+</body>
 ```
 
 然后修改 `AcGame` 类对象的引入方式，进入 `/game/static/js/src`，打开 `zbase.js`：
@@ -82,7 +85,7 @@ export class AcGame {  // 此处添加 export
 class AcGamePlayground {
     constructor(root) {
         this.root = root;
-        this.$playground = $(`&lt;div&gt;lys is a dog&lt;/div&gt;`);
+        this.$playground = $(`<div>lys is a dog</div>`);
 
         // this.hide();  注释掉该行，不默认关闭
         this.root.$ac_game.append(this.$playground);
@@ -117,7 +120,7 @@ class AcGamePlayground {
 class AcGamePlayground {
     constructor(root) {
         this.root = root;
-        this.$playground = $(`&lt;div class="ac_game_playground"&gt;lys is a dog&lt;/div&gt;`);  // 创建新的html对象
+        this.$playground = $(`<div class="ac_game_playground">lys is a dog</div>`);  // 创建新的html对象
 
         // this.hide();  注释掉该行，不默认关闭
         this.root.$ac_game.append(this.$playground);
@@ -222,7 +225,7 @@ class AcGameObject {
     destroy() {  // 删除当前物体
         this.on_destroy();
 
-        for (let i = 0; i &lt; AC_GAME_OBJECTS.length; i++) {
+        for (let i = 0; i < AC_GAME_OBJECTS.length; i++) {
             if (AC_GAME_OBJECTS[i] === this) {  // 找到需要删除的对象
                 AC_GAME_OBJECTS.splice(i, 1);
                 i--;
@@ -233,7 +236,7 @@ class AcGameObject {
 
 let last_timestamp;  // 上一帧的时间戳
 let AC_GAME_ANIMATION = function(timestamp) {  // timestamp是传入的当前时间
-    for (let i = 0; i &lt; AC_GAME_OBJECTS.length; i++) {  // 更新所有可以动的对象
+    for (let i = 0; i < AC_GAME_OBJECTS.length; i++) {  // 更新所有可以动的对象
         let obj = AC_GAME_OBJECTS[i];
         if (!obj.has_called_start) {
             obj.start();
@@ -262,7 +265,7 @@ class GameMap extends AcGameObject {
     constructor(playground) {  // 将playground的参数传进来
         super();
         this.playground = playground;  // 存储下来
-        this.$canvas = $(`&lt;canvas&gt;&lt;/canvas&gt;`);  // 通过API创建画布
+        this.$canvas = $(`<canvas></canvas>`);  // 通过API创建画布
         this.ctx = this.$canvas[0].getContext('2d');
         this.ctx.canvas.width = this.playground.width;  // 设置画布宽度
         this.ctx.canvas.height = this.playground.height;  // 设置画布高度
@@ -343,7 +346,7 @@ class Player extends AcGameObject {
     add_listening_events() {
         let outer = this;
 
-        if (this.life &lt;= 0) return false;  // 死亡不再接收指令
+        if (this.life <= 0) return false;  // 死亡不再接收指令
 
         this.playground.game_map.$canvas.on("contextmenu", function() {  // 截断鼠标右键显示菜单选项
             return false;
@@ -387,7 +390,7 @@ class Player extends AcGameObject {
         let vx = Math.cos(angle), vy = Math.sin(angle);  // 计算速度的方向
         let speed = this.speed * 2;  // 火球速度为自身移动速度的2倍
         let move_length = this.playground.height * 1;  // 火球移动的最大距离
-        if (this.life &gt; 0) new FireBall(this.playground, this, x, y, radius, vx, vy, this.color, speed, move_length, this.playground.height * 0.01);  // 当前对象存活才可发射火球
+        if (this.life > 0) new FireBall(this.playground, this, x, y, radius, vx, vy, this.color, speed, move_length, this.playground.height * 0.01);  // 当前对象存活才可发射火球
         // console.log("fireball", tx, ty);
         // if(this.is_me) console.log("life:", this.life);
     }
@@ -415,9 +418,9 @@ class Player extends AcGameObject {
 
     // 受到攻击后执行的逻辑
     is_attacked(angle, damage) {
-        if (this.life &lt;= 0) return false;  // 生命值归零的对象直接忽视
+        if (this.life <= 0) return false;  // 生命值归零的对象直接忽视
         // 释放粒子效果
-        for (let i = 0; i &lt; 10 + Math.random() * 5; i++) {
+        for (let i = 0; i < 10 + Math.random() * 5; i++) {
             let x = this.x, y = this.y;
             let radius = this.radius * Math.random() * 0.11;  // 粒子大小半径
             let angle = Math.PI * 2 * Math.random();  // 随机的角度
@@ -432,7 +435,7 @@ class Player extends AcGameObject {
         this.speed *= 0.88;  // 速度减慢
         this.life -= 1;  // 生命值降低
 
-        if (this.life &lt;= 0) {  // 生命值归零即为死亡
+        if (this.life <= 0) {  // 生命值归零即为死亡
             this.destroy();  // 销毁该对象
             return false;
         }
@@ -447,7 +450,7 @@ class Player extends AcGameObject {
     // 每一帧刷新
     update() {
         // 生命值归零直接销毁对象
-        if (this.life &lt;= 0) {
+        if (this.life <= 0) {
             this.destroy();
             return false;
         }
@@ -455,7 +458,7 @@ class Player extends AcGameObject {
         // 更新静默的时间
         this.spent_time += this.timedelta / 1000;
 
-        if (this.damage_speed &gt; this.eps) {  // 当前存在受击的方向和速度则先被击退
+        if (this.damage_speed > this.eps) {  // 当前存在受击的方向和速度则先被击退
             // 打断当前的移动
             this.vx = this.vy = 0;
             this.move_length = 0;
@@ -468,7 +471,7 @@ class Player extends AcGameObject {
     }
     else {
         if (!this.is_me) { // 人机模式下敌人的攻击规则
-            if (Math.random() &lt; 1 / 250.0 && this.spent_time &gt; 3) { // 攻击频率和静默时间
+            if (Math.random() < 1 / 250.0 && this.spent_time > 3) { // 攻击频率和静默时间
                 // 随机攻击当前场上存在的人
                 let player = this.playground.players[Math.floor(Math.random() * this.playground.players.length)];
 
@@ -481,7 +484,7 @@ class Player extends AcGameObject {
         }
 
         // 当前移动距离为0，即到达了上一次移动的终点位置
-        if (this.move_length &lt; this.eps) {
+        if (this.move_length < this.eps) {
             // 重置速度和移动距离
             this.vx = this.vy = 0;
             this.move_length = 0;
@@ -550,7 +553,7 @@ class FireBall extends AcGameObject {
 
     update() {
         // 到达最大距离消失
-        if (this.move_length &lt; this.eps) {
+        if (this.move_length < this.eps) {
             this.destroy();
             return false;
         }
@@ -562,9 +565,9 @@ class FireBall extends AcGameObject {
         this.move_length -= moved;
 
         // 判断火球是否击中某个球
-        for (let i = 0; i &lt; this.playground.players.length; i++) {
+        for (let i = 0; i < this.playground.players.length; i++) {
             let player = this.playground.players[i];
-            if (this.player !== player && this.is_collision(player) && this.player.life &gt; 0) {
+            if (this.player !== player && this.is_collision(player) && this.player.life > 0) {
                 this.attack(player);  // 调用击中函数
             }
         }
@@ -583,13 +586,13 @@ class FireBall extends AcGameObject {
     // 判断是否可以击中
     is_collision(player) {
         let distance = this.get_dist(this.x, this.y, player.x, player.y);
-        if (distance &lt; this.radius + player.radius) return true;
+        if (distance < this.radius + player.radius) return true;
         else return false;
     }
 
     // 击中之后的逻辑
     attack(player) {
-        if (player.life &gt; 0) this.destroy();  // 击中后销毁火球
+        if (player.life > 0) this.destroy();  // 击中后销毁火球
         let angle = Math.atan2(player.y - this.y, player.x - this.x);
         player.is_attacked(angle, this.damage);
         return false;
@@ -634,7 +637,7 @@ class Particle extends AcGameObject {
     }
 
     update() {
-        if (this.move_length &lt; this.eps || this.speed &lt; this.eps) {
+        if (this.move_length < this.eps || this.speed < this.eps) {
             this.destroy();
             return false;
         }
@@ -667,7 +670,7 @@ class Particle extends AcGameObject {
 class AcGamePlayground {
     constructor(root) {
         this.root = root;
-        this.$playground = $(`&lt;div class="ac_game_playground"&gt;lys is a dog&lt;/div&gt;`);
+        this.$playground = $(`<div class="ac_game_playground">lys is a dog</div>`);
         // this.hide();
         this.root.$ac_game.append(this.$playground);
         this.width = this.$playground.width();
@@ -708,3 +711,4 @@ class AcGamePlayground {
 ```
 
 最后进入 `game/scripts`，运行之前写好的打包文件脚本，启动服务查看效果即可。
+

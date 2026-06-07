@@ -1,9 +1,12 @@
----
+﻿---
 title: "跳跃游戏 II"
 date: 2023-04-29
-categories: [Q&amp;A, 贪心]
+categories: [Q&A, 贪心]
 description: ""
 ---
+
+# 跳跃游戏-ii
+
 
 [Original link](https://leetcode.cn/problems/jump-game-ii/)
 
@@ -21,12 +24,12 @@ description: ""
 class Solution {
     public int jump(int[] nums) {
         int ans = 0, n = nums.length;
-        if (n &lt;= 1) return 0;  // 当长度只有 1 时无需操作
-        for (int i = 0; i &lt; n; i++) {
+        if (n <= 1) return 0;  // 当长度只有 1 时无需操作
+        for (int i = 0; i < n; i++) {
             int res = 0, idx = 0;
-            if (i + nums[i] &gt;= n - 1) return ans + 1;  // 下一步的最远距离正好到达终点
-            for (int j = i + 1; j &lt;= i + nums[i]; j++) {  // 遍历找到能到达最远距离的方案
-                if (j + nums[j] &gt;= idx) {
+            if (i + nums[i] >= n - 1) return ans + 1;  // 下一步的最远距离正好到达终点
+            for (int j = i + 1; j <= i + nums[i]; j++) {  // 遍历找到能到达最远距离的方案
+                if (j + nums[j] >= idx) {
                     idx = j + nums[j];
                     res = j;
                 }
@@ -37,3 +40,4 @@ class Solution {
     }
 }
 ```
+
