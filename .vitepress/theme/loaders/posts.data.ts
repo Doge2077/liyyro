@@ -8,6 +8,7 @@ export interface Post {
   categories: string[]
   tags: string[]
   section: string
+  order: number
 }
 
 export default createContentLoader(['AI/**/*.md', 'Life/**/*.md', 'History/**/*.md'], {
@@ -26,9 +27,14 @@ export default createContentLoader(['AI/**/*.md', 'Life/**/*.md', 'History/**/*.
           description: item.frontmatter.description || '',
           categories: item.frontmatter.categories || [],
           tags: item.frontmatter.tags || [],
-          section
+          section,
+          order: item.frontmatter.order ?? 9999
         }
       })
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .sort((a, b) => {
+        if (a.order !== b.order) return a.order - b.order
+        // 如果 order 相同，按日期倒序
+        return new Date(b.date).getTime() - new Date(a.date).getTime()
+      })
   }
 })

@@ -1,9 +1,12 @@
----
+﻿---
 title: "深入理解 JVM 之——Java 内存区域与溢出异常"
 date: 2023-09-01
 categories: [Java, jvm]
 description: ""
 ---
+
+# 深入理解-jvm-之-java-内存区域与溢出异常
+
 
 本篇为深入理解 `Java` 虚拟机第二章内容，推荐在学习前先掌握基础的 `Linux` 操作、编译原理、计算机组成原理等计算机基础以及扎实的 `C/C++` 功底。
 
@@ -168,7 +171,7 @@ public class HeapOOM {
         Long num[] = new Long[10000000];
     }
     public static void main(String[] args) {
-        List&lt;OOMObject&gt; list = new ArrayList&lt;OOMObject&gt;();
+        List<OOMObject> list = new ArrayList<OOMObject>();
         while (true) {
             list.add(new OOMObject());
             System.out.println(list.size());
@@ -307,7 +310,7 @@ Exception in thread "main" java.lang.StackOverflowError
 ```java
 public class RuntimeConstantPoolOOM {
     public static void main(String[] args) {
-        Set&lt;String&gt; set = new HashSet&lt;String&gt;();
+        Set<String> set = new HashSet<String>();
         int i = 0;
         while (true) {
             set.add(String.valueOf(i++).intern());
@@ -374,3 +377,4 @@ Exception in thread "main" java.lang.OutOfMemoryError
 ```
 
 这是由于在上述代码的每次循环中，`unsafe.allocateMemory(_1MB)` 会调用 `Unsafe` 类的 `allocateMemory` 方法来分配 `1MB` 的直接内存空间，最终导致直接内存溢出。
+

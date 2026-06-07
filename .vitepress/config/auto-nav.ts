@@ -5,11 +5,61 @@ import type { DefaultTheme } from 'vitepress'
 
 const docsDir = path.resolve(__dirname, '../../docs')
 
+// 读取排序配置文件
+const orderConfigPath = path.resolve(__dirname, '../../order.json')
+let orderConfig: { sidebar?: Record<string, number>; directories?: Record<string, Record<string, number>> } = {}
+try {
+  if (fs.existsSync(orderConfigPath)) {
+    orderConfig = JSON.parse(fs.readFileSync(orderConfigPath, 'utf-8'))
+  }
+} catch (e) {
+  console.warn('Failed to load order.json:', e)
+}
+
 // 板块名称映射
 const SECTION_MAP: Record<string, string> = {
   AI: 'AI',
-  Life: '生活',
-  History: '历史'
+  Life: 'Life',
+  History: 'History'
+}
+
+// 目录Emoji映射
+const EMOJI_MAP: Record<string, string> = {
+  // History子目录
+  'Algorithm': '🧠',
+  'Cpp': '⚙️',
+  'Cs-Fundamentals': '📚',
+  'Database': '🗄️',
+  'Java': '☕',
+  'Linux': '🐧',
+  'Python': '🐍',
+  'Tips': '💡',
+  // Life子目录
+  'Articles': '📝',
+  'Campus': '🏫',
+  'Essays': '📖',
+  'Novels': '📚',
+  'Photos': '📷',
+  'Poems': '🎭',
+  // 算法子目录
+  '算法讲解': '📖',
+  '算法题解': '💻',
+  '竞赛题解': '🏆',
+  // 数据库子目录
+  'mysql': '🐬',
+  'neo4j': '🔗',
+  'redis': '🔴',
+  // Java子目录
+  '架构': '🏗️',
+  '其他': '📦',
+  'jdk源码': '☕',
+  'jvm': '☕',
+  'spring': '🌱',
+  // 计算机基础子目录
+  '编译原理': '🔧',
+  '计算机网络': '🌐',
+  '计算机组成': '💻',
+  '数据结构': '📊'
 }
 
 // 目录排序配置（数字越小越靠前）
@@ -125,10 +175,30 @@ function generateSidebarItems(dir: string, basePath: string): DefaultTheme.Sideb
     ...files.map(f => ({ type: 'file' as const, name: f.name, title: f.title, path: f.path, order: f.order }))
   ]
   
-  // 按数字前缀排序
+  // 获取当前目录的相对路径（用于查找 orderConfig.directories）
+  const relativePath = basePath.startsWith('/') ? basePath.slice(1) : basePath
+  
+  // 排序函数
   entries.sort((a, b) => {
-    const orderA = extractOrderFromName(a.name)
-    const orderB = extractOrderFromName(b.name)
+    let orderA: number
+    let orderB: number
+    
+    if (a.type === 'dir') {
+      // 目录：优先使用 orderConfig.directories 配置
+      const dirConfig = orderConfig.directories?.[relativePath]
+      orderA = dirConfig?.[a.name] ?? extractOrderFromName(a.name)
+    } else {
+      // 文件：优先使用 frontmatter 的 order 字段
+      orderA = (a.type === 'file' && a.order !== 999) ? a.order : 9999
+    }
+    
+    if (b.type === 'dir') {
+      const dirConfig = orderConfig.directories?.[relativePath]
+      orderB = dirConfig?.[b.name] ?? extractOrderFromName(b.name)
+    } else {
+      orderB = (b.type === 'file' && b.order !== 999) ? b.order : 9999
+    }
+    
     if (orderA !== orderB) return orderA - orderB
     return a.name.localeCompare(b.name)
   })
@@ -140,8 +210,10 @@ function generateSidebarItems(dir: string, basePath: string): DefaultTheme.Sideb
       const subItems = generateSidebarItems(subPath, `${basePath}/${entry.name}`)
       
       if (subItems.length > 0) {
+        const emoji = EMOJI_MAP[entry.name] || ''
+        const text = entry.name
         items.push({
-          text: entry.name,
+          text: emoji ? `${emoji} ${text}` : text,
           collapsed: true,
           items: subItems
         })
@@ -169,12 +241,21 @@ export function generateNav(): DefaultTheme.NavItem[] {
              d !== '.vitepress' &&
              !d.startsWith('.')
     })
-    .sort()
+    .sort((a, b) => {
+      const orderA = orderConfig.sidebar?.[a] ?? 9999
+      const orderB = orderConfig.sidebar?.[b] ?? 9999
+      if (orderA !== orderB) return orderA - orderB
+      return a.localeCompare(b)
+    })
   
-  return dirs.map(dir => ({
-    text: SECTION_MAP[dir] || dir,
-    link: `/${dir}/`
-  }))
+  return dirs.map(dir => {
+    const emoji = EMOJI_MAP[dir] || ''
+    const text = SECTION_MAP[dir] || dir
+    return {
+      text: emoji ? `${emoji} ${text}` : text,
+      link: `/${dir}/`
+    }
+  })
 }
 
 // 扫描目录 -> 生成 sidebar（支持多级）
@@ -190,7 +271,12 @@ export function generateSidebar(): DefaultTheme.Sidebar {
              d !== '.vitepress' &&
              !d.startsWith('.')
     })
-    .sort()
+    .sort((a, b) => {
+      const orderA = orderConfig.sidebar?.[a] ?? 9999
+      const orderB = orderConfig.sidebar?.[b] ?? 9999
+      if (orderA !== orderB) return orderA - orderB
+      return a.localeCompare(b)
+    })
 
   for (const firstDir of firstLevelDirs) {
     const firstPath = path.join(docsDir, firstDir)

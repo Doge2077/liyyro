@@ -1,9 +1,12 @@
----
+﻿---
 title: "JDK源码系列（一）"
 date: 2024-10-26
 categories: [Software Architect]
 description: ""
 ---
+
+# jdk源码系列（一）-object-类
+
 
 ## Object 类结构
 
@@ -59,7 +62,7 @@ public class Object {
     /**
      * 返回此Object的运行时类。
      */
-    public final native Class&lt;?&gt; getClass();
+    public final native Class<?> getClass();
 }
 ```
 
@@ -111,11 +114,11 @@ public class Object {
 
 ```java
 public final void wait(long timeout, int nanos) throws InterruptedException {
-        if (timeout &lt; 0) {
+        if (timeout < 0) {
             throw new IllegalArgumentException("timeout value is negative");
         }
 
-        if (nanos &lt; 0 || nanos &gt; 999999) {
+        if (nanos < 0 || nanos > 999999) {
             throw new IllegalArgumentException(
                     "nanosecond timeout value out of range");
         }
@@ -605,3 +608,4 @@ static {
 ```
 
 静态代码块是类在初始化过程中必定会执行的内容。因此，在类加载时会执行该方法，从而完成本地方法的注册。
+

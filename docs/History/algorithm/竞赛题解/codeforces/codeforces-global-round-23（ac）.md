@@ -1,9 +1,12 @@
----
+﻿---
 title: "Codeforces Global Round 23（A~C）"
 date: 2022-10-17
-categories: [ALGORITHM, Q&amp;A, Codeforces, 思维]
+categories: [ALGORITHM, Q&A, Codeforces, 思维]
 description: ""
 ---
+
+# codeforces-global-round-23（ac）
+
 
 ## A. Maxmina
 
@@ -30,19 +33,19 @@ description: ""
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -53,8 +56,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -63,18 +66,18 @@ const double eps = 1e-6, PI = acos(-1);
 void solve(){
     int n, k; cin >> n >> k;
     bool flag = 0;
-    for(int i = 0; i &lt; n; i ++){
-        int x; cin &gt;> x;
+    for(int i = 0; i < n; i ++){
+        int x; cin >> x;
         if(x == 1) flag = 1;
     }
-    if(flag) cout &lt;&lt; "YES" &lt;&lt; endl;
-    else cout &lt;&lt; "NO" &lt;&lt; endl;
+    if(flag) cout << "YES" << endl;
+    else cout << "NO" << endl;
 }
 
 int main(){
     IOS;
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while(_ --){
         solve();
     }
@@ -114,19 +117,19 @@ int main(){
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -137,8 +140,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -148,22 +151,22 @@ int a[N], b[N];
 
 void solve(){
     int n; cin >> n;
-    for(int i = 0; i &lt; n; i ++){
-        cin &gt;> a[i];
+    for(int i = 0; i < n; i ++){
+        cin >> a[i];
         b[i] = a[i];
     }
     sort(b, b + n);
     int cnt = 0;
-    for(int i = 0; i &lt; n; i ++){
+    for(int i = 0; i < n; i ++){
         if(a[i] != b[i]) cnt ++;
     }
-    cout &lt;&lt; cnt / 2 &lt;&lt; endl;
+    cout << cnt / 2 << endl;
 }
 
 int main(){
     IOS;
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while(_ --){
         solve();
     }
@@ -199,10 +202,10 @@ int main(){
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;algorithm&gt;
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <algorithm>
 
 using namespace std;
 
@@ -212,22 +215,22 @@ int main() {
 
     int n;
     cin >> n;
-    vector&lt;int&gt; a(n + 1);
-    for (int i = 1; i &lt;= n; ++i) {
-        cin &gt;> a[i];
+    vector<int> a(n + 1);
+    for (int i = 1; i <= n; ++i) {
+        cin >> a[i];
     }
 
     // 存储 (差值, 位置) 的小根堆
-    priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;>, greater&lt;pair&lt;int, int&gt;>> pq;
-    for (int i = 2; i &lt;= n; ++i) {
-        if (a[i] &lt; a[i - 1]) {
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    for (int i = 2; i <= n; ++i) {
+        if (a[i] < a[i - 1]) {
             int diff = a[i - 1] - a[i];
             pq.push({diff, i});
         }
     }
 
-    for (int i = 1; i &lt;= n; ++i) {
-        if (pq.empty() || pq.top().first &gt; i) {
+    for (int i = 1; i <= n; ++i) {
+        if (pq.empty() || pq.top().first > i) {
             cout << 1 << " ";
         } else {
             cout << pq.top().second << " ";
@@ -239,3 +242,4 @@ int main() {
     return 0;
 }
 ```
+

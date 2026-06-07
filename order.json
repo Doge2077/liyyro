@@ -1,0 +1,14 @@
+{
+  "sidebar": {
+    "AI": 1,
+    "History": 2,
+    "Life": 3
+  },
+  "directories": {
+    "History/algorithm": {
+      "算法讲解": 1,
+      "算法题解": 2,
+      "竞赛题解": 3
+    }
+  }
+}

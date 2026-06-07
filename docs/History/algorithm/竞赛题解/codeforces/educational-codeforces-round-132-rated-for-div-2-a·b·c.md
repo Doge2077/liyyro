@@ -1,9 +1,12 @@
----
+﻿---
 title: "Educational Codeforces Round 132 (Rated for Div. 2) A·B·C"
 date: 2022-07-22
-categories: [ALGORITHM, Q&amp;A, 模拟, Codeforces, 贪心, 前缀和]
+categories: [ALGORITHM, Q&A, 模拟, Codeforces, 贪心, 前缀和]
 description: ""
 ---
+
+# educational-codeforces-round-132-rated-for-div-2-a·b·c
+
 
 ---
 
@@ -26,7 +29,7 @@ description: ""
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 10;
@@ -36,15 +39,15 @@ void solve(){
     int n;
     cin >> n;
     int flag = 1; // 记录打开的门的数量
-    for(int i = 1; i &lt;= 3; i++) cin &gt;> a[i];
+    for(int i = 1; i <= 3; i++) cin >> a[i];
     for(int i = n; a[i] != 0; i = a[i]) flag++;
-    if(flag == 3) cout &lt;&lt; "YES" &lt;&lt; "\n";
-    else cout &lt;&lt; "NO" &lt;&lt; "\n";
+    if(flag == 3) cout << "YES" << "\n";
+    else cout << "NO" << "\n";
 }
 
 int main(){
     int _;
-    cin &gt;> _;
+    cin >> _;
     while(_--){
         solve();
     }
@@ -75,7 +78,7 @@ int main(){
 
 ### 代码
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 #define int long long
@@ -88,11 +91,11 @@ int b[N], c[N]; // b存前缀伤害，c存后缀伤害
 void solve(){
     int n, m;
     cin >> n >> m;
-    for(int i = 1; i &lt;= n; i++){
-        cin &gt;> a[i];
-        if(a[i] &lt; a[i-1]){
+    for(int i = 1; i <= n; i++){
+        cin >> a[i];
+        if(a[i] < a[i-1]){
             b[i] = a[i-1] - a[i]; // 向下跳伤害
-        } else if(a[i] &gt; a[i-1]){
+        } else if(a[i] > a[i-1]){
             c[i] = a[i] - a[i-1]; // 向上跳伤害
         }
         b[i] += b[i-1]; // 构造前缀和数组
@@ -101,10 +104,10 @@ void solve(){
     while(m--){
         int l, r;
         cin >> l >> r;
-        if(l &lt; r){
-            cout &lt;&lt; b[r] - b[l] &lt;&lt; "\n"; // 正序前缀和差
+        if(l < r){
+            cout << b[r] - b[l] << "\n"; // 正序前缀和差
         } else {
-            cout &lt;&lt; c[l] - c[r] &lt;&lt; "\n"; // 逆序后缀和差
+            cout << c[l] - c[r] << "\n"; // 逆序后缀和差
         }
     }
 }
@@ -138,7 +141,7 @@ signed main(){
 ```
   * 在遍历过程中，`dep`的状态会影响序列的唯一性 
 ```cpp
-* 若`dep &lt; 0`，则在之前遍历的序列中，必然存在至少一个`?`即`vis &gt; 0`，使得括号序列合法，且`?`的状态将唯一确定，此时`dep++, vis--`
+* 若`dep < 0`，则在之前遍历的序列中，必然存在至少一个`?`即`vis > 0`，使得括号序列合法，且`?`的状态将唯一确定，此时`dep++, vis--`
 * 若`dep == 0 && vis == 1`，则在之前遍历的序列中，`?`的状态也将唯一确定，此时`dep++, vis--`
 ```
   * 遍历结束后，由于遍历时`dep`和`vis`唯一确定的状态已经消去，故现在只剩下了还未确定唯一性状态的`dep`和`vis`
@@ -149,20 +152,20 @@ signed main(){
 ### 代码
 ```cpp
 
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 void solve() {
     string s;
     cin >> s;
     int dep = 0, vis = 0;
-    for (int i = 0; i &lt; s.size(); i++) {
+    for (int i = 0; i < s.size(); i++) {
         if (s[i] == '(') dep++;
         else if (s[i] == ')') {
             dep--;
-            if (dep &lt; 0) {
-                if (vis &gt; 0) dep++, vis--;
-                else {  // vis &lt;= 0 说明无法匹配，序列非法
+            if (dep < 0) {
+                if (vis > 0) dep++, vis--;
+                else {  // vis <= 0 说明无法匹配，序列非法
                     dep = 1, vis = 0;
                     break;
                 }
@@ -172,13 +175,13 @@ void solve() {
 
         if (dep == 0 && vis == 1) dep++, vis--;
     }
-    if (abs(dep) == vis) cout &lt;&lt; "YES" &lt;&lt; '\n';
-    else cout &lt;&lt; "NO" &lt;&lt; '\n';
+    if (abs(dep) == vis) cout << "YES" << '\n';
+    else cout << "NO" << '\n';
 }
 
 int main() {
     int _;
-    cin &gt;> _;
+    cin >> _;
     while (_--) {
         solve();
     }
@@ -202,3 +205,4 @@ int main() {
 * $C$题遇到括号序列就不会，这次好好补补，贪心学不会的无力感QAQ
 * 最后发现$D$题过的居然比$C$题多？！$D$好像是`ST表`的模板题，还没学，等我学完之后回来复仇
 * 读英文题一定要理解清楚，读错题太伤了。
+

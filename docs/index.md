@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: "lys2021"
-  text: "个人博客"
-  tagline: AI · 生活 · 历史
+  name: "AI Life History"
+  text: "Personal Blog"
+  tagline: AI · Life · History
   actions:
     - theme: brand
       text: 开始阅读

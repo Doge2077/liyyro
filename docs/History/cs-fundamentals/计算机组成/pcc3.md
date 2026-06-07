@@ -1,9 +1,12 @@
----
+﻿---
 title: "计算机组成原理：3. 系统总线"
 date: 2023-02-22
 categories: [Principles of Computer Composition]
 description: ""
 ---
+
+# pcc3
+
 
 在第一章中，我们分别了解了构成计算机的硬件，若要使得计算机正常工作，必须通过线路将各个器件进行连接，连接方式不同，对计算机工作的影响也不同。
 

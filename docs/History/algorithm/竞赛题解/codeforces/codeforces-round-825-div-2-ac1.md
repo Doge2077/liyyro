@@ -1,9 +1,12 @@
----
+﻿---
 title: "Codeforces Round #825 (Div. 2) (A~C1)"
 date: 2022-10-12
-categories: [ALGORITHM, Q&amp;A, 双指针, 数学, Codeforces, 构造]
+categories: [ALGORITHM, Q&A, 双指针, 数学, Codeforces, 构造]
 description: ""
 ---
+
+# codeforces-round-825-div-2-ac1
+
 
 ## A. Make A Equal to B
 
@@ -36,19 +39,19 @@ description: ""
 
 **代码** ：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -59,8 +62,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 10;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -72,29 +75,29 @@ void solve() {
     int n; cin >> n;
 
     int p = 0, t = 0;
-    for (int i = 0; i &lt; n; i++) {
-        cin &gt;> a[i];
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
         if (a[i] == 1) p++;
     }
 
-    for (int i = 0; i &lt; n; i++) {
-        cin &gt;> b[i];
+    for (int i = 0; i < n; i++) {
+        cin >> b[i];
         if (b[i] == 1) t++;
     }
 
     int cnt = 0;
-    for (int i = 0; i &lt; n; i++) {
+    for (int i = 0; i < n; i++) {
         if (a[i] != b[i]) cnt++;
     }
 
-    cout &lt;&lt; min(cnt, abs(t - p) + 1) &lt;&lt; endl;
+    cout << min(cnt, abs(t - p) + 1) << endl;
 }
 
 int main() {
     IOS;
 
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
 
     while (_--) {
         solve();
@@ -148,12 +151,12 @@ int a[N];
 
 void solve(){
     int n; cin >> n;
-    for(int i = 0; i &lt; n; i++) cin &gt;> a[i];
+    for(int i = 0; i < n; i++) cin >> a[i];
     
     bool flag = 1;
     if(n > 2){
         int b = a[0] * a[1] / gcd(a[0], a[1]);
-        for(int i = 1; i + 1 &lt; n; i++){
+        for(int i = 1; i + 1 < n; i++){
             int t = a[i] * a[i + 1] / gcd(a[i], a[i + 1]);
             if(gcd(b, t) != a[i]){
                 flag = 0;
@@ -163,14 +166,14 @@ void solve(){
         }
     }
     
-    if(flag) cout &lt;&lt; "YES" &lt;&lt; endl;
-    else cout &lt;&lt; "NO" &lt;&lt; endl;
+    if(flag) cout << "YES" << endl;
+    else cout << "NO" << endl;
 }
 
 int main(){
     IOS;
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while(_--){
         solve();
     }
@@ -206,19 +209,19 @@ int main(){
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -229,8 +232,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -241,25 +244,25 @@ int a[N];
 void solve() {
     int n;
     cin >> n;
-    for (int i = 1; i &lt;= n; i++)
-        cin &gt;> a[i];
+    for (int i = 1; i <= n; i++)
+        cin >> a[i];
 
     LL sum = 0;
-    for (int i = 1, j = 1; i &lt;= n; i++) {
-        while (j &lt;= n && a[j] &gt;= j - i + 1) {
+    for (int i = 1, j = 1; i <= n; i++) {
+        while (j <= n && a[j] >= j - i + 1) {
             sum += j - i + 1;
             j++;
         }
     }
 
-    cout &lt;&lt; sum &lt;&lt; endl;
+    cout << sum << endl;
 }
 
 int main() {
     IOS;
 
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
 
     while (_--) {
         solve();
@@ -268,3 +271,4 @@ int main() {
     return 0;
 }
 ```
+

@@ -1,11 +1,14 @@
----
+﻿---
 title: "深入理解 JVM 之——垃圾回收与内存分配策略"
 date: 2023-09-05
 categories: [Java, jvm]
 description: ""
 ---
 
-# 垃圾回收策略
+# 深入理解-jvm-之-垃圾回收与内存分配策略
+
+
+## 垃圾回收策略
 
 ---
 
@@ -13,15 +16,15 @@ description: ""
 
 ---
 
-## 回收三问
+### 回收三问
 
-### 哪些区域的内存需要回收？
+#### 哪些区域的内存需要回收？
 
 *   `Java` 内存运行时区域的各个部分，特别是程序计数器、虚拟机栈和本地方法栈这三个区域随线程而生、随线程而灭，而栈帧则在方法的进入和退出过程中执行出栈和入栈操作。这些区域的内存分配和回收是确定性的，因为在类结构确定时就已经知道了每个栈帧分配的内存大小。
     *   而对于 `Java` 堆和方法区则具有不确定性，因为接口的不同实现类和方法的不同条件分支可能需要不同的内存。只有在运行时才能确定程序会创建哪些对象以及创建多少个对象，因此这部分内存的分配和回收是动态的。**垃圾收集器的主要任务是管理这部分内存的分配和回收。**
     *   通过垃圾回收，可以避免内存泄漏且大幅优化内存使用以减轻开发人员的负担，避免了手动管理内存的复杂性和错误。
 
-### 什么时候回收？
+#### 什么时候回收？
 
 内存回收的时机是由垃圾回收器（Garbage Collector）来决定的，而垃圾回收器的具体策略和时机会根据不同的实现而有所差异。一般情况下，以下几种情况会触发内存回收：
 
@@ -30,7 +33,7 @@ description: ""
 3.  **程序显式调用**：在某些情况下，程序可以显式地调用垃圾回收器来进行内存回收。例如，在程序中使用 `System.gc()` 方法可以建议垃圾回收器执行回收操作，但并不能保证立即执行回收。
 4.  **程序空闲时**：当程序处于空闲状态时，即没有活动的线程在运行，垃圾回收器可以利用这段时间来回收内存。例如，在 `Java` 中，当所有线程都处于等待状态或者没有活动时，垃圾回收器可能会被触发。
 
-### 如何回收？
+#### 如何回收？
 
 垃圾回收（Garbage Collection）是 `JVM` 自动管理内存的过程，它负责释放不再使用的对象所占用的内存空间，以便其他对象可以使用。垃圾回收器通过以下步骤来执行垃圾回收：
 
@@ -41,9 +44,9 @@ description: ""
 
 ---
 
-## 确认存活
+### 确认存活
 
-### 引用计数法
+#### 引用计数法
 
 引用计数法是一种简单的垃圾回收算法：
 
@@ -57,7 +60,7 @@ description: ""
 
 ---
 
-### 可达性分析
+#### 可达性分析
 
 ---
 
@@ -75,7 +78,7 @@ description: ""
 
 ---
 
-### 引用详解（重点）
+#### 引用详解（重点）
 
 ---
 
@@ -97,21 +100,21 @@ public class TestReference {
         Object hardReference = new Object();
 
         // 创建一个软引用对象
-        SoftReference&lt;Object&gt; softReference = new SoftReference<>(new Object());
+        SoftReference<Object> softReference = new SoftReference<>(new Object());
 
         // 创建一个弱引用对象
-        WeakReference&lt;Object&gt; weakReference = new WeakReference<>(new Object());
+        WeakReference<Object> weakReference = new WeakReference<>(new Object());
 
         // 创建一个弱引用对象，并将其引用赋给一个强引用变量
-        WeakReference&lt;Object&gt; weakUseReference = new WeakReference<>(new Object());
+        WeakReference<Object> weakUseReference = new WeakReference<>(new Object());
         Object hardUseReference = weakUseReference.get();
 
-        // WeakReference&lt;Object&gt; weakUseReference = new WeakReference<>(hardReference);
+        // WeakReference<Object> weakUseReference = new WeakReference<>(hardReference);
         // Object hardUseReference = weakUseReference;
 
         // 创建一个虚引用对象，并指定引用队列
-        ReferenceQueue&lt;Object&gt; referenceQueue = new ReferenceQueue<>();
-        PhantomReference&lt;Object&gt; phantomReference = new PhantomReference<>(new Object(), referenceQueue);
+        ReferenceQueue<Object> referenceQueue = new ReferenceQueue<>();
+        PhantomReference<Object> phantomReference = new PhantomReference<>(new Object(), referenceQueue);
 
         // 执行垃圾回收
         System.gc();
@@ -139,7 +142,7 @@ public class TestReference {
 我在弱引用下添加了被注释的代码片段：
 
 ```java
-WeakReference&lt;Object&gt; weakUseReference = new WeakReference<>(hardReference);
+WeakReference<Object> weakUseReference = new WeakReference<>(hardReference);
 Object hardUseReference = weakUseReference;
 ```
 
@@ -148,7 +151,7 @@ Object hardUseReference = weakUseReference;
 不同于原来的：
 
 ```java
-WeakReference&lt;Object&gt; weakUseReference = new WeakReference<>(new Object());
+WeakReference<Object> weakUseReference = new WeakReference<>(new Object());
 Object hardUseReference = weakUseReference.get();
 ```
 
@@ -158,7 +161,7 @@ Object hardUseReference = weakUseReference.get();
 
 ---
 
-### 再抢救一下
+#### 再抢救一下
 
 ---
 
@@ -189,7 +192,7 @@ public class FinalizeEscapeGC {
         // 创建对象 link start!
         SAVE_HOOK = new FinalizeEscapeGC();
 
-        for (int i = 0; i &lt; 5; i++) {
+        for (int i = 0; i < 5; i++) {
             // 断开连接
             SAVE_HOOK = null;
             System.out.println("God ! Please! no ! Please do something! Save me!");
@@ -236,11 +239,11 @@ Wasted :(
 
 ---
 
-## 垃圾回收
+### 垃圾回收
 
 ---
 
-### 分代收集理论
+#### 分代收集理论
 
 ---
 
@@ -269,7 +272,7 @@ Wasted :(
 
 ---
 
-### 标记算法
+#### 标记算法
 
 ---
 
@@ -297,11 +300,11 @@ Wasted :(
 
 ---
 
-## 经典垃圾收集器
+### 经典垃圾收集器
 
 ---
 
-### Serial 收集器
+#### Serial 收集器
 
 ---
 
@@ -320,7 +323,7 @@ Wasted :(
 
 ---
 
-### ParNew 收集器
+#### ParNew 收集器
 
 ---
 
@@ -353,11 +356,11 @@ Wasted :(
 
 ---
 
-# 内存分配策略
+## 内存分配策略
 
 ---
 
-## 常见的内存分配策略
+### 常见的内存分配策略
 
 ---
 
@@ -373,7 +376,7 @@ Wasted :(
 
 ---
 
-## 其他内存分配策略
+### 其他内存分配策略
 
 ---
 
@@ -397,7 +400,7 @@ Wasted :(
 
 ---
 
-## 空间分配担保机制
+### 空间分配担保机制
 
 ---
 
@@ -410,3 +413,4 @@ Wasted :(
 当发生担保失败时，虚拟机需要重新发起一次 `Full GC`，停顿时间会很长。为了避免频繁进行 `Full GC`，通常会打开 `HandlePromotionFailure` 开关，以便进行有风险的 `Minor GC`，而不是立即进行 `Full GC`。
 
 ---
+

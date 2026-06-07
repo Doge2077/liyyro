@@ -1,9 +1,12 @@
----
+﻿---
 title: "Codeforces Round #828 (Div. 3) （A~D）"
 date: 2022-10-17
-categories: [ALGORITHM, Q&amp;A, 模拟, Codeforces, 贪心, 思维]
+categories: [ALGORITHM, Q&A, 模拟, Codeforces, 贪心, 思维]
 description: ""
 ---
+
+# codeforces-round-828-div-3-（ad）
+
 
 ## A. Number Replacement
 
@@ -29,8 +32,8 @@ description: ""
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
+#include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -44,7 +47,7 @@ int main(){
     while(t--){
         int n;
         cin >> n;
-        for(int i = 0; i &lt; n; i++) cin &gt;> a[i];
+        for(int i = 0; i < n; i++) cin >> a[i];
         string s;
         cin >> s;
         
@@ -52,7 +55,7 @@ int main(){
         bool ok = true;
         memset(rule, 0, sizeof(rule));
         
-        for(int i = 0; i &lt; n; i++){
+        for(int i = 0; i < n; i++){
             int val = a[i];
             if(rule[val] == 0){
                 // 首次出现，建立规则
@@ -66,8 +69,8 @@ int main(){
             }
         }
         
-        if(ok) cout &lt;&lt; "YES" &lt;&lt; endl;
-        else cout &lt;&lt; "NO" &lt;&lt; endl;
+        if(ok) cout << "YES" << endl;
+        else cout << "NO" << endl;
     }
     return 0;
 }
@@ -105,19 +108,19 @@ int main(){
 
 **代码** ：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -128,8 +131,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -140,8 +143,8 @@ void solve(){
     LL odd = 0, even = 0;
 
     int n, q; cin >> n >> q;
-    for(int i = 0; i &lt; n; i ++){
-        LL x; cin &gt;> x;
+    for(int i = 0; i < n; i ++){
+        LL x; cin >> x;
         if(x % 2 == 0) even ++;
         else odd ++;
         sum += x;
@@ -162,14 +165,14 @@ void solve(){
                 even += odd; odd = 0;
             }
         }
-        cout &lt;&lt; sum &lt;&lt; endl;
+        cout << sum << endl;
     }
 }
 
 int main(){
     IOS;
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while(_ --){
         solve();
     }
@@ -204,19 +207,19 @@ int main(){
 
 **代码** ：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -227,8 +230,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -244,24 +247,24 @@ void solve() {
     s = s + s;
     int pos = s.find(op);
     int res = -1;
-    for (int i = 0; i &lt; t + pos + 1; i++) {
+    for (int i = 0; i < t + pos + 1; i++) {
         int cnt = 0;
         if (s[i] == op[0]) {
-            while (s[i] != 'g' && i &lt; s.size()) {
+            while (s[i] != 'g' && i < s.size()) {
                 cnt++;
                 i++;
             }
             res = max(res, cnt);
         }
     }
-    cout &lt;&lt; res &lt;&lt; endl;
+    cout << res << endl;
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while (_--) {
         solve();
     }
@@ -297,19 +300,19 @@ int main() {
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -320,8 +323,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -338,35 +341,36 @@ int f(LL n) {
 
 void solve() {
     LL sum = 0;
-    priority_queue&lt;int&gt; st;
+    priority_queue<int> st;
     int n;
     cin >> n;
-    for (int i = 1; i &lt;= n; i++) {
+    for (int i = 1; i <= n; i++) {
         LL x;
-        cin &gt;> x;
+        cin >> x;
         sum += f(x);
         st.push(f(i));
     }
     int cnt = 0;
-    while (!st.empty() && sum &lt; n) {
+    while (!st.empty() && sum < n) {
         sum += st.top();
         st.pop();
         cnt++;
     }
-    if (sum &gt;= n) {
-        cout &lt;&lt; cnt &lt;&lt; endl;
+    if (sum >= n) {
+        cout << cnt << endl;
     } else {
-        cout &lt;&lt; -1 &lt;&lt; endl;
+        cout << -1 << endl;
     }
 }
 
 int main() {
     IOS;
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while (_--) {
         solve();
     }
     return 0;
 }
 ```
+

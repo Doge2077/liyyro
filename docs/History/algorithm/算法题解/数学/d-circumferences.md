@@ -1,9 +1,12 @@
----
+﻿---
 title: "D - Circumferences"
 date: 2022-07-14
-categories: [ALGORITHM, Q&amp;A, BFS]
+categories: [ALGORITHM, Q&A, BFS]
 description: ""
 ---
+
+# d-circumferences
+
 
 ### D - Circumferences
 
@@ -24,7 +27,7 @@ description: ""
 
 **代码**
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 typedef long long LL;
@@ -37,7 +40,7 @@ struct point {  // 存储圆的信息
     LL x, y, r;
 } mp[N];
 
-queue&lt;point&gt; st;  // 用于搜索的队列
+queue<point> st;  // 用于搜索的队列
 
 bool vis[N];  // 记录该圆是否被搜到过
 
@@ -104,3 +107,4 @@ int main() {
     return 0;
 }
 ```
+

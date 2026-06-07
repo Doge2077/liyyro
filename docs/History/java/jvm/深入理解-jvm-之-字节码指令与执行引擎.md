@@ -1,15 +1,18 @@
----
+﻿---
 title: "深入理解 JVM 之——字节码指令与执行引擎"
 date: 2023-09-06
 categories: [Java, jvm]
 description: ""
 ---
 
-# 类文件结构
+# 深入理解-jvm-之-字节码指令与执行引擎
+
+
+## 类文件结构
 
 ---
 
-## Write Once, Run Anywhere
+### Write Once, Run Anywhere
 
 ---
 
@@ -65,7 +68,7 @@ java Hello
 
 ---
 
-## 类文件结构概述
+### 类文件结构概述
 
 ---
 
@@ -89,11 +92,11 @@ java Hello
 
 ---
 
-# 字节码指令
+## 字节码指令
 
 ---
 
-## 生成反编译文件
+### 生成反编译文件
 
 ---
 
@@ -126,11 +129,11 @@ public class Hello
   super_class: #2                         // java/lang/Object
   interfaces: 0, fields: 0, methods: 2, attributes: 1
 Constant pool:
-   #1 = Methodref          #2.#3          // java/lang/Object."&lt;init&gt;":()V
+   #1 = Methodref          #2.#3          // java/lang/Object."<init>":()V
    #2 = Class              #4             // java/lang/Object
-   #3 = NameAndType        #5:#6          // "&lt;init&gt;":()V
+   #3 = NameAndType        #5:#6          // "<init>":()V
    #4 = Utf8               java/lang/Object
-   #5 = Utf8               &lt;init&gt;
+   #5 = Utf8               <init>
    #6 = Utf8               ()V
    #7 = Fieldref           #8.#9          // java/lang/System.out:Ljava/io/PrintStream;
    #8 = Class              #10            // java/lang/System
@@ -161,7 +164,7 @@ Constant pool:
     Code:
       stack=1, locals=1, args_size=1
          0: aload_0
-         1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
          4: return
       LineNumberTable:
         line 1: 0
@@ -186,7 +189,7 @@ SourceFile: "Hello.java"
 
 ---
 
-## 常见字节码指令
+### 常见字节码指令
 
 ---
 
@@ -194,7 +197,7 @@ SourceFile: "Hello.java"
 
 ---
 
-### 加载和存储指令
+#### 加载和存储指令
 
 ---
 
@@ -231,7 +234,7 @@ SourceFile: "Hello.java"
 
 ---
 
-### 运算相关指令
+#### 运算相关指令
 
 ---
 
@@ -315,7 +318,7 @@ SourceFile: "Hello.java"
 
 ---
 
-### 类型转换指令
+#### 类型转换指令
 
 ---
 
@@ -347,7 +350,7 @@ SourceFile: "Hello.java"
 
 ---
 
-### 对象创建与访问指令
+#### 对象创建与访问指令
 
 ---
 
@@ -369,7 +372,7 @@ SourceFile: "Hello.java"
 
 ---
 
-### 操作数栈管理指令
+#### 操作数栈管理指令
 
 ---
 
@@ -393,7 +396,7 @@ SourceFile: "Hello.java"
 
 ---
 
-### 控制转移指令
+#### 控制转移指令
 
 ---
 
@@ -431,7 +434,7 @@ SourceFile: "Hello.java"
 
 ---
 
-### 方法返回指令
+#### 方法返回指令
 
 ---
 
@@ -444,11 +447,11 @@ SourceFile: "Hello.java"
 * `areturn`: 该指令用于返回引用类型（Object类型）的返回值。它将操作数栈顶的引用值弹出，并将其作为方法的返回值。然后，将返回值传递给调用该方法的指令。
 * `return`: 该指令用于结束方法的执行，并返回到调用该方法的指令。该指令通常用于声明为void的方法、实例初始化方法、类和接口的类初始化方法。它没有返回值。
 
-# 虚拟机字节码执行引擎
+## 虚拟机字节码执行引擎
 
 ---
 
-## 执行引擎概述
+### 执行引擎概述
 
 ---
 
@@ -469,7 +472,7 @@ SourceFile: "Hello.java"
 
 ---
 
-## 运行时的栈帧结构
+### 运行时的栈帧结构
 
 ---
 
@@ -491,7 +494,7 @@ SourceFile: "Hello.java"
 
 ---
 
-## 字节码的解释执行
+### 字节码的解释执行
 
 ---
 
@@ -499,7 +502,7 @@ SourceFile: "Hello.java"
 
 ---
 
-### 基于栈的指令集和基于寄存器的指令集
+#### 基于栈的指令集和基于寄存器的指令集
 
 ---
 
@@ -557,7 +560,7 @@ add eax, 1
 
 ---
 
-### 基于栈的解释器执行过程
+#### 基于栈的解释器执行过程
 
 ---
 
@@ -594,11 +597,11 @@ public class Test
   super_class: #2                         // java/lang/Object
   interfaces: 0, fields: 0, methods: 2, attributes: 1
 Constant pool:
-   #1 = Methodref          #2.#3          // java/lang/Object."&lt;init&gt;":()V
+   #1 = Methodref          #2.#3          // java/lang/Object."<init>":()V
    #2 = Class              #4             // java/lang/Object
-   #3 = NameAndType        #5:#6          // "&lt;init&gt;":()V
+   #3 = NameAndType        #5:#6          // "<init>":()V
    #4 = Utf8               java/lang/Object
-   #5 = Utf8               &lt;init&gt;
+   #5 = Utf8               <init>
    #6 = Utf8               ()V
    #7 = Class              #8             // Test
    #8 = Utf8               Test
@@ -615,7 +618,7 @@ Constant pool:
     Code:
       stack=1, locals=1, args_size=1
          0: aload_0
-         1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
          4: return
       LineNumberTable:
         line 1: 0
@@ -733,7 +736,7 @@ stack=2, locals=4, args_size=1
 
 ---
 
-# 方法调用指令
+## 方法调用指令
 
 针对调用不同类型的方法，字节码指令集里设计了不同的指令：
 
@@ -757,7 +760,7 @@ stack=2, locals=4, args_size=1
 
 ---
 
-## 方法调用概述
+### 方法调用概述
 
 ---
 
@@ -771,7 +774,7 @@ stack=2, locals=4, args_size=1
 
 ---
 
-## 解析
+### 解析
 
 ---
 
@@ -793,7 +796,7 @@ stack=2, locals=4, args_size=1
 
 ---
 
-## 分派（重点）
+### 分派（重点）
 
 ---
 
@@ -809,7 +812,7 @@ stack=2, locals=4, args_size=1
 
 ---
 
-### 静态分派
+#### 静态分派
 
 ---
 
@@ -879,7 +882,7 @@ public class StaticDispatch {
   public StaticDispatch();
     Code:
        0: aload_0
-       1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
        4: return
 
   public void sayHello(StaticDispatch$Human);
@@ -907,15 +910,15 @@ public class StaticDispatch {
     Code:
        0: new           #25                 // class StaticDispatch$Man
        3: dup
-       4: invokespecial #27                 // Method StaticDispatch$Man."&lt;init&gt;":()V
+       4: invokespecial #27                 // Method StaticDispatch$Man."<init>":()V
        7: astore_1
        8: new           #28                 // class StaticDispatch$Woman
       11: dup
-      12: invokespecial #30                 // Method StaticDispatch$Woman."&lt;init&gt;":()V
+      12: invokespecial #30                 // Method StaticDispatch$Woman."<init>":()V
       15: astore_2
       16: new           #31                 // class StaticDispatch
       19: dup
-      20: invokespecial #33                 // Method "&lt;init&gt;":()V
+      20: invokespecial #33                 // Method "<init>":()V
       23: astore_3
       24: aload_3
       25: aload_1
@@ -972,7 +975,7 @@ hello,lady!
 
 ---
 
-### 动态分派
+#### 动态分派
 
 ---
 
@@ -1035,18 +1038,18 @@ public class DynamicDispatch {
   public DynamicDispatch();
     Code:
        0: aload_0
-       1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
        4: return
 
   public static void main(java.lang.String[]);
     Code:
        0: new           #7                  // class DynamicDispatch$Man
        3: dup
-       4: invokespecial #9                  // Method DynamicDispatch$Man."&lt;init&gt;":()V
+       4: invokespecial #9                  // Method DynamicDispatch$Man."<init>":()V
        7: astore_1
        8: new           #10                 // class DynamicDispatch$Woman
       11: dup
-      12: invokespecial #12                 // Method DynamicDispatch$Woman."&lt;init&gt;":()V
+      12: invokespecial #12                 // Method DynamicDispatch$Woman."<init>":()V
       15: astore_2
       16: aload_1
       17: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
@@ -1054,7 +1057,7 @@ public class DynamicDispatch {
       21: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
       24: new           #10                 // class DynamicDispatch$Woman
       27: dup
-      28: invokespecial #12                 // Method DynamicDispatch$Woman."&lt;init&gt;":()V
+      28: invokespecial #12                 // Method DynamicDispatch$Woman."<init>":()V
       31: astore_1
       32: aload_1
       33: invokevirtual #13                 // Method DynamicDispatch$Human.sayHello:()V
@@ -1072,11 +1075,11 @@ Human woman = new Woman();
 ```
 0: new           #7                  // class DynamicDispatch$Man
  3: dup
- 4: invokespecial #9                  // Method DynamicDispatch$Man."&lt;init&gt;":()V
+ 4: invokespecial #9                  // Method DynamicDispatch$Man."<init>":()V
  7: astore_1
  8: new           #10                 // class DynamicDispatch$Woman
 11: dup
-12: invokespecial #12                 // Method DynamicDispatch$Woman."&lt;init&gt;":()V
+12: invokespecial #12                 // Method DynamicDispatch$Woman."<init>":()V
 15: astore_2
 ```
 
@@ -1106,7 +1109,7 @@ woman.sayHello();
 
 ---
 
-### 单分派与多分派
+#### 单分派与多分派
 
 方法的接收者与方法的参数统称为方法的宗量，根据分派基于多少种宗量，可以将分派划分为单分派和多分派两种：
 
@@ -1122,7 +1125,7 @@ woman.sayHello();
 
 ---
 
-### invokedynamic
+#### invokedynamic
 
 `JDK 7` 为了更好地支持动态类型语言，引入了第五条方法调用的字节码指令 `invokedynamic`。如果你看过我之前写过的[浅谈 Java 中的 Lambda 表达式](https://lys2021.com/?p=1544)，其中在 `Lambda` 的本质一节我也提到了它，那么接下来我们好好看看到底怎么回事。
 
@@ -1155,11 +1158,11 @@ public class LambdaTest
   super_class: #2                         // java/lang/Object
   interfaces: 0, fields: 0, methods: 3, attributes: 4
 Constant pool:
-   #1 = Methodref          #2.#3          // java/lang/Object."&lt;init&gt;":()V
+   #1 = Methodref          #2.#3          // java/lang/Object."<init>":()V
    #2 = Class              #4             // java/lang/Object
-   #3 = NameAndType        #5:#6          // "&lt;init&gt;":()V
+   #3 = NameAndType        #5:#6          // "<init>":()V
    #4 = Utf8               java/lang/Object
-   #5 = Utf8               &lt;init&gt;
+   #5 = Utf8               <init>
    #6 = Utf8               ()V
    #7 = InvokeDynamic      #0:#8          // #0:showTestNumber:()LLambdaTest$Test;
    #8 = NameAndType        #9:#10         // showTestNumber:()LLambdaTest$Test;
@@ -1236,7 +1239,7 @@ Constant pool:
     Code:
       stack=1, locals=1, args_size=1
          0: aload_0
-         1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
          4: return
       LineNumberTable:
         line 1: 0
@@ -1271,3 +1274,4 @@ BootstrapMethods:
       #57 REF_invokeStatic LambdaTest.lambda$main$0:(Ljava/lang/Integer;)Ljava/lang/String;
       #56 (Ljava/lang/Integer;)Ljava/lang/String;
   1: #60 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/
+

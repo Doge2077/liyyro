@@ -1,15 +1,18 @@
----
+﻿---
 title: "Redis 应用与原理（三）"
 date: 2024-03-20
 categories: [DataBase System, Software Architect, Redis]
 description: ""
 ---
 
-# Redis Cluster 解决方案
+# redis-应用与原理（三）
+
+
+## Redis Cluster 解决方案
 
 ---
 
-## 基础概念
+### 基础概念
 
 ---
 
@@ -32,11 +35,11 @@ description: ""
 
 ---
 
-## Redis Cluster 集群策略
+### Redis Cluster 集群策略
 
 ---
 
-### 故障转移策略
+#### 故障转移策略
 
 ---
 
@@ -58,11 +61,11 @@ description: ""
 
 ---
 
-### 数据分片策略
+#### 数据分片策略
 
 ---
 
-#### 常见的数据分布策略
+##### 常见的数据分布策略
 
 ---
 
@@ -81,7 +84,7 @@ description: ""
 
 但是当删除节点时，数据再分配会把当前节点所有数据加到它的下一个节点上（缓存抖动）。这样会导致下一个节点使用率暴增，可能会导致挂掉，如果下一个节点挂掉，下下个节点将会承受更大的压力，最终导致集群雪崩。
 
-#### Redis 哈希槽策略
+##### Redis 哈希槽策略
 
 ---
 
@@ -93,11 +96,11 @@ Redis 集群有16384个哈希槽，每个key通过CRC16校验后对16384取模�
 
 ---
 
-## 基于 Redis 实现分布式锁
+### 基于 Redis 实现分布式锁
 
 ---
 
-### 基础实现
+#### 基础实现
 
 ---
 
@@ -140,18 +143,18 @@ public class AppController {
 
 ---
 
-### 缺陷分析
+#### 缺陷分析
 
 ---
 
-#### 加锁和设置过期时间非原子操作
+##### 加锁和设置过期时间非原子操作
 
 ---
 
 * 我们先是用 `SETNX` 创建了锁，假如这个服务在创建锁之后由于事故导致直接停机，那么这个锁就是一个永不过期的锁。
   * 这将导致其他服务无法获取到锁，影响业务的正常进行。
 
-#### 解决方案：
+##### 解决方案：
 
 * 使用 Lua 脚本来进行加锁和设置过期时间的操作。
   * 这样可以使得加锁和设置过期时间是一个原子操作。
@@ -203,7 +206,7 @@ public class AppController {
 
 ---
 
-#### 锁的过期时间设置是否合理
+##### 锁的过期时间设置是否合理
 
 ![image-20240319003866632](https://image.itbaima.cn/images/40/image-20240319003866632.png)
 
@@ -239,7 +242,7 @@ public class AppController {
         
         // 生产环境替换为 uuid + 线程 id
         String VALUE = String.valueOf(Thread.currentThread().getId());
-        Boolean isLocked = stringRedisTemplate.execute(new RedisCallback&lt;Boolean&gt;() {
+        Boolean isLocked = stringRedisTemplate.execute(new RedisCallback<Boolean>() {
             @Override
             public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
                 return connection.eval(lockLuaScript.getBytes(),
@@ -268,7 +271,7 @@ public class AppController {
                                 "return true " +
                                 "else return false " +
                                 "end";
-                stringRedisTemplate.execute(new RedisCallback&lt;Object&gt;() {
+                stringRedisTemplate.execute(new RedisCallback<Object>() {
                     @Override
                     public Object doInRedis(RedisConnection connection) throws DataAccessException {
                         return connection.eval(unlockLuaScript.getBytes(),
@@ -313,7 +316,7 @@ public class AppController {
                         " end";
         // 生产环境替换为 uuid + 线程 ID
         String VALUE = String.valueOf(Thread.currentThread().getId());
-        Boolean isLocked = stringRedisTemplate.execute(new RedisCallback&lt;Boolean&gt;() {
+        Boolean isLocked = stringRedisTemplate.execute(new RedisCallback<Boolean>() {
             @Override
             public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
                 return connection.eval(lockLuaScript.getBytes(),
@@ -334,7 +337,7 @@ public class AppController {
                             " else return false" +
                             " end";
             Thread watchDog = new Thread(() -> {
-                while (Boolean.TRUE.equals(stringRedisTemplate.execute(new RedisCallback&lt;Boolean&gt;() {
+                while (Boolean.TRUE.equals(stringRedisTemplate.execute(new RedisCallback<Boolean>() {
                     @Override
                     public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
                         return connection.eval(addlockLuaScript.getBytes(),
@@ -372,7 +375,7 @@ public class AppController {
                                 " return true" +
                                 " else return false" +
                                 " end";
-                stringRedisTemplate.execute(new RedisCallback&lt;Object&gt;() {
+                stringRedisTemplate.execute(new RedisCallback<Object>() {
                     @Override
                     public Object doInRedis(RedisConnection connection) throws DataAccessException {
                         return connection.eval(unlockLuaScript.getBytes(),
@@ -393,7 +396,7 @@ public class AppController {
 
 ---
 
-#### 其他缺陷
+##### 其他缺陷
 
 ---
 
@@ -408,11 +411,11 @@ public class AppController {
 
 ---
 
-## 基于 Redisson 实现分布式锁
+### 基于 Redisson 实现分布式锁
 
 ---
 
-### 基础操作
+#### 基础操作
 
 ---
 
@@ -420,11 +423,11 @@ Redisson 内置了一系列的分布式对象，分布式集合，分布式锁�
 
 引入依赖：
 ```xml
-&lt;dependency&gt;
-    &lt;groupId&gt;org.redisson&lt;/groupId&gt;
-    &lt;artifactId&gt;redisson&lt;/artifactId&gt;
-    &lt;version&gt;3.27.2&lt;/version&gt;
-&lt;/dependency&gt;
+<dependency>
+    <groupId>org.redisson</groupId>
+    <artifactId>redisson</artifactId>
+    <version>3.27.2</version>
+</dependency>
 ```
 
 编写 Redisson 配置类：
@@ -482,11 +485,11 @@ public class RedissonAppController {
 
 ---
 
-### 源码剖析
+#### 源码剖析
 
 ---
 
-#### 加锁原理
+##### 加锁原理
 
 ---
 
@@ -503,7 +506,7 @@ private void lock(long leaseTime, TimeUnit unit, boolean interruptibly) throws I
     Long ttl = this.tryAcquire(-1L, leaseTime, unit, threadId);
     if (ttl != null) {
         // 发布订阅，非阻塞锁
-        CompletableFuture&lt;RedissonLockEntry&gt; future = this.subscribe(threadId);
+        CompletableFuture<RedissonLockEntry> future = this.subscribe(threadId);
         this.pubSub.timeout(future);
         RedissonLockEntry entry;
         if (interruptibly) {
@@ -539,8 +542,8 @@ private void lock(long leaseTime, TimeUnit unit, boolean interruptibly) throws I
 
 `tryAcquire` 方法最终会调用到 `tryAcquireOnceAsync`：
 ```java
-private RFuture&lt;Boolean&gt; tryAcquireOnceAsync(long waitTime, long leaseTime, TimeUnit unit, long threadId) {
-    RFuture&lt;Boolean&gt; acquiredFuture;
+private RFuture<Boolean> tryAcquireOnceAsync(long waitTime, long leaseTime, TimeUnit unit, long threadId) {
+    RFuture<Boolean> acquiredFuture;
     if (leaseTime > 0L) {
         acquiredFuture = this.tryLockInnerAsync(waitTime, leaseTime, unit, threadId, RedisCommands.EVAL_NULL_BOOLEAN);
     } else {
@@ -548,7 +551,7 @@ private RFuture&lt;Boolean&gt; tryAcquireOnceAsync(long waitTime, long leaseTime
         acquiredFuture = this.tryLockInnerAsync(waitTime, this.internalLockLeaseTime, TimeUnit.MILLISECONDS, threadId, RedisCommands.EVAL_NULL_BOOLEAN);
     }
 
-    CompletionStage&lt;Boolean&gt; f = this.handleNoSync(threadId, acquiredFuture).thenApply((acquired) -> {
+    CompletionStage<Boolean> f = this.handleNoSync(threadId, acquiredFuture).thenApply((acquired) -> {
         if (acquired) {
             if (leaseTime > 0L) {
                 this.internalLockLeaseTime = unit.toMillis(leaseTime);
@@ -599,7 +602,7 @@ public Config() {
 最后我们回到最底层的 `tryLockInnerAsync` 方法：
 
 ```java
-&lt;T&gt; RFuture&lt;T&gt; tryLockInnerAsync(long waitTime, long leaseTime, TimeUnit unit, long threadId, RedisStrictCommand&lt;T&gt; command) {
+<T> RFuture<T> tryLockInnerAsync(long waitTime, long leaseTime, TimeUnit unit, long threadId, RedisStrictCommand<T> command) {
         return this.evalWriteSyncedAsync(
             this.getRawName(),
             LongCodec.INSTANCE,
@@ -631,23 +634,23 @@ end;
 
 ---
 
-#### 看门狗机制原理
+##### 看门狗机制原理
 
 ---
 
 继续看 `tryLockInnerAsync` 方法，在获取到锁后，走 `scheduleExpirationRenewal` 的逻辑：
 ```java
-private RFuture&lt;Long&gt; tryAcquireAsync(long waitTime, long leaseTime, TimeUnit unit, long threadId) {
-    RFuture&lt;Long&gt; ttlRemainingFuture;
+private RFuture<Long> tryAcquireAsync(long waitTime, long leaseTime, TimeUnit unit, long threadId) {
+    RFuture<Long> ttlRemainingFuture;
     if (leaseTime > 0L) {
         ttlRemainingFuture = this.tryLockInnerAsync(waitTime, leaseTime, unit, threadId, RedisCommands.EVAL_LONG);
     } else {
         ttlRemainingFuture = this.tryLockInnerAsync(waitTime, this.internalLockLeaseTime, TimeUnit.MILLISECONDS, threadId, RedisCommands.EVAL_LONG);
     }
 
-    CompletionStage&lt;Long&gt; stage = this.handleNoSync(threadId, ttlRemainingFuture);
-    RFuture&lt;Long&gt; ttlRemainingFutureWrapper = new CompletableFutureWrapper<>(stage);
-    CompletionStage&lt;Long&gt; future = ttlRemainingFutureWrapper.thenApply((ttlRemaining) -> {
+    CompletionStage<Long> stage = this.handleNoSync(threadId, ttlRemainingFuture);
+    RFuture<Long> ttlRemainingFutureWrapper = new CompletableFutureWrapper<>(stage);
+    CompletionStage<Long> future = ttlRemainingFutureWrapper.thenApply((ttlRemaining) -> {
         if (ttlRemaining == null) {
             if (leaseTime > 0L) {
                 this.internalLockLeaseTime = unit.toMillis(leaseTime);
@@ -693,7 +696,7 @@ private void renewExpiration() {
                 if (ent != null) {
                     Long threadId = ent.getFirstThreadId();
                     if (threadId != null) {
-                        CompletionStage&lt;Boolean&gt; future = RedissonBaseLock.this.renewExpirationAsync(threadId);
+                        CompletionStage<Boolean> future = RedissonBaseLock.this.renewExpirationAsync(threadId);
                         future.whenComplete((res, e) -> {
                             if (e != null) {
                                 RedissonBaseLock.log.error("Can't update lock {} expiration", RedissonBaseLock.this.getRawName(), e);
@@ -718,7 +721,7 @@ private void renewExpiration() {
 每次定时任务触发，会执行 `renewExpirationAsync` 方法：
 
 ```java
-protected CompletionStage&lt;Boolean&gt; renewExpirationAsync(long threadId) {
+protected CompletionStage<Boolean> renewExpirationAsync(long threadId) {
     return this.evalWriteSyncedAsync(
         this.getRawName(),
         LongCodec.INSTANCE,
@@ -744,7 +747,7 @@ return 0;
 
 ---
 
-#### 解锁原理
+##### 解锁原理
 
 首先来看 `package org.redisson` 包下的 `unlock` 方法的具体实现：
 
@@ -765,16 +768,16 @@ public void unlock() {
 调用了方法 `unlockAsync`：
 
 ```java
-public RFuture&lt;Void&gt; unlockAsync(long threadId) {
+public RFuture<Void> unlockAsync(long threadId) {
     return this.getServiceManager().execute(() -> {
         return this.unlockAsync0(threadId);
     });
 }
 
 // 接下来调用这段
-private RFuture&lt;Void&gt; unlockAsync0(long threadId) {
-    CompletionStage&lt;Boolean&gt; future = this.unlockInnerAsync(threadId);
-    CompletionStage&lt;Void&gt; f = future.handle((res, e) -> {
+private RFuture<Void> unlockAsync0(long threadId) {
+    CompletionStage<Boolean> future = this.unlockInnerAsync(threadId);
+    CompletionStage<Void> f = future.handle((res, e) -> {
         this.cancelExpirationRenewal(threadId, res);
         if (e != null) {
             if (e instanceof CompletionException) {
@@ -794,7 +797,7 @@ private RFuture&lt;Void&gt; unlockAsync0(long threadId) {
 }
 
 // 接下来走 unlockInnerAsync 的逻辑
-protected final RFuture&lt;Boolean&gt; unlockInnerAsync(long threadId) {
+protected final RFuture<Boolean> unlockInnerAsync(long threadId) {
     // 生成一个会话ID用于锁的释放
     String id = this.getServiceManager().generateId();
 
@@ -806,10 +809,10 @@ protected final RFuture&lt;Boolean&gt; unlockInnerAsync(long threadId) {
     timeout = Math.max(timeout, 1);
 
     // 执行异步任务以释放锁
-    RFuture&lt;Boolean&gt; r = this.unlockInnerAsync(threadId, id, timeout);
+    RFuture<Boolean> r = this.unlockInnerAsync(threadId, id, timeout);
 
     // 使用CompletionStage处理异步操作的结果
-    CompletionStage&lt;Boolean&gt; ff = r.thenApply((v) -> {
+    CompletionStage<Boolean> ff = r.thenApply((v) -> {
         CommandAsyncExecutor ce = this.commandExecutor;
 
         // 判断commandExecutor是否是CommandBatchService的一个实例
@@ -839,7 +842,7 @@ protected final RFuture&lt;Boolean&gt; unlockInnerAsync(long threadId) {
 ```
 
 ```java
-protected RFuture&lt;Boolean&gt; unlockInnerAsync(long threadId, String requestId, int timeout) {
+protected RFuture<Boolean> unlockInnerAsync(long threadId, String requestId, int timeout) {
     return this.evalWriteSyncedAsync(
         this.getRawName(),
         LongCodec.INSTANCE,
@@ -910,19 +913,19 @@ end
 
 ---
 
-# 三大使用陷阱
+## 三大使用陷阱
 
 ---
 
-## 缓存穿透
+### 缓存穿透
 
-### 原因分析
+#### 原因分析
 *   查询的 key 不存在，导致查询结果没有写入缓存。
     *   后续大量此类请求会直接访问数据库，造成巨大压力。
 
 根本原因在于大量不存在 key 的请求频繁到来，使得查询数据库的次数剧增。
 
-### 解决方案
+#### 解决方案
 一个简单的解决方案是将查询不到的 key 设置为空值缓存并返回，缺点是占用内存。更优雅的方案是添加布隆过滤器：
 *   它是一个位图（bitmap），通过多个 hash 函数实现。
     *   对于已缓存的 key，经过多次 hash 运算后，在位图中进行映射。
@@ -941,9 +944,9 @@ end
 
 ---
 
-## 缓存击穿
+### 缓存击穿
 
-### 原因分析
+#### 原因分析
 
 * 对于设置了过期时间的 key，缓存在某个时间点过期时出现大量高并发请求。
   * 请求发现缓存过期后会从后端 DB 加载数据并写回缓存，此时高并发的请求可能会瞬间把 DB 压垮。
@@ -952,7 +955,7 @@ end
 
 ---
 
-### 解决方案
+#### 解决方案
 
 ![image-20240320181549116](https://image.itbaima.cn/images/40/image-20240320182318621.png)
 
@@ -969,11 +972,11 @@ end
 
 ---
 
-## 缓存雪崩
+### 缓存雪崩
 
 ---
 
-### 原因分析
+#### 原因分析
 
 * 大量设置缓存时间相同的 key 在同一时间集中失效。
   * 导致大量失效的 key 全部查询 DB。
@@ -982,8 +985,9 @@ end
 
 ---
 
-### 解决方案
+#### 解决方案
 
 * 将缓存失效时间分散，在原有过期时间上增加随机数以错开失效时间。
   * 采用加锁或使用合理的队列来避免缓存失效时对数据库造成过大压力，但会降低系统吞吐量。
   * 分析用户行为，尽量让失效时间点均匀分布，以降低缓存雪崩发生的概率。
+

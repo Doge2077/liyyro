@@ -1,9 +1,12 @@
----
+﻿---
 title: "1. Django 项目创建"
 date: 2022-10-29
 categories: [Django, Django]
 description: ""
 ---
+
+# 1-django-项目创建
+
 
 ## 1.1 服务器及 Docker 环境
 

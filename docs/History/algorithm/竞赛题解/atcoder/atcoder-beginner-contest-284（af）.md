@@ -1,9 +1,12 @@
----
+﻿---
 title: "AtCoder Beginner Contest 284（A~F）"
 date: 2023-02-02
-categories: [ALGORITHM, Q&amp;A, 并查集, AtCoder, 字符串哈希]
+categories: [ALGORITHM, Q&A, 并查集, AtCoder, 字符串哈希]
 description: ""
 ---
+
+# atcoder-beginner-contest-284（af）
+
 
 ## A - Sequence of Strings
 
@@ -25,19 +28,19 @@ description: ""
 
 **代码** ：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -48,8 +51,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -60,8 +63,8 @@ string s[N];
 void solve(){
 
     int n; cin >> n;
-    for(int i = 0; i &lt; n; i ++) cin &gt;> s[i];
-    for(int i = n - 1; i >= 0; i --) cout &lt;&lt; s[i] &lt;&lt; endl;
+    for(int i = 0; i < n; i ++) cin >> s[i];
+    for(int i = n - 1; i >= 0; i --) cout << s[i] << endl;
 
 }
 
@@ -71,7 +74,7 @@ int main(){
 
     int _ = 1;
 
-    // cin &gt;> _;
+    // cin >> _;
 
     while(_ --){
         solve();
@@ -104,19 +107,19 @@ int main(){
 
 **代码** ：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -127,8 +130,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -138,19 +141,19 @@ void solve() {
     int n;
     cin >> n;
     int cnt = 0;
-    for (int i = 0; i &lt; n; i++) {
+    for (int i = 0; i < n; i++) {
         int x;
-        cin &gt;> x;
+        cin >> x;
         if (x % 2 != 0)
             cnt++;
     }
-    cout &lt;&lt; cnt &lt;&lt; endl;
+    cout << cnt << endl;
 }
 
 int main() {
     IOS;
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while (_--) {
         solve();
     }
@@ -177,19 +180,19 @@ int main() {
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -200,8 +203,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 // const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -220,21 +223,21 @@ int find(int u){
 
 void solve(){
     cin >> n >> m;
-    for(int i = 1; i &lt;= n; i++) g[i] = i; // 初始化
-    for(int i = 1; i &lt;= m; i++){
-        int a, b; cin &gt;> a >> b;
+    for(int i = 1; i <= n; i++) g[i] = i; // 初始化
+    for(int i = 1; i <= m; i++){
+        int a, b; cin >> a >> b;
         g[find(a)] = find(b);
     }
-    for(int i = 1; i &lt;= n; i++){
+    for(int i = 1; i <= n; i++){
         if(g[i] == i) cnt++;
     }
-    cout &lt;&lt; cnt &lt;&lt; endl;
+    cout << cnt << endl;
 }
 
 int main(){
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while(_--){
         solve();
     }
@@ -285,7 +288,7 @@ int main(){
         long long n;
         cin >> n;
         long long p, q;
-        for(long long i = 2; i * i * i &lt;= n; i++){
+        for(long long i = 2; i * i * i <= n; i++){
             if(n % i == 0){
                 if((n / i) % i == 0){
                     p = i;
@@ -298,7 +301,7 @@ int main(){
                 }
             }
         }
-        cout &lt;&lt; p &lt;&lt; " " &lt;&lt; q &lt;&lt; endl;
+        cout << p << " " << q << endl;
     }
     return 0;
 }
@@ -331,19 +334,19 @@ int main(){
 **代码**
 
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -354,14 +357,14 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 2e5 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
 const double eps = 1e-6, PI = acos(-1.0);
 
-vector&lt;int&gt; g[N];
+vector<int> g[N];
 bool vis[N];
 
 LL cnt = 0;
@@ -370,7 +373,7 @@ void dfs(int u) {
     if (cnt > 1e6) return;
     vis[u] = 1;
     cnt++;
-    for (int i = 0; i &lt; g[u].size(); i++) {
+    for (int i = 0; i < g[u].size(); i++) {
         if (vis[g[u][i]]) continue;
         vis[g[u][i]] = 1;
         dfs(g[u][i]);
@@ -380,22 +383,22 @@ void dfs(int u) {
 
 void solve() {
     int n, m;
-    cin &gt;> n >> m;
-    for (int i = 0; i &lt; m; i++) {
+    cin >> n >> m;
+    for (int i = 0; i < m; i++) {
         int a, b;
-        cin &gt;> a >> b;
+        cin >> a >> b;
         g[a].push_back(b);
         g[b].push_back(a);
     }
     dfs(1);
-    cout &lt;&lt; min(cnt, (LL)1000000) &lt;&lt; endl;
+    cout << min(cnt, (LL)1000000) << endl;
 }
 
 int main() {
     IOS;
 
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
 
     while (_--) {
         solve();
@@ -435,19 +438,19 @@ int main() {
 
 **代码** ：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -460,8 +463,8 @@ using namespace std;
 typedef long long LL;
 typedef unsigned long long ULL;
 
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 // const int N = 1e6 + 3;
 // const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -481,9 +484,9 @@ ULL h1[N][hash_cnt], h2[N][hash_cnt], p[N][hash_cnt];
 // 初始化哈希
 void initHash(ULL n, ULL cnt){
     p[0][cnt] = 1;
-    for(int i = 1; i &lt;= n; ++ i) p[i][cnt] = p[i - 1][cnt] * base[cnt] % mod[cnt];
-    for(int i = 1; i &lt;= n; ++ i) h1[i][cnt] = (h1[i - 1][cnt] * base[cnt] % mod[cnt] + s[i]) % mod[cnt]; // 正序hash
-    for(int i = n; i &gt;= 1; -- i) h2[i][cnt] = (h2[i + 1][cnt] * base[cnt] % mod[cnt] + s[i]) % mod[cnt]; // 逆序hash
+    for(int i = 1; i <= n; ++ i) p[i][cnt] = p[i - 1][cnt] * base[cnt] % mod[cnt];
+    for(int i = 1; i <= n; ++ i) h1[i][cnt] = (h1[i - 1][cnt] * base[cnt] % mod[cnt] + s[i]) % mod[cnt]; // 正序hash
+    for(int i = n; i >= 1; -- i) h2[i][cnt] = (h2[i + 1][cnt] * base[cnt] % mod[cnt] + s[i]) % mod[cnt]; // 逆序hash
 }
 
 // 正序HASH
@@ -505,27 +508,28 @@ void solve(){
     cin >> n >> s;
     s = " " + s;
     initHash(2 * n, 0);
-    for(int i = 0; i &lt;= n; i ++ ){
+    for(int i = 0; i <= n; i ++ ){
         ULL sum1 = ((getHash1(0, 1, i) * p[n - i][0] % mod[0] + getHash1(0, n + i + 1, 2 * n)) % mod[0]);
         ULL sum2 = getHash2(0, i + 1, n + i);
         if(sum1 == sum2){
             string st = s.substr(i + 1, n);
             reverse(st.begin(), st.end());
-            cout &lt;&lt; st &lt;&lt; endl;
-            cout &lt;&lt; i &lt;&lt; endl;
+            cout << st << endl;
+            cout << i << endl;
             return;
         }
     }
-    cout &lt;&lt; -1 &lt;&lt; endl;
+    cout << -1 << endl;
 }
 
 int main(){
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while(_ --){
         solve();
     }
     return 0;
 }
 ```
+

@@ -1,9 +1,12 @@
----
+﻿---
 title: "河南工程学院2022级新生周赛（五）邀请函"
 date: 2022-10-22
 categories: [University Activities]
 description: ""
 ---
+
+# haueacm202205
+
 
 ## 你好，朋友：
 

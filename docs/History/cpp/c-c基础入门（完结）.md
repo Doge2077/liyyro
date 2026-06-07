@@ -1,9 +1,12 @@
----
+﻿---
 title: "C/C++基础入门"
 date: 2022-08-22
 categories: [c++, C/C++]
 description: ""
 ---
+
+# c-c基础入门（完结）
+
 
 ## 前言
 
@@ -30,7 +33,7 @@ description: ""
 
 **C程序**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main() {
     printf("Hello, world!");
@@ -40,11 +43,11 @@ int main() {
 
 **C++程序**：
 ```cpp
-#include &lt;iostream&gt;
+#include <iostream>
 using namespace std;
 
 int main() {
-    cout &lt;&lt; "Hello, world!";
+    cout << "Hello, world!";
     return 0;
 }
 ```
@@ -64,9 +67,9 @@ int main() {
   * `using namespace std;` 会将 `std` 中的所有名字引入，我们就可以用 `cout` 代替 `std::cout`。
 
 ```cpp
-#include &lt;iostream&gt;
+#include <iostream>
 int main(){
-    std::cout &lt;&lt; "Hello,world!" ;
+    std::cout << "Hello,world!" ;
     return 0;
 }
 ```
@@ -104,7 +107,7 @@ int main(){
 
 **示例**：
 ```cpp
-#include &lt;stdio.h&gt;  //这是C语言的头文件
+#include <stdio.h>  //这是C语言的头文件
 int main(){  //main()函数
     printf("Hello,world!");  //输出Hello,world!
     /*  这是多行注释，从本行开始
@@ -132,7 +135,7 @@ int main(){  //main()函数
 
 **C语言代码示例**：
 ```c
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main() {
     int a;  // 定义一个变量a
@@ -144,13 +147,13 @@ int main() {
 
 **C++语言代码示例**：
 ```cpp
-#include &lt;iostream&gt;
+#include <iostream>
 using namespace std;
 
 int main() {
     int a;  // 定义一个变量a
     cin >> a;  // 输入a的值
-    cout &lt;&lt; a;  // 输出a的值
+    cout << a;  // 输出a的值
     return 0;
 }
 ```
@@ -193,7 +196,7 @@ int main() {
 
 **C语言代码示例**：
 ```c
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main() {
     int a;  // 定义一个int型的变量a
@@ -206,14 +209,14 @@ int main() {
 
 **C++语言代码示例**：
 ```cpp
-#include &lt;iostream&gt;
+#include <iostream>
 using namespace std;
 
 int main() {
     int a;  // 定义一个int型的变量a
     int b = 10;  // 定义一个int型的变量b，初始值为10
     cin >> a;
-    cout &lt;&lt; a &lt;&lt; " " &lt;&lt; b;  // 输出a的值后输出一个空格，再输出b的值
+    cout << a << " " << b;  // 输出a的值后输出一个空格，再输出b的值
     return 0;
 }
 ```
@@ -244,7 +247,7 @@ int main() {
 
 **C 语言代码示例**：
 ```c
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main(){
     int a; // 定义一个int型的变量a
@@ -257,14 +260,14 @@ int main(){
 
 **C++ 语言代码示例**：
 ```cpp
-#include &lt;iostream&gt;
+#include <iostream>
 using namespace std;
 
 int main(){
     int a; // 定义一个int型的变量a
     long long b; // 定义一个long long型的变量b
     cin >> a >> b; // 读入a和b的值
-    cout &lt;&lt; a &lt;&lt; " " &lt;&lt; b; // 输出a的值后输出一个空格，再输出b的值
+    cout << a << " " << b; // 输出a的值后输出一个空格，再输出b的值
     return 0;
 }
 ```
@@ -297,7 +300,7 @@ int main(){
 
 **C语言代码示例**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main(){
     float a;  //定义一个float型的变量a
@@ -311,16 +314,16 @@ int main(){
 
 **C++语言代码示例**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;iomanip&gt;
+#include <iostream>
+#include <iomanip>
 using namespace std;
 
 int main(){
     float a;  //定义一个float型的变量a
     double b;  //定义一个double型的变量b
     cin >> a >> b;  //读入a和b的值
-    cout &lt;&lt; a &lt;&lt; " " &lt;&lt; b &lt;&lt; endl;  //输出a的值后输出一个空格，再输出b的值再输出回车
-    cout &lt;&lt; setprecision(2) &lt;&lt; a &lt;&lt; " " &lt;&lt; setprecision(3) &lt;&lt; b &lt;&lt; endl;  //输出a的值保留2位小数后输出一个空格，再输出b的值保留3位小数再输出回车
+    cout << a << " " << b << endl;  //输出a的值后输出一个空格，再输出b的值再输出回车
+    cout << setprecision(2) << a << " " << setprecision(3) << b << endl;  //输出a的值保留2位小数后输出一个空格，再输出b的值保留3位小数再输出回车
     return 0;
 }
 ```
@@ -355,7 +358,7 @@ int main(){
 
 **C语言代码示例**：
 ```c
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main() {
     char a;  // 定义一个char型的变量a
@@ -367,13 +370,13 @@ int main() {
 
 **C++语言代码示例**：
 ```cpp
-#include &lt;iostream&gt;
+#include <iostream>
 using namespace std;
 
 int main() {
     char a;  // 定义一个char型的变量a
     cin >> a;  // 读入a值
-    cout &lt;&lt; a &lt;&lt; endl;  // 输出a的值后输出一个回车
+    cout << a << endl;  // 输出a的值后输出一个回车
     return 0;
 }
 ```
@@ -462,15 +465,15 @@ int main() {
 
 **C++语言代码示例**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;string&gt;
+#include <iostream>
+#include <string>
 using namespace std;
 
 int main(){
     string s1 = "a";  //定义一个string型的变量s1，初始化值为"a"
     string s2;        //定义一个string型的变量s2
     cin >> s2;        //读入s2的值
-    cout &lt;&lt; s1 &lt;&lt; endl &lt;&lt; s2;  //输出s1的值后输出一个回车，再输出s2
+    cout << s1 << endl << s2;  //输出s1的值后输出一个回车，再输出s2
     return 0;
 }
 ```
@@ -481,7 +484,7 @@ int main(){
 
 **C语言代码示例**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main(){
     char a[100] = "lys is a doge";  //C语言可以借助字符数组来达到同样效果
@@ -492,13 +495,13 @@ int main(){
 
 **C++语言代码示例**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;string&gt;
+#include <iostream>
+#include <string>
 using namespace std;
 
 int main(){
     string a = "lys is a doge";
-    cout &lt;&lt; a &lt;&lt; endl;
+    cout << a << endl;
     return 0;
 }
 ```
@@ -533,15 +536,15 @@ int main(){
 
 **C++语言代码示例**：
 ```cpp
-#include &lt;iostream&gt;
+#include <iostream>
 using namespace std;
 
 int main(){
     bool a = false, b = 1;  //定义一个bool型的变量a,b，初始化值为false和1
     bool n;  //定义一个bool型的变量n
     cin >> n;  //读入n的值，只能是0或1
-    cout &lt;&lt; a &lt;&lt; " " &lt;&lt; b &lt;&lt; endl;  //输出a的值后输出一个空格，再输出b的值和一个回车
-    cout &lt;&lt; n &lt;&lt; endl;  //输出n的值和一个回车
+    cout << a << " " << b << endl;  //输出a的值后输出一个空格，再输出b的值和一个回车
+    cout << n << endl;  //输出n的值和一个回车
     return 0;
 }
 ```
@@ -568,7 +571,7 @@ int main(){
 
 **C语言代码示例**：
 ```c
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 #define b 20  //宏定义的方式定义常量
 
@@ -800,7 +803,7 @@ int main(){
 
 **C++语言代码示例**：
 ```cpp
-#include &lt;iostream&gt;
+#include <iostream>
 using namespace std;
 
 int main() {
@@ -809,13 +812,13 @@ int main() {
     cin >> a >> b;
 
     res = a && b;  // 当 a 与 b 都为真时则 res 为真
-    cout &lt;&lt; res &lt;&lt; endl;
+    cout << res << endl;
 
     res = a || b;  // 当 a 或 b 其中一个为真时则 res 为真
-    cout &lt;&lt; res &lt;&lt; endl;
+    cout << res << endl;
 
     res = !a;      // 当 a 为假时则 res 为真
-    cout &lt;&lt; res &lt;&lt; endl;
+    cout << res << endl;
 
     return 0;
 }
@@ -865,16 +868,16 @@ int main() {
 1 ^ 1 = 0;
 
 // 右移运算
-n &gt;> k  // 表示 n / 2^k
+n >> k  // 表示 n / 2^k
 
 // 左移运算
-n &lt;&lt; k  // 表示 n * 2^k
+n << k  // 表示 n * 2^k
 ```
 
 **常用模板**：
 ```cpp
 // 求 x 的第 k 位数字
-x &gt;> k & 1;
+x >> k & 1;
 
 // 求 x 的最后一位 1
 x & -x;
@@ -931,17 +934,17 @@ $$
 
 **C++代码示例**：
 ```cpp
-#include &lt;iostream&gt;
+#include <iostream>
 using namespace std;
 
 int main() {
     int res;
     res = 1 + 2, 3 + 4, 5 + 6;
     // 得到 res 的值为 3 而不是 11，因为赋值运算符 "=" 的优先级比逗号运算符高，先进行了赋值运算才进行逗号运算。
-    cout &lt;&lt; res &lt;&lt; endl;
+    cout << res << endl;
     res = (1 + 2, 3 + 4, 5 + 6);
     // 若要让 res 的值得到逗号运算的结果，则应将整个表达式用括号提高优先级，此时 res 的值才为 11。
-    cout &lt;&lt; res &lt;&lt; endl;
+    cout << res << endl;
     return 0;
 }
 ```
@@ -1004,7 +1007,7 @@ if(条件表达式){
 
 **C 语言代码示例**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main(){
     int a;  // 定义一个 int 型变量 a
@@ -1029,7 +1032,7 @@ else{
 
 **C 语言代码示例**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main(){
     int a;  // 定义一个 int 型变量 a
@@ -1059,7 +1062,7 @@ else{
 
 **C语言代码示例**：
 ```c
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main(){
     int a;  //定义一个int型变量a
@@ -1089,7 +1092,7 @@ int main(){
 
 **C语言代码示例**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main() {
     int a;  // 定义一个int型变量a
@@ -1127,7 +1130,7 @@ switch (条件表达式) {
 
 **C语言代码示例**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main() {
     // 请给电影评分
@@ -1190,13 +1193,13 @@ while (条件表达式) {
 
 **C语言代码示例**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main() {
     int n;
     scanf("%d", &n);
     int sum = 1;
-    while(sum &lt;= n) {  //当sum小于等于n时执行
+    while(sum <= n) {  //当sum小于等于n时执行
         printf("%d\n", sum);  //输出sum的值和回车
         sum++;  //执行完一次循环，sum的值加1
     }
@@ -1232,7 +1235,7 @@ do {
 
 **C语言代码示例**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main() {
     int n;
@@ -1277,12 +1280,12 @@ for(初始化条件; 判断条件; 更新) {
 
 **C语言代码示例**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main() {
     int n;
     scanf("%d", &n);
-    for(int i = 1; i &lt;= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行之后，i的值加1
+    for(int i = 1; i <= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行之后，i的值加1
         printf("%d\n", i);  //输出i的值和一个回车
     }
     return 0;
@@ -1301,13 +1304,13 @@ int main() {
 
 **C语言代码示例**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main() {
     int n;
     scanf("%d", &n);
-    for(int i = 1; i &lt;= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行之后，i的值加1
-        for(int j = 1; j &lt;= i; j ++){//当j小于等于i时，执行循环体内的语句，执行之后，j的值加1
+    for(int i = 1; i <= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行之后，i的值加1
+        for(int j = 1; j <= i; j ++){//当j小于等于i时，执行循环体内的语句，执行之后，j的值加1
             printf("%d ", j);  //输出j的值
         }
         printf("\n");  //执行完内层的循环之后，输出一次回车
@@ -1334,12 +1337,12 @@ int main() {
 
 **C语言代码示例1**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main() {
     int n;
     scanf("%d", &n);
-    for(int i = 1; i &lt;= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行后i的值加1
+    for(int i = 1; i <= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行后i的值加1
         printf("%d ", i);  //输出i的值和一个空格
         if(i == 10){  //若i的值为10，则终止循环
             break;
@@ -1353,13 +1356,13 @@ int main() {
 
 **C语言代码示例2**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main() {
     int n;
     scanf("%d", &n);
-    for(int i = 1; i &lt;= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行后i的值加1
-        for(int j = 1; j &lt;= i; j ++){  //当j小于等于i时，执行循环体内的语句，执行之后，j的值加1
+    for(int i = 1; i <= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行后i的值加1
+        for(int j = 1; j <= i; j ++){  //当j小于等于i时，执行循环体内的语句，执行之后，j的值加1
             printf("%d ", j);  //输出j的值
             if(j == 5){  //j的值为5时，退出该层循环
                 break;
@@ -1386,12 +1389,12 @@ int main() {
 
 **C语言代码示例**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main() {
     int n;
     scanf("%d", &n);
-    for(int i = 1; i &lt;= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行后i的值加1
+    for(int i = 1; i <= n; i ++){  //当i小于等于n时，执行循环体内的语句，执行后i的值加1
         if(i % 2 == 0){  //当i为偶数时，跳过本次循环，不再执行下面的语句
             continue;
         }
@@ -1467,7 +1470,7 @@ a3 = a1;  // 错误
 应该尽量**将较大的数组定义为全局变量**，即将数组声明在 `main()` 函数外的全局区。因为局部变量会被创建在栈区中，过大（大于栈的大小）的数组会爆栈，进而导致 RE。如果将数组声明在全局作用域中，就会在静态区中创建数组。
 
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main(){
     int a[100000000];  //数组过大，导致爆栈，运行错误，使得程序异常退出
@@ -1476,7 +1479,7 @@ int main(){
 }
 ```
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int a[100000000];  //数组建立在全局区，程序正常运行
 
@@ -1502,7 +1505,7 @@ int main(){
 
 **C语言代码示例**：
 ```cpp
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main() {
     //定义方式1
@@ -1525,7 +1528,7 @@ int main() {
     int score2[10] = { 100, 90, 80, 70, 60, 50, 40, 30, 20, 10 };
 
     //一个一个输出太麻烦，因此可以利用循环进行输出
-    for (int i = 0; i &lt; 10; i++){
+    for (int i = 0; i < 10; i++){
         printf("%d ", score2[i]);
     }
     printf("\n");
@@ -1534,7 +1537,7 @@ int main() {
     //数据类型 数组名[] =  {值1，值2 ，值3 ...};
     int score3[] = { 100, 90, 80, 70, 60, 50, 40, 30, 20, 10 };
 
-    for (int i = 0; i &lt; 10; i++){
+    for (int i = 0; i < 10; i++){
         printf("%d ", score3[i]);
     }
     printf("\n");
@@ -1544,7 +1547,7 @@ int main() {
 
 **C++语言代码示例**：
 ```cpp
-#include &lt;iostream&gt;
+#include <iostream>
 using namespace std;
 
 int main() {
@@ -1559,9 +1562,9 @@ int main() {
     score1[2] = 85;
 
     //利用下标输出
-    cout &lt;&lt; score1[0] &lt;&lt; endl;
-    cout &lt;&lt; score1[1] &lt;&lt; endl;
-    cout &lt;&lt; score1[2] &lt;&lt; endl;
+    cout << score1[0] << endl;
+    cout << score1[1] << endl;
+    cout << score1[2] << endl;
 
     //第二种定义方式
     //数据类型 数组名[元素个数] = {值1, 值2, 值3...};
@@ -1569,24 +1572,24 @@ int main() {
     int score2[10] = { 100, 90, 80, 70, 60, 50, 40, 30, 20, 10 };
 
     //逐个输出
-    //cout &lt;&lt; score2[0] &lt;&lt; " " &lt;&lt; endl;
+    //cout << score2[0] << " " << endl;
     //...
-    //cout &lt;&lt; score2[9] &lt;&lt; " " &lt;&lt; endl;
+    //cout << score2[9] << " " << endl;
 
     //一个一个输出太麻烦，因此可以利用循环进行输出
-    for (int i = 0; i &lt; 10; i++) {
-        cout &lt;&lt; score2[i] &lt;&lt; " ";
+    for (int i = 0; i < 10; i++) {
+        cout << score2[i] << " ";
     }
-    cout &lt;&lt; endl;
+    cout << endl;
 
     //定义方式3
     //数据类型 数组名[] = {值1, 值2, 值3...};
     int score3[] = { 100, 90, 80, 70, 60, 50, 40, 30, 20, 10 };
 
-    for (int i = 0; i &lt; 10; i++) {
-        cout &lt;&lt; score3[i] &lt;&lt; " ";
+    for (int i = 0; i < 10; i++) {
+        cout << score3[i] << " ";
     }
-    cout &lt;&lt; endl;
+    cout << endl;
 
     return 0;
 }
@@ -1608,7 +1611,7 @@ int main() {
 
 **示例**：
 ```cpp
-#include &lt;iostream&gt;
+#include <iostream>
 using namespace std;
 
 int main() {
@@ -1616,15 +1619,15 @@ int main() {
     //数组名用途
     //1、可以获取整个数组占用内存空间大小
     int a[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-    cout &lt;&lt; "整个数组所占内存空间为： " &lt;&lt; sizeof(a) &lt;&lt; endl;  //sizeof() 关键字可以返回对应参数的大小
-    cout &lt;&lt; "每个元素所占内存空间为： " &lt;&lt; sizeof(a[0]) &lt;&lt; endl;
-    cout &lt;&lt; "数组的元素个数为： " &lt;&lt; sizeof(a) / sizeof(a[0]) &lt;&lt; endl;
+    cout << "整个数组所占内存空间为： " << sizeof(a) << endl;  //sizeof() 关键字可以返回对应参数的大小
+    cout << "每个元素所占内存空间为： " << sizeof(a[0]) << endl;
+    cout << "数组的元素个数为： " << sizeof(a) / sizeof(a[0]) << endl;
 
     //2、可以通过数组名获取到数组首地址
-    cout &lt;&lt; "数组的首元素值为：" &lt;&lt; *a &lt;&lt; endl;  //*a 表示解引用，具体参见指针相关内容
-    cout &lt;&lt; "数组首地址为： " &lt;&lt; &a &lt;&lt; endl;  //&a 表示取数组a的首元素的地址，默认输出为16进制
-    cout &lt;&lt; "数组中第一个元素地址为： " &lt;&lt; &a[0] &lt;&lt; endl;
-    cout &lt;&lt; "数组中第二个元素地址为： " &lt;&lt; (long long)&a[1] &lt;&lt; endl;  //输出地址为10进制
+    cout << "数组的首元素值为：" << *a << endl;  //*a 表示解引用，具体参见指针相关内容
+    cout << "数组首地址为： " << &a << endl;  //&a 表示取数组a的首元素的地址，默认输出为16进制
+    cout << "数组中第一个元素地址为： " << &a[0] << endl;
+    cout << "数组中第二个元素地址为： " << (long long)&a[1] << endl;  //输出地址为10进制
 
     //arr = 100; 错误，数组名是常量，因此不可以赋值
 
@@ -1678,3 +1681,4 @@ int main() {
 **语法**：
 
 *   `数组
+

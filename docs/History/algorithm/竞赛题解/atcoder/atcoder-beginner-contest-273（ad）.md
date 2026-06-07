@@ -1,9 +1,12 @@
----
+﻿---
 title: "AtCoder Beginner Contest 273（A~D）"
 date: 2022-10-17
-categories: [ALGORITHM, Q&amp;A, 模拟, 二分, AtCoder]
+categories: [ALGORITHM, Q&A, 模拟, 二分, AtCoder]
 description: ""
 ---
+
+# atcoder-beginner-contest-273（ad）
+
 
 ## A - A Recursive Function
 
@@ -29,19 +32,19 @@ description: ""
 
 **代码** ：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -52,8 +55,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -66,13 +69,13 @@ LL f(LL n){
 
 void solve(){
     LL n; cin >> n;
-    cout &lt;&lt; f(n) &lt;&lt; endl;
+    cout << f(n) << endl;
 }
 
 int main(){
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while(_ --){
         solve();
     }
@@ -104,19 +107,19 @@ int main(){
 
 **代码** ：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -127,8 +130,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -138,20 +141,20 @@ void solve() {
     LL x; int k;
     cin >> x >> k;
     LL fac = 1;
-    for (int i = 1; i &lt;= k; i++) {
+    for (int i = 1; i <= k; i++) {
         fac *= 10;
         LL a = x / fac, b = ceil(1.0 * x / fac);
         a *= fac; b *= fac;
-        if (abs(a - x) &lt; abs(b - x)) x = a;
+        if (abs(a - x) < abs(b - x)) x = a;
         else x = b;
     }
-    cout &lt;&lt; x &lt;&lt; endl;
+    cout << x << endl;
 }
 
 int main() {
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while (_--) {
         solve();
     }
@@ -184,19 +187,19 @@ int main() {
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -207,8 +210,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -218,27 +221,27 @@ LL a[N];
 int idx;
 LL b[N];
 LL c[N];
-map&lt;LL,int&gt; vis;
+map<LL,int> vis;
 
 void solve() {
     int n; cin >> n;
-    for (int i = 0; i &lt; n; i++) {
-        cin &gt;> a[i];
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
         if (vis[a[i]] == 0) {
             vis[a[i]] = 1;
             b[idx++] = a[i];
         }
     }
 
-    sort(b, b + idx, greater&lt;LL&gt;());
+    sort(b, b + idx, greater<LL>());
 
-    for (int i = 0; i &lt; n; i++) {
-        int t = lower_bound(b, b + idx, a[i], greater&lt;LL&gt;()) - b;
+    for (int i = 0; i < n; i++) {
+        int t = lower_bound(b, b + idx, a[i], greater<LL>()) - b;
         c[t]++;
     }
 
-    for (int i = 0; i &lt; n; i++) {
-        cout &lt;&lt; c[i] &lt;&lt; endl;
+    for (int i = 0; i < n; i++) {
+        cout << c[i] << endl;
     }
 }
 
@@ -246,7 +249,7 @@ int main() {
     IOS;
 
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while (_--) {
         solve();
     }
@@ -284,19 +287,19 @@ int main() {
 
 **代码** ：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -307,8 +310,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -316,7 +319,7 @@ const double eps = 1e-6, PI = acos(-1);
 
 void solve(){
     LL l, w, x, y; cin >> l >> w >> x >> y;
-    map&lt;LL,set&lt;LL&gt;> dx, dy;
+    map<LL,set<LL>> dx, dy;
     int n; cin >> n;
     while(n --){
         LL a, b;
@@ -377,7 +380,7 @@ void solve(){
             }
         }
 
-        cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; endl;
+        cout << x << ' ' << y << endl;
     }
 }
 
@@ -385,7 +388,7 @@ int main() {
     IOS;
 
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while (_--) {
         solve();
     }
@@ -393,3 +396,4 @@ int main() {
     return 0;
 }
 ```
+

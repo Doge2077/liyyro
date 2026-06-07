@@ -1,9 +1,12 @@
----
+﻿---
 title: "HF的衣橱"
 date: 2023-03-18
-categories: [Q&amp;A, 贪心]
+categories: [Q&A, 贪心]
 description: ""
 ---
+
+# hf的衣橱
+
 
 [原题链接](http://www.haueacm.top/problem.php?id=1435)
 
@@ -70,19 +73,19 @@ $0 \le a, b, c, d \le 1 \times 10^8$，$1 \le a + b + c + d$。
 
 **代码** ：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -95,8 +98,8 @@ using namespace std;
 typedef long long LL;
 typedef unsigned long long ULL;
 
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -104,17 +107,18 @@ const double eps = 1e-6, PI = acos(-1);
 
 void solve(){
     LL a, b, c, d; cin >> a >> b >> c >> d;
-    if(a == 0) cout &lt;&lt; 1 &lt;&lt; endl;
-    else cout &lt;&lt; a + min(b, c) * 2 + min(a + 1, abs(b - c) + d) &lt;&lt; endl;
+    if(a == 0) cout << 1 << endl;
+    else cout << a + min(b, c) * 2 + min(a + 1, abs(b - c) + d) << endl;
 }
 
 int main(){
     IOS;
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while(_ --){
         solve();
     }
     return 0;
 }
 ```
+

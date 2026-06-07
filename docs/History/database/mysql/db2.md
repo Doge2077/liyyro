@@ -1,9 +1,12 @@
----
+﻿---
 title: "数据库系统：2. 关系数据库"
 date: 2023-02-22
 categories: [DataBase System]
 description: ""
 ---
+
+# db2
+
 
 提出关系模型的是美国 `IBM` 公司的 `E.F.Codd`：
 

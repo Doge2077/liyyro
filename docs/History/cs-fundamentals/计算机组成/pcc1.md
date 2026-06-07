@@ -1,9 +1,12 @@
----
+﻿---
 title: "计算机组成原理：1. 计算机系统概论"
 date: 2023-02-13
 categories: [Principles of Computer Composition]
 description: ""
 ---
+
+# pcc1
+
 
 ## 1.1 计算机系统简介
 

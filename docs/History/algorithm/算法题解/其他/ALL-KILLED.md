@@ -1,9 +1,12 @@
----
+﻿---
 title: "ALL KILLED"
 date: 2022-10-01
-categories: [ALGORITHM, Q&amp;A, 字符串, 思维]
+categories: [ALGORITHM, Q&A, 字符串, 思维]
 description: ""
 ---
+
+# ALL-KILLED
+
 
 [原题链接](https://www.luogu.com.cn/problem/U248402)
 
@@ -63,7 +66,7 @@ YES
 
 **代码1**：
 ```c
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 void solve(){
     int n; scanf("%d", &n);
@@ -80,7 +83,7 @@ int main(){
 
 **代码2**：
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 void solve() {
@@ -89,9 +92,9 @@ void solve() {
 
     char t, p;
 
-    for (int i = 0; i &lt; n; i++) {
+    for (int i = 0; i < n; i++) {
         char op;
-        cin &gt;> op;
+        cin >> op;
         if (i == 0) t = op;
         if (i == n - 1) p = op;
     }
@@ -108,3 +111,4 @@ int main() {
     return 0;
 }
 ```
+

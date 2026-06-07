@@ -1,9 +1,12 @@
----
+﻿---
 title: "Java 语法基础（持续更新中）"
 date: 2022-09-14
 categories: [java, Java]
 description: ""
 ---
+
+# java
+
 
 ## 1. Java 初识
 
@@ -579,13 +582,13 @@ public class Main {
 n >> k  // 表示 n / 2^k
 
 // 左移运算
-n &lt;&lt; k  // 表示 n * 2^k
+n << k  // 表示 n * 2^k
 ```
 
 **常用模板**：
 ```java
 // 求x的第k位数字
-x &gt;> k & 1;
+x >> k & 1;
 
 // 求x的最后一位1
 x & -x;
@@ -620,3 +623,4 @@ x & -x;
 取自[菜鸟教程](https://www.runoob.com/java/java-operators.html)
 
 ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/09/运算符优先级.png)
+

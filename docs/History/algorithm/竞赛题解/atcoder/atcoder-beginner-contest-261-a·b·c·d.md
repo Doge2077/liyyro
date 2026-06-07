@@ -1,9 +1,12 @@
----
+﻿---
 title: "AtCoder Beginner Contest 261 (A·B·C·D)"
 date: 2022-07-25
-categories: [ALGORITHM, Q&amp;A, 模拟, AtCoder, DP]
+categories: [ALGORITHM, Q&A, 模拟, AtCoder, DP]
 description: ""
 ---
+
+# atcoder-beginner-contest-261-a·b·c·d
+
 
 ---
 
@@ -28,7 +31,7 @@ description: ""
 ### 代码
 
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1e6 + 10;
@@ -39,14 +42,14 @@ int main() {
     int a, b, c, d;
     cin >> a >> b >> c >> d;
 
-    for (int i = a; i &lt;= b; i++) res[i]++;
-    for (int i = c; i &lt;= d; i++) res[i]++;
+    for (int i = a; i <= b; i++) res[i]++;
+    for (int i = c; i <= d; i++) res[i]++;
 
     int cnt = 0;
-    for (int i = 0; i &lt;= 200; i++) if (res[i] == 2) cnt++;
+    for (int i = 0; i <= 200; i++) if (res[i] == 2) cnt++;
 
-    if (cnt) cout &lt;&lt; cnt - 1 &lt;&lt; endl;
-    else cout &lt;&lt; 0 &lt;&lt; endl;
+    if (cnt) cout << cnt - 1 << endl;
+    else cout << 0 << endl;
 
     return 0;
 }
@@ -75,7 +78,7 @@ int main() {
 ### 代码
 
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1010;
@@ -86,8 +89,8 @@ int n;
 int main() {
     cin >> n;
 
-    for (int i = 1; i &lt;= n; i++) {
-        for (int j = 1; j &lt;= n; j++) cin &gt;> mp[i][j];
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) cin >> mp[i][j];
     }
 
     // ... 后续代码逻辑 ...
@@ -117,10 +120,10 @@ int main() {
 ### 代码
 
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
-map&lt;string, int&gt; a;
+map<string, int> a;
 
 int n;
 
@@ -132,16 +135,16 @@ int main() {
 
     cin >> n;
 
-    for (int i = 0; i &lt; n; i++) cin &gt;> s[i];
+    for (int i = 0; i < n; i++) cin >> s[i];
 
-    for (int i = 0; i &lt; n; i++) {
+    for (int i = 0; i < n; i++) {
 
         a[s[i]]++;
         int t = a[s[i]] - 1;
         if (t != 0) {
-            cout &lt;&lt; s[i] &lt;&lt; '(' &lt;&lt; t &lt;&lt; ')' &lt;&lt; endl;
+            cout << s[i] << '(' << t << ')' << endl;
         } else {
-            cout &lt;&lt; s[i] &lt;&lt; endl;
+            cout << s[i] << endl;
         }
     }
 
@@ -175,7 +178,7 @@ int main() {
 ### 代码
 
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 typedef long long LL;
@@ -192,11 +195,11 @@ LL b[N];
 int main() {
     cin >> n >> m;
 
-    for (int i = 1; i &lt;= n; i++) cin &gt;> a[i];
+    for (int i = 1; i <= n; i++) cin >> a[i];
 
-    for (int i = 0; i &lt; m; i++) {
+    for (int i = 0; i < m; i++) {
         int x, y;
-        cin &gt;> x >> y;
+        cin >> x >> y;
         b[x] = y;
     }
 
@@ -219,3 +222,4 @@ int main() {
     return 0;
 }
 ```
+

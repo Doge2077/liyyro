@@ -1,9 +1,12 @@
----
+﻿---
 title: "Codeforces Round #808 (Div 2.) A·B·C"
 date: 2022-07-19
-categories: [ALGORITHM, Q&amp;A, 数学, Codeforces, 贪心]
+categories: [ALGORITHM, Q&A, 数学, Codeforces, 贪心]
 description: ""
 ---
+
+# codeforces-round-808-div-2-a·b·c
+
 
 ---
 
@@ -43,7 +46,7 @@ description: ""
 ### 代码
 
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1e6 + 3;
@@ -53,13 +56,13 @@ int a[N];
 void solve() {
     int n;
     cin >> n;
-    for (int i = 1; i &lt;= n; i++) {
-        cin &gt;> a[i];
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i];
     }
 
     bool flag = 1;
     int t = a[1];
-    for (int i = 2; i &lt;= n; i++) {
+    for (int i = 2; i <= n; i++) {
         if (a[i] % t != 0) {
             flag = 0;
             break;
@@ -67,14 +70,14 @@ void solve() {
     }
 
     if (flag)
-        cout &lt;&lt; "YES" &lt;&lt; "\n";
+        cout << "YES" << "\n";
     else
-        cout &lt;&lt; "NO" &lt;&lt; "\n";
+        cout << "NO" << "\n";
 }
 
 int main() {
     int tt;
-    cin &gt;> tt;
+    cin >> tt;
     while (tt--) {
         solve();
     }
@@ -106,7 +109,7 @@ int main() {
 ### 代码
 
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1e6 + 3;
@@ -119,9 +122,9 @@ void solve() {
 
     bool flag = 1;
 
-    for (int i = 1; i &lt;= n; i++) {
+    for (int i = 1; i <= n; i++) {
         a[i] = r / i * i;
-        if (a[i] &lt; l) {
+        if (a[i] < l) {
             flag = 0;
             break;
         }
@@ -157,7 +160,7 @@ void solve() {
 ### 代码
 
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1e6 + 3;
@@ -170,24 +173,24 @@ void solve() {
 
     string s(n, '0');
 
-    for (int i = 0; i &lt; n; i++) cin &gt;> a[i];
+    for (int i = 0; i < n; i++) cin >> a[i];
 
     int q = 0;
 
     for (int i = n - 1; i >= 0; i--) {
-        if (a[i] &lt;= q) s[i] = '1';
-        else if (a[i] &gt; q && q &lt; m) {
+        if (a[i] <= q) s[i] = '1';
+        else if (a[i] > q && q < m) {
             q++;
             s[i] = '1';
         }
     }
 
-    cout &lt;&lt; s &lt;&lt; "\n";
+    cout << s << "\n";
 }
 
 int main() {
     int tt;
-    cin &gt;> tt;
+    cin >> tt;
 
     while (tt--) {
         solve();
@@ -206,3 +209,4 @@ int main() {
     *   赛后补题发现 $A$ 和 $B$ 原来这么简单，还是自己数学基础不好，吃大亏 QAQ。
     *   $C$ 题一眼 `DP`，赛时考虑了贪心，但是没证出来，逆向贪心的问题不知道怎么处理。
     *   希望早日变绿。。。。。。（我好笨比）
+

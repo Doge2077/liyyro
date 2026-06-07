@@ -1,9 +1,12 @@
----
+﻿---
 title: "计算机组成原理：5. 输入输出系统"
 date: 2023-04-04
 categories: [Principles of Computer Composition]
 description: ""
 ---
+
+# pcc5
+
 
 ## 5.1 输入输出系统概述
 

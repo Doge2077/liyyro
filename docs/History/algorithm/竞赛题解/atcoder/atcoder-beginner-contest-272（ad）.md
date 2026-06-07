@@ -1,9 +1,12 @@
----
+﻿---
 title: "AtCoder Beginner Contest 272（A~D）"
 date: 2022-10-10
-categories: [ALGORITHM, Q&amp;A, 模拟, BFS, AtCoder, 思维]
+categories: [ALGORITHM, Q&A, 模拟, BFS, AtCoder, 思维]
 description: ""
 ---
+
+# atcoder-beginner-contest-272（ad）
+
 
 ## A. Integer Sum
 
@@ -25,19 +28,19 @@ description: ""
 
 **代码** ：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -48,8 +51,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 1e6 + 3;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -62,14 +65,14 @@ void solve(){
         LL x; cin >> x;
         sum += x;
     }
-    cout &lt;&lt; sum &lt;&lt; endl;
+    cout << sum << endl;
     return;
 }
 
 int main(){
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while(_ --){
         solve();
     }
@@ -102,19 +105,19 @@ int main(){
 
 ---
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -125,8 +128,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 200;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -137,19 +140,19 @@ int vis[N][N];
 
 void solve(){
     cin >> n >> m;
-    for(int i = 1; i &lt;= m; i ++){
-        int t; cin &gt;> t;
+    for(int i = 1; i <= m; i ++){
+        int t; cin >> t;
         int num[N];
-        for(int j = 0; j &lt; t; j ++) cin &gt;> num[j];  //读入参加该聚会的人的编号
-        for(int j = 0; j &lt; t; j ++){
-            for(int k = 0; k &lt; t; k ++){
+        for(int j = 0; j < t; j ++) cin >> num[j];  //读入参加该聚会的人的编号
+        for(int j = 0; j < t; j ++){
+            for(int k = 0; k < t; k ++){
                 if(k != j) vis[num[j]][num[k]] = 1;  //去除自己本身，所有参加该聚会的人两两组合。
             }
         }
     }
     bool flag = 1;
-    for(int i = 1; i &lt;= n; i ++){
-        for(int j = i + 1; j &lt;= n; j ++){
+    for(int i = 1; i <= n; i ++){
+        for(int j = i + 1; j <= n; j ++){
             if(vis[i][j] == 0){
                 flag = 0;
                 break;
@@ -157,15 +160,15 @@ void solve(){
         }
         if(!flag) break;
     }
-    if (flag) cout &lt;&lt; "Yes" &lt;&lt; endl;
-    else cout &lt;&lt; "No" &lt;&lt; endl;
+    if (flag) cout << "Yes" << endl;
+    else cout << "No" << endl;
     return;
 }
 
 int main(){
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while(_ --){
         solve();
     }
@@ -198,19 +201,19 @@ int main(){
 
 **代码** ：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -221,8 +224,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 200;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -241,34 +244,34 @@ void solve(){
             else if(o_1 != -1 && o_2 == -1) o_2 = x, O ++;  //第二个偶数出现
             else{  //第三个及之后的偶数出现
                 if(x > o_2) o_2 = x;  //x大于较小偶数则更新o_2
-                if(o_1 &lt; o_2) swap(o_1, o_2);  //维护o_1为最大的偶数
+                if(o_1 < o_2) swap(o_1, o_2);  //维护o_1为最大的偶数
             }
         }
         else{  //奇数同理
             if(e_1 == -1 && e_2 == -1) e_1 = x, E ++;
             else if(e_1 != -1 && e_2 == -1) e_2 = x, E ++;
             else{
-                if(x &gt; e_2) e_2 = x;
-                if(e_1 &lt; e_2) swap(e_1, e_2);
+                if(x > e_2) e_2 = x;
+                if(e_1 < e_2) swap(e_1, e_2);
             }
         }
     }
     if(O == 2 && E == 2){  //两个偶数相加为偶数，两个奇数相加为偶数，两种情况取最大
-        cout &lt;&lt; max(o_1 + o_2, e_1 + e_2) &lt;&lt; endl;
+        cout << max(o_1 + o_2, e_1 + e_2) << endl;
     }
     else if(O == 2 && E != 2){  //只存在两个偶数加和的情况
-        cout &lt;&lt; o_1 + o_2 &lt;&lt; endl;
+        cout << o_1 + o_2 << endl;
     }
     else if(O != 2 && E == 2){   //只存在两个奇数加和的情况
-        cout &lt;&lt; e_1 + e_2 &lt;&lt; endl;
+        cout << e_1 + e_2 << endl;
     }
-    else cout &lt;&lt; -1 &lt;&lt; endl;  //不存在的情况
+    else cout << -1 << endl;  //不存在的情况
 }
 
 int main(){
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while(_ --){
         solve();
     }
@@ -303,19 +306,19 @@ int main(){
 
 **代码**：
 ```cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;set&gt;
-#include &lt;unordered_map&gt;
-#include &lt;unordered_set&gt;
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -326,8 +329,8 @@ using namespace std;
 #define endl '\n'
 
 typedef long long LL;
-typedef pair&lt;int, int&gt; PII;
-typedef pair&lt;LL, LL&gt; PLL;
+typedef pair<int, int> PII;
+typedef pair<LL, LL> PLL;
 
 const int N = 505;
 const int INF = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -336,19 +339,19 @@ const double eps = 1e-6, PI = acos(-1);
 int n, m;
 int ans[N][N];  //记录步数，初始化为-1
 bool vis[N][N];  //标记是否走过该点
-vector&lt;PII&gt; d;  //偏移量数组
+vector<PII> d;  //偏移量数组
 
 void bfs(int l, int r) {
     vis[l][r] = 1;  //标记起始点已经走过
     ans[l][r] = 0;  //起始点的步数恒为0
-    queue&lt;PII&gt; st;
+    queue<PII> st;
     st.push({l, r});
     while (!st.empty()) {
         auto p = st.front();
         st.pop();
-        for (int i = 0; i &lt; d.size(); i++) {
+        for (int i = 0; i < d.size(); i++) {
             int x = p.first + d[i].first, y = p.second + d[i].second;
-            if (x &gt;= 1 && x &lt;= n && y &gt;= 1 && y &lt;= n && !vis[x][y]) {  // 下一步在矩阵范围内且没有走过
+            if (x >= 1 && x <= n && y >= 1 && y <= n && !vis[x][y]) {  // 下一步在矩阵范围内且没有走过
                 ans[x][y] = ans[p.first][p.second] + 1;  // 步数为上一个格子的步数+1
                 vis[x][y] = 1;
                 st.push({x, y});
@@ -358,9 +361,9 @@ void bfs(int l, int r) {
 }
 
 void solve() {
-    cin &gt;> n >> m;
-    for (int i = 0; i &lt;= n; i++) {
-        for (int j = 0; j &lt;= n; j++) {
+    cin >> n >> m;
+    for (int i = 0; i <= n; i++) {
+        for (int j = 0; j <= n; j++) {
             ans[i][j] = -1;
             if (i * i + j * j == m) {  // 初始化偏移量
                 d.push_back({i, j});
@@ -371,18 +374,18 @@ void solve() {
         }
     }
     bfs(1, 1);  // 从(1,1)开始搜索
-    for (int i = 1; i &lt;= n; i++) {
-        for (int j = 1; j &lt;= n; j++) {
-            cout &lt;&lt; ans[i][j] &lt;&lt; ' ';
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            cout << ans[i][j] << ' ';
         }
-        cout &lt;&lt; endl;
+        cout << endl;
     }
 }
 
 int main() {
     IOS;
     int _ = 1;
-    // cin &gt;> _;
+    // cin >> _;
     while (_ --) {
         solve();
     }
@@ -396,3 +399,4 @@ int main() {
 3. 修正了代码中的变量命名和注释错误
 4. 补全了不完整的代码块
 5. 规范了Markdown标题和段落格式
+

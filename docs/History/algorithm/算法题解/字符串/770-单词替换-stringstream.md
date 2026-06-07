@@ -1,9 +1,12 @@
----
+﻿---
 title: "770.单词替换 (stringstream)"
 date: 2022-06-15
-categories: [ALGORITHM, Q&amp;A, 字符串]
+categories: [ALGORITHM, Q&A, 字符串]
 description: ""
 ---
+
+# 770-单词替换-stringstream
+
 
 ### 770.单词替换 (stringstream)
 
@@ -41,7 +44,7 @@ I want someone to help you
 
 **代码**：
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 int main()
 {
@@ -51,9 +54,9 @@ int main()
     stringstream ssin(s);  //初始化
     while(ssin >> s1) {  //依次读入
         if(s1 == a) {  //判断
-            cout &lt;&lt; b &lt;&lt; " ";
+            cout << b << " ";
         }
-        else cout &lt;&lt; s1 &lt;&lt; " ";
+        else cout << s1 << " ";
     }
     return 0;
 }
@@ -77,3 +80,4 @@ int main()
 >     double nums = atof(str3.c_str()) ;  //将str3转换为double类型
 >
 >     int num_i = atoi(str3.c_str()) ;  //将str3转换为int类型
+

@@ -1,9 +1,12 @@
----
+﻿---
 title: "AcWing 第69场周赛"
 date: 2022-10-10
-categories: [ALGORITHM, Q&amp;A, 思维]
+categories: [ALGORITHM, Q&A, 思维]
 description: ""
 ---
+
+# acwing-第69场周赛
+
 
 ## 4615. 相遇问题
 
@@ -20,7 +23,7 @@ description: ""
 
 **代码**：
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 typedef long long LL;
@@ -29,14 +32,14 @@ void solve() {
     LL x, y, a, b;
     cin >> x >> y >> a >> b;
     if ((y - x) % (a + b) == 0)
-        cout &lt;&lt; (y - x) / (a + b) &lt;&lt; endl;
+        cout << (y - x) / (a + b) << endl;
     else
-        cout &lt;&lt; -1 &lt;&lt; endl;
+        cout << -1 << endl;
 }
 
 int main() {
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while (_--) solve();
     return 0;
 }
@@ -64,7 +67,7 @@ int main() {
 
 **代码**：
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1e6 + 10;
@@ -79,7 +82,7 @@ void solve() {
     cin >> s;
     int cnt = 0;
     idx = 0;
-    for (int i = 0; i &lt; s.size(); i++) {
+    for (int i = 0; i < s.size(); i++) {
         if (s[i] == '0') {
             cnt++;
             if (cnt == b) {
@@ -90,11 +93,11 @@ void solve() {
             cnt = 0;
         }
     }
-    cout &lt;&lt; idx - a + 1 &lt;&lt; endl;
-    for (int i = 0; i &lt; idx - a + 1; i++) {
-        cout &lt;&lt; num[i] &lt;&lt; ' ';
+    cout << idx - a + 1 << endl;
+    for (int i = 0; i < idx - a + 1; i++) {
+        cout << num[i] << ' ';
     }
-    cout &lt;&lt; endl;
+    cout << endl;
 }
 
 int main() {
@@ -127,7 +130,7 @@ int main() {
 
 **代码**：
 ```cpp
-#include &lt;bits/stdc++.h&gt;
+#include <bits/stdc++.h>
 using namespace std;
 
 typedef long long LL;
@@ -140,13 +143,14 @@ void solve() {
         cnt += n & 1;
         n >>= 1;
     }
-    cout &lt;&lt; (1LL &lt;&lt; cnt) &lt;&lt; endl;
+    cout << (1LL << cnt) << endl;
 }
 
 int main() {
     int _ = 1;
-    cin &gt;> _;
+    cin >> _;
     while (_--) solve();
     return 0;
 }
 ```
+

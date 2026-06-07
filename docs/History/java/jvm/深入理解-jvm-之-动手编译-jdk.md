@@ -1,9 +1,12 @@
----
+﻿---
 title: "深入理解 JVM 之——动手编译 JDK"
 date: 2023-08-29
 categories: [Java, jvm]
 description: ""
 ---
+
+# 深入理解-jvm-之-动手编译-jdk
+
 
 本篇为深入理解 `Java` 虚拟机第一章的实战内容，推荐在学习前先掌握基础的 `Linux` 操作、编译原理基础以及扎实的 `C/C++` 功底。
 

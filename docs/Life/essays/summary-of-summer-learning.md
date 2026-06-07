@@ -1,9 +1,12 @@
----
+﻿---
 title: "Summary of Summer Learning"
 date: 2022-08-31
 categories: [ARTICLES, Essays, essays]
 description: ""
 ---
+
+# summary-of-summer-learning
+
 
 ## What I've learnt?
 
