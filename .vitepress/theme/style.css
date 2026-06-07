@@ -180,3 +180,83 @@ mjx-container svg {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
+/* Hero图片动画 */
+@keyframes Updown {
+  0% { transform: translate(-50%, -50%); }
+  100% { transform: translate(-50%, -48%); }
+}
+
+.VPHero .image img {
+  animation: Updown 0.9s infinite alternate ease-in-out;
+}
+
+/* 响应式尺寸 */
+@media (min-width: 640px) {
+  .VPHero .image img {
+    max-width: 300px;
+    max-height: 300px;
+  }
+}
+
+@media (min-width: 960px) {
+  .VPHero .image img {
+    max-width: 300px;
+    max-height: 300px;
+  }
+}
+
+/* 打字动画样式 */
+.typed-info {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.typed-info .tagline {
+  padding-top: 8px;
+  max-width: 392px;
+  line-height: 28px;
+  font-size: 18px;
+  font-weight: 500;
+  white-space: pre-wrap;
+  color: var(--vp-c-text-2);
+}
+
+@media (min-width: 640px) {
+  .typed-info .tagline {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 960px) {
+  .typed-info .tagline {
+    font-size: 22px;
+  }
+}
+
+/* 优化Features卡片样式 */
+.VPFeature {
+  background-color: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.VPFeature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--vp-c-brand-1);
+}
+
+.VPFeature .title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.VPFeature .details {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--vp-c-text-2);
+}
