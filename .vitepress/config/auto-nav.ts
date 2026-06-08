@@ -23,12 +23,12 @@ const SECTION_MAP: Record<string, string> = {
   History: 'History'
 }
 
-// 侧边栏一级目录 Emoji（仅顶层使用）
+// 侧边栏目录 Emoji（仅 History 一级子目录使用）
 const SIDEBAR_EMOJI_MAP: Record<string, string> = {
   'AI': '🤖',
   'Life': '🌟',
   'History': '📚',
-  // History 子目录
+  // History 一级子目录
   'algorithm': '🧠',
   'java': '☕',
   'cpp': '⚙️',
@@ -37,26 +37,54 @@ const SIDEBAR_EMOJI_MAP: Record<string, string> = {
   'python': '🐍',
   'linux': '🐧',
   'tips': '💡',
-  'other': '📦',
-  // 算法子目录
-  '算法讲解': '📖',
-  '算法题解': '💻',
-  '竞赛题解': '🏆',
-  // 数据库子目录
-  'mysql': '🐬',
-  'redis': '🔴',
-  'neo4j': '🔗',
-  // Java子目录
-  'jdk源码': '☕',
-  'jvm': '☕',
-  'spring': '🌱',
-  '架构': '🏗️',
-  '其他': '📦',
-  // 计算机基础子目录
-  '数据结构': '📊',
-  '计算机组成': '💻',
-  '编译原理': '🔧',
-  '计算机网络': '🌐'
+  'other': '📦'
+}
+
+// 首字母大写映射
+const CAPITALIZE_MAP: Record<string, string> = {
+  'algorithm': 'Algorithm',
+  'java': 'Java',
+  'cpp': 'Cpp',
+  'cs-fundamentals': 'Cs-Fundamentals',
+  'database': 'Database',
+  'python': 'Python',
+  'linux': 'Linux',
+  'tips': 'Tips',
+  'other': 'Other',
+  'mysql': 'MySQL',
+  'redis': 'Redis',
+  'neo4j': 'Neo4j',
+  'jdk源码': 'JDK源码',
+  'jvm': 'JVM',
+  'spring': 'Spring',
+  '架构': '架构',
+  '其他': '其他',
+  '数据结构': '数据结构',
+  '计算机组成': '计算机组成',
+  '编译原理': '编译原理',
+  '计算机网络': '计算机网络',
+  '算法讲解': '算法讲解',
+  '算法题解': '算法题解',
+  '竞赛题解': '竞赛题解',
+  '动态规划': '动态规划',
+  '搜索': '搜索',
+  '数学': '数学',
+  '贪心': '贪心',
+  '字符串': '字符串',
+  '图论': '图论',
+  '力扣': '力扣',
+  'acwing': 'Acwing',
+  'codeforces': 'Codeforces',
+  'atcoder': 'Atcoder',
+  'ccpc': 'CCPC',
+  'leetcode': 'LeetCode',
+  '校内竞赛': '校内竞赛',
+  '学校培训': '学校培训',
+  'campus': 'Campus',
+  'essays': 'Essays',
+  'poems': 'Poems',
+  'Novels': 'Novels',
+  'photos': 'Photos'
 }
 
 interface MarkdownFile {
@@ -217,9 +245,13 @@ function generateSidebarItems(dir: string, basePath: string): DefaultTheme.Sideb
       const subPath = path.join(dir, entry.name)
       const subItems = generateSidebarItems(subPath, `${basePath}/${entry.name}`)
       if (subItems.length > 0) {
-        // 一级目录添加 emoji
-        const emoji = SIDEBAR_EMOJI_MAP[entry.name] || ''
-        const text = emoji ? `${emoji} ${entry.name}` : entry.name
+        // 计算目录深度
+        const depth = basePath.split('/').filter(Boolean).length
+        // 只有一级子目录（History 下的目录）添加 emoji
+        const emoji = (depth === 1 && basePath.endsWith('/History')) ? (SIDEBAR_EMOJI_MAP[entry.name] || '') : ''
+        // 首字母大写
+        const displayName = CAPITALIZE_MAP[entry.name] || entry.name
+        const text = emoji ? `${emoji} ${displayName}` : displayName
         items.push({
           text,
           collapsed: true,
