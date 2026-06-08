@@ -1,15 +1,43 @@
 {
-  "sidebar": {
-    "AI": 1,
-    "Life": 2,
-    "History": 3
-
-  },
-  "directories": {
-    "History/algorithm": {
-      "算法讲解": 1,
-      "算法题解": 2,
-      "竞赛题解": 3
+  "topLevel": ["AI", "Life", "History"],
+  "History": {
+    "_order": ["algorithm", "java", "cpp", "cs-fundamentals", "database", "python", "linux", "tips", "other"],
+    "algorithm": {
+      "_order": ["算法讲解", "算法题解", "竞赛题解"],
+      "算法讲解": {
+        "_order": [
+          "1. 基础算法初识",
+          "2. 基础数据结构初识",
+          "3. 基础搜索与图论初识",
+          "4. 基础数学初识",
+          "5. 动态规划",
+          "6. 学校培训",
+          "7. Java算竞操作",
+          "8. AC自动机详解"
+        ]
+      },
+      "算法题解": {
+        "_order": ["动态规划", "搜索", "数学", "贪心", "字符串", "图论", "力扣", "其他"]
+      },
+      "竞赛题解": {
+        "_order": ["acwing", "codeforces", "atcoder", "ccpc", "leetcode", "校内竞赛"]
+      }
+    },
+    "java": {
+      "_order": ["jdk源码", "jvm", "spring", "架构", "其他"]
+    },
+    "cpp": {},
+    "cs-fundamentals": {
+      "_order": ["数据结构", "计算机组成", "编译原理", "计算机网络", "其他"]
+    },
+    "database": {
+      "_order": ["mysql", "redis", "neo4j", "理论"]
+    },
+    "python": {},
+    "linux": {},
+    "tips": {},
+    "other": {
+      "_order": ["campus", "essays", "poems", "Novels", "photos"]
     }
   }
 }
