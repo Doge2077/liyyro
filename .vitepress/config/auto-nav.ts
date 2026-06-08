@@ -5,9 +5,9 @@ import type { DefaultTheme } from 'vitepress'
 
 const docsDir = path.resolve(__dirname, '../../docs')
 
-// 读取排序配置文件
+// 读取排序配置文件（嵌套格式）
 const orderConfigPath = path.resolve(__dirname, '../../order.json')
-let orderConfig: { sidebar?: Record<string, number>; directories?: Record<string, Record<string, number>> } = {}
+let orderConfig: Record<string, any> = {}
 try {
   if (fs.existsSync(orderConfigPath)) {
     orderConfig = JSON.parse(fs.readFileSync(orderConfigPath, 'utf-8'))
@@ -23,52 +23,40 @@ const SECTION_MAP: Record<string, string> = {
   History: 'History'
 }
 
-// 目录Emoji映射
-const EMOJI_MAP: Record<string, string> = {
-  // History子目录
-  'Algorithm': '🧠',
-  'Cpp': '⚙️',
-  'Cs-Fundamentals': '📚',
-  'Database': '🗄️',
-  'Java': '☕',
-  'Linux': '🐧',
-  'Python': '🐍',
-  'Tips': '💡',
-  // Life子目录
-  'Articles': '📝',
-  'Campus': '🏫',
-  'Essays': '📖',
-  'Novels': '📚',
-  'Photos': '📷',
-  'Poems': '🎭',
+// 侧边栏一级目录 Emoji（仅顶层使用）
+const SIDEBAR_EMOJI_MAP: Record<string, string> = {
+  'AI': '🤖',
+  'Life': '🌟',
+  'History': '📚',
+  // History 子目录
+  'algorithm': '🧠',
+  'java': '☕',
+  'cpp': '⚙️',
+  'cs-fundamentals': '📚',
+  'database': '🗄️',
+  'python': '🐍',
+  'linux': '🐧',
+  'tips': '💡',
+  'other': '📦',
   // 算法子目录
   '算法讲解': '📖',
   '算法题解': '💻',
   '竞赛题解': '🏆',
   // 数据库子目录
   'mysql': '🐬',
-  'neo4j': '🔗',
   'redis': '🔴',
+  'neo4j': '🔗',
   // Java子目录
-  '架构': '🏗️',
-  '其他': '📦',
   'jdk源码': '☕',
   'jvm': '☕',
   'spring': '🌱',
+  '架构': '🏗️',
+  '其他': '📦',
   // 计算机基础子目录
-  '编译原理': '🔧',
-  '计算机网络': '🌐',
+  '数据结构': '📊',
   '计算机组成': '💻',
-  '数据结构': '📊'
-}
-
-// 目录排序配置（数字越小越靠前）
-const DIR_ORDER: Record<string, Record<string, number>> = {
-  'History/algorithm': {
-    '算法讲解': 1,
-    '算法题解': 2,
-    '竞赛题解': 3
-  }
+  '编译原理': '🔧',
+  '计算机网络': '🌐'
 }
 
 interface MarkdownFile {
@@ -81,50 +69,58 @@ interface MarkdownFile {
 
 // 从标题中提取数字（用于排序）
 function extractNumber(title: string): number {
-  // 匹配中文数字
   const chineseNums: Record<string, number> = {
     '一': 1, '二': 2, '三': 3, '四': 4, '五': 5,
     '六': 6, '七': 7, '八': 8, '九': 9, '十': 10,
     '十一': 11, '十二': 12, '十三': 13, '十四': 14, '十五': 15
   }
-  
-  // 尝试匹配 "（一）" 或 "(一)" 格式
   const chineseMatch = title.match(/[（(]([一二三四五六七八九十]+)[）)]/)
-  if (chineseMatch) {
-    return chineseNums[chineseMatch[1]] || 999
-  }
-  
-  // 尝试匹配数字格式如 "第1章" 或 "1." 或 "1-" 开头
+  if (chineseMatch) return chineseNums[chineseMatch[1]] || 999
   const numMatch = title.match(/^(?:第)?(\d+)[章节目篇.、-]/)
-  if (numMatch) {
-    return parseInt(numMatch[1])
-  }
-  
-  // 尝试匹配标题中的第一个数字
+  if (numMatch) return parseInt(numMatch[1])
   const firstNum = title.match(/\d+/)
-  if (firstNum) {
-    return parseInt(firstNum[0])
+  if (firstNum) return parseInt(firstNum[0])
+  return 999
+}
+
+// 从名称中提取数字前缀
+function extractOrderFromName(name: string): number {
+  const match = name.match(/^(\d+)[.\s]/)
+  return match ? parseInt(match[1]) : 999
+}
+
+// 从嵌套配置中获取某个目录的排序数组
+function getOrderArray(configPath: string): string[] {
+  const parts = configPath.split('/')
+  let current: any = orderConfig
+  for (const part of parts) {
+    if (current && typeof current === 'object' && part in current) {
+      current = current[part]
+    } else {
+      return []
+    }
   }
-  
-  return 999 // 没有数字的排在最后
+  if (current && typeof current === 'object' && '_order' in current) {
+    return current['_order']
+  }
+  return []
 }
 
 // 获取指定目录下的 .md 文件（不递归，排除 index.md）
 function getMarkdownFiles(dir: string): MarkdownFile[] {
   const files: MarkdownFile[] = []
   if (!fs.existsSync(dir)) return files
-  
+
   for (const f of fs.readdirSync(dir)) {
     const fullPath = path.join(dir, f)
     if (fs.statSync(fullPath).isDirectory()) continue
     if (!f.endsWith('.md') || f === 'index.md') continue
-    
+
     try {
       const content = fs.readFileSync(fullPath, 'utf-8')
       const { data } = matter(content)
       const name = f.replace('.md', '')
       const title = data.title || name
-      
       files.push({
         name,
         title,
@@ -146,74 +142,86 @@ function getMarkdownFiles(dir: string): MarkdownFile[] {
   return files
 }
 
-// 从名称中提取数字前缀用于排序
-function extractOrderFromName(name: string): number {
-  const match = name.match(/^(\d+)[.\s]/)
-  return match ? parseInt(match[1]) : 999
+// 根据 _order 数组排序
+function sortByOrder<T extends { name: string }>(items: T[], orderArr: string[]): T[] {
+  if (!orderArr || orderArr.length === 0) return items
+  const orderMap = new Map(orderArr.map((name, idx) => [name, idx]))
+  return [...items].sort((a, b) => {
+    const idxA = orderMap.has(a.name) ? orderMap.get(a.name)! : 9999
+    const idxB = orderMap.has(b.name) ? orderMap.get(b.name)! : 9999
+    if (idxA !== idxB) return idxA - idxB
+    return a.name.localeCompare(b.name)
+  })
 }
 
 // 递归生成侧边栏项
 function generateSidebarItems(dir: string, basePath: string): DefaultTheme.SidebarItem[] {
   const items: DefaultTheme.SidebarItem[] = []
-  
   if (!fs.existsSync(dir)) return items
-  
+
   // 获取子目录
   const subDirs = fs.readdirSync(dir)
-    .filter(d => {
-      const fullPath = path.join(dir, d)
-      return fs.statSync(fullPath).isDirectory()
-    })
-  
+    .filter(d => fs.statSync(path.join(dir, d)).isDirectory())
+
   // 获取当前目录下的 .md 文件
   const files = getMarkdownFiles(dir)
-  
-  // 合并子目录和文件，统一排序
+
+  // 计算 order.json 中的配置路径
+  const relBasePath = basePath.startsWith('/') ? basePath.slice(1) : basePath
+
+  // 用 _order 排序子目录
+  const dirOrderArr = getOrderArray(relBasePath)
+  const sortedDirs = sortByOrder(
+    subDirs.map(d => ({ name: d })),
+    dirOrderArr
+  ).map(d => d.name)
+
+  // 用 _order 或 frontmatter order 排序文件
+  const fileOrderArr = getOrderArray(relBasePath)
+  const sortedFiles = sortByOrder(
+    files.map(f => ({ ...f })),
+    fileOrderArr
+  ).sort((a, b) => {
+    // 如果在 _order 中有位置，按 _order 排
+    const idxA = fileOrderArr.indexOf(a.name)
+    const idxB = fileOrderArr.indexOf(b.name)
+    if (idxA !== -1 && idxB !== -1) return idxA - idxB
+    if (idxA !== -1) return -1
+    if (idxB !== -1) return 1
+    // 否则按 order 字段排
+    if (a.order !== b.order) return a.order - b.order
+    return b.date.getTime() - a.date.getTime()
+  })
+
+  // 合并子目录和文件，按 _order 统一排序
   type Entry = { type: 'dir'; name: string } | { type: 'file'; name: string; title: string; path: string; order: number }
   const entries: Entry[] = [
-    ...subDirs.map(d => ({ type: 'dir' as const, name: d })),
-    ...files.map(f => ({ type: 'file' as const, name: f.name, title: f.title, path: f.path, order: f.order }))
+    ...sortedDirs.map(d => ({ type: 'dir' as const, name: d })),
+    ...sortedFiles.map(f => ({ type: 'file' as const, name: f.name, title: f.title, path: f.path, order: f.order }))
   ]
-  
-  // 获取当前目录的相对路径（用于查找 orderConfig.directories）
-  const relativePath = basePath.startsWith('/') ? basePath.slice(1) : basePath
-  
-  // 排序函数
-  entries.sort((a, b) => {
-    let orderA: number
-    let orderB: number
-    
-    if (a.type === 'dir') {
-      // 目录：优先使用 orderConfig.directories 配置
-      const dirConfig = orderConfig.directories?.[relativePath]
-      orderA = dirConfig?.[a.name] ?? extractOrderFromName(a.name)
-    } else {
-      // 文件：优先使用 frontmatter 的 order 字段
-      orderA = (a.type === 'file' && a.order !== 999) ? a.order : 9999
-    }
-    
-    if (b.type === 'dir') {
-      const dirConfig = orderConfig.directories?.[relativePath]
-      orderB = dirConfig?.[b.name] ?? extractOrderFromName(b.name)
-    } else {
-      orderB = (b.type === 'file' && b.order !== 999) ? b.order : 9999
-    }
-    
-    if (orderA !== orderB) return orderA - orderB
-    return a.name.localeCompare(b.name)
-  })
-  
+
+  // 如果有 _order，按 _order 统一排序
+  if (fileOrderArr.length > 0) {
+    const orderMap = new Map(fileOrderArr.map((name, idx) => [name, idx]))
+    entries.sort((a, b) => {
+      const idxA = orderMap.has(a.name) ? orderMap.get(a.name)! : 9999
+      const idxB = orderMap.has(b.name) ? orderMap.get(b.name)! : 9999
+      if (idxA !== idxB) return idxA - idxB
+      return a.name.localeCompare(b.name)
+    })
+  }
+
   // 按排序顺序添加到 items
   for (const entry of entries) {
     if (entry.type === 'dir') {
       const subPath = path.join(dir, entry.name)
       const subItems = generateSidebarItems(subPath, `${basePath}/${entry.name}`)
-      
       if (subItems.length > 0) {
-        const emoji = EMOJI_MAP[entry.name] || ''
-        const text = entry.name
+        // 一级目录添加 emoji
+        const emoji = SIDEBAR_EMOJI_MAP[entry.name] || ''
+        const text = emoji ? `${emoji} ${entry.name}` : entry.name
         items.push({
-          text: emoji ? `${emoji} ${text}` : text,
+          text,
           collapsed: true,
           items: subItems
         })
@@ -225,34 +233,30 @@ function generateSidebarItems(dir: string, basePath: string): DefaultTheme.Sideb
       })
     }
   }
-  
+
   return items
 }
 
 // 扫描一级目录 -> 生成 nav
 export function generateNav(): DefaultTheme.NavItem[] {
   if (!fs.existsSync(docsDir)) return []
-  
+
+  const topOrder: string[] = orderConfig.topLevel || []
   const dirs = fs.readdirSync(docsDir)
     .filter(d => {
       const fullPath = path.join(docsDir, d)
-      return fs.statSync(fullPath).isDirectory() && 
-             d !== 'public' && 
+      return fs.statSync(fullPath).isDirectory() &&
+             d !== 'public' &&
              d !== '.vitepress' &&
              !d.startsWith('.')
     })
-    .sort((a, b) => {
-      const orderA = orderConfig.sidebar?.[a] ?? 9999
-      const orderB = orderConfig.sidebar?.[b] ?? 9999
-      if (orderA !== orderB) return orderA - orderB
-      return a.localeCompare(b)
-    })
-  
-  return dirs.map(dir => {
-    const emoji = EMOJI_MAP[dir] || ''
+
+  const sortedDirs = sortByOrder(dirs.map(d => ({ name: d })), topOrder).map(d => d.name)
+
+  return sortedDirs.map(dir => {
     const text = SECTION_MAP[dir] || dir
     return {
-      text: emoji ? `${emoji} ${text}` : text,
+      text,
       link: `/${dir}/`
     }
   })
@@ -261,31 +265,29 @@ export function generateNav(): DefaultTheme.NavItem[] {
 // 扫描目录 -> 生成 sidebar（支持多级）
 export function generateSidebar(): DefaultTheme.Sidebar {
   if (!fs.existsSync(docsDir)) return {}
-  
+
   const sidebar: DefaultTheme.Sidebar = {}
+  const topOrder: string[] = orderConfig.topLevel || []
   const firstLevelDirs = fs.readdirSync(docsDir)
     .filter(d => {
       const fullPath = path.join(docsDir, d)
-      return fs.statSync(fullPath).isDirectory() && 
-             d !== 'public' && 
+      return fs.statSync(fullPath).isDirectory() &&
+             d !== 'public' &&
              d !== '.vitepress' &&
              !d.startsWith('.')
     })
-    .sort((a, b) => {
-      const orderA = orderConfig.sidebar?.[a] ?? 9999
-      const orderB = orderConfig.sidebar?.[b] ?? 9999
-      if (orderA !== orderB) return orderA - orderB
-      return a.localeCompare(b)
-    })
 
-  for (const firstDir of firstLevelDirs) {
+  const sortedDirs = sortByOrder(firstLevelDirs.map(d => ({ name: d })), topOrder).map(d => d.name)
+
+  for (const firstDir of sortedDirs) {
     const firstPath = path.join(docsDir, firstDir)
     const items = generateSidebarItems(firstPath, `/${firstDir}`)
-    
     if (items.length > 0) {
+      const emoji = SIDEBAR_EMOJI_MAP[firstDir] || ''
+      const text = emoji ? `${emoji} ${firstDir}` : firstDir
       sidebar[`/${firstDir}/`] = items
     }
   }
-  
+
   return sidebar
 }
