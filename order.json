@@ -1,5 +1,10 @@
 {
   "topLevel": ["AI", "Life", "History"],
+  "AI": {
+    "大模型基础": {
+      "_order": ["大模型基础（一）", "大模型基础（二）", "大模型基础（三）"]
+    }
+  },
   "History": {
     "_order": ["algorithm", "java", "cpp", "cs-fundamentals", "database", "python", "linux", "tips", "other"],
     "algorithm": {
