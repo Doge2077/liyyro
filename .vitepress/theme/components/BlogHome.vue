@@ -37,7 +37,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
+import { data as postsData } from '../loaders/posts.data'
 
 interface Post {
   title: string
@@ -57,8 +58,8 @@ const tabs = [
 ]
 
 const activeTab = ref('AI')
-const loading = ref(true)
-const allPosts = ref<Post[]>([])
+const loading = ref(false)
+const allPosts = ref<Post[]>(postsData || [])
 
 const pageSize = 10
 const currentPage = ref(1)
@@ -89,42 +90,6 @@ function formatDate(dateStr: string): string {
   })
 }
 
-onMounted(async () => {
-  try {
-    const modules = import.meta.glob('/docs/**/*.md')
-    const posts: Post[] = []
-    
-    for (const path in modules) {
-      if (path.endsWith('/index.md')) continue
-      
-      const mod = await modules[path]()
-      const fm = (mod as any).frontmatter || {}
-      const urlPath = path.replace('/docs', '').replace('.md', '')
-      const section = urlPath.split('/')[1] || 'unknown'
-      
-      posts.push({
-        title: fm.title || urlPath.split('/').pop() || 'Untitled',
-        date: fm.date || '1970-01-01',
-        path: urlPath,
-        description: fm.description || '',
-        categories: fm.categories || [],
-        tags: fm.tags || [],
-        section,
-        order: fm.order ?? 9999
-      })
-    }
-    
-    allPosts.value = posts.sort((a, b) => {
-      if (a.order !== b.order) return a.order - b.order
-      // 如果 order 相同，按日期倒序
-      return new Date(b.date).getTime() - new Date(a.date).getTime()
-    })
-  } catch (e) {
-    console.error('Failed to load posts:', e)
-  } finally {
-    loading.value = false
-  }
-})
 </script>
 
 <style scoped>

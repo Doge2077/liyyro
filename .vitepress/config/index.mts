@@ -1,12 +1,11 @@
 import { defineConfig } from 'vitepress'
 import { zh, search as zhSearch } from './theme'
 import footnote from 'markdown-it-footnote'
-import markdownItMathjax3 from 'markdown-it-mathjax3'
 
 export default defineConfig({
   outDir: 'dist',
   srcDir: 'docs',
-  lastUpdated: true,
+  lastUpdated: process.env.VITEPRESS_LAST_UPDATED === 'true',
   ignoreDeadLinks: true,
   locales: {
     root: { label: '简体中文', ...zh }
@@ -16,12 +15,14 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/Doge2077/liyyro' }
     ],
-    search: {
-      provider: 'local',
-      options: {
-        locales: { ...zhSearch }
-      }
-    }
+    search: process.env.VITEPRESS_LOCAL_SEARCH === 'true'
+      ? {
+          provider: 'local',
+          options: {
+            locales: { ...zhSearch }
+          }
+        }
+      : undefined
   },
   markdown: {
     math: true,
@@ -34,7 +35,6 @@ export default defineConfig({
     },
     config: (md) => {
       md.use(footnote)
-      md.use(markdownItMathjax3)
     }
   },
   head: [
