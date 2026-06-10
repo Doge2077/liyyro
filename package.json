@@ -3,8 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "docs:dev": "vitepress dev --port 8081",
+    "docs:dev": "vitepress dev --host 127.0.0.1 --port 8081",
+    "docs:dev:host": "vitepress dev --host 0.0.0.0 --port 8081",
     "docs:build": "vitepress build",
+    "docs:build:full": "cross-env VITEPRESS_LAST_UPDATED=true VITEPRESS_LOCAL_SEARCH=true vitepress build",
     "docs:preview": "vitepress preview --port 8080"
   },
   "dependencies": {
@@ -19,6 +21,7 @@
     "vitepress-plugin-mermaid": "^2.0.16"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "markdown-it-mathjax3": "^5.2.0"
   }
 }

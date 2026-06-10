@@ -1,0 +1,7 @@
+node_modules
+.git
+.github
+.opencode
+.vitepress/cache
+npm-debug.log*
+preview.err
