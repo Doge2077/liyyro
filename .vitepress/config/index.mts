@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 import { zh, search as zhSearch } from './theme'
 import footnote from 'markdown-it-footnote'
+import mathjax3 from 'markdown-it-mathjax3'
 
 export default defineConfig({
   outDir: 'dist',
@@ -25,7 +26,7 @@ export default defineConfig({
       : undefined
   },
   markdown: {
-    math: true,
+    math: false,
     lineNumbers: true,
     image: {
       lazyLoading: true
@@ -35,6 +36,14 @@ export default defineConfig({
     },
     config: (md) => {
       md.use(footnote)
+      md.use(mathjax3)
+
+      const stripSideEffectTags = (render: any) => (...args: any[]) => {
+        return render(...args).replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '')
+      }
+
+      md.renderer.rules.math_inline = stripSideEffectTags(md.renderer.rules.math_inline)
+      md.renderer.rules.math_block = stripSideEffectTags(md.renderer.rules.math_block)
     }
   },
   head: [
