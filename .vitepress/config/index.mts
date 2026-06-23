@@ -1,7 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { zh, search as zhSearch } from './theme'
 import footnote from 'markdown-it-footnote'
-import mathjax3 from 'markdown-it-mathjax3'
 
 const lowMemoryBuild = process.env.VITEPRESS_LOW_MEMORY_BUILD === 'true'
 
@@ -22,6 +21,114 @@ const escapeHtml = (value: string) =>
   })
 
 const plainCodeHighlight = (code: string) => `<span v-pre>${escapeHtml(code)}</span>`
+
+const isEscaped = (src: string, pos: number) => {
+  let count = 0
+  for (let index = pos - 1; index >= 0 && src[index] === '\\'; index--) {
+    count++
+  }
+  return count % 2 === 1
+}
+
+const useLightweightMath = (md: any) => {
+  md.inline.ruler.after('escape', 'math_inline', (state: any, silent: boolean) => {
+    if (state.src[state.pos] !== '$' || state.src[state.pos + 1] === '$') {
+      return false
+    }
+
+    const start = state.pos + 1
+    let match = start
+
+    while ((match = state.src.indexOf('$', match)) !== -1) {
+      if (!isEscaped(state.src, match)) {
+        const followingChar = state.src.charCodeAt(match + 1)
+        if (!(followingChar >= 48 && followingChar <= 57)) {
+          break
+        }
+      }
+      match++
+    }
+
+    if (match === -1 || match === start || !state.src.slice(start, match).trim()) {
+      return false
+    }
+
+    if (!silent) {
+      const token = state.push('math_inline', 'math', 0)
+      token.markup = '$'
+      token.content = state.src.slice(start, match)
+    }
+
+    state.pos = match + 1
+    return true
+  })
+
+  md.block.ruler.after('blockquote', 'math_block', (state: any, startLine: number, endLine: number, silent: boolean) => {
+    let pos = state.bMarks[startLine] + state.tShift[startLine]
+    let max = state.eMarks[startLine]
+
+    if (pos + 2 > max || state.src.slice(pos, pos + 2) !== '$$') {
+      return false
+    }
+
+    if (silent) {
+      return true
+    }
+
+    pos += 2
+    let firstLine = state.src.slice(pos, max)
+    let lastLine = ''
+    let nextLine = startLine
+    let found = false
+
+    if (firstLine.trim().endsWith('$$')) {
+      firstLine = firstLine.trim().slice(0, -2)
+      found = true
+    }
+
+    while (!found) {
+      nextLine++
+      if (nextLine >= endLine) {
+        break
+      }
+
+      pos = state.bMarks[nextLine] + state.tShift[nextLine]
+      max = state.eMarks[nextLine]
+
+      if (pos < max && state.tShift[nextLine] < state.blkIndent) {
+        break
+      }
+
+      const currentLine = state.src.slice(pos, max)
+      if (currentLine.trim().endsWith('$$')) {
+        lastLine = currentLine.slice(0, currentLine.lastIndexOf('$$'))
+        found = true
+      }
+    }
+
+    state.line = nextLine + 1
+
+    const token = state.push('math_block', 'math', 0)
+    token.block = true
+    token.content = [
+      firstLine && firstLine.trim() ? firstLine : '',
+      state.getLines(startLine + 1, nextLine, state.tShift[startLine], true),
+      lastLine && lastLine.trim() ? lastLine : ''
+    ].filter(Boolean).join('\n')
+    token.map = [startLine, state.line]
+    token.markup = '$$'
+
+    return true
+  }, {
+    alt: ['paragraph', 'reference', 'blockquote', 'list']
+  })
+
+  md.renderer.rules.math_inline = (tokens: any[], idx: number) =>
+    `<span v-pre class="math math-inline">\\(${escapeHtml(tokens[idx].content)}\\)</span>`
+
+  md.renderer.rules.math_block = (tokens: any[], idx: number) =>
+    `<div v-pre class="math math-display">\\[${escapeHtml(tokens[idx].content)}\\]</div>`
+}
 
 export default defineConfig({
   outDir: 'dist',
@@ -48,10 +155,15 @@ export default defineConfig({
       : undefined
   },
   markdown: {
-    cache: !lowMemoryBuild,
-    highlight: lowMemoryBuild ? plainCodeHighlight : undefined,
+    ...(lowMemoryBuild ? {
+      cache: false,
+      highlight: plainCodeHighlight,
+      lineNumbers: false
+    } : {
+      cache: true,
+      lineNumbers: true
+    }),
     math: false,
-    lineNumbers: !lowMemoryBuild,
     image: {
       lazyLoading: true
     },
@@ -60,14 +172,7 @@ export default defineConfig({
     },
     config: (md) => {
       md.use(footnote)
-      md.use(mathjax3)
-
-      const stripSideEffectTags = (render: any) => (...args: any[]) => {
-        return render(...args).replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '')
-      }
-
-      md.renderer.rules.math_inline = stripSideEffectTags(md.renderer.rules.math_inline)
-      md.renderer.rules.math_block = stripSideEffectTags(md.renderer.rules.math_block)
+      useLightweightMath(md)
     }
   },
   vite: {
@@ -86,6 +191,14 @@ export default defineConfig({
     ['link', { rel: 'preconnect', href: 'https://gstatic.loli.net', crossorigin: '' }],
     ['link', { href: 'https://fonts.loli.net/css2?family=Noto+Sans+SC:wght@400..900&display=swap', rel: 'stylesheet' }],
     ['link', { href: 'https://fonts.loli.net/css2?family=Fira+Code:wght@500&display=swap', rel: 'stylesheet' }],
+    ['script', {}, `window.MathJax = {
+  tex: {
+    inlineMath: [['\\\\(', '\\\\)']],
+    displayMath: [['\\\\[', '\\\\]']]
+  },
+  svg: { fontCache: 'global' }
+};`],
+    ['script', { id: 'MathJax-script', async: '', src: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js' }],
     ['link', { rel: 'icon', href: '/logo/favicon.png' }]
   ]
 })
