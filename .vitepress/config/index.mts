@@ -27,6 +27,7 @@ export default defineConfig({
   outDir: 'dist',
   srcDir: 'docs',
   mpa: process.env.VITEPRESS_MPA === 'true',
+  metaChunk: true,
   lastUpdated: process.env.VITEPRESS_LAST_UPDATED === 'true',
   ignoreDeadLinks: true,
   locales: {
