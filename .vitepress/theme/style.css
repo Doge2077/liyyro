@@ -157,7 +157,9 @@ mjx-container svg {
 .VPHero .name {
   font-size: 56px;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.2;
+  padding-bottom: 0.08em;
+  overflow: visible;
 }
 
 .VPHero .text {
@@ -223,16 +225,21 @@ mjx-container svg {
 /* 打字动画样式 */
 .typed-info {
   margin-top: 15px;
+  min-height: 34px;
   text-align: center;
+  overflow: visible;
 }
 
 .typed-info .tagline {
+  display: inline-block;
   padding-top: 8px;
-  max-width: 392px;
-  line-height: 28px;
+  padding-bottom: 4px;
+  max-width: 100%;
+  line-height: 1.4;
   font-size: 18px;
   font-weight: 500;
   white-space: pre-wrap;
+  overflow: visible;
   color: var(--vp-c-text-2);
 }
 
