@@ -17,6 +17,7 @@ NC='\033[0m'
 PORT="${PORT:-8081}"
 URL="${URL:-http://127.0.0.1:${PORT}/}"
 BUILD_SCRIPT="${BUILD_SCRIPT:-docs:build}"
+SKIP_BUILD="${SKIP_BUILD:-false}"
 
 echo -e "${GREEN}========================================${NC}"
 echo -e "${GREEN}  博客部署脚本${NC}"
@@ -37,19 +38,31 @@ if ! docker compose version >/dev/null 2>&1; then
 fi
 echo -e "${GREEN}  依赖检查通过${NC}"
 
-echo -e "${YELLOW}[2/5] 安装 npm 依赖...${NC}"
-if [ -f package-lock.json ]; then
-    npm ci --legacy-peer-deps
+if [ "$SKIP_BUILD" = "true" ]; then
+    echo -e "${YELLOW}[2/5] 跳过 npm 依赖安装 (SKIP_BUILD=true)...${NC}"
 else
-    npm install --legacy-peer-deps
+    echo -e "${YELLOW}[2/5] 安装 npm 依赖...${NC}"
+    if [ -f package-lock.json ]; then
+        npm ci --legacy-peer-deps
+    else
+        npm install --legacy-peer-deps
+    fi
+    echo -e "${GREEN}  依赖安装完成${NC}"
 fi
-echo -e "${GREEN}  依赖安装完成${NC}"
 
-echo -e "${YELLOW}[3/5] 构建 VitePress (${BUILD_SCRIPT})...${NC}"
-export VITEPRESS_LOW_MEMORY_BUILD="${VITEPRESS_LOW_MEMORY_BUILD:-true}"
-export NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=1536}"
-npm run "$BUILD_SCRIPT"
-echo -e "${GREEN}  构建完成${NC}"
+if [ "$SKIP_BUILD" = "true" ]; then
+    echo -e "${YELLOW}[3/5] 使用现有 dist，跳过 VitePress 构建...${NC}"
+    if [ ! -f dist/index.html ]; then
+        echo -e "${RED}错误: dist/index.html 不存在，无法跳过构建${NC}"
+        exit 1
+    fi
+else
+    echo -e "${YELLOW}[3/5] 构建 VitePress (${BUILD_SCRIPT})...${NC}"
+    export VITEPRESS_LOW_MEMORY_BUILD="${VITEPRESS_LOW_MEMORY_BUILD:-true}"
+    export NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=1536}"
+    npm run "$BUILD_SCRIPT"
+    echo -e "${GREEN}  构建完成${NC}"
+fi
 
 echo -e "${YELLOW}[4/5] 重启容器...${NC}"
 docker compose down --remove-orphans 2>/dev/null || true
