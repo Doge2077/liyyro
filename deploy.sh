@@ -46,7 +46,8 @@ fi
 echo -e "${GREEN}  依赖安装完成${NC}"
 
 echo -e "${YELLOW}[3/5] 构建 VitePress (${BUILD_SCRIPT})...${NC}"
-export NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=1024}"
+export VITEPRESS_LOW_MEMORY_BUILD="${VITEPRESS_LOW_MEMORY_BUILD:-true}"
+export NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=1536}"
 npm run "$BUILD_SCRIPT"
 echo -e "${GREEN}  构建完成${NC}"
 
