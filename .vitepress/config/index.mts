@@ -3,9 +3,30 @@ import { zh, search as zhSearch } from './theme'
 import footnote from 'markdown-it-footnote'
 import mathjax3 from 'markdown-it-mathjax3'
 
+const lowMemoryBuild = process.env.VITEPRESS_LOW_MEMORY_BUILD === 'true'
+
+const escapeHtml = (value: string) =>
+  value.replace(/[&<>"']/g, (char) => {
+    switch (char) {
+      case '&':
+        return '&amp;'
+      case '<':
+        return '&lt;'
+      case '>':
+        return '&gt;'
+      case '"':
+        return '&quot;'
+      default:
+        return '&#39;'
+    }
+  })
+
+const plainCodeHighlight = (code: string) => `<span v-pre>${escapeHtml(code)}</span>`
+
 export default defineConfig({
   outDir: 'dist',
   srcDir: 'docs',
+  mpa: process.env.VITEPRESS_MPA === 'true',
   lastUpdated: process.env.VITEPRESS_LAST_UPDATED === 'true',
   ignoreDeadLinks: true,
   locales: {
@@ -26,8 +47,10 @@ export default defineConfig({
       : undefined
   },
   markdown: {
+    cache: !lowMemoryBuild,
+    highlight: lowMemoryBuild ? plainCodeHighlight : undefined,
     math: false,
-    lineNumbers: true,
+    lineNumbers: !lowMemoryBuild,
     image: {
       lazyLoading: true
     },
@@ -44,6 +67,17 @@ export default defineConfig({
 
       md.renderer.rules.math_inline = stripSideEffectTags(md.renderer.rules.math_inline)
       md.renderer.rules.math_block = stripSideEffectTags(md.renderer.rules.math_block)
+    }
+  },
+  vite: {
+    build: {
+      minify: lowMemoryBuild ? false : 'esbuild',
+      reportCompressedSize: false,
+      cssCodeSplit: true,
+      chunkSizeWarningLimit: 2000,
+      rollupOptions: {
+        cache: false
+      }
     }
   },
   head: [
