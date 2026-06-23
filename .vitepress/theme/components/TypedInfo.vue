@@ -10,7 +10,7 @@ import Typed from 'typed.js';
 
 onMounted(() => {
   new Typed("#typedText", {
-    strings: ['AI · Life · History', '探索无限可能', '记录生活点滴'],
+    strings: ['Welcome to Astraia's Blog', 'Los perros románticos with King Shit on his throne of loneliness.'],
     startDelay: 300,
     backDelay: 2500,
     typeSpeed: 100,
