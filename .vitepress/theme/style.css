@@ -99,6 +99,20 @@ mjx-container {
   padding: 4px 0;
 }
 
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px !important;
+  height: 1px !important;
+  padding: 1px 0 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  display: block !important;
+  user-select: none;
+}
+
 mjx-container svg {
   overflow: visible;
 }
