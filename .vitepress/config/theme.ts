@@ -3,7 +3,7 @@ import { generateNav, generateSidebar } from './auto-nav'
 
 export const zh = defineConfig({
   lang: 'zh-Hans',
-  title: 'AI Life History',
+  title: "Astria's Blog",
   description: 'Personal Blog',
   themeConfig: {
     nav: generateNav(),
