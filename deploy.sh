@@ -58,8 +58,8 @@ if [ "$SKIP_BUILD" = "true" ]; then
     fi
 else
     echo -e "${YELLOW}[3/5] 构建 VitePress (${BUILD_SCRIPT})...${NC}"
-    export VITEPRESS_LOW_MEMORY_BUILD="${VITEPRESS_LOW_MEMORY_BUILD:-true}"
-    export NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=1024}"
+    export VITEPRESS_LOW_MEMORY_BUILD="${VITEPRESS_LOW_MEMORY_BUILD:-false}"
+    export NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=2048}"
     npm run "$BUILD_SCRIPT"
     echo -e "${GREEN}  构建完成${NC}"
 fi

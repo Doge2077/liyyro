@@ -513,7 +513,7 @@ SourceFile: "Hello.java"
 例如计算：$1 + 1$，两种指令集看起来是下面这样：
 
 基于栈的指令集：
-```assembly
+```asm
 iconst_1
 iconst_1
 iadd
@@ -528,7 +528,7 @@ istore_0
 4.  `istore_0`：将栈顶的整数值存储到局部变量表中索引为 $0$ 的位置。
 
 基于寄存器的指令集：
-```assembly
+```asm
 mov eax, 1
 add eax, 1
 ```
