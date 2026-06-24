@@ -145,6 +145,19 @@ Evaluator-Optimizer 模式由生成器和评估器组成。生成器产出代码
 
 若一个模式让成本上升明显，成功率没有提升，就应回退到更简单结构。一个小而稳定的单 Agent，通常比缺少治理的多 Agent 系统更适合生产环境。复杂模式的价值来自明确分工和可验证收益，而非角色数量本身。
 
+### 4.6 后续专题
+
+本文保留模式选型入口。详细实现拆到架构和协作专题：
+
+| 文章 | 重点 |
+| --- | --- |
+| [ReAct范式](../Agent架构/ReAct范式) | 单步推理、行动、观察循环 |
+| [Plan-and-Execute范式](../Agent架构/Plan-and-Execute范式) | Planner、Executor 和 Replan |
+| [Reflection与Reflexion](../Agent架构/Reflection与Reflexion) | 评估、修正和失败经验记忆 |
+| [任务拆分与规划](../Agent架构/任务拆分与规划) | 静态拆分、动态拆分和任务图 |
+| [Supervisor-Worker](../Agent协作/Supervisor-Worker) | 中心化调度和 Worker 分工 |
+| [Handoff与动态切换](../Agent协作/Handoff与动态切换) | 专业接力、交接摘要和权限继承 |
+
 ## 参考资料
 
 - [Anthropic: Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)
