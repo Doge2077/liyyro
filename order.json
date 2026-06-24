@@ -1,7 +1,7 @@
 {
   "topLevel": ["AI", "Life", "History"],
   "AI": {
-    "_order": ["Agent", "大模型基础", "bert模型训练实践"],
+    "_order": ["大模型基础", "Agent", "bert模型训练实践"],
     "Agent": {
       "_order": ["Agent基础"],
       "Agent基础": {
