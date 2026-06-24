@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 import { zh, search as zhSearch } from './theme'
 import footnote from 'markdown-it-footnote'
 
@@ -130,7 +131,7 @@ const useLightweightMath = (md: any) => {
     `<div v-pre class="math math-display">\\[${escapeHtml(tokens[idx].content)}\\]</div>`
 }
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   outDir: 'dist',
   srcDir: 'docs',
   mpa: process.env.VITEPRESS_MPA === 'true',
@@ -201,4 +202,4 @@ export default defineConfig({
     ['script', { id: 'MathJax-script', async: '', src: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js' }],
     ['link', { rel: 'icon', href: '/logo/favicon.png' }]
   ]
-})
+}))
