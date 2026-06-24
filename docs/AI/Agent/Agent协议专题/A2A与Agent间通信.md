@@ -6,65 +6,117 @@ title: A2A与Agent间通信
 
 ## 1. Agent 间通信的边界
 
-### 1.1 A2A 的定位
+### 1.1 背景
 
-Agent2Agent Protocol 关注 Agent 与 Agent 之间如何发现能力、委派任务、传递状态和接收产物。它和 MCP 关注的对象不同：MCP 连接 Agent 与工具或上下文服务，A2A 连接不同 Agent 系统。
+当系统里只有一个 Agent，它可以直接使用工具和资源完成任务。复杂业务中常会出现多个 Agent：研究 Agent 收集资料，代码 Agent 修改仓库，审查 Agent 检查风险，客服 Agent 与用户沟通。此时系统需要描述能力、委派任务、传递状态、取消任务、恢复任务和记录审计。
 
-多 Agent 系统中，Research Agent、Coding Agent、Review Agent 可能来自不同框架或供应商。若没有统一通信方式，任务委派会退化成一批私有 API。A2A 尝试把 Agent 能力描述、任务状态和产物交付标准化。
+Google 提出的 Agent2Agent（A2A）协议关注 Agent 与 Agent 或应用之间的任务通信。它与 MCP 的关注点不同：MCP 连接 Host 与工具/资源 Server，A2A 关注不同 Agent 或服务之间如何表达任务、能力和状态。
 
-### 1.2 与 MCP 的差异
+### 1.2 MCP 与 A2A 对比
 
 | 维度 | MCP | A2A |
 | --- | --- | --- |
-| 连接对象 | Host 与工具、资源、提示 Server | Agent 与 Agent |
-| 交互单元 | tool call、resource read、prompt get | task、message、artifact、status |
-| 关注重点 | 能力接入和上下文获取 | 任务委派和协作状态 |
-| 典型场景 | 文件搜索、数据库查询、浏览器控制 | 跨专业 Agent 协作 |
+| 主要对象 | 工具、资源、提示 | Agent 能力、任务、事件 |
+| 调用方向 | Host 调用 Server 能力 | Agent 或应用委派任务 |
+| 交互粒度 | tool call、resource read | task、message、artifact、status |
+| 典型场景 | 接入文件、数据库、业务工具 | 跨 Agent 分工、远程助手协作 |
 
-两者可以同时使用。主 Agent 通过 A2A 委派研究任务给 Research Agent，Research Agent 内部再通过 MCP 使用搜索和资料库工具。
+两者可以共存。一个 Supervisor 通过 A2A 把任务交给代码 Agent，代码 Agent 内部再通过 MCP 调用 Git、文件系统和测试工具。
 
-## 2. 组成部分
+## 2. 通信模型
 
-### 2.1 Agent Card
+### 2.1 能力描述
 
-Agent Card 用于描述一个 Agent 的能力、入口、认证要求和交互方式。调用方可以据此判断是否适合委派任务。它类似服务发现中的能力说明，但内容更贴近 Agent 任务。
+Agent 间通信首先要知道对方能做什么。能力描述通常包含名称、说明、输入输出、支持的事件、认证方式和限制。它类似服务发现，但语义更贴近任务。
 
-### 2.2 Task 与 Artifact
+```json
+{
+  "name": "code-review-agent",
+  "description": "审查代码变更并返回风险、测试建议和阻断问题。",
+  "capabilities": ["review_diff", "suggest_tests"],
+  "input_modes": ["text", "patch"],
+  "output_modes": ["text", "json"],
+  "auth": "bearer_token"
+}
+```
 
-Task 是委派工作的核心对象，包含目标、输入、状态和上下文。Artifact 是任务产物，例如报告、文件、结构化结果或链接。长任务需要状态流转，例如 submitted、working、input-required、completed、failed。
+能力描述不要夸大范围。若审查 Agent 只能读 diff，描述里就不应暗示它能访问完整仓库。
 
-### 2.3 时序
+### 2.2 任务生命周期
 
 ```mermaid
 sequenceDiagram
-  participant A as "主 Agent"
-  participant B as "Research Agent"
+  participant S as Supervisor
+  participant A as Worker Agent
+  participant O as Observability
 
-  A->>B: 获取 Agent Card
-  B-->>A: 返回能力和认证信息
-  A->>B: 创建调研 Task
-  B-->>A: 返回 task id 和状态
-  B-->>A: 推送进度或等待输入
-  A->>B: 补充约束或取消请求
-  B-->>A: 返回 artifact 和完成状态
+  S->>A: 创建任务：审查登录模块改动
+  A-->>S: 接受任务，返回 task_id
+  A-->>O: 上报 task.started
+  A-->>S: 事件：需要读取更多上下文
+  S->>A: 追加上下文
+  A-->>S: 事件：产出 review artifact
+  A-->>O: 上报 task.completed
+  S->>S: 合并结果并决定下一步
 ```
 
-## 3. 工程问题
+任务通信应支持事件流。长任务不能只等待最终响应，因为上层需要知道进度、阻塞原因、部分产出和取消状态。
 
-### 3.1 状态和取消
+## 3. 状态、取消与恢复
 
-Agent 间任务可能持续很久。协议和 Runtime 应支持查询状态、取消任务、恢复任务和获取产物。任务状态要能关联 trace，方便跨系统排查。
+### 3.1 任务状态
 
-### 3.2 权限与信任
+| 状态 | 含义 | 上层处理 |
+| --- | --- | --- |
+| submitted | 任务已提交 | 等待接收 |
+| running | 正在执行 | 展示进度或继续等待 |
+| input_required | 需要补充信息 | 向用户或上游 Agent 请求 |
+| completed | 已完成 | 读取产物 |
+| failed | 执行失败 | 查看错误和可恢复性 |
+| canceled | 已取消 | 停止下游工具 |
 
-委派任务不代表下游 Agent 获得上游全部权限。主 Agent 应传递最小必要上下文，并限制下游可访问的数据和动作。产物也要标记来源、时间和置信度，避免把下游结果直接当成已验证事实。
+状态机要明确。没有状态约定时，Supervisor 很难判断 Worker 是仍在运行、等待输入，还是已经失败。
 
-### 3.3 失败处理
+### 3.2 取消与恢复
 
-下游 Agent 失败时，应返回结构化原因：输入不足、工具失败、权限不足、超时、能力不支持或任务冲突。主 Agent 根据失败类型决定重试、换 Agent、请求用户补充或降级处理。
+```python
+def cancel_task(task_id, reason):
+    task = task_store.get(task_id)
+    task.status = "canceled"
+    task.cancel_reason = reason
+    task_store.save(task)
+    event_bus.publish("task.canceled", {"task_id": task_id})
+
+
+def resume_task(task_id, extra_input):
+    task = task_store.get(task_id)
+    if task.status != "input_required":
+        return {"ok": False, "error_type": "not_resumable"}
+    task.messages.append(extra_input)
+    task.status = "running"
+    task_store.save(task)
+    return {"ok": True}
+```
+
+取消要能传播到下游工具，尤其是长时间运行的浏览器、测试或数据查询。恢复要依赖可持久化状态，不能只靠进程内上下文。
+
+## 4. 治理与审计
+
+### 4.1 风险
+
+| 风险 | 表现 | 处理方式 |
+| --- | --- | --- |
+| 能力冒用 | 上游把任务交给无权限 Agent | 能力发现和认证绑定 |
+| 上下文泄露 | 敏感资料传给下游 | 最小上下文、脱敏、租户隔离 |
+| 责任不清 | 多 Agent 失败难归因 | 统一 task id、trace id、artifact |
+| 循环委派 | Agent 之间反复转交 | 最大委派深度和超时 |
+| 状态丢失 | 长任务中断后无法恢复 | 持久化任务状态和事件 |
+
+Agent 间通信的重点是任务边界。只有把能力、状态、事件和产物表达清楚，多 Agent 系统才具备调试和治理基础。
 
 ## 参考资料
 
-- [A2A Project](https://github.com/a2aproject/A2A)
-- [Google Developers Blog: Agent2Agent Protocol](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/)
-- [MCP Introduction](https://modelcontextprotocol.io/docs/getting-started/intro)
+- [Google A2A Project](https://github.com/google-a2a/A2A)
+- [A2A Protocol Documentation](https://google-a2a.github.io/A2A/)
+- [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro)
+- [Anthropic: Building effective agents](https://www.anthropic.com/research/building-effective-agents)

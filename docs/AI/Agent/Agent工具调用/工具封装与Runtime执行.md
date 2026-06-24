@@ -4,46 +4,50 @@ title: 工具封装与Runtime执行
 
 # 工具封装与Runtime执行
 
-## 1. 工具封装的边界
+## 1. Runtime 的工具封装边界
 
-### 1.1 避免开放命令字符串
+### 1.1 背景
 
-Agent 工具应是受控接口，而非任意命令字符串。以搜索代码为例，模型不应直接拼接 shell 命令。Runtime 可以把 `rg` 封装成 `search_text`，只暴露 `query`、`path`、`max_results`、`fixed_strings` 等参数。
+模型生成的工具调用只是候选动作。真正执行文件搜索、读取、写入、命令运行和网络请求时，必须经过 Runtime。Runtime 负责把模型的自然语言意图转成受控系统操作，同时记录每一次动作的输入、输出、耗时、错误和权限判断。
 
-这样做能限制路径、超时、结果数量和输出格式。工具越接近业务语义，模型越容易选对动作，Runtime 越容易审计。
+以 `rg` 搜索为例，ripgrep 本身负责递归遍历目录、遵守 ignore 规则、使用 Rust regex 引擎匹配文本、在适合场景下做字面量优化和并行目录遍历，还支持 `--json` 输出。Agent Runtime 要做的事情不同：限制搜索路径、设置超时、控制结果数量、解析 JSON 行、截断片段、把结果整理成模型可消费的观察。
 
-### 1.2 工具元数据
+### 1.2 工具封装边界
 
-| 字段 | 作用 |
-| --- | --- |
-| name | 稳定工具名 |
-| description | 使用条件和限制 |
-| parameters | JSON schema |
-| risk_level | 只读、低风险写入、高风险动作 |
-| timeout | 最大执行时间 |
-| output_policy | 截断、脱敏、摘要方式 |
+| 层次 | 职责 | 示例 |
+| --- | --- | --- |
+| 底层工具 | 执行具体能力 | `rg --json`、数据库查询、HTTP API |
+| 工具适配器 | 参数校验、命令构造、输出解析 | `search_text(query, path)` |
+| Runtime | 权限、预算、trace、错误回填 | 最大轮次、沙箱、审计 |
+| 模型 | 选择工具和参数 | 生成 `search_text` 调用 |
 
-工具描述要短而明确。描述过长会占用上下文，也可能让模型把说明文字当作任务内容。高风险工具应有额外确认流程。
+这层封装让底层工具的复杂能力变成稳定接口。模型无需知道 `rg` 的所有参数，只需要选择受控的 `search_text` 工具。
 
-## 2. Runtime 执行链路
+## 2. 只读工具的实现
 
-### 2.1 执行步骤
+### 2.1 `rg` 到 `search_text`
 
 ```mermaid
-flowchart TD
-  A["接收 tool_call"] --> B["查找工具定义"]
-  B --> C["schema 校验"]
-  C --> D["权限检查"]
-  D --> E["路径、域名、资源限制"]
-  E --> F["执行工具"]
-  F --> G["截断和脱敏"]
-  G --> H["写入 trace 和状态"]
-  H --> I["返回 observation"]
+sequenceDiagram
+  participant M as 模型
+  participant R as Runtime
+  participant A as search_text 适配器
+  participant RG as ripgrep
+  participant S as 状态存储
+
+  M-->>R: tool_call search_text({"query":"redirectAfterLogin","path":"src"})
+  R->>R: 校验路径、预算、权限
+  R->>A: 执行适配器
+  A->>RG: rg --json redirectAfterLogin src
+  RG-->>A: JSON Lines
+  A-->>R: 命中路径、行号、片段、截断标记
+  R->>S: 写入 trace 和证据
+  R-->>M: 结构化观察
 ```
 
-Runtime 是工具调用的控制面。所有外部副作用都要经过它。即使模型输出看起来合理，也要执行同样校验。
+`rg` 的速度来自多方面：默认递归搜索、自动读取 `.gitignore` 等忽略文件、使用 Rust regex 库、对简单查询做字面量加速、并行遍历目录、在部分场景使用内存映射或缓冲读取。Runtime 不应把这些细节直接暴露给模型，而应把它封装成窄接口。
 
-### 2.2 `rg` 封装示例
+### 2.2 Python 示例
 
 ```python
 import json
@@ -51,65 +55,95 @@ import subprocess
 from pathlib import Path
 
 
-def search_text(root, query, rel_path=".", max_results=20):
-    base = Path(root).resolve()
-    target = (base / rel_path).resolve()
+ROOT = Path("/workspace/project").resolve()
 
-    # 路径校验：限制搜索范围在工作区内
-    if base not in target.parents and target != base:
+
+def search_text(query, path=".", limit=20):
+    # 路径校验：模型给出的 path 只能落在工作区内。
+    target = (ROOT / path).resolve()
+    if ROOT not in target.parents and target != ROOT:
         return {"ok": False, "error_type": "path_denied", "retryable": False}
 
-    cmd = [
-        "rg",
-        "--json",
-        "--fixed-strings",
-        query,
-        str(target),
-    ]
+    cmd = ["rg", "--json", "--max-count", "20", query, str(target)]
 
     try:
-        # 命令执行：设置超时，避免长时间占用资源
-        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=5)
+        # 命令执行：设置超时，避免搜索拖住 Agent 循环。
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=3)
     except subprocess.TimeoutExpired:
         return {"ok": False, "error_type": "timeout", "retryable": True}
 
-    matches = []
+    items = []
     for line in proc.stdout.splitlines():
         event = json.loads(line)
         if event.get("type") != "match":
             continue
         data = event["data"]
-        matches.append({
+        items.append({
             "path": data["path"]["text"],
             "line": data["line_number"],
-            "text": data["lines"]["text"].strip(),
+            "text": data["lines"]["text"].strip()[:240],
         })
-        # 结果截断：控制上下文体积
-        if len(matches) >= max_results:
+        # 结果截断：只给模型足够判断下一步的信息。
+        if len(items) >= limit:
             break
 
     return {
         "ok": proc.returncode in (0, 1),
-        "matches": matches,
-        "truncated": len(matches) >= max_results,
-        "returncode": proc.returncode,
+        "items": items,
+        "truncated": len(items) >= limit,
+        "error_type": None if proc.returncode in (0, 1) else "rg_error",
     }
 ```
 
-这个示例只展示关键控制点。真实系统还要处理编码、忽略规则、上下文行、二进制文件、输出脱敏和日志关联。
+这个示例把 `rg` 包成了 Agent 工具：路径校验、超时、结果截断和错误返回都在适配器里完成。真实系统还要记录 trace id、命令版本、工作目录、调用耗时和用户权限。
 
-## 3. 工具结果设计
+## 3. 写入与执行类工具
 
-### 3.1 观察结果
+### 3.1 风险分层
 
-工具结果应面向模型决策，而非面向人类终端。成功结果要包含摘要、结构化数据、来源、截断状态和耗时。失败结果要包含错误类型、是否可重试和建议动作。
+| 工具类型 | 示例 | 风险 | Runtime 控制 |
+| --- | --- | --- | --- |
+| 只读 | 搜索、读取文件 | 信息泄露 | 路径范围、脱敏、截断 |
+| 可逆写入 | 应用 patch、写草稿 | 修改错误 | diff 展示、版本控制、回滚 |
+| 命令执行 | 运行测试、构建 | 资源消耗、命令注入 | 命令白名单、沙箱、超时 |
+| 外部副作用 | 发邮件、下单、改权限 | 业务事故 | 人工确认、幂等键、审计 |
 
-### 3.2 安全隔离
+写入类工具需要把“模型建议修改”和“系统执行修改”分开。`apply_patch` 这类工具适合接收 diff，因为 diff 可审查、可回滚，也容易在 trace 中记录。
 
-工具读取到的网页、文档、代码注释都属于外部内容。Runtime 回填时应标记来源，并避免把其中的文本提升为系统指令。写入类工具还要记录 diff、确认状态和回滚信息。
+### 3.2 执行流程
+
+```mermaid
+flowchart TD
+  A["模型生成写入动作"] --> B["Runtime 校验工具和参数"]
+  B --> C["生成预览或 diff"]
+  C --> D{"是否需要确认"}
+  D -->|"需要"| E["用户或策略确认"]
+  D -->|"无需"| F["沙箱执行"]
+  E --> F
+  F --> G["记录结果、耗时、文件变更"]
+  G --> H["运行验证工具"]
+  H --> I["观察写回模型"]
+```
+
+测试工具也要受控。允许模型传任意 shell 命令风险很高，工程上通常提供 `run_tests(scope)`、`run_lint(scope)` 这类窄接口，由 Runtime 映射到固定命令。
+
+## 4. 评估工具封装质量
+
+### 4.1 指标
+
+| 指标 | 含义 | 观测方式 |
+| --- | --- | --- |
+| 调用成功率 | 参数校验通过并正常返回的比例 | tool span |
+| 误用率 | 选择了无关工具或越权参数 | trace 评分 |
+| 结果有效率 | 工具结果推动了下一步 | 轨迹评估 |
+| 截断损失 | 截断导致模型漏掉关键信息 | 失败回放 |
+| 成本延迟 | 单次调用耗时和资源消耗 | metrics |
+
+工具封装的好坏最终体现在轨迹上。一次工具调用返回了很多内容，但没有帮助模型前进，对 Agent 来说仍然是低质量工具。
 
 ## 参考资料
 
 - [ripgrep README](https://github.com/BurntSushi/ripgrep)
+- [Rust regex crate](https://docs.rs/regex/latest/regex/)
 - [OpenAI Tools Guide](https://platform.openai.com/docs/guides/tools)
-- [Microsoft: Updating the taxonomy of failure modes in agentic AI systems](https://www.microsoft.com/en-us/security/blog/2026/06/04/updating-taxonomy-failure-modes-agentic-ai-systems-year-red-teaming-taught-us/)
+- [Anthropic: Writing tools for agents](https://www.anthropic.com/engineering/writing-tools-for-agents)

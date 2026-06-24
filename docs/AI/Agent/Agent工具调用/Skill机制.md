@@ -4,82 +4,115 @@ title: Skill机制
 
 # Skill机制
 
-## 1. Skill 的定位
+## 1. Skill 要解决的工程问题
 
-### 1.1 从工具到能力包
+### 1.1 背景
 
-工具提供可执行动作，例如搜索文件、调用 API、运行测试。Skill 更像一个可复用能力包，通常包含说明、脚本、模板、参考资料和使用流程。它解决的是“Agent 拿到工具后如何完成一类任务”的问题。
+工具函数通常很窄：搜索文件、读取资源、调用 API、运行测试。复杂任务还需要背景知识、操作步骤、注意事项、示例输入、领域资源和失败处理策略。把这些全部塞进系统提示词，会让上下文膨胀，也会让无关任务加载无关信息。
 
-Anthropic 对 Skills 的介绍强调渐进式加载。Agent 先看到 Skill 的简短描述，判断需要时再读取详细说明或资源文件。这样既减少上下文占用，也能让团队把重复流程沉淀成稳定模块。
+Skill 机制把某类能力封装成可按需加载的资源包。Anthropic 的 Agent Skills 把说明文件、脚本和资源组织在一起；很多企业内部 Agent 也会把“报表分析”“客服退款”“代码发布”做成可触发能力包。Skill 的核心是按任务需要加载合适能力，而非一开始把所有知识塞进模型上下文。
 
-### 1.2 与工具和提示词的差异
+### 1.2 Skill 与 Tool 的差异
 
-| 概念 | 内容 | 典型用途 |
+| 维度 | Tool | Skill |
 | --- | --- | --- |
-| Prompt | 一段指令文本 | 调整当前对话行为 |
-| Tool | 可执行接口 | 读取、搜索、写入、查询 |
-| Skill | 指令、脚本、模板和资料的组合 | 复用一类任务流程 |
+| 基本形态 | 可调用函数或外部接口 | 能力说明、资源、脚本和工具组合 |
+| 触发方式 | 模型选择 tool call | Runtime 或模型根据任务匹配 |
+| 上下文内容 | 名称、描述、schema | 操作步骤、示例、限制、相关文件 |
+| 适合场景 | 单一动作 | 领域流程或复合能力 |
 
-Skill 可以包含工具使用方法，但它本身通常不等同于工具。一个“生成财务报表”的 Skill 可以说明数据字段、图表模板、校验规则和导出流程，并调用查询数据库和生成文件的工具。
+Tool 是执行接口，Skill 是能力包。一个 Skill 可以包含多个工具，也可以只提供操作方法和参考资源。
 
-## 2. 文件结构与加载
+## 2. Skill 的组成
 
-### 2.1 常见结构
+### 2.1 最小结构
 
 ```text
-report-skill/
+refund-skill/
   SKILL.md
   scripts/
-    build_report.py
-  templates/
-    monthly_report.md
+    validate_refund.py
   references/
-    metric_definitions.md
+    refund-policy.md
 ```
 
-`SKILL.md` 负责说明触发场景、输入要求、步骤和输出格式。脚本和模板承载可复用实现。参考资料用于较长的领域知识，不必每次都进入上下文。
+`SKILL.md` 一般说明触发条件、可用工具、操作步骤、风险边界和输出格式。脚本目录放可复用的校验或转换逻辑，参考资料目录放领域政策或样例。Runtime 发现 Skill 后，只在相关任务中读取说明，避免污染无关上下文。
 
-### 2.2 加载流程
+### 2.2 调用流程
 
 ```mermaid
-sequenceDiagram
-  participant R as "Runtime"
-  participant M as "模型"
-  participant S as "Skill Store"
-  participant T as "工具"
-
-  R->>M: 发送任务和可用 Skill 摘要
-  M-->>R: 请求加载 report-skill
-  R->>S: 读取 SKILL.md
-  S-->>R: 返回流程说明
-  R->>M: 发送 Skill 说明和相关工具
-  M-->>R: 请求执行脚本或工具
-  R->>T: 执行动作
+flowchart TD
+  A["用户请求"] --> B["Runtime 识别任务意图"]
+  B --> C["检索候选 Skill"]
+  C --> D{"是否匹配"}
+  D -->|"匹配"| E["加载 SKILL.md 摘要和必要资源"]
+  D -->|"不匹配"| F["使用默认工具集"]
+  E --> G["模型基于 Skill 指南选择步骤和工具"]
+  G --> H["Runtime 执行工具并记录 trace"]
+  H --> I["输出结果和来源"]
 ```
 
-加载应是按需的。若任务不需要某个 Skill，就不读取它的详细文档。这样能避免上下文被大量流程说明淹没。
+Skill 的加载应有预算。说明太长时，先加载触发条件和关键步骤；只有任务进入某个阶段时，再读取具体参考资料或脚本说明。
 
-## 3. 工程治理
+## 3. 实现一个最小 Skill Runtime
 
-### 3.1 适合沉淀为 Skill 的场景
+### 3.1 Skill 元数据
 
-| 场景 | 原因 |
-| --- | --- |
-| 重复出现的业务流程 | 可以统一步骤和格式 |
-| 多工具组合任务 | 能记录工具调用顺序和注意事项 |
-| 强模板输出 | 可以复用文件或报告模板 |
-| 团队共享经验 | 减少每个 Agent 单独维护提示词 |
+```json
+{
+  "name": "code-migration",
+  "description": "处理 TypeScript 项目的 API 迁移任务。",
+  "triggers": ["迁移", "升级 API", "替换旧接口"],
+  "allowed_tools": ["search_text", "read_file", "apply_patch", "run_tests"],
+  "entry": "SKILL.md"
+}
+```
 
-### 3.2 风险控制
+触发词只是起点。更稳的实现会结合用户目标、当前目录、文件类型、历史任务和模型分类结果。Runtime 可以先召回多个 Skill，再让模型选择最相关的一个或几个。
 
-Skill 可能包含脚本和外部资料，因此需要版本管理、权限审查和来源记录。Agent 加载 Skill 后，Runtime 仍然要校验工具调用和文件访问。Skill 的说明不能绕过工具权限，也不能自动获得高风险操作权限。
+### 3.2 伪代码
 
-### 3.3 与 MCP 的配合
+```python
+def select_skills(goal, skills, limit=2):
+    matched = []
+    for skill in skills:
+        score = sum(1 for t in skill["triggers"] if t in goal)
+        if score > 0:
+            matched.append((score, skill))
+    return [s for _, s in sorted(matched, reverse=True)[:limit]]
 
-MCP 可以把外部能力标准化为工具、资源和提示。Skill 可以描述如何组合这些能力完成任务。实际系统中，MCP 负责能力接入，Skill 负责流程复用，两者可以同时存在。
+
+def build_context(goal, selected_skills):
+    context = {"goal": goal, "skills": []}
+    for skill in selected_skills:
+        # 只加载入口摘要，详细资料按阶段再读取。
+        context["skills"].append({
+            "name": skill["name"],
+            "guide": read_summary(skill["entry"]),
+            "allowed_tools": skill["allowed_tools"],
+        })
+    return context
+```
+
+这个最小实现体现两件事：Skill 选择要受限，加载内容要分层。否则 Skill 会退化成一个不断增长的系统提示词。
+
+## 4. 治理与评估
+
+### 4.1 常见风险
+
+| 风险 | 表现 | 处理方式 |
+| --- | --- | --- |
+| 触发过宽 | 无关任务加载错误 Skill | 记录触发原因，做命中评测 |
+| 内容过长 | 上下文被说明挤满 | 摘要加载、阶段加载、资源索引 |
+| 能力重叠 | 多个 Skill 给出冲突步骤 | 维护优先级和适用边界 |
+| 脚本失控 | Skill 内脚本执行外部副作用 | 沙箱、权限、命令白名单 |
+| 版本漂移 | 说明与真实工具不一致 | Skill 版本与工具版本绑定 |
+
+Skill 的质量要通过任务轨迹评估。只看“是否触发”不够，还要看触发后是否减少错误工具调用、是否提升任务成功率、是否增加成本。
 
 ## 参考资料
 
-- [Anthropic: Agent Skills overview](https://docs.anthropic.com/en/docs/agents-and-tools/skills/overview)
-- [Anthropic: Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
-- [Model Context Protocol Documentation](https://modelcontextprotocol.io/docs/getting-started/intro)
+- [Anthropic Agent Skills](https://docs.anthropic.com/en/docs/agents-and-tools/agent-skills/overview)
+- [Anthropic: Writing tools for agents](https://www.anthropic.com/engineering/writing-tools-for-agents)
+- [OpenAI Tools Guide](https://platform.openai.com/docs/guides/tools)
+- [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro)
