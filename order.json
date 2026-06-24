@@ -1,29 +1,17 @@
 {
   "topLevel": ["AI", "Life", "History"],
   "AI": {
-    "_order": ["大模型基础", "Agent", "bert模型训练实践"],
-    "Agent": {
-      "_order": ["Agent基础", "Agent架构", "Agent工具调用", "Agent协议专题", "Agent记忆", "Agent协作", "Agent工程", "Agent评估"],
+    "_order": ["大模型基础", "Agent Engineering", "bert模型训练实践"],
+    "Agent Engineering": {
+      "_order": ["Agent基础", "记忆治理", "Agent协作", "Agent评估"],
       "Agent基础": {
-        "_order": ["Agent基础概念", "Agent设计模式", "Agent协议", "Agent工具"]
+        "_order": ["基础概念", "设计模式", "常见协议", "工具调用"]
       },
-      "Agent架构": {
-        "_order": ["ReAct范式", "Plan-and-Execute范式", "Reflection与Reflexion", "任务拆分与规划"]
-      },
-      "Agent工具调用": {
-        "_order": ["Function Calling原理", "模型如何学会调用工具", "工具封装与Runtime执行", "Skill机制"]
-      },
-      "Agent协议专题": {
-        "_order": ["MCP组成部分", "MCP最小实现", "MCP传输机制", "A2A与Agent间通信"]
-      },
-      "Agent记忆": {
+      "记忆治理": {
         "_order": ["记忆类型", "记忆抽取", "记忆存储与检索", "记忆压缩与更新"]
       },
       "Agent协作": {
         "_order": ["Single-Agent与Multi-Agent", "Supervisor-Worker", "Handoff与动态切换"]
-      },
-      "Agent工程": {
-        "_order": ["手写AgentRuntime", "Agent框架选型", "LLM网关"]
       },
       "Agent评估": {
         "_order": ["Agent评估总览", "评测指标与评分器", "评测数据集建设", "自动化评测框架", "Agent可观测性", "反馈闭环与发布门禁"]

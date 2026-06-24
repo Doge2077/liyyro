@@ -162,6 +162,10 @@ export default withMermaid(defineConfig({
       lineNumbers: false
     } : {
       cache: true,
+      theme: {
+        light: 'github-light',
+        dark: 'github-dark'
+      },
       lineNumbers: true
     }),
     math: false,
