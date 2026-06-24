@@ -277,6 +277,17 @@ def search_text(query, path=".", max_results=20, timeout=5):
 
 迁移到 MCP 时，不需要改变工具设计原则。名称、描述、schema、权限、结果结构、错误模型和审计仍然适用。差异在于通信从函数调用变成协议消息，工具能力可以被更多 host 发现和使用。若工具本身设计粗糙，换成 MCP 也无法提高可靠性。
 
+### 4.6 后续专题
+
+本文保留工具设计总览。更细的工具调用主题拆到独立专题：
+
+| 文章 | 重点 |
+| --- | --- |
+| [Function Calling原理](../Agent工具调用/Function%20Calling原理) | schema、两轮调用、并行调用和错误结构 |
+| [模型如何学会调用工具](../Agent工具调用/模型如何学会调用工具) | SFT、偏好对齐和运行时边界 |
+| [工具封装与Runtime执行](../Agent工具调用/工具封装与Runtime执行) | 工具注册、参数校验、权限和 `rg` 封装 |
+| [Skill机制](../Agent工具调用/Skill机制) | Skill 的结构、加载和工具配合方式 |
+
 ## 参考资料
 
 - [ripgrep GitHub README](https://github.com/BurntSushi/ripgrep)
