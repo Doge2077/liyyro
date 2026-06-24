@@ -4,68 +4,123 @@ title: Agent可观测性
 
 # Agent可观测性
 
-## 1. 观察对象
+## 1. 可观测性是评估数据来源
 
-### 1.1 AI 行为证据
+### 1.1 背景
 
-Agent 可观测性要覆盖传统系统指标，也要覆盖模型和工具行为。Trace 的价值在于解释 Agent 看到了什么、做了什么、结果如何被评价。
+Agent 失败后，如果只能看到最终回答，就很难定位问题。它可能是模型理解错误、工具参数错误、检索漏召回、权限拒绝、状态污染、记忆冲突、成本超预算或外部系统超时。可观测性要把这些行为记录成 trace 和 span，支撑调试、评测、告警和线上回流。
 
-| 层级 | 信号 |
+OpenTelemetry GenAI 语义约定提供了模型调用、提示、响应、token、系统、操作等通用属性。Agent 系统可以在此基础上扩展 tool call、retrieval、memory、policy、handoff 和 evaluator span。
+
+### 1.2 可观测对象
+
+| 对象 | 记录内容 |
 | --- | --- |
-| 用户会话 | session、入口、意图、轮次、反馈 |
-| Agent 决策 | plan、step、selected_tool、fallback |
-| 模型调用 | model、prompt version、tokens、latency、cost |
-| 工具调用 | tool、arguments hash、status、error、side_effect |
-| 检索/RAG | query、doc ids、scores、citation coverage |
-| 环境状态 | 初始状态、状态变更、最终状态 |
-| 安全合规 | PII、policy check、blocked action |
-| 评分反馈 | online score、用户评分、人工审核 |
+| Session | 用户、应用、入口、任务目标 |
+| Model Call | 模型、输入输出 token、延迟、错误 |
+| Tool Call | 工具名、参数摘要、结果、耗时 |
+| Retrieval | query、命中文档、分数、引用 |
+| Memory | 检索记忆、写入记忆、冲突 |
+| Policy | 权限判断、安全拦截 |
+| Handoff | 转交原因、接收方、状态 |
+| Evaluator | 分数、失败类型、rubric 版本 |
 
-不要把敏感内容无差别写入日志。PII、密钥、支付信息和受限内容应脱敏、采样或分级授权查看。
+这些对象要通过同一个 trace id 串起来。否则模型日志、工具日志和评测结果会分散在不同系统中。
 
-### 1.2 Trace 结构
+## 2. Trace 结构
+
+### 2.1 Span 树
 
 ```mermaid
 flowchart TD
-  A["task trace"] --> B["model span"]
-  A --> C["tool span"]
-  A --> D["retrieval span"]
-  A --> E["policy span"]
-  A --> F["evaluation span"]
+  A["trace: 用户任务"] --> B["span: model.plan"]
+  A --> C["span: tool.search_text"]
+  A --> D["span: tool.read_file"]
+  A --> E["span: model.final"]
+  A --> F["span: evaluator.outcome"]
+  C --> C1["attributes: query, path, result_count"]
+  D --> D1["attributes: path, bytes, truncated"]
+  E --> E1["attributes: model, tokens, latency"]
 ```
 
-每个 span 应有 trace id、step id、耗时、状态和错误类型。这样一次失败可以从用户反馈追到模型调用、工具结果和最终状态。
+Trace 要能回答四个问题：Agent 看到了什么，做了什么，外部系统返回什么，结果如何被评价。每个 span 都应包含开始时间、结束时间、状态和关键属性。
 
-## 2. 仪表盘
+### 2.2 Span 示例
 
-### 2.1 四类视图
+```json
+{
+  "trace_id": "tr_001",
+  "span_id": "sp_tool_002",
+  "name": "tool.search_text",
+  "attributes": {
+    "agent.tool.name": "search_text",
+    "agent.tool.args.query": "redirectAfterLogin",
+    "agent.tool.result_count": 3,
+    "agent.tool.truncated": false,
+    "gen_ai.operation.name": "tool_call"
+  },
+  "duration_ms": 42,
+  "status": "ok"
+}
+```
 
-| 仪表盘 | 指标 |
+敏感参数不能明文记录。可以记录摘要、哈希、字段类型和长度，并把原始内容放在受控存储中。
+
+## 3. 仪表盘与告警
+
+### 3.1 核心视图
+
+| 视图 | 关注点 |
 | --- | --- |
-| 业务质量 | 任务成功率、人工接管率、负反馈 |
-| Agent 行为 | 工具分布、重复调用、澄清率、拒答率 |
-| 系统性能 | P50/P95/P99 延迟、成本、超时 |
-| 安全治理 | PII 告警、越权动作、危险工具阻断 |
+| 质量趋势 | 成功率、评分、失败类型 |
+| 工具健康 | 错误率、延迟、重试、超时 |
+| 成本延迟 | token、模型调用次数、P95/P99 |
+| 检索质量 | 命中率、引用覆盖、空召回 |
+| 安全策略 | 拦截、越权尝试、注入样本 |
+| Trace 完整率 | span 缺失和日志关联失败 |
 
-告警不应只看服务错误率。Agent 还要关注线上质量分下降、某类意图成功率突降、工具调用数异常上升、trace 完整率下降和安全策略命中异常。
+仪表盘要能 drill down 到单条 trace。趋势图只能提示异常，根因仍要回到具体轨迹。
 
-### 2.2 根因分析
+### 3.2 告警示例
 
-质量下降时，先定位业务意图、用户群、模型版本、prompt 版本、工具版本和时间窗口。再抽取低分 trace，按失败位置聚类：输入理解、检索、规划、工具选择、参数、环境返回、策略判断、最终表达或后处理。
+```json
+{
+  "alert": "tool_error_rate_high",
+  "condition": "tool.search_text.error_rate > 0.05 for 10m",
+  "labels": {
+    "tool": "search_text",
+    "env": "prod"
+  },
+  "action": "route_to_agent_runtime_owner"
+}
+```
 
-## 3. 标准与平台
+告警规则要避免过多噪声。优先覆盖安全违规、工具大面积失败、成本异常、延迟异常和 trace 缺失。
 
-### 3.1 OpenTelemetry
+## 4. 线上回流
 
-OpenTelemetry GenAI 语义约定适合作为通用遥测底座。它能把模型调用、token、系统属性和 trace 连接到现有观测平台。LangSmith、Phoenix、Langfuse 和 Grafana 可以在不同层面展示质量、成本和延迟。
+### 4.1 从 trace 到 eval
 
-### 3.2 线上评分
+```mermaid
+sequenceDiagram
+  participant P as Production
+  participant O as Observability
+  participant T as Triage
+  participant D as Dataset
+  participant E as Eval Runner
 
-线上 evaluator 可以抽样运行规则或 LLM Judge，并把结果回连到 trace。低分样本经过脱敏和复核后，进入 replay 或 regression 数据集。
+  P->>O: 上报 trace 和反馈
+  O->>T: 暴露低分和异常 trace
+  T->>T: 脱敏、归因、重建环境
+  T->>D: 写入 replay case
+  D->>E: 后续回归运行
+```
+
+可观测性和评估要形成闭环。线上失败被捕获后，经过脱敏和环境重建，进入 Replay Suite，成为以后发布前必须跑的样本。
 
 ## 参考资料
 
-- [OpenTelemetry GenAI Semantic Conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/)
+- [OpenTelemetry GenAI Semantic Conventions](https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/)
 - [LangSmith Observability](https://docs.smith.langchain.com/observability)
-- [Arize Phoenix](https://arize.com/docs/phoenix)
-- [Langfuse Documentation](https://langfuse.com/docs)
+- [Arize Phoenix](https://docs.arize.com/phoenix)
+- [Langfuse](https://langfuse.com/docs)

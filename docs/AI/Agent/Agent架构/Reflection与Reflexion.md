@@ -4,92 +4,125 @@ title: Reflection与Reflexion
 
 # Reflection与Reflexion
 
-## 1. 生成后的评估循环
+## 1. 从一次生成到自我修正
 
 ### 1.1 背景
 
-Reflection 指 Agent 在生成结果或完成步骤后，引入评估和修正环节。它常用于代码生成、报告写作、复杂检索和多步骤任务。核心循环是：生成一个候选结果，评估它是否满足目标，若不满足则给出修改方向，再生成新版本。
+Reflection 泛指模型在生成结果后进行评估、发现问题并修正输出的机制。Reflexion 则来自论文 *Reflexion: Language Agents with Verbal Reinforcement Learning*，它让 Agent 在失败后生成语言形式的反思记忆，并在后续尝试中使用这些记忆改进行为。两者常被混用，但工程实现时需要区分：Reflection 更像一个评估修正环节，Reflexion 更强调失败经验沉淀和下次调用。
 
-Reflexion 是论文中更具体的一类方法。它让 Agent 把失败经验转成自然语言反馈，并存入后续尝试可使用的记忆中。它强调从失败轨迹中学习，而非只靠随机重试。
+这类机制出现的原因很直接：Agent 常常能完成大部分步骤，却在最后答案、工具参数、测试修复或证据归纳上出现细小错误。只靠一次模型调用，错误会直接暴露给用户；加一层评估与修正，可以把部分问题挡在发布前。
 
-### 1.2 两层机制
+### 1.2 问题边界
 
-| 机制 | 输入 | 输出 | 适用场景 |
-| --- | --- | --- | --- |
-| Reflection | 候选结果、目标、评分标准 | 评估意见和修正结果 | 单次任务质量改进 |
-| Reflexion | 失败轨迹、环境反馈、任务目标 | 可复用经验记忆 | 多次尝试或相似任务 |
+| 场景 | 适合的反思方式 | 风险 |
+| --- | --- | --- |
+| 文档写作 | 检查证据覆盖、结构、遗漏 | 反思模型可能空泛批评 |
+| 代码修复 | 根据测试失败生成下一步修正 | 可能扩大修改范围 |
+| 工具调用 | 检查参数和工具选择是否合理 | 评估需要完整 trace |
+| 长期学习 | 保存失败经验供下次任务检索 | 错误经验可能污染记忆 |
 
-Reflection 可以独立作为 Evaluator-Optimizer 模式，也可以嵌入 ReAct 或 Plan-and-Execute。Reflexion 更依赖记忆模块，需要记录失败、原因和下一次可采用的策略。
+Reflection 不会自动提升事实正确性。它必须依赖可检查的证据、测试、规则或外部反馈。没有观察结果的自我评价，容易变成语气更自信的二次生成。
 
-## 2. 执行流程
+## 2. 运行机制
 
-### 2.1 基本时序
+### 2.1 Evaluator-Optimizer 循环
+
+Anthropic 把 evaluator-optimizer 归入常见工作流：一个模型生成答案，另一个评估器给出反馈，生成器据此修改。Agent 场景中，评估器可以是代码测试、规则评分器、LLM Judge 或人工审核。
+
+```mermaid
+flowchart TD
+  G["任务目标"] --> A["Agent 生成候选结果"]
+  A --> E["Evaluator 读取结果、证据、trace"]
+  E --> J{"是否达到验收项"}
+  J -->|"通过"| F["返回最终结果"]
+  J -->|"未通过"| R["生成修正反馈"]
+  R --> A
+  J -->|"高风险"| H["人工确认或停止"]
+```
+
+关键点在于反馈要可执行。比如“内容不够好”没有帮助；“第 3 段提到 pgvector 成本低，但没有引用来源，请回到笔记或资料中补证据”可以直接驱动下一轮行动。
+
+### 2.2 Reflexion 的记忆写入
+
+Reflexion 的特殊之处在于把失败经验写成语言记忆。下一次类似任务开始时，Agent 检索这些经验，改变初始策略。它不更新模型参数，因此实现成本低，但记忆质量决定效果。
+
+```python
+def reflect_after_trial(task, trace, outcome):
+    if outcome["passed"]:
+        return None
+
+    # 反思内容必须绑定失败证据，避免保存空泛经验。
+    return {
+        "task_type": task["type"],
+        "failure": outcome["reason"],
+        "lesson": "先运行最小测试定位失败，再扩大修改范围。",
+        "evidence": trace[-3:],
+        "expires_after_days": 30,
+    }
+
+
+def start_next_trial(task, memory_store):
+    memories = memory_store.search(namespace=task["type"], query=task["goal"], limit=3)
+    return {
+        "goal": task["goal"],
+        "reflections": [m["lesson"] for m in memories],
+    }
+```
+
+这段代码强调两点：反思记忆只在失败后写入，并且要携带证据。没有证据的经验容易沉淀成噪声，后续任务会被错误建议误导。
+
+## 3. 与 ReAct、计划的组合
+
+### 3.1 三种嵌入位置
+
+| 嵌入位置 | 机制 | 适合场景 |
+| --- | --- | --- |
+| 每轮动作后 | 检查工具选择、参数、观察结果 | 高风险工具调用 |
+| 阶段完成后 | 检查计划步骤是否满足完成条件 | Plan-and-Execute |
+| 最终输出前 | 检查答案、证据、格式、风险 | 写作、客服、代码修复 |
+
+在代码 Agent 中，Reflection 通常跟测试结果绑定。模型修改代码后运行测试，失败日志就是评估依据；模型再根据失败日志提出补丁。这里的反思来自外部反馈，而非纯文本自评。
+
+### 3.2 时序示例
 
 ```mermaid
 sequenceDiagram
-  participant R as "Runtime"
-  participant G as "Generator"
-  participant E as "Evaluator"
-  participant M as "Memory"
+  participant R as Runtime
+  participant A as Agent
+  participant T as TestTool
+  participant E as Evaluator
+  participant M as Memory
 
-  R->>G: 发送目标、证据和约束
-  G-->>R: 返回候选结果
-  R->>E: 发送候选结果和评分依据
-  E-->>R: 返回通过、问题和修改建议
-  alt 通过
-    R-->>R: 输出最终结果
-  else 未通过
-    R->>M: 写入失败摘要和修正方向
-    R->>G: 带反馈重新生成
-  end
+  R->>A: 修复目标和上下文
+  A-->>R: 补丁方案
+  R->>T: 运行测试
+  T-->>R: 失败日志
+  R->>E: 候选补丁、trace、失败日志
+  E-->>R: 反馈：失败原因和修正方向
+  R->>A: 反馈和约束
+  A-->>R: 修订补丁
+  R->>M: 若最终失败，写入反思记忆
 ```
 
-这里的 Evaluator 可以是规则、测试、静态分析、另一个模型或人工审核。能用程序判断的部分应优先使用程序，例如单元测试、JSON schema、权限校验和链接检查。模型评估适合语义覆盖、可读性、引用质量和风险遗漏。
+评估反馈不要覆盖原始证据。最终调试时需要看到模型候选补丁、测试失败日志、评估器反馈和后续修订之间的关系。
 
-### 2.2 停止条件
+## 4. 工程风险
 
-Reflection 容易陷入反复修改。Runtime 至少需要三类停止条件：达到最高迭代次数，评估器返回通过，连续两轮没有新增改进。对高风险任务，还要设置人工接管条件。
+### 4.1 常见失败
 
-```python
-def optimize(generator, evaluator, task, max_rounds=3):
-    draft = generator(task)
-    history = []
-
-    for _ in range(max_rounds):
-        review = evaluator(task, draft)
-        history.append({"draft": draft, "review": review})
-
-        # 评估器给出通过信号后立即停止
-        if review["pass"]:
-            return {"result": draft, "reviews": history}
-
-        draft = generator(task, feedback=review["issues"])
-
-    return {"result": draft, "reviews": history, "limited": True}
-```
-
-## 3. 工程取舍
-
-### 3.1 评估器选择
-
-| 评估器 | 优点 | 局限 |
+| 失败类型 | 表现 | 处理方式 |
 | --- | --- | --- |
-| 测试和规则 | 稳定、便宜、可复现 | 覆盖不了开放式质量 |
-| LLM Judge | 能评估语义和表达 | 需要 Rubric 和校准 |
-| 人工审核 | 适合高风险和争议样本 | 成本高，速度慢 |
+| 自我肯定 | 评估器重复生成器观点 | 使用测试、规则、证据字段约束评估 |
+| 反馈空泛 | 只说“需要改进” | 要求反馈绑定段落、文件、工具结果 |
+| 无限修正 | 多轮修改仍不达标 | 设置修正预算和人工接管条件 |
+| 记忆污染 | 保存了错误经验 | 写入前检查证据，定期过期和降权 |
+| 成本升高 | 每次任务多次模型调用 | 只在高风险阶段启用评估 |
 
-代码修复可以先跑测试，再让模型审查 diff 风险。研究报告可以先检查引用来源和覆盖维度，再让模型评估逻辑连贯性。客服类任务需要优先检查策略合规和业务状态。
-
-### 3.2 与记忆的关系
-
-Reflection 的反馈如果只在当前轮使用，任务结束后就消失。Reflexion 会把失败原因、修正策略和环境反馈写入记忆，供后续任务检索。记忆写入需要结构化字段，例如任务类型、失败位置、修复动作、适用条件和过期策略。
-
-### 3.3 风险
-
-Reflection 会增加延迟和 token 成本。评估器质量差时，Agent 可能把正确结果改坏。工程上应先在有明确评分依据的任务中使用，再逐步扩展到开放任务。
+Reflection 的效果来自可验证反馈。若任务没有测试、规则、证据或人工样本，优先补评估依据，再考虑反思循环。
 
 ## 参考资料
 
 - [Reflexion: Language Agents with Verbal Reinforcement Learning](https://arxiv.org/abs/2303.11366)
-- [OpenAI Evals](https://github.com/openai/evals)
-- [Anthropic: Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
+- [Self-Refine: Iterative Refinement with Self-Feedback](https://arxiv.org/abs/2303.17651)
+- [Anthropic: Building effective agents](https://www.anthropic.com/research/building-effective-agents)
+- [OpenAI: Evaluate agent workflows](https://developers.openai.com/api/docs/guides/agent-evals)
