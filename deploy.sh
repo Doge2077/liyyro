@@ -25,7 +25,11 @@ echo -e "${GREEN}========================================${NC}"
 echo ""
 
 echo -e "${YELLOW}[1/5] 检查依赖...${NC}"
-for cmd in node npm docker; do
+REQUIRED_COMMANDS="docker"
+if [ "$SKIP_BUILD" != "true" ]; then
+    REQUIRED_COMMANDS="node npm docker"
+fi
+for cmd in $REQUIRED_COMMANDS; do
     if ! command -v "$cmd" >/dev/null 2>&1; then
         echo -e "${RED}错误: ${cmd} 未安装${NC}"
         exit 1
