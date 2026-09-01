@@ -71,13 +71,13 @@ description: ""
 * 由数据库、数据库管理系统（及其应用开发工具）、应用程序和数据库管理员（DataBase Administrator，DBA）组成的存储、管理、处理和维护数据的系统。
   * 数据库的建立、使用和维护等工作只靠一个数据库管理系统远远不够，还要有专门的人员来完成，这些人被称为数据库管理员。
 
-![数据库系统概念图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/概念.png)
+![数据库系统概念图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/概念.png)
 
 ---
 
 ### 1.1.2 数据管理技术的产生和发展
 
-![数据管理技术发展阶段图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/阶段发展.png)
+![数据管理技术发展阶段图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/阶段发展.png)
 
 ---
 
@@ -135,7 +135,7 @@ description: ""
 
 第二类中的物理模型是对数据最底层的抽象，它描述数据在系统内部的表示方式和存取方法，或在磁盘或磁带上的存储方式和存取方法，是面向计算机系统的。物理模型的具体实现是数据库管理系统的任务。
 
-![数据抽象层次图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/抽象.png)
+![数据抽象层次图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/抽象.png)
 
 ---
 
@@ -251,7 +251,7 @@ description: ""
 
 在层次模型中，同一双亲的子女结点称为兄弟结点（twin 或 sibling），没有子女结点的结点称为叶结点：
 
-![层次模型示意图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/层次模型.png)
+![层次模型示意图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/层次模型.png)
 
 由上图可以看出：**层次模型像一棵倒立的树，结点的双亲是唯一的**。
 
@@ -290,7 +290,7 @@ description: ""
 
 网状模型是一种比层次模型更具普遍性的结构。**它去掉了层次模型的两个限制，允许多个结点没有双亲结点，允许结点有多个双亲结点；此外它还允许两个结点之间有多种联系（称之为复合联系）**。因此，网状模型可以更直接地去描述现实世界。而层次模型实际上是网状模型的一个特例。
 
-![网状模型示意图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/网状模型.png)
+![网状模型示意图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/网状模型.png)
 
 由上图可知，层次模型中子女结点与双亲结点的联系是唯一的，而在网状模型中这种联系可以不唯一。
 
@@ -339,7 +339,7 @@ description: ""
 
 借用下图，介绍关系模型的基本概念：
 
-![关系模型示意图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/关系模型.png)
+![关系模型示意图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/关系模型.png)
 
 - 关系（relation）：一个关系对应通常说的一张表。
   - 例如：图中的这张学生登记表。
@@ -411,7 +411,7 @@ description: ""
 
 数据库系统的三级模式结构是指数据库系统是由外模式、模式和内模式三级构成：
 
-![三级模式结构图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/三级结构.png)
+![三级模式结构图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/三级结构.png)
 
 ---
 

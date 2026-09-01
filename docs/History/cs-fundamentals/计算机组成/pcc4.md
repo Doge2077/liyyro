@@ -27,7 +27,7 @@ description: ""
 
 #### 按在计算机中的作用分类
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/分类.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/分类.png)
 
 ### 4.1.2 存储器的层次结构
 
@@ -40,7 +40,7 @@ description: ""
 
 其特性关系如图所示：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/金字塔.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/金字塔.png)
 
 #### 缓存-主存层次和主存-辅存层次
 
@@ -49,7 +49,7 @@ description: ""
 * 缓存能直接和 `CPU`、主存交换信息；
 * 主存可以和 `CPU`、缓存、辅存交换信息。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/存储层次.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/存储层次.png)
 
 ## 4.2 主存储器
 
@@ -57,7 +57,7 @@ description: ""
 
 #### 主存的基本组成
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/主存的基本组成.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/主存的基本组成.png)
 
 * 存储体：
   * 由许多**存储单元** 组成；
@@ -101,7 +101,7 @@ description: ""
 
 #### 半导体存储芯片的基本结构
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/存储芯片的基本结构.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/存储芯片的基本结构.png)
 
 * 地址线：单向输入，其位数与芯片的容量有关。
 * 数据线：双向传输，其位数与芯片可读出或写入的数据位数有关，也与芯片的容量有关。
@@ -110,7 +110,7 @@ description: ""
 
 **地址线和数据线共同来反映存储芯片的容量**，比如地址线 10 根，数据线 4 根，芯片容量为 2^{10} × 4 = 4K 位。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/存储器.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/存储器.png)
 
 如上图所示，是一个由 $32$ 片 $16K \times 1$ 位的存储芯片组成的 $64K \times 8$ 位的存储器，每次读出一个存储字时，通过片选线选中 $8$ 片。
 
@@ -118,7 +118,7 @@ description: ""
 
 **线选法**：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/线选法.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/线选法.png)
 
 * 用一根字选择线（字线），直接选中一个存储单元的各位（如一个字节）。
   * 例如，当地址线 $A_3 A_2 A_1 A_0$ 为 $1111$ 时，则第 $15$ 根字线被选中。
@@ -126,7 +126,7 @@ description: ""
 
 **重合法**：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/重合法.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/重合法.png)
 
 * 用 $64$ 根选择线（$X$、$Y$ 两个方向各 $32$ 根），便可选择 $32 \times 32$ 矩阵中的任一位。
   * 例如，当地址线为全 $0$ 时，译码输出 $X_0$ 和 $Y_0$ 有效，矩阵中第 $0$ 行、第 $0$ 列共同选中的那位即被选中。
@@ -136,7 +136,7 @@ description: ""
 
 #### 静态 RAM（Static RAM, SRAM）
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/静态RAM.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/静态RAM.png)
 
 **特点**：
 
@@ -146,15 +146,15 @@ description: ""
 
 **读周期**：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/静态RAM读.jpg)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/静态RAM读.jpg)
 
 **写周期**：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/静态RAM写.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/静态RAM写.png)
 
 #### 动态 RAM（Dynamic RAM, DRAM）
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/动态RAM.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/动态RAM.png)
 
 **特点**：
 
@@ -164,11 +164,11 @@ description: ""
 
 **读周期**：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/动态RAM读.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/动态RAM读.png)
 
 **写周期**：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/动态RAM写.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/动态RAM写.png)
 
 **刷新方式**：
 
@@ -195,7 +195,7 @@ description: ""
 
 #### 掩模 `ROM`
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/掩模MOS.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/掩模MOS.png)
 
 **特点**：
 
@@ -204,7 +204,7 @@ description: ""
 
 #### `PROM`
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/PROM.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/PROM.png)
 
 **特点**：
 
@@ -214,7 +214,7 @@ description: ""
 
 #### `EPROM`
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/EPROM.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/EPROM.png)
 
 **特点**：
 
@@ -230,13 +230,13 @@ description: ""
 
 位扩展是指增加存储字长，例如，$2$ 片 $1K \times 4$ 位的芯片可组成 $1K \times 8$ 位的存储器：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/位扩展.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/位扩展.png)
 
 ##### 字扩展
 
 字扩展是指增加存储器字的数量。例如，用 $2$ 片 $1K \times 8$ 位的存储芯片可组成一个 $2K \times 8$ 位的存储器：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/字扩展.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/字扩展.png)
 
 **注意**：
 * 将 $A_{10}$ 用作片选信号：
@@ -247,7 +247,7 @@ description: ""
 
 字、位扩展是指既增加存储字的数量，又增加存储字长。例如，用 $8$ 片 $1K \times 4$ 位的芯片组成 $4K \times 8$ 位的存储器。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/位字扩展.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/位字扩展.png)
 
 #### 存储器与 CPU 的连接
 
@@ -305,7 +305,7 @@ $k$ 的位数确定后，便可由它们所承担的检测任务设定它们在�
     * 每两个小组 $g_i$ 和 $g_j$ 共同占有一位是其他小组没有的，即每两小组 $g_i, g_j$ 共同占有第 $2^{i - 1}+2^{j - 1}$ 位 $(i,j=1,2,\dots)$。
     * 每三个小组 $g_i, g_j, g_l$，共同占有第 $2^{i - 1} + 2^{j - 1} + 2^{l - 1}$ 位，是其他小组所没有的。
     * 依次类推，便可确定每组所包含的各位。
-  * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/汉明码组成举例.png)
+  * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/汉明码组成举例.png)
 
 #### 汉明码的纠错过程
 
@@ -315,7 +315,7 @@ $P_i$ 的状态由原检测位 $C_i$ 及其所在小组内“1”的个数确定
 * 倘若按配偶原则配置的汉明码，其传送后形成新的检测位 $P_i$ 应为 $0$；
   * 否则说明传送有错，并且还可直接指出出错的位置。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/汉明码的纠错举例.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/汉明码的纠错举例.png)
 
 ### 4.2.7 提高访存速度的措施
 
@@ -325,7 +325,7 @@ $P_i$ 的状态由原检测位 $C_i$ 及其所在小组内“1”的个数确定
 * 故可以在一个存取周期内，从同一地址取出 $4$ 条指令，然后再逐条将指令送至 CPU 执行；
   * 每隔 $1/4$ 存取周期，主存向 CPU 送一条指令，这样显然增大了存储器的带宽，提高了单体存储器的工作速度。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/单体多字存储.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/单体多字存储.png)
 
 #### 多体并行系统
 
@@ -334,7 +334,7 @@ $P_i$ 的状态由原检测位 $C_i$ 及其所在小组内“1”的个数确定
   * 各模块各自都有独立的地址寄存器（MAR）、数据寄存器（MDR）、地址译码、驱动电路和读/写电路；
   * 这些模块能并行工作，又能交叉工作。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/高位多体存储.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/高位多体存储.png)
 
 #### 高性能存储芯片
 
@@ -354,7 +354,7 @@ $P_i$ 的状态由原检测位 $C_i$ 及其所在小组内“1”的个数确定
 
 缓存和主存的地址都分为两部分，其中两者的块内地址相等，块内地址的大小决定了块的大小，比如块内地址为 $4$ 位，并且编址方式为字节，则每块大小为 $16$ 字节。另外，Cache 中还存在一个标记，用于标识当前 Cache 块对应的主存块号。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/Cache的组成.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/Cache的组成.png)
 
 #### 命中与命中率
 
@@ -367,11 +367,11 @@ Cache 的容量与块长是影响 Cache 效率的重要因素，通常用“命�
 
 **命中率**：指 CPU 要访问的信息已在 Cache 内的比率。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/Cache的命中率.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/Cache的命中率.png)
 
 #### 基本结构和工作原理
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/Cache的组成原理.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/Cache的组成原理.png)
 
 CPU通过地址总线发送主存块号，由于Cache和主存的块内地址编号相同，可以直接转换。主存块号先经过主存Cache地址映射变换机构判断是否命中：
 * 如果命中，则给出相应的Cache地址的块号，然后从Cache存储体中取数据通过数据总线送给CPU。
@@ -386,7 +386,7 @@ CPU通过地址总线发送主存块号，由于Cache和主存的块内地址编
 
 **读操作**
 
-![读操作](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/Cache读操作.png)
+![读操作](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/Cache读操作.png)
 
 **写操作**
 
@@ -415,7 +415,7 @@ Cache刚出现时，典型系统只有一个缓存，近年来普遍采用多个
 
 #### 直接映射
 
-![直接映射](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/Cache直接映射.png)
+![直接映射](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/Cache直接映射.png)
 
 CPU给出的主存地址由三部分组成：主存字块标记，Cache字块地址，字块内地址。
 *   主存字块标记就是主存的分区号；
@@ -436,7 +436,7 @@ CPU给出的主存地址由三部分组成：主存字块标记，Cache字块地
 
 #### 全相联映射
 
-![全相联映射](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/Cache全相联映射.png)
+![全相联映射](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/Cache全相联映射.png)
 
 **特点**：
 
@@ -456,7 +456,7 @@ CPU给出的主存地址由三部分组成：主存字块标记，Cache字块地
 
 #### 组相联映射
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/03/Cache组相联映射.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/Cache组相联映射.png)
 
 * Cache字块地址字段由 $c$ 位变为组地址字段 $q$ 位，且 $q = c - r$：
   其中 $2^c$ 表示Cache的总块数；

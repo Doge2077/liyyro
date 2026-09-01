@@ -188,10 +188,10 @@ scripts/
 
 扫描到 134 个非 jsDelivr 图片
 [1/134] 下载: https://cdn.acwing.com/media/article/image/2024/05/05/xxx.jpg
-  ✓ 上传成功 -> https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/05/xxx.jpg
+  ✓ 上传成功 -> https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/xxx.jpg
 
 [2/134] 下载: https://img-blog.csdnimg.cn/xxx.png
-  ✓ 上传成功 -> https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/06/xxx.png
+  ✓ 上传成功 -> https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/xxx.png
 
 ...
 

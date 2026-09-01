@@ -23,7 +23,7 @@ description: ""
 
 在编译源代码时，如果一个类没有显式标明继承的父类，编译器会为其指定一个默认的父类（即 `Object`）。而在交给虚拟机处理这个类时，由于该类已经有一个默认的父类，因此，JVM 仍然会按照常规的方法，像处理其他类一样来处理这个类。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220315104729779.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220315104729779.png)
 
 以上源码中定义了7个 `native` 方法：`registerNatives()`、`getClass()`、`hashCode()`、`clone()`、`notify()`、`notifyAll()`、`wait(long)`。
 
@@ -370,7 +370,7 @@ hashCode 是基于哈希算法（散列算法）生成的，是将数据依特�
 
 当一个对象在堆内存中分配好并且初始化完成之后的结构如下：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220314135624491.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220314135624491.png)
 
 * 添加对齐填充是为了保证对象的总大小是8的整数倍个字节
   * 类型指针占4个字节是因为默认开启了指针压缩，如果不开启指针压缩，则占8个字节
@@ -382,9 +382,9 @@ hashCode 的值存储在Java对象头里的，Hotspot虚拟机的对象头主要
 
 对象头结构如下：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220228140424617.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220228140424617.png)
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220228140345317.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220228140345317.png)
 
 ---
 

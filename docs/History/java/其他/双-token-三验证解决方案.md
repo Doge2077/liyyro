@@ -47,7 +47,7 @@ description: ""
 
 该机制的 UML 图如下：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/08/双token三验证.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/双token三验证.png)
 
 ---
 

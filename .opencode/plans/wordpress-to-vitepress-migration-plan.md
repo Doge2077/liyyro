@@ -101,13 +101,13 @@ blog-assets/                    # 独立图床仓库
 
 ```
 原始 GitHub URL:
-https://raw.githubusercontent.com/<username>/blog-assets/main/images/2024/06/image.png
+https://raw.githubusercontent.com/<username>/blog-assets/main/images/2024/image.png
 
 jsDelivr CDN URL（推荐）:
-https://cdn.jsdelivr.net/gh/<username>/blog-assets@main/images/2024/06/image.png
+https://cdn.jsdelivr.net/gh/<username>/blog-assets@main/images/2024/image.png
 
 带版本号（更稳定）:
-https://cdn.jsdelivr.net/gh/<username>/blog-assets@v1.0/images/2024/06/image.png
+https://cdn.jsdelivr.net/gh/<username>/blog-assets@v1.0/images/2024/image.png
 ```
 
 ### 2.4 jsDelivr 在中国的优势

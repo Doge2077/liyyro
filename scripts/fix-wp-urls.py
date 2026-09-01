@@ -6,20 +6,29 @@
 
 import os
 import re
+import json
 
 DOCS_DIR = "/root/liyyro/docs"
 CDN_PREFIX = "https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images"
+MAPPING_FILE = "/root/liyyro/scripts/url-mapping.json"
+
+try:
+    with open(MAPPING_FILE, encoding="utf-8") as f:
+        URL_MAPPING = json.load(f)
+except FileNotFoundError:
+    URL_MAPPING = {}
 
 def fix_wp_url(match):
     """修复 WordPress URL"""
     full_url = match.group(0)
+    if full_url in URL_MAPPING:
+        return URL_MAPPING[full_url]
     # 提取路径部分
     path_match = re.search(r'/uploads/(\d{4})/(\d{2})/(.+?)(?:-\d+x\d+)?(\.\w+)$', full_url)
     if path_match:
         year = path_match.group(1)
-        month = path_match.group(2)
         filename = path_match.group(3) + path_match.group(4)
-        return f"{CDN_PREFIX}/{year}/{month}/{filename}"
+        return f"{CDN_PREFIX}/{year}/{filename}"
     return full_url
 
 def main():

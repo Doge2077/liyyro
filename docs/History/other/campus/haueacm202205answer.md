@@ -542,7 +542,7 @@ int main() {
 
 现在给出一个“卷点”的定义：在一个正方形内存在某一点，使得这个点和正方形四个顶点连接而划分出的四块三角形的面积比为 $a:b:c:d$。四个数不分顺序；卷点可能不是唯一的。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/10/卷点.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/卷点.png)
 
 现在有一个正方形，给出 $4$个整数 $a,b,c,d$，表示被某点划分出的四个三角形的面积，判断有多少个这样的卷点在正方形内部？
 
@@ -752,7 +752,7 @@ int main() {
 
 **描述**：
 
-![现在是摸鱼时间](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/10/现在是摸鱼时间.png)
+![现在是摸鱼时间](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/现在是摸鱼时间.png)
 
 $LYS$ 最喜欢摸鱼了，现在给出一个长度为 $N$ 的序列 $A={A_1,A_2,\dots,A_N}$，表示 $LYS$ 的日程表，其中 $A_i$ 表示第 $i$ 天的摸鱼指数。
 
@@ -869,7 +869,7 @@ int main() {
 
 在习得摸鱼大师 $HF$ 给出的公式之后，$LYS$ 发现 $HF$ 给的摸鱼公式只适用于地球上的日程表，于是他提出了“宇宙摸鱼大一统理论”，以便适应全宇宙不同摸鱼人群的需求。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/10/现在是摸鱼时间PLUS.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/现在是摸鱼时间PLUS.png)
 
 现在给出一个长度为 $N$ 的序列 $A={A_1,A_2,\dots,A_N}$，表示某一日程表，其中 $A_i$ 表示第 $i$ 天的摸鱼指数。
 

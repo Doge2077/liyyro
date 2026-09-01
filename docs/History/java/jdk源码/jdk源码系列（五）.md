@@ -30,9 +30,9 @@ ConcurrentHashMap 中的分段锁称为 Segment，它类似于 HashMap 的结构
 
 Java 7 版本 ConcurrentHashMap 的存储结构如图：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220318161208191.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220318161208191.png)
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220318162050021.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220318162050021.png)
 
 ConcurrentHashMap 由很多个 Segment 组合，而每一个 Segment 是一个类似于 HashMap 的结构，所以每一个 Segment 的内部可以进行扩容。
 
@@ -443,7 +443,7 @@ public V get(Object key) {
 
 #### 存储结构
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/777aa77f4b9dda09bbd40454d77fb54c.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/777aa77f4b9dda09bbd40454d77fb54c.png)
 
 可以发现 Java 8 的 ConcurrentHashMap 相对于 Java 7 来说变化较大，不再是之前的 Segment 数组 + HashEntry 数组 + 链表，而是 Node 数组 + 链表或红黑树。
 
@@ -472,7 +472,7 @@ CAS 核心算法：
     * 如果 E != V：说明我们准备的这个 E 已经过时了，所以我们要重新准备一个最新的 E，去跟 V 比较
   * 比较成功后才能更新 V 的值为 N
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220319000316710.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220319000316710.png)
 
 如果多个线程同时使用 CAS 操作一个变量的时候，只有一个线程能够修改成功。
 其余的线程提供的期望值已经与共享变量的值不一样了，所以均会失败。

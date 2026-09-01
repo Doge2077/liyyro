@@ -75,13 +75,12 @@ for alt, url in matches:
         new_filename = f'{file_hash}{ext}'
         
         year = datetime.now().strftime('%Y')
-        month = datetime.now().strftime('%m')
-        target_dir = os.path.join(photo_repo, 'images', year, month)
+        target_dir = os.path.join(photo_repo, 'images', year)
         os.makedirs(target_dir, exist_ok=True)
         target_path = os.path.join(target_dir, new_filename)
         shutil.copy2(img_path, target_path)
         
-        cdn_url = f'{cdn_prefix}/{year}/{month}/{new_filename}'
+        cdn_url = f'{cdn_prefix}/{year}/{new_filename}'
         content = content.replace(url, cdn_url)
         changed = True
         print(f'  上传: {url} -> {cdn_url}')

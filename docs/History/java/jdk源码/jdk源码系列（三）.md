@@ -47,7 +47,7 @@ HashMap 的实现不是同步的，这意味着它不是**线程安全**的。�
 * JDK 8 以前 HashMap 的实现是**数组 + 链表**。即使哈希函数取得再好，也很难达到元素百分百均匀分布。
   * 当 HashMap 中有大量的元素都存放到同一个桶中时，这个桶下会有一条长长的链表。极端情况下，HashMap 就相当于一个单链表。假如单链表有 n 个元素，遍历的时间复杂度就是 O(n)，完全失去了它的优势。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220221182804565.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220221182804565.png)
 
 ---
 
@@ -58,7 +58,7 @@ HashMap 的实现不是同步的，这意味着它不是**线程安全**的。�
 * JDK 8 之后 HashMap 的实现是**数组 + 链表 + 红黑树**。
   * 桶中的结构可能是链表，也可能是红黑树。当**链表长度大于阈值**（默认为 8）并且**当前数组的长度大于 64** 时，此索引位置上的所有数据将改为使用红黑树存储。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220224112415112.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220224112415112.png)
 
 ---
 
@@ -69,7 +69,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
     implements Map<K,V>, Cloneable, Serializable {
 ```
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220222100327933.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220222100327933.png)
 
 JDK 为我们提供了一个抽象类 AbstractMap，该抽象类实现了 Map 接口。因此，如果我们不想实现所有的 Map 接口方法，就可以选择继承抽象类 AbstractMap。
 

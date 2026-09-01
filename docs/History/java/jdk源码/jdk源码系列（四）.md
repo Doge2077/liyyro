@@ -263,7 +263,7 @@ ObjectMonitor::ObjectMonitor() {
 *   `_recursions`：锁的重入次数。
 *   `_owner`：拥有者，是持有该 ObjectMonitor（监视器）对象的线程。
 *   `_EntryList`：监控集合，存放的是处于阻塞状态的线程队列，在多线程下，竞争失败的线程会进入 EntryList 队列。
-*   `_WaitSet`：待授权集合，存放的是处于 wait 状态的线程队列，当线程执行了 `wait()` 方法之后，会进入 WaitSet 队列。 ![image.png](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/屏幕截图-2024-10-29-145205.png)
+*   `_WaitSet`：待授权集合，存放的是处于 wait 状态的线程队列，当线程执行了 `wait()` 方法之后，会进入 WaitSet 队列。 ![image.png](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/屏幕截图-2024-10-29-145205.png)
 
 监视器执行的流程如下：
 
@@ -327,13 +327,13 @@ ObjectMonitor::ObjectMonitor() {
 
 首先要明确一点，这个锁是一个重量级的锁，由操作系统直接管理，要想使用它，需要将当前线程挂起并从用户态切换到内核态来执行，这种切换的代价是非常昂贵的。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220315193108505.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220315193108505.png)
 
 JDK 1.6之前每次获取的都是重量级锁，无疑在很多场景下性能不高，故JDK 1.6对 synchronized 做了很大程度的优化，其目的就是为了减少这种重量级锁的使用。
 
 整体锁升级的过程大致可以分为两条路径，如下：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220315193128071.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220315193128071.png)
 
 上述过程就是锁膨胀，会因实际情况进行膨胀升级，其膨胀方向是：无锁 -> 偏向锁 -> 轻量级锁 -> 重量级锁，并且膨胀方向不可逆。
 

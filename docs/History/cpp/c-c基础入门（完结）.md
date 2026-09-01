@@ -968,7 +968,7 @@ int main() {
 
 取自 [C++ 运算符优先级 - cppreference](https://zh.cppreference.com/w/cpp/language/operator_precedence)
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/08/运算符优先级.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/运算符优先级.png)
 
 ---
 
@@ -1185,7 +1185,7 @@ while (条件表达式) {
 
 **解释**：
 * 先判断循环条件表达式，只要循环条件的结果为真，就执行循环语句。
-  * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/08/循环w.png)
+  * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/循环w.png)
 
 **注意**：
 
@@ -1227,7 +1227,7 @@ do {
 **解释**：
 
 * 先执行一次语句，再判断条件表达式，只要条件表达式的结果为真，就执行循环语句。
-  * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/08/循环dw.png)
+  * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/循环dw.png)
 
 **注意**：
 
@@ -1276,7 +1276,7 @@ for(初始化条件; 判断条件; 更新) {
 **解释**：
 
 * 只要循环条件的结果为真，就执行循环语句。
-  * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/08/循环图.png)
+  * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/循环图.png)
 
 **C语言代码示例**：
 ```cpp
@@ -1669,7 +1669,7 @@ int main() {
 **解释**：
 
 *   数组的声明形如 `int Array[3][4]`，那就指的是定义了一个三行四列的矩阵形状的二维数组，如下图所示。
-    *   ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/08/二维数组.png)
+    *   ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/二维数组.png)
     *   这样的矩阵在内存中是以箭头右边的方式存放的，也就是说实际上我们**定义的二维数组在内存中仍然像是一维数组那样连续存储的**，可以想象为把一个矩阵一层层伸展铺平。
 
 ---

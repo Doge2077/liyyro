@@ -28,7 +28,7 @@ public class ArrayList<E> extends AbstractList<E>
         implements List<E>, RandomAccess, Cloneable, java.io.Serializable
 ```
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220214151452756.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220214151452756.png)
 
 * 实现 RandomAccess 接口：
 
@@ -46,7 +46,7 @@ public class ArrayList<E> extends AbstractList<E>
 
 > 这个接口是 List 类集合的上层接口，定义了实现该接口的类都必须要实现的一组方法。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220214152521279.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220214152521279.png)
 
 ---
 
@@ -452,7 +452,7 @@ public class LinkedList<E>
      implements List<E>, Deque<E>, Cloneable, java.io.Serializable
 ```
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220221114859670.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220221114859670.png)
 
 * 和 ArrayList 集合一样，LinkedList 集合也实现了 Cloneable 接口和 Serializable 接口，分别用来支持克隆以及支持序列化。
   * List 接口也不用多说，定义了一套 List 集合类型的方法规范。
@@ -480,7 +480,7 @@ transient Node<E> first;
 transient Node<E> last;
 ```
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220221134536731.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220221134536731.png)
 
 **注意**：这里出现了一个 Node 类，这是 LinkedList 类中的一个内部类，其中每一个元素就代表一个 Node 类对象，LinkedList 集合就是由许多个 Node 对象类似于手拉着手构成。
 
@@ -970,13 +970,13 @@ private class ListItr implements ListIterator<E>
 
 看一下它的继承结构，发现只继承了一个ListIterator，到ListIterator中一看：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220221161618682.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220221161618682.png)
 
 其中不止有向后迭代的方法，还有向前迭代的方法，可以让LinkedList不光能向后迭代，也能向前迭代
 
 看一下ListItr中的方法，可以发现，在迭代的过程中，还能移除、修改、添加值的操作
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/10/image-20220221161652319.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/image-20220221161652319.png)
 
 其中 `DescendingIterator` 内部类： 
 ```java

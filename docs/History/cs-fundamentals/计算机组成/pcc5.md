@@ -16,7 +16,7 @@ description: ""
 
 早期的I/O设备种类较少，I/O设备与主存交换信息都必须通过CPU：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/早期阶段.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/早期阶段.png)
 
 * 每个I/O设备都必须配有一套独立的逻辑电路与CPU相连，**线路十分散乱、庞杂**。
   * 输入输出过程是穿插在CPU执行程序过程之中进行的，**工作效率低**。
@@ -26,7 +26,7 @@ description: ""
 
 这个阶段I/O设备通过接口模块与主机连接，计算机系统采用了总线结构：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/接口模块阶段.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/接口模块阶段.png)
 
 * 数据经过接口既起到缓冲作用，又可完成串-并变换。
   * 接口能满足中断请求处理的要求，使I/O设备与CPU可按并行方式工作，大大地提高了CPU的工作效率。
@@ -39,7 +39,7 @@ description: ""
 
 #### 具有通道结构的阶段
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/通道结构阶段.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/通道结构阶段.png)
 
 * 通道是用来负责管理I/O设备以及实现主存与I/O设备之间交换信息的部件。
   * 通道有专用的通道指令，能独立地执行用通道指令所编写的输入输出程序，是从属于CPU的一个专用处理器。
@@ -74,7 +74,7 @@ description: ""
 
 #### I/O 硬件
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/IO硬件.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/IO硬件.png)
 
 输入输出系统的硬件组成是多种多样的，在带有接口的I/O系统中，一般包括：
 
@@ -106,7 +106,7 @@ I/O设备大致可分为三类：
 *   计算机信息的存储设备：系统软件和各种计算机的有用信息，其信息量极大，需存储保留起来。
 *   机——机通信设备：实现一台计算机与其他计算机或与其他系统之间完成通信任务的设备。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/IO用途.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/IO用途.png)
 
 ### 5.2.2 输入设备
 
@@ -159,7 +159,7 @@ I/O设备大致可分为三类：
 
 ### 5.3.2 接口的功能和组成
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/IO总线.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/IO总线.png)
 
 如上图所示为总线结构的计算机，每一台I/O设备都是通过I/O接口挂到系统总线上的。图中的I/O总线包括数据线、设备选择线、命令线和状态线。
 
@@ -172,7 +172,7 @@ I/O设备大致可分为三类：
 
 ### 5.3.3 接口类型
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/IO接口基本组成.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/IO接口基本组成.png)
 
 * 按数据传送方式分类：
   * 并行接口：将一个字节（或一个字）的所有位同时传送；
@@ -193,15 +193,15 @@ I/O设备大致可分为三类：
 
 #### 单I/O设备
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/单IO设备查询.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/单IO设备查询.png)
 
 #### 多I/O设备
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/多IO设备查询.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/多IO设备查询.png)
 
 ### 5.4.2 程序查询方式的接口电路
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/查询接口电路.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/查询接口电路.png)
 
 以输入设备为例，该接口的工作过程如下：
 
@@ -246,7 +246,7 @@ CPU响应I/O设备提出中断请求的条件是必须满足CPU中的允许中�
 
 **CPU响应中断的时间一定是在每条指令执行阶段的结束时刻。**
 
-![中断接口电路组成](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/中断接口电路组成.png)
+![中断接口电路组成](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/中断接口电路组成.png)
 
 #### I/O 中断处理过程
 
@@ -260,7 +260,7 @@ CPU响应I/O设备提出中断请求的条件是必须满足CPU中的允许中�
 
 具体地：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/中断处理过程.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/中断处理过程.png)
 
 * 由 CPU 发启动 I/O 设备命令，将接口中的 B 置“1”，D 置“0”。
   * 接口启动输入设备开始工作。
@@ -278,7 +278,7 @@ CPU响应I/O设备提出中断请求的条件是必须满足CPU中的允许中�
 
 ### 5.6.1 DMA 方式的特点
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/DMA方式数据传送.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/DMA方式数据传送.png)
 
 由图中可见，由于**主存和 DMA 接口之间有一条数据通路**，因此主存和设备交换信息时，不通过 CPU，也不需要 CPU 暂停现行程序为设备服务，省去了保护现场和恢复现场，因此工作速度比程序中断方式的工作速度高。
 
@@ -313,7 +313,7 @@ CPU响应I/O设备提出中断请求的条件是必须满足CPU中的允许中�
 
 #### DMA接口基本组成
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/DMA接口组成.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/DMA接口组成.png)
 
 * 主存地址寄存器(AR)：用于存放主存中需要交换数据的地址。
 * 字计数器(WC)：用于记录传送数据的总字数，通常以交换字数的补码值预置。
@@ -338,7 +338,7 @@ DMA的数据传送过程分为三个阶段：
 
 #### 数据传送
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/DMA数据传送.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/DMA数据传送.png)
 
 #### 后处理
 
@@ -352,7 +352,7 @@ DMA的数据传送过程分为三个阶段：
 
 #### 选择型DMA接口
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/选择型DMA接口.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/选择型DMA接口.png)
 
 **特点**：
 
@@ -361,7 +361,7 @@ DMA的数据传送过程分为三个阶段：
 
 #### 多路型DMA接口
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/04/多路型DMA接口.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/多路型DMA接口.png)
 
 **特点**：
 

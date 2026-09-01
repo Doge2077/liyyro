@@ -123,7 +123,7 @@ description: "描述"
 图片存放在独立仓库 [Doge2077/liyyro-photo](https://github.com/Doge2077/liyyro-photo)，通过 jsDelivr CDN 加速：
 
 ```markdown
-![描述](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/06/xxx.png)
+![描述](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2024/xxx.png)
 ```
 
 ## 自动部署

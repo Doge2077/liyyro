@@ -45,6 +45,7 @@ import os
 import hashlib
 import subprocess
 import urllib.parse
+from datetime import datetime
 
 filepath = '$FILE_PATH'
 photo_repo = '$PHOTO_REPO'
@@ -82,14 +83,13 @@ for alt, url in matches:
         # 复制到图床
         import shutil
         year = datetime.now().strftime('%Y')
-        month = datetime.now().strftime('%m')
-        target_dir = os.path.join(photo_repo, 'images', year, month)
+        target_dir = os.path.join(photo_repo, 'images', year)
         os.makedirs(target_dir, exist_ok=True)
         target_path = os.path.join(target_dir, new_filename)
         shutil.copy2(img_path, target_path)
         
         # 生成 CDN URL
-        cdn_url = f'{cdn_prefix}/{year}/{month}/{new_filename}'
+        cdn_url = f'{cdn_prefix}/{year}/{new_filename}'
         
         # 替换内容
         content = content.replace(url, cdn_url)

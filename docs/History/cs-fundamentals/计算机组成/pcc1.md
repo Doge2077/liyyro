@@ -32,7 +32,7 @@ description: ""
 
 现代计算机具有多级层次的结构：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/计算机层次结构.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/计算机层次结构.png)
 
 从计算机系统的多级层次结构来看，可以将硬件研究的主要对象归结为传统机器 $M_1$，和微程序机器 $M_0$。软件的研究对象主要是操作系统级以上的各级虚拟机。
 
@@ -69,11 +69,11 @@ description: ""
 
 典型的冯·诺依曼计算机是以运算器为中心的：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/计算机硬件框图1.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/计算机硬件框图1.png)
 
 现代的计算机已转化为以存储器为中心：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/计算机硬件框图2.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/计算机硬件框图2.png)
 
 图中各部件的功能如下：
 
@@ -85,7 +85,7 @@ description: ""
 
 由于运算器和控制器在逻辑关系和电路结构上联系十分紧密，通常将它们合起来统称为中央处理器（Central Processing Unit，CPU）。把输入设备与输出设备简称为 `I/O` 设备（Input/Output Equipment）。这样，现代计算机可认为由三大部分组成：`CPU`，`I/O`设备及主存储器（Main Memory，MM）；`CPU` 与主存储器合起来又可称为主机，`I/O` 设备又可称为外部设备。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/计算机硬件框图3.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/计算机硬件框图3.png)
 
 算术逻辑单元（Arithmetic Logic Unit，ALU）：简称算逻部件，用来完成算术逻辑运算。
 控制单元（Control Unit，CU）：用来解释存储器中的指令，并发出各种操作命令来执行指令。

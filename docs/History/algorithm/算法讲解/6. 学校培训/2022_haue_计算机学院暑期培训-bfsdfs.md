@@ -29,7 +29,7 @@ description: ""
 
 给定一个 n×n 的矩阵，Z 字形扫描的过程如下图所示：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/149096_b6baba9e88-19_4b6be8d85f-zig.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/149096_b6baba9e88-19_4b6be8d85f-zig.png)
 
 对于下面的 4×4 的矩阵：
 ```
@@ -73,10 +73,10 @@ description: ""
 
 * 该题以Z字形遍历数组，对于奇数和偶数情况下，边界转向复杂。
   * 扩大原二维数组，使边界转向统一。
-  * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/2.png)
+  * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/2.png)
   * 观察旋转方向，设初始方向 `dr = 0`。
   * 扩大二维数组，遍历满足在原数组范围内时输出。
-  * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/3.png)
+  * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/3.png)
 
 **代码**
 ```cpp
@@ -220,7 +220,7 @@ int main() {
 *   先进先出。
 *   只允许对队头进行操作。
 
-![队列概念图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/队列概念.png)
+![队列概念图](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/队列概念.png)
 
 ###### 1. 头文件
 
@@ -450,7 +450,7 @@ int main() {
   * 对这些元素进行判断，满足继续搜索的条件则将该元素入队，否则具体问题具体分析，标记或抛弃。
   * 一般来说，`BFS`在第一次搜到答案时可以直接返回值，提前结束搜索。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/BFS.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/BFS.png)
 
 ###### 2\. 走出迷宫（BFS）
 
@@ -578,7 +578,7 @@ int main() {
 * 栈是一种**后进先出**（LIFO）的数据结构。
   * 只允许对栈顶元素操作，不允许遍历。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/栈概念.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/栈概念.png)
 
 ---
 
@@ -689,7 +689,7 @@ int main() {
 
 * 当搜索过程中出现明显不满足目标的状态时可以提前返回，减少搜索次数。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/DFS.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/DFS.png)
 
 ---
 
@@ -827,7 +827,7 @@ int main() {
 *   递归处理，每一次递归视为一次选择，递归的层数即为选择数。
 *   对于每一次的选择进行标记，记录选择并递归到下一层。
 *   回退时要对上一次的标记的状态进行还原。
-*   ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/06/5.png)
+*   ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/5.png)
 
 **代码**
 ```cpp

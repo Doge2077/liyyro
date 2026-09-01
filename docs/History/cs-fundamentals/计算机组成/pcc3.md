@@ -30,7 +30,7 @@ description: ""
 
 采用总线连接可以极大优化分散连接带来的一系列问题：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/总线连接.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/总线连接.png)
 
 `CPU` 与主存之间再开辟一条总线，称为存储总线。这组总线速度高，仅供主存与 `CPU` 之间传输信息。这样既提高了传输效率，又减轻了系统总线的负担，还保留了 `I/O` 设备与存储器交换信息时不经过 `CPU` 的特点。**现代计算机大多数采用各类总线结构**。
 
@@ -113,7 +113,7 @@ description: ""
 
 ### 3.3.1 单总线结构
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/单总线.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/单总线.png)
 
 如图是单总线结构的示意图，这种结构简单，也便于扩展，但**所有的传送都通过这组共享总线**，因此极易造成计算机系统的瓶颈。它也**不允许两个以上的部件在同一时刻向总线传输信息**，这就必然会影响系统工作效率的提高。
 
@@ -121,23 +121,23 @@ description: ""
 
 #### 双总线结构
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/双总线1.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/双总线1.png)
 
 双总线结构的特点是将速度较低的 `I/O` 设备从单总线上分离出来，形成主存总线与 `I/O` 总线分开的结构。图中通道是一个具有特殊功能的处理器，`CPU` 将一部分功能下放给通道，使其对 `I/O` 设备具有统一管理的功能，完成外部设备与主存储器之间的数据传送，其系统的吞吐能力可以相当大。这种结构大多用于大、中型计算机系统。
 
 #### 三总线结构
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/三总线.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/三总线.png)
 
 在三总线结构中，任一时刻只能使用一种总线。主存总线与 `DMA` 总线不能同时对主存进行访问，`I/O` 总线只有在 `CPU` 执行 `I/O` 指令时才能用到。以下是另一种三总线结构的示意图：
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/三总线2.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/三总线2.png)
 
 #### 扩展总线结构
 
 为了进一步提高 `I/O` 设备的性能，使其更快地响应命令，又出现了四总线结构。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/扩展总线.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/扩展总线.png)
 
 ---
 
@@ -202,7 +202,7 @@ description: ""
     *   主模块发出请求信号，必须待从模块回答后再撤销其请求信号；
     *   从模块发出回答信号，必须待获知主模块请求信号已撤销后，再撤销其回答信号。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/应答方式.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/应答方式.png)
 
 异步串行通信的数据传送速率用**波特率**来衡量。
 

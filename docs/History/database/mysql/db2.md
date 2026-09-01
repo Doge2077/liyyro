@@ -206,7 +206,7 @@ description: ""
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/操作语言.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/操作语言.png)
 
 **特点**：
 
@@ -299,7 +299,7 @@ description: ""
 * 集合运算符
 * 专门的关系运算符
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/运算符.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/运算符.png)
 
 ---
 
@@ -341,7 +341,7 @@ description: ""
     R \times S = \{\overset{\frown}{t_r t_s} \mid t_r \in R \land t_s \in S\}
     $$
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/传统集合运算.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/传统集合运算.png)
 
 ---
 
@@ -391,7 +391,7 @@ description: ""
   - $X_1, Y_1$ 等是属性名、常量、简单函数；属性名也可以用它的序号来代替。
   - 在基本的选择条件上可以进一步进行逻辑运算，求非（$\lnot$）、与（$\land$）、或（$\lor$）运算。
 
-![选择](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/选择.png)
+![选择](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/选择.png)
 
 ---
 
@@ -403,7 +403,7 @@ description: ""
   - 投影操作主要是从**列**的角度进行运算
   - 投影之后不仅取消了原关系中的某些列，而且还可能取消某些元组（避免重复行）
 
-![投影](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/投影.png)
+![投影](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/投影.png)
 
 ---
 
@@ -438,7 +438,7 @@ description: ""
 
 一般的连接操作是从行的角度进行运算。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/连接.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/连接.png)
 
 **自然连接还需要取消重复列，所以是同时从行和列的角度进行运算。**
 
@@ -458,4 +458,4 @@ description: ""
 
 **除操作是同时从行和列角度进行运算。**
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/除.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/除.png)

@@ -176,7 +176,7 @@ int main() {
 
 给定一个如下图所示的全圆量角器。
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/07/4498.jpg)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/4498.jpg)
 
 初始时，量角器上的指针指向刻度 0。
 

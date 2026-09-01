@@ -32,6 +32,23 @@ def calculate_hash(filepath):
     with open(filepath, 'rb') as f:
         return hashlib.md5(f.read()).hexdigest()[:8]
 
+def resolve_destination(target_dir, filename, source):
+    """将文件放入年份目录，处理同名文件冲突。"""
+    destination = os.path.join(target_dir, filename)
+    if not os.path.exists(destination):
+        return destination
+    if calculate_hash(source) == calculate_hash(destination):
+        return destination
+
+    stem, ext = os.path.splitext(filename)
+    digest = calculate_hash(source)
+    candidate = os.path.join(target_dir, f'{stem}-{digest}{ext}')
+    counter = 2
+    while os.path.exists(candidate) and calculate_hash(candidate) != calculate_hash(source):
+        candidate = os.path.join(target_dir, f'{stem}-{digest}-{counter}{ext}')
+        counter += 1
+    return candidate
+
 def main():
     print("=" * 60)
     print("WordPress 图片迁移工具")
@@ -53,7 +70,7 @@ def main():
     copied_files = 0
     skipped_thumbnails = 0
     
-    # 遍历年/月目录
+    # 遍历 WordPress 年/月目录，目标仓库仅按年份归档
     for year_dir in sorted(os.listdir(WP_UPLOADS)):
         year_path = os.path.join(WP_UPLOADS, year_dir)
         if not os.path.isdir(year_path) or not year_dir.isdigit():
@@ -64,8 +81,8 @@ def main():
             if not os.path.isdir(month_path):
                 continue
             
-            # 创建目标目录
-            target_dir = os.path.join(BLOG_ASSETS, year_dir, month_dir)
+            # 创建年份目录
+            target_dir = os.path.join(BLOG_ASSETS, year_dir)
             os.makedirs(target_dir, exist_ok=True)
             
             for filename in sorted(os.listdir(month_path)):
@@ -80,15 +97,15 @@ def main():
                     skipped_thumbnails += 1
                     continue
                 
-                # 复制文件
-                dst = os.path.join(target_dir, filename)
+                # 复制文件，避免同一年内同名文件互相覆盖
+                dst = resolve_destination(target_dir, filename, src)
                 if not os.path.exists(dst):
                     shutil.copy2(src, dst)
                     copied_files += 1
                 
                 # 记录 URL 映射
                 old_url = f"https://lys2021.com/wp-content/uploads/{year_dir}/{month_dir}/{filename}"
-                new_url = f"{CDN_PREFIX}/{year_dir}/{month_dir}/{filename}"
+                new_url = f"{CDN_PREFIX}/{year_dir}/{os.path.basename(dst)}"
                 url_mapping[old_url] = new_url
     
     # 保存 URL 映射表

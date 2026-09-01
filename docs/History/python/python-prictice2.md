@@ -12,7 +12,7 @@ description: ""
 
 ---
 
-[下载习题](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/01/python基础练习题二.txt)
+[下载习题](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/python基础练习题二.txt)
 
 ---
 

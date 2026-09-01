@@ -197,7 +197,7 @@ int main() {
 * $B$题居然是以[Terraria](https://terraria.org/)为背景的，~~本来还激动一下~~，读懂题之后发现是前缀和，比较简单
   ```java
   * 但是做的时候眼瞎，没看见$a_i$的范围，不开`long long`吃了四个`WA`，~~活该（）~~
-  * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/07/WA.png)
+  * ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/WA.png)
   * 记得开`long long`！！！
   * 记得开`long long`！！！
   * 记得开`long long`！！！

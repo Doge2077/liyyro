@@ -344,10 +344,10 @@ int main() {
 ## 后记
 
 * **A题**一开始没找到规律，找到规律后居然没有把错误思路的代码删掉，狠狠地吃了`WA`的铁头娃  
-  ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/08/屏幕截图-2022-08-01-115832.png)
+  ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/屏幕截图-2022-08-01-115832.png)
 * **B题**读懂题意就很简单了，没什么好说的，就是判断公共区间。
 * **C题**一直在想着怎么维护端点的信息，最后发现根本不需要，只要长度就行了 QAQ
 * **D题**没时间了，太抽象了看不懂，补题看题解发现证明的想法实在是妙极了，根本想不到。
 * 最后还是没能上绿，~~我是废物~~  
-  ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/08/屏幕截图-2022-08-01-120032.png)
+  ![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/屏幕截图-2022-08-01-120032.png)
 

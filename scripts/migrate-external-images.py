@@ -89,7 +89,7 @@ def get_extension_from_content(data):
         return ".webp"
     return ".png"
 
-def upload_to_repo(image_data, original_url, year, month):
+def upload_to_repo(image_data, original_url, year):
     """上传图片到 liyyro-photo 仓库"""
     # 计算哈希
     file_hash = get_file_hash(image_data)
@@ -101,7 +101,7 @@ def upload_to_repo(image_data, original_url, year, month):
     filename = f"external-{file_hash}{ext}"
     
     # 创建目录
-    target_dir = os.path.join(PHOTO_REPO, "images", year, month)
+    target_dir = os.path.join(PHOTO_REPO, "images", year)
     os.makedirs(target_dir, exist_ok=True)
     
     # 保存文件
@@ -110,7 +110,7 @@ def upload_to_repo(image_data, original_url, year, month):
         f.write(image_data)
     
     # 生成 CDN URL
-    cdn_url = f"{CDN_PREFIX}/{year}/{month}/{filename}"
+    cdn_url = f"{CDN_PREFIX}/{year}/{filename}"
     
     return cdn_url
 
@@ -158,14 +158,12 @@ def process_markdown_file(filepath):
                 migrations.append({"url": url, "status": "failed", "reason": "download_failed"})
                 continue
             
-            # 确定年月
-            now = datetime.now()
-            year = str(now.year)
-            month = f"{now.month:02d}"
+            # 按年份归档，月份不参与目录命名
+            year = str(datetime.now().year)
             
             # 上传到仓库
             try:
-                cdn_url = upload_to_repo(image_data, url, year, month)
+                cdn_url = upload_to_repo(image_data, url, year)
                 print(f"    ✓ 上传成功: {cdn_url[:80]}...")
                 
                 # 替换 URL

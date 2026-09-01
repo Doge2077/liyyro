@@ -622,5 +622,5 @@ x & -x;
 
 取自[菜鸟教程](https://www.runoob.com/java/java-operators.html)
 
-![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/09/运算符优先级.png)
+![](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2022/运算符优先级-d290405d.png)
 

@@ -107,7 +107,7 @@ RETURN REAL(0.0) SEMI RBRACE EOF
 
 **有限自动机**：有一个有限状态集合和一些从一个状态通向另一个状态的边，每条边上标记有一个符号；其中一个状态是初态，某些状态是终态。
 
-![有限自动机示例](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/有限自动机1.png)
+![有限自动机示例](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/有限自动机1.png)
 
 上图给出了一些有限自动机的例子。为了讨论方便我们给每个状态一个编号。每个例子中的初态都是编号为 `1` 的状态。标有多个字符的边是多条平行边的缩写形式；因此，在机器 `ID` 中，实际上有 `26` 条边从状态 `1` 通向状态 `2`，每条边用不同的字母标记。
 
@@ -130,7 +130,7 @@ RETURN REAL(0.0) SEMI RBRACE EOF
 
 非确定有限自动机（NFA）是一种需要对从一个状态出发的多条标有相同符号的边进行选择的自动机。它也可能存在标有 $\epsilon$ 的边，这种边可以在不接收输入字符的情况下进行状态转换。
 
-![非确定有限自动机示例](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/非确定有限自动机1.png)
+![非确定有限自动机示例](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/非确定有限自动机1.png)
 
 如上图，在初态时，根据输入的字母，自动机既可向左转换，也可向右转换。若选择了向左转换，则接收的是长度为 `3` 的倍数的字符串；若选择了向右转换，则接收的是长度为偶数的字符串。因此，由这个 `NFA` 识别的语言是长度为 `2` 的倍数或 `3` 的倍数的所有由字母 `a` 组成的字符串的集合。
 
@@ -150,21 +150,21 @@ RETURN REAL(0.0) SEMI RBRACE EOF
 
 例如，单个符号的正则表达式 $a$ 转换成的 `NFA` 为：
 
-![单符号NFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA1.png)
+![单符号NFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/正则表达式转NFA1.png)
 
 由 $a$ 和 $b$ 经联结运算而形成的正则表达式 $ab$ 对应的 `NFA` 是由两个 `NFA` 组合而成的，即将 $a$ 的头与 $b$ 的尾连接起来。由此得到的自动机有一个用 $a$ 标记的尾和一个从 $b$ 边进入的头。
 
-![联结NFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA2.png)
+![联结NFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/正则表达式转NFA2.png)
 
 一般而言，任何一个正则表达式 $M$ 都有一个具有尾和头的 `NFA`：
 
-![一般NFA结构](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA3.png)
+![一般NFA结构](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/正则表达式转NFA3.png)
 
 我们可以归纳地定义正则表达式到 `NFA` 的转换。一个正则表达式或者是原语（单个符号或 $\epsilon$），或者是由多个较小的表达式组合而成。类似地，`NFA` 或者是基本元素，或者是由多个较小的 `NFA` 组合而成。
 
 将正则表达式转换至 `NFA`，我们利用单词 `IF`、`ID`、`NUM` 以及 `error` 的一些表达式来举例说明这种转换算法。每个表达式都转换成了一个 `NFA`，每个 `NFA` 的头是用不同单词类型标记的终态结点，并且每一个表达式的尾汇合成一个新的初始结点。由此得到的结果（在合并了某些等价的 `NFA` 状态之后）如下图所示：
 
-![复合NFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA4.png)
+![复合NFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/正则表达式转NFA4.png)
 
 ---
 
@@ -174,7 +174,7 @@ RETURN REAL(0.0) SEMI RBRACE EOF
 
 用计算机程序实现确定的有限自动机（DFA）较容易。但实现 `NFA` 则要困难一些，因为大多数计算机都没有足够好的可以进行“猜测”的硬件。下面给出一个由四个正则表达式转换成的 `NFA`：
 
-![待转换的NFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/正则表达式转NFA5.png)
+![待转换的NFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/正则表达式转NFA5.png)
 
 我们用一个字符串 `"in"` 来模拟，计算所有的 $\epsilon$ 闭包：
 
@@ -234,4 +234,4 @@ $$
 
 由此我们对上述所给出的 NFA 应用该 DFA 算法得到如下图所示自动机。
 
-![转换后的DFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/02/NFA转DFA-.png)
+![转换后的DFA](https://cdn.jsdelivr.net/gh/Doge2077/liyyro-photo@main/images/2023/NFA转DFA、.png)
