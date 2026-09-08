@@ -12,7 +12,7 @@ let typed;
 
 onMounted(() => {
   typed = new Typed("#typedText", {
-    strings: ["Welcome to Astria's Blog", 'Los perros románticos with King Shit on his throne of loneliness.'],
+    strings: ["Welcome to Astraia's Blog", 'Los perros románticos with King Shit on his throne of loneliness.'],
     startDelay: 300,
     backDelay: 2500,
     typeSpeed: 100,

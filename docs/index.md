@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: "Astria's Blog"
+  name: "Astraia's Blog"
   actions:
     - theme: brand
       text: ✨ 开始阅读
