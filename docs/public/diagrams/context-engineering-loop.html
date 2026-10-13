@@ -8,68 +8,65 @@
   <style>
     :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
     * { box-sizing:border-box; }
-    body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); }
-    svg { width:100%; height:auto; display:block; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
   </style>
 </head>
 <body>
-  <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="context-loop-title context-loop-desc">
+  <svg viewBox="0 0 1000 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="context-loop-title context-loop-desc">
     <title id="context-loop-title">上下文组装循环</title>
-    <desc id="context-loop-desc">运行时从状态、事件和能力中组装上下文，调用模型，执行工具并把结果写回任务状态。</desc>
-    <rect width="1000" height="360" fill="#f5f5f5"/>
+    <desc id="context-loop-desc">任务输入经上下文组装进入模型，工具访问外部环境，结果更新任务状态后进入下一轮组装。</desc>
+    <rect width="1000" height="240" fill="#f5f5f5"/>
     <defs>
       <marker id="context-loop-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4f5d75"/></marker>
       <marker id="context-loop-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#eb6c36"/></marker>
       <marker id="context-loop-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#2e5aa8"/></marker>
     </defs>
 
-    <path d="M 182 84 H 258" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#context-loop-arrow)"/>
-    <path d="M 400 84 H 476" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#context-loop-arrow)"/>
-    <path d="M 618 84 H 694" fill="none" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#context-loop-accent)"/>
-    <path d="M 836 84 V 184 H 694" fill="none" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#context-loop-link)"/>
-    <path d="M 618 184 H 476" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#context-loop-arrow)"/>
-    <path d="M 400 184 H 258" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#context-loop-arrow)"/>
-    <path d="M 182 184 V 280 H 94 V 84 H 102" fill="none" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5,4" marker-end="url(#context-loop-arrow)"/>
+    <path d="M 200 72 H 280" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#context-loop-arrow)"/>
+    <path d="M 440 72 H 520" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#context-loop-arrow)"/>
+    <path d="M 680 72 H 760" fill="none" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#context-loop-accent)"/>
+    <path d="M 840 104 V 148" fill="none" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#context-loop-link)"/>
+    <path d="M 760 180 H 680" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#context-loop-arrow)"/>
+    <path d="M 520 180 H 440" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#context-loop-arrow)"/>
+    <path d="M 360 148 V 104" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#context-loop-arrow)"/>
 
     <g>
-      <rect x="38" y="52" width="144" height="64" rx="6" fill="rgba(79,93,117,.10)" stroke="#7a8399"/>
-      <text x="110" y="76" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">任务输入</text>
-      <text x="110" y="96" text-anchor="middle" fill="#4f5d75" font-size="10" font-family="var(--mono)">user · event</text>
+      <rect x="40" y="40" width="160" height="64" rx="6" fill="rgba(79,93,117,.10)" stroke="#7a8399"/>
+      <text x="120" y="64" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">任务输入</text>
+      <text x="120" y="84" text-anchor="middle" fill="#4f5d75" font-size="10" font-family="var(--mono)">user · event</text>
     </g>
     <g>
-      <rect x="258" y="52" width="142" height="64" rx="6" fill="#fff" stroke="#2d3142"/>
-      <text x="329" y="76" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">上下文组装</text>
-      <text x="329" y="96" text-anchor="middle" fill="#4f5d75" font-size="10" font-family="var(--mono)">state · history · tools</text>
+      <rect x="280" y="40" width="160" height="64" rx="6" fill="#fff" stroke="#2d3142"/>
+      <text x="360" y="64" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">上下文组装</text>
+      <text x="360" y="84" text-anchor="middle" fill="#4f5d75" font-size="10" font-family="var(--mono)">state · history · tools</text>
     </g>
     <g>
-      <rect x="476" y="52" width="142" height="64" rx="6" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
-      <text x="547" y="76" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">模型决策</text>
-      <text x="547" y="96" text-anchor="middle" fill="#4f5d75" font-size="10" font-family="var(--mono)">text · tool_call</text>
+      <rect x="520" y="40" width="160" height="64" rx="6" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="600" y="64" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">模型决策</text>
+      <text x="600" y="84" text-anchor="middle" fill="#4f5d75" font-size="10" font-family="var(--mono)">text · tool_call</text>
     </g>
     <g>
-      <rect x="694" y="52" width="142" height="64" rx="6" fill="#fff" stroke="#2d3142"/>
-      <text x="765" y="76" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">工具执行</text>
-      <text x="765" y="96" text-anchor="middle" fill="#4f5d75" font-size="10" font-family="var(--mono)">validate · run</text>
+      <rect x="760" y="40" width="160" height="64" rx="6" fill="#fff" stroke="#2d3142"/>
+      <text x="840" y="64" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">工具执行</text>
+      <text x="840" y="84" text-anchor="middle" fill="#4f5d75" font-size="10" font-family="var(--mono)">validate · run</text>
     </g>
     <g>
-      <rect x="476" y="152" width="142" height="64" rx="6" fill="#fff" stroke="#2d3142"/>
-      <text x="547" y="176" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">结果标准化</text>
-      <text x="547" y="196" text-anchor="middle" fill="#4f5d75" font-size="10" font-family="var(--mono)">source · status · error</text>
+      <rect x="280" y="148" width="160" height="64" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75"/>
+      <text x="360" y="172" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">任务状态</text>
+      <text x="360" y="192" text-anchor="middle" fill="#4f5d75" font-size="10" font-family="var(--mono)">goal · progress · budget</text>
     </g>
     <g>
-      <rect x="258" y="152" width="142" height="64" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75"/>
-      <text x="329" y="176" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">任务状态</text>
-      <text x="329" y="196" text-anchor="middle" fill="#4f5d75" font-size="10" font-family="var(--mono)">goal · progress · budget</text>
+      <rect x="520" y="148" width="160" height="64" rx="6" fill="#fff" stroke="#2d3142"/>
+      <text x="600" y="172" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">结果标准化</text>
+      <text x="600" y="192" text-anchor="middle" fill="#4f5d75" font-size="10" font-family="var(--mono)">source · status · error</text>
     </g>
     <g>
-      <rect x="694" y="152" width="142" height="64" rx="6" fill="rgba(46,90,168,.05)" stroke="#2e5aa8"/>
-      <text x="765" y="176" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">外部环境</text>
-      <text x="765" y="196" text-anchor="middle" fill="#4f5d75" font-size="10" font-family="var(--mono)">web · files · APIs</text>
+      <rect x="760" y="148" width="160" height="64" rx="6" fill="rgba(46,90,168,.05)" stroke="#2e5aa8"/>
+      <text x="840" y="172" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">外部环境</text>
+      <text x="840" y="192" text-anchor="middle" fill="#4f5d75" font-size="10" font-family="var(--mono)">web · files · APIs</text>
     </g>
-
-    <line x1="38" y1="256" x2="962" y2="256" stroke="rgba(45,49,66,.12)"/>
-    <text x="38" y="280" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".14em">RUNNING PRINCIPLE</text>
-    <text x="38" y="306" fill="#2d3142" font-size="13">状态与事件由运行时维护，消息由适配层生成，工具结果成为下一轮决策的观察。</text>
   </svg>
 </body>
 </html>

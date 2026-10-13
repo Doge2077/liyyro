@@ -8,42 +8,39 @@
   <style>
     :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
     * { box-sizing:border-box; }
-    body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); }
-    svg { width:100%; height:auto; display:block; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
   </style>
 </head>
 <body>
-  <svg viewBox="0 0 1000 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cache-layout-title cache-layout-desc">
+  <svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cache-layout-title cache-layout-desc">
     <title id="cache-layout-title">缓存友好的上下文布局</title>
-    <desc id="cache-layout-desc">分层展示稳定前缀、能力说明、任务轨迹和动态后缀，以及每一层对应的缓存策略。</desc>
-    <rect width="1000" height="390" fill="#f5f5f5"/>
-    <text x="62" y="34" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".14em">MODEL INPUT PREFIX</text>
-    <text x="938" y="34" text-anchor="end" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".14em">MORE VARIABLE →</text>
+    <desc id="cache-layout-desc">分层展示稳定规则、能力说明、任务轨迹和动态请求在模型输入中的排列方式。</desc>
+    <rect width="1000" height="320" fill="#f5f5f5"/>
+    <text x="64" y="28" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".14em">STABLE PREFIX</text>
+    <text x="936" y="28" text-anchor="end" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".14em">MORE VARIABLE ↓</text>
 
-    <rect x="62" y="54" width="876" height="60" rx="6" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
-    <rect x="62" y="114" width="876" height="60" fill="#fff" stroke="rgba(45,49,66,.12)"/>
-    <rect x="62" y="174" width="876" height="72" fill="rgba(45,49,66,.05)" stroke="rgba(45,49,66,.12)"/>
-    <rect x="62" y="246" width="876" height="60" rx="6" fill="rgba(46,90,168,.05)" stroke="#2e5aa8"/>
+    <rect x="64" y="44" width="872" height="60" rx="6" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+    <rect x="64" y="104" width="872" height="60" fill="#fff" stroke="rgba(45,49,66,.12)"/>
+    <rect x="64" y="164" width="872" height="60" fill="rgba(45,49,66,.05)" stroke="rgba(45,49,66,.12)"/>
+    <rect x="64" y="224" width="872" height="60" rx="6" fill="rgba(46,90,168,.05)" stroke="#2e5aa8"/>
 
-    <text x="86" y="82" fill="#eb6c36" font-size="8" font-family="var(--mono)" letter-spacing=".12em">STATIC / HIGH REUSE</text>
-    <text x="86" y="102" fill="#2d3142" font-size="16" font-weight="600">系统规则与固定流程</text>
-    <text x="450" y="94" fill="#4f5d75" font-size="10" font-family="var(--mono)">identity · policy · output contract</text>
+    <text x="88" y="68" fill="#eb6c36" font-size="8" font-family="var(--mono)" letter-spacing=".12em">GLOBAL RULES</text>
+    <text x="88" y="92" fill="#2d3142" font-size="16" font-weight="600">系统规则与固定流程</text>
+    <text x="456" y="84" fill="#4f5d75" font-size="10" font-family="var(--mono)">identity · policy · completion criteria</text>
 
-    <text x="86" y="142" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".12em">STATIC / CAPABILITY</text>
-    <text x="86" y="162" fill="#2d3142" font-size="16" font-weight="600">工具定义与 Skill 目录</text>
-    <text x="450" y="154" fill="#4f5d75" font-size="10" font-family="var(--mono)">schemas · examples · routing metadata</text>
+    <text x="88" y="128" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".12em">CAPABILITY CATALOG</text>
+    <text x="88" y="152" fill="#2d3142" font-size="16" font-weight="600">工具定义、固定示例、Skill 目录</text>
+    <text x="456" y="144" fill="#4f5d75" font-size="10" font-family="var(--mono)">schemas · examples · routing metadata</text>
 
-    <text x="86" y="202" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".12em">TASK TRAJECTORY</text>
-    <text x="86" y="226" fill="#2d3142" font-size="16" font-weight="600">用户输入、模型动作、工具结果</text>
-    <text x="450" y="218" fill="#4f5d75" font-size="10" font-family="var(--mono)">append · summarize · archive</text>
+    <text x="88" y="188" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".12em">TASK TRAJECTORY</text>
+    <text x="88" y="212" fill="#2d3142" font-size="16" font-weight="600">用户输入、模型动作、工具结果</text>
+    <text x="456" y="204" fill="#4f5d75" font-size="10" font-family="var(--mono)">append · summarize · archive</text>
 
-    <text x="86" y="274" fill="#2e5aa8" font-size="8" font-family="var(--mono)" letter-spacing=".12em">DYNAMIC / LOW REUSE</text>
-    <text x="86" y="294" fill="#2d3142" font-size="16" font-weight="600">当前状态与本轮请求</text>
-    <text x="450" y="286" fill="#4f5d75" font-size="10" font-family="var(--mono)">time · latest observation · user turn</text>
-
-    <path d="M 62 330 H 938" fill="none" stroke="rgba(45,49,66,.12)"/>
-    <text x="62" y="354" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".14em">DESIGN RULE</text>
-    <text x="62" y="376" fill="#2d3142" font-size="13">稳定内容前置并保持不变，变化内容追加到后面；压缩任务轨迹，不改写缓存前缀。</text>
+    <text x="88" y="248" fill="#2e5aa8" font-size="8" font-family="var(--mono)" letter-spacing=".12em">LATEST TURN</text>
+    <text x="88" y="272" fill="#2d3142" font-size="16" font-weight="600">当前状态、本轮请求、最新观察</text>
+    <text x="456" y="264" fill="#4f5d75" font-size="10" font-family="var(--mono)">runtime context · user turn · observation</text>
   </svg>
 </body>
 </html>
