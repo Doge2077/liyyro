@@ -334,13 +334,6 @@ Earlier runtime-context snapshots no longer apply.
 
 推荐默认策略是“事件日志保存完整事实，模型 Surface 保留当前状态，稳定字段使用 baseline，变化字段使用 delta”。这组合了三种策略的主要优点，但需要把 Surface、baseline 和事件日志明确区分。
 
-```typescript
-function projectStatus(previous: StatusSnapshot | undefined, current: StatusSnapshot) {
-  if (previous && stableHash(previous) === stableHash(current)) return undefined
-  return renderStatusMessage(current)
-}
-```
-
 ## 3. 状态栏工程实践
 
 下面四个实现使用同一个状态变化进行比较：工作目录从 `/repo` 切换到 `/repo/services/payment`。分析每个实现的状态来源、状态投影、模型消息、旧状态处理和恢复方式。
