@@ -47,9 +47,9 @@ sequenceDiagram
 
 这条状态快照就是 Agent 上下文状态栏。它不保存完整执行历史，也不替代工具结果，作用是把下一步决策需要的关键状态重新放到模型面前。
 
-## 1.1 Agent 上下文状态表示
+## 2. Agent 上下文状态表示
 
-### 上下文有状态性
+### 2.1 上下文有状态性
 
 Harness 框架有自己的状态，模型 API 调用本身通常是无状态的。Harness 知道任务已经运行到哪一步、工具调用了多少次、当前目录是什么、哪些测试失败；模型只有在这些信息被重新写入请求后才能使用它们。
 
@@ -67,7 +67,7 @@ Harness 框架有自己的状态，模型 API 调用本身通常是无状态的�
 
 上下文状态栏负责弥合这条断层：把 Harness 私有、权威、实时的状态，转换成模型能够读取的结构化文本或结构化消息。
 
-### 状态栏原理
+### 2.2 状态栏原理
 
 模型可以从上下文中检索已经存在的内容，但“已经调用了几次”“还剩多少预算”“当前阶段是否完成”这类结论需要对多条事件进行归纳。随着轨迹增长，模型每次重新统计都会消耗额外推理 token，也会受到历史截断和注意力分散影响。
 
@@ -93,7 +93,7 @@ Harness 框架有自己的状态，模型 API 调用本身通常是无状态的�
 
 状态栏只保存当前决策所需的投影。原始事件、工具结果和测试产物继续保留，状态错误时可以回溯和修正。
 
-### 状态栏组成结构
+### 2.3 状态栏组成结构
 
 一个实用的状态栏可以分为七类信息：
 
@@ -126,7 +126,7 @@ Harness 框架有自己的状态，模型 API 调用本身通常是无状态的�
 }
 ```
 
-### 状态栏在上下文的位置
+### 2.4 状态栏在上下文的位置
 
 稳定规则、工具定义和固定示例位于请求前部，状态栏属于动态上下文，通常放在当前消息轨迹末尾：
 
@@ -158,7 +158,7 @@ user：Harness 生成的 Agent 状态栏
 - 它靠近模型即将生成的新 token，当前阶段和下一步信息更容易被使用；
 - 追加尾部不需要修改前面的 system prompt 和工具定义，有利于缓存复用。
 
-### 状态栏缓存与更新
+### 2.5 状态栏缓存与更新
 
 状态栏更新同时影响三个对象：模型可见消息、Prompt Cache 前缀、持久化状态。完整设计需要同时规定以下内容：
 
@@ -338,11 +338,11 @@ Earlier runtime-context snapshots no longer apply.
 
 下面四个实现使用同一个状态变化进行比较：工作目录从 `/repo` 切换到 `/repo/services/payment`。分析每个实现的状态来源、状态投影、模型消息、旧状态处理和恢复方式。
 
-## 3.1 Claude Code 状态栏
+### 3.1 Claude Code 状态栏
 
 <iframe src="/diagrams/status-claude-code.html" title="Claude Code 状态栏链路" loading="lazy" style="width:100%;height:auto;aspect-ratio:1000/260;border:0;display:block;margin:24px 0;"></iframe>
 
-### 状态栏结构
+#### 状态栏结构
 
 本节分析本地 `claude-code-best` 仓库。它是 Claude Code CLI 的逆向开源实现和扩展，不能直接代表 Anthropic 闭源版本的全部行为。
 
@@ -392,7 +392,7 @@ type Attachment =
 
 `getAttachments()` 只负责收集，`normalizeAttachmentForAPI()` 才决定如何变成模型消息。这样可以让 token usage 的功能开关、Plan reminder 的 turn 节流和 MCP 状态变化各自拥有独立生命周期。
 
-### 状态栏更新
+#### 状态栏更新
 
 `src/query.ts` 在工具执行结束、下一轮模型调用前收集附件。`src/utils/messages.ts` 使用：
 
@@ -416,11 +416,11 @@ Git 状态采用会话开始快照，包含分支、工作区状态和最近提�
 
 压缩后重新收集附件时，应依据当前状态重新计算，不能复用旧字符串。比如当前 Plan 文件已被删除，重新构造的 Plan attachment 就不能继续使用压缩前的文本；用户确认和工具结果必须保留原始事件，不能依赖附件重新生成。
 
-## 3.2 Codex 状态栏
+### 3.2 Codex 状态栏
 
 <iframe src="/diagrams/status-codex.html" title="Codex WorldState 链路" loading="lazy" style="width:100%;height:auto;aspect-ratio:1000/260;border:0;display:block;margin:24px 0;"></iframe>
 
-### 状态栏结构
+#### 状态栏结构
 
 Codex 将 TUI 状态线和模型状态分开。`status_line_setup.rs` 的模型名、目录、Git 分支、权限、token、费用和任务进度只服务 TUI；模型状态由 `TurnContext`、`StepContext` 和 `WorldState` 共同生成。
 
@@ -432,7 +432,7 @@ Codex 将 TUI 状态线和模型状态分开。`status_line_setup.rs` 的模型�
 
 Codex 的关键约束是模型观察和工具执行共享同一个 StepContext。否则会出现：TUI 显示 `/repo/services/payment`，模型仍看到 `/repo`，工具却已经在新目录运行，模型生成的相对路径就可能指向错误位置。
 
-### 状态栏更新
+#### 状态栏更新
 
 Codex 为每个 WorldState section 保存 snapshot。首次模型请求注入完整状态，后续请求按 section 计算差异。
 
@@ -463,11 +463,11 @@ TUI 的 Git 分支和 `Tasks n/m` 不会自动进入 WorldState。Codex 的设�
 
 这意味着终端显示字段不能直接作为模型事实。模型需要当前分支时，仍需通过 WorldState section、工具结果或专门上下文提供器注入。
 
-## 3.3 OpenCode 状态栏
+### 3.3 OpenCode 状态栏
 
 <iframe src="/diagrams/status-opencode.html" title="OpenCode Instruction State 链路" loading="lazy" style="width:100%;height:auto;aspect-ratio:1000/260;border:0;display:block;margin:24px 0;"></iframe>
 
-### 状态栏结构
+#### 状态栏结构
 
 OpenCode 使用 Instruction Source 统一管理日期、环境、项目指令、Skill、MCP 和会话上下文。每个 source 都有稳定 key、读取函数和 initial/changed/removed 渲染规则。
 
@@ -498,7 +498,7 @@ type InstructionSource<T> = {
 
 `read()` 不负责写消息，`render` 不负责判断变化。运行时先把值规范化并计算 hash，Instruction State 再决定是否创建更新事件。这样，状态读取、状态比较、文本渲染和持久化各自有明确职责。
 
-### 状态栏更新
+#### 状态栏更新
 
 运行时对 source 的值做 canonical JSON hash。hash 不变，不生成新消息；hash 变化，写入 durable instruction event：
 
@@ -525,11 +525,11 @@ epoch 的作用是把不断增长的 instruction delta 切成上下文窗口。�
 
 OpenCode 的 TUI footer 显示 token、费用、目录和 Git 分支，但这些字段不会自动写入 instruction state。Core `<env>` 说明是否为 Git 仓库，不自动提供当前分支；Shell environment 只服务命令执行。
 
-## 3.4 DeepSeek Harness 状态栏
+### 3.4 DeepSeek Harness 状态栏
 
 <iframe src="/diagrams/status-deepseek-harness.html" title="DeepSeek Harness 状态链路" loading="lazy" style="width:100%;height:auto;aspect-ratio:1000/260;border:0;display:block;margin:24px 0;"></iframe>
 
-### 状态栏结构
+#### 状态栏结构
 
 DeepSeek Harness 将模型输入拆成两层：
 
@@ -555,7 +555,7 @@ Session log 记录 `system/message`、`developer/message`、`user/message`、`as
 
 这些 producer 可以分成两类：`working-directory`、Todo、schedule 和 jobs 产生需要持久化的事实；time-context、tmux-context 和 repeat-tool-reminder 更接近当前观察，可以在 pre-step 中重新采集。两类状态都可能进入模型，但恢复方式不同：前者依赖 Session log，后者可以依赖当前环境重建。
 
-### 状态栏更新
+#### 状态栏更新
 
 `RuntimeContextProjection` 维护当前 runtime-context 的 `{seq, text}`。每次 pre-step 重新渲染 provider：
 
@@ -594,7 +594,7 @@ Surface replacement 还解决了陈旧状态问题。日志可以同时保留 `c
 
 ## 4. 状态栏最佳实践
 
-## 4.1 状态栏工程教训
+### 4.1 状态栏工程教训
 
 四个工程给出了四种不同的状态生命周期：
 
@@ -618,7 +618,7 @@ Surface replacement 还解决了陈旧状态问题。日志可以同时保留 `c
 
 **第五，缓存策略和状态策略必须一起设计：** 状态小且更新间隔长，可以追加；状态大且频繁变化，应该替换；状态字段很多且更新频率不同，可以采用 section diff 或 instruction source。
 
-## 4.2 最佳实践设计
+### 4.2 最佳实践设计
 
 一套可复用的状态栏可以拆成六个接口：
 
