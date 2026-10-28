@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex 的新窗口生成流程</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="compact-codex-title compact-codex-desc">
+    <title id="compact-codex-title">Codex 的新窗口生成流程</title>
+    <desc id="compact-codex-desc">压缩触发后按提供方能力选择重置窗口、本地摘要或服务端压缩，再重建环境状态并安装新窗口。</desc>
+    <rect width="1000" height="340" fill="#f5f5f5"/>
+    <defs>
+      <marker id="cx-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <path d="M 166 128 H 194" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#cx-arrow)"/>
+    <path d="M 326 128 H 354" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#cx-arrow)"/>
+    <path d="M 486 128 H 514" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#cx-arrow)"/>
+    <path d="M 646 128 H 674" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#cx-arrow)"/>
+    <path d="M 806 128 H 834" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#cx-arrow)"/>
+
+    <g>
+      <rect x="34" y="96" width="132" height="64" rx="6" fill="#ececec" stroke="#7a8399"/>
+      <text x="100" y="124" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">触发压缩</text>
+      <text x="100" y="144" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">自动 · 手动</text>
+    </g>
+    <g>
+      <rect x="194" y="96" width="132" height="64" rx="6" fill="#fff" stroke="#2d3142"/>
+      <text x="260" y="124" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">选择实现</text>
+      <text x="260" y="144" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">按提供方能力</text>
+    </g>
+    <g>
+      <rect x="354" y="80" width="132" height="96" rx="6" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="420" y="106" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">生成检查点</text>
+      <text x="420" y="128" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">重置窗口</text>
+      <text x="420" y="146" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">本地摘要</text>
+      <text x="420" y="164" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">服务端压缩</text>
+    </g>
+    <g>
+      <rect x="514" y="96" width="132" height="64" rx="6" fill="#fff" stroke="#2d3142"/>
+      <text x="580" y="124" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">重建环境状态</text>
+      <text x="580" y="144" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">规则 · 权限 · 工具</text>
+    </g>
+    <g>
+      <rect x="674" y="96" width="132" height="64" rx="6" fill="#fff" stroke="#2d3142"/>
+      <text x="740" y="124" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">安装新窗口</text>
+      <text x="740" y="144" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">替换历史</text>
+    </g>
+    <g>
+      <rect x="834" y="96" width="132" height="64" rx="6" fill="rgba(46,90,168,.05)" stroke="#2e5aa8"/>
+      <text x="900" y="124" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">下一轮请求</text>
+      <text x="900" y="144" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">继续任务</text>
+    </g>
+
+    <line x1="34" y1="208" x2="966" y2="208" stroke="rgba(45,49,66,.12)"/>
+    <text x="34" y="232" fill="#4f5d75" font-size="11">自动上限取窗口 90%，硬上限取窗口 95%；轮次前、轮次中、轮次后都可以触发。</text>
+    <text x="34" y="256" fill="#4f5d75" font-size="11">本地摘要保留最近 20k 用户消息；服务端压缩保留最近 64k 上下文。</text>
+    <text x="34" y="280" fill="#7a8399" font-size="10">切换模型时按新窗口重新计算，压缩失败逐条删除最老历史后再试。</text>
+  </svg>
+</body>
+</html>
