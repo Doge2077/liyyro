@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RAG 检索管道的七个环节</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rag-pipe-title rag-pipe-desc">
+    <title id="rag-pipe-title">RAG 检索管道的七个环节</title>
+    <desc id="rag-pipe-desc">离线阶段完成分块与嵌入；在线阶段依次是查询改写、双路召回、排名融合、精排、组装与生成。改写与精排是两处可以回退重试的位置。</desc>
+    <rect width="1000" height="400" fill="#f5f5f5"/>
+    <defs>
+      <marker id="rp-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+      <marker id="rp-ac" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#eb6c36"/>
+      </marker>
+    </defs>
+
+    <text x="44" y="42" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">OFFLINE · INDEX</text>
+    <text x="44" y="132" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">ONLINE · QUERY</text>
+
+    <path d="M 214 100 H 254" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rp-ar)"/>
+    <path d="M 434 100 H 474" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rp-ar)"/>
+    <path d="M 474 100 V 196" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rp-ar)"/>
+
+    <g>
+      <rect x="44" y="68" width="170" height="64" fill="#ececec" stroke="#7a8399"/>
+      <text x="129" y="96" text-anchor="middle" fill="#2d3142" font-size="13" font-weight="600">原始文档</text>
+      <text x="129" y="116" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">structure · links</text>
+    </g>
+    <g>
+      <rect x="254" y="68" width="180" height="64" fill="#fff" stroke="#2d3142"/>
+      <text x="344" y="96" text-anchor="middle" fill="#2d3142" font-size="13" font-weight="600">分块</text>
+      <text x="344" y="116" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">256–1024 · overlap 10–20%</text>
+    </g>
+    <g>
+      <rect x="474" y="60" width="220" height="80" fill="rgba(46,90,168,.06)" stroke="#2e5aa8"/>
+      <text x="584" y="86" text-anchor="middle" fill="#2d3142" font-size="13" font-weight="600">嵌入与索引</text>
+      <text x="584" y="108" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">dense + sparse + ANN</text>
+      <text x="584" y="126" text-anchor="middle" fill="#7a8399" font-size="9" font-family="var(--mono)">可重建的派生物</text>
+    </g>
+
+    <path d="M 44 228 H 144" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rp-ar)"/>
+    <path d="M 324 228 H 384" fill="none" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#rp-ac)"/>
+    <path d="M 564 228 H 604" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rp-ar)"/>
+    <path d="M 784 228 H 824" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rp-ar)"/>
+
+    <g>
+      <rect x="44" y="196" width="100" height="64" fill="#fff" stroke="#2d3142"/>
+      <text x="94" y="224" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">用户问题</text>
+      <text x="94" y="244" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">raw query</text>
+    </g>
+    <g>
+      <rect x="144" y="196" width="180" height="64" fill="rgba(235,108,36,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="234" y="224" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">查询改写</text>
+      <text x="234" y="244" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">task · time · source</text>
+    </g>
+    <g>
+      <rect x="384" y="180" width="180" height="96" fill="#fff" stroke="#2d3142"/>
+      <text x="474" y="204" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">双路召回</text>
+      <text x="474" y="224" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">dense: semantics</text>
+      <text x="474" y="242" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">sparse: exact terms</text>
+      <text x="474" y="262" text-anchor="middle" fill="#7a8399" font-size="9" font-family="var(--mono)">filter by scope</text>
+    </g>
+    <g>
+      <rect x="604" y="196" width="180" height="64" fill="#fff" stroke="#2d3142"/>
+      <text x="694" y="220" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">排名融合</text>
+      <text x="694" y="240" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">RRF, k ≈ 60</text>
+      <text x="694" y="256" text-anchor="middle" fill="#7a8399" font-size="9">只看排名，不比分数</text>
+    </g>
+    <g>
+      <rect x="824" y="180" width="132" height="96" fill="rgba(235,108,36,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="890" y="204" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">精排</text>
+      <text x="890" y="226" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">cross-encoder</text>
+      <text x="890" y="246" text-anchor="middle" fill="#7a8399" font-size="9">只对前 N 个候选</text>
+    </g>
+
+    <path d="M 890 276 V 316 H 700" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rp-ar)"/>
+    <path d="M 700 316 H 660" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rp-ar)"/>
+    <g>
+      <rect x="480" y="288" width="180" height="56" fill="#eaf0fa" stroke="#2e5aa8"/>
+      <text x="570" y="310" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">组装上下文</text>
+      <text x="570" y="330" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">片段 + 来源标记</text>
+    </g>
+    <g>
+      <rect x="300" y="288" width="160" height="56" fill="#eaf0fa" stroke="#2e5aa8"/>
+      <text x="380" y="310" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">生成回答</text>
+      <text x="380" y="330" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">引用可核查</text>
+    </g>
+
+    <text x="44" y="372" fill="#7a8399" font-size="10">珊瑚色两处是失败后值得回退重试的位置：改写决定召回方向，精排决定最终顺序。</text>
+  </svg>
+</body>
+</html>

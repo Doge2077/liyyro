@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>双路召回与分数尺度的差异</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rag-fus-title rag-fus-desc">
+    <title id="rag-fus-title">双路召回与分数尺度的差异</title>
+    <desc id="rag-fus-desc">稠密召回给出零到一之间的余弦相似度，稀疏召回给出无上界的 BM25 得分，两路无法直接相加，因此融合只使用排名。</desc>
+    <rect width="1000" height="360" fill="#f5f5f5"/>
+    <defs>
+      <marker id="rf-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <text x="44" y="40" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">TWO SCALES, ONE RANKING</text>
+
+    <path d="M 220 96 H 300" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rf-ar)"/>
+    <path d="M 220 220 H 300" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rf-ar)"/>
+    <path d="M 500 96 H 560 Q 568 96 568 104 V 150 Q 568 158 576 158 H 600" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rf-ar)"/>
+    <path d="M 500 220 H 560 Q 568 220 568 212 V 166 Q 568 158 576 158 H 600" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rf-ar)"/>
+    <path d="M 800 170 H 856" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rf-ar)"/>
+
+    <g>
+      <rect x="44" y="72" width="176" height="64" fill="#fff" stroke="#2d3142"/>
+      <text x="132" y="96" text-anchor="middle" fill="#2d3142" font-size="13" font-weight="600">问题</text>
+      <text x="132" y="116" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">"退款流程"</text>
+    </g>
+    <g>
+      <rect x="44" y="188" width="176" height="64" fill="#fff" stroke="#2d3142"/>
+      <text x="132" y="212" text-anchor="middle" fill="#2d3142" font-size="13" font-weight="600">稀有标识符</text>
+      <text x="132" y="232" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">error_code_4021</text>
+    </g>
+
+    <g>
+      <rect x="300" y="66" width="200" height="76" fill="rgba(46,90,168,.06)" stroke="#2e5aa8"/>
+      <text x="400" y="90" text-anchor="middle" fill="#2d3142" font-size="13" font-weight="600">稠密召回</text>
+      <text x="400" y="110" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">cosine ∈ [0, 1]</text>
+      <text x="400" y="128" text-anchor="middle" fill="#7a8399" font-size="9">看懂改写与同义</text>
+    </g>
+    <g>
+      <rect x="300" y="190" width="200" height="76" fill="rgba(45,49,66,.06)" stroke="#7a8399"/>
+      <text x="400" y="214" text-anchor="middle" fill="#2d3142" font-size="13" font-weight="600">稀疏召回</text>
+      <text x="400" y="234" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">BM25 ∈ [0, ∞)</text>
+      <text x="400" y="252" text-anchor="middle" fill="#7a8399" font-size="9">命中精确词</text>
+    </g>
+
+    <g>
+      <rect x="600" y="128" width="200" height="60" fill="#fff" stroke="#2d3142"/>
+      <text x="700" y="152" text-anchor="middle" fill="#2d3142" font-size="13" font-weight="600">排名融合</text>
+      <text x="700" y="172" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">Σ 1 / (k + rank)</text>
+    </g>
+
+    <g>
+      <rect x="856" y="128" width="100" height="60" fill="rgba(235,108,36,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="906" y="152" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">精排</text>
+      <text x="906" y="172" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">top N</text>
+    </g>
+
+    <line x1="44" y1="296" x2="956" y2="296" stroke="rgba(45,49,66,.12)"/>
+    <text x="44" y="320" fill="#4f5d75" font-size="11">一个量纲在零到一之间，一个没有上界，相加没有意义；用排名避开这个问题，代价是丢掉原始分数的区分度。</text>
+    <text x="44" y="342" fill="#7a8399" font-size="10">精排不是补救融合，它换的是匹配方式：双编码器各自编码，跨编码器把两者拼在一起看。</text>
+  </svg>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>跨会话信息的三种承载方式</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mem-spec-title mem-spec-desc">
+    <title id="mem-spec-title">跨会话信息的三种承载方式</title>
+    <desc id="mem-spec-desc">从左到右依次是指令文件、引用快照和独立记忆库。写入责任由人逐渐转向智能体自动完成，存储与整理成本同步上升。</desc>
+    <rect width="1000" height="400" fill="#f5f5f5"/>
+    <defs>
+      <marker id="ms-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <text x="48" y="42" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">WHO WRITES MOVES RIGHT</text>
+
+    <path d="M 48 96 H 948" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#ms-arrow)"/>
+    <text x="48" y="80" fill="#4f5d75" font-size="11">人写</text>
+    <text x="948" y="80" text-anchor="end" fill="#4f5d75" font-size="11">智能体自动写</text>
+
+    <g>
+      <rect x="48" y="128" width="280" height="164" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="68" y="158" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">MODE A</text>
+      <text x="68" y="184" fill="#2d3142" font-size="16" font-weight="600">指令文件</text>
+      <text x="68" y="210" fill="#4f5d75" font-size="11">仓库里的约定与规范</text>
+      <text x="68" y="232" fill="#4f5d75" font-size="11">写者：贡献者</text>
+      <text x="68" y="252" fill="#4f5d75" font-size="11">过期：靠人发现</text>
+      <text x="68" y="272" fill="#7a8399" font-size="10">代表：OpenCode · DeepSeek Harness</text>
+    </g>
+
+    <g>
+      <rect x="360" y="128" width="280" height="164" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="380" y="158" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">MODE B</text>
+      <text x="380" y="184" fill="#2d3142" font-size="16" font-weight="600">引用快照</text>
+      <text x="380" y="210" fill="#4f5d75" font-size="11">按需引用另一段会话</text>
+      <text x="380" y="232" fill="#4f5d75" font-size="11">写者：用户显式引用</text>
+      <text x="380" y="252" fill="#4f5d75" font-size="11">过期：捕获即冻结</text>
+      <text x="380" y="272" fill="#7a8399" font-size="10">代表：DeepSeek Harness</text>
+    </g>
+
+    <g>
+      <rect x="672" y="128" width="276" height="164" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="692" y="158" fill="#eb6c36" font-size="8" font-family="var(--mono)" letter-spacing=".1em">MODE C</text>
+      <text x="692" y="184" fill="#2d3142" font-size="16" font-weight="600">独立记忆库</text>
+      <text x="692" y="210" fill="#4f5d75" font-size="11">跨会话沉淀偏好与经验</text>
+      <text x="692" y="232" fill="#4f5d75" font-size="11">写者：抽取子代理 · 后台管线</text>
+      <text x="692" y="252" fill="#4f5d75" font-size="11">过期：用量窗口 · 定期整理</text>
+      <text x="692" y="272" fill="#7a8399" font-size="10">代表：Claude Code · Codex</text>
+    </g>
+
+    <line x1="48" y1="316" x2="948" y2="316" stroke="rgba(45,49,66,.12)"/>
+    <text x="48" y="342" fill="#4f5d75" font-size="11">存储成本与整理负担随写者右移而上升；可审计性则相反，人写的内容最容易 diff 与回溯。</text>
+    <text x="48" y="366" fill="#7a8399" font-size="10">三种方式可以并存：同一系统常用指令文件承担约定，用记忆库承担个性化经验。</text>
+  </svg>
+</body>
+</html>

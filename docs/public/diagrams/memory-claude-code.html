@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude Code 的记忆写入与取回</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mcc-title mcc-desc">
+    <title id="mcc-title">Claude Code 的记忆写入与取回</title>
+    <desc id="mcc-desc">主智能体在会话中直接写记忆，遗漏时由回合末的抽取子代理补写；夜间整理把日志并入索引与主题文件；新会话先注入索引，再按需挑选最多五份细节。</desc>
+    <rect width="1000" height="400" fill="#f5f5f5"/>
+    <defs>
+      <marker id="mc-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+      <marker id="mc-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#eb6c36"/>
+      </marker>
+    </defs>
+
+    <line x1="500" y1="56" x2="500" y2="356" stroke="rgba(45,49,66,.18)" stroke-dasharray="4,4"/>
+    <text x="60" y="48" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">WRITE PATH</text>
+    <text x="540" y="48" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">READ PATH</text>
+
+    <path d="M 220 120 H 260" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mc-arrow)"/>
+    <path d="M 400 120 H 440" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mc-arrow)"/>
+
+    <g>
+      <rect x="60" y="88" width="160" height="64" fill="#ececec" stroke="#7a8399"/>
+      <text x="140" y="116" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">会话进行中</text>
+      <text x="140" y="136" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">main agent writes</text>
+    </g>
+    <g>
+      <rect x="260" y="88" width="140" height="64" fill="#fff" stroke="#2d3142"/>
+      <text x="330" y="116" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">回合末补写</text>
+      <text x="330" y="136" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">extraction fork</text>
+    </g>
+    <g>
+      <rect x="440" y="80" width="200" height="80" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="540" y="106" text-anchor="middle" fill="#2d3142" font-size="14" font-weight="600">记忆目录</text>
+      <text x="540" y="126" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">MEMORY.md + topics</text>
+      <text x="540" y="144" text-anchor="middle" fill="#7a8399" font-size="9" font-family="var(--mono)">+ team / + logs</text>
+    </g>
+
+    <path d="M 400 168 V 196 H 340" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mc-arrow)"/>
+    <g>
+      <rect x="220" y="168" width="120" height="52" fill="#ececec" stroke="#7a8399"/>
+      <text x="280" y="190" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">按日日志</text>
+      <text x="280" y="208" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">append only</text>
+    </g>
+
+    <path d="M 280 220 V 252 H 400" fill="none" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#mc-accent)"/>
+    <g>
+      <rect x="400" y="220" width="240" height="64" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="520" y="246" text-anchor="middle" fill="#2d3142" font-size="13" font-weight="600">夜间整理</text>
+      <text x="520" y="266" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">≥24h · ≥5 sessions · lock</text>
+    </g>
+
+    <path d="M 540 80 V 56 H 640" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mc-arrow)"/>
+    <g>
+      <rect x="640" y="40" width="300" height="52" fill="#fff" stroke="#2d3142"/>
+      <text x="790" y="62" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">新会话注入索引</text>
+      <text x="790" y="80" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">≤ 200 lines / 25 KB</text>
+    </g>
+
+    <path d="M 640 140 H 700" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mc-arrow)"/>
+    <g>
+      <rect x="700" y="112" width="240" height="60" fill="rgba(46,90,168,.06)" stroke="#2e5aa8"/>
+      <text x="820" y="136" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">按需挑选 ≤ 5 份</text>
+      <text x="820" y="156" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">+ freshness note</text>
+    </g>
+
+    <line x1="60" y1="304" x2="940" y2="304" stroke="rgba(45,49,66,.12)"/>
+    <text x="60" y="330" fill="#4f5d75" font-size="11">四类记忆：用户、反馈、项目、外部指针。能从代码与提交历史推导的内容明确不写。</text>
+    <text x="60" y="354" fill="#7a8399" font-size="10">反馈类要求写出原因与适用方式；项目类要求把相对日期换成绝对日期。</text>
+  </svg>
+</body>
+</html>

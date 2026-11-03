@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>四家的检索路径对比</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ret-har-title ret-har-desc">
+    <title id="ret-har-title">四家的检索路径对比</title>
+    <desc id="ret-har-desc">同一个查询起点分成四条路径：Claude Code 走专用工具加只读检索子代理，Codex 走 shell，OpenCode 走自建 ripgrep 适配器，DeepSeek Harness 走自带二进制的 glob 与 grep。</desc>
+    <rect width="1000" height="420" fill="#f5f5f5"/>
+    <defs>
+      <marker id="rh-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <text x="44" y="40" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">SAME QUERY, FOUR PATHS</text>
+
+    <path d="M 156 212 H 196" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rh-ar)"/>
+    <path d="M 196 212 V 82 H 236" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rh-ar)"/>
+    <path d="M 196 212 V 166 H 236" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rh-ar)"/>
+    <path d="M 196 212 V 250 H 236" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rh-ar)"/>
+    <path d="M 196 212 V 334 H 236" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rh-ar)"/>
+
+    <g>
+      <rect x="44" y="180" width="112" height="64" fill="#ececec" stroke="#7a8399"/>
+      <text x="100" y="208" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">查询</text>
+      <text x="100" y="228" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">支付回调</text>
+    </g>
+
+    <g>
+      <rect x="236" y="52" width="180" height="60" fill="rgba(235,108,36,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="326" y="76" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">专用工具 + 只读子代理</text>
+      <text x="326" y="96" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">Grep · Glob · Read</text>
+    </g>
+    <g>
+      <rect x="236" y="136" width="180" height="60" fill="#fff" stroke="#2d3142"/>
+      <text x="326" y="160" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">shell 与 exec</text>
+      <text x="326" y="180" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">no dedicated tool</text>
+    </g>
+    <g>
+      <rect x="236" y="220" width="180" height="60" fill="#fff" stroke="#2d3142"/>
+      <text x="326" y="244" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">grep 与 glob</text>
+      <text x="326" y="264" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">own ripgrep adapter</text>
+    </g>
+    <g>
+      <rect x="236" y="304" width="180" height="60" fill="#fff" stroke="#2d3142"/>
+      <text x="326" y="328" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">glob 与 grep</text>
+      <text x="326" y="348" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">bundled binary</text>
+    </g>
+
+    <path d="M 416 82 H 466" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rh-ar)"/>
+    <path d="M 416 166 H 466" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rh-ar)"/>
+    <path d="M 416 250 H 466" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rh-ar)"/>
+    <path d="M 416 334 H 466" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#rh-ar)"/>
+
+    <g>
+      <rect x="466" y="52" width="240" height="60" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="586" y="76" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">250 条 · 20,000 字符</text>
+      <text x="586" y="96" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">50,000 字符触发外置</text>
+    </g>
+    <g>
+      <rect x="466" y="136" width="240" height="60" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="586" y="160" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">输出上限即控制点</text>
+      <text x="586" y="180" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">truncate + spill</text>
+    </g>
+    <g>
+      <rect x="466" y="220" width="240" height="60" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="586" y="244" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">默认 100 条 · 30 秒</text>
+      <text x="586" y="264" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">grouped by file</text>
+    </g>
+    <g>
+      <rect x="466" y="304" width="240" height="60" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="586" y="328" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">100 路径 · 250 匹配</text>
+      <text x="586" y="348" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">over-cap → spill locator</text>
+    </g>
+
+    <g>
+      <rect x="760" y="52" width="196" height="312" fill="rgba(46,90,168,.05)" stroke="#2e5aa8"/>
+      <text x="780" y="80" fill="#2e5aa8" font-size="8" font-family="var(--mono)" letter-spacing=".1em">SHARED</text>
+      <text x="780" y="106" fill="#2d3142" font-size="12" font-weight="600">没有向量索引</text>
+      <text x="780" y="132" fill="#4f5d75" font-size="10">索引形态是文件系统</text>
+      <text x="780" y="152" fill="#4f5d75" font-size="10">冷启动代价接近零</text>
+      <text x="780" y="178" fill="#2d3142" font-size="12" font-weight="600">差异只在控制点</text>
+      <text x="780" y="204" fill="#4f5d75" font-size="10">条数、字符数</text>
+      <text x="780" y="224" fill="#4f5d75" font-size="10">外置时机、超时</text>
+      <text x="780" y="250" fill="#2d3142" font-size="12" font-weight="600">谁做二次控制</text>
+      <text x="780" y="276" fill="#4f5d75" font-size="10">旧结果清理</text>
+      <text x="780" y="296" fill="#4f5d75" font-size="10">结果修剪与外置</text>
+      <text x="780" y="316" fill="#4f5d75" font-size="10">折叠与引用替换</text>
+    </g>
+
+    <text x="44" y="404" fill="#7a8399" font-size="10">四家都把工程重心放在结果体积控制上，而不是召回算法上。</text>
+  </svg>
+</body>
+</html>

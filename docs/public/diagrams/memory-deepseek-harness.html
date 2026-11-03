@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeepSeek Harness 的指令链与预算裁剪</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mds-title mds-desc">
+    <title id="mds-title">DeepSeek Harness 的指令链与预算裁剪</title>
+    <desc id="mds-desc">三层指令来源按由宽泛到具体拼接，超过 65,536 字节时先整份丢弃宽泛文件，再截断最具体文件，并发出一条可见通知。</desc>
+    <rect width="1000" height="360" fill="#f5f5f5"/>
+    <defs>
+      <marker id="md-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+      <marker id="md-ac" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#eb6c36"/>
+      </marker>
+    </defs>
+
+    <path d="M 198 100 H 238" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#md-ar)"/>
+    <path d="M 198 172 H 238" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#md-ar)"/>
+    <path d="M 198 244 H 238" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#md-ar)"/>
+    <path d="M 478 172 H 528" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#md-ar)"/>
+    <path d="M 528 172 H 568" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#md-ar)"/>
+    <path d="M 738 172 H 798" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#md-ar)"/>
+
+    <g>
+      <rect x="48" y="72" width="150" height="56" fill="#ececec" stroke="#7a8399"/>
+      <text x="123" y="96" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">用户全局</text>
+      <text x="123" y="114" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">$DSH_HOME</text>
+    </g>
+    <g>
+      <rect x="48" y="144" width="150" height="56" fill="#ececec" stroke="#7a8399"/>
+      <text x="123" y="168" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">共享 agents 根</text>
+      <text x="123" y="186" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">$DSH_AGENTS_HOME</text>
+    </g>
+    <g>
+      <rect x="48" y="216" width="150" height="56" fill="#ececec" stroke="#7a8399"/>
+      <text x="123" y="240" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">项目链</text>
+      <text x="123" y="258" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">root → cwd</text>
+    </g>
+
+    <g>
+      <rect x="238" y="72" width="240" height="200" fill="#fff" stroke="#2d3142"/>
+      <text x="358" y="100" text-anchor="middle" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">RENDER ORDER</text>
+      <text x="358" y="128" text-anchor="middle" fill="#2d3142" font-size="13" font-weight="600">宽泛到具体</text>
+      <text x="358" y="156" text-anchor="middle" fill="#4f5d75" font-size="10">AGENTS.md · CLAUDE.md</text>
+      <text x="358" y="176" text-anchor="middle" fill="#4f5d75" font-size="10">+ *.local.md overlay</text>
+      <text x="358" y="204" text-anchor="middle" fill="#7a8399" font-size="9" font-family="var(--mono)">identical → fold</text>
+      <text x="358" y="232" text-anchor="middle" fill="#7a8399" font-size="9" font-family="var(--mono)">single source ≤ 1 MB</text>
+    </g>
+
+    <g>
+      <rect x="528" y="128" width="200" height="88" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="628" y="156" text-anchor="middle" fill="#2d3142" font-size="13" font-weight="600">预算裁剪</text>
+      <text x="628" y="178" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">maxBytes 65,536</text>
+      <text x="628" y="198" text-anchor="middle" fill="#7a8399" font-size="9">先丢宽泛，再截最具体</text>
+    </g>
+
+    <g>
+      <rect x="798" y="128" width="154" height="88" fill="#eaf0fa" stroke="#2e5aa8"/>
+      <text x="875" y="156" text-anchor="middle" fill="#2d3142" font-size="13" font-weight="600">基线消息</text>
+      <text x="875" y="178" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">persistent user</text>
+      <text x="875" y="198" text-anchor="middle" fill="#7a8399" font-size="9" font-family="var(--mono)">+ budget notice</text>
+    </g>
+
+    <path d="M 628 216 V 276 H 400" fill="none" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#md-ac)"/>
+    <g>
+      <rect x="120" y="248" width="280" height="56" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="260" y="270" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">可见通知</text>
+      <text x="260" y="290" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">omitted / truncated paths</text>
+    </g>
+
+    <line x1="48" y1="332" x2="952" y2="332" stroke="rgba(45,49,66,.12)"/>
+    <text x="48" y="352" fill="#7a8399" font-size="10">刷新时机：首次请求、文件操作到达更深目录、内容变化、文件消失、恢复会话对账；不做持续监视。</text>
+  </svg>
+</body>
+</html>
