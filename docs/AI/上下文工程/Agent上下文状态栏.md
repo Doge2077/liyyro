@@ -45,6 +45,8 @@ sequenceDiagram
 
 这条状态快照就是 Agent 上下文状态栏。它不保存完整执行历史，也不替代工具结果，作用是把下一步决策需要的关键状态重新放到模型面前。
 
+---
+
 # 2. Agent 上下文状态表示
 
 ## 2.1 上下文有状态性
@@ -330,6 +332,8 @@ Earlier runtime-context snapshots no longer apply.
 
 推荐默认策略是“事件日志保存完整事实，模型 Surface 保留当前状态，稳定字段使用 baseline，变化字段使用 delta”。这组合了三种策略的主要优点，但需要把 Surface、baseline 和事件日志明确区分。
 
+---
+
 # 3. 状态栏工程实践
 
 下面四个实现使用同一个状态变化进行比较：工作目录从 `/repo` 切换到 `/repo/services/payment`。分析每个实现的状态来源、状态投影、模型消息、旧状态处理和恢复方式。
@@ -587,6 +591,8 @@ Agent loop 在每个 step 进入模型前执行 `agent/pre-step`，先刷新状�
 这个顺序形成了明确的一致性点。状态刷新发生在请求冻结之前，工具和环境变化能够进入本次请求；请求冻结后发生的变化进入下一 step。重试只刷新允许变化的 runtime-context，不重复追加最初的用户消息，避免重试改变任务语义。
 
 Surface replacement 还解决了陈旧状态问题。日志可以同时保留 `cwd=/repo` 和 `cwd=/repo/services/payment` 两个事件，模型视图只保留后者。审计需要完整历史，模型决策只需要当前快照，两者由不同数据结构承担。
+
+---
 
 # 4. 状态栏最佳实践
 

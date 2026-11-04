@@ -11,6 +11,8 @@ description: ""
 
 完整代码地址：[https://github.com/Doge2077/learn-bert](https://github.com/Doge2077/learn-bert)
 
+---
+
 # 1. 技术介绍
 
 ## 1.1 BERT 的核心原理
@@ -77,6 +79,8 @@ BERT 模型分为**输入层、嵌入层、多层编码器**。以 BERT-Base 为
 - `[CLS]` 向量：用于分类任务（如情感分析），聚合全局信息。
 - 其他词向量：用于序列标注（如命名实体识别）、问答等任务。
 
+---
+
 # 2. 环境配置
 
 | 项目 | 说明 |
@@ -88,6 +92,8 @@ BERT 模型分为**输入层、嵌入层、多层编码器**。以 BERT-Base 为
 | 验证命令 | `python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"` |
 | 预期输出 | `2.6.0+cu126`&lt;br&gt;`True` |
 
+---
+
 # 3. 项目结构
 
 ```
@@ -98,6 +104,8 @@ my_transformer_demo/
 ├── train.py
 ├── utils.py
 ```
+
+---
 
 # 4. 配置文件 `config.json`
 ```json
@@ -113,6 +121,8 @@ my_transformer_demo/
 }
 ```
 
+---
+
 # 5. 数据集 `data/dataset.csv`
 ```text
 sentence,score
@@ -122,6 +132,8 @@ sentence,score
 "The concert was mediocre at best.",3
 ...
 ```
+
+---
 
 # 6. 工具函数 `utils.py`
 ```python
@@ -133,6 +145,8 @@ def load_dataset(path):
     df['label'] = df['score'] - 1  # 评分1~5 → label 0~4
     return Dataset.from_pandas(df[['sentence', 'label']])
 ```
+
+---
 
 # 7. 训练脚本 `train.py`
 ```python
