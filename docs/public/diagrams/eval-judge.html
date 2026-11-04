@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>评分器的三种形态与偏差</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ej-title ej-desc">
+    <title id="ej-title">评分器的三种形态与偏差</title>
+    <desc id="ej-desc">代码判定最稳定但覆盖有限，规则判定居中，模型量表覆盖最广但带有位置与长度偏差。三者应组合使用并互相校准。</desc>
+    <rect width="1000" height="340" fill="#f5f5f5"/>
+    <defs>
+      <marker id="ej-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <text x="40" y="34" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">PREFER CODE, CALIBRATE THE MODEL</text>
+
+    <g>
+      <rect x="40" y="56" width="290" height="150" fill="#ececec" stroke="#7a8399"/>
+      <text x="58" y="80" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">FORM 1</text>
+      <text x="58" y="104" fill="#2d3142" font-size="13" font-weight="600">代码判定</text>
+      <text x="58" y="128" fill="#4f5d75" font-size="10">跑测试、查状态、比对结构</text>
+      <text x="58" y="150" fill="#4f5d75" font-size="10">无偏差，可复现</text>
+      <text x="58" y="176" fill="#7a8399" font-size="9">局限：只能判可形式化的项</text>
+      <text x="58" y="194" fill="#7a8399" font-size="9">「表达是否清晰」判不了</text>
+    </g>
+
+    <g>
+      <rect x="354" y="56" width="290" height="150" fill="#fff" stroke="#2d3142"/>
+      <text x="372" y="80" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">FORM 2</text>
+      <text x="372" y="104" fill="#2d3142" font-size="13" font-weight="600">规则判定</text>
+      <text x="372" y="128" fill="#4f5d75" font-size="10">动作序列、权限、必含字段</text>
+      <text x="372" y="150" fill="#4f5d75" font-size="10">可解释，接近无偏差</text>
+      <text x="372" y="176" fill="#7a8399" font-size="9">局限：规则写完之前有盲区</text>
+      <text x="372" y="194" fill="#7a8399" font-size="9">规则写错会系统性地误判</text>
+    </g>
+
+    <g>
+      <rect x="668" y="56" width="292" height="150" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="686" y="80" fill="#eb6c36" font-size="8" font-family="var(--mono)" letter-spacing=".1em">FORM 3</text>
+      <text x="686" y="104" fill="#2d3142" font-size="13" font-weight="600">模型量表</text>
+      <text x="686" y="128" fill="#4f5d75" font-size="10">逐项打分并引用证据</text>
+      <text x="686" y="150" fill="#4f5d75" font-size="10">覆盖面最广</text>
+      <text x="686" y="176" fill="#7a8399" font-size="9">偏差：位置、长度、自身偏好</text>
+      <text x="686" y="194" fill="#7a8399" font-size="9">必须与人工标注校准</text>
+    </g>
+
+    <path d="M 185 206 V 244" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#ej-ar)"/>
+    <path d="M 499 206 V 244" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#ej-ar)"/>
+    <path d="M 814 206 V 244" fill="none" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#ej-ar)"/>
+
+    <g>
+      <rect x="40" y="244" width="920" height="88" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="58" y="268" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">COMBINATION RULES</text>
+      <text x="58" y="292" fill="#2d3142" font-size="12" font-weight="600">能用代码判的不用模型判；必须用模型的先校准再上线</text>
+      <text x="58" y="314" fill="#4f5d75" font-size="10">冲突仲裁：代码结论优先于模型结论；模型结论只补代码覆盖不到的部分。</text>
+    </g>
+  </svg>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>必须记录的观测字段</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="eob-title eob-desc">
+    <title id="eob-title">必须记录的观测字段</title>
+    <desc id="eob-desc">六类字段支撑归因：任务标识、工具与参数摘要、结果状态、Token、时延、失败类型。缺少任何一类，某类问题就无法定位。</desc>
+    <rect width="1000" height="340" fill="#f5f5f5"/>
+    <defs>
+      <marker id="eb-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <text x="40" y="34" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">EACH FIELD ANSWERS ONE QUESTION</text>
+
+    <g>
+      <rect x="40" y="56" width="460" height="46" fill="#ececec" stroke="#7a8399"/>
+      <text x="58" y="78" fill="#2d3142" font-size="11" font-weight="600">任务标识与版本</text>
+      <text x="260" y="78" fill="#4f5d75" font-size="9">这次运行属于哪个任务、哪个版本</text>
+    </g>
+    <g>
+      <rect x="40" y="110" width="460" height="46" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="58" y="132" fill="#2d3142" font-size="11" font-weight="600">工具与参数摘要</text>
+      <text x="260" y="132" fill="#4f5d75" font-size="9">它做了什么（摘要而非全文）</text>
+    </g>
+    <g>
+      <rect x="40" y="164" width="460" height="46" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="58" y="186" fill="#2d3142" font-size="11" font-weight="600">结果状态</text>
+      <text x="260" y="186" fill="#4f5d75" font-size="9">成功、部分成功、失败</text>
+    </g>
+    <g>
+      <rect x="40" y="218" width="460" height="46" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="58" y="240" fill="#2d3142" font-size="11" font-weight="600">失败类型</text>
+      <text x="260" y="240" fill="#4f5d75" font-size="9">归因与聚合的唯一依据</text>
+    </g>
+    <g>
+      <rect x="40" y="272" width="460" height="46" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="58" y="294" fill="#2d3142" font-size="11" font-weight="600">Token 与费用</text>
+      <text x="260" y="294" fill="#4f5d75" font-size="9">成本是否退化</text>
+    </g>
+
+    <g>
+      <rect x="520" y="56" width="440" height="262" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="538" y="80" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">THE ONE THAT GETS DROPPED</text>
+      <text x="538" y="108" fill="#2d3142" font-size="12" font-weight="600">失败类型最常被省略，也最不该省略</text>
+      <text x="538" y="136" fill="#4f5d75" font-size="10">没有它，日志系统只能统计总数。</text>
+      <text x="538" y="158" fill="#4f5d75" font-size="10">有它，才能回答「哪类问题在变多」。</text>
+      <text x="538" y="188" fill="#2d3142" font-size="12" font-weight="600">建议的分类</text>
+      <text x="538" y="212" fill="#4f5d75" font-size="10">工具选择错误 · 参数错误 · 检索未命中</text>
+      <text x="538" y="232" fill="#4f5d75" font-size="10">过程违规 · 能力不足 · 环境故障</text>
+      <text x="538" y="252" fill="#4f5d75" font-size="10">需求不清 · 超时或取消</text>
+      <text x="538" y="282" fill="#7a8399" font-size="9">八类足够区分「该改工具、改提示词、改定义」。</text>
+      <text x="538" y="302" fill="#7a8399" font-size="9">类别太多会没人维护，太少则无法定位。</text>
+    </g>
+  </svg>
+</body>
+</html>

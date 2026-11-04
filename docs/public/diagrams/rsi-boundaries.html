@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>自进化的三种失效与四层指标</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rb-title rb-desc">
+    <title id="rb-title">自进化的三种失效与四层指标</title>
+    <desc id="rb-desc">实现漂移、认识论过度乐观、隐性判断力不足是三类主要失效。四层指标分别检验提案、激活、遵循与保留集增益。</desc>
+    <rect width="1000" height="360" fill="#f5f5f5"/>
+    <defs>
+      <marker id="rb2-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <text x="40" y="34" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">EACH METRIC CATCHES A DIFFERENT LIE</text>
+
+    <g>
+      <rect x="40" y="52" width="220" height="150" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="58" y="76" fill="#eb6c36" font-size="8" font-family="var(--mono)" letter-spacing=".1em">METRIC 1</text>
+      <text x="58" y="100" fill="#2d3142" font-size="13" font-weight="600">提案有效率</text>
+      <text x="58" y="124" fill="#4f5d75" font-size="10">提案在独立验证中是否被接受</text>
+      <text x="58" y="148" fill="#4f5d75" font-size="10">假阳性：提案对自己有效</text>
+      <text x="58" y="170" fill="#7a8399" font-size="9">它检验「更新器会不会改」</text>
+    </g>
+
+    <g>
+      <rect x="280" y="52" width="220" height="150" fill="#fff" stroke="#2d3142"/>
+      <text x="298" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">METRIC 2</text>
+      <text x="298" y="100" fill="#2d3142" font-size="13" font-weight="600">产物激活率</text>
+      <text x="298" y="124" fill="#4f5d75" font-size="10">正确场景是否加载了新产物</text>
+      <text x="298" y="148" fill="#4f5d75" font-size="10">假阳性：分数涨了但不是因为它</text>
+      <text x="298" y="170" fill="#7a8399" font-size="9">它检验「会不会被用到」</text>
+    </g>
+
+    <g>
+      <rect x="520" y="52" width="220" height="150" fill="#fff" stroke="#2d3142"/>
+      <text x="538" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">METRIC 3</text>
+      <text x="538" y="100" fill="#2d3142" font-size="13" font-weight="600">遵循成功率</text>
+      <text x="538" y="124" fill="#4f5d75" font-size="10">激活后是否按新规则执行</text>
+      <text x="538" y="148" fill="#4f5d75" font-size="10">假阳性：短任务看不出偏离</text>
+      <text x="538" y="170" fill="#7a8399" font-size="9">它检验「能不能守住」</text>
+    </g>
+
+    <g>
+      <rect x="760" y="52" width="200" height="150" fill="#fff" stroke="#4f5d75"/>
+      <text x="778" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">METRIC 4</text>
+      <text x="778" y="100" fill="#2d3142" font-size="13" font-weight="600">保留集增益</text>
+      <text x="778" y="124" fill="#4f5d75" font-size="10">未参与进化的任务是否改善</text>
+      <text x="778" y="148" fill="#4f5d75" font-size="10">假阳性：保留集与训练集重叠</text>
+      <text x="778" y="170" fill="#7a8399" font-size="9">它检验「有没有泛化」</text>
+    </g>
+
+    <path d="M 150 202 V 240" fill="none" stroke="#4f5d75" stroke-width="1.2"/>
+    <path d="M 390 202 V 240" fill="none" stroke="#4f5d75" stroke-width="1.2"/>
+    <path d="M 630 202 V 240" fill="none" stroke="#4f5d75" stroke-width="1.2"/>
+    <path d="M 860 202 V 240" fill="none" stroke="#4f5d75" stroke-width="1.2"/>
+
+    <g>
+      <rect x="40" y="240" width="920" height="108" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="58" y="264" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">THREE FAILURE MODES BEHIND THE NUMBERS</text>
+      <text x="58" y="288" fill="#2d3142" font-size="12" font-weight="600">实现漂移 · 认识论过度乐观 · 隐性判断力不足</text>
+      <text x="58" y="312" fill="#4f5d75" font-size="10">实现漂移：方案一旦变难，就退回训练数据里更熟悉的做法，偏离原假设；分数可能还涨了。</text>
+      <text x="58" y="330" fill="#4f5d75" font-size="10">过度乐观：信号还只是噪声，系统已开始解释结果、打补丁、宣布发现；阴性结果被忽略。</text>
+      <text x="58" y="346" fill="#7a8399" font-size="9">判断力不足：能跑实验，但不知道哪个基线重要、哪个异常值得追、何时该放弃假设。</text>
+    </g>
+  </svg>
+</body>
+</html>

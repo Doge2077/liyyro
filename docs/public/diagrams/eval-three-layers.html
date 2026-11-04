@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>三层验证与各自的判定者</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="etl-title etl-desc">
+    <title id="etl-title">三层验证与各自的判定者</title>
+    <desc id="etl-desc">结果层由环境状态判定，过程层由策略与动作序列判定，质量层由量表与模型判定。三层的可靠性依次下降，成本依次上升。</desc>
+    <rect width="1000" height="360" fill="#f5f5f5"/>
+    <defs>
+      <marker id="el-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <text x="40" y="34" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">BUILD BOTTOM-UP</text>
+
+    <g>
+      <rect x="40" y="212" width="600" height="72" fill="#ececec" stroke="#7a8399"/>
+      <text x="58" y="236" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">LAYER 1 · RESULT</text>
+      <text x="58" y="260" fill="#2d3142" font-size="12" font-weight="600">结果层：事情办成了吗</text>
+      <text x="300" y="236" fill="#4f5d75" font-size="10">判定者：环境状态与测试</text>
+      <text x="300" y="260" fill="#7a8399" font-size="9">最可靠、最便宜，应当先建</text>
+    </g>
+
+    <g>
+      <rect x="40" y="132" width="600" height="72" fill="#fff" stroke="#2d3142"/>
+      <text x="58" y="156" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">LAYER 2 · PROCESS</text>
+      <text x="58" y="180" fill="#2d3142" font-size="12" font-weight="600">过程层：以允许的方式办成了吗</text>
+      <text x="300" y="156" fill="#4f5d75" font-size="10">判定者：策略库与动作序列</text>
+      <text x="300" y="180" fill="#7a8399" font-size="9">可代码化，但需要策略完整</text>
+    </g>
+
+    <g>
+      <rect x="40" y="52" width="600" height="72" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="58" y="76" fill="#eb6c36" font-size="8" font-family="var(--mono)" letter-spacing=".1em">LAYER 3 · QUALITY</text>
+      <text x="58" y="100" fill="#2d3142" font-size="12" font-weight="600">质量层：用户是否满意</text>
+      <text x="300" y="76" fill="#4f5d75" font-size="10">判定者：量表 + 模型评分</text>
+      <text x="300" y="100" fill="#7a8399" font-size="9">最不确定，需要校准</text>
+    </g>
+
+    <g>
+      <rect x="672" y="52" width="288" height="232" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="690" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">RELIABILITY VS COST</text>
+      <text x="690" y="104" fill="#2d3142" font-size="12" font-weight="600">越往上越不确定</text>
+      <text x="690" y="132" fill="#4f5d75" font-size="10">结果层：几乎无歧义</text>
+      <text x="690" y="154" fill="#4f5d75" font-size="10">过程层：需策略覆盖完整</text>
+      <text x="690" y="176" fill="#4f5d75" font-size="10">质量层：需人工校准</text>
+      <text x="690" y="206" fill="#7a8399" font-size="9">上层依赖下层：结果不对时，</text>
+      <text x="690" y="224" fill="#7a8399" font-size="9">讨论过程是否合规意义不大。</text>
+      <text x="690" y="252" fill="#7a8399" font-size="9">所以建的顺序应当自下而上。</text>
+    </g>
+
+    <text x="40" y="312" fill="#7a8399" font-size="10">常见错误：一开始就做质量层的量表评分，因为「它最能反映体验」。</text>
+    <text x="40" y="336" fill="#7a8399" font-size="10">结果没有下层支撑时，量表分数无法解释——涨了不知道是不是真的好了。</text>
+  </svg>
+</body>
+</html>

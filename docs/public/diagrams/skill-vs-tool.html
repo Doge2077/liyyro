@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>系统提示、Skill 与工具的判定</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svt-title svt-desc">
+    <title id="svt-title">系统提示、Skill 与工具的判定</title>
+    <desc id="svt-desc">三个判定问题依次区分：是否需要模型执行动作，是否对所有任务生效，是否需要额外的可执行能力。答案决定内容放进工具、系统提示还是 Skill。</desc>
+    <rect width="1000" height="320" fill="#f5f5f5"/>
+    <defs>
+      <marker id="sv-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <text x="40" y="34" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">THREE QUESTIONS, THREE PLACES</text>
+
+    <g>
+      <rect x="40" y="56" width="240" height="56" fill="#fff" stroke="#2d3142"/>
+      <text x="160" y="80" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">模型需要执行动作吗</text>
+      <text x="160" y="98" text-anchor="middle" fill="#4f5d75" font-size="9">读写文件、调接口、跑命令</text>
+    </g>
+    <path d="M 280 84 H 330" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sv-ar)"/>
+    <g>
+      <rect x="330" y="56" width="180" height="56" fill="rgba(235,108,36,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="420" y="80" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">是 → 工具</text>
+      <text x="420" y="98" text-anchor="middle" fill="#4f5d75" font-size="9">带 schema 与权限</text>
+    </g>
+
+    <path d="M 160 112 V 156" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sv-ar)"/>
+    <g>
+      <rect x="40" y="156" width="240" height="56" fill="#fff" stroke="#2d3142"/>
+      <text x="160" y="180" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">对所有任务都生效吗</text>
+      <text x="160" y="198" text-anchor="middle" fill="#4f5d75" font-size="9">不能违反的约束、身份、输出格式</text>
+    </g>
+    <path d="M 280 184 H 330" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sv-ar)"/>
+    <g>
+      <rect x="330" y="156" width="180" height="56" fill="#fff" stroke="#2d3142"/>
+      <text x="420" y="180" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">是 → 系统提示</text>
+      <text x="420" y="198" text-anchor="middle" fill="#4f5d75" font-size="9">每轮都在，稳定前缀</text>
+    </g>
+
+    <path d="M 160 212 V 256" fill="none" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#sv-ar)"/>
+    <g>
+      <rect x="40" y="256" width="470" height="52" fill="rgba(235,108,36,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="58" y="278" fill="#2d3142" font-size="12" font-weight="600">否 → Skill</text>
+      <text x="58" y="296" fill="#4f5d75" font-size="9">按任务匹配加载的领域流程与判定原则</text>
+    </g>
+
+    <g>
+      <rect x="560" y="56" width="400" height="252" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="578" y="80" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">THE MISPLACEMENT SYMPTOMS</text>
+      <text x="578" y="108" fill="#2d3142" font-size="12" font-weight="600">放错位置的三类症状</text>
+      <text x="578" y="136" fill="#4f5d75" font-size="10">流程写进系统提示 → 每轮都付，且越写越长</text>
+      <text x="578" y="160" fill="#4f5d75" font-size="10">约定写成 Skill → 该遵守时没加载，不该遵守时加载</text>
+      <text x="578" y="184" fill="#4f5d75" font-size="10">能力写成描述 → 模型知道该做什么，但没有工具可调</text>
+      <text x="578" y="216" fill="#7a8399" font-size="9">判定的顺序不能反：先问有没有动作，再问是否全局，</text>
+      <text x="578" y="234" fill="#7a8399" font-size="9">最后才考虑按需加载。反着问会把工具写进 Skill。</text>
+      <text x="578" y="266" fill="#7a8399" font-size="9">一个内容可以拆开放：约定进系统提示，</text>
+      <text x="578" y="284" fill="#7a8399" font-size="9">流程进 Skill，动作进工具。</text>
+    </g>
+  </svg>
+</body>
+</html>

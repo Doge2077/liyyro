@@ -1,33 +1,104 @@
 {
-  "topLevel": ["AI", "Life", "History"],
+  "topLevel": [
+    "AI",
+    "Life",
+    "History"
+  ],
   "AI": {
-    "_order": ["大模型基础", "Agent基础", "上下文工程", "记忆治理", "RAG", "Agent协作", "Agent评估", "bert模型训练实践"],
+    "_order": [
+      "大模型基础",
+      "Agent基础",
+      "上下文工程",
+      "工具与Skill",
+      "记忆治理",
+      "RAG",
+      "Agent协作",
+      "Agent RSI",
+      "Agent评估",
+      "bert模型训练实践"
+    ],
     "Agent基础": {
-      "_order": ["基础概念", "常见协议"]
+      "_order": [
+        "基础概念",
+        "常见协议"
+      ]
     },
     "上下文工程": {
-      "_order": ["上下文工程设计", "Agent上下文状态栏", "上下文压缩策略"]
+      "_order": [
+        "上下文工程设计",
+        "Agent上下文状态栏",
+        "上下文压缩策略"
+      ]
     },
     "记忆治理": {
-      "_order": ["记忆治理设计", "记忆检索与注入", "记忆工程实践"]
+      "_order": [
+        "记忆治理设计",
+        "记忆检索与注入",
+        "记忆工程实践"
+      ]
     },
     "RAG": {
-      "_order": ["RAG基础与检索管道", "知识组织与更新", "检索工程实践"]
+      "_order": [
+        "RAG基础与检索管道",
+        "知识组织与更新",
+        "检索工程实践"
+      ]
     },
     "Agent协作": {
-      "_order": ["Single-Agent与Multi-Agent", "Supervisor-Worker", "Handoff与动态切换"]
+      "_order": [
+        "协作模式设计",
+        "协作工程实践",
+        "SuperAgent多Agent设计解析"
+      ]
     },
     "Agent评估": {
-      "_order": ["Agent评估总览", "评测指标与评分器", "评测数据集建设", "自动化评测框架", "Agent可观测性", "反馈闭环与发布门禁"]
+      "_order": [
+        "评估体系设计",
+        "评测集与评分器",
+        "观测回归与发布"
+      ]
     },
     "大模型基础": {
-      "_order": ["大模型基础（一）", "大模型基础（二）", "大模型基础（三）"]
+      "_order": [
+        "大模型基础（一）",
+        "大模型基础（二）",
+        "大模型基础（三）"
+      ]
+    },
+    "工具与Skill": {
+      "_order": [
+        "工具设计",
+        "Skill设计与加载",
+        "渐进式披露与按需注入",
+        "工具与Skill工程实践"
+      ]
+    },
+    "Agent RSI": {
+      "_order": [
+        "RSI设计",
+        "自进化工程实践",
+        "RSI的适用与评估"
+      ]
     }
   },
   "History": {
-    "_order": ["algorithm", "java", "cpp", "cs-fundamentals", "database", "python", "linux", "tips", "other"],
+    "_order": [
+      "algorithm",
+      "java",
+      "cpp",
+      "cs-fundamentals",
+      "database",
+      "python",
+      "linux",
+      "tips",
+      "other"
+    ],
     "algorithm": {
-      "_order": ["算法讲解", "算法题解", "竞赛题解"],
+      "_order": [
+        "算法讲解",
+        "算法题解",
+        "竞赛题解"
+      ],
       "算法讲解": {
         "_order": [
           "1. 基础算法初识",
@@ -41,27 +112,66 @@
         ]
       },
       "算法题解": {
-        "_order": ["动态规划", "搜索", "数学", "贪心", "字符串", "图论", "力扣", "其他"]
+        "_order": [
+          "动态规划",
+          "搜索",
+          "数学",
+          "贪心",
+          "字符串",
+          "图论",
+          "力扣",
+          "其他"
+        ]
       },
       "竞赛题解": {
-        "_order": ["acwing", "codeforces", "atcoder", "ccpc", "leetcode", "校内竞赛"]
+        "_order": [
+          "acwing",
+          "codeforces",
+          "atcoder",
+          "ccpc",
+          "leetcode",
+          "校内竞赛"
+        ]
       }
     },
     "java": {
-      "_order": ["jdk源码", "jvm", "spring", "架构", "其他"]
+      "_order": [
+        "jdk源码",
+        "jvm",
+        "spring",
+        "架构",
+        "其他"
+      ]
     },
     "cpp": {},
     "cs-fundamentals": {
-      "_order": ["数据结构", "计算机组成", "编译原理", "计算机网络", "其他"]
+      "_order": [
+        "数据结构",
+        "计算机组成",
+        "编译原理",
+        "计算机网络",
+        "其他"
+      ]
     },
     "database": {
-      "_order": ["mysql", "redis", "neo4j", "理论"]
+      "_order": [
+        "mysql",
+        "redis",
+        "neo4j",
+        "理论"
+      ]
     },
     "python": {},
     "linux": {},
     "tips": {},
     "other": {
-      "_order": ["campus", "essays", "poems", "Novels", "photos"]
+      "_order": [
+        "campus",
+        "essays",
+        "poems",
+        "Novels",
+        "photos"
+      ]
     }
   }
 }

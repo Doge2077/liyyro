@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>在线执行与离线进化的双循环</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rdl-title rdl-desc">
+    <title id="rdl-title">在线执行与离线进化的双循环</title>
+    <desc id="rdl-desc">在线循环只完成任务并记录证据，不直接改写正式版本；离线循环聚合轨迹、生成提案、过验证门槛后发布新版本。两者通过版本化经验与评估集连接。</desc>
+    <rect width="1000" height="340" fill="#f5f5f5"/>
+    <defs>
+      <marker id="dl-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+      <marker id="dl-ac" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#eb6c36"/>
+      </marker>
+    </defs>
+
+    <text x="40" y="34" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">ONLINE NEVER WRITES ITSELF</text>
+
+    <g>
+      <rect x="40" y="56" width="440" height="96" fill="#ececec" stroke="#7a8399"/>
+      <text x="58" y="80" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">ONLINE LOOP</text>
+      <text x="58" y="104" fill="#2d3142" font-size="13" font-weight="600">完成任务，只记录证据</text>
+      <text x="58" y="126" fill="#4f5d75" font-size="10">按当前版本执行；不修改自身定义</text>
+      <text x="58" y="144" fill="#7a8399" font-size="9">产出：轨迹、结果、过程记录</text>
+    </g>
+
+    <path d="M 480 104 H 540" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#dl-ar)"/>
+    <text x="510" y="94" text-anchor="middle" fill="#7a8399" font-size="9">证据</text>
+
+    <g>
+      <rect x="540" y="56" width="420" height="96" fill="rgba(235,108,36,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="558" y="80" fill="#eb6c36" font-size="8" font-family="var(--mono)" letter-spacing=".1em">OFFLINE LOOP</text>
+      <text x="558" y="104" fill="#2d3142" font-size="13" font-weight="600">聚合、诊断、提出提案、验证</text>
+      <text x="558" y="126" fill="#4f5d75" font-size="10">跨轨迹归纳；对比保留集</text>
+      <text x="558" y="144" fill="#7a8399" font-size="9">产出：带来源的更新提案</text>
+    </g>
+
+    <path d="M 750 152 V 196 H 500" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#dl-ar)"/>
+    <text x="770" y="180" fill="#7a8399" font-size="9">过门槛</text>
+
+    <g>
+      <rect x="200" y="196" width="300" height="56" fill="#fff" stroke="#2d3142"/>
+      <text x="350" y="218" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">新版本</text>
+      <text x="350" y="238" text-anchor="middle" fill="#4f5d75" font-size="9">版本号 + 可回滚的旧版本</text>
+    </g>
+
+    <path d="M 200 224 H 120 V 152 H 260" fill="none" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#dl-ac)"/>
+    <text x="128" y="192" fill="#7a8399" font-size="9">发布</text>
+
+    <g>
+      <rect x="540" y="196" width="420" height="56" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="558" y="218" fill="#2d3142" font-size="12" font-weight="600">保留集与评估集</text>
+      <text x="558" y="238" fill="#4f5d75" font-size="9">连接两个循环的唯一通道</text>
+    </g>
+
+    <g>
+      <rect x="40" y="276" width="920" height="52" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="58" y="298" fill="#2d3142" font-size="12" font-weight="600">关键约束：在线循环没有写权限</text>
+      <text x="58" y="318" fill="#4f5d75" font-size="10">一次偶发成功、一次网络故障或一次恶意输入，都不应立刻改变长期能力。</text>
+    </g>
+  </svg>
+</body>
+</html>

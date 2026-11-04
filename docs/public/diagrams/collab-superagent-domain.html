@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SuperAgent 的领域流转</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="csd-title csd-desc">
+    <title id="csd-title">SuperAgent 的领域流转</title>
+    <desc id="csd-desc">来源产生触发，触发汇成线程；评估对触发批次作出决定，接受时创建带授权的工单；工单派工给执行器，执行结果经渠道写回来源。</desc>
+    <rect width="1000" height="420" fill="#f5f5f5"/>
+    <defs>
+      <marker id="sd-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+      <marker id="sd-ac" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#eb6c36"/>
+      </marker>
+    </defs>
+
+    <text x="36" y="32" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">DOMAIN, NOT CHAT</text>
+
+    <path d="M 170 96 H 210" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sd-ar)"/>
+    <path d="M 350 96 H 390" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sd-ar)"/>
+    <path d="M 530 96 H 570" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sd-ar)"/>
+    <path d="M 710 96 H 750" fill="none" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#sd-ac)"/>
+
+    <g>
+      <rect x="36" y="64" width="134" height="64" fill="#ececec" stroke="#7a8399"/>
+      <text x="103" y="90" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">来源</text>
+      <text x="103" y="110" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">Source</text>
+    </g>
+    <g>
+      <rect x="210" y="64" width="140" height="64" fill="#fff" stroke="#2d3142"/>
+      <text x="280" y="90" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">触发</text>
+      <text x="280" y="110" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">Trigger</text>
+    </g>
+    <g>
+      <rect x="390" y="64" width="140" height="64" fill="#fff" stroke="#2d3142"/>
+      <text x="460" y="90" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">线程</text>
+      <text x="460" y="110" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">Thread</text>
+    </g>
+    <g>
+      <rect x="570" y="64" width="140" height="64" fill="#fff" stroke="#2d3142"/>
+      <text x="640" y="90" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">评估</text>
+      <text x="640" y="110" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">Eval</text>
+    </g>
+    <g>
+      <rect x="750" y="56" width="214" height="80" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="857" y="82" text-anchor="middle" fill="#2d3142" font-size="13" font-weight="600">工单 + 授权</text>
+      <text x="857" y="102" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">Ticket + Mandate</text>
+      <text x="857" y="122" text-anchor="middle" fill="#7a8399" font-size="9">只有评估能创建</text>
+    </g>
+
+    <path d="M 857 136 V 180 H 640" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sd-ar)"/>
+    <path d="M 570 212 H 400" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sd-ar)"/>
+
+    <g>
+      <rect x="570" y="180" width="140" height="64" fill="#fff" stroke="#2d3142"/>
+      <text x="640" y="206" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">派工</text>
+      <text x="640" y="226" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">Assignment</text>
+    </g>
+    <g>
+      <rect x="230" y="180" width="170" height="64" fill="#fff" stroke="#2d3142"/>
+      <text x="315" y="206" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">执行器</text>
+      <text x="315" y="226" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">Executor Session</text>
+    </g>
+    <g>
+      <rect x="36" y="180" width="160" height="64" fill="#fff" stroke="#2d3142"/>
+      <text x="116" y="206" text-anchor="middle" fill="#2d3142" font-size="12" font-weight="600">报告</text>
+      <text x="116" y="226" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">Report</text>
+    </g>
+
+    <path d="M 116 244 V 288 H 460" fill="none" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#sd-ac)"/>
+    <g>
+      <rect x="280" y="256" width="180" height="56" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="370" y="278" text-anchor="middle" fill="#2d3142" font-size="11" font-weight="600">渠道写回</text>
+      <text x="370" y="296" text-anchor="middle" fill="#4f5d75" font-size="9" font-family="var(--mono)">Channel → Source</text>
+    </g>
+
+    <g>
+      <rect x="480" y="256" width="484" height="120" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="498" y="280" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">WHY THE LAYER EXISTS</text>
+      <text x="498" y="304" fill="#2d3142" font-size="12" font-weight="600">会话可以被替换，状态不会被带走</text>
+      <text x="498" y="326" fill="#4f5d75" font-size="10">工单自己定义状态，不跟随执行会话的阶段。</text>
+      <text x="498" y="344" fill="#4f5d75" font-size="10">派工的生命周期独立于工单：一个工单可以有多次派工。</text>
+      <text x="498" y="362" fill="#7a8399" font-size="9">执行器在领域之外，通过派工与报告接回。</text>
+    </g>
+
+    <text x="36" y="400" fill="#7a8399" font-size="10">这条链路里，人写的消息与机器的操作走同一套对象，因此审计与恢复不需要另建模型。</text>
+  </svg>
+</body>
+</html>

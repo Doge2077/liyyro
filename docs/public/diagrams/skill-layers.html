@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skill 的三层披露结构</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="sll-title sll-desc">
+    <title id="sll-title">Skill 的三层披露结构</title>
+    <desc id="sll-desc">目录层常驻名称与一句描述，正文层在命中后加载，资源层在执行时才读。每层体积相差一个数量级。</desc>
+    <rect width="1000" height="340" fill="#f5f5f5"/>
+    <defs>
+      <marker id="sl-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+      <marker id="sl-ac" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#eb6c36"/>
+      </marker>
+    </defs>
+
+    <text x="40" y="34" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">PROGRESSIVE DISCLOSURE</text>
+
+    <g>
+      <rect x="40" y="56" width="280" height="88" fill="rgba(235,108,36,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="58" y="78" fill="#eb6c36" font-size="8" font-family="var(--mono)" letter-spacing=".1em">LAYER 1 · ALWAYS</text>
+      <text x="58" y="102" fill="#2d3142" font-size="13" font-weight="600">目录</text>
+      <text x="58" y="122" fill="#4f5d75" font-size="10">名称 + 一句描述 + 何时使用</text>
+      <text x="58" y="138" fill="#7a8399" font-size="9">每条约 100–200 字节</text>
+    </g>
+
+    <path d="M 320 100 H 372" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sl-ar)"/>
+
+    <g>
+      <rect x="372" y="56" width="280" height="88" fill="#fff" stroke="#2d3142"/>
+      <text x="390" y="78" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">LAYER 2 · ON MATCH</text>
+      <text x="390" y="102" fill="#2d3142" font-size="13" font-weight="600">正文</text>
+      <text x="390" y="122" fill="#4f5d75" font-size="10">流程、判定条件、完成标准</text>
+      <text x="390" y="138" fill="#7a8399" font-size="9">通常 2–8 KB</text>
+    </g>
+
+    <path d="M 652 100 H 704" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sl-ar)"/>
+
+    <g>
+      <rect x="704" y="56" width="256" height="88" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="722" y="78" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">LAYER 3 · ON DEMAND</text>
+      <text x="722" y="102" fill="#2d3142" font-size="13" font-weight="600">资源</text>
+      <text x="722" y="122" fill="#4f5d75" font-size="10">脚本、模板、示例</text>
+      <text x="722" y="138" fill="#7a8399" font-size="9">按执行需要读取</text>
+    </g>
+
+    <path d="M 180 144 V 188" fill="none" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="4,3"/>
+    <path d="M 512 144 V 188" fill="none" stroke="#eb6c36" stroke-width="1.2" stroke-dasharray="4,3"/>
+    <path d="M 832 144 V 188" fill="none" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="4,3"/>
+
+    <g>
+      <rect x="40" y="188" width="920" height="80" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="58" y="212" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">COST OF GETTING IT WRONG</text>
+      <text x="58" y="236" fill="#2d3142" font-size="12" font-weight="600">目录写得太粗会漏选，写得太细会撑破常驻预算</text>
+      <text x="58" y="258" fill="#4f5d75" font-size="10">二十个 Skill、每条 200 字节是 4 KB；每条 500 字节就是 10 KB，且每轮都要付。</text>
+    </g>
+
+    <text x="40" y="296" fill="#7a8399" font-size="10">正文层的常见问题是膨胀：把整套流程细节写进去，命中一次就吃掉几 KB。</text>
+    <text x="40" y="320" fill="#7a8399" font-size="10">资源层的价值在于「正文可以只说「运行 scripts/check.py」，而不必内联脚本内容」。</text>
+  </svg>
+</body>
+</html>

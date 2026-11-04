@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>八条批判按设计张力分组</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="csc-title csc-desc">
+    <title id="csc-title">八条批判按设计张力分组</title>
+    <desc id="csc-desc">八条批判归入三组张力：注意力与完整性、自动化与可控性、领域纯洁与实现重复。每组张力对应一个具体的取舍。</desc>
+    <rect width="1000" height="340" fill="#f5f5f5"/>
+    <defs>
+      <marker id="sc-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <text x="36" y="32" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">EIGHT OBJECTIONS, THREE TENSIONS</text>
+
+    <g>
+      <rect x="36" y="52" width="290" height="180" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="54" y="76" fill="#eb6c36" font-size="8" font-family="var(--mono)" letter-spacing=".1em">TENSION 1</text>
+      <text x="54" y="100" fill="#2d3142" font-size="13" font-weight="600">注意力与完整性</text>
+      <text x="54" y="126" fill="#4f5d75" font-size="10">路由不读代码，但要做范围判断</text>
+      <text x="54" y="148" fill="#4f5d75" font-size="10">只显示状态，不记录判断理由</text>
+      <text x="54" y="170" fill="#4f5d75" font-size="10">30 分钟后台预算截断长任务</text>
+      <text x="54" y="200" fill="#7a8399" font-size="9">取舍：省下的注意力要有人补回来</text>
+      <text x="54" y="218" fill="#7a8399" font-size="9">替代：把判断理由写进事件，不占消息</text>
+    </g>
+
+    <g>
+      <rect x="354" y="52" width="290" height="180" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="372" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">TENSION 2</text>
+      <text x="372" y="100" fill="#2d3142" font-size="13" font-weight="600">自动化与可控性</text>
+      <text x="372" y="126" fill="#4f5d75" font-size="10">准入表是接收范围乘三格</text>
+      <text x="372" y="148" fill="#4f5d75" font-size="10">策略变更不撤销已发授权</text>
+      <text x="372" y="170" fill="#4f5d75" font-size="10">扇出不检查发送人身份</text>
+      <text x="372" y="200" fill="#7a8399" font-size="9">取舍：表达力换可审计性</text>
+      <text x="372" y="218" fill="#7a8399" font-size="9">替代：默认拒绝，显式列出交集</text>
+    </g>
+
+    <g>
+      <rect x="672" y="52" width="292" height="180" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="690" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">TENSION 3</text>
+      <text x="690" y="100" fill="#2d3142" font-size="13" font-weight="600">领域纯洁与实现重复</text>
+      <text x="690" y="126" fill="#4f5d75" font-size="10">单工单单派工，并行只能靠子代理</text>
+      <text x="690" y="148" fill="#4f5d75" font-size="10">子代理继承执行器权限，未再收窄</text>
+      <text x="690" y="170" fill="#4f5d75" font-size="10">与宿主原生团队机制概念重叠</text>
+      <text x="690" y="200" fill="#7a8399" font-size="9">取舍：模型干净，但边界变模糊</text>
+      <text x="690" y="218" fill="#7a8399" font-size="9">替代：显式声明与原生机制的分工</text>
+    </g>
+
+    <g>
+      <rect x="36" y="252" width="928" height="72" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="54" y="276" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">WHAT SURVIVES THE CRITIQUE</text>
+      <text x="54" y="300" fill="#2d3142" font-size="12" font-weight="600">授权与上下文分离、执行器可替换、注意力当一等预算——这三条与批判无关，成立。</text>
+      <text x="54" y="318" fill="#4f5d75" font-size="10">八条批判主要指向「边界表达」与「证据留存」，不是指向核心领域模型。</text>
+    </g>
+  </svg>
+</body>
+</html>
