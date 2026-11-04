@@ -18,7 +18,7 @@ export const zh = defineConfig({
     },
     outline: {
       label: '页面导航',
-      level: 'deep'
+      level: [1, 6]
     },
     lastUpdated: {
       text: '最后更新于',

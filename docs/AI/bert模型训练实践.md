@@ -5,18 +5,15 @@ categories: [AI, AI]
 description: ""
 ---
 
-# 1. bert模型训练实践
-
-
 **平台**：Windows 11 + NVIDIA RTX 4060 + CUDA 12.6 + Miniconda + PyTorch + Hugging Face Transformers
 
 使用 Hugging Face 的 Transformers 库，基于 `bert-base-uncased` 模型进行微调，完成一个**句子评分/分类任务**的训练与预测流程，并使用 GPU 加速训练。
 
 完整代码地址：[https://github.com/Doge2077/learn-bert](https://github.com/Doge2077/learn-bert)
 
-## 1.1 技术介绍
+# 1. 技术介绍
 
-### BERT 的核心原理
+## 1.1 BERT 的核心原理
 
 BERT（Bidirectional Encoder Representations from Transformers）是由 Google 在 2018 年提出的预训练语言模型，基于 Transformer 架构。它通过大规模无监督语料进行训练，能够捕捉文本的深层语义和上下文信息。以下是 BERT 的核心原理及其各层功能的详细解析。
 
@@ -30,11 +27,11 @@ BERT（Bidirectional Encoder Representations from Transformers）是由 Google �
 3.  **Transformer Encoder 架构**：
     BERT 仅使用 Transformer 的**编码器（Encoder）** 部分，由堆叠的编码器组成，每层包含自注意力机制和前馈神经网络。
 
-### BERT 的层级结构
+## 1.2 BERT 的层级结构
 
 BERT 模型分为**输入层、嵌入层、多层编码器**。以 BERT-Base 为例（12 层编码器），每一层的作用如下：
 
-#### 输入层（Input Layer）
+### 输入层（Input Layer）
 
 *   **功能**：将原始文本转换为模型可处理的输入表示。
 *   **输入格式**：
@@ -43,14 +40,14 @@ BERT 模型分为**输入层、嵌入层、多层编码器**。以 BERT-Base 为
     *   `Segment Embeddings`：区分句子 A 和句子 B（用于 NSP 任务）。
     *   `Position Embeddings`：位置编码，标记词的位置信息。
 
-#### 嵌入层（Embedding Layer）
+### 嵌入层（Embedding Layer）
 
 *   **功能**：将输入转换为稠密向量。
     *   词嵌入（Token Embeddings）：将词映射到低维向量。
     *   位置嵌入（Position Embeddings）：编码词的位置信息。
     *   分段嵌入（Segment Embeddings）：区分不同句子（如问答任务中的问题和答案）。
 
-#### 编码器层（Encoder Layers）
+### 编码器层（Encoder Layers）
 
 每层编码器包含两个核心模块：**多头自注意力（Multi-Head Self-Attention）** 和 **前馈神经网络（Feed-Forward Network）**，并通过残差连接和层归一化（LayerNorm）以优化训练。
 
@@ -70,17 +67,17 @@ BERT 模型分为**输入层、嵌入层、多层编码器**。以 BERT-Base 为
 *   **(3) 残差连接与层归一化**：
     每层输出前均应用残差连接，以缓解梯度消失问题。
 
-### 各编码器层的特点
+## 1.3 各编码器层的特点
 - **底层（靠近输入层）**：学习基础语法、局部特征（如词性、短语结构）。
 - **中层**：捕捉句内和句间关系（如指代消解、语义角色）。
 - **高层**：提取抽象语义（如情感倾向、文本主旨）。
 
-### BERT 的输出
+## 1.4 BERT 的输出
 - **最后一层编码器的输出**：每个词对应的上下文向量。
 - `[CLS]` 向量：用于分类任务（如情感分析），聚合全局信息。
 - 其他词向量：用于序列标注（如命名实体识别）、问答等任务。
 
-## 1.2 环境配置
+# 2. 环境配置
 
 | 项目 | 说明 |
 | :--- | :--- |
@@ -91,7 +88,7 @@ BERT 模型分为**输入层、嵌入层、多层编码器**。以 BERT-Base 为
 | 验证命令 | `python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"` |
 | 预期输出 | `2.6.0+cu126`&lt;br&gt;`True` |
 
-## 1.3 项目结构
+# 3. 项目结构
 
 ```
 my_transformer_demo/
@@ -102,7 +99,7 @@ my_transformer_demo/
 ├── utils.py
 ```
 
-## 1.4 配置文件 `config.json`
+# 4. 配置文件 `config.json`
 ```json
 {
   "model_name": "bert-base-uncased",
@@ -116,7 +113,7 @@ my_transformer_demo/
 }
 ```
 
-## 1.5 数据集 `data/dataset.csv`
+# 5. 数据集 `data/dataset.csv`
 ```text
 sentence,score
 "The weather is perfect today!",5
@@ -126,7 +123,7 @@ sentence,score
 ...
 ```
 
-## 1.6 工具函数 `utils.py`
+# 6. 工具函数 `utils.py`
 ```python
 import pandas as pd
 from datasets import Dataset
@@ -137,7 +134,7 @@ def load_dataset(path):
     return Dataset.from_pandas(df[['sentence', 'label']])
 ```
 
-## 1.7 训练脚本 `train.py`
+# 7. 训练脚本 `train.py`
 ```python
 import json
 
@@ -226,7 +223,7 @@ tokenizer.save_pretrained(cfg["output_dir"])
 print("✅ 模型和分词器保存成功！")
 ```
 
-### 使用模型 `predict.py`
+## 7.1 使用模型 `predict.py`
 模型会保存到 `./models/`。
 
 ```python
