@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>端到端回归与轨迹前缀回归的截取位置</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="epr-title epr-desc">
+    <title id="epr-title">端到端回归与轨迹前缀回归的截取位置</title>
+    <desc id="epr-desc">端到端回归从初始状态跑完整任务，验证最终状态；轨迹前缀回归把首个错误之前的上下文冻结，只验证那个决策点的下一步动作是否落在可接受集合内。</desc>
+    <rect width="1000" height="380" fill="#f5f5f5"/>
+    <defs>
+      <marker id="ep-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <text x="36" y="32" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">TWO REGRESSIONS, TWO CUTS</text>
+
+    <text x="36" y="66" fill="#4f5d75" font-size="10" font-family="var(--mono)">端到端</text>
+    <g>
+      <rect x="110" y="50" width="120" height="34" fill="#ececec" stroke="#7a8399"/>
+      <text x="170" y="71" text-anchor="middle" fill="#4f5d75" font-size="9">初始状态</text>
+    </g>
+    <g>
+      <rect x="238" y="50" width="120" height="34" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="298" y="71" text-anchor="middle" fill="#4f5d75" font-size="9">动作 1-3</text>
+    </g>
+    <g>
+      <rect x="366" y="50" width="120" height="34" fill="rgba(235,108,36,.10)" stroke="#eb6c36"/>
+      <text x="426" y="71" text-anchor="middle" fill="#4f5d75" font-size="9">首错</text>
+    </g>
+    <g>
+      <rect x="494" y="50" width="120" height="34" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="554" y="71" text-anchor="middle" fill="#4f5d75" font-size="9">后续</text>
+    </g>
+    <g>
+      <rect x="622" y="50" width="120" height="34" fill="#eaf0fa" stroke="#2e5aa8"/>
+      <text x="682" y="71" text-anchor="middle" fill="#4f5d75" font-size="9">最终状态</text>
+    </g>
+    <text x="760" y="72" fill="#7a8399" font-size="9">查终态与安全条件</text>
+
+    <text x="36" y="136" fill="#4f5d75" font-size="10" font-family="var(--mono)">轨迹前缀</text>
+    <g>
+      <rect x="110" y="120" width="120" height="34" fill="#ececec" stroke="#7a8399"/>
+      <text x="170" y="141" text-anchor="middle" fill="#4f5d75" font-size="9">初始状态</text>
+    </g>
+    <g>
+      <rect x="238" y="120" width="120" height="34" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="298" y="141" text-anchor="middle" fill="#4f5d75" font-size="9">动作 1-3</text>
+    </g>
+    <g>
+      <rect x="366" y="120" width="120" height="34" fill="rgba(235,108,36,.10)" stroke="#eb6c36" stroke-width="1.4"/>
+      <text x="426" y="141" text-anchor="middle" fill="#4f5d75" font-size="9">截断点</text>
+    </g>
+    <g>
+      <rect x="494" y="120" width="120" height="34" fill="#f5f5f5" stroke="#7a8399" stroke-dasharray="4,3"/>
+      <text x="554" y="141" text-anchor="middle" fill="#7a8399" font-size="9">不跑</text>
+    </g>
+    <g>
+      <rect x="622" y="120" width="120" height="34" fill="#f5f5f5" stroke="#7a8399" stroke-dasharray="4,3"/>
+      <text x="682" y="141" text-anchor="middle" fill="#7a8399" font-size="9">不跑</text>
+    </g>
+    <text x="760" y="142" fill="#7a8399" font-size="9">只查下一步动作</text>
+
+    <path d="M 426 154 V 196" fill="none" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#ep-ar)"/>
+
+    <g>
+      <rect x="110" y="196" width="744" height="60" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="128" y="220" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">ACCEPTABLE ACTION SET, NOT A SINGLE ANSWER</text>
+      <text x="128" y="242" fill="#4f5d75" font-size="10">要求「先读仓库规则」「先询问用户」「拒绝危险操作」之一；同时列出禁止动作。</text>
+    </g>
+
+    <g>
+      <rect x="36" y="276" width="928" height="84" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="54" y="300" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">WHY BOTH</text>
+      <text x="54" y="324" fill="#2d3142" font-size="12" font-weight="600">端到端最接近生产，但说不清失败在哪一步；前缀能隔离单个决策，但证明不了整体可用</text>
+      <text x="54" y="346" fill="#4f5d75" font-size="10">高可靠场景里，两类都要建；前缀集的维护成本与失败分类体系的成熟度直接相关。</text>
+    </g>
+  </svg>
+</body>
+</html>

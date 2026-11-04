@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>评估环境的五个要素与缺一失效</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="efe-title efe-desc">
+    <title id="efe-title">评估环境的五个要素与缺一失效</title>
+    <desc id="efe-desc">数据集、环境状态、工具接口、评分标准、执行协议五个要素缺一不可，每个要素缺失对应一种无法复现的失效。</desc>
+    <rect width="1000" height="400" fill="#f5f5f5"/>
+    <defs>
+      <marker id="ef-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <text x="36" y="32" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">FIVE ELEMENTS, FIVE FAILURES</text>
+
+    <g>
+      <rect x="36" y="52" width="180" height="96" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="54" y="76" fill="#eb6c36" font-size="8" font-family="var(--mono)" letter-spacing=".1em">1 · DATASET</text>
+      <text x="54" y="100" fill="#2d3142" font-size="12" font-weight="600">数据集</text>
+      <text x="54" y="122" fill="#4f5d75" font-size="9">工单、模拟器规范</text>
+      <text x="54" y="140" fill="#4f5d75" font-size="9">验收标准打包为一条</text>
+    </g>
+    <g>
+      <rect x="232" y="52" width="180" height="96" fill="#fff" stroke="#2d3142"/>
+      <text x="250" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">2 · STATE</text>
+      <text x="250" y="100" fill="#2d3142" font-size="12" font-weight="600">环境状态</text>
+      <text x="250" y="122" fill="#4f5d75" font-size="9">可变信息</text>
+      <text x="250" y="140" fill="#4f5d75" font-size="9">可重置到同一起点</text>
+    </g>
+    <g>
+      <rect x="428" y="52" width="180" height="96" fill="#fff" stroke="#2d3142"/>
+      <text x="446" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">3 · TOOLS</text>
+      <text x="446" y="100" fill="#2d3142" font-size="12" font-weight="600">工具接口</text>
+      <text x="446" y="122" fill="#4f5d75" font-size="9">两侧各自的原子操作</text>
+      <text x="446" y="140" fill="#4f5d75" font-size="9">不含高层抽象</text>
+    </g>
+    <g>
+      <rect x="624" y="52" width="180" height="96" fill="#fff" stroke="#2d3142"/>
+      <text x="642" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">4 · RUBRIC</text>
+      <text x="642" y="100" fill="#2d3142" font-size="12" font-weight="600">评分标准</text>
+      <text x="642" y="122" fill="#4f5d75" font-size="9">四层检查</text>
+      <text x="642" y="140" fill="#4f5d75" font-size="9">加聚合规则</text>
+    </g>
+    <g>
+      <rect x="820" y="52" width="144" height="96" fill="#fff" stroke="#2d3142"/>
+      <text x="838" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">5 · PROTOCOL</text>
+      <text x="838" y="100" fill="#2d3142" font-size="12" font-weight="600">执行协议</text>
+      <text x="838" y="122" fill="#4f5d75" font-size="9">交互顺序</text>
+      <text x="838" y="140" fill="#4f5d75" font-size="9">终止条件</text>
+    </g>
+
+    <path d="M 126 148 V 184" fill="none" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#ef-ar)"/>
+    <path d="M 322 148 V 184" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#ef-ar)"/>
+    <path d="M 518 148 V 184" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#ef-ar)"/>
+    <path d="M 714 148 V 184" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#ef-ar)"/>
+    <path d="M 892 148 V 184" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#ef-ar)"/>
+
+    <g>
+      <rect x="36" y="184" width="928" height="92" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="54" y="208" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">MISSING ONE, LOSING REPRODUCIBILITY</text>
+      <text x="54" y="232" fill="#4f5d75" font-size="10">缺数据集：每次运行的任务不同，结果无法比较。</text>
+      <text x="54" y="252" fill="#4f5d75" font-size="10">缺状态重置：上次的残留影响这次，同一用例有时过有时不过。</text>
+      <text x="54" y="270" fill="#7a8399" font-size="9">缺工具接口：Agent 只能用自然语言描述动作，规划与推理被工具本身吸收。</text>
+    </g>
+
+    <g>
+      <rect x="36" y="292" width="928" height="84" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="54" y="316" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">THE TWO THAT GET OVERLOOKED</text>
+      <text x="54" y="340" fill="#2d3142" font-size="12" font-weight="600">评分标准与执行协议</text>
+      <text x="54" y="362" fill="#4f5d75" font-size="10">缺评分标准：只能人工看输出，无法规模化。缺执行协议：对话可能永远不结束，或在不该结束时结束。</text>
+    </g>
+  </svg>
+</body>
+</html>

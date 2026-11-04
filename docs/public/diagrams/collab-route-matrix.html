@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>五个设计问题的答案组合与三条路线</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="crm-title crm-desc">
+    <title id="crm-title">五个设计问题的答案组合与三条路线</title>
+    <desc id="crm-desc">五个设计问题的答案不能自由组合：「继承父级历史」推出了「无法判断自己读过什么」，「全新建子级」推出了「任务必须自包含」。由此收敛出探索、执行、复核三条路线。</desc>
+    <rect width="1000" height="400" fill="#f5f5f5"/>
+    <defs>
+      <marker id="cm-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <text x="36" y="32" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">FIVE QUESTIONS, THREE CONVERGED ROUTES</text>
+
+    <g>
+      <rect x="36" y="52" width="928" height="96" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="54" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">THE FIVE QUESTIONS EVERY IMPLEMENTATION ANSWERS</text>
+      <text x="54" y="102" fill="#2d3142" font-size="11">1 子级如何创建　　2 看多少父级历史　　3 能用什么工具　　4 结果怎么回来　　5 同时能跑几个</text>
+      <text x="54" y="130" fill="#4f5d75" font-size="10">每问都有两到四个可选答案。答案之间不自由——选了一个，另几个的可选范围随之收窄。</text>
+    </g>
+
+    <path d="M 176 148 V 184" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#cm-ar)"/>
+    <path d="M 500 148 V 184" fill="none" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#cm-ar)"/>
+    <path d="M 824 148 V 184" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#cm-ar)"/>
+
+    <g>
+      <rect x="36" y="184" width="280" height="120" fill="#ececec" stroke="#7a8399"/>
+      <text x="54" y="208" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">ROUTE A · EXPLORE</text>
+      <text x="54" y="232" fill="#2d3142" font-size="13" font-weight="600">探索型</text>
+      <text x="54" y="256" fill="#4f5d75" font-size="10">全新建 · 不继承 · 只读工具</text>
+      <text x="54" y="276" fill="#4f5d75" font-size="10">小模型 · 并行多开 · 只回结论</text>
+      <text x="54" y="296" fill="#7a8399" font-size="9">前提：任务能写成一段自包含描述</text>
+    </g>
+
+    <g>
+      <rect x="360" y="184" width="280" height="120" fill="rgba(235,108,36,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="378" y="208" fill="#eb6c36" font-size="8" font-family="var(--mono)" letter-spacing=".1em">ROUTE B · EXECUTE</text>
+      <text x="378" y="232" fill="#2d3142" font-size="13" font-weight="600">执行型</text>
+      <text x="378" y="256" fill="#4f5d75" font-size="10">全新建 · 不继承 · 全工具</text>
+      <text x="378" y="276" fill="#4f5d75" font-size="10">独占资源 · 串行或少开 · 回结构化结果</text>
+      <text x="378" y="296" fill="#7a8399" font-size="9">前提：权限能按任务切分</text>
+    </g>
+
+    <g>
+      <rect x="684" y="184" width="280" height="120" fill="#fff" stroke="#2d3142"/>
+      <text x="702" y="208" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">ROUTE C · REVIEW</text>
+      <text x="702" y="232" fill="#2d3142" font-size="13" font-weight="600">复核型</text>
+      <text x="702" y="256" fill="#4f5d75" font-size="10">继承前缀 · 只读 · 独立结论</text>
+      <text x="702" y="276" fill="#4f5d75" font-size="10">不参与执行 · 可否决 · 一般单开</text>
+      <text x="702" y="296" fill="#7a8399" font-size="9">前提：执行者的完成标准可核对</text>
+    </g>
+
+    <g>
+      <rect x="36" y="320" width="928" height="60" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="54" y="344" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">THE CONSTRAINT LINK</text>
+      <text x="54" y="368" fill="#4f5d75" font-size="10">继承前缀 → 子级继承了父级的错误假设，也说不清自己读过什么；全新建 → 父级必须把任务写成自包含的描述。</text>
+    </g>
+  </svg>
+</body>
+</html>
