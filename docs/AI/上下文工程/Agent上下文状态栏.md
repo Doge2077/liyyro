@@ -2,9 +2,9 @@
 title: Agent 上下文状态栏
 ---
 
-# Agent 上下文状态栏
+# 1. Agent 上下文状态栏
 
-## 1. 概述
+## 1.1 概述
 
 Agent 最适合处理步骤数量无法预先确定的任务。例如，修复一个线上问题通常要经历：理解问题、搜索代码、读取配置、修改实现、运行测试、分析失败、继续修改和提交变更。每一步的结果都会影响下一步，任务可能持续几十轮模型调用和工具执行。
 
@@ -47,9 +47,9 @@ sequenceDiagram
 
 这条状态快照就是 Agent 上下文状态栏。它不保存完整执行历史，也不替代工具结果，作用是把下一步决策需要的关键状态重新放到模型面前。
 
-## 2. Agent 上下文状态表示
+## 1.2 Agent 上下文状态表示
 
-### 2.1 上下文有状态性
+### 上下文有状态性
 
 Harness 框架有自己的状态，模型 API 调用本身通常是无状态的。Harness 知道任务已经运行到哪一步、工具调用了多少次、当前目录是什么、哪些测试失败；模型只有在这些信息被重新写入请求后才能使用它们。
 
@@ -67,7 +67,7 @@ Harness 框架有自己的状态，模型 API 调用本身通常是无状态的�
 
 上下文状态栏负责弥合这条断层：把 Harness 私有、权威、实时的状态，转换成模型能够读取的结构化文本或结构化消息。
 
-### 2.2 状态栏原理
+### 状态栏原理
 
 模型可以从上下文中检索已经存在的内容，但“已经调用了几次”“还剩多少预算”“当前阶段是否完成”这类结论需要对多条事件进行归纳。随着轨迹增长，模型每次重新统计都会消耗额外推理 token，也会受到历史截断和注意力分散影响。
 
@@ -93,7 +93,7 @@ Harness 框架有自己的状态，模型 API 调用本身通常是无状态的�
 
 状态栏只保存当前决策所需的投影。原始事件、工具结果和测试产物继续保留，状态错误时可以回溯和修正。
 
-### 2.3 状态栏组成结构
+### 状态栏组成结构
 
 一个实用的状态栏可以分为七类信息：
 
@@ -126,7 +126,7 @@ Harness 框架有自己的状态，模型 API 调用本身通常是无状态的�
 }
 ```
 
-### 2.4 状态栏在上下文的位置
+### 状态栏在上下文的位置
 
 稳定规则、工具定义和固定示例位于请求前部，状态栏属于动态上下文，通常放在当前消息轨迹末尾：
 
@@ -158,7 +158,7 @@ user：Harness 生成的 Agent 状态栏
 - 它靠近模型即将生成的新 token，当前阶段和下一步信息更容易被使用；
 - 追加尾部不需要修改前面的 system prompt 和工具定义，有利于缓存复用。
 
-### 2.5 状态栏缓存与更新
+### 状态栏缓存与更新
 
 状态栏更新同时影响三个对象：模型可见消息、Prompt Cache 前缀、持久化状态。完整设计需要同时规定以下内容：
 
@@ -332,11 +332,11 @@ Earlier runtime-context snapshots no longer apply.
 
 推荐默认策略是“事件日志保存完整事实，模型 Surface 保留当前状态，稳定字段使用 baseline，变化字段使用 delta”。这组合了三种策略的主要优点，但需要把 Surface、baseline 和事件日志明确区分。
 
-## 3. 状态栏工程实践
+## 1.3 状态栏工程实践
 
 下面四个实现使用同一个状态变化进行比较：工作目录从 `/repo` 切换到 `/repo/services/payment`。分析每个实现的状态来源、状态投影、模型消息、旧状态处理和恢复方式。
 
-### 3.1 Claude Code 状态栏
+### Claude Code 状态栏
 
 <iframe src="/diagrams/status-claude-code.html" title="Claude Code 状态栏链路" loading="lazy" style="width:100%;height:auto;aspect-ratio:1000/260;border:0;display:block;margin:24px 0;"></iframe>
 
@@ -414,7 +414,7 @@ Git 状态采用会话开始快照，包含分支、工作区状态和最近提�
 
 压缩后重新收集附件时，应依据当前状态重新计算，不能复用旧字符串。比如当前 Plan 文件已被删除，重新构造的 Plan attachment 就不能继续使用压缩前的文本；用户确认和工具结果必须保留原始事件，不能依赖附件重新生成。
 
-### 3.2 Codex 状态栏
+### Codex 状态栏
 
 <iframe src="/diagrams/status-codex.html" title="Codex WorldState 链路" loading="lazy" style="width:100%;height:auto;aspect-ratio:1000/260;border:0;display:block;margin:24px 0;"></iframe>
 
@@ -461,7 +461,7 @@ TUI 的 Git 分支和 `Tasks n/m` 不会自动进入 WorldState。Codex 的设�
 
 这意味着终端显示字段不能直接作为模型事实。模型需要当前分支时，仍需通过 WorldState section、工具结果或专门上下文提供器注入。
 
-### 3.3 OpenCode 状态栏
+### OpenCode 状态栏
 
 <iframe src="/diagrams/status-opencode.html" title="OpenCode Instruction State 链路" loading="lazy" style="width:100%;height:auto;aspect-ratio:1000/260;border:0;display:block;margin:24px 0;"></iframe>
 
@@ -523,7 +523,7 @@ epoch 的作用是把不断增长的 instruction delta 切成上下文窗口。�
 
 OpenCode 的 TUI footer 显示 token、费用、目录和 Git 分支，但这些字段不会自动写入 instruction state。Core `<env>` 说明是否为 Git 仓库，不自动提供当前分支；Shell environment 只服务命令执行。
 
-### 3.4 DeepSeek Harness 状态栏
+### DeepSeek Harness 状态栏
 
 <iframe src="/diagrams/status-deepseek-harness.html" title="DeepSeek Harness 状态链路" loading="lazy" style="width:100%;height:auto;aspect-ratio:1000/260;border:0;display:block;margin:24px 0;"></iframe>
 
@@ -590,9 +590,9 @@ Agent loop 在每个 step 进入模型前执行 `agent/pre-step`，先刷新状�
 
 Surface replacement 还解决了陈旧状态问题。日志可以同时保留 `cwd=/repo` 和 `cwd=/repo/services/payment` 两个事件，模型视图只保留后者。审计需要完整历史，模型决策只需要当前快照，两者由不同数据结构承担。
 
-## 4. 状态栏最佳实践
+## 1.4 状态栏最佳实践
 
-### 4.1 状态栏工程教训
+### 状态栏工程教训
 
 四个工程给出了四种不同的状态生命周期：
 
@@ -616,7 +616,7 @@ Surface replacement 还解决了陈旧状态问题。日志可以同时保留 `c
 
 **第五，缓存策略和状态策略必须一起设计：** 状态小且更新间隔长，可以追加；状态大且频繁变化，应该替换；状态字段很多且更新频率不同，可以采用 section diff 或 instruction source。
 
-### 4.2 最佳实践设计
+### 最佳实践设计
 
 一套可复用的状态栏可以拆成六个接口：
 
