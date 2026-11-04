@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>一条失败轨迹到下次行为改变的六步</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rfp-title rfp-desc">
+    <title id="rfp-title">一条失败轨迹到下次行为改变的六步</title>
+    <desc id="rfp-desc">六步依次是记录、判定、提炼、选载体、发布、下次命中。缺哪一步就退化成对应的失效形态：盲改、乱改、只记录、自我强化。</desc>
+    <rect width="1000" height="400" fill="#f5f5f5"/>
+    <defs>
+      <marker id="fp-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0,0 8,3 0,6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <text x="36" y="30" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">FAILURE TO BEHAVIOUR CHANGE</text>
+
+    <g>
+      <rect x="36" y="52" width="140" height="76" fill="#ececec" stroke="#7a8399"/>
+      <text x="54" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">1</text>
+      <text x="54" y="98" fill="#2d3142" font-size="12" font-weight="600">记录</text>
+      <text x="54" y="118" fill="#4f5d75" font-size="9">轨迹与结果</text>
+    </g>
+    <path d="M 176 90 H 196" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#fp-ar)"/>
+
+    <g>
+      <rect x="196" y="52" width="140" height="76" fill="#fff" stroke="#2d3142"/>
+      <text x="214" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">2</text>
+      <text x="214" y="98" fill="#2d3142" font-size="12" font-weight="600">判定</text>
+      <text x="214" y="118" fill="#4f5d75" font-size="9">成功还是失败</text>
+    </g>
+    <path d="M 336 90 H 356" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#fp-ar)"/>
+
+    <g>
+      <rect x="356" y="52" width="140" height="76" fill="#fff" stroke="#2d3142"/>
+      <text x="374" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">3</text>
+      <text x="374" y="98" fill="#2d3142" font-size="12" font-weight="600">提炼</text>
+      <text x="374" y="118" fill="#4f5d75" font-size="9">一条可复用的判断</text>
+    </g>
+    <path d="M 496 90 H 516" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#fp-ar)"/>
+
+    <g>
+      <rect x="516" y="52" width="140" height="76" fill="rgba(235,108,36,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="534" y="76" fill="#eb6c36" font-size="8" font-family="var(--mono)" letter-spacing=".1em">4</text>
+      <text x="534" y="98" fill="#2d3142" font-size="12" font-weight="600">选载体</text>
+      <text x="534" y="118" fill="#4f5d75" font-size="9">知识、说明、程序</text>
+    </g>
+    <path d="M 656 90 H 676" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#fp-ar)"/>
+
+    <g>
+      <rect x="676" y="52" width="140" height="76" fill="#fff" stroke="#2d3142"/>
+      <text x="694" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">5</text>
+      <text x="694" y="98" fill="#2d3142" font-size="12" font-weight="600">发布</text>
+      <text x="694" y="118" fill="#4f5d75" font-size="9">过检查再上线</text>
+    </g>
+    <path d="M 816 90 H 836" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#fp-ar)"/>
+
+    <g>
+      <rect x="836" y="52" width="128" height="76" fill="#eaf0fa" stroke="#2e5aa8"/>
+      <text x="854" y="76" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">6</text>
+      <text x="854" y="98" fill="#2d3142" font-size="12" font-weight="600">下次命中</text>
+      <text x="854" y="118" fill="#4f5d75" font-size="9">行为真的变了</text>
+    </g>
+
+    <path d="M 900 128 V 168 H 106" fill="none" stroke="#2e5aa8" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#fp-ar)"/>
+    <text x="500" y="162" text-anchor="middle" fill="#7a8399" font-size="9">这条回到第 1 步，成为下一轮的输入</text>
+
+    <text x="36" y="196" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">WHAT BREAKS WHEN A STEP IS MISSING</text>
+
+    <g>
+      <rect x="36" y="208" width="222" height="86" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="54" y="230" fill="#2d3142" font-size="11" font-weight="600">缺记录或判定</text>
+      <text x="54" y="250" fill="#4f5d75" font-size="9">不知道这次为什么成败，</text>
+      <text x="54" y="266" fill="#4f5d75" font-size="9">只能凭感觉改。</text>
+      <text x="54" y="286" fill="#eb6c36" font-size="9">退化为盲改</text>
+    </g>
+    <g>
+      <rect x="272" y="208" width="222" height="86" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="290" y="230" fill="#2d3142" font-size="11" font-weight="600">缺提炼</text>
+      <text x="290" y="250" fill="#4f5d75" font-size="9">只有一堆原始轨迹，</text>
+      <text x="290" y="266" fill="#4f5d75" font-size="9">每次都要重新读一遍。</text>
+      <text x="290" y="286" fill="#eb6c36" font-size="9">退化为只记录</text>
+    </g>
+    <g>
+      <rect x="508" y="208" width="222" height="86" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="526" y="230" fill="#2d3142" font-size="11" font-weight="600">缺选载体</text>
+      <text x="526" y="250" fill="#4f5d75" font-size="9">硬约束写成原则拦不住，</text>
+      <text x="526" y="266" fill="#4f5d75" font-size="9">判断原则写成代码变僵。</text>
+      <text x="526" y="286" fill="#eb6c36" font-size="9">退化为乱改</text>
+    </g>
+    <g>
+      <rect x="744" y="208" width="220" height="86" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="762" y="230" fill="#2d3142" font-size="11" font-weight="600">缺发布或命中</text>
+      <text x="762" y="250" fill="#4f5d75" font-size="9">改了但没上线，或上线了</text>
+      <text x="762" y="266" fill="#4f5d75" font-size="9">却从没被加载。</text>
+      <text x="762" y="286" fill="#eb6c36" font-size="9">退化为自我强化</text>
+    </g>
+
+    <rect x="36" y="312" width="928" height="70" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+    <text x="54" y="336" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">THE PART MOST OFTEN SKIPPED</text>
+    <text x="54" y="360" fill="#2d3142" font-size="12" font-weight="600">第 6 步最难验证，也最容易被当成已经成立</text>
+    <text x="54" y="376" fill="#4f5d75" font-size="9">产物写出来了、分数也涨了，但涨的原因可能不是它。</text>
+  </svg>
+</body>
+</html>

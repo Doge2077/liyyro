@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>一条能力的三种形态与四个决策维度</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="tfs-title tfs-desc">
+    <title id="tfs-title">一条能力的三种形态与四个决策维度</title>
+    <desc id="tfs-desc">同一条能力可以做成专用工具、通用执行器或 Skill。四个维度决定往哪一侧放：安全的硬约束往专用工具，参数简单且常变的往 Skill。默认偏通用，四种情况退回专用。</desc>
+    <rect width="1000" height="400" fill="#f5f5f5"/>
+    <defs>
+      <marker id="fs-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0,0 8,3 0,6" fill="#4f5d75"/>
+      </marker>
+    </defs>
+
+    <text x="36" y="30" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">SAME CAPABILITY, THREE FORMS</text>
+
+    <line x1="60" y1="150" x2="940" y2="150" stroke="#4f5d75" stroke-width="1.2"/>
+    <text x="60" y="140" fill="#7a8399" font-size="9">专用一端</text>
+    <text x="940" y="140" text-anchor="end" fill="#7a8399" font-size="9">通用一端</text>
+
+    <g>
+      <rect x="60" y="60" width="240" height="76" fill="#fff" stroke="#2d3142"/>
+      <text x="78" y="84" fill="#2d3142" font-size="13" font-weight="600">专用工具</text>
+      <text x="78" y="106" fill="#4f5d75" font-size="9">一条能力一个工具，参数受结构约束</text>
+      <text x="78" y="124" fill="#7a8399" font-size="9">示例：create_refund(order_id, amount)</text>
+    </g>
+    <g>
+      <rect x="380" y="60" width="240" height="76" fill="rgba(235,108,36,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="398" y="84" fill="#2d3142" font-size="13" font-weight="600">通用执行器</text>
+      <text x="398" y="106" fill="#4f5d75" font-size="9">只给执行环境，动作由模型现写</text>
+      <text x="398" y="124" fill="#7a8399" font-size="9">示例：沙盒里的代码解释器、命令执行</text>
+    </g>
+    <g>
+      <rect x="700" y="60" width="240" height="76" fill="#fff" stroke="#2d3142"/>
+      <text x="718" y="84" fill="#2d3142" font-size="13" font-weight="600">Skill</text>
+      <text x="718" y="106" fill="#4f5d75" font-size="9">一份说明，模型照着用通用执行器做</text>
+      <text x="718" y="124" fill="#7a8399" font-size="9">示例：部署应用的六步流程</text>
+    </g>
+
+    <path d="M 300 98 H 380" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#fs-ar)"/>
+    <path d="M 620 98 H 700" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#fs-ar)"/>
+
+    <text x="36" y="186" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">FOUR DIMENSIONS TILT THE CHOICE</text>
+
+    <g>
+      <rect x="36" y="198" width="220" height="82" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="54" y="220" fill="#2d3142" font-size="11" font-weight="600">安全与权限</text>
+      <text x="54" y="242" fill="#4f5d75" font-size="9">需要精细授权、审计留痕、</text>
+      <text x="54" y="258" fill="#4f5d75" font-size="9">不可逆操作</text>
+      <text x="54" y="274" fill="#eb6c36" font-size="9">往专用一端</text>
+    </g>
+    <g>
+      <rect x="272" y="198" width="220" height="82" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="290" y="220" fill="#2d3142" font-size="11" font-weight="600">参数复杂度</text>
+      <text x="290" y="242" fill="#4f5d75" font-size="9">嵌套对象、多字段联合校验、</text>
+      <text x="290" y="258" fill="#4f5d75" font-size="9">大量特殊字符要转义</text>
+      <text x="290" y="274" fill="#eb6c36" font-size="9">往专用一端</text>
+    </g>
+    <g>
+      <rect x="508" y="198" width="220" height="82" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="526" y="220" fill="#2d3142" font-size="11" font-weight="600">变更频率</text>
+      <text x="526" y="242" fill="#4f5d75" font-size="9">流程还在改，改一次就要动代码</text>
+      <text x="526" y="258" fill="#4f5d75" font-size="9">并重新部署</text>
+      <text x="526" y="274" fill="#eb6c36" font-size="9">往 Skill 一端</text>
+    </g>
+    <g>
+      <rect x="744" y="198" width="220" height="82" fill="#ececec" stroke="rgba(45,49,66,.14)"/>
+      <text x="762" y="220" fill="#2d3142" font-size="11" font-weight="600">模型能力</text>
+      <text x="762" y="242" fill="#4f5d75" font-size="9">强模型能用 Skill 加执行器覆盖</text>
+      <text x="762" y="258" fill="#4f5d75" font-size="9">更多场景，弱的要靠结构引导</text>
+      <text x="762" y="274" fill="#eb6c36" font-size="9">看模型定</text>
+    </g>
+
+    <g>
+      <rect x="36" y="296" width="928" height="86" fill="#fff" stroke="rgba(45,49,66,.14)"/>
+      <text x="54" y="318" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">DEFAULT AND FOUR EXCEPTIONS</text>
+      <text x="54" y="342" fill="#2d3142" font-size="12" font-weight="600">默认往通用一侧放，四种情况退回专用</text>
+      <text x="54" y="364" fill="#4f5d75" font-size="9">一、安全与权限　二、要屏蔽平台差异并给更清晰的反馈　三、使用频率极高　四、参数结构复杂</text>
+    </g>
+  </svg>
+</body>
+</html>
