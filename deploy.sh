@@ -70,6 +70,7 @@ fi
 
 echo -e "${YELLOW}[4/5] 重启容器...${NC}"
 docker compose down --remove-orphans 2>/dev/null || true
+docker image prune -f
 docker compose up -d --build
 echo -e "${GREEN}  容器已启动${NC}"
 
