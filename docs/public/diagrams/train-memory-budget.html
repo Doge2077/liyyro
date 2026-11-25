@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>七十亿参数下全参与 LoRA 的显存账</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="tmem-title tmem-desc">
+    <title id="tmem-title">七十亿参数下全参与 LoRA 的显存账</title>
+    <desc id="tmem-desc">全参微调每个参数要占十六字节，七十亿参数合计一百一十二 GB，越过单卡八十 GB。LoRA 冻结基座，只剩十四 GB 权重与极小的适配器，激活值成为主要开销。</desc>
+    <rect width="1000" height="360" fill="#f5f5f5"/>
+
+    <text x="40" y="34" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">SIXTEEN BYTES PER PARAMETER</text>
+
+    <text x="40" y="76" fill="#2d3142" font-size="12" font-weight="600" font-family="var(--sans)">全参微调</text>
+    <text x="40" y="94" fill="#7a8399" font-size="9" font-family="var(--mono)">112 GB</text>
+
+    <g>
+      <rect x="240" y="60" width="84" height="40" fill="#fff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="324" y="60" width="84" height="40" fill="#fff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="408" y="60" width="336" height="40" fill="rgba(235,108,54,.10)" stroke="#eb6c36" stroke-width="1.2"/>
+      <rect x="744" y="60" width="168" height="40" fill="#fff" stroke="#2d3142" stroke-width="1"/>
+    </g>
+
+    <text x="282" y="84" fill="#2d3142" font-size="9" font-family="var(--mono)" text-anchor="middle">权重 14</text>
+    <text x="366" y="84" fill="#2d3142" font-size="9" font-family="var(--mono)" text-anchor="middle">梯度 14</text>
+    <text x="576" y="84" fill="#eb6c36" font-size="9" font-family="var(--mono)" text-anchor="middle">优化器状态 56</text>
+    <text x="828" y="84" fill="#2d3142" font-size="9" font-family="var(--mono)" text-anchor="middle">主权重 28</text>
+
+    <line x1="720" y1="48" x2="720" y2="292" stroke="#eb6c36" stroke-width="1" stroke-dasharray="4,3"/>
+    <rect x="660" y="290" width="120" height="14" fill="#f5f5f5"/>
+    <text x="720" y="301" fill="#eb6c36" font-size="9" font-family="var(--mono)" text-anchor="middle">单卡 80 GB</text>
+
+    <text x="40" y="156" fill="#2d3142" font-size="12" font-weight="600" font-family="var(--sans)">LoRA</text>
+    <text x="40" y="174" fill="#7a8399" font-size="9" font-family="var(--mono)">约 24 GB</text>
+
+    <g>
+      <rect x="240" y="140" width="84" height="40" fill="#ececec" stroke="#7a8399" stroke-width="1"/>
+      <rect x="324" y="140" width="4" height="40" fill="#2d3142"/>
+      <rect x="328" y="140" width="60" height="40" fill="#fff" stroke="#2d3142" stroke-width="1"/>
+    </g>
+
+    <path d="M 326 120 V 136" fill="none" stroke="#4f5d75" stroke-width="0.8"/>
+    <text x="326" y="114" fill="#4f5d75" font-size="8" font-family="var(--mono)" text-anchor="middle">适配器</text>
+
+    <text x="282" y="164" fill="#4f5d75" font-size="9" font-family="var(--mono)" text-anchor="middle">基座 14</text>
+    <text x="358" y="164" fill="#2d3142" font-size="9" font-family="var(--mono)" text-anchor="middle">激活值 10</text>
+
+    <text x="240" y="200" fill="#7a8399" font-size="8" font-family="var(--mono)">冻结：不存梯度，不存优化器状态</text>
+    <text x="240" y="216" fill="#7a8399" font-size="8" font-family="var(--mono)">适配器 16.8 M 参数，不到 0.1 GB</text>
+
+    <line x1="40" y1="244" x2="960" y2="244" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+
+    <text x="40" y="268" fill="#4f5d75" font-size="9" font-family="var(--mono)" letter-spacing=".1em">读法</text>
+    <text x="40" y="290" fill="#2d3142" font-size="10" font-family="var(--sans)">每参数 2 字节权重 + 2 字节梯度 + 4+4 字节 Adam + 4 字节主权重：七十亿参数合计一百一十二 GB。</text>
+    <text x="40" y="312" fill="#2d3142" font-size="10" font-family="var(--sans)">全参卡在优化器状态，必须切开分散；LoRA 把这一整段删掉，单卡即可容纳，多卡只换速度。</text>
+    <text x="40" y="334" fill="#7a8399" font-size="9" font-family="var(--sans)">激活值随 batch 与序列长度增长，序列长度翻倍时注意力部分按平方增长。</text>
+  </svg>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>三次测量：条件不同，结论方向相反</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f5f5f5; --ink:#2d3142; --muted:#4f5d75; --soft:#7a8399; --accent:#eb6c36; --link:#2e5aa8; --sans:'Geist','Noto Sans SC',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; width:100%; height:100%; background:var(--paper); }
+    body { color:var(--ink); font-family:var(--sans); }
+    svg { width:100%; height:100%; display:block; }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="sgap-title sgap-desc">
+    <title id="sgap-title">三次测量：条件不同，结论方向相反</title>
+    <desc id="sgap-desc">空仓库任务上快 55.8%，资深开发者维护的真实仓库里慢 19%，而同一批人自认为快 20%。半年后的区间已跨过零，对照分组难以凑齐。</desc>
+    <rect width="1000" height="340" fill="#f5f5f5"/>
+
+    <text x="40" y="34" fill="#7a8399" font-size="9" font-family="var(--mono)" letter-spacing=".16em">THREE MEASUREMENTS, TWO DIRECTIONS</text>
+
+    <g>
+      <rect x="40" y="56" width="288" height="132" fill="#fff" stroke="#2d3142"/>
+      <text x="56" y="78" fill="#7a8399" font-size="8" font-family="var(--mono)" letter-spacing=".1em">2023 · CONTROLLED</text>
+      <text x="56" y="120" fill="#2d3142" font-size="30" font-family="var(--sans)" font-weight="600">−55.8%</text>
+      <text x="56" y="144" fill="#4f5d75" font-size="10" font-family="var(--sans)">用时缩短，空仓库写 HTTP 服务</text>
+      <text x="56" y="164" fill="#7a8399" font-size="9" font-family="var(--sans)">验收标准唯一，无历史包袱</text>
+    </g>
+
+    <g>
+      <rect x="356" y="56" width="288" height="132" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="372" y="78" fill="#eb6c36" font-size="8" font-family="var(--mono)" letter-spacing=".1em">2025 · REAL REPOS</text>
+      <text x="372" y="120" fill="#2d3142" font-size="30" font-family="var(--sans)" font-weight="600">+19%</text>
+      <text x="372" y="144" fill="#4f5d75" font-size="10" font-family="var(--sans)">用时变长，区间 +2% 到 +39%</text>
+      <text x="372" y="164" fill="#7a8399" font-size="9" font-family="var(--sans)">十六人，246 个议题，均时两小时</text>
+    </g>
+
+    <g>
+      <rect x="672" y="56" width="288" height="132" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1.2"/>
+      <text x="688" y="78" fill="#eb6c36" font-size="8" font-family="var(--mono)" letter-spacing=".1em">2025 · SELF-REPORT</text>
+      <text x="688" y="120" fill="#2d3142" font-size="30" font-family="var(--sans)" font-weight="600">−20%</text>
+      <text x="688" y="144" fill="#4f5d75" font-size="10" font-family="var(--sans)">同一批人，自认为变快了</text>
+      <text x="688" y="164" fill="#7a8399" font-size="9" font-family="var(--sans)">事前预估是快 24%</text>
+    </g>
+
+    <line x1="40" y1="212" x2="960" y2="212" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+
+    <text x="40" y="238" fill="#4f5d75" font-size="9" font-family="var(--mono)" letter-spacing=".1em">2026 更新</text>
+    <text x="140" y="238" fill="#2d3142" font-size="10" font-family="var(--sans)">原班十人估计 −18%，区间 −38% 到 +9%；新招募四十七人估计 −4%，区间 −15% 到 +9%。</text>
+    <text x="40" y="264" fill="#2d3142" font-size="10" font-family="var(--sans)">两个区间都跨过零。报告同时说明：三到五成参与者会先筛掉自己不愿在无 AI 条件下做的任务，</text>
+    <text x="40" y="286" fill="#2d3142" font-size="10" font-family="var(--sans)">数据只能当作下界，随机分组已难维持，同一批研究者正在重做实验设计。</text>
+    <text x="40" y="312" fill="#7a8399" font-size="9" font-family="var(--sans)">三次测量都是真的：对单点环节的加速测得准，对整条交付链路的加速测不准。</text>
+  </svg>
+</body>
+</html>
